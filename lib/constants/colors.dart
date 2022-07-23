@@ -8,4 +8,6 @@ class AppColors {
   static const stroke = Color.fromRGBO(232, 232, 232, 0.7);
   static const bgLight = Color(0XFFFAFBFF);
   static const error = Color(0XFFF1002E);
+  static const black = Color(0XFF000000);
+  static const mainCardLight = Color(0XFFFFFFFF);
 }
