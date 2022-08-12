@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:funconnect/constants/colors.dart';
 import 'package:funconnect/constants/custom_button.dart';
@@ -27,101 +29,133 @@ class _OnboardingViewState extends State<OnboardingView> {
     super.dispose();
   }
 
-  final List<String> _list = [];
+  final List<String> _list = ["Welcome", "Discover", "Connect"];
   final List<String> _listTitle = [
-    "See beautiful places you can visit",
-    "See events around your neighborhood",
-    "See nearby places you can have fun",
+    "See beautiful\nplaces you can visit",
+    "See events around\nyour neighborhood",
+    "See nearby places\nyou can have fun",
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        fit: StackFit.expand,
-        children: [
-          Positioned.fill(
-            child: PageView(
-              onPageChanged: (val) => setState(() => page = val),
-              controller: controller,
-              children: _list.map((e) {
-                return Image.network(
-                  e,
-                  fit: BoxFit.cover,
-                );
-              }).toList(),
+      body: SafeArea(
+        child: Stack(
+          fit: StackFit.expand,
+          children: [
+            Positioned.fill(
+              child: PageView(
+                onPageChanged: (val) => setState(() => page = val),
+                controller: controller,
+                children: _list.map((e) {
+                  return Container(
+                    color: Color.fromRGBO(100, 100, Random().nextInt(255), 1),
+                    // child: Image.network(
+                    //   e,
+                    //   fit: BoxFit.cover,
+                    // ),
+                  );
+                }).toList(),
+              ),
             ),
-          ),
-          Positioned(
-            bottom: 29,
-            left: 24,
-            right: 24,
-            top: 0,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(height: 16),
-                Row(
+            IgnorePointer(
+              child: Container(
+                decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      AppColors.black,
+                      AppColors.transparent,
+                    ],
+                    stops: [0.02, 0.4],
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                  ),
+                ),
+              ),
+            ),
+            Positioned(
+              bottom: 29,
+              left: 24,
+              right: 24,
+              top: 0,
+              child: IgnorePointer(
+                ignoring: false,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Expanded(
-                      child: Divider(
-                        color: AppColors.secondary,
-                        thickness: 2,
+                    const SizedBox(height: 10),
+                    Row(
+                      children: [
+                        const Expanded(
+                          child: Divider(
+                            color: AppColors.secondary,
+                            thickness: 2,
+                          ),
+                        ),
+                        const SizedBox(width: 7),
+                        Expanded(
+                          child: Divider(
+                            color: page > 0
+                                ? AppColors.secondary
+                                : AppColors.white,
+                            thickness: 2,
+                          ),
+                        ),
+                        const SizedBox(width: 7),
+                        Expanded(
+                          child: Divider(
+                            color: page == 2
+                                ? AppColors.secondary
+                                : AppColors.white,
+                            thickness: 2,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 31),
+                    Image.asset(
+                      miniLogoImg,
+                    ),
+                    const SizedBox(height: 31),
+                    Text(
+                      _listTitle[page],
+                      style: const TextStyle(
+                        fontSize: 28,
+                        color: AppColors.bgLight,
+                        fontFamily: AppFonts.merriweather,
+                        letterSpacing: 1.3,
                       ),
                     ),
-                    const SizedBox(width: 7),
-                    Expanded(
-                      child: Divider(
-                        color: page > 0 ? AppColors.secondary : AppColors.white,
-                        thickness: 2,
-                      ),
+                    const Spacer(),
+                    CustomButton(
+                      text: "Get started",
+                      buttonColor: AppColors.primary,
+                      textColor: AppColors.white,
+                      height: 64,
+                      radius: 50,
+                      fontSize: 16,
+                      function: () {
+                        print("Get started");
+                      },
                     ),
-                    const SizedBox(width: 7),
-                    Expanded(
-                      child: Divider(
-                        color:
-                            page == 2 ? AppColors.secondary : AppColors.white,
-                        thickness: 2,
-                      ),
+                    const SizedBox(height: 16),
+                    CustomButton(
+                      text: "Login",
+                      buttonColor: AppColors.par,
+                      textColor: AppColors.white,
+                      height: 64,
+                      radius: 50,
+                      fontSize: 16,
+                      function: () {
+                        print("Login");
+                      },
                     ),
                   ],
                 ),
-                const SizedBox(height: 31),
-                Image.asset(
-                  miniLogoImg,
-                  scale: 3.5,
-                ),
-                const SizedBox(height: 31),
-                Text(
-                  _listTitle[page],
-                  style: const TextStyle(
-                    fontSize: 28,
-                    color: AppColors.bgLight,
-                    fontFamily: AppFonts.gtWalshPro,
-                  ),
-                ),
-                const Spacer(),
-                CustomButton(
-                  text: "Get started",
-                  buttonColor: AppColors.primary,
-                  height: 64,
-                  radius: 50,
-                  fontSize: 16,
-                  function: () {},
-                ),
-                const SizedBox(height: 16),
-                CustomButton(
-                  text: "Login",
-                  buttonColor: AppColors.par,
-                  height: 64,
-                  radius: 50,
-                  fontSize: 16,
-                  function: () {},
-                ),
-              ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
