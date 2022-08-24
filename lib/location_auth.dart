@@ -46,12 +46,8 @@ class _LocationAuthenticationState extends State<LocationAuthentication> {
                 text: "Allow location data",
                 textColor: Colors.white,
                 buttonColor: AppColors.primary,
-                height: 70,
-                radius: 50,
-                fontSize: 20,
                 function: () async {
                   await _getLocation();
-                  print("catcyuioooppppppp");
                 },
               ),
               const SizedBox(
