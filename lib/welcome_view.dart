@@ -1,37 +1,148 @@
 import 'package:flutter/material.dart';
 import 'package:funconnect/constants/colors.dart';
+import 'package:funconnect/constants/custom_button.dart';
+import 'package:funconnect/constants/fonts.dart';
 
 class WelcomeView extends StatelessWidget {
   const WelcomeView({Key? key}) : super(key: key);
   static const welcomeImage = "assets/images/sign_in_image.jpeg";
+  static const emailSvg = "assets/svgs/clarity_email-solid.svg";
+  static const googleSvg = "assets/svgs/flat-color-icons_google.svg";
+  static const appleLogoSvg = "assets/svgs/applelogo.svg";
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
+      body: Stack(
+        fit: StackFit.expand,
         children: [
-          Image.asset(
-            welcomeImage,
-            fit: BoxFit.fitWidth,
+          Column(
+            children: [
+              Image.asset(
+                welcomeImage,
+                fit: BoxFit.cover,
+              ),
+            ],
           ),
-          const Spacer(),
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            // top: 5,
+            child: Container(
+              height: 500,
+              width: double.maxFinite,
+              padding: const EdgeInsets.all(24),
+              clipBehavior: Clip.hardEdge,
+              decoration: const BoxDecoration(
+                color: AppColors.white,
+                borderRadius: BorderRadius.vertical(top: Radius.circular(32)),
+              ),
+              child: Column(
+                children: [
+                  const SizedBox(height: 35),
+                  const Text(
+                    "Welcome Back",
+                    style: TextStyle(
+                      fontSize: 24,
+                      color: AppColors.text,
+                      fontFamily: AppFonts.merriweather,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  const Text(
+                    "Jump back in where you stopped",
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: AppColors.par,
+                      fontFamily: AppFonts.gtWalshPro,
+                      fontWeight: FontWeight.normal,
+                    ),
+                  ),
+                  const SizedBox(height: 43),
+                  const CustomButton(
+                    text: "Sign in with Email",
+                    isImage: true,
+                    image: emailSvg,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                    textColor: AppColors.par,
+                    buttonColor: AppColors.white,
+                    borderColor: AppColors.stroke,
+                    radius: 50,
+                  ),
+                  const SizedBox(height: 16),
+                  const CustomButton(
+                    text: "Continue with Google",
+                    image: googleSvg,
+                    isImage: true,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                    textColor: AppColors.par,
+                    buttonColor: AppColors.white,
+                    borderColor: AppColors.stroke,
+                    radius: 50,
+                  ),
+                  const SizedBox(height: 16),
+                  const CustomButton(
+                    text: "Sign in with Apple",
+                    isImage: true,
+                    image: appleLogoSvg,
+                    fontSize: 17,
+                    fontWeight: FontWeight.w300,
+                    textColor: AppColors.white,
+                    buttonColor: AppColors.black,
+                    radius: 50,
+                  ),
+                  const SizedBox(height: 25),
+                  RichText(
+                    textAlign: TextAlign.start,
+                    text: const TextSpan(
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.normal,
+                        fontFamily: AppFonts.gtWalshPro,
+                        color: AppColors.par,
+                      ),
+                      children: [
+                        TextSpan(
+                            text:
+                                "By sigining in you have read and agreed to our "),
+                        TextSpan(
+                          text: "Terms of use",
+                          style: TextStyle(
+                            color: AppColors.secondary,
+                          ),
+                        ),
+                        TextSpan(text: " and read our "),
+                        TextSpan(
+                          text: "Privacy policy",
+                          style: TextStyle(
+                            color: AppColors.secondary,
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
+          )
         ],
       ),
-      bottomSheet: Container(
-        height: 600,
-        padding: const EdgeInsets.all(24),
-        decoration: const BoxDecoration(
-          color: AppColors.white,
-          borderRadius: BorderRadius.vertical(top: Radius.circular(32)),
-        ),
-        child: Column(
-          children:  [
-            Text("Welcome Back"),
-            Text("Jump back in where you stopped"),
-            
-          ],
-        ),
-      ),
+      // bottomSheet: BottomSheet(
+      //   shape: const RoundedRectangleBorder(
+      //     borderRadius: BorderRadius.vertical(top: Radius.circular(32)),
+      //   ),
+      //   backgroundColor: AppColors.primary,
+      //   clipBehavior: Clip.hardEdge,
+      //   enableDrag: false,
+      //   onClosing: () {},
+      //   builder: (context) {
+      //     return ;
+      //   },
+      // ),
     );
   }
 }
