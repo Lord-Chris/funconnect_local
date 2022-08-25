@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:funconnect/welcome_view.dart';
+
+import 'email_signin_view.dart';
 
 void main() {
   runApp(const MyApp());
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const WelcomeView(),
+      home: const EmailSigninView(),
     );
   }
 }
