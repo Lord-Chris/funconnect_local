@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:funconnect/constants/fonts.dart';
 
 class CustomButton extends StatelessWidget {
-  CustomButton({
+  const CustomButton({
     Key? key,
     this.text,
     this.image,
@@ -25,7 +26,7 @@ class CustomButton extends StatelessWidget {
   final String? image;
   final Color? buttonColor;
   final Function()? function;
-  final bool? isImage;
+  final bool isImage;
   final Color? borderColor;
   final double? radius;
   final Color? textColor;
@@ -34,7 +35,7 @@ class CustomButton extends StatelessWidget {
   final Widget? widget;
   final double? height;
   final double? width, borderWidth;
-  bool showLoader;
+  final bool showLoader;
 
   @override
   Widget build(BuildContext context) {
@@ -68,6 +69,15 @@ class CustomButton extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                Builder(builder: (context) {
+                  if (!isImage) return const SizedBox();
+                  if (image == null) return const SizedBox();
+                  if (image!.endsWith("svg")) {
+                    return SvgPicture.asset(image!);
+                  }
+                  return Image.asset(image!);
+                }),
+                if (image != null) const SizedBox(width: 8),
                 widget ??
                     Text(
                       text!,
