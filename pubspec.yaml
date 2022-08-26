@@ -33,6 +33,9 @@ dependencies:
   flutter_svg: null
   pin_code_fields: ^7.4.0
 
+  location: ^4.3.0
+
+
 dev_dependencies:
 
   # The "flutter_lints" package below contains a set of recommended lints to
@@ -53,6 +56,11 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+  assets:
+    - assets/fonts/
+    - assets/icons/
+   
+
 
   # To add assets to your application, add an assets section, like this:
   assets:
