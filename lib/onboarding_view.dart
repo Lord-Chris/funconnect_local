@@ -135,7 +135,6 @@ class _OnboardingViewState extends State<OnboardingView> {
                       radius: 50,
                       fontSize: 16,
                       function: () {
-                        print("Get started");
                       },
                     ),
                     const SizedBox(height: 16),
@@ -147,7 +146,6 @@ class _OnboardingViewState extends State<OnboardingView> {
                       radius: 50,
                       fontSize: 16,
                       function: () {
-                        print("Login");
                       },
                     ),
                   ],

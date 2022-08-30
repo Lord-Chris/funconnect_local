@@ -56,9 +56,7 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
-  assets:
-    - assets/fonts/
-    - assets/icons/
+  
    
 
 
@@ -66,6 +64,8 @@ flutter:
   assets:
     - assets/images/
     - assets/svgs/
+    - assets/fonts/
+    - assets/icons/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
