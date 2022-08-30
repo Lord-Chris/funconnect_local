@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:funconnect/constants/colors.dart';
 import 'package:funconnect/constants/custom_button.dart';
-import 'package:funconnect/constants/fonts.dart';
+import 'package:funconnect/shared/constants/_constants.dart';
 import 'package:location/location.dart';
 
 class LocationAuthentication extends StatefulWidget {

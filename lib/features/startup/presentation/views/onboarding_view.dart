@@ -1,9 +1,8 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:funconnect/constants/colors.dart';
+import 'package:funconnect/shared/constants/_constants.dart';
 import 'package:funconnect/constants/custom_button.dart';
-import 'package:funconnect/constants/fonts.dart';
 
 class OnboardingView extends StatefulWidget {
   const OnboardingView({Key? key}) : super(key: key);
@@ -16,12 +15,6 @@ class _OnboardingViewState extends State<OnboardingView> {
   final controller = PageController(initialPage: 0);
   int page = 0;
   static const miniLogoImg = 'assets/images/mini_logo.png';
-
-  // void _storeOnboardInfo() async {
-  //   int isViewed = 0;
-  //   SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   await prefs.setInt('onBoard', isViewed);
-  // }
 
   @override
   void dispose() {
@@ -134,8 +127,7 @@ class _OnboardingViewState extends State<OnboardingView> {
                       height: 64,
                       radius: 50,
                       fontSize: 16,
-                      function: () {
-                      },
+                      function: () {},
                     ),
                     const SizedBox(height: 16),
                     CustomButton(
@@ -145,8 +137,7 @@ class _OnboardingViewState extends State<OnboardingView> {
                       height: 64,
                       radius: 50,
                       fontSize: 16,
-                      function: () {
-                      },
+                      function: () {},
                     ),
                   ],
                 ),

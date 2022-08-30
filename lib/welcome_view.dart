@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:funconnect/constants/colors.dart';
 import 'package:funconnect/constants/custom_button.dart';
-import 'package:funconnect/constants/fonts.dart';
+import 'package:funconnect/shared/constants/_constants.dart';
 
 class WelcomeView extends StatelessWidget {
   const WelcomeView({Key? key}) : super(key: key);

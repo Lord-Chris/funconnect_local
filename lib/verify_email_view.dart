@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:funconnect/constants/custom_button.dart';
+import 'package:funconnect/shared/constants/_constants.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
-
-import 'constants/colors.dart';
-import 'constants/fonts.dart';
 
 class VerifyEmailView extends StatelessWidget {
   const VerifyEmailView({Key? key}) : super(key: key);
