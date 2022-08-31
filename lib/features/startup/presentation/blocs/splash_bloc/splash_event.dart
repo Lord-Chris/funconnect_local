@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/cupertino.dart';
 
 abstract class SplashEvent extends Equatable {
   @override
@@ -7,4 +8,9 @@ abstract class SplashEvent extends Equatable {
 
 class InitializeSplashEvent extends SplashEvent {}
 
-class FinishSplashEvent extends SplashEvent {}
+class FinishSplashEvent extends SplashEvent {
+  final BuildContext context;
+  FinishSplashEvent({
+    required this.context,
+  });
+}
