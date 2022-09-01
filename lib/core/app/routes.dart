@@ -8,7 +8,7 @@ import 'package:funconnect/features/startup/presentation/views/splash_view.dart'
 import 'package:funconnect/success_view.dart';
 
 class Routes {
-  static const initialRoute = welcomeViewRoute;
+  static const initialRoute = splashRoute;
   static const splashRoute = '/';
   static const onboardingRoute = '/onboarding';
   static const welcomeViewRoute = '/welcome-view';
