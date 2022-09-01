@@ -1,10 +1,10 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:funconnect/constants/custom_button.dart';
 import 'package:funconnect/features/authentication/presentation/blocs/verify_email_bloc/verify_email_bloc.dart';
 import 'package:funconnect/features/authentication/presentation/blocs/verify_email_bloc/verify_email_event.dart';
 import 'package:funconnect/features/authentication/presentation/blocs/verify_email_bloc/verify_email_state.dart';
+import 'package:funconnect/shared/components/_components.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 

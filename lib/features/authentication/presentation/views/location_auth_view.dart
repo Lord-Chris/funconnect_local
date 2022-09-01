@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:funconnect/constants/custom_button.dart';
 import 'package:funconnect/features/authentication/presentation/blocs/location_auth_bloc/location_auth_bloc.dart';
 import 'package:funconnect/features/authentication/presentation/blocs/location_auth_bloc/location_auth_event.dart';
+import 'package:funconnect/shared/components/_components.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
 
 class LocationAuthView extends StatelessWidget {

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:funconnect/constants/custom_button.dart';
-import 'package:funconnect/constants/text_input.dart';
 import 'package:funconnect/features/authentication/presentation/blocs/email_sign_in_bloc/email_sign_in_bloc.dart';
 import 'package:funconnect/features/authentication/presentation/blocs/email_sign_in_bloc/email_sign_in_event.dart';
+import 'package:funconnect/shared/components/_components.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
 
 import '../blocs/email_sign_in_bloc/email_sign_in_state.dart';

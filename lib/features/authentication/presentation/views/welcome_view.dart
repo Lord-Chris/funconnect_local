@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:funconnect/constants/custom_button.dart';
 import 'package:funconnect/features/authentication/presentation/blocs/welcome_bloc/welcome_bloc.dart';
 import 'package:funconnect/features/authentication/presentation/blocs/welcome_bloc/welcome_event.dart';
+import 'package:funconnect/shared/components/_components.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
 
 import '../blocs/welcome_bloc/welcome_state.dart';
