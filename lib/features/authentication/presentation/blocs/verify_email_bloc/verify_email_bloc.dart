@@ -11,12 +11,17 @@ class VerifyEmailBloc extends Bloc<VerifyEmailEvent, VerifyEmailState> {
     on<ResendCodeEvent>(_onResendCodeEvent);
     on<PinFieldChangedEvent>(_onPinFieldChangedEvent);
     on<VerifyEmailTapEvent>(_onVerifyEmailTapEvent);
+    on<ChangeTimerEvent>(_onChangeTimerEvent);
   }
+
+  static const otpTimer = 60;
 
   FutureOr<void> _onResendCodeEvent(
     ResendCodeEvent event,
     Emitter<VerifyEmailState> emit,
-  ) {}
+  ) {
+    emit(TimerChangedState(time: otpTimer));
+  }
 
   FutureOr<void> _onPinFieldChangedEvent(
     PinFieldChangedEvent event,
@@ -31,5 +36,17 @@ class VerifyEmailBloc extends Bloc<VerifyEmailEvent, VerifyEmailState> {
       event.context,
       MaterialPageRoute(builder: (_) => const LocationAuthView()),
     );
+  }
+
+  FutureOr<void> _onChangeTimerEvent(
+    ChangeTimerEvent event,
+    Emitter<VerifyEmailState> emit,
+  ) async {
+    if (event.time == 0) {
+      emit(TimerFinishedState());
+      return;
+    }
+    await Future.delayed(const Duration(seconds: 1));
+    emit(TimerChangedState(time: event.time - 1));
   }
 }

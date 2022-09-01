@@ -6,7 +6,6 @@ import 'package:funconnect/features/startup/presentation/blocs/splash_bloc/splas
 
 class SplashBloc extends Bloc<SplashEvent, SplashState> {
   SplashBloc() : super(SplashInitialState()) {
-    print("HERE dfaOOOO");
     on<InitializeSplashEvent>(_onSplashInit);
     on<FinishSplashEvent>(_onSplashFinished);
   }
@@ -15,7 +14,6 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
     InitializeSplashEvent event,
     Emitter<SplashState> emit,
   ) async {
-    print("HERE OOOdsfO");
     await Future.delayed(const Duration(seconds: 2));
     emit(SplashFinishedState());
   }
@@ -23,6 +21,5 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
   void _onSplashFinished(FinishSplashEvent event, Emitter<SplashState> emit) {
     // TODO: Navigate to either onboarding, auth screen or home screen here.
     // emit(SplashFinishedState());
-    print("HERE OOOO");
   }
 }

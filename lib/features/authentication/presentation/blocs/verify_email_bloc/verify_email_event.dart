@@ -8,6 +8,13 @@ abstract class VerifyEmailEvent extends Equatable {
 
 class ResendCodeEvent extends VerifyEmailEvent {}
 
+class ChangeTimerEvent extends VerifyEmailEvent {
+  final int time;
+  ChangeTimerEvent({
+    required this.time,
+  });
+}
+
 class PinFieldChangedEvent extends VerifyEmailEvent {}
 
 class VerifyEmailTapEvent extends VerifyEmailEvent {
