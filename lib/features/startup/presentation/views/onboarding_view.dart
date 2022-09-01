@@ -6,6 +6,7 @@ import 'package:funconnect/constants/custom_button.dart';
 import 'package:funconnect/features/startup/presentation/blocs/onboarding_bloc/onboarding_bloc.dart';
 import 'package:funconnect/features/startup/presentation/blocs/onboarding_bloc/onboarding_event.dart';
 import 'package:funconnect/features/startup/presentation/blocs/onboarding_bloc/onboarding_state.dart';
+import 'package:funconnect/shared/components/_components.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
 
 class OnboardingView extends StatefulWidget {

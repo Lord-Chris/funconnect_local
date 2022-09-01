@@ -26,5 +26,7 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
       event.context,
       MaterialPageRoute(builder: (context) => const OnboardingView()),
     );
+
+    // emit(SplashFinishedState());
   }
 }

@@ -1,0 +1,46 @@
+import 'package:flutter/material.dart';
+import 'package:funconnect/features/authentication/presentation/views/email_signin_view.dart';
+import 'package:funconnect/features/authentication/presentation/views/location_auth_view.dart';
+import 'package:funconnect/features/authentication/presentation/views/verify_email_view.dart';
+import 'package:funconnect/features/authentication/presentation/views/welcome_view.dart';
+import 'package:funconnect/features/startup/presentation/views/onboarding_view.dart';
+import 'package:funconnect/features/startup/presentation/views/splash_view.dart';
+import 'package:funconnect/success_view.dart';
+
+class Routes {
+  static const initialRoute = welcomeViewRoute;
+  static const splashRoute = '/';
+  static const onboardingRoute = '/onboarding';
+  static const welcomeViewRoute = '/welcome-view';
+  static const emailSignInRoute = '/email-sign-in';
+  static const verifyEmailRoute = '/verify-email';
+  static const locationAuthRoute = '/location-auth';
+  static const successViewRoute = '/success-view';
+
+  static Route<dynamic> generateRoute(RouteSettings settings) {
+    switch (settings.name) {
+      case splashRoute:
+        return MaterialPageRoute(builder: (_) => const SplashView());
+      case onboardingRoute:
+        return MaterialPageRoute(builder: (_) => const OnboardingView());
+      case welcomeViewRoute:
+        return MaterialPageRoute(builder: (_) => const WelcomeView());
+      case emailSignInRoute:
+        return MaterialPageRoute(builder: (_) => const EmailSigninView());
+      case verifyEmailRoute:
+        return MaterialPageRoute(builder: (_) => const VerifyEmailView());
+      case locationAuthRoute:
+        return MaterialPageRoute(builder: (_) => const LocationAuthView());
+      case successViewRoute:
+        return MaterialPageRoute(builder: (_) => const SuccessView());
+      default:
+        return MaterialPageRoute(
+          builder: (_) => Scaffold(
+            body: Center(
+              child: Text('No route defined for ${settings.name}'),
+            ),
+          ),
+        );
+    }
+  }
+}
