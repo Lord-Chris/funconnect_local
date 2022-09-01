@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:funconnect/features/authentication/presentation/blocs/email_sign_in_bloc/email_sign_in_event.dart';
 import 'package:funconnect/features/authentication/presentation/blocs/email_sign_in_bloc/email_sign_in_state.dart';
-import 'package:funconnect/verify_email_view.dart';
+import 'package:funconnect/features/authentication/presentation/views/verify_email_view.dart';
 
 class EmailSignInBloc extends Bloc<EmailSignInEvent, EmailSignInState> {
   EmailSignInBloc() : super(EmailSignInInitialState()) {

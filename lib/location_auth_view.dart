@@ -4,14 +4,14 @@ import 'package:funconnect/constants/custom_button.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
 import 'package:location/location.dart';
 
-class LocationAuthentication extends StatefulWidget {
-  const LocationAuthentication({Key? key}) : super(key: key);
+class LocationAuthenticationView extends StatefulWidget {
+  const LocationAuthenticationView({Key? key}) : super(key: key);
 
   @override
-  State<LocationAuthentication> createState() => _LocationAuthenticationState();
+  State<LocationAuthenticationView> createState() => _LocationAuthenticationViewState();
 }
 
-class _LocationAuthenticationState extends State<LocationAuthentication> {
+class _LocationAuthenticationViewState extends State<LocationAuthenticationView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
