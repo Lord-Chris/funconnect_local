@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:funconnect/core/router/routes.dart';
+import 'package:funconnect/core/app/locator.dart';
+import 'package:funconnect/core/app/routes.dart';
 import 'package:funconnect/services/navigation_service/navigation_service.dart';
 
 void main() {
+  setUpLocator();
   runApp(const MyApp());
 }
 
@@ -19,7 +21,7 @@ class MyApp extends StatelessWidget {
       ),
       navigatorKey: NavigationService.navigatorKey,
       onGenerateRoute: Routes.generateRoute,
-      initialRoute: Routes.splashRoute,
+      initialRoute: Routes.initialRoute,
     );
   }
 }

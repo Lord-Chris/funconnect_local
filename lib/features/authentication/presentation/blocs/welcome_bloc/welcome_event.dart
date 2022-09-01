@@ -1,15 +1,11 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter/widgets.dart';
 
 abstract class WelcomeEvent extends Equatable {
   @override
   List<Object?> get props => [];
 }
 
-class EmailSignInEvent extends WelcomeEvent {
-  final BuildContext context;
-  EmailSignInEvent(this.context);
-}
+class EmailSignInEvent extends WelcomeEvent {}
 
 class GoogleSignInEvent extends WelcomeEvent {}
 

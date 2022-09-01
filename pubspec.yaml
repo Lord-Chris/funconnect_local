@@ -33,6 +33,7 @@ dependencies:
     sdk: flutter
   flutter_bloc: ^8.1.1
   flutter_svg: null
+  get_it: ^7.2.0
   location: ^4.3.0
   pin_code_fields: ^7.4.0
 

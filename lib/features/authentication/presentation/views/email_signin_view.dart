@@ -64,7 +64,7 @@ class EmailSigninView extends StatelessWidget {
                         buttonColor: AppColors.par,
                         function: () => context
                             .read<EmailSignInBloc>()
-                            .add(GetCodeEvent(context)),
+                            .add(GetCodeEvent()),
                       ),
                       const Spacer(),
                     ],

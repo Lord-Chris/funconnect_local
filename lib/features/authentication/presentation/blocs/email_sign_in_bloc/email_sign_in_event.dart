@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
 
 abstract class EmailSignInEvent extends Equatable {
   @override
@@ -8,8 +7,4 @@ abstract class EmailSignInEvent extends Equatable {
 
 class EmailFieldChangeEvent extends EmailSignInEvent {}
 
-class GetCodeEvent extends EmailSignInEvent {
-  final BuildContext context;
-
-  GetCodeEvent(this.context);
-}
+class GetCodeEvent extends EmailSignInEvent {}

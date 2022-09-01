@@ -160,7 +160,7 @@ class VerifyEmailView extends StatelessWidget {
                         radius: 50,
                         function: () => context
                             .read<VerifyEmailBloc>()
-                            .add(VerifyEmailTapEvent(context)),
+                            .add(VerifyEmailTapEvent()),
                       ),
                     ),
                   ],

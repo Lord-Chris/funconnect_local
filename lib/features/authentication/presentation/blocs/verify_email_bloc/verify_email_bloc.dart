@@ -1,10 +1,10 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:funconnect/core/app/_app.dart';
 import 'package:funconnect/features/authentication/presentation/blocs/verify_email_bloc/verify_email_event.dart';
 import 'package:funconnect/features/authentication/presentation/blocs/verify_email_bloc/verify_email_state.dart';
-import 'package:funconnect/features/authentication/presentation/views/location_auth_view.dart';
+import 'package:funconnect/services/_services.dart';
 
 class VerifyEmailBloc extends Bloc<VerifyEmailEvent, VerifyEmailState> {
   VerifyEmailBloc() : super(VerifyEmailInitialState()) {
@@ -15,6 +15,7 @@ class VerifyEmailBloc extends Bloc<VerifyEmailEvent, VerifyEmailState> {
   }
 
   static const otpTimer = 60;
+  final _navigationService = locator<INavigationService>();
 
   FutureOr<void> _onResendCodeEvent(
     ResendCodeEvent event,
@@ -32,10 +33,7 @@ class VerifyEmailBloc extends Bloc<VerifyEmailEvent, VerifyEmailState> {
     VerifyEmailTapEvent event,
     Emitter<VerifyEmailState> emit,
   ) {
-    Navigator.push(
-      event.context,
-      MaterialPageRoute(builder: (_) => const LocationAuthView()),
-    );
+    _navigationService.toNamed(Routes.locationAuthRoute);
   }
 
   FutureOr<void> _onChangeTimerEvent(

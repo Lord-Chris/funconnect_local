@@ -1,16 +1,17 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:funconnect/core/app/_app.dart';
 import 'package:funconnect/features/authentication/presentation/blocs/email_sign_in_bloc/email_sign_in_event.dart';
 import 'package:funconnect/features/authentication/presentation/blocs/email_sign_in_bloc/email_sign_in_state.dart';
-import 'package:funconnect/features/authentication/presentation/views/verify_email_view.dart';
+import 'package:funconnect/services/_services.dart';
 
 class EmailSignInBloc extends Bloc<EmailSignInEvent, EmailSignInState> {
   EmailSignInBloc() : super(EmailSignInInitialState()) {
     on<EmailFieldChangeEvent>(_onEmailFieldChangeEvent);
     on<GetCodeEvent>(_onGetCodeEvent);
   }
+  final _navigationService = locator<INavigationService>();
 
   FutureOr<void> _onEmailFieldChangeEvent(
     EmailFieldChangeEvent event,
@@ -21,9 +22,6 @@ class EmailSignInBloc extends Bloc<EmailSignInEvent, EmailSignInState> {
     GetCodeEvent event,
     Emitter<EmailSignInState> emit,
   ) {
-    Navigator.push(
-      event.context,
-      MaterialPageRoute(builder: (_) => const VerifyEmailView()),
-    );
+    _navigationService.toNamed(Routes.verifyEmailRoute);
   }
 }

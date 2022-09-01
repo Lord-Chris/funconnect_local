@@ -81,7 +81,7 @@ class WelcomeView extends StatelessWidget {
                           radius: 50,
                           function: () => context
                               .read<WelcomeBloc>()
-                              .add(EmailSignInEvent(context)),
+                              .add(EmailSignInEvent()),
                         ),
                         const SizedBox(height: 16),
                         const CustomButton(
