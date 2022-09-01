@@ -21,13 +21,14 @@ class SplashView extends StatelessWidget {
         },
         child: Scaffold(
           body: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 22),
+            width: double.maxFinite,
             color: AppColors.primary,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 SvgPicture.asset(
                   AppAssets.splashUpSvg,
+                  width: 370,
                 ),
                 const Spacer(),
                 SvgPicture.asset(
@@ -40,6 +41,7 @@ class SplashView extends StatelessWidget {
                   children: [
                     SvgPicture.asset(
                       AppAssets.splashDownSvg,
+                      width: 370,
                       // width: 331,
                       // height: 331,
                     ),

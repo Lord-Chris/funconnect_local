@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:funconnect/features/startup/presentation/views/splash_view.dart';
+import 'package:funconnect/features/authentication/presentation/views/welcome_view.dart';
 
 void main() {
   runApp(const MyApp());
@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const SplashView(),
+      home: const WelcomeView(),
     );
   }
 }
