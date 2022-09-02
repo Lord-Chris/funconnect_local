@@ -2,7 +2,6 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:funconnect/constants/custom_button.dart';
 import 'package:funconnect/features/startup/presentation/blocs/onboarding_bloc/onboarding_bloc.dart';
 import 'package:funconnect/features/startup/presentation/blocs/onboarding_bloc/onboarding_event.dart';
 import 'package:funconnect/features/startup/presentation/blocs/onboarding_bloc/onboarding_state.dart';
