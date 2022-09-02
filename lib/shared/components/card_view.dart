@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:funconnect/constants/fonts.dart';
+import 'package:funconnect/shared/constants/_constants.dart';
 
 class CardView extends StatelessWidget {
   const CardView({Key? key, this.iconFav, this.openText, this.text})

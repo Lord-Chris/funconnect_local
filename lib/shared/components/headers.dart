@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:funconnect/constants/fonts.dart';
+import 'package:funconnect/shared/constants/_constants.dart';
 
 class CustomHeader extends StatelessWidget {
   const CustomHeader({Key? key, required this.text}) : super(key: key);

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:funconnect/constants/colors.dart';
-import 'package:funconnect/constants/custom_button.dart';
-import 'package:funconnect/constants/fonts.dart';
+import 'package:funconnect/shared/constants/_constants.dart';
+
+import 'shared/components/_components.dart';
 
 class SuccessView extends StatelessWidget {
   const SuccessView({Key? key}) : super(key: key);

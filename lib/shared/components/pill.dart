@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:funconnect/constants/fonts.dart';
-
-import 'colors.dart';
+import 'package:funconnect/shared/constants/_constants.dart';
 
 class Pill extends StatelessWidget {
   final String name;
