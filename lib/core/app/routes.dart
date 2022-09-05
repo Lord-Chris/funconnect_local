@@ -3,6 +3,7 @@ import 'package:funconnect/features/authentication/presentation/views/email_sign
 import 'package:funconnect/features/authentication/presentation/views/location_auth_view.dart';
 import 'package:funconnect/features/authentication/presentation/views/verify_email_view.dart';
 import 'package:funconnect/features/authentication/presentation/views/welcome_view.dart';
+import 'package:funconnect/features/dashboard/presentation/views/dashboard_view.dart';
 import 'package:funconnect/features/startup/presentation/views/onboarding_view.dart';
 import 'package:funconnect/features/startup/presentation/views/splash_view.dart';
 import 'package:funconnect/success_view.dart';
@@ -16,6 +17,7 @@ class Routes {
   static const verifyEmailRoute = '/verify-email';
   static const locationAuthRoute = '/location-auth';
   static const successViewRoute = '/success-view';
+  static const dashboardViewRoute = '/dashboard-view';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -33,6 +35,8 @@ class Routes {
         return MaterialPageRoute(builder: (_) => const LocationAuthView());
       case successViewRoute:
         return MaterialPageRoute(builder: (_) => const SuccessView());
+      case dashboardViewRoute:
+        return MaterialPageRoute(builder: (_) => const DashboardView());
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(
