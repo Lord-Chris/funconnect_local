@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:funconnect/shared/components/_components.dart';
 import 'package:funconnect/shared/constants/app_assets.dart';
 import 'package:funconnect/shared/constants/colors.dart';
 import 'package:funconnect/shared/constants/fonts.dart';
@@ -105,6 +106,7 @@ class HomeView extends StatelessWidget {
               padding: const EdgeInsets.fromLTRB(24, 24, 24, 0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
                 children: const [
                   Text(
                     "Recreational Centers Near You",
@@ -116,21 +118,7 @@ class HomeView extends StatelessWidget {
                       color: AppColors.black,
                     ),
                   ),
-                  Padding(
-                    padding: EdgeInsets.only(top: 200.0),
-                    child: Center(
-                      child: Text(
-                        "No centers available",
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w500,
-                          fontFamily: AppFonts.gtWalshPro,
-                          height: 1.3,
-                          color: AppColors.black,
-                        ),
-                      ),
-                    ),
-                  ),
+                  CardView(iconFav: Icon(Icons.favorite))
                 ],
               ),
             ),
