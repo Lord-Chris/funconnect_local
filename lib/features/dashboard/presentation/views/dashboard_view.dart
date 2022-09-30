@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:funconnect/features/dashboard/presentation/views/events_view.dart';
-import 'package:funconnect/features/dashboard/presentation/views/explore_view.dart';
 import 'package:funconnect/features/dashboard/presentation/views/favourites_view.dart';
 import 'package:funconnect/features/dashboard/presentation/views/home_view.dart';
+import 'package:funconnect/features/explore_view/presentation/explore_view.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
 
 class DashboardView extends StatefulWidget {

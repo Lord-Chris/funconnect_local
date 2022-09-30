@@ -118,7 +118,7 @@ class HomeView extends StatelessWidget {
                       color: AppColors.black,
                     ),
                   ),
-                  CardView(iconFav: Icon(Icons.favorite))
+                  CardView(),
                 ],
               ),
             ),
