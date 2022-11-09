@@ -16,8 +16,8 @@ class Pill extends StatelessWidget {
       margin: const EdgeInsets.all(5),
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
       decoration: BoxDecoration(
-        color: AppColors.mainCardLight,
-        border: Border.all(color: AppColors.stroke),
+        color: AppColors.green,
+        border: Border.all(color: AppColors.green),
         borderRadius: BorderRadius.circular(50),
       ),
       child: Text(

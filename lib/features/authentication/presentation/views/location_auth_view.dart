@@ -57,7 +57,7 @@ class LocationAuthView extends StatelessWidget {
                       child: Text(
                         "Not now",
                         style: TextStyle(
-                          color: AppColors.secondary,
+                          color: AppColors.primary,
                           fontSize: 16,
                           fontWeight: FontWeight.w400,
                           height: 1.3,

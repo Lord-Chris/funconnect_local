@@ -10,7 +10,7 @@ class SuccessView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.bgLight,
+      backgroundColor: AppColors.green,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
@@ -30,7 +30,7 @@ class SuccessView extends StatelessWidget {
               style: TextStyle(
                 fontFamily: AppFonts.gtWalshPro,
                 fontSize: 24,
-                color: AppColors.grey,
+                color: AppColors.primary,
               ),
             ),
           ),
@@ -44,7 +44,7 @@ class SuccessView extends StatelessWidget {
                 style: TextStyle(
                   fontFamily: AppFonts.gtWalshPro,
                   fontSize: 16,
-                  color: AppColors.grey,
+                  color: AppColors.primary,
                 ),
               ),
             ),

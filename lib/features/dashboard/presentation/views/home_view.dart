@@ -18,7 +18,7 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.bgLight,
+      backgroundColor: AppColors.primary,
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -50,7 +50,7 @@ class HomeView extends StatelessWidget {
                         onTap: () {},
                         child: const CircleAvatar(
                           radius: 20,
-                          backgroundColor: AppColors.lightBlue,
+                          backgroundColor: AppColors.green,
                           child: Icon(
                             Icons.person,
                             color: AppColors.black,
@@ -67,7 +67,7 @@ class HomeView extends StatelessWidget {
                       fontWeight: FontWeight.w400,
                       fontFamily: AppFonts.gtWalshPro,
                       height: 1.3,
-                      color: AppColors.par,
+                      color: AppColors.primary,
                     ),
                   ),
                   Wrap(
@@ -81,7 +81,7 @@ class HomeView extends StatelessWidget {
                           decoration: BoxDecoration(
                             color: AppColors.white,
                             border: Border.all(
-                                color: AppColors.grey.withOpacity(.2)),
+                                color: AppColors.green.withOpacity(.2)),
                             borderRadius: BorderRadius.circular(20),
                           ),
                           child: Text(
@@ -101,7 +101,7 @@ class HomeView extends StatelessWidget {
                 ],
               ),
             ),
-            const Divider(color: AppColors.grey),
+            const Divider(color: AppColors.green),
             Padding(
               padding: const EdgeInsets.fromLTRB(24, 24, 24, 0),
               child: Column(

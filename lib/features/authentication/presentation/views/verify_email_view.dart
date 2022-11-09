@@ -28,7 +28,7 @@ class VerifyEmailView extends StatelessWidget {
               }
             },
             child: Scaffold(
-              backgroundColor: AppColors.bgLight,
+              backgroundColor: AppColors.green,
               body: Padding(
                 padding: const EdgeInsets.all(24),
                 child: ListView(
@@ -41,7 +41,7 @@ class VerifyEmailView extends StatelessWidget {
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
                         fontFamily: AppFonts.merriweather,
-                        color: AppColors.text,
+                        color: AppColors.green,
                       ),
                     ),
                     const SizedBox(height: 8),
@@ -51,7 +51,7 @@ class VerifyEmailView extends StatelessWidget {
                         fontSize: 14,
                         fontWeight: FontWeight.normal,
                         fontFamily: AppFonts.gtWalshPro,
-                        color: AppColors.par,
+                        color: AppColors.primary,
                       ),
                     ),
                     const SizedBox(height: 62),
@@ -75,7 +75,7 @@ class VerifyEmailView extends StatelessWidget {
                           borderRadius: BorderRadius.circular(10),
                           selectedColor: AppColors.primary,
                           activeColor: AppColors.primary,
-                          inactiveColor: AppColors.grey.withOpacity(0.2),
+                          inactiveColor: AppColors.green.withOpacity(0.2),
                           fieldHeight: 64,
                           fieldWidth: 64,
                           activeFillColor: Colors.white,
@@ -105,14 +105,14 @@ class VerifyEmailView extends StatelessWidget {
                                 fontSize: 14,
                                 fontWeight: FontWeight.normal,
                                 fontFamily: AppFonts.gtWalshPro,
-                                color: AppColors.par,
+                                color: AppColors.primary,
                               ),
                               children: [
                                 const TextSpan(text: "Did not receive code? "),
                                 TextSpan(
                                   text: "Resend Code",
                                   style: const TextStyle(
-                                    color: AppColors.secondary,
+                                    color: AppColors.primary,
                                   ),
                                   recognizer: TapGestureRecognizer()
                                     ..onTap = () {
@@ -145,7 +145,7 @@ class VerifyEmailView extends StatelessWidget {
                               fontSize: 14,
                               fontWeight: FontWeight.normal,
                               fontFamily: AppFonts.gtWalshPro,
-                              color: AppColors.par,
+                              color: AppColors.primary,
                             ),
                           ),
                         );

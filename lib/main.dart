@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:funconnect/core/app/locator.dart';
-import 'package:funconnect/core/app/routes.dart';
-import 'package:funconnect/services/navigation_service/navigation_service.dart';
+
+import 'features/startup/presentation/views/onboarding_view.dart';
 
 void main() {
   setUpLocator();
@@ -11,17 +11,18 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.orange,
       ),
-      navigatorKey: NavigationService.navigatorKey,
-      onGenerateRoute: Routes.generateRoute,
-      initialRoute: Routes.initialRoute,
+      debugShowCheckedModeBanner: false,
+      home: const OnboardingView(),
+      // navigatorKey: NavigationService.navigatorKey,
+      // onGenerateRoute: Routes.generateRoute,
+      // initialRoute: Routes.initialRoute,
     );
   }
 }

@@ -18,7 +18,7 @@ class EmailSigninView extends StatelessWidget {
       child: BlocBuilder<EmailSignInBloc, EmailSignInState>(
         builder: (context, state) {
           return Scaffold(
-            backgroundColor: AppColors.bgLight,
+            backgroundColor: AppColors.green,
             body: Stack(
               fit: StackFit.loose,
               children: [
@@ -38,7 +38,7 @@ class EmailSigninView extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 24,
                           fontFamily: AppFonts.merriweather,
-                          color: AppColors.text,
+                          color: AppColors.green,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -48,7 +48,7 @@ class EmailSigninView extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 14,
                           fontFamily: AppFonts.gtWalshPro,
-                          color: AppColors.par,
+                          color: AppColors.primary,
                           fontWeight: FontWeight.normal,
                         ),
                       ),
@@ -61,10 +61,9 @@ class EmailSigninView extends StatelessWidget {
                         text: "Get Code",
                         radius: 50,
                         textColor: AppColors.white,
-                        buttonColor: AppColors.par,
-                        function: () => context
-                            .read<EmailSignInBloc>()
-                            .add(GetCodeEvent()),
+                        buttonColor: AppColors.primary,
+                        function: () =>
+                            context.read<EmailSignInBloc>().add(GetCodeEvent()),
                       ),
                       const Spacer(),
                     ],

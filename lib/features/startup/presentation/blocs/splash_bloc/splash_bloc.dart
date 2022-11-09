@@ -26,9 +26,8 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
     bool isAuthenticated = true;
     if (isAuthenticated) {
       _navigationService.toNamed(Routes.dashboardViewRoute);
+    } else {
+      _navigationService.toNamed(Routes.onboardingRoute);
     }
-    // else {
-    //   _navigationService.toNamed(Routes.onboardingRoute);
-    // }
   }
 }

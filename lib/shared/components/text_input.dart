@@ -72,38 +72,38 @@ class AppTextField extends StatelessWidget {
         prefixIcon: prefix,
         filled: true,
         enabled: enabled,
-        fillColor: AppColors.mainCardLight,
+        fillColor: AppColors.primary,
         contentPadding:
             const EdgeInsets.symmetric(vertical: 25, horizontal: 12),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
           borderSide: const BorderSide(
-            color: AppColors.stroke,
+            color: AppColors.primary,
             width: 1,
           ),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
           borderSide: const BorderSide(
-            color: AppColors.stroke,
+            color: AppColors.primary,
             width: 1,
           ),
         ),
         disabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
           borderSide: const BorderSide(
-            color: AppColors.stroke,
+            color: AppColors.green,
             width: 1,
           ),
         ),
         labelStyle: const TextStyle(
-          color: AppColors.par,
+          color: AppColors.primary,
           fontSize: 16,
           fontWeight: FontWeight.normal,
           fontFamily: AppFonts.gtWalshPro,
         ),
         hintStyle: const TextStyle(
-          color: AppColors.par,
+          color: AppColors.primary,
           fontSize: 16,
           fontWeight: FontWeight.normal,
           fontFamily: AppFonts.gtWalshPro,

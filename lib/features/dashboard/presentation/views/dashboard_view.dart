@@ -35,7 +35,7 @@ class _DashboardViewState extends State<DashboardView> {
       body: _tabs[_index],
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.white,
-        unselectedItemColor: AppColors.grey,
+        unselectedItemColor: AppColors.green,
         currentIndex: _index,
         onTap: onTap,
         selectedFontSize: 20,
@@ -53,7 +53,7 @@ class _DashboardViewState extends State<DashboardView> {
           height: 1.3,
           fontFamily: AppFonts.gtWalshPro,
           fontWeight: FontWeight.w400,
-          color: AppColors.par,
+          color: AppColors.primary,
         ),
         showUnselectedLabels: true,
         iconSize: 16,

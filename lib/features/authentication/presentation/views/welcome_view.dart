@@ -53,7 +53,7 @@ class WelcomeView extends StatelessWidget {
                           "Welcome Back",
                           style: TextStyle(
                             fontSize: 24,
-                            color: AppColors.text,
+                            color: AppColors.green,
                             fontFamily: AppFonts.merriweather,
                             fontWeight: FontWeight.bold,
                           ),
@@ -63,7 +63,7 @@ class WelcomeView extends StatelessWidget {
                           "Jump back in where you stopped",
                           style: TextStyle(
                             fontSize: 14,
-                            color: AppColors.par,
+                            color: AppColors.primary,
                             fontFamily: AppFonts.gtWalshPro,
                             fontWeight: FontWeight.normal,
                           ),
@@ -75,9 +75,9 @@ class WelcomeView extends StatelessWidget {
                           image: emailSvg,
                           fontSize: 16,
                           fontWeight: FontWeight.w500,
-                          textColor: AppColors.par,
+                          textColor: AppColors.primary,
                           buttonColor: AppColors.white,
-                          borderColor: AppColors.stroke,
+                          borderColor: AppColors.green,
                           radius: 50,
                           function: () => context
                               .read<WelcomeBloc>()
@@ -90,9 +90,9 @@ class WelcomeView extends StatelessWidget {
                           isImage: true,
                           fontSize: 16,
                           fontWeight: FontWeight.w500,
-                          textColor: AppColors.par,
+                          textColor: AppColors.primary,
                           buttonColor: AppColors.white,
-                          borderColor: AppColors.stroke,
+                          borderColor: AppColors.green,
                           radius: 50,
                         ),
                         const SizedBox(height: 16),
@@ -114,7 +114,7 @@ class WelcomeView extends StatelessWidget {
                               fontSize: 12,
                               fontWeight: FontWeight.normal,
                               fontFamily: AppFonts.gtWalshPro,
-                              color: AppColors.par,
+                              color: AppColors.primary,
                             ),
                             children: [
                               TextSpan(
@@ -123,14 +123,14 @@ class WelcomeView extends StatelessWidget {
                               TextSpan(
                                 text: "Terms of use",
                                 style: TextStyle(
-                                  color: AppColors.secondary,
+                                  color: AppColors.green,
                                 ),
                               ),
                               TextSpan(text: " and read our "),
                               TextSpan(
                                 text: "Privacy policy",
                                 style: TextStyle(
-                                  color: AppColors.secondary,
+                                  color: AppColors.primary,
                                 ),
                               ),
                             ],
