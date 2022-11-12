@@ -5,4 +5,5 @@ final locator = GetIt.instance;
 
 void setUpLocator() {
   locator.registerLazySingleton<INavigationService>(() => NavigationService());
+  // locator.registerLazySingleton(() => AppVideoPlayer());
 }

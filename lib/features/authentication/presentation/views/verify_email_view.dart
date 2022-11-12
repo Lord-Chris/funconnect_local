@@ -4,9 +4,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:funconnect/features/authentication/presentation/blocs/verify_email_bloc/verify_email_bloc.dart';
 import 'package:funconnect/features/authentication/presentation/blocs/verify_email_bloc/verify_email_event.dart';
 import 'package:funconnect/features/authentication/presentation/blocs/verify_email_bloc/verify_email_state.dart';
-import 'package:funconnect/shared/components/_components.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
+import 'package:funconnect/shared/constants/app_textStyle.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
+
+import '../../../../core/presentation/widgets/app_orange_button.dart';
 
 class VerifyEmailView extends StatelessWidget {
   const VerifyEmailView({Key? key}) : super(key: key);
@@ -28,145 +30,234 @@ class VerifyEmailView extends StatelessWidget {
               }
             },
             child: Scaffold(
-              backgroundColor: AppColors.green,
-              body: Padding(
-                padding: const EdgeInsets.all(24),
-                child: ListView(
-                  physics: const ClampingScrollPhysics(),
-                  children: [
-                    const SizedBox(height: 30),
-                    const Text(
-                      "Verify Email Address",
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: AppFonts.merriweather,
-                        color: AppColors.green,
+              body: Stack(
+                fit: StackFit.loose,
+                children: [
+                  Container(
+                    height: MediaQuery.of(context).size.height,
+                    child: Container(
+                      height: 400,
+                      decoration: const BoxDecoration(
+                        image: DecorationImage(
+                            image: AssetImage(
+                              "assets/images/registerIMG.jpg",
+                            ),
+                            fit: BoxFit.cover),
                       ),
                     ),
-                    const SizedBox(height: 8),
-                    const Text(
-                      "An OTP has been sent to kings****@gmail.com",
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.normal,
-                        fontFamily: AppFonts.gtWalshPro,
-                        color: AppColors.primary,
-                      ),
-                    ),
-                    const SizedBox(height: 62),
-                    Center(
-                      child: PinCodeTextField(
-                        appContext: context,
-                        length: 6,
-                        onCompleted: (value) {},
-                        onChanged: (value) {},
-                        // controller: pinController,
-                        autoDisposeControllers: false,
-                        autovalidateMode: AutovalidateMode.onUserInteraction,
-                        keyboardType: TextInputType.number,
-                        cursorColor: AppColors.black,
-                        obscureText: true,
-                        obscuringCharacter: "*",
-                        backgroundColor: AppColors.transparent,
-                        enableActiveFill: true,
-                        pinTheme: PinTheme(
-                          shape: PinCodeFieldShape.box,
-                          borderRadius: BorderRadius.circular(10),
-                          selectedColor: AppColors.primary,
-                          activeColor: AppColors.primary,
-                          inactiveColor: AppColors.green.withOpacity(0.2),
-                          fieldHeight: 64,
-                          fieldWidth: 64,
-                          activeFillColor: Colors.white,
-                          inactiveFillColor: AppColors.white,
-                          selectedFillColor: AppColors.white,
+                  ),
+                  Positioned(
+                    bottom: -20.0,
+                    child: Container(
+                      height: 450,
+                      width: MediaQuery.of(context).size.width,
+                      decoration: const BoxDecoration(
+                        color: AppColors.black,
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(40.0),
+                          topRight: Radius.circular(40.0),
                         ),
                       ),
-                    ),
-                    const SizedBox(height: 40),
-                    BlocBuilder(
-                      bloc: context.watch<VerifyEmailBloc>(),
-                      buildWhen: (previous, current) {
-                        if (current is TimerFinishedState) return true;
-                        if (previous is TimerFinishedState &&
-                            current is TimerChangedState) return true;
-                        return false;
-                      },
-                      builder: (context, state) {
-                        if (state is! TimerFinishedState) {
-                          return const SizedBox();
-                        }
-                        return Center(
-                          child: RichText(
-                            textAlign: TextAlign.start,
-                            text: TextSpan(
-                              style: const TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.normal,
-                                fontFamily: AppFonts.gtWalshPro,
-                                color: AppColors.primary,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          const Text(
+                            "Verify Email ID",
+                            style: TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: AppFonts.merriweather,
+                              color: AppColors.white,
+                            ),
+                          ),
+                          // RichText(
+                          //   textAlign: TextAlign.start,
+                          //   text: TextSpan(
+                          //
+                          //     children: [
+                          //       TextSpan(
+                          //         text: "We’ve sent a code to ",
+                          //         style: AppTextStyle.WhiteMedium,
+                          //       ),
+                          //       TextSpan(
+                          //         text: "john****@gmail.com",
+                          //         style: AppTextStyle.WhiteMedium.copyWith(
+                          //             color: AppColors.primary),
+                          //         // recognizer: TapGestureRecognizer()
+                          //         //   ..onTap = () {
+                          //         //     context
+                          //         //         .read<VerifyEmailBloc>()
+                          //         //         .add(ResendCodeEvent());
+                          //         //   },
+                          //       ),
+                          //       TextSpan(
+                          //         text:
+                          //         "Check your spam folder, refresh or try again with\nanother email",
+                          //         style: AppTextStyle.WhiteMedium,
+                          //       ),
+                          //     ],
+                          //   ),
+                          // ),
+                          Text(
+                              "We’ve sent a code to john****@gmail.com\nCheck your spam folder, refresh or try again with\nanother email",
+                              textAlign: TextAlign.center,
+                              style: AppTextStyle.WhiteMedium),
+                          const SizedBox(height: 62),
+                          Center(
+                            child: PinCodeTextField(
+                              appContext: context,
+                              length: 6,
+                              onCompleted: (value) {},
+                              onChanged: (value) {},
+                              // controller: pinController,
+                              autoDisposeControllers: false,
+                              autovalidateMode:
+                                  AutovalidateMode.onUserInteraction,
+                              keyboardType: TextInputType.number,
+                              cursorColor: AppColors.black,
+                              obscureText: true,
+                              obscuringCharacter: "*",
+                              backgroundColor: AppColors.transparent,
+                              enableActiveFill: true,
+                              pinTheme: PinTheme(
+                                shape: PinCodeFieldShape.box,
+                                borderRadius: BorderRadius.circular(10),
+                                selectedColor: AppColors.primary,
+                                activeColor: AppColors.primary,
+                                inactiveColor: AppColors.ash,
+                                fieldHeight: 64,
+                                fieldWidth: 64,
+                                activeFillColor: Colors.white,
+                                inactiveFillColor: AppColors.transparent,
+                                selectedFillColor: AppColors.white,
                               ),
-                              children: [
-                                const TextSpan(text: "Did not receive code? "),
-                                TextSpan(
-                                  text: "Resend Code",
-                                  style: const TextStyle(
-                                    color: AppColors.primary,
+                            ),
+                          ),
+                          Container(
+                            height: 32,
+                            decoration: BoxDecoration(
+                                color: AppColors.primary,
+                                borderRadius: BorderRadius.circular(8.0)),
+                            child: TextButton(
+                              onPressed: () {},
+                              child: Text(
+                                "Paste",
+                                style: AppTextStyle.Blacklight,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 32.0,
+                          ),
+                          BlocBuilder(
+                            bloc: context.watch<VerifyEmailBloc>(),
+                            buildWhen: (previous, current) {
+                              if (current is TimerFinishedState) return true;
+                              if (previous is TimerFinishedState &&
+                                  current is TimerChangedState) return true;
+                              return false;
+                            },
+                            builder: (context, state) {
+                              if (state is! TimerFinishedState) {
+                                return const SizedBox();
+                              }
+                              return Center(
+                                child: RichText(
+                                  textAlign: TextAlign.start,
+                                  text: TextSpan(
+                                    style: const TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.normal,
+                                      fontFamily: AppFonts.gtWalshPro,
+                                      color: AppColors.primary,
+                                    ),
+                                    children: [
+                                      TextSpan(
+                                        text: "Did not receive code? ",
+                                        style: AppTextStyle.WhiteMedium,
+                                      ),
+                                      TextSpan(
+                                        text: "Resend Code",
+                                        style:
+                                            AppTextStyle.WhiteMedium.copyWith(
+                                                color: AppColors.primary),
+                                        recognizer: TapGestureRecognizer()
+                                          ..onTap = () {
+                                            context
+                                                .read<VerifyEmailBloc>()
+                                                .add(ResendCodeEvent());
+                                          },
+                                      ),
+                                    ],
                                   ),
-                                  recognizer: TapGestureRecognizer()
-                                    ..onTap = () {
-                                      context
-                                          .read<VerifyEmailBloc>()
-                                          .add(ResendCodeEvent());
-                                    },
                                 ),
-                              ],
-                            ),
+                              );
+                            },
                           ),
-                        );
-                      },
-                    ),
-                    const SizedBox(height: 8),
-                    BlocBuilder(
-                      bloc: context.watch<VerifyEmailBloc>(),
-                      buildWhen: (previous, current) {
-                        return current is TimerChangedState ||
-                            current is TimerFinishedState;
-                      },
-                      builder: (context, state) {
-                        if (state is! TimerChangedState) {
-                          return const SizedBox();
-                        }
-                        return Center(
-                          child: Text(
-                            state.parsedTime,
-                            style: const TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.normal,
-                              fontFamily: AppFonts.gtWalshPro,
-                              color: AppColors.primary,
-                            ),
+                          const SizedBox(
+                            height: 32.0,
                           ),
-                        );
-                      },
-                    ),
-                    const SizedBox(height: 56),
-                    Center(
-                      child: CustomButton(
-                        text: "Verify Email",
-                        textColor: AppColors.white,
-                        buttonColor: AppColors.primary,
-                        radius: 50,
-                        function: () => context
-                            .read<VerifyEmailBloc>()
-                            .add(VerifyEmailTapEvent()),
+                          App_Orange_Btn(
+                            label: "Verify e-mail",
+                          ),
+                        ],
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
+
+            // Scaffold(
+            //   backgroundColor: AppColors.green,
+            //   body: Padding(
+            //     padding: const EdgeInsets.all(24),
+            //     child: ListView(
+            //       physics: const ClampingScrollPhysics(),
+            //       children: [
+            //
+
+            //         const SizedBox(height: 8),
+            //         BlocBuilder(
+            //           bloc: context.watch<VerifyEmailBloc>(),
+            //           buildWhen: (previous, current) {
+            //             return current is TimerChangedState ||
+            //                 current is TimerFinishedState;
+            //           },
+            //           builder: (context, state) {
+            //             if (state is! TimerChangedState) {
+            //               return const SizedBox();
+            //             }
+            //             return Center(
+            //               child: Text(
+            //                 state.parsedTime,
+            //                 style: const TextStyle(
+            //                   fontSize: 14,
+            //                   fontWeight: FontWeight.normal,
+            //                   fontFamily: AppFonts.gtWalshPro,
+            //                   color: AppColors.primary,
+            //                 ),
+            //               ),
+            //             );
+            //           },
+            //         ),
+            //         const SizedBox(height: 56),
+            //         Center(
+            //           child: CustomButton(
+            //             text: "Verify Email",
+            //             textColor: AppColors.white,
+            //             buttonColor: AppColors.primary,
+            //             radius: 50,
+            //             function: () => context
+            //                 .read<VerifyEmailBloc>()
+            //                 .add(VerifyEmailTapEvent()),
+            //           ),
+            //         ),
+            //       ],
+            //     ),
+            //   ),
+            // ),
           );
         },
       ),

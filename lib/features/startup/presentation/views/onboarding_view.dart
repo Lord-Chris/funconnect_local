@@ -6,6 +6,7 @@ import 'package:funconnect/features/startup/presentation/blocs/onboarding_bloc/o
 import 'package:funconnect/shared/constants/_constants.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../../core/presentation/widgets/app_orange_button.dart';
 import '../../models/onBoarding_carousel_model.dart';
 
 class OnboardingView extends StatefulWidget {
@@ -144,18 +145,8 @@ class _OnboardingViewState extends State<OnboardingView> {
                               ),
                             ],
                           ),
-                          Container(
-                            height: 80,
-                            decoration: const BoxDecoration(
-                              color: AppColors.primary,
-                              borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(36),
-                                topRight: Radius.circular(36),
-                              ),
-                            ),
-                            child: const Center(
-                              child: Text("Get Started"),
-                            ),
+                          App_Orange_Btn(
+                            label: "Get Started",
                           ),
                         ],
                       ),

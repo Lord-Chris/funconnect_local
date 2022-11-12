@@ -1,79 +1,119 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:funconnect/features/authentication/presentation/blocs/email_sign_in_bloc/email_sign_in_bloc.dart';
-import 'package:funconnect/features/authentication/presentation/blocs/email_sign_in_bloc/email_sign_in_event.dart';
-import 'package:funconnect/shared/components/_components.dart';
-import 'package:funconnect/shared/constants/_constants.dart';
+import 'package:google_fonts/google_fonts.dart';
 
+import '../../../../core/presentation/widgets/app_auth_text_form_field.dart';
+import '../../../../core/presentation/widgets/app_black_modal.dart';
+import '../../../../core/presentation/widgets/app_orange_button.dart';
 import '../blocs/email_sign_in_bloc/email_sign_in_state.dart';
 
 class EmailSigninView extends StatelessWidget {
   const EmailSigninView({Key? key}) : super(key: key);
-  static const topCircle = "assets/svgs/ellipse_137.svg";
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => EmailSignInBloc(),
       child: BlocBuilder<EmailSignInBloc, EmailSignInState>(
-        builder: (context, state) {
-          return Scaffold(
-            backgroundColor: AppColors.green,
-            body: Stack(
-              fit: StackFit.loose,
-              children: [
-                Positioned(
-                  top: 0,
-                  right: 0,
-                  child: SvgPicture.asset(topCircle, width: 150),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(24),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const SizedBox(height: 100),
-                      const Text(
-                        "Authentication",
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontFamily: AppFonts.merriweather,
-                          color: AppColors.green,
-                          fontWeight: FontWeight.bold,
-                        ),
+          builder: (context, state) {
+        return Scaffold(
+          body: AppBlackModalWidget(
+            imageContainerHeight: 400.0,
+            modalHeight: 480.0,
+            children: [
+              Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    "Welcome!",
+                    style:
+                        GoogleFonts.inter(color: Colors.white, fontSize: 24.0),
+                  ),
+                  const SizedBox(
+                    height: 8.0,
+                  ),
+                  Text(
+                    "Continue with your socials",
+                    style:
+                        GoogleFonts.inter(color: Colors.white, fontSize: 14.0),
+                  ),
+                  const SizedBox(
+                    height: 32.0,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      CircleAvatar(
+                        backgroundColor: Colors.white,
+                        radius: 30,
                       ),
-                      const SizedBox(height: 8),
-                      const Text(
-                        "Keep your data secured",
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontFamily: AppFonts.gtWalshPro,
-                          color: AppColors.primary,
-                          fontWeight: FontWeight.normal,
-                        ),
+                      SizedBox(
+                        width: 16.0,
                       ),
-                      const SizedBox(height: 78),
-                      const AppTextField(
-                        hint: "Your Email Address",
+                      CircleAvatar(
+                        radius: 30,
+                        backgroundColor: Colors.white,
                       ),
-                      const SizedBox(height: 40),
-                      CustomButton(
-                        text: "Get Code",
-                        radius: 50,
-                        textColor: AppColors.white,
-                        buttonColor: AppColors.primary,
-                        function: () =>
-                            context.read<EmailSignInBloc>().add(GetCodeEvent()),
-                      ),
-                      const Spacer(),
                     ],
                   ),
-                ),
-              ],
-            ),
-          );
-        },
-      ),
+                  const SizedBox(
+                    height: 32.0,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        height: 1.0,
+                        width: MediaQuery.of(context).size.width / 4,
+                        color: Colors.white,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        child: Text(
+                          "Or with email ID",
+                          style: GoogleFonts.inter(color: Colors.white),
+                        ),
+                      ),
+                      Container(
+                        height: 1.0,
+                        width: MediaQuery.of(context).size.width / 4,
+                        color: Colors.white,
+                      ),
+                      const Divider(
+                        height: 5.0,
+                        thickness: 5.0,
+                        color: Colors.white,
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 32.0,
+                  ),
+                  AppTextForm(
+                    hintText: "E-mail",
+                    onChanged: (String) {},
+                    validator: (String) {},
+                  ),
+                  const SizedBox(
+                    height: 32.0,
+                  ),
+                  Text(
+                    "By registering, you agree to our Terms & Conditions and Privacy policy",
+                    style: GoogleFonts.inter(color: Colors.white),
+                  ),
+                  const SizedBox(
+                    height: 24.0,
+                  ),
+                  App_Orange_Btn(
+                    label: "Sign Up",
+                  ),
+                ],
+              ),
+            ],
+          ),
+        );
+      }),
     );
   }
 }
