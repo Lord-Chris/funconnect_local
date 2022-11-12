@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:funconnect/features/authentication/presentation/views/email_signin_view.dart';
+import 'package:funconnect/features/authentication/presentation/views/email_verified_view.dart';
 import 'package:funconnect/features/authentication/presentation/views/location_auth_view.dart';
 import 'package:funconnect/features/authentication/presentation/views/verify_email_view.dart';
 import 'package:funconnect/features/authentication/presentation/views/welcome_view.dart';
@@ -15,8 +16,10 @@ class Routes {
   static const welcomeViewRoute = '/welcome-view';
   static const emailSignInRoute = '/email-sign-in';
   static const verifyEmailRoute = '/verify-email';
+  static const emailVerifiedRoute = '/email-verified';
   static const locationAuthRoute = '/location-auth';
   static const successViewRoute = '/success-view';
+  static const setUpProfile = '/setUp-Profile';
   static const dashboardViewRoute = '/dashboard-view';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -31,6 +34,8 @@ class Routes {
         return MaterialPageRoute(builder: (_) => const EmailSigninView());
       case verifyEmailRoute:
         return MaterialPageRoute(builder: (_) => const VerifyEmailView());
+      case emailVerifiedRoute:
+        return MaterialPageRoute(builder: (_) => const EmailVerifiedScreen());
       case locationAuthRoute:
         return MaterialPageRoute(builder: (_) => const LocationAuthView());
       case successViewRoute:

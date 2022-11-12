@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:funconnect/core/app/locator.dart';
+import 'package:funconnect/services/navigation_service/navigation_service.dart';
 
-import 'features/authentication/presentation/views/email_verified_view.dart';
-import 'features/profile_setup/presentation/views/Profile_setup_view.dart';
+import 'core/app/routes.dart';
 
 void main() {
   setUpLocator();
@@ -20,10 +20,10 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.orange,
       ),
       debugShowCheckedModeBanner: false,
-      home: const ProfileSetUpView(),
-      // navigatorKey: NavigationService.navigatorKey,
-      // onGenerateRoute: Routes.generateRoute,
-      // initialRoute: Routes.initialRoute,
+      // home: const ProfileSetUpView(),
+      navigatorKey: NavigationService.navigatorKey,
+      onGenerateRoute: Routes.generateRoute,
+      initialRoute: Routes.initialRoute,
     );
   }
 }
