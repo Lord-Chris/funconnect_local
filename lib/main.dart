@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:funconnect/core/app/locator.dart';
-import 'package:funconnect/services/navigation_service/navigation_service.dart';
 
-import 'core/app/routes.dart';
+import 'features/dashboard/presentation/views/home_view.dart';
 
-void main() {
+void main() async {
   setUpLocator();
+  await ScreenUtil.ensureScreenSize();
   runApp(const MyApp());
 }
 
@@ -14,16 +15,23 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.orange,
-      ),
-      debugShowCheckedModeBanner: false,
-      // home: const ProfileSetUpView(),
-      navigatorKey: NavigationService.navigatorKey,
-      onGenerateRoute: Routes.generateRoute,
-      initialRoute: Routes.initialRoute,
-    );
+    return ScreenUtilInit(
+        designSize: const Size(428, 926),
+        minTextAdapt: true,
+        splitScreenMode: true,
+        builder: (context, _) {
+          // ScreenUtil.init(context);
+          return MaterialApp(
+            title: 'Flutter Demo',
+            theme: ThemeData(
+              primarySwatch: Colors.orange,
+            ),
+            debugShowCheckedModeBanner: false,
+            home: const HomeView(),
+            // navigatorKey: NavigationService.navigatorKey,
+            // onGenerateRoute: Routes.generateRoute,
+            // initialRoute: Routes.initialRoute,
+          );
+        });
   }
 }
