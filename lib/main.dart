@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:funconnect/core/app/locator.dart';
 
-import 'features/dashboard/presentation/views/home_view.dart';
+import 'features/fun_connect/notification/presentation/notificataion_view.dart';
 
 void main() async {
   setUpLocator();
@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
               primarySwatch: Colors.orange,
             ),
             debugShowCheckedModeBanner: false,
-            home: const HomeView(),
+            home: const NotificationView(),
             // navigatorKey: NavigationService.navigatorKey,
             // onGenerateRoute: Routes.generateRoute,
             // initialRoute: Routes.initialRoute,

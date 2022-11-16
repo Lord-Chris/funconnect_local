@@ -352,25 +352,11 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "6.0.3"
-  simple_star_rating:
-    dependency: "direct main"
-    description:
-      name: simple_star_rating
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.0.3"
   sky_engine:
     dependency: transitive
     description: flutter
     source: sdk
     version: "0.0.99"
-  smooth_star_rating:
-    dependency: "direct main"
-    description:
-      name: smooth_star_rating
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.1.1"
   source_span:
     dependency: transitive
     description:
@@ -385,13 +371,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.10.0"
-  star_rating:
-    dependency: "direct main"
-    description:
-      name: star_rating
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.10.0"
   stream_channel:
     dependency: transitive
     description:
