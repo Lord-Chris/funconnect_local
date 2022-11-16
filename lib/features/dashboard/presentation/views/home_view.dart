@@ -86,17 +86,20 @@ class HomeView extends StatelessWidget {
                 label: "Categories",
                 child: const HomeViewCategoriesSmallSubWidget(),
               ),
+              AppSpacer.normalHeightSpace,
               HomeViewCategoriesWidget(
                 height: 200,
                 child: const HomeCategoriesLargeWidget(),
                 label: "Best for you",
               ),
+              AppSpacer.normalHeightSpace,
               HomeViewCategoriesWidget(
                 height: 200,
                 label: "Recently added",
                 child: const HomeCategoriesLargeWidget(),
               ),
-              AppSpacer.xtraHeightSpace
+              AppSpacer.xtraHeightSpace,
+              AppSpacer.normalHeightSpace,
             ],
           ),
         ),
