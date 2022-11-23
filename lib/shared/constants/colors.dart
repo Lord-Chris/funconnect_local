@@ -16,4 +16,5 @@ class AppColors {
   // static const mainCardLight = Color(0XFFFFFFFF);
   // static const grey = Color(0XFF333333);
   // static const lightBlue = Color(0xFFE6ECFF);
+
 }
