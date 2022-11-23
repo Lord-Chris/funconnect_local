@@ -23,8 +23,11 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
 
   void _onSplashFinished(FinishSplashEvent event, Emitter<SplashState> emit) {
     // TODO: Navigate to either onboarding, auth screen or home screen here.
-    _navigationService.toNamed(Routes.onboardingRoute);
-
-    // emit(SplashFinishedState());
+    bool isAuthenticated = true;
+    if (isAuthenticated) {
+      _navigationService.toNamed(Routes.dashboardViewRoute);
+    } else {
+      _navigationService.toNamed(Routes.onboardingRoute);
+    }
   }
 }

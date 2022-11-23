@@ -4,7 +4,6 @@ class AppColors {
   static const transparent = Color(0x00000000);
   static const black = Color(0XFF000000);
   static const white = Color(0XFFFFFFFF);
-
   static const primary = Color(0XFF8051FF);
   static const secondary = Color(0XFFE65F5C);
   static const text = Color(0XFF001347);
@@ -15,4 +14,5 @@ class AppColors {
   static const mainCardLight = Color(0XFFFFFFFF);
   static const grey = Color(0XFF333333);
   static const lightBlue = Color(0xFFE6ECFF);
+
 }
