@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:funconnect/features/authentication/presentation/views/email_signin_view.dart';
 import 'package:funconnect/features/authentication/presentation/views/email_verified_view.dart';
-import 'package:funconnect/features/authentication/presentation/views/location_auth_view.dart';
 import 'package:funconnect/features/authentication/presentation/views/verify_email_view.dart';
 import 'package:funconnect/features/authentication/presentation/views/welcome_view.dart';
 import 'package:funconnect/features/dashboard/presentation/views/dashboard_view.dart';
@@ -36,8 +35,8 @@ class Routes {
         return MaterialPageRoute(builder: (_) => const VerifyEmailView());
       case emailVerifiedRoute:
         return MaterialPageRoute(builder: (_) => const EmailVerifiedScreen());
-      case locationAuthRoute:
-        return MaterialPageRoute(builder: (_) => const LocationAuthView());
+      // case locationAuthRoute:
+      //   return MaterialPageRoute(builder: (_) => const LocationAuthView());
       case successViewRoute:
         return MaterialPageRoute(builder: (_) => const SuccessView());
       case dashboardViewRoute:

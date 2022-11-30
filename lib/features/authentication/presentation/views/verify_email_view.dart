@@ -9,6 +9,8 @@ import 'package:funconnect/shared/constants/app_textStyle.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 import '../../../../core/presentation/widgets/app_orange_button.dart';
+import '../../../../core/presentation/widgets/app_smart_strings.dart';
+import '../../../../core/presentation/widgets/app_text.dart';
 
 class VerifyEmailView extends StatelessWidget {
   const VerifyEmailView({Key? key}) : super(key: key);
@@ -39,9 +41,7 @@ class VerifyEmailView extends StatelessWidget {
                       height: 400,
                       decoration: const BoxDecoration(
                         image: DecorationImage(
-                            image: AssetImage(
-                              "assets/images/registerIMG.jpg",
-                            ),
+                            image: AssetImage(AppSmartString.registerImg),
                             fit: BoxFit.cover),
                       ),
                     ),
@@ -63,7 +63,7 @@ class VerifyEmailView extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           const Text(
-                            "Verify Email ID",
+                            AppText.aTAuthVerifyEmailIdText,
                             style: TextStyle(
                               fontSize: 24,
                               fontWeight: FontWeight.bold,
@@ -117,6 +117,8 @@ class VerifyEmailView extends StatelessWidget {
                               keyboardType: TextInputType.number,
                               cursorColor: AppColors.black,
                               obscureText: true,
+                              textStyle: AppTextStyle.BlackBold.copyWith(
+                                  fontSize: 20.0),
                               obscuringCharacter: "*",
                               backgroundColor: AppColors.transparent,
                               enableActiveFill: true,
@@ -174,11 +176,11 @@ class VerifyEmailView extends StatelessWidget {
                                     ),
                                     children: [
                                       TextSpan(
-                                        text: "Did not receive code? ",
+                                        text: AppText.aTAuthDNReceiveCodeText,
                                         style: AppTextStyle.WhiteMedium,
                                       ),
                                       TextSpan(
-                                        text: "Resend Code",
+                                        text: AppText.aTAuthResendCodeText,
                                         style:
                                             AppTextStyle.WhiteMedium.copyWith(
                                                 color: AppColors.primary),
@@ -199,7 +201,7 @@ class VerifyEmailView extends StatelessWidget {
                             height: 32.0,
                           ),
                           App_Orange_Btn(
-                            label: "Verify e-mail",
+                            label: AppText.aTAuthVerifyEmailText,
                           ),
                         ],
                       ),

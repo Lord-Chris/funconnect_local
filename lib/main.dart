@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:funconnect/core/app/locator.dart';
 
-import 'features/fun_connect/notification/presentation/notificataion_view.dart';
+import 'features/fun_connect/event/presentation/event_description_view.dart';
 
 void main() async {
   setUpLocator();
@@ -22,12 +22,11 @@ class MyApp extends StatelessWidget {
         builder: (context, _) {
           // ScreenUtil.init(context);
           return MaterialApp(
-            title: 'Flutter Demo',
             theme: ThemeData(
               primarySwatch: Colors.orange,
             ),
             debugShowCheckedModeBanner: false,
-            home: const NotificationView(),
+            home: EventDescription(),
             // navigatorKey: NavigationService.navigatorKey,
             // onGenerateRoute: Routes.generateRoute,
             // initialRoute: Routes.initialRoute,

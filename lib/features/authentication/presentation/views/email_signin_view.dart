@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../../../core/presentation/widgets/app_auth_text_form_field.dart';
 import '../../../../core/presentation/widgets/app_black_modal.dart';
 import '../../../../core/presentation/widgets/app_orange_button.dart';
+import '../../../../core/presentation/widgets/app_text.dart';
 import '../blocs/email_sign_in_bloc/email_sign_in_state.dart';
 
 class EmailSigninView extends StatelessWidget {
@@ -26,7 +27,7 @@ class EmailSigninView extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    "Welcome!",
+                    AppText.aTAuthWelcomeText,
                     style:
                         GoogleFonts.inter(color: Colors.white, fontSize: 24.0),
                   ),
@@ -34,7 +35,7 @@ class EmailSigninView extends StatelessWidget {
                     height: 8.0,
                   ),
                   Text(
-                    "Continue with your socials",
+                    AppText.aTAuthContinueWithSocialsText,
                     style:
                         GoogleFonts.inter(color: Colors.white, fontSize: 14.0),
                   ),
@@ -71,7 +72,7 @@ class EmailSigninView extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 8.0),
                         child: Text(
-                          "Or with email ID",
+                          AppText.aTAuthEmailID,
                           style: GoogleFonts.inter(color: Colors.white),
                         ),
                       ),
@@ -91,7 +92,7 @@ class EmailSigninView extends StatelessWidget {
                     height: 32.0,
                   ),
                   AppTextForm(
-                    hintText: "E-mail",
+                    hintText: AppText.aTAuthEmailText,
                     onChanged: (String) {},
                     validator: (String) {},
                   ),
@@ -99,14 +100,14 @@ class EmailSigninView extends StatelessWidget {
                     height: 32.0,
                   ),
                   Text(
-                    "By registering, you agree to our Terms & Conditions and Privacy policy",
+                    AppText.aTAuthAgreementText,
                     style: GoogleFonts.inter(color: Colors.white),
                   ),
                   const SizedBox(
                     height: 24.0,
                   ),
                   App_Orange_Btn(
-                    label: "Sign Up",
+                    label: AppText.aTAuthSignUpText,
                   ),
                 ],
               ),

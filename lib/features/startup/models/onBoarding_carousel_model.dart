@@ -1,3 +1,5 @@
+import 'package:funconnect/core/presentation/widgets/app_smart_strings.dart';
+
 class OnBoardingCarouselModel {
   String title;
   String Subtitle;
@@ -9,24 +11,24 @@ class OnBoardingCarouselModel {
 
 List<OnBoardingCarouselModel> onBoardingCarouselItems = [
   OnBoardingCarouselModel(
-      title: 'Create events for\nmeet-ups',
-      Subtitle:
-          "Let’s help you create memorable moments by \n planning your next hangout",
-      ImgUrl: "assets/images/splashImg.png"),
+    title: AppSmartString.carouselItemTitle1,
+    Subtitle: AppSmartString.carouselItemSubTitle1,
+    ImgUrl: AppSmartString.carouselImage1,
+  ),
   OnBoardingCarouselModel(
-      title: "Explore amazing\nplaces near you",
-      Subtitle:
-          "Every place has its specialty, we ought to feel\nthe freedom that comes with adventures",
-      ImgUrl: "assets/images/splashImg2.png"),
+    title: AppSmartString.carouselItemTitle2,
+    Subtitle: AppSmartString.carouselItemSubTitle2,
+    ImgUrl: AppSmartString.carouselImage2,
+  ),
   OnBoardingCarouselModel(
-      title: "Share your best\nexperiences",
-      Subtitle:
-          "We help you establish human connections within\nthe context of shared experience.",
-      ImgUrl: "assets/images/SplashImg3.png"),
+    title: AppSmartString.carouselItemTitle3,
+    Subtitle: AppSmartString.carouselItemSubTitle3,
+    ImgUrl: AppSmartString.carouselImage3,
+  ),
 ];
 
-final List<String> _ImgList = [
-  "assets/images/splashImg.png",
-  "assets/images/splashImg2.png",
-  "assets/images/SplashImg3.png"
-];
+//final List<String> _ImgList = [
+//   AppSmartString.carouselImage1,
+//   AppSmartString.carouselImage2,
+//   AppSmartString.carouselImage3,
+// ];

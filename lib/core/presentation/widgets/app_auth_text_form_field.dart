@@ -40,6 +40,7 @@ class AppTextForm extends StatefulWidget {
     this.textAlign,
     this.textAlignVertical,
     this.borderRadius,
+    this.topLabelText,
   }) : super(key: key);
 
   final String? hintText;
@@ -63,6 +64,7 @@ class AppTextForm extends StatefulWidget {
   final bool showObscureTextToggle;
   final String? Function(String) validator;
   final String? infoText;
+  final String? topLabelText;
   final TextInputAction? textInputAction;
   final void Function(String)? onFieldSubmitted;
   final Color? backgroundColor;
@@ -120,11 +122,11 @@ class _AppTextFormState extends State<AppTextForm>
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          if (widget.labelText != null && !widget.hideLabel)
+          if (widget.topLabelText != null && !widget.hideLabel)
             Padding(
               padding: const EdgeInsets.all(6),
               child: Text(
-                widget.labelText!,
+                widget.topLabelText!,
                 textAlign: TextAlign.left,
                 style: widget.lableStyle ??
                     const TextStyle(
@@ -190,10 +192,8 @@ class _AppTextFormState extends State<AppTextForm>
                           inputFormatters: widget.inputFormatters,
                           onFieldSubmitted: widget.onFieldSubmitted,
                           decoration: InputDecoration(
-                            prefix: widget.prefixIcon ??
-                                const Icon(Icons.mail_rounded,
-                                    color: AppColors.ash),
-                            labelText: widget.hintText ?? "label",
+                            prefix: widget.prefixIcon,
+                            labelText: widget.labelText ?? "label",
                             labelStyle: const TextStyle(
                                 color: AppColors.white, fontSize: 16.0),
                             border: OutlineInputBorder(

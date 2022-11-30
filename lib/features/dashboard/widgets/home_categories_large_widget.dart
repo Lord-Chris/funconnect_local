@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -7,7 +5,9 @@ import '../../../shared/constants/_constants.dart';
 import '../../../shared/dumb_widgets/dumb_app_strings.dart';
 
 class HomeCategoriesLargeWidget extends StatefulWidget {
-  const HomeCategoriesLargeWidget({
+  double? width;
+  HomeCategoriesLargeWidget({
+    this.width,
     Key? key,
   }) : super(key: key);
 
@@ -21,8 +21,9 @@ class _HomeCategoriesLargeWidgetState extends State<HomeCategoriesLargeWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 30.0,
-      width: 170.0,
+      height: 300.0.h,
+      // height: 30.0,
+      width: widget.width ?? 170.0,
       decoration: BoxDecoration(
         color: AppColors.primary,
         borderRadius: BorderRadius.circular(30.0.r),
@@ -33,13 +34,14 @@ class _HomeCategoriesLargeWidgetState extends State<HomeCategoriesLargeWidget> {
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             Center(
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(20.0.r),
-                child: BackdropFilter(
-                  filter: ImageFilter.blur(sigmaX: 15.0, sigmaY: 15.0),
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20.0.r),
+                ),
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 8.0.w),
                   child: Container(
                     height: 90.0.h,
-                    width: 160.0.w,
                     decoration: BoxDecoration(
                       color: Colors.black.withOpacity(0.7),
                       borderRadius: BorderRadius.circular(20.0.r),

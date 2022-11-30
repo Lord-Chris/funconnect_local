@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:funconnect/core/presentation/widgets/app_black_modal.dart';
 
 import '../../../../core/presentation/widgets/app_orange_button.dart';
+import '../../../../core/presentation/widgets/core_widgets.dart';
 import '../../../../shared/constants/app_textStyle.dart';
 import '../../../../shared/constants/colors.dart';
 import '../../../../shared/constants/fonts.dart';
@@ -22,7 +22,7 @@ class EmailVerifiedScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const Text(
-              "Email ID verified!",
+              AppText.aTAuthEmailIDVerificationText,
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
@@ -30,11 +30,11 @@ class EmailVerifiedScreen extends StatelessWidget {
                 color: AppColors.white,
               ),
             ),
-            Text("Your email has been verified successfully.",
+            Text(AppText.aTAuthEmailIDVerificationSuccessText,
                 textAlign: TextAlign.center, style: AppTextStyle.WhiteMedium),
             const SizedBox(height: 62),
             App_Orange_Btn(
-              label: "Continue",
+              label: AppText.aTAuthContinueText,
             ),
           ],
         ),
