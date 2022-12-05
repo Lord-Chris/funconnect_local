@@ -35,7 +35,7 @@ class VerifyEmailView extends StatelessWidget {
               body: Stack(
                 fit: StackFit.loose,
                 children: [
-                  Container(
+                  SizedBox(
                     height: MediaQuery.of(context).size.height,
                     child: Container(
                       height: 400,
@@ -200,7 +200,7 @@ class VerifyEmailView extends StatelessWidget {
                           const SizedBox(
                             height: 32.0,
                           ),
-                          App_Orange_Btn(
+                          const AppOrangeBtn(
                             label: AppText.aTAuthVerifyEmailText,
                           ),
                         ],

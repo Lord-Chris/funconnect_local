@@ -1,19 +1,20 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../shared/constants/colors.dart';
 
-class App_Orange_Btn extends StatelessWidget {
-  String label;
-  double? height;
-  double? weight;
+class AppOrangeBtn extends StatelessWidget {
+  final String label;
+  final double? height;
+  final double? weight;
+  final VoidCallback? onTap;
 
-  App_Orange_Btn({
+  const AppOrangeBtn({
+    Key? key,
     required this.label,
     this.height,
     this.weight,
-    Key? key,
+    this.onTap,
   }) : super(key: key);
 
   @override
@@ -29,7 +30,7 @@ class App_Orange_Btn extends StatelessWidget {
         ),
       ),
       child: TextButton(
-        onPressed: () {},
+        onPressed: onTap,
         child: Text(
           label,
           style: GoogleFonts.inter(fontSize: 20.0, color: Colors.black),

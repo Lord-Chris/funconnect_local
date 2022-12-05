@@ -155,8 +155,11 @@ class _OnboardingViewState extends State<OnboardingView> {
                           ),
                           AppSpacer.xtraHeightSpace,
                           AppSpacer.xtraHeightSpace,
-                          App_Orange_Btn(
+                          AppOrangeBtn(
                             label: "Get Started",
+                            onTap: () => context
+                                .read<OnboardingBloc>()
+                                .add(GetStartedEvent()),
                           ),
                         ],
                       ),

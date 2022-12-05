@@ -39,7 +39,7 @@ class _InterestViewState extends State<InterestView> {
             );
           })),
           const SizedBox(height: 62),
-          App_Orange_Btn(
+          AppOrangeBtn(
             label: AppText.aTAuthContinueText,
           ),
         ],

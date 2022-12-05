@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter/widgets.dart';
 
 abstract class OnboardingEvent extends Equatable {
   @override
@@ -16,9 +15,6 @@ class PageChangedEvent extends OnboardingEvent {
   List<Object?> get props => [page];
 }
 
-class GetStartedEvent extends OnboardingEvent {
-  final BuildContext context;
-  GetStartedEvent(this.context);
-}
+class GetStartedEvent extends OnboardingEvent {}
 
 class LoginTapEvent extends OnboardingEvent {}

@@ -106,7 +106,7 @@ class EmailSigninView extends StatelessWidget {
                   const SizedBox(
                     height: 24.0,
                   ),
-                  App_Orange_Btn(
+                  AppOrangeBtn(
                     label: AppText.aTAuthSignUpText,
                   ),
                 ],

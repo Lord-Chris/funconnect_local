@@ -55,7 +55,9 @@ class _ProfileSetUpViewState extends State<ProfileSetUpView> {
                 ),
                 hintText: "Full name",
                 onChanged: (String) {},
-                validator: (String) {},
+                validator: (String) {
+                  return null;
+                },
               ),
               AppTextForm(
                 prefixIcon: const Icon(
@@ -64,7 +66,9 @@ class _ProfileSetUpViewState extends State<ProfileSetUpView> {
                 ),
                 hintText: "Username",
                 onChanged: (String) {},
-                validator: (String) {},
+                validator: (String) {
+                  return null;
+                },
               ),
               AppTextForm(
                 prefixIcon: const Icon(
@@ -73,7 +77,9 @@ class _ProfileSetUpViewState extends State<ProfileSetUpView> {
                 ),
                 hintText: "Gender",
                 onChanged: (String) {},
-                validator: (String) {},
+                validator: (String) {
+                  return null;
+                },
               ),
             ],
           )),
@@ -89,7 +95,7 @@ class _ProfileSetUpViewState extends State<ProfileSetUpView> {
             ],
           ),
           const SizedBox(height: 62),
-          App_Orange_Btn(
+          const AppOrangeBtn(
             label: "Continue",
           ),
         ],
