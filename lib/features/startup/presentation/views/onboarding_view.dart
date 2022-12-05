@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:funconnect/core/presentation/widgets/core_widgets.dart';
 import 'package:funconnect/features/startup/presentation/blocs/onboarding_bloc/onboarding_bloc.dart';
 import 'package:funconnect/features/startup/presentation/blocs/onboarding_bloc/onboarding_event.dart';
 import 'package:funconnect/features/startup/presentation/blocs/onboarding_bloc/onboarding_state.dart';
@@ -42,6 +43,7 @@ class _OnboardingViewState extends State<OnboardingView> {
                         .read<OnboardingBloc>()
                         .add(PageChangedEvent(page: val)),
                     controller: controller,
+                    physics: const ClampingScrollPhysics(),
                     children: onBoardingCarouselItems.map((e) {
                       return Container(
                         decoration: BoxDecoration(
@@ -72,15 +74,19 @@ class _OnboardingViewState extends State<OnboardingView> {
                             AppColors.black,
                             AppColors.transparent,
                           ],
-                          stops: [0.02, 0.4],
+                          stops: [0.4, 1],
                           begin: Alignment.topCenter,
                           end: Alignment.bottomCenter,
                         ),
                       ),
                       child: SafeArea(
                         child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 16.0,
+                            vertical: 40.0,
+                          ),
                           child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               const Expanded(
                                 child: Divider(
@@ -118,7 +124,7 @@ class _OnboardingViewState extends State<OnboardingView> {
                             AppColors.black,
                             AppColors.transparent,
                           ],
-                          stops: [0.02, 0.4],
+                          stops: [0.4, 1],
                           begin: Alignment.bottomCenter,
                           end: Alignment.topCenter,
                         ),
@@ -128,23 +134,27 @@ class _OnboardingViewState extends State<OnboardingView> {
                           Column(
                             children: [
                               Text(
-                                onBoardingCarouselItems[state.page].title,
+                                "Create events for meet-ups",
                                 textAlign: TextAlign.center,
                                 style: GoogleFonts.inter(
                                     fontSize: 36,
                                     color: AppColors.white,
                                     fontWeight: FontWeight.bold),
                               ),
+                              AppSpacer.xtraHeightSpace,
                               Text(
-                                onBoardingCarouselItems[state.page].Subtitle,
+                                "Let’s help you create memorable moments by planning your next hangout",
                                 textAlign: TextAlign.center,
                                 style: GoogleFonts.inter(
                                   fontSize: 16,
+                                  fontWeight: FontWeight.normal,
                                   color: AppColors.white,
                                 ),
                               ),
                             ],
                           ),
+                          AppSpacer.xtraHeightSpace,
+                          AppSpacer.xtraHeightSpace,
                           App_Orange_Btn(
                             label: "Get Started",
                           ),
