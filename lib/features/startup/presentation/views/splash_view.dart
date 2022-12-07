@@ -26,10 +26,10 @@ class SplashView extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                SvgPicture.asset(
-                  AppAssets.splashUpSvg,
-                  width: 370,
-                ),
+                // SvgPicture.asset(
+                //   AppAssets.splashUpSvg,
+                //   width: 370,
+                // ),
                 const Spacer(),
                 SvgPicture.asset(
                   AppAssets.funconnectSvg,
@@ -37,34 +37,34 @@ class SplashView extends StatelessWidget {
                   height: 24,
                 ),
                 const Spacer(),
-                Stack(
-                  children: [
-                    SvgPicture.asset(
-                      AppAssets.splashDownSvg,
-                      width: 370,
-                      // width: 331,
-                      // height: 331,
-                    ),
-                    const Positioned(
-                      bottom: 40,
-                      left: 0,
-                      right: 0,
-                      child: Center(
-                        child: Text(
-                          "Funconnect Technologies",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w300,
-                            height: 1.3,
-                            fontFamily: AppFonts.gtWalshPro,
-                            fontStyle: FontStyle.normal,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+                // Stack(
+                //   children: [
+                //     SvgPicture.asset(
+                //       AppAssets.splashDownSvg,
+                //       width: 370,
+                //       // width: 331,
+                //       // height: 331,
+                //     ),
+                //     const Positioned(
+                //       bottom: 40,
+                //       left: 0,
+                //       right: 0,
+                //       child: Center(
+                //         child: Text(
+                //           "Funconnect Technologies",
+                //           style: TextStyle(
+                //             color: Colors.white,
+                //             fontSize: 14,
+                //             fontWeight: FontWeight.w300,
+                //             height: 1.3,
+                //             fontFamily: AppFonts.gtWalshPro,
+                //             fontStyle: FontStyle.normal,
+                //           ),
+                //         ),
+                //       ),
+                //     ),
+                //   ],
+                // ),
               ],
             ),
           ),

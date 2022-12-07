@@ -1,128 +1,107 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:funconnect/shared/components/_components.dart';
-import 'package:funconnect/shared/constants/app_assets.dart';
-import 'package:funconnect/shared/constants/colors.dart';
-import 'package:funconnect/shared/constants/fonts.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:funconnect/core/presentation/widgets/app_spacer.dart';
+import 'package:funconnect/shared/constants/_constants.dart';
+
+import '../../../../core/presentation/widgets/custom_drawer.dart';
+import '../../widgets/home_view_widgets.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({Key? key}) : super(key: key);
 
-  static const List<String> _tabs = [
-    "Party",
-    "Viewing Center",
-    "Hotel",
-    "Gas Station",
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.primary,
-      body: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              padding: const EdgeInsets.fromLTRB(24, 20, 24, 0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+      backgroundColor: AppColors.black,
+      body: SingleChildScrollView(
+        child: SafeArea(
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Row(
                     children: [
-                      const Expanded(
-                        child: Text(
-                          "Hello, Chukwuemeka",
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontFamily: AppFonts.gtWalshPro,
-                            fontWeight: FontWeight.w400,
-                            height: 1.3,
-                            color: AppColors.black,
-                          ),
-                        ),
+                      const CircleAvatar(
+                        radius: 25.0,
                       ),
-                      SvgPicture.asset(AppAssets.notIconSvg),
-                      const SizedBox(
-                        height: 16,
-                      ),
-                      InkWell(
-                        onTap: () {},
-                        child: const CircleAvatar(
-                          radius: 20,
-                          backgroundColor: AppColors.green,
-                          child: Icon(
-                            Icons.person,
-                            color: AppColors.black,
-                            size: 20,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const Text(
-                    "Surulere, Lagos.",
-                    style: TextStyle(
-                      fontSize: 10,
-                      fontWeight: FontWeight.w400,
-                      fontFamily: AppFonts.gtWalshPro,
-                      height: 1.3,
-                      color: AppColors.primary,
-                    ),
-                  ),
-                  Wrap(
-                    direction: Axis.horizontal,
-                    children: [
-                      ..._tabs.map(
-                        (tab) => Container(
-                          margin: const EdgeInsets.all(5),
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 5, vertical: 5),
-                          decoration: BoxDecoration(
-                            color: AppColors.white,
-                            border: Border.all(
-                                color: AppColors.green.withOpacity(.2)),
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          child: Text(
-                            tab,
-                            style: const TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.w400,
-                              fontFamily: AppFonts.gtWalshPro,
-                              height: 1.3,
-                              color: AppColors.black,
+                      AppSpacer.xtraWeightSpace,
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(left: 8.0.w),
+                            child: Text(
+                              "Hi John",
+                              style: AppTextStyle.WhiteBold.copyWith(
+                                  fontSize: 24.0.sp),
                             ),
                           ),
-                        ),
+                          AppSpacer.normalHeightSpace,
+                          Row(
+                            children: [
+                              const Icon(
+                                Icons.location_on,
+                                color: AppColors.locationIconAsh,
+                              ),
+                              Text(
+                                "Yaba, Lagos",
+                                style: AppTextStyle.Whitelight.copyWith(
+                                    color: AppColors.homeViewAsh),
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
                     ],
                   ),
-                ],
-              ),
-            ),
-            const Divider(color: AppColors.green),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(24, 24, 24, 0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: const [
-                  Text(
-                    "Recreational Centers Near You",
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w700,
-                      fontFamily: AppFonts.gtWalshPro,
-                      height: 1.3,
-                      color: AppColors.black,
+                  IconButton(
+                    onPressed: () {},
+                    icon: const Icon(
+                      Icons.notification_add_rounded,
+                      color: AppColors.white,
                     ),
                   ),
-                  CardView(),
                 ],
               ),
-            ),
-          ],
+              AppSpacer.normalHeightSpace,
+              CustomDrawer(),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 16.0),
+                child: Container(
+                  height: 56.0.h,
+                  width: MediaQuery.of(context).size.width,
+                  child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Padding(
+                          padding: EdgeInsets.only(right: 8.0.w),
+                          child: const HomeInterestWidget(),
+                        );
+                      }),
+                ),
+              ),
+              CustomDrawer(),
+              HomeViewCategoriesWidget(
+                label: "Categories",
+                child: const HomeViewCategoriesSmallSubWidget(),
+              ),
+              AppSpacer.normalHeightSpace,
+              HomeViewCategoriesWidget(
+                height: 200,
+                label: "Best for you",
+                child: HomeCategoriesLargeWidget(),
+              ),
+              AppSpacer.normalHeightSpace,
+              HomeViewCategoriesWidget(
+                height: 200,
+                label: "Recently added",
+                child: HomeCategoriesLargeWidget(),
+              ),
+              AppSpacer.xtraHeightSpace,
+              AppSpacer.normalHeightSpace,
+            ],
+          ),
         ),
       ),
     );

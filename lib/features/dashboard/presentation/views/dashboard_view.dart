@@ -3,8 +3,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:funconnect/features/dashboard/presentation/views/events_view.dart';
 import 'package:funconnect/features/dashboard/presentation/views/favourites_view.dart';
 import 'package:funconnect/features/dashboard/presentation/views/home_view.dart';
-import 'package:funconnect/features/explore_view/presentation/explore_view.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
+
+import '../../../fun_connect/explore/presentation/explore_view.dart';
 
 class DashboardView extends StatefulWidget {
   const DashboardView({Key? key}) : super(key: key);
