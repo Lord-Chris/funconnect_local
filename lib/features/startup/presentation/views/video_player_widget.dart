@@ -1,54 +1,44 @@
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
-class Video_player_widget extends StatefulWidget {
-  const Video_player_widget({Key? key}) : super(key: key);
+class VideoPlayerWidget extends StatefulWidget {
+  const VideoPlayerWidget({Key? key}) : super(key: key);
 
   @override
-  State<Video_player_widget> createState() => _Video_player_widgetState();
+  State<VideoPlayerWidget> createState() => _VideoPlayerWidgetState();
 }
 
-class _Video_player_widgetState extends State<Video_player_widget> {
+class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
   late VideoPlayerController _controller;
+
+  String assetVideo = "assets/videos/pexels-rodnae-productions-6193112.mp4";
+  String networkVideo =
+      'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4';
 
   @override
   void initState() {
     super.initState();
-    _controller = VideoPlayerController.network(
-        'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4')
+    _controller = VideoPlayerController.asset(assetVideo)
       ..initialize().then((_) {
         setState(() {});
         _controller.play();
-      });
+      })
+      ..setLooping(true);
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        children: [
-          Center(
-            child: _controller.value.isInitialized
-                ? AspectRatio(
-                    aspectRatio: _controller.value.aspectRatio,
-                    child: VideoPlayer(_controller),
-                  )
-                : Container(),
-          ),
-        ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          setState(() {
-            _controller.value.isPlaying
-                ? _controller.pause()
-                : _controller.play();
-          });
-        },
-        child: Icon(
-          _controller.value.isPlaying ? Icons.pause : Icons.play_arrow,
-        ),
-      ),
-    );
+    return _controller.value.isInitialized
+        ? AspectRatio(
+            aspectRatio: _controller.value.aspectRatio,
+            child: VideoPlayer(_controller),
+          )
+        : Container();
   }
 }
