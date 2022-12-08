@@ -1,5 +1,10 @@
-class ApiResponse {
-  final Map<String, dynamic> data;
+import 'package:equatable/equatable.dart';
 
-  ApiResponse({required this.data});
+class ApiResponse<T> extends Equatable {
+  final T data;
+
+  const ApiResponse({required this.data});
+
+  @override
+  List<Object?> get props => [data];
 }

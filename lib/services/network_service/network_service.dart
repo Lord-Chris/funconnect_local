@@ -21,7 +21,7 @@ class NetworkService extends INetworkService {
   }
 
   @override
-  Future<ApiResponse?> delete(String url,
+  Future<ApiResponse<Map<String, dynamic>>> delete(String url,
       {dynamic body, Map<String, String>? headers}) async {
     try {
       if (headers != null) {
@@ -38,24 +38,22 @@ class NetworkService extends INetworkService {
       throw res.statusMessage!;
     } on DioError catch (e) {
       _logger.e(e.toString());
-      convertException(e);
+      throw convertException(e);
     } catch (e) {
       _logger.e(e.toString());
       throw Failure(e.toString());
     }
-    return null;
   }
 
   @override
-  Future<ApiResponse?> get(String url,
-      {dynamic body, Map<String, String>? headers}) async {
+  Future<ApiResponse<Map<String, dynamic>>> get(String url,
+      {Map<String, String>? headers}) async {
     try {
       if (headers != null) {
         _headers.addAll(headers);
       }
       final res = await _dio.get(
         url,
-        queryParameters: body,
         options: Options(headers: _headers),
       );
       if (res.statusCode == 200 || res.statusCode == 201) {
@@ -64,16 +62,15 @@ class NetworkService extends INetworkService {
       throw res.statusMessage!;
     } on DioError catch (e) {
       _logger.e(e.toString());
-      convertException(e);
+      throw convertException(e);
     } catch (e) {
       _logger.e(e.toString());
       throw Failure(e.toString());
     }
-    return null;
   }
 
   @override
-  Future<ApiResponse?> patch(String url,
+  Future<ApiResponse<Map<String, dynamic>>> patch(String url,
       {dynamic body, Map<String, String>? headers}) async {
     try {
       if (headers != null) {
@@ -90,16 +87,15 @@ class NetworkService extends INetworkService {
       throw res.statusMessage!;
     } on DioError catch (e) {
       _logger.e(e.toString());
-      convertException(e);
+      throw convertException(e);
     } catch (e) {
       _logger.e(e.toString());
       throw Failure(e.toString());
     }
-    return null;
   }
 
   @override
-  Future<ApiResponse?> post(String url,
+  Future<ApiResponse<Map<String, dynamic>>> post(String url,
       {dynamic body, Map<String, String>? headers}) async {
     try {
       if (headers != null) {
@@ -116,28 +112,29 @@ class NetworkService extends INetworkService {
       throw res.statusMessage!;
     } on DioError catch (e) {
       _logger.e(e.toString());
-      convertException(e);
+      throw convertException(e);
     } catch (e) {
       _logger.e(e.toString());
       throw Failure(e.toString());
     }
-    return null;
   }
 
   Failure convertException(DioError e) {
     switch (e.type) {
       case DioErrorType.connectTimeout:
-        throw const Failure("Connection Timed Out");
+        return const Failure("Connection Timed Out");
       case DioErrorType.sendTimeout:
-        throw const Failure("Connection Timed Out");
+        return const Failure("Connection Timed Out");
       case DioErrorType.receiveTimeout:
-        throw const Failure("Connection Timed Out");
+        return const Failure("Connection Timed Out");
       case DioErrorType.response:
-        throw Failure(e.response?.data['message'] ?? e.response?.data['error']);
+        return Failure(
+            e.response?.data['message'] ?? e.response?.data['error']);
       case DioErrorType.cancel:
-        throw Failure(e.response?.data['message'] ?? e.response?.data['error']);
+        return Failure(
+            e.response?.data['message'] ?? e.response?.data['error']);
       case DioErrorType.other:
-        throw const Failure("No Internet Connection");
+        return const Failure("No Internet Connection");
     }
   }
 }

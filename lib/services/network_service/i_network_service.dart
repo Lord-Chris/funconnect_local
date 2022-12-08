@@ -1,25 +1,24 @@
 import 'package:funconnect/models/api_response.dart';
 
 abstract class INetworkService {
-  Future<ApiResponse?> get(
+  Future<ApiResponse<Map<String, dynamic>>> get(
+    String url, {
+    Map<String, String>? headers,
+  });
+
+  Future<ApiResponse<Map<String, dynamic>>> post(
     String url, {
     Map body,
     Map<String, String>? headers,
   });
 
-  Future<ApiResponse?> post(
+  Future<ApiResponse<Map<String, dynamic>>> patch(
     String url, {
     Map body,
     Map<String, String>? headers,
   });
 
-  Future<ApiResponse?> patch(
-    String url, {
-    Map body,
-    Map<String, String>? headers,
-  });
-
-  Future<ApiResponse?> delete(
+  Future<ApiResponse<Map<String, dynamic>>> delete(
     String url, {
     Map body,
     Map<String, String>? headers,
