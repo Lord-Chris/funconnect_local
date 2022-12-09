@@ -6,3 +6,9 @@ abstract class WelcomeState extends Equatable {
 }
 
 class WelcomeInitialState extends WelcomeState {}
+
+class WelcomeLoadingState extends WelcomeState {}
+
+class WelcomeSuccessState extends WelcomeState {}
+
+class WelcomeFailureState extends WelcomeState {}

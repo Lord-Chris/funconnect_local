@@ -5,7 +5,13 @@ abstract class WelcomeEvent extends Equatable {
   List<Object?> get props => [];
 }
 
-class EmailSignInEvent extends WelcomeEvent {}
+class EmailSignInEvent extends WelcomeEvent {
+  final String email;
+
+  EmailSignInEvent({
+    required this.email,
+  });
+}
 
 class GoogleSignInEvent extends WelcomeEvent {}
 
