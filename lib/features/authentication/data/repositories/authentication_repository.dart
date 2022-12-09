@@ -1,13 +1,12 @@
 import 'package:funconnect/core/app/_app.dart';
-import 'package:funconnect/core/constants/api_constants.dart';
+import 'package:funconnect/features/authentication/data/data_sources/i_authentication_datasource.dart';
 import 'package:funconnect/features/authentication/domain/params/email_sign_in.dart';
 import 'package:funconnect/models/api_response.dart';
-import 'package:funconnect/services/_services.dart';
 
 import 'i_authentication_repository.dart';
 
 class AuthenticationRepository extends IAuthenticationRepository {
-  final _networkService = locator<INetworkService>();
+  final _httpDS = locator<IAuthenticationDataSource>();
 
   @override
   Future<ApiResponse<void>> signInWithApple(EmailSignInParams params) {
@@ -17,8 +16,7 @@ class AuthenticationRepository extends IAuthenticationRepository {
 
   @override
   Future<ApiResponse<void>> signInWithEmail(EmailSignInParams params) async {
-    await _networkService.post(ApiConstants.requestOtp, body: params.toMap());
-    return const ApiResponse<void>(data: null);
+    return await _httpDS.requestLoginOtp(params);
   }
 
   @override

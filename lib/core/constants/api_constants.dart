@@ -6,6 +6,7 @@ class ApiConstants {
   static const auth = "${baseUrl}auth/";
 
   //
+  static get checkEmail => "${auth}check-email";
   static get requestOtp => "${auth}login/send-otp";
   static get loginWithOtp => "${auth}login/otp";
 }

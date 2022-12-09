@@ -16,3 +16,7 @@ class SignInWithEmail extends EmailSignInEvent {
     required this.email,
   });
 }
+
+class GoogleSignInEvent extends EmailSignInEvent {}
+
+class AppleSignInEvent extends EmailSignInEvent {}

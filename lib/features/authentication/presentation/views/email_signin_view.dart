@@ -51,17 +51,25 @@ class EmailSigninView extends HookWidget {
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
-                        CircleAvatar(
-                          backgroundColor: Colors.white,
-                          radius: 30,
+                      children: [
+                        GestureDetector(
+                          onTap: () => context
+                              .read<EmailSignInBloc>()
+                              .add(GoogleSignInEvent()),
+                          child: const CircleAvatar(
+                            backgroundColor: Colors.white,
+                            radius: 30,
+                          ),
                         ),
-                        SizedBox(
-                          width: 16.0,
-                        ),
-                        CircleAvatar(
-                          radius: 30,
-                          backgroundColor: Colors.white,
+                        const SizedBox(width: 16.0),
+                        GestureDetector(
+                          onTap: () => context
+                              .read<EmailSignInBloc>()
+                              .add(AppleSignInEvent()),
+                          child: const CircleAvatar(
+                            radius: 30,
+                            backgroundColor: Colors.white,
+                          ),
                         ),
                       ],
                     ),
@@ -119,9 +127,8 @@ class EmailSigninView extends HookWidget {
                         // print(!formKey.currentState!.validate());
                         if (!formKey.currentState!.validate()) return;
                         // print("Yes");
-                        context
-                            .read<EmailSignInBloc>()
-                            .add(SignInWithEmail(email: "maduekechris65@gmail.com"));
+                        context.read<EmailSignInBloc>().add(
+                            SignInWithEmail(email: "maduekechris65@gmail.com"));
                       },
                     ),
                   ],
