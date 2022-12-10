@@ -28,6 +28,7 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   cupertino_icons: ^1.0.2
+  dio: ^4.0.6
   equatable: ^2.0.5
   flutter:
     sdk: flutter
@@ -38,8 +39,11 @@ dependencies:
   flutter_svg: null
   get_it: ^7.2.0
   google_fonts: ^3.0.1
+  google_sign_in: ^5.4.2
   location: ^4.3.0
+  logger: ^1.1.0
   pin_code_fields: ^7.4.0
+  sign_in_with_apple: ^4.2.0
   video_player: ^2.4.7
 
 dev_dependencies:

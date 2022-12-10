@@ -8,3 +8,15 @@ abstract class EmailSignInEvent extends Equatable {
 class EmailFieldChangeEvent extends EmailSignInEvent {}
 
 class GetCodeEvent extends EmailSignInEvent {}
+
+class SignInWithEmail extends EmailSignInEvent {
+  final String email;
+
+  SignInWithEmail({
+    required this.email,
+  });
+}
+
+class GoogleSignInEvent extends EmailSignInEvent {}
+
+class AppleSignInEvent extends EmailSignInEvent {}

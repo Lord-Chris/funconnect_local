@@ -15,7 +15,7 @@ class AppTextForm extends StatefulWidget {
     this.initialValue,
     this.autoFocus = false,
     this.controller,
-    required this.onChanged,
+    this.onChanged,
     required this.validator,
     this.maxLines = 1,
     this.maxLength,
@@ -58,7 +58,7 @@ class AppTextForm extends StatefulWidget {
   final TextStyle? errorStyle;
   final TextInputType? textInputType;
   final TextEditingController? controller;
-  final Function(String) onChanged;
+  final Function(String)? onChanged;
   final FocusNode? focusNode;
   final bool showObscureTextToggle;
   final String? Function(String) validator;
@@ -192,7 +192,7 @@ class _AppTextFormState extends State<AppTextForm>
                           onFieldSubmitted: widget.onFieldSubmitted,
                           decoration: InputDecoration(
                             prefix: widget.prefixIcon,
-                            labelText: widget.labelText ?? "label",
+                            labelText: widget.labelText,
                             labelStyle: const TextStyle(
                                 color: AppColors.white, fontSize: 16.0),
                             border: OutlineInputBorder(
@@ -217,7 +217,7 @@ class _AppTextFormState extends State<AppTextForm>
                               horizontal: 19,
                               vertical: 15,
                             ),
-                            hintText: widget.hintText ?? "text hint here",
+                            hintText: widget.hintText,
                             hintStyle: const TextStyle(
                                 fontSize: 14, color: AppColors.ash),
                           ),
