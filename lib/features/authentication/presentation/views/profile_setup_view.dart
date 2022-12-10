@@ -1,11 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
 
 import '../../../../core/presentation/widgets/app_auth_text_form_field.dart';
 import '../../../../core/presentation/widgets/app_black_modal.dart';
 import '../../../../core/presentation/widgets/app_orange_button.dart';
-import '../../../../shared/constants/app_textStyle.dart';
 
 class ProfileSetUpView extends StatefulWidget {
   const ProfileSetUpView({Key? key}) : super(key: key);
@@ -42,8 +40,11 @@ class _ProfileSetUpViewState extends State<ProfileSetUpView> {
             ),
           ),
           const SizedBox(height: 8.0),
-          Text("Add image",
-              textAlign: TextAlign.center, style: AppTextStyle.WhiteMedium),
+          Text(
+            "Add image",
+            textAlign: TextAlign.center,
+            style: AppTextStyle.WhiteMedium,
+          ),
           const SizedBox(height: 29),
           Form(
               child: Column(
@@ -54,8 +55,8 @@ class _ProfileSetUpViewState extends State<ProfileSetUpView> {
                   color: AppColors.ash,
                 ),
                 hintText: "Full name",
-                onChanged: (String) {},
-                validator: (String) {
+                onChanged: (val) {},
+                validator: (val) {
                   return null;
                 },
               ),
@@ -65,8 +66,8 @@ class _ProfileSetUpViewState extends State<ProfileSetUpView> {
                   color: AppColors.ash,
                 ),
                 hintText: "Username",
-                onChanged: (String) {},
-                validator: (String) {
+                onChanged: (val) {},
+                validator: (val) {
                   return null;
                 },
               ),
@@ -76,8 +77,8 @@ class _ProfileSetUpViewState extends State<ProfileSetUpView> {
                   color: AppColors.ash,
                 ),
                 hintText: "Gender",
-                onChanged: (String) {},
-                validator: (String) {
+                onChanged: (val) {},
+                validator: (val) {
                   return null;
                 },
               ),

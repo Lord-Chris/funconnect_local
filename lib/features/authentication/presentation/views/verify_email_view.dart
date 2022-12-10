@@ -1,22 +1,30 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:funconnect/core/utils/general_utils.dart';
 import 'package:funconnect/features/authentication/presentation/blocs/verify_email_bloc/verify_email_bloc.dart';
 import 'package:funconnect/features/authentication/presentation/blocs/verify_email_bloc/verify_email_event.dart';
 import 'package:funconnect/features/authentication/presentation/blocs/verify_email_bloc/verify_email_state.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
-import 'package:funconnect/shared/constants/app_textStyle.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 import '../../../../core/presentation/widgets/app_orange_button.dart';
 import '../../../../core/presentation/widgets/app_smart_strings.dart';
 import '../../../../core/presentation/widgets/app_text.dart';
 
-class VerifyEmailView extends StatelessWidget {
-  const VerifyEmailView({Key? key}) : super(key: key);
+class VerifyEmailView extends HookWidget {
+  final String email;
+  const VerifyEmailView({
+    required this.email,
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final clipData = useStream(GeneralUtils.checkClipBoard());
+    final pinController = useTextEditingController();
     return BlocProvider(
       create: (context) => VerifyEmailBloc()
         ..add(ChangeTimerEvent(time: VerifyEmailBloc.otpTimer)),
@@ -50,6 +58,7 @@ class VerifyEmailView extends StatelessWidget {
                     bottom: -20.0,
                     child: Container(
                       height: 450,
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
                       width: MediaQuery.of(context).size.width,
                       decoration: const BoxDecoration(
                         color: AppColors.black,
@@ -62,6 +71,7 @@ class VerifyEmailView extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.end,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
+                          const SizedBox(height: 20),
                           const Text(
                             AppText.aTAuthVerifyEmailIdText,
                             style: TextStyle(
@@ -71,38 +81,29 @@ class VerifyEmailView extends StatelessWidget {
                               color: AppColors.white,
                             ),
                           ),
-                          // RichText(
-                          //   textAlign: TextAlign.start,
-                          //   text: TextSpan(
-                          //
-                          //     children: [
-                          //       TextSpan(
-                          //         text: "We’ve sent a code to ",
-                          //         style: AppTextStyle.WhiteMedium,
-                          //       ),
-                          //       TextSpan(
-                          //         text: "john****@gmail.com",
-                          //         style: AppTextStyle.WhiteMedium.copyWith(
-                          //             color: AppColors.primary),
-                          //         // recognizer: TapGestureRecognizer()
-                          //         //   ..onTap = () {
-                          //         //     context
-                          //         //         .read<VerifyEmailBloc>()
-                          //         //         .add(ResendCodeEvent());
-                          //         //   },
-                          //       ),
-                          //       TextSpan(
-                          //         text:
-                          //         "Check your spam folder, refresh or try again with\nanother email",
-                          //         style: AppTextStyle.WhiteMedium,
-                          //       ),
-                          //     ],
-                          //   ),
-                          // ),
-                          Text(
-                              "We’ve sent a code to john****@gmail.com\nCheck your spam folder, refresh or try again with\nanother email",
-                              textAlign: TextAlign.center,
-                              style: AppTextStyle.WhiteMedium),
+                          const SizedBox(height: 10),
+                          RichText(
+                            textAlign: TextAlign.center,
+                            text: TextSpan(
+                              children: [
+                                TextSpan(
+                                  text: "We’ve sent a code to ",
+                                  style: AppTextStyle.WhiteMedium,
+                                ),
+                                TextSpan(
+                                  text: GeneralUtils.hideEmail(email),
+                                  style: AppTextStyle.WhiteMedium.copyWith(
+                                    color: AppColors.primary,
+                                  ),
+                                ),
+                                TextSpan(
+                                  text:
+                                      "\nCheck your spam folder, refresh or try again with\nanother email",
+                                  style: AppTextStyle.WhiteMedium,
+                                ),
+                              ],
+                            ),
+                          ),
                           const SizedBox(height: 62),
                           Center(
                             child: PinCodeTextField(
@@ -110,15 +111,16 @@ class VerifyEmailView extends StatelessWidget {
                               length: 6,
                               onCompleted: (value) {},
                               onChanged: (value) {},
-                              // controller: pinController,
+                              controller: pinController,
                               autoDisposeControllers: false,
                               autovalidateMode:
                                   AutovalidateMode.onUserInteraction,
                               keyboardType: TextInputType.number,
-                              cursorColor: AppColors.black,
-                              obscureText: true,
-                              textStyle: AppTextStyle.BlackBold.copyWith(
-                                  fontSize: 20.0),
+                              cursorColor: AppColors.ash,
+                              obscureText: !true,
+                              textStyle: AppTextStyle.WhiteBold.copyWith(
+                                fontSize: 20.0,
+                              ),
                               obscuringCharacter: "*",
                               backgroundColor: AppColors.transparent,
                               enableActiveFill: true,
@@ -128,24 +130,28 @@ class VerifyEmailView extends StatelessWidget {
                                 selectedColor: AppColors.primary,
                                 activeColor: AppColors.primary,
                                 inactiveColor: AppColors.ash,
-                                fieldHeight: 64,
-                                fieldWidth: 64,
-                                activeFillColor: Colors.white,
+                                fieldHeight: 64.r,
+                                fieldWidth: 64.r,
+                                activeFillColor: AppColors.transparent,
                                 inactiveFillColor: AppColors.transparent,
-                                selectedFillColor: AppColors.white,
+                                selectedFillColor: AppColors.transparent,
                               ),
                             ),
                           ),
-                          Container(
-                            height: 32,
-                            decoration: BoxDecoration(
-                                color: AppColors.primary,
-                                borderRadius: BorderRadius.circular(8.0)),
-                            child: TextButton(
-                              onPressed: () {},
-                              child: Text(
-                                "Paste",
-                                style: AppTextStyle.Blacklight,
+                          Visibility(
+                            visible: clipData.hasData,
+                            child: Container(
+                              height: 32,
+                              decoration: BoxDecoration(
+                                  color: AppColors.primary,
+                                  borderRadius: BorderRadius.circular(8.0)),
+                              child: TextButton(
+                                onPressed: () =>
+                                    pinController.text = clipData.data!,
+                                child: Text(
+                                  "Paste",
+                                  style: AppTextStyle.Blacklight,
+                                ),
                               ),
                             ),
                           ),
@@ -183,7 +189,8 @@ class VerifyEmailView extends StatelessWidget {
                                         text: AppText.aTAuthResendCodeText,
                                         style:
                                             AppTextStyle.WhiteMedium.copyWith(
-                                                color: AppColors.primary),
+                                          color: AppColors.primary,
+                                        ),
                                         recognizer: TapGestureRecognizer()
                                           ..onTap = () {
                                             context
@@ -197,11 +204,40 @@ class VerifyEmailView extends StatelessWidget {
                               );
                             },
                           ),
+                          BlocBuilder(
+                            bloc: context.watch<VerifyEmailBloc>(),
+                            buildWhen: (previous, current) {
+                              return current is TimerChangedState ||
+                                  current is TimerFinishedState;
+                            },
+                            builder: (context, state) {
+                              if (state is! TimerChangedState) {
+                                return const SizedBox();
+                              }
+                              return Center(
+                                child: Text(
+                                  state.parsedTime,
+                                  style: const TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.normal,
+                                    fontFamily: AppFonts.gtWalshPro,
+                                    color: AppColors.primary,
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
                           const SizedBox(
                             height: 32.0,
                           ),
-                          const AppOrangeBtn(
+                          AppOrangeBtn(
                             label: AppText.aTAuthVerifyEmailText,
+                            onTap: () => context
+                                .read<VerifyEmailBloc>()
+                                .add(VerifyEmailTapEvent(
+                                  email: email,
+                                  otp: pinController.text,
+                                )),
                           ),
                         ],
                       ),
@@ -210,56 +246,6 @@ class VerifyEmailView extends StatelessWidget {
                 ],
               ),
             ),
-
-            // Scaffold(
-            //   backgroundColor: AppColors.green,
-            //   body: Padding(
-            //     padding: const EdgeInsets.all(24),
-            //     child: ListView(
-            //       physics: const ClampingScrollPhysics(),
-            //       children: [
-            //
-
-            //         const SizedBox(height: 8),
-            //         BlocBuilder(
-            //           bloc: context.watch<VerifyEmailBloc>(),
-            //           buildWhen: (previous, current) {
-            //             return current is TimerChangedState ||
-            //                 current is TimerFinishedState;
-            //           },
-            //           builder: (context, state) {
-            //             if (state is! TimerChangedState) {
-            //               return const SizedBox();
-            //             }
-            //             return Center(
-            //               child: Text(
-            //                 state.parsedTime,
-            //                 style: const TextStyle(
-            //                   fontSize: 14,
-            //                   fontWeight: FontWeight.normal,
-            //                   fontFamily: AppFonts.gtWalshPro,
-            //                   color: AppColors.primary,
-            //                 ),
-            //               ),
-            //             );
-            //           },
-            //         ),
-            //         const SizedBox(height: 56),
-            //         Center(
-            //           child: CustomButton(
-            //             text: "Verify Email",
-            //             textColor: AppColors.white,
-            //             buttonColor: AppColors.primary,
-            //             radius: 50,
-            //             function: () => context
-            //                 .read<VerifyEmailBloc>()
-            //                 .add(VerifyEmailTapEvent()),
-            //           ),
-            //         ),
-            //       ],
-            //     ),
-            //   ),
-            // ),
           );
         },
       ),

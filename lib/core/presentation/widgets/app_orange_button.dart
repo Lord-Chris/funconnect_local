@@ -22,6 +22,7 @@ class AppOrangeBtn extends StatelessWidget {
     return Container(
       width: MediaQuery.of(context).size.width,
       height: 80,
+      padding: const EdgeInsets.only(bottom: 80 / 5),
       decoration: const BoxDecoration(
         color: AppColors.primary,
         borderRadius: BorderRadius.only(

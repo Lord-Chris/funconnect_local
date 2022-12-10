@@ -11,4 +11,10 @@ class VerifyOtpParams extends Equatable {
 
   @override
   List<Object?> get props => [email, otp];
+
+  Map<String, dynamic> toMap() {
+    return {
+      'email': email,
+    };
+  }
 }

@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:funconnect/core/app/_app.dart';
 import 'package:funconnect/features/authentication/presentation/blocs/verify_email_bloc/verify_email_event.dart';
 import 'package:funconnect/features/authentication/presentation/blocs/verify_email_bloc/verify_email_state.dart';
+import 'package:funconnect/models/failure.dart';
 import 'package:funconnect/services/_services.dart';
 
 class VerifyEmailBloc extends Bloc<VerifyEmailEvent, VerifyEmailState> {
@@ -14,7 +15,7 @@ class VerifyEmailBloc extends Bloc<VerifyEmailEvent, VerifyEmailState> {
     on<ChangeTimerEvent>(_onChangeTimerEvent);
   }
 
-  static const otpTimer = 60;
+  static const otpTimer = 10;
   final _navigationService = locator<INavigationService>();
 
   FutureOr<void> _onResendCodeEvent(
@@ -29,11 +30,19 @@ class VerifyEmailBloc extends Bloc<VerifyEmailEvent, VerifyEmailState> {
     Emitter<VerifyEmailState> emit,
   ) {}
 
-  FutureOr<void> _onVerifyEmailTapEvent(
+  Future<FutureOr<void>> _onVerifyEmailTapEvent(
     VerifyEmailTapEvent event,
     Emitter<VerifyEmailState> emit,
-  ) {
-    _navigationService.toNamed(Routes.locationAuthRoute);
+  ) async {
+    try {
+      emit(VerifyEmailLoadingState());
+      // await VerifyOtpUsecase()
+      //     .call(VerifyOtpParams(email: event.email, otp: event.otp));
+      _navigationService.toNamed(Routes.profileSetupViewRoute);
+      emit(VerifyEmailSuccessState());
+    } on Failure {
+      emit(VerifyEmailErrorState());
+    }
   }
 
   FutureOr<void> _onChangeTimerEvent(
