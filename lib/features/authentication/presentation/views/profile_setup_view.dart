@@ -20,12 +20,12 @@ class _ProfileSetUpViewState extends State<ProfileSetUpView> {
         modalHeight: MediaQuery.of(context).size.height,
         children: [
           Text("Profile setup",
-              style: AppTextStyle.whiteBold.copyWith(fontSize: 24.0)),
+              style: AppTextStyles.whiteBold.copyWith(fontSize: 24.0)),
           const SizedBox(height: 8.0),
           Text(
               "We would like to know about you Please kindly\nset up your profile.",
               textAlign: TextAlign.center,
-              style: AppTextStyle.whiteMedium),
+              style: AppTextStyles.whiteMedium),
           const SizedBox(height: 29),
           CircleAvatar(
             radius: 70.0,
@@ -43,7 +43,7 @@ class _ProfileSetUpViewState extends State<ProfileSetUpView> {
           Text(
             "Add image",
             textAlign: TextAlign.center,
-            style: AppTextStyle.whiteMedium,
+            style: AppTextStyles.whiteMedium,
           ),
           const SizedBox(height: 29),
           Form(
@@ -92,7 +92,7 @@ class _ProfileSetUpViewState extends State<ProfileSetUpView> {
                 color: AppColors.locationIconAsh,
               ),
               Text("Share my location",
-                  textAlign: TextAlign.center, style: AppTextStyle.whiteMedium),
+                  textAlign: TextAlign.center, style: AppTextStyles.whiteMedium),
             ],
           ),
           const SizedBox(height: 62),

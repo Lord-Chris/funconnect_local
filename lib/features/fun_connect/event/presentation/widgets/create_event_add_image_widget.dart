@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../core/presentation/widgets/core_widgets.dart';
-import '../../../../../shared/constants/textstyle.dart';
 import '../../../../../shared/constants/colors.dart';
+import '../../../../../shared/constants/textstyles.dart';
 
 class CreateEventAddImageWidget extends StatelessWidget {
   const CreateEventAddImageWidget({
@@ -30,7 +30,7 @@ class CreateEventAddImageWidget extends StatelessWidget {
           child: Center(
             child: Text(
               AppText.aTCreateEventAddImageText,
-              style: AppTextStyle.whiteMedium
+              style: AppTextStyles.whiteMedium
                   .copyWith(color: AppColors.locationIconAsh),
             ),
           ),

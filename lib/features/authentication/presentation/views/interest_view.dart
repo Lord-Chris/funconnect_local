@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/presentation/widgets/app_orange_button.dart';
 import '../../../../core/presentation/widgets/core_widgets.dart';
-import '../../../../shared/constants/textstyle.dart';
+import '../../../../shared/constants/textstyles.dart';
 import '../widgets/interest_selection_widget.dart';
 
 class InterestView extends StatefulWidget {
@@ -23,10 +23,10 @@ class _InterestViewState extends State<InterestView> {
             height: 16.0,
           ),
           Text(AppText.aTInterestText,
-              style: AppTextStyle.whiteBold.copyWith(fontSize: 24.0)),
+              style: AppTextStyles.whiteBold.copyWith(fontSize: 24.0)),
           const SizedBox(height: 8.0),
           Text(AppText.aTInterestSelectText,
-              textAlign: TextAlign.center, style: AppTextStyle.whiteMedium),
+              textAlign: TextAlign.center, style: AppTextStyles.whiteMedium),
           const SizedBox(height: 29),
           Expanded(child:
               ListView.builder(itemBuilder: (BuildContext context, int index) {

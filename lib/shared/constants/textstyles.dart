@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class AppTextStyle {
-  AppTextStyle._();
+class AppTextStyles {
+  AppTextStyles._();
 
   static TextStyle get bold36 => GoogleFonts.inter(
         fontSize: 36,

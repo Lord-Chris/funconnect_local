@@ -33,7 +33,7 @@ class HomeView extends StatelessWidget {
                             padding: EdgeInsets.only(left: 8.0.w),
                             child: Text(
                               "Hi John",
-                              style: AppTextStyle.whiteBold
+                              style: AppTextStyles.whiteBold
                                   .copyWith(fontSize: 24.0.sp),
                             ),
                           ),
@@ -46,7 +46,7 @@ class HomeView extends StatelessWidget {
                               ),
                               Text(
                                 "Yaba, Lagos",
-                                style: AppTextStyle.whitelight
+                                style: AppTextStyles.whitelight
                                     .copyWith(color: AppColors.homeViewAsh),
                               ),
                             ],

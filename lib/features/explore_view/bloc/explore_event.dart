@@ -4,4 +4,3 @@ abstract class ExploreEvent extends Equatable {
   @override
   List<Object?> get props => [];
 }
-

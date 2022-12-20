@@ -9,7 +9,6 @@ import 'package:funconnect/features/startup/presentation/blocs/onboarding_bloc/o
 import 'package:funconnect/features/startup/presentation/blocs/onboarding_bloc/onboarding_event.dart';
 import 'package:funconnect/features/startup/presentation/blocs/onboarding_bloc/onboarding_state.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../core/presentation/widgets/app_orange_button.dart';
 import '../../models/onBoarding_carousel_model.dart';
@@ -153,27 +152,27 @@ class _OnboardingViewState extends State<OnboardingView> {
                         }),
                       ),
                       const Spacer(),
-                      Column(
-                        children: [
-                          Text(
-                            "Create events for meet-ups",
-                            textAlign: TextAlign.center,
-                            style: GoogleFonts.inter(
-                                fontSize: 36,
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 30),
+                        child: Column(
+                          children: [
+                            Text(
+                              "Create events for meet-ups",
+                              textAlign: TextAlign.center,
+                              style: AppTextStyles.bold36.copyWith(
                                 color: AppColors.white,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          AppSpacer.xtraHeightSpace,
-                          Text(
-                            "Let’s help you create memorable moments by planning your next hangout",
-                            textAlign: TextAlign.center,
-                            style: GoogleFonts.inter(
-                              fontSize: 16,
-                              fontWeight: FontWeight.normal,
-                              color: AppColors.white,
+                              ),
                             ),
-                          ),
-                        ],
+                            AppSpacer.xtraHeightSpace,
+                            Text(
+                              "Let’s help you create memorable moments by planning your next hangout",
+                              textAlign: TextAlign.center,
+                              style: AppTextStyles.regular16.copyWith(
+                                color: AppColors.white,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                       AppSpacer.xtraHeightSpace,
                       AppSpacer.xtraHeightSpace,

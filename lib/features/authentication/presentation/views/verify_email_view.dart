@@ -88,18 +88,18 @@ class VerifyEmailView extends HookWidget {
                               children: [
                                 TextSpan(
                                   text: "We’ve sent a code to ",
-                                  style: AppTextStyle.whiteMedium,
+                                  style: AppTextStyles.whiteMedium,
                                 ),
                                 TextSpan(
                                   text: GeneralUtils.hideEmail(email),
-                                  style: AppTextStyle.whiteMedium.copyWith(
+                                  style: AppTextStyles.whiteMedium.copyWith(
                                     color: AppColors.primary,
                                   ),
                                 ),
                                 TextSpan(
                                   text:
                                       "\nCheck your spam folder, refresh or try again with\nanother email",
-                                  style: AppTextStyle.whiteMedium,
+                                  style: AppTextStyles.whiteMedium,
                                 ),
                               ],
                             ),
@@ -118,7 +118,7 @@ class VerifyEmailView extends HookWidget {
                               keyboardType: TextInputType.number,
                               cursorColor: AppColors.ash,
                               obscureText: !true,
-                              textStyle: AppTextStyle.whiteBold.copyWith(
+                              textStyle: AppTextStyles.whiteBold.copyWith(
                                 fontSize: 20.0,
                               ),
                               obscuringCharacter: "*",
@@ -150,7 +150,7 @@ class VerifyEmailView extends HookWidget {
                                     pinController.text = clipData.data!,
                                 child: Text(
                                   "Paste",
-                                  style: AppTextStyle.blacklight,
+                                  style: AppTextStyles.blacklight,
                                 ),
                               ),
                             ),
@@ -183,12 +183,12 @@ class VerifyEmailView extends HookWidget {
                                     children: [
                                       TextSpan(
                                         text: AppText.aTAuthDNReceiveCodeText,
-                                        style: AppTextStyle.whiteMedium,
+                                        style: AppTextStyles.whiteMedium,
                                       ),
                                       TextSpan(
                                         text: AppText.aTAuthResendCodeText,
                                         style:
-                                            AppTextStyle.whiteMedium.copyWith(
+                                            AppTextStyles.whiteMedium.copyWith(
                                           color: AppColors.primary,
                                         ),
                                         recognizer: TapGestureRecognizer()

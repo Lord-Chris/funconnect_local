@@ -15,7 +15,7 @@ abstract class IAuthenticationDataSource {
     EmailSignInParams params,
   );
 
-   Future<ApiResponse<VerifyOtpResponse>> verifyOtp(
+  Future<ApiResponse<VerifyOtpResponse>> verifyOtp(
     VerifyOtpParams params,
   );
 }

@@ -11,6 +11,4 @@ class AppAssets {
   static const activeFavIconSvg = "assets/icons/active_fav_icon.svg";
   static const activeEventIconSvg = "assets/icons/active_event_icon.svg";
   static const notIconSvg = "assets/icons/notification_icon.svg";
-
-
 }

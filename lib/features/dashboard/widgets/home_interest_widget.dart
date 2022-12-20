@@ -28,7 +28,7 @@ class HomeInterestWidget extends StatelessWidget {
             AppSpacer.normalWeightSpace,
             Text(
               "Fine dining",
-              style: AppTextStyle.whitelight,
+              style: AppTextStyles.whitelight,
             ),
           ],
         ),

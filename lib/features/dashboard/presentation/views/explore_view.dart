@@ -40,7 +40,7 @@ class ExploreView extends StatelessWidget {
                     EdgeInsets.only(left: 8.0.w, bottom: 8.0.h, top: 32.0.h),
                 child: Text(
                   AppText.aTexplore,
-                  style: AppTextStyle.whiteMedium.copyWith(
+                  style: AppTextStyles.whiteMedium.copyWith(
                     fontSize: 28.0.sp,
                   ),
                 ),
@@ -49,7 +49,7 @@ class ExploreView extends StatelessWidget {
                 padding: EdgeInsets.only(left: 8.0.w, bottom: 32.0.h),
                 child: Text(
                   AppText.aTexplorePlaces,
-                  style: AppTextStyle.whiteMedium.copyWith(fontSize: 16.0.sp),
+                  style: AppTextStyles.whiteMedium.copyWith(fontSize: 16.0.sp),
                 ),
               ),
               Row(
@@ -171,7 +171,7 @@ class _ExploreCategoriesWidgetsState extends State<ExploreCategoriesWidgets> {
               padding: EdgeInsets.symmetric(horizontal: 16.0.w),
               child: Text(
                 widget.label,
-                style: AppTextStyle.whitelight,
+                style: AppTextStyles.whitelight,
               ),
             ),
           ),
