@@ -51,13 +51,13 @@ class SuccessView extends StatelessWidget {
           ),
           const SizedBox(height: 60),
           const Spacer(),
-          CustomButton(
-            text: "Dive in",
+          AppButton(
+            label: "Dive in",
             buttonColor: AppColors.primary,
             height: 70,
-            radius: 50,
-            fontSize: 20,
-            function: () {},
+            borderRadius: 50,
+            labelSize: 20,
+            onTap: () {},
           ),
           const Spacer(flex: 3),
         ],

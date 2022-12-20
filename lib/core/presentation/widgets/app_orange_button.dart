@@ -1,39 +1,40 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-
-import '../../../shared/constants/colors.dart';
+import 'package:funconnect/shared/constants/_constants.dart';
 
 class AppOrangeBtn extends StatelessWidget {
   final String label;
-  final double? height;
+  final double height;
   final double? weight;
   final VoidCallback? onTap;
 
   const AppOrangeBtn({
     Key? key,
     required this.label,
-    this.height,
+    this.height = 80,
     this.weight,
     this.onTap,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      height: 80,
-      decoration: const BoxDecoration(
-        color: AppColors.primary,
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(36),
-          topRight: Radius.circular(36),
+    return MaterialButton(
+      onPressed: onTap,
+      minWidth: MediaQuery.of(context).size.width,
+      height: height,
+      padding: EdgeInsets.only(bottom: height * 0.1),
+      color: AppColors.primary,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(36),
         ),
       ),
-      child: TextButton(
-        onPressed: onTap,
+      child: Align(
+        alignment: Alignment.bottomCenter,
         child: Text(
           label,
-          style: GoogleFonts.inter(fontSize: 20.0, color: Colors.black),
+          style: AppTextStyles.medium20.copyWith(
+            color: AppColors.black,
+          ),
         ),
       ),
     );

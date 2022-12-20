@@ -1,150 +1,142 @@
-// import 'package:flutter/material.dart';
-// import 'package:flutter_bloc/flutter_bloc.dart';
-// import 'package:funconnect/features/authentication/presentation/blocs/welcome_bloc/welcome_bloc.dart';
-// import 'package:funconnect/features/authentication/presentation/blocs/welcome_bloc/welcome_event.dart';
-// import 'package:funconnect/shared/components/_components.dart';
-// import 'package:funconnect/shared/constants/_constants.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:funconnect/core/extensions/_extensions.dart';
+import 'package:funconnect/features/authentication/presentation/blocs/welcome_bloc/welcome_bloc.dart';
+import 'package:funconnect/features/authentication/presentation/blocs/welcome_bloc/welcome_event.dart';
+import 'package:funconnect/features/authentication/presentation/blocs/welcome_bloc/welcome_state.dart';
+import 'package:google_fonts/google_fonts.dart';
 
-// import '../blocs/welcome_bloc/welcome_state.dart';
+import '../../../../core/presentation/widgets/app_auth_text_form_field.dart';
+import '../../../../core/presentation/widgets/app_black_modal.dart';
+import '../../../../core/presentation/widgets/app_orange_button.dart';
+import '../../../../core/presentation/widgets/app_text.dart';
 
-// class WelcomeView extends StatelessWidget {
-//   const WelcomeView({Key? key}) : super(key: key);
-//   static const welcomeImage = "assets/images/sign_in_image.jpeg";
-//   static const emailSvg = "assets/svgs/clarity_email-solid.svg";
-//   static const googleSvg = "assets/svgs/flat-color-icons_google.svg";
-//   static const appleLogoSvg = "assets/svgs/applelogo.svg";
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return BlocProvider(
-//       create: (context) => WelcomeBloc(),
-//       child: BlocBuilder<WelcomeBloc, WelcomeState>(
-//         builder: (context, state) {
-//           return Scaffold(
-//             body: Stack(
-//               fit: StackFit.expand,
-//               children: [
-//                 Column(
-//                   children: [
-//                     Image.asset(
-//                       welcomeImage,
-//                       fit: BoxFit.cover,
-//                     ),
-//                   ],
-//                 ),
-//                 Positioned(
-//                   bottom: 0,
-//                   left: 0,
-//                   right: 0,
-//                   child: Container(
-//                     height: 700,
-//                     width: double.maxFinite,
-//                     padding: const EdgeInsets.all(48),
-//                     clipBehavior: Clip.hardEdge,
-//                     decoration: const BoxDecoration(
-//                       color: AppColors.white,
-//                       borderRadius:
-//                           BorderRadius.vertical(top: Radius.circular(32)),
-//                     ),
-//                     child: Column(
-//                       children: [
-//                         const SizedBox(height: 35),
-//                         const Text(
-//                           "Welcome Back",
-//                           style: TextStyle(
-//                             fontSize: 24,
-//                             color: AppColors.green,
-//                             fontFamily: AppFonts.merriweather,
-//                             fontWeight: FontWeight.bold,
-//                           ),
-//                         ),
-//                         const SizedBox(height: 8),
-//                         const Text(
-//                           "Jump back in where you stopped",
-//                           style: TextStyle(
-//                             fontSize: 14,
-//                             color: AppColors.primary,
-//                             fontFamily: AppFonts.gtWalshPro,
-//                             fontWeight: FontWeight.normal,
-//                           ),
-//                         ),
-//                         const SizedBox(height: 43),
-//                         CustomButton(
-//                           text: "Sign in with Email",
-//                           isImage: true,
-//                           image: emailSvg,
-//                           fontSize: 16,
-//                           fontWeight: FontWeight.w500,
-//                           textColor: AppColors.primary,
-//                           buttonColor: AppColors.white,
-//                           borderColor: AppColors.green,
-//                           radius: 50,
-//                           function: () => context
-//                               .read<WelcomeBloc>()
-//                               .add(EmailSignInEvent()),
-//                         ),
-//                         const SizedBox(height: 16),
-//                         const CustomButton(
-//                           text: "Continue with Google",
-//                           image: googleSvg,
-//                           isImage: true,
-//                           fontSize: 16,
-//                           fontWeight: FontWeight.w500,
-//                           textColor: AppColors.primary,
-//                           buttonColor: AppColors.white,
-//                           borderColor: AppColors.green,
-//                           radius: 50,
-//                         ),
-//                         const SizedBox(height: 16),
-//                         const CustomButton(
-//                           text: "Sign in with Apple",
-//                           isImage: true,
-//                           image: appleLogoSvg,
-//                           fontSize: 17,
-//                           fontWeight: FontWeight.w300,
-//                           textColor: AppColors.white,
-//                           buttonColor: AppColors.black,
-//                           radius: 50,
-//                         ),
-//                         const SizedBox(height: 25),
-//                         RichText(
-//                           textAlign: TextAlign.start,
-//                           text: const TextSpan(
-//                             style: TextStyle(
-//                               fontSize: 12,
-//                               fontWeight: FontWeight.normal,
-//                               fontFamily: AppFonts.gtWalshPro,
-//                               color: AppColors.primary,
-//                             ),
-//                             children: [
-//                               TextSpan(
-//                                   text:
-//                                       "By sigining in you have read and agreed to our "),
-//                               TextSpan(
-//                                 text: "Terms of use",
-//                                 style: TextStyle(
-//                                   color: AppColors.green,
-//                                 ),
-//                               ),
-//                               TextSpan(text: " and read our "),
-//                               TextSpan(
-//                                 text: "Privacy policy",
-//                                 style: TextStyle(
-//                                   color: AppColors.primary,
-//                                 ),
-//                               ),
-//                             ],
-//                           ),
-//                         )
-//                       ],
-//                     ),
-//                   ),
-//                 )
-//               ],
-//             ),
-//           );
-//         },
-//       ),
-//     );
-//   }
-// }
+class WelcomeView extends HookWidget {
+  const WelcomeView({Key? key}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    final controller = useTextEditingController();
+    final formKey = GlobalKey<FormState>();
+    return BlocProvider(
+      create: (context) => WelcomeBloc(),
+      child: BlocBuilder<WelcomeBloc, WelcomeState>(builder: (context, state) {
+        return Scaffold(
+          body: AppBlackModalWidget(
+            imageContainerHeight: 400.0,
+            modalHeight: 480.0,
+            children: [
+              Form(
+                key: formKey,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      AppText.aTAuthWelcomeText,
+                      style: GoogleFonts.inter(
+                          color: Colors.white, fontSize: 24.0),
+                    ),
+                    const SizedBox(
+                      height: 8.0,
+                    ),
+                    Text(
+                      AppText.aTAuthContinueWithSocialsText,
+                      style: GoogleFonts.inter(
+                          color: Colors.white, fontSize: 14.0),
+                    ),
+                    const SizedBox(
+                      height: 32.0,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        GestureDetector(
+                          onTap: () => context
+                              .read<WelcomeBloc>()
+                              .add(GoogleSignInEvent()),
+                          child: const CircleAvatar(
+                            backgroundColor: Colors.white,
+                            radius: 30,
+                          ),
+                        ),
+                        const SizedBox(width: 16.0),
+                        GestureDetector(
+                          onTap: () => context
+                              .read<WelcomeBloc>()
+                              .add(AppleSignInEvent()),
+                          child: const CircleAvatar(
+                            radius: 30,
+                            backgroundColor: Colors.white,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 32.0,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          height: 1.0,
+                          width: MediaQuery.of(context).size.width / 4,
+                          color: Colors.white,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          child: Text(
+                            AppText.aTAuthEmailID,
+                            style: GoogleFonts.inter(color: Colors.white),
+                          ),
+                        ),
+                        Container(
+                          height: 1.0,
+                          width: MediaQuery.of(context).size.width / 4,
+                          color: Colors.white,
+                        ),
+                        const Divider(
+                          height: 5.0,
+                          thickness: 5.0,
+                          color: Colors.white,
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 32.0,
+                    ),
+                    AppTextForm(
+                      labelText: AppText.aTAuthEmailText,
+                      controller: controller,
+                      validator: context.validateEmail,
+                    ),
+                    const SizedBox(
+                      height: 32.0,
+                    ),
+                    Text(
+                      AppText.aTAuthAgreementText,
+                      style: GoogleFonts.inter(color: Colors.white),
+                    ),
+                    const SizedBox(
+                      height: 24.0,
+                    ),
+                    AppOrangeBtn(
+                      label: AppText.aTAuthSignUpText,
+                      onTap: () {
+                        // print(!formKey.currentState!.validate());
+                        if (!formKey.currentState!.validate()) return;
+                        // print("Yes");
+                        context.read<WelcomeBloc>().add(EmailSignInEvent(
+                            email: "maduekechris65@gmail.com"));
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        );
+      }),
+    );
+  }
+}

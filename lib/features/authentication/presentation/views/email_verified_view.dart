@@ -1,11 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/presentation/widgets/app_orange_button.dart';
 import '../../../../core/presentation/widgets/core_widgets.dart';
-import '../../../../shared/constants/app_textStyle.dart';
 import '../../../../shared/constants/colors.dart';
 import '../../../../shared/constants/fonts.dart';
+import '../../../../shared/constants/textstyles.dart';
 
 class EmailVerifiedScreen extends StatelessWidget {
   const EmailVerifiedScreen({Key? key}) : super(key: key);
@@ -31,9 +30,9 @@ class EmailVerifiedScreen extends StatelessWidget {
               ),
             ),
             Text(AppText.aTAuthEmailIDVerificationSuccessText,
-                textAlign: TextAlign.center, style: AppTextStyle.WhiteMedium),
+                textAlign: TextAlign.center, style: AppTextStyles.whiteMedium),
             const SizedBox(height: 62),
-            AppOrangeBtn(
+            const AppOrangeBtn(
               label: AppText.aTAuthContinueText,
             ),
           ],

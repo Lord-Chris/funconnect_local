@@ -1,0 +1,3066 @@
+{
+	"info": {
+		"_postman_id": "f1753cfc-fcac-4b8b-8c2f-d046ea6fb93c",
+		"name": "Fun-connect-API-2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13496269"
+	},
+	"item": [
+		{
+			"name": "Places",
+			"item": [
+				{
+					"name": "Categories",
+					"item": [
+						{
+							"name": "list",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{ api_key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/categories",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"categories"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{ api_key}}",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Arcade Gaming\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/categories",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"categories"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "single",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{ api_key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/categories/:category_id:",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"categories",
+										":category_id:"
+									],
+									"variable": [
+										{
+											"key": "category_id:",
+											"value": null
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{ api_key}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Parks\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/categories/:category_id:",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"categories",
+										":category_id:"
+									],
+									"variable": [
+										{
+											"key": "category_id:",
+											"value": null
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{ api_key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/categories/:category_id:",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"categories",
+										":category_id:"
+									],
+									"variable": [
+										{
+											"key": "category_id:",
+											"value": null
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Features",
+					"item": [
+						{
+							"name": "list",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{ api_key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/features",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"features"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{ api_key}}",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Arcade Gaming\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/features",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"features"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "single",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{ api_key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/features/:feature_id",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"features",
+										":feature_id"
+									],
+									"variable": [
+										{
+											"key": "feature_id",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{ api_key}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Parks\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/features/:feature_id",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"features",
+										":feature_id"
+									],
+									"variable": [
+										{
+											"key": "feature_id",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{ api_key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/features/:feature_id",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"features",
+										":feature_id"
+									],
+									"variable": [
+										{
+											"key": "feature_id",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Get Places",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"host": true,
+							"user-agent": true,
+							"accept": true,
+							"accept-encoding": true,
+							"connection": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://api.funconnect.app/places",
+							"protocol": "https",
+							"host": [
+								"api",
+								"funconnect",
+								"app"
+							],
+							"path": [
+								"places"
+							]
+						},
+						"description": "Use this endpoint to get all funconnect places."
+					},
+					"response": []
+				},
+				{
+					"name": "Create Places",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-length": true,
+							"host": true,
+							"user-agent": true,
+							"accept-encoding": true,
+							"connection": true,
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Ikeja city mall\", // min:3, max:255\r\n    \"headline\": \"Ikeja city mall headline\", // min:3, max:255\r\n    \"description\": \"Ikeja city mall description\", // also known as about\r\n    \"added_by\": \"The uuid of the author\", // data type: uuid\r\n    \"opens_at\": \"12:00\", // format H:i\r\n    \"closes_at\": \"10:00\", // format H:i\r\n    \"phone_e164\": \"080##\", // e164 phone number\r\n    \"cover\": \"file\", // image cover for place \r\n    \"address\": \"address\",\r\n    \"city\": \"city\",\r\n    \"state\": \"state\",\r\n    \"country\": \"country\",\r\n    \"latitude\": \"38.8951\",\r\n    \"longitude\": \"-78.8951\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/places",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"places"
+							]
+						},
+						"description": "Use this endpoint to add new place to funconnect. All fields in the body request are required."
+					},
+					"response": [
+						{
+							"name": "Success Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Ikeja city mall\", // min:3, max:255\r\n    \"headling\": \"Ikeja city mall headline\", // min:3, max:255\r\n    \"description\": \"Ikeja city mall description\", // also known as about\r\n    \"added_by\": \"The uuid of the author\", // data type: uuid\r\n    \"opens_at\": \"12:00\", // format H:i\r\n    \"closes_at\": \"10:00\", // format H:i\r\n    \"phone_e164\": \"080##\", // e164 phone number\r\n    \"cover\": \"file\", // image cover for place \r\n    \"address\": \"address\",\r\n    \"city\": \"city\",\r\n    \"state\": \"state\",\r\n    \"country\": \"country\",\r\n    \"latitude\": \"38.8951\",\r\n    \"longitude\": \"-78.8951\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/places",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"places"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Accept",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"name\": \"Ikeja city mall\",\n        \"headline\": \"Ikeja city mall headline\",\n        \"cover_image_path\": \"cover_images/ZzsaGcJYzPbPPHjuj4XiTX4T4csjDIzcAQO02XG8.jpg\",\n        \"description\": \"description\",\n        \"opens_at\": \"12:00\",\n        \"closes_at\": \"10:00\",\n        \"phone_e164\": \"08089903736\",\n        \"id\": \"97ead48b-6ce5-4439-a8c1-7cb69a021de2\"\n    },\n    \"message\": \"Resource Created.\"\n}"
+						},
+						{
+							"name": "Error Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Ikeja city mall\", // min:3, max:255\r\n    \"headling\": \"Ikeja city mall headline\", // min:3, max:255\r\n    \"description\": \"Ikeja city mall description\", // also known as about\r\n    \"added_by\": \"The uuid of the author\", // data type: uuid\r\n    \"opens_at\": \"12:00\", // format H:i\r\n    \"closes_at\": \"10:00\", // format H:i\r\n    \"phone_e164\": \"080##\", // e164 phone number\r\n    \"cover\": \"file\", // image cover for place \r\n    \"address\": \"address\",\r\n    \"city\": \"city\",\r\n    \"state\": \"state\",\r\n    \"country\": \"country\",\r\n    \"latitude\": \"38.8951\",\r\n    \"longitude\": \"-78.8951\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/places",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"places"
+									]
+								}
+							},
+							"code": 422,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"The name field is required. (and 13 more errors)\",\n    \"errors\": {\n        \"name\": [\n            \"The name field is required.\"\n        ],\n        \"headline\": [\n            \"The headline field is required.\"\n        ],\n        \"description\": [\n            \"The description field is required.\"\n        ],\n        \"added_by\": [\n            \"The added by field is required.\"\n        ],\n        \"opens_at\": [\n            \"The opens at field is required.\"\n        ],\n        \"closes_at\": [\n            \"The closes at field is required.\"\n        ],\n        \"phone_e164\": [\n            \"The phone e164 field is required.\"\n        ],\n        \"cover\": [\n            \"The cover field is required.\"\n        ],\n        \"address\": [\n            \"The address field is required.\"\n        ],\n        \"city\": [\n            \"The city field is required.\"\n        ],\n        \"state\": [\n            \"The state field is required.\"\n        ],\n        \"country\": [\n            \"The country field is required.\"\n        ],\n        \"latitude\": [\n            \"The latitude field is required.\"\n        ],\n        \"longitude\": [\n            \"The longitude field is required.\"\n        ]\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Place",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/places/{place_id}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"places",
+								"{place_id}"
+							]
+						},
+						"description": "This endpoint enables you to get a single place from the funconnect places database."
+					},
+					"response": [
+						{
+							"name": "Success Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/places/{place_id}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"places",
+										"{place_id}"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"id\": \"97ead920-d773-4ac1-9005-f2dd0175194d\",\n        \"name\": \"Ikeja City mall\",\n        \"headline\": \"Ikeja City mall headline\",\n        \"cover_image_path\": \"https://via.placeholder.com/640x480.png/005555?text=similique\",\n        \"description\": \"description\",\n        \"added_by\": \"5eb1e843-b86f-37ec-be6a-7bd8991b3b75\",\n        \"opens_at\": \"12:00\",\n        \"closes_at\": \"10:00\",\n        \"phone_e164\": \"08028244850\",\n        \"features\": [],\n        \"categories\": [],\n        \"images\": []\n    },\n    \"message\": \"OK\"\n}"
+						},
+						{
+							"name": "Error Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/places/{place_id}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"places",
+										"{place_id}"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [],\n    \"message\": \"Not Found\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Update Place",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-length": true,
+							"host": true,
+							"user-agent": true,
+							"accept-encoding": true,
+							"connection": true,
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Lagos city mall\", // min:3, max:255\r\n    \"headline\": \"Lagos city mall headline\", // min:3, max:255\r\n    \"description\": \"Ikeja city mall description\", // also known as about\r\n    \"added_by\": \"The uuid of the author\", // data type: uuid\r\n    \"opens_at\": \"12:00\", // format H:i\r\n    \"closes_at\": \"10:00\", // format H:i\r\n    \"phone_e164\": \"080##\", // e164 phone number\r\n    \"address\": \"address\",\r\n    \"city\": \"city\",\r\n    \"state\": \"state\",\r\n    \"country\": \"country\",\r\n    \"latitude\": \"38.8951\",\r\n    \"longitude\": \"-78.8951\"\r\n}\r\n\r\n// \"cover\": \"file\",  image cover for place, optional for this request",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/places/{place_id}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"places",
+								"{place_id}"
+							]
+						},
+						"description": "Use this endpoint to update an already saved place in the funconnect places database."
+					},
+					"response": [
+						{
+							"name": "Success Response",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Lagos city mall\", // min:3, max:255\r\n    \"headline\": \"Lagos city mall headline\", // min:3, max:255\r\n    \"description\": \"Ikeja city mall description\", // also known as about\r\n    \"added_by\": \"The uuid of the author\", // data type: uuid\r\n    \"opens_at\": \"12:00\", // format H:i\r\n    \"closes_at\": \"10:00\", // format H:i\r\n    \"phone_e164\": \"080##\", // e164 phone number\r\n    \"address\": \"address\",\r\n    \"city\": \"city\",\r\n    \"state\": \"state\",\r\n    \"country\": \"country\",\r\n    \"latitude\": \"38.8951\",\r\n    \"longitude\": \"-78.8951\"\r\n}\r\n\r\n// \"cover\": \"file\",  image cover for place, optional for this request",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/places/{place_id}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"places",
+										"{place_id}"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"name\": \"Lagos city mall\",\n        \"headline\": \"Lagos city mall headline\",\n        \"cover_image_path\": \"cover_images/ZzsaGcJYzPbPPHjuj4XiTX4T4csjDIzcAQO02XG8.jpg\",\n        \"description\": \"description\",\n        \"opens_at\": \"12:00\",\n        \"closes_at\": \"10:00\",\n        \"phone_e164\": \"08089903736\",\n        \"id\": \"97ead48b-6ce5-4439-a8c1-7cb69a021de2\"\n    },\n    \"message\": \"Updated\"\n}"
+						},
+						{
+							"name": "Error response",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Lagos city mall\", // min:3, max:255\r\n    \"headline\": \"Lagos city mall headline\", // min:3, max:255\r\n    \"description\": \"Ikeja city mall description\", // also known as about\r\n    \"added_by\": \"The uuid of the author\", // data type: uuid\r\n    \"opens_at\": \"12:00\", // format H:i\r\n    \"closes_at\": \"10:00\", // format H:i\r\n    \"phone_e164\": \"080##\", // e164 phone number\r\n    \"address\": \"address\",\r\n    \"city\": \"city\",\r\n    \"state\": \"state\",\r\n    \"country\": \"country\",\r\n    \"latitude\": \"38.8951\",\r\n    \"longitude\": \"-78.8951\"\r\n}\r\n\r\n// \"cover\": \"file\",  image cover for place, optional for this request",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/places/{place_id}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"places",
+										"{place_id}"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"The name field is required. (and 13 more errors)\",\n    \"errors\": {\n        \"name\": [\n            \"The name field is required.\"\n        ],\n        \"headline\": [\n            \"The headline field is required.\"\n        ],\n        \"description\": [\n            \"The description field is required.\"\n        ],\n        \"added_by\": [\n            \"The added by field is required.\"\n        ],\n        \"opens_at\": [\n            \"The opens at field is required.\"\n        ],\n        \"closes_at\": [\n            \"The closes at field is required.\"\n        ],\n        \"phone_e164\": [\n            \"The phone e164 field is required.\"\n        ],\n        \"cover\": [\n            \"The cover field is required.\"\n        ],\n        \"address\": [\n            \"The address field is required.\"\n        ],\n        \"city\": [\n            \"The city field is required.\"\n        ],\n        \"state\": [\n            \"The state field is required.\"\n        ],\n        \"country\": [\n            \"The country field is required.\"\n        ],\n        \"latitude\": [\n            \"The latitude field is required.\"\n        ],\n        \"longitude\": [\n            \"The longitude field is required.\"\n        ]\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete Place",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/places/{place_id}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"places",
+								"{place_id}"
+							]
+						},
+						"description": "This endpoint enables you to remove a place from the funconnect places database"
+					},
+					"response": [
+						{
+							"name": "Delete Place",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/places/{place_id}",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"places",
+										"{place_id}"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {},\n    \"message\": \"Deleted\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Check Email",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"admin@funconnect.test\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/auth/check-email",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"auth",
+								"check-email"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"admin@funconnect.test\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/auth/check-email",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"auth",
+										"check-email"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.18.0 (Ubuntu)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 22 Oct 2022 19:53:17 GMT"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "5"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "4"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"exists\": false\n    },\n    \"message\": \"OK\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Request Login OTP",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"admin@funconnect.test\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/auth/login/send-otp",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"auth",
+								"login",
+								"send-otp"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"admin@funconnect.test\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/auth/login/send-otp",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"auth",
+										"login",
+										"send-otp"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.18.0 (Ubuntu)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 22 Oct 2022 19:54:53 GMT"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "58"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"email\": \"admin@funconnect.test\"\n    },\n    \"message\": \"OTp sent.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Login via OTP",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"admin@funconnect.test\",\r\n    \"otp\": \"150610\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/auth/login/otp",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"auth",
+								"login",
+								"otp"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"admin@funconnect.test\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/auth/login/send-otp",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"auth",
+										"login",
+										"send-otp"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.18.0 (Ubuntu)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 22 Oct 2022 19:54:53 GMT"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "58"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"email\": \"admin@funconnect.test\"\n    },\n    \"message\": \"OTp sent.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Login via Google",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"code\": \"code-from-google-after-oauth\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/auth/login/google",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"auth",
+								"login",
+								"google"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"admin@funconnect.test\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/auth/login/send-otp",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"auth",
+										"login",
+										"send-otp"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.18.0 (Ubuntu)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 22 Oct 2022 19:54:53 GMT"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "58"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"email\": \"admin@funconnect.test\"\n    },\n    \"message\": \"OTp sent.\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Events",
+			"item": [
+				{
+					"name": "Review",
+					"item": [
+						{
+							"name": "Get Reviews",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bear {{api_key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/reviews/{event_id}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"reviews",
+										"{event_id}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Review",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{api_key}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\":\"title of review\",\r\n    \"comment\": \"review comment\",\r\n    \"rating\": \"4\", //  max:5, min:1\r\n    \"user_id\": \"uuid\", // reviewer id,\r\n    \"authenticated-user\": {\"user_id\":\"same uuid\"}\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/reviews/{event_id}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"reviews",
+										"{event_id}"
+									]
+								},
+								"description": "Use this endpoint to create an event related review."
+							},
+							"response": [
+								{
+									"name": "success response",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{api_key}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"title\":\"title of review\",\r\n    \"comment\": \"review comment\",\r\n    \"rating\": \"4\", //  max:5, min:1\r\n    \"user_id\": \"uuid\", // reviewer id,\r\n    \"authenticated-user\": {\"user_id\":\"same uuid\"}\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{host}}/reviews/{event_id}",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"reviews",
+												"{event_id}"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"name": "Content-Type",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"data\": {\n        \"user_id\": \"a195aad3-c330-4615-8139-d9dadda29d6c\",\n        \"rating\": 1,\n        \"title\": \"cio\",\n        \"comment\": \"Saepe ipsa omnis itaque.\",\n        \"event_id\": \"97eccd41-d92f-4711-bd86-ad3494e10bcb\",\n        \"id\": \"97eccd41-ddb3-492c-a9dd-88686a9112e8\"\n    },\n    \"message\": \"Resource Created.\"\n}"
+								},
+								{
+									"name": "error response",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{api_key}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"title\":\"title of review\",\r\n    \"comment\": \"review comment\",\r\n    \"rating\": \"4\", //  max:5, min:1\r\n    \"user_id\": \"uuid\", // reviewer id,\r\n    \"authenticated-user\": {\"user_id\":\"same uuid\"}\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{host}}/reviews/{event_id}",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"reviews",
+												"{event_id}"
+											]
+										}
+									},
+									"status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+									"code": 422,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"name": "Content-Type",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "{\r\n    \"message\": \"The title field is required. (and -- more errors)\",\r\n    \"errors\": {\r\n        \"field\": [ // array of errors for this particular field\r\n            \"error\"\r\n        ]\r\n    }\r\n}"
+								},
+								{
+									"name": "404 error response",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{api_key}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"title\":\"title of review\",\r\n    \"comment\": \"review comment\",\r\n    \"rating\": \"4\", //  max:5, min:1\r\n    \"user_id\": \"uuid\", // reviewer id,\r\n    \"authenticated-user\": {\"user_id\":\"same uuid\"}\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{host}}/reviews/{event_id}",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"reviews",
+												"{event_id}"
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"name": "Content-Type",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "{\r\n    \"data\":[],\r\n    \"message\": \"Not Found\" // the related event not found\r\n}"
+								}
+							]
+						}
+					],
+					"description": "Find all endpoints related to events reviews here."
+				},
+				{
+					"name": "Category",
+					"item": [
+						{
+							"name": "Get Categories",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{api_key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/categories",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"categories"
+									]
+								},
+								"description": "use this endpoint to get a list of all events categories"
+							},
+							"response": []
+						},
+						{
+							"name": "Create Category",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{api_key}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"category name\", // required, max:255 and min:3,\r\n    \"status\": \"active\" // nullable and must be either active or inactive\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/categories",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"categories"
+									]
+								},
+								"description": "Use this endpoint to create event categories"
+							},
+							"response": [
+								{
+									"name": "success response",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{api_key}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"name\": \"category name\", // required, max:255 and min:3,\r\n    \"status\": \"active\" // nullable and must be either active or inactive\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{host}}/categories",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"categories"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"name": "Content-Type",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"data\": {\n        \"name\": \"category\",\n        \"status\": \"active\",\n        \"id\": \"97ecd7c2-ca93-4161-93d0-939fee74312c\"\n    },\n    \"message\": \"Created\"\n}"
+								},
+								{
+									"name": "error response",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{api_key}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"name\": \"category name\", // required, max:255 and min:3,\r\n    \"status\": \"active\" // nullable and must be either active or inactive\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{host}}/categories",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"categories"
+											]
+										}
+									},
+									"status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+									"code": 422,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"name": "Content-Type",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "{\r\n    \"message\": \"The name field is required. (and -- more errors)\",\r\n    \"errors\": {\r\n        \"field\": [ // array of errors for this particular field\r\n            \"error\"\r\n        ]\r\n    }\r\n}"
+								}
+							]
+						},
+						{
+							"name": "Get Category",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{api_key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/categories/{category_id}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"categories",
+										"{category_id}"
+									]
+								},
+								"description": "Use this endpoint to retrieve a category from the funconnect events service category."
+							},
+							"response": [
+								{
+									"name": "success response",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{api_key}}",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{host}}/categories/{category_id}",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"categories",
+												"{category_id}"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"name": "Content-Type",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "{\r\n    \"data\": {\r\n        \"name\": \"category\",\r\n        \"status\": \"active\",\r\n        \"id\": \"97ecd7c2-ca93-4161-93d0-939fee74312c\"\r\n    },\r\n    \"message\": \"OK\"\r\n}"
+								},
+								{
+									"name": "error response",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{api_key}}",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{host}}/categories/{category_id}",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"categories",
+												"{category_id}"
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"name": "Content-Type",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"data\": [],\n    \"message\": \"Not Found\"\n}"
+								}
+							]
+						},
+						{
+							"name": "Update Category",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{api_key}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"category new name\", // required, max:255 and min:3,\r\n    \"status\": \"inactive\" // nullable and must be either active or inactive\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/categories/{category_id}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"categories",
+										"{category_id}"
+									]
+								},
+								"description": "Use this endpoint to update existing event category in the funconnect events service database"
+							},
+							"response": [
+								{
+									"name": "success response",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{api_key}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"name\": \"category new name\", // required, max:255 and min:3,\r\n    \"status\": \"inactive\" // nullable and must be either active or inactive\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{host}}/categories/{category_id}",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"categories",
+												"{category_id}"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"name": "Content-Type",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"data\": {\n        \"name\": \"category new name\",\n        \"status\": \"inactive\",\n        \"id\": \"97ecd7c2-ca93-4161-93d0-939fee74312c\"\n    },\n    \"message\": \"Updated\"\n}"
+								},
+								{
+									"name": "error response",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{api_key}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"name\": \"category new name\", // required, max:255 and min:3,\r\n    \"status\": \"inactive\" // nullable and must be either active or inactive\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{host}}/categories/{category_id}",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"categories",
+												"{category_id}"
+											]
+										}
+									},
+									"status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+									"code": 422,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"name": "Content-Type",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "{\r\n    \"message\": \"The name field is required. (and -- more errors)\",\r\n    \"errors\": {\r\n        \"field\": [ // array of errors for this particular field\r\n            \"error\"\r\n        ]\r\n    }\r\n}"
+								},
+								{
+									"name": "404 error response",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{api_key}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"name\": \"category new name\", // required, max:255 and min:3,\r\n    \"status\": \"inactive\" // nullable and must be either active or inactive\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{host}}/categories/{category_id}",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"categories",
+												"{category_id}"
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"name": "Content-Type",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "{\r\n    \"data\":[],\r\n    \"message\":\"Not Found\"\r\n}"
+								}
+							]
+						},
+						{
+							"name": "Update Status",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{api_key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/categories/{category_id}/set-status/{status}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"categories",
+										"{category_id}",
+										"set-status",
+										"{status}"
+									]
+								},
+								"description": "Use this endpoint to only update category status when needed. The {status} var represents either \"active or inactive\" status. Anything other than this will result to an error."
+							},
+							"response": [
+								{
+									"name": "success response",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{api_key}}",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{host}}/categories/{category_id}/set-status/{status}",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"categories",
+												"{category_id}",
+												"set-status",
+												"{status}"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"name": "Content-Type",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "{\r\n    \"data\":{\r\n        \"name\":\"category new name\",\r\n        \"status\": \"active\", // previously inactive\r\n        \"id\": \"97ecd7c2-ca93-4161-93d0-939fee74312c\"\r\n    },\r\n    \"message\": \"Status Updated\"\r\n}"
+								},
+								{
+									"name": "error response",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{api_key}}",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{host}}/categories/{category_id}/set-status/{status}",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"categories",
+												"{category_id}",
+												"set-status",
+												"{status}"
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"name": "Content-Type",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "{\r\n    \"data\": [],\r\n    \"message\": \"Not Found\"\r\n}"
+								}
+							]
+						},
+						{
+							"name": "Delete Category",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{api_key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/categories/{category_id}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"categories",
+										"{category_id}"
+									]
+								},
+								"description": "Use this endpoint to delete or remove an event category"
+							},
+							"response": [
+								{
+									"name": "success response",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{api_key}}",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{host}}/categories/{category_id}",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"categories",
+												"{category_id}"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"name": "Content-Type",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "{\r\n    \"data\": [],\r\n    \"message\": \"Deleted\"\r\n}"
+								},
+								{
+									"name": "error response",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{api_key}}",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{host}}/categories/{category_id}",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"categories",
+												"{category_id}"
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"name": "Content-Type",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "{\r\n    \"data\": [],\r\n    \"message\": \"Not Found\"\r\n}"
+								}
+							]
+						}
+					],
+					"description": "Find all endpoint related to events category in this folder."
+				},
+				{
+					"name": "SavedEvent",
+					"item": [
+						{
+							"name": "Get Saved Events",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{ api_key }}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/saved-events/{event_id}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"saved-events",
+										"{event_id}"
+									]
+								},
+								"description": "Use this endpoint to get a list of all saved events"
+							},
+							"response": []
+						},
+						{
+							"name": "Create SavedEvents",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{api_key}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"user_id\": \"uuid\",\r\n    \"authenticated-user\":{\"user_id\":\"uuid\"}\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/saved-events/{event_id}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"saved-events",
+										"{event_id}"
+									]
+								},
+								"description": "Use this endpoints to create a user's saved event"
+							},
+							"response": [
+								{
+									"name": "success response",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{api_key}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"user_id\": \"uuid\",\r\n    \"authenticated-user\":{\"user_id\":\"uuid\"}\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{host}}/saved-events/{event_id}",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"saved-events",
+												"{event_id}"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"name": "Content-Type",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"data\": {\n        \"user_id\": \"d4d49ccb-a930-4719-a698-a102427f9a37\",\n        \"event_id\": \"97ed05fb-9d7f-46de-b0b5-b0bcb8f09b84\",\n        \"id\": \"97ed05fb-9f37-4637-b6ff-5832778adab9\",\n        \"event\": {\n            \"id\": \"97ed05fb-9d7f-46de-b0b5-b0bcb8f09b84\",\n            \"user_id\": \"fa07e5ec-e8e8-3e0e-a9f4-c6c83c0505c9\",\n            \"category_id\": \"79ad5c1c-ba9c-376a-a3a9-31f5b29e851c\",\n            \"title\": \"Enim error voluptas et tempora sit.\",\n            \"cover\": \"cover.png\",\n            \"description\": \"Accusantium ut aperiam dolorum veniam repellat dolores. Aperiam sint qui rerum et veritatis. Est eos eos ipsa maiores.\",\n            \"date\": \"1997-09-29\",\n            \"time\": \"10:03:15\",\n            \"seats\": 5,\n            \"price\": \"26.60\",\n            \"type\": \"public\"\n        }\n    },\n    \"message\": \"Created\"\n}"
+								}
+							]
+						},
+						{
+							"name": "Delete SavedEvent",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{api_key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/saved-events/{saved_event_id}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"saved-events",
+										"{saved_event_id}"
+									]
+								},
+								"description": "Use this endpoint to delete user saved event"
+							},
+							"response": [
+								{
+									"name": "Delete SavedEvent",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{api_key}}",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{host}}/saved-events/{saved_event_id}",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"saved-events",
+												"{saved_event_id}"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json",
+											"name": "Content-Type",
+											"description": "",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"data\": [],\n    \"message\": \"Deleted\"\n}"
+								}
+							]
+						}
+					],
+					"description": "Find all endpoints related to saved events."
+				},
+				{
+					"name": "Get Events",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/events",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"events"
+							]
+						},
+						"description": "Use this endpoint to get all the events in the funconnect events database. Please note that this endpoint gets you all the events irrespective of it's visibility status in the database."
+					},
+					"response": []
+				},
+				{
+					"name": "Create Event",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_key}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"event title\",\r\n    \"category_id\":\"uuid\", // required, category id\r\n    \"user_id\": \"uuid\", // existing user id,\r\n    \"cover\": \"file\", // cover image,\r\n    \"description\": \"event description\",\r\n    \"date\": \"date\", // required,\r\n    \"time\": \"time\", // required,\r\n    \"seats\": \"seat\", // integer,\r\n    \"type\": \"event type\", // required event type:public or private,\r\n    \"price\": \"90.00\", // leave empty or null if event is free,\r\n    \"address\": \"event address\",\r\n    \"city\": \"event city\",\r\n    \"state\": \"state\",\r\n    \"country\": \"country\",\r\n    \"latitude\": \"latitude\",\r\n    \"longitude\": \"longitude\",\r\n    \"authenticated-user\": {\"user_id\":\"uuid\"}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/events",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"events"
+							]
+						},
+						"description": "Use this endpoint to create an event. Please read the comments on the request body and ensure to read the response messages"
+					},
+					"response": [
+						{
+							"name": "success response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{api_key}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"event title\",\r\n    \"category_id\":\"uuid\", // required, category id\r\n    \"user_id\": \"uuid\", // existing user id,\r\n    \"cover\": \"file\", // cover image,\r\n    \"description\": \"event description\",\r\n    \"date\": \"date\", // required,\r\n    \"time\": \"time\", // required,\r\n    \"seats\": \"seat\", // integer,\r\n    \"type\": \"event type\", // required event type:public or private,\r\n    \"price\": \"90.00\", // leave empty or null if event is free,\r\n    \"address\": \"event address\",\r\n    \"city\": \"event city\",\r\n    \"state\": \"state\",\r\n    \"country\": \"country\",\r\n    \"latitude\": \"latitude\",\r\n    \"longitude\": \"longitude\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/events",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"events"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"user_id\": \"3d35da71-c28e-4709-bdce-6d2574bc7055\",\n        \"category_id\": \"97ecbd1a-4317-4225-b083-87500f2df7cf\",\n        \"title\": \"Odit consequatur quas aut repellat aliquid quia.\",\n        \"description\": \"Et qui doloribus nesciunt facilis quisquam et accusantium. Sit aut alias eum perspiciatis non exercitationem. Quia aliquam quaerat sit molestias. Enim impedit repudiandae enim eos magni.\",\n        \"date\": \"2008-08-24\",\n        \"time\": \"11:39:23\",\n        \"seats\": 9,\n        \"price\": 22,\n        \"type\": \"public\",\n        \"cover\": \"cover/PG6j9j5Ruk3CmoKSYOpBZH2qCwvvnCIVdv1hG3tj.jpg\",\n        \"id\": \"97ecbd1b-41e1-46db-8dd7-ab25799ead3a\"\n    },\n    \"message\": \"Created\"\n}"
+						},
+						{
+							"name": "error response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{api_key}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"event title\",\r\n    \"category_id\":\"uuid\", // required, category id\r\n    \"user_id\": \"uuid\", // existing user id,\r\n    \"cover\": \"file\", // cover image,\r\n    \"description\": \"event description\",\r\n    \"date\": \"date\", // required,\r\n    \"time\": \"time\", // required,\r\n    \"seats\": \"seat\", // integer,\r\n    \"type\": \"event type\", // required event type:public or private,\r\n    \"price\": \"90.00\", // leave empty or null if event is free,\r\n    \"address\": \"event address\",\r\n    \"city\": \"event city\",\r\n    \"state\": \"state\",\r\n    \"country\": \"country\",\r\n    \"latitude\": \"latitude\",\r\n    \"longitude\": \"longitude\",\r\n    \"authenticated-user\": {\"user_id\":\"uuid\"}\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/events",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"events"
+									]
+								}
+							},
+							"status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+							"code": 422,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"The title field is required. (and -- more errors)\",\n    \"errors\": {\n        \"field\": [ // array of errors for this particular field\n            \"error\"\n        ]\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Event",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/events/{event_id}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"events",
+								"{event_id}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "success response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{api_key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/events/{event_id}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"events",
+										"{event_id}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"user_id\": \"3d35da71-c28e-4709-bdce-6d2574bc7055\",\n        \"category_id\": \"97ecbd1a-4317-4225-b083-87500f2df7cf\",\n        \"title\": \"Odit consequatur quas aut repellat aliquid quia.\",\n        \"description\": \"Et qui doloribus nesciunt facilis quisquam et accusantium. Sit aut alias eum perspiciatis non exercitationem. Quia aliquam quaerat sit molestias. Enim impedit repudiandae enim eos magni.\",\n        \"date\": \"2008-08-24\",\n        \"time\": \"11:39:23\",\n        \"seats\": 9,\n        \"price\": 22,\n        \"type\": \"public\",\n        \"cover\": \"cover/PG6j9j5Ruk3CmoKSYOpBZH2qCwvvnCIVdv1hG3tj.jpg\",\n        \"id\": \"97ecbd1b-41e1-46db-8dd7-ab25799ead3a\"\n    },\n    \"message\": \"Created\"\n}"
+						},
+						{
+							"name": "error response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{api_key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/events/{event_id}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"events",
+										"{event_id}"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\r\n    \"data\":[],\r\n    \"message\": \"Not Found\"\r\n}"
+						}
+					]
+				},
+				{
+					"name": "Update Event",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_key}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"new event title\",\r\n    \"category_id\":\"uuid\", // required, category id\r\n    \"user_id\": \"uuid\", // existing user id,\r\n    \"description\": \"event description\",\r\n    \"date\": \"date\", // required,\r\n    \"time\": \"time\", // required,\r\n    \"seats\": \"seat\", // integer,\r\n    \"type\": \"event type\", // required event type:public or private,\r\n    \"price\": \"90.00\", // leave empty or null if event is free,\r\n    \"address\": \"event address\",\r\n    \"city\": \"event city\",\r\n    \"state\": \"state\",\r\n    \"country\": \"country\",\r\n    \"latitude\": \"latitude\",\r\n    \"longitude\": \"longitude\",\r\n    \"authenticated-user\": {\"user_id\":\"uuid\"}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/events/{event_id}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"events",
+								"{event_id}"
+							]
+						},
+						"description": "Use this endpoint to update an event. Note that this endpoint return 3 types of response messages. Ensure to handle all 3"
+					},
+					"response": [
+						{
+							"name": "success response",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{api_key}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"new event title\",\r\n    \"category_id\":\"uuid\", // required, category id\r\n    \"user_id\": \"uuid\", // existing user id,\r\n    \"description\": \"event description\",\r\n    \"date\": \"date\", // required,\r\n    \"time\": \"time\", // required,\r\n    \"seats\": \"seat\", // integer,\r\n    \"type\": \"event type\", // required event type:public or private,\r\n    \"price\": \"90.00\", // leave empty or null if event is free,\r\n    \"address\": \"event address\",\r\n    \"city\": \"event city\",\r\n    \"state\": \"state\",\r\n    \"country\": \"country\",\r\n    \"latitude\": \"latitude\",\r\n    \"longitude\": \"longitude\",\r\n    \"authenticated-user\": {\"user_id\":\"uuid\"}\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/events/{event_id}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"events",
+										"{event_id}"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\r\n    \"data\": {\r\n        \"user_id\": \"3d35da71-c28e-4709-bdce-6d2574bc7055\",\r\n        \"category_id\": \"97ecbd1a-4317-4225-b083-87500f2df7cf\",\r\n        \"title\": \"new event title\",\r\n        \"description\": \"Et qui doloribus nesciunt facilis quisquam et accusantium. Sit aut alias eum perspiciatis non exercitationem. Quia aliquam quaerat sit molestias. Enim impedit repudiandae enim eos magni.\",\r\n        \"date\": \"2008-08-24\",\r\n        \"time\": \"11:39:23\",\r\n        \"seats\": 9,\r\n        \"price\": 22,\r\n        \"type\": \"public\",\r\n        \"cover\": \"cover/PG6j9j5Ruk3CmoKSYOpBZH2qCwvvnCIVdv1hG3tj.jpg\",\r\n        \"id\": \"97ecbd1b-41e1-46db-8dd7-ab25799ead3a\"\r\n    },\r\n    \"message\": \"Updated\"\r\n}"
+						},
+						{
+							"name": "422 error response",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{api_key}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"new event title\",\r\n    \"category_id\":\"uuid\", // required, category id\r\n    \"user_id\": \"uuid\", // existing user id,\r\n    \"description\": \"event description\",\r\n    \"date\": \"date\", // required,\r\n    \"time\": \"time\", // required,\r\n    \"seats\": \"seat\", // integer,\r\n    \"type\": \"event type\", // required event type:public or private,\r\n    \"price\": \"90.00\", // leave empty or null if event is free,\r\n    \"address\": \"event address\",\r\n    \"city\": \"event city\",\r\n    \"state\": \"state\",\r\n    \"country\": \"country\",\r\n    \"latitude\": \"latitude\",\r\n    \"longitude\": \"longitude\",\r\n    \"authenticated-user\": {\"user_id\":\"uuid\"}\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/events/{event_id}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"events",
+										"{event_id}"
+									]
+								}
+							},
+							"status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+							"code": 422,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\r\n    \"message\": \"The title field is required. (and -- more errors)\",\r\n    \"errors\": {\r\n        \"field\": [ // array of errors for this particular field\r\n            \"error\"\r\n        ]\r\n    }\r\n}"
+						},
+						{
+							"name": "404 error response",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{api_key}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"new event title\",\r\n    \"category_id\":\"uuid\", // required, category id\r\n    \"user_id\": \"uuid\", // existing user id,\r\n    \"description\": \"event description\",\r\n    \"date\": \"date\", // required,\r\n    \"time\": \"time\", // required,\r\n    \"seats\": \"seat\", // integer,\r\n    \"type\": \"event type\", // required event type:public or private,\r\n    \"price\": \"90.00\", // leave empty or null if event is free,\r\n    \"address\": \"event address\",\r\n    \"city\": \"event city\",\r\n    \"state\": \"state\",\r\n    \"country\": \"country\",\r\n    \"latitude\": \"latitude\",\r\n    \"longitude\": \"longitude\",\r\n    \"authenticated-user\": {\"user_id\":\"uuid\"}\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/events/{event_id}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"events",
+										"{event_id}"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [],\n    \"message\": \"Not Found\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete Event",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{api_key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/events/{event_id}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"events",
+								"{event_id}"
+							]
+						},
+						"description": "Use this endpoint to remove or delete an event from the funconnect events service"
+					},
+					"response": [
+						{
+							"name": "success response",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{api_key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/events/{event_id}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"events",
+										"{event_id}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {},\n    \"message\": \"Deleted\"\n}"
+						},
+						{
+							"name": "error response",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{api_key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{host}}/events/{event_id}",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"events",
+										"{event_id}"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [],\n    \"message\": \"Not Found\"\n}"
+						}
+					]
+				}
+			],
+			"description": "This folder has all endpoints related to the events services."
+		},
+		{
+			"name": "Core",
+			"item": [
+				{
+					"name": "Profile",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/core/profile",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"core",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "https://api.funconnect.app"
+		},
+		{
+			"key": "host",
+			"value": "https://api.funconnect.app"
+		}
+	]
+}

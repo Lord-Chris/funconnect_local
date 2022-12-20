@@ -5,5 +5,4 @@ abstract class ExploreState extends Equatable {
   List<Object?> get props => [];
 }
 
-class ExploreInitialState extends ExploreState{}
-
+class ExploreInitialState extends ExploreState {}

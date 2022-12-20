@@ -1,101 +1,111 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
 
+import '_components.dart';
 
-
-class CustomButton extends StatelessWidget {
-  const CustomButton({
+class AppButton extends StatelessWidget {
+  final String label;
+  final VoidCallback? onTap;
+  final Color? labelColor, buttonColor, borderColor, disabledColor;
+  final double? width, height, borderRadius, labelSize;
+  final bool isCollapsed, isDisabled;
+  final bool hasShadow, hasBorder, isBusy, showFeedback;
+  final FontWeight fontWeight;
+  final EdgeInsetsGeometry? padding;
+  final Widget? customChild, prefixWidget, suffixWidget;
+  const AppButton({
     Key? key,
-    this.text,
-    this.image,
-    this.buttonColor,
-    this.function,
-    this.isImage = false,
-    this.borderColor,
-    this.radius = 50,
-    this.textColor,
-    this.fontSize = 20,
-    this.fontWeight,
-    this.widget,
-    this.height = 64,
+    this.onTap,
     this.width,
-    this.borderWidth,
-    this.showLoader = false,
+    this.height,
+    this.customChild,
+    this.buttonColor = AppColors.primary,
+    required this.label,
+    this.labelColor = AppColors.white,
+    this.disabledColor,
+    this.borderColor,
+    this.isCollapsed = false,
+    this.hasShadow = false,
+    this.hasBorder = false,
+    this.isBusy = false,
+    this.isDisabled = false,
+    this.showFeedback = true,
+    this.fontWeight = FontWeight.w600,
+    this.borderRadius,
+    this.padding,
+    this.labelSize,
+    this.prefixWidget,
+    this.suffixWidget,
   }) : super(key: key);
-
-  final String? text;
-  final String? image;
-  final Color? buttonColor;
-  final Function()? function;
-  final bool isImage;
-  final Color? borderColor;
-  final double? radius;
-  final Color? textColor;
-  final double? fontSize;
-  final FontWeight? fontWeight;
-  final Widget? widget;
-  final double? height;
-  final double? width, borderWidth;
-  final bool showLoader;
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      splashColor: Colors.white,
-      onTap: function, //showLoader ? null : function,
-      child: Container(
-        width: width,
-        height: height,
-        decoration: BoxDecoration(
-          color: buttonColor ?? Colors.blue,
-          borderRadius: BorderRadius.circular(radius!),
-          border: Border.all(
-            color: borderColor ?? Colors.transparent,
-            width: borderWidth ?? .5,
-          ),
-          boxShadow: const [
-            BoxShadow(
-              color: Color.fromRGBO(0, 58, 213, 0.22),
-              blurRadius: 0.5,
-            ),
-          ],
+    return SizedBox(
+      width: width ?? (isCollapsed ? null : double.maxFinite),
+      height: height ?? (isCollapsed ? null : 50.h),
+      child: MaterialButton(
+        onPressed: isDisabled ? null : onTap,
+        disabledColor: disabledColor ?? buttonColor?.withOpacity(0.3),
+        color: buttonColor,
+        elevation: hasShadow ? 5 : 0,
+        clipBehavior: Clip.hardEdge,
+        splashColor: showFeedback ? null : buttonColor,
+        highlightColor: showFeedback ? null : buttonColor,
+        highlightElevation: showFeedback ? 4 : 0,
+        padding: padding ?? EdgeInsets.all(10.r),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(borderRadius?.r ?? 40.r),
+          side: hasBorder
+              ? BorderSide(
+                  color: borderColor ?? Colors.grey[400]!,
+                  width: 1.r,
+                )
+              : BorderSide.none,
         ),
-        child: Center(
-          child: Visibility(
-            visible: !showLoader,
-            replacement: CircularProgressIndicator(
-              color: textColor ?? Theme.of(context).textTheme.button!.color,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Builder(builder: (context) {
-                  if (!isImage) return const SizedBox();
-                  if (image == null) return const SizedBox();
-                  if (image!.endsWith("svg")) {
-                    return SvgPicture.asset(image!);
-                  }
-                  return Image.asset(image!);
-                }),
-                if (image != null) const SizedBox(width: 8),
-                widget ??
-                    Text(
-                      text!,
-                      style: TextStyle(
-                        color: textColor ??
-                            Theme.of(context).textTheme.button!.color,
-                        fontSize: fontSize ??
-                            Theme.of(context).textTheme.button!.fontSize,
-                        fontWeight: fontWeight ??
-                            Theme.of(context).textTheme.button!.fontWeight,
-                        fontFamily: AppFonts.gtWalshPro,
+        child: Builder(
+          builder: (context) {
+            if (isBusy) {
+              return SizedBox.square(
+                child: FittedBox(
+                  child: AppLoader(
+                    padding: 15,
+                    color: labelColor,
+                  ),
+                ),
+              );
+            }
+
+            if (customChild != null) return customChild!;
+
+            return FittedBox(
+              child: Row(
+                children: [
+                  if (prefixWidget != null)
+                    Padding(
+                      padding: EdgeInsets.only(right: 10.w),
+                      child: prefixWidget,
+                    ),
+                  Center(
+                    child: Text(
+                      label,
+                      textAlign: TextAlign.center,
+                      style: AppTextStyles.medium14.copyWith(
+                        fontSize: labelSize?.sm,
+                        fontWeight: fontWeight,
+                        color: labelColor,
                       ),
                     ),
-              ],
-            ),
-          ),
+                  ),
+                  if (suffixWidget != null)
+                    Padding(
+                      padding: EdgeInsets.only(left: 10.w),
+                      child: suffixWidget,
+                    ),
+                ],
+              ),
+            );
+          },
         ),
       ),
     );

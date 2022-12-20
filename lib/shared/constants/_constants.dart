@@ -1,5 +1,5 @@
 export 'app_assets.dart';
-export 'app_textStyle.dart';
+export 'textstyles.dart';
 export 'colors.dart';
 export 'dimens.dart';
 export 'fonts.dart';

@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:funconnect/core/presentation/widgets/app_auth_text_form_field.dart';
-import 'package:funconnect/core/presentation/widgets/app_spacer.dart';
 import 'package:funconnect/features/fun_connect/event/presentation/widgets/create_event_add_image_widget.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
 
@@ -18,7 +16,7 @@ class CreateEventView extends StatelessWidget {
         backgroundColor: AppColors.black,
         title: Text(
           AppText.aTCreateEventAppBarText,
-          style: AppTextStyle.WhiteMedium,
+          style: AppTextStyles.whiteMedium,
         ),
       ),
       body: SingleChildScrollView(
@@ -31,13 +29,17 @@ class CreateEventView extends StatelessWidget {
             AppSpacer.xtraHeightSpace,
             AppTextForm(
               onChanged: (String) {},
-              validator: (String) {},
+              validator: (String) {
+                return null;
+              },
               labelText: AppText.aTCreateEventTextFormTitleText,
               hintText: AppText.aTCreateEventTextFormSubTitleText,
             ),
             AppTextForm(
               onChanged: (String) {},
-              validator: (String) {},
+              validator: (String) {
+                return null;
+              },
               labelText: AppText.aTCreateEventDiscriptionFormText,
               hintText: AppText.aTCreateEventDiscriptionFormSubText,
               maxLines: 3,
@@ -63,19 +65,25 @@ class CreateEventView extends StatelessWidget {
             // ),
             AppTextForm(
               onChanged: (String) {},
-              validator: (String) {},
+              validator: (String) {
+                return null;
+              },
               labelText: AppText.aTCreateEventSeatFormText,
               hintText: AppText.aTCreateEventSeatFormSubText,
             ),
             AppTextForm(
               onChanged: (String) {},
-              validator: (String) {},
+              validator: (String) {
+                return null;
+              },
               labelText: AppText.aTCreateEventCategoryFormText,
               hintText: AppText.aTCreateEventCategoryFormSubText,
             ),
             AppTextForm(
               onChanged: (String) {},
-              validator: (String) {},
+              validator: (String) {
+                return null;
+              },
               labelText: AppText.aTCreateEventTypeFormText,
               hintText: AppText.aTCreateEventTypeFormSubText,
             ),
@@ -92,15 +100,15 @@ class CreateEventView extends StatelessWidget {
               ),
               title: Text(
                 AppText.aTCreateEventAddLocationText,
-                style: AppTextStyle.WhiteMedium,
+                style: AppTextStyles.whiteMedium,
               ),
             ),
             AppSpacer.xtraHeightSpace,
-            const CustomButton(
+            const AppButton(
               height: 50.0,
               //width: MediaQuery.of(context).size.width - 50,
-              text: AppText.aTCreateEventCreateEventText,
-              textColor: Colors.white,
+              label: AppText.aTCreateEventCreateEventText,
+              labelColor: Colors.white,
               buttonColor: AppColors.primary,
               // function: () => context
               //     .read<LocationAuthBloc>()

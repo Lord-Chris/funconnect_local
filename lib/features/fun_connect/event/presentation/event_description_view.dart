@@ -19,7 +19,7 @@ class EventDescription extends StatelessWidget {
         backgroundColor: AppColors.interestWidgetAsh,
         title: Text(
           DumbAppStrings.eventTitleText,
-          style: AppTextStyle.WhiteMedium,
+          style: AppTextStyles.whiteMedium,
         ),
         actions: [
           CircleAvatar(
@@ -52,7 +52,7 @@ class EventDescription extends StatelessWidget {
             AppSpacer.xtraHeightSpace,
             Text(
               DumbAppStrings.eventDescriptionSubTitleText,
-              style: AppTextStyle.WhiteBold.copyWith(fontSize: 24.0.sp),
+              style: AppTextStyles.whiteBold.copyWith(fontSize: 24.0.sp),
             ),
             AppSpacer.xtraHeightSpace,
             Row(
@@ -71,7 +71,7 @@ class EventDescription extends StatelessWidget {
                       padding: EdgeInsets.symmetric(horizontal: 16.0.w),
                       child: Text(
                         DumbAppStrings.eventDescriptionPrivateLAbelText,
-                        style: AppTextStyle.Blacklight.copyWith(
+                        style: AppTextStyles.blacklight.copyWith(
                           color: AppColors.exploreIconAsh,
                         ),
                       ),
@@ -90,7 +90,7 @@ class EventDescription extends StatelessWidget {
                       padding: EdgeInsets.symmetric(horizontal: 16.0.w),
                       child: Text(
                         DumbAppStrings.eventDescriptionFreeLAbelText,
-                        style: AppTextStyle.Blacklight.copyWith(
+                        style: AppTextStyles.blacklight.copyWith(
                           color: AppColors.exploreIconAsh,
                         ),
                       ),
@@ -104,11 +104,11 @@ class EventDescription extends StatelessWidget {
               leading: const CircleAvatar(),
               title: Text(
                 DumbAppStrings.eventDescriptionSubText0,
-                style: AppTextStyle.WhiteMedium,
+                style: AppTextStyles.whiteMedium,
               ),
               subtitle: Text(
                 DumbAppStrings.eventDescriptionSubText1,
-                style: AppTextStyle.Whitelight,
+                style: AppTextStyles.whitelight,
               ),
             ),
             AppSpacer.xtraHeightSpace,
@@ -121,7 +121,7 @@ class EventDescription extends StatelessWidget {
                 AppSpacer.smallWeightSpace,
                 Text(
                   DumbAppStrings.eventDescriptionDateAndTimeText,
-                  style: AppTextStyle.Whitelight,
+                  style: AppTextStyles.whitelight,
                 ),
               ],
             ),
@@ -130,19 +130,19 @@ class EventDescription extends StatelessWidget {
               child: Text(
                 DumbAppStrings.eventDescriptionCalenderText,
                 style:
-                    AppTextStyle.WhiteBold.copyWith(color: AppColors.primary),
+                    AppTextStyles.whiteBold.copyWith(color: AppColors.primary),
               ),
             ),
             AppSpacer.xtraHeightSpace,
             Text(
               DumbAppStrings.eventDescriptionAboutText,
-              style: AppTextStyle.WhiteBold,
+              style: AppTextStyles.whiteBold,
             ),
             AppSpacer.smallHeightSpace,
             AppSpacer.smallHeightSpace,
             Text(
               DumbAppStrings.eventDescriptionAboutDescriptionText,
-              style: AppTextStyle.Whitelight.copyWith(fontSize: 14.0.sp),
+              style: AppTextStyles.whitelight.copyWith(fontSize: 14.0.sp),
             ),
             AppSpacer.xtraHeightSpace,
             AppSpacer.xtraHeightSpace,
@@ -160,17 +160,17 @@ class EventDescription extends StatelessWidget {
                   AppSpacer.xtraHeightSpace,
                   Text(
                     DumbAppStrings.eventDescriptionFirstEventText,
-                    style: AppTextStyle.WhiteBold.copyWith(fontSize: 24.0.sp),
+                    style: AppTextStyles.whiteBold.copyWith(fontSize: 24.0.sp),
                   ),
                   AppSpacer.xtraHeightSpace,
                   Text(
                     DumbAppStrings.eventDescriptionSubText1,
-                    style: AppTextStyle.WhiteBold.copyWith(
+                    style: AppTextStyles.whiteBold.copyWith(
                         fontSize: 16.0.sp, color: AppColors.emailAddressAsh),
                   ),
                   Text(
                     DumbAppStrings.eventDescriptionRsvpMailText,
-                    style: AppTextStyle.WhiteBold.copyWith(
+                    style: AppTextStyles.whiteBold.copyWith(
                         fontSize: 16.0.sp, color: AppColors.emailAddressAsh),
                   ),
                 ],

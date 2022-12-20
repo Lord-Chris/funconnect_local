@@ -16,4 +16,12 @@ class ChangeTimerEvent extends VerifyEmailEvent {
 
 class PinFieldChangedEvent extends VerifyEmailEvent {}
 
-class VerifyEmailTapEvent extends VerifyEmailEvent {}
+class VerifyEmailTapEvent extends VerifyEmailEvent {
+  final String email;
+  final String otp;
+
+  VerifyEmailTapEvent({
+    required this.email,
+    required this.otp,
+  });
+}

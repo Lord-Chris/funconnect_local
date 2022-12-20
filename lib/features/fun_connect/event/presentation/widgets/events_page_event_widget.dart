@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../../core/presentation/widgets/core_widgets.dart';
-import '../../../../../shared/constants/app_textStyle.dart';
 import '../../../../../shared/constants/colors.dart';
+import '../../../../../shared/constants/textstyles.dart';
 import '../../../../../shared/dumb_widgets/dumb_app_strings.dart';
 
 class EventsPageEventWidget extends StatelessWidget {
@@ -45,7 +45,7 @@ class EventsPageEventWidget extends StatelessWidget {
                 children: [
                   Text(
                     DumbAppStrings.eventDateText,
-                    style: AppTextStyle.WhiteMedium.copyWith(
+                    style: AppTextStyles.whiteMedium.copyWith(
                         color: AppColors.eventTextRed, fontSize: 15.0.sp),
                   ),
                   Row(
@@ -53,7 +53,7 @@ class EventsPageEventWidget extends StatelessWidget {
                     children: [
                       Text(
                         DumbAppStrings.eventTitleText,
-                        style: AppTextStyle.WhiteBold.copyWith(fontSize: 16.0),
+                        style: AppTextStyles.whiteBold.copyWith(fontSize: 16.0),
                       ),
                       IconButton(
                         onPressed: () {},
@@ -66,7 +66,7 @@ class EventsPageEventWidget extends StatelessWidget {
                   ),
                   Text(
                     DumbAppStrings.eventAddressText,
-                    style: AppTextStyle.Whitelight.copyWith(
+                    style: AppTextStyles.whitelight.copyWith(
                         color: AppColors.locationIconAsh, fontSize: 15.0.sp),
                   ),
                   AppSpacer.xtraHeightSpace,
@@ -86,7 +86,7 @@ class EventsPageEventWidget extends StatelessWidget {
                                       EdgeInsets.symmetric(horizontal: 16.0.w),
                                   child: Text(
                                     AppText.aTEventPublicText,
-                                    style: AppTextStyle.WhiteMedium.copyWith(
+                                    style: AppTextStyles.whiteMedium.copyWith(
                                         color: AppColors.locationIconAsh),
                                   ),
                                 ),
@@ -95,8 +95,8 @@ class EventsPageEventWidget extends StatelessWidget {
                             AppSpacer.normalWeightSpace,
                             Text(
                               AppText.aTEventFreeText,
-                              style: AppTextStyle.WhiteMedium.copyWith(
-                                  color: AppColors.primary),
+                              style: AppTextStyles.whiteMedium
+                                  .copyWith(color: AppColors.primary),
                             ),
                           ],
                         )
@@ -115,7 +115,7 @@ class EventsPageEventWidget extends StatelessWidget {
                                       EdgeInsets.symmetric(horizontal: 16.0.w),
                                   child: Text(
                                     AppText.aTEventPrivateText,
-                                    style: AppTextStyle.WhiteMedium.copyWith(
+                                    style: AppTextStyles.whiteMedium.copyWith(
                                         color: AppColors.locationIconAsh),
                                   ),
                                 ),
@@ -124,7 +124,7 @@ class EventsPageEventWidget extends StatelessWidget {
                             // AppSpacer.normalWeightSpace,
                             // Text(
                             //   "Free",
-                            //   style: AppTextStyle.WhiteMedium.copyWith(
+                            //   style: AppTextStyles.whiteMedium.copyWith(
                             //       color: AppColors.primary),
                             // ),
                           ],

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
+  AppColors._();
+
   static const transparent = Color(0x00000000);
   static const black = Color(0XFF000000);
   static const notificationWidgetBlack = Color(0XFF0F0F0F);
