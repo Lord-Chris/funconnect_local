@@ -60,7 +60,7 @@ extension ValidatorExtension on BuildContext {
       value != null && value != password ? 'Passwords do not match' : null;
 
   String? validateOtp(String? value) =>
-      value != null && value.length == 4 ? null : 'Enter valid OTP';
+      value != null && value.length == 6 ? null : 'Enter valid OTP';
 
   String? validateGender(String? value) => value != null && value == 'Gender'
       ? 'Choose one of male or female'

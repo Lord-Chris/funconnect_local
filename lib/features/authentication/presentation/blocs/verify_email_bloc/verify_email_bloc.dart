@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:funconnect/core/app/_app.dart';
+import 'package:funconnect/features/authentication/domain/params/verify_otp.dart';
+import 'package:funconnect/features/authentication/domain/usecases/verify_otp_usecase.dart';
 import 'package:funconnect/features/authentication/presentation/blocs/verify_email_bloc/verify_email_event.dart';
 import 'package:funconnect/features/authentication/presentation/blocs/verify_email_bloc/verify_email_state.dart';
 import 'package:funconnect/models/failure.dart';
@@ -36,8 +38,8 @@ class VerifyEmailBloc extends Bloc<VerifyEmailEvent, VerifyEmailState> {
   ) async {
     try {
       emit(VerifyEmailLoadingState());
-      // await VerifyOtpUsecase()
-      //     .call(VerifyOtpParams(email: event.email, otp: event.otp));
+      await VerifyOtpUsecase()
+          .call(VerifyOtpParams(email: event.email, otp: event.otp));
       _navigationService.toNamed(Routes.profileSetupViewRoute);
       emit(VerifyEmailSuccessState());
     } on Failure {

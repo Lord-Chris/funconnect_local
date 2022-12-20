@@ -133,6 +133,19 @@ class AppTextStyles {
         height: 1.6,
       );
 
+  // Light
+  static TextStyle get light14 => GoogleFonts.inter(
+        fontSize: 14,
+        fontWeight: FontWeight.w300,
+        height: 1.6,
+      );
+
+  static TextStyle get light12 => GoogleFonts.inter(
+        fontSize: 12,
+        fontWeight: FontWeight.w300,
+        height: 1.21,
+      );
+
   static TextStyle whiteMedium = GoogleFonts.inter(
       // fontFamily: VeloxFonts.markPro,
       fontWeight: FontWeight.w500,
