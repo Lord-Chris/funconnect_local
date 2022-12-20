@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/presentation/widgets/app_orange_button.dart';
 import '../../../../core/presentation/widgets/core_widgets.dart';
-import '../../../../shared/constants/app_textStyle.dart';
+import '../../../../shared/constants/textstyle.dart';
 import '../widgets/interest_selection_widget.dart';
 
 class InterestView extends StatefulWidget {
@@ -19,14 +19,14 @@ class _InterestViewState extends State<InterestView> {
       body: AppBlackModalWidget(
         modalHeight: MediaQuery.of(context).size.height,
         children: [
-          SizedBox(
+          const SizedBox(
             height: 16.0,
           ),
           Text(AppText.aTInterestText,
-              style: AppTextStyle.WhiteBold.copyWith(fontSize: 24.0)),
+              style: AppTextStyle.whiteBold.copyWith(fontSize: 24.0)),
           const SizedBox(height: 8.0),
           Text(AppText.aTInterestSelectText,
-              textAlign: TextAlign.center, style: AppTextStyle.WhiteMedium),
+              textAlign: TextAlign.center, style: AppTextStyle.whiteMedium),
           const SizedBox(height: 29),
           Expanded(child:
               ListView.builder(itemBuilder: (BuildContext context, int index) {
@@ -39,7 +39,7 @@ class _InterestViewState extends State<InterestView> {
             );
           })),
           const SizedBox(height: 62),
-          AppOrangeBtn(
+          const AppOrangeBtn(
             label: AppText.aTAuthContinueText,
           ),
         ],

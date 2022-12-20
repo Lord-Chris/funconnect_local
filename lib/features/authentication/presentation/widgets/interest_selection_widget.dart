@@ -1,7 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../shared/constants/app_textStyle.dart';
+import '../../../../shared/constants/textstyle.dart';
 import '../../../../shared/constants/colors.dart';
 
 class InterestSelectionWidget extends StatelessWidget {
@@ -26,7 +25,7 @@ class InterestSelectionWidget extends StatelessWidget {
             const CircleAvatar(),
             Text(
               "Fine dining\nRestaurant",
-              style: AppTextStyle.Whitelight,
+              style: AppTextStyle.whitelight,
             ),
             Checkbox(
               value: false,

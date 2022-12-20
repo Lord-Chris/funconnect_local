@@ -33,8 +33,8 @@ class HomeView extends StatelessWidget {
                             padding: EdgeInsets.only(left: 8.0.w),
                             child: Text(
                               "Hi John",
-                              style: AppTextStyle.WhiteBold.copyWith(
-                                  fontSize: 24.0.sp),
+                              style: AppTextStyle.whiteBold
+                                  .copyWith(fontSize: 24.0.sp),
                             ),
                           ),
                           AppSpacer.normalHeightSpace,
@@ -46,8 +46,8 @@ class HomeView extends StatelessWidget {
                               ),
                               Text(
                                 "Yaba, Lagos",
-                                style: AppTextStyle.Whitelight.copyWith(
-                                    color: AppColors.homeViewAsh),
+                                style: AppTextStyle.whitelight
+                                    .copyWith(color: AppColors.homeViewAsh),
                               ),
                             ],
                           ),
@@ -68,7 +68,7 @@ class HomeView extends StatelessWidget {
               CustomDrawer(),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 16.0),
-                child: Container(
+                child: SizedBox(
                   height: 56.0.h,
                   width: MediaQuery.of(context).size.width,
                   child: ListView.builder(

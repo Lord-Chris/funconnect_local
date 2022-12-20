@@ -58,7 +58,7 @@ class _HomeCategoriesLargeWidgetState extends State<HomeCategoriesLargeWidget> {
                           children: [
                             Text(
                               DumbAppStrings.bestForYouLabel,
-                              style: AppTextStyle.WhiteMedium,
+                              style: AppTextStyle.whiteMedium,
                             ),
                             AnimatedContainer(
                               duration: Duration(milliseconds: 1),
@@ -75,7 +75,7 @@ class _HomeCategoriesLargeWidgetState extends State<HomeCategoriesLargeWidget> {
                           children: [
                             Text(
                               DumbAppStrings.ratingLabel,
-                              style: AppTextStyle.WhiteMedium,
+                              style: AppTextStyle.whiteMedium,
                             ),
                             // SimpleStarRating(
                             //   allowHalfRating: true,
@@ -134,7 +134,7 @@ class _HomeCategoriesLargeWidgetState extends State<HomeCategoriesLargeWidget> {
                             // ),
                             Text(
                               DumbAppStrings.ratiedLabel,
-                              style: AppTextStyle.Whitelight,
+                              style: AppTextStyle.whitelight,
                             ),
                           ],
                         ),

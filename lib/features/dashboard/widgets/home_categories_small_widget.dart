@@ -42,7 +42,7 @@ class HomeViewCategoriesSmallSubWidget extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 4.0),
                   child: Text(
                     DumbAppStrings.categoriesLabel,
-                    style: AppTextStyle.Whitelight,
+                    style: AppTextStyle.whitelight,
                   ),
                 ),
               ),

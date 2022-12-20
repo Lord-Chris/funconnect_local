@@ -18,7 +18,7 @@ class CreateEventView extends StatelessWidget {
         backgroundColor: AppColors.black,
         title: Text(
           AppText.aTCreateEventAppBarText,
-          style: AppTextStyle.WhiteMedium,
+          style: AppTextStyle.whiteMedium,
         ),
       ),
       body: SingleChildScrollView(
@@ -92,7 +92,7 @@ class CreateEventView extends StatelessWidget {
               ),
               title: Text(
                 AppText.aTCreateEventAddLocationText,
-                style: AppTextStyle.WhiteMedium,
+                style: AppTextStyle.whiteMedium,
               ),
             ),
             AppSpacer.xtraHeightSpace,

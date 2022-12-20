@@ -32,7 +32,7 @@ class NotificationWidget extends StatelessWidget {
               backgroundColor:
                   read ? AppColors.notificationGreen : AppColors.red,
             ),
-            CircleAvatar(),
+            const CircleAvatar(),
             RichText(
               textAlign: TextAlign.start,
               text: TextSpan(
@@ -45,11 +45,11 @@ class NotificationWidget extends StatelessWidget {
                 children: [
                   TextSpan(
                     text: DumbAppStrings.notificationMainText,
-                    style: AppTextStyle.WhiteMedium,
+                    style: AppTextStyle.whiteMedium,
                   ),
                   TextSpan(
                     text: DumbAppStrings.notificationSubMainText,
-                    style: AppTextStyle.Whitelight.copyWith(
+                    style: AppTextStyle.whitelight.copyWith(
                       color: AppColors.primary,
                     ),
                     recognizer: TapGestureRecognizer()..onTap = () {},
@@ -70,7 +70,7 @@ class NotificationWidget extends StatelessWidget {
                         onPressed: () {},
                         child: Text(
                           DumbAppStrings.notificationButtonText,
-                          style: AppTextStyle.BlackBold.copyWith(fontSize: 7.0),
+                          style: AppTextStyle.blackBold.copyWith(fontSize: 7.0),
                         ),
                       ),
                     ),

@@ -27,11 +27,11 @@ class HomeViewCategoriesWidget extends StatelessWidget {
               children: [
                 Text(
                   label,
-                  style: AppTextStyle.WhiteBold.copyWith(fontSize: 20.0),
+                  style: AppTextStyle.whiteBold.copyWith(fontSize: 20.0),
                 ),
                 Text(
                   "See all",
-                  style: AppTextStyle.Whitelight.copyWith(fontSize: 14.0),
+                  style: AppTextStyle.whitelight.copyWith(fontSize: 14.0),
                 ),
               ],
             ),
