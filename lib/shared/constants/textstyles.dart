@@ -4,6 +4,25 @@ import 'package:google_fonts/google_fonts.dart';
 class AppTextStyles {
   AppTextStyles._();
 
+  static TextStyle dynamic(
+    double size, {
+    Color? color,
+    FontWeight? weight,
+    double? height,
+    double? spacing,
+    FontStyle? style,
+    String? fontFamily,
+  }) {
+    return GoogleFonts.inter(
+      fontSize: size,
+      color: color,
+      fontWeight: weight,
+      height: height == null ? null : height / size,
+      letterSpacing: spacing,
+      fontStyle: style,
+    );
+  }
+
   static TextStyle get bold36 => GoogleFonts.inter(
         fontSize: 36,
         fontWeight: FontWeight.bold,

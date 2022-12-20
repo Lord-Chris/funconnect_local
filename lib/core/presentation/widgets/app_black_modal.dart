@@ -1,16 +1,22 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 import '../../../shared/constants/colors.dart';
 
 class AppBlackModalWidget extends StatelessWidget {
-  List<Widget> children;
-  double? modalHeight;
-  double? imageContainerHeight;
-  AppBlackModalWidget({
-    required this.children,
-    this.imageContainerHeight,
-    this.modalHeight,
+  final List<Widget> children;
+  final double? modalHeight;
+  final double? imageContainerHeight;
+  final EdgeInsets? padding;
+  final bool showBackButton;
+
+  const AppBlackModalWidget({
     Key? key,
+    required this.children,
+    this.modalHeight,
+    this.imageContainerHeight,
+    this.padding,
+    this.showBackButton = false,
   }) : super(key: key);
 
   @override
@@ -18,7 +24,7 @@ class AppBlackModalWidget extends StatelessWidget {
     return Stack(
       fit: StackFit.loose,
       children: [
-        Container(
+        SizedBox(
           height: MediaQuery.of(context).size.height,
           child: Container(
             height: imageContainerHeight ?? 400,
@@ -31,10 +37,23 @@ class AppBlackModalWidget extends StatelessWidget {
             ),
           ),
         ),
+        if (showBackButton)
+          Positioned(
+            top: 50,
+            left: 16,
+            child: IconButton(
+              onPressed: () => Navigator.maybePop(context),
+              icon: const Icon(
+                CupertinoIcons.back,
+                color: AppColors.white,
+              ),
+            ),
+          ),
         Positioned(
           bottom: -20.0,
           child: Container(
-            height: modalHeight ?? 350,
+            // height: modalHeight ?? 350,
+            padding: padding,
             width: MediaQuery.of(context).size.width,
             decoration: const BoxDecoration(
               color: AppColors.black,
@@ -46,6 +65,7 @@ class AppBlackModalWidget extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
               crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
               children: children,
             ),
           ),

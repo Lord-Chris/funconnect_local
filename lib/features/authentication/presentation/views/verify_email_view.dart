@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:funconnect/core/presentation/widgets/core_widgets.dart';
 import 'package:funconnect/core/utils/general_utils.dart';
 import 'package:funconnect/features/authentication/presentation/blocs/verify_email_bloc/verify_email_bloc.dart';
 import 'package:funconnect/features/authentication/presentation/blocs/verify_email_bloc/verify_email_event.dart';
@@ -11,8 +12,6 @@ import 'package:funconnect/shared/constants/_constants.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 import '../../../../core/presentation/widgets/app_orange_button.dart';
-import '../../../../core/presentation/widgets/app_smart_strings.dart';
-import '../../../../core/presentation/widgets/app_text.dart';
 
 class VerifyEmailView extends HookWidget {
   final String email;
@@ -40,208 +39,185 @@ class VerifyEmailView extends HookWidget {
               }
             },
             child: Scaffold(
-              body: Stack(
-                fit: StackFit.loose,
+              body: AppBlackModalWidget(
+                showBackButton: true,
                 children: [
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height,
-                    child: Container(
-                      height: 400,
-                      decoration: const BoxDecoration(
-                        image: DecorationImage(
-                            image: AssetImage(AppSmartString.registerImg),
-                            fit: BoxFit.cover),
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    bottom: -20.0,
-                    child: Container(
-                      height: 450,
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      width: MediaQuery.of(context).size.width,
-                      decoration: const BoxDecoration(
-                        color: AppColors.black,
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(40.0),
-                          topRight: Radius.circular(40.0),
-                        ),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          const SizedBox(height: 20),
-                          const Text(
-                            AppText.aTAuthVerifyEmailIdText,
-                            style: TextStyle(
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: AppFonts.merriweather,
-                              color: AppColors.white,
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(20),
+                        child: Column(
+                          children: [
+                            const SizedBox(height: 20),
+                            const Text(
+                              AppText.aTAuthVerifyEmailIdText,
+                              style: TextStyle(
+                                fontSize: 24,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: AppFonts.merriweather,
+                                color: AppColors.white,
+                              ),
                             ),
-                          ),
-                          const SizedBox(height: 10),
-                          RichText(
-                            textAlign: TextAlign.center,
-                            text: TextSpan(
-                              children: [
-                                TextSpan(
-                                  text: "We’ve sent a code to ",
-                                  style: AppTextStyles.whiteMedium,
+                            const SizedBox(height: 10),
+                            RichText(
+                              textAlign: TextAlign.center,
+                              text: TextSpan(
+                                children: [
+                                  TextSpan(
+                                    text: "We’ve sent a code to ",
+                                    style: AppTextStyles.whiteMedium,
+                                  ),
+                                  TextSpan(
+                                    text: GeneralUtils.hideEmail(email),
+                                    style: AppTextStyles.whiteMedium.copyWith(
+                                      color: AppColors.primary,
+                                    ),
+                                  ),
+                                  TextSpan(
+                                    text:
+                                        "\nCheck your spam folder, refresh or try again with\nanother email",
+                                    style: AppTextStyles.whiteMedium,
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(height: 62),
+                            Center(
+                              child: PinCodeTextField(
+                                appContext: context,
+                                length: 6,
+                                onCompleted: (value) {},
+                                onChanged: (value) {},
+                                controller: pinController,
+                                autoDisposeControllers: false,
+                                autovalidateMode:
+                                    AutovalidateMode.onUserInteraction,
+                                keyboardType: TextInputType.number,
+                                cursorColor: AppColors.ash,
+                                obscureText: !true,
+                                textStyle: AppTextStyles.whiteBold.copyWith(
+                                  fontSize: 20.0,
                                 ),
-                                TextSpan(
-                                  text: GeneralUtils.hideEmail(email),
-                                  style: AppTextStyles.whiteMedium.copyWith(
+                                obscuringCharacter: "*",
+                                backgroundColor: AppColors.transparent,
+                                enableActiveFill: true,
+                                pinTheme: PinTheme(
+                                  shape: PinCodeFieldShape.box,
+                                  borderRadius: BorderRadius.circular(10),
+                                  selectedColor: AppColors.primary,
+                                  activeColor: AppColors.primary,
+                                  inactiveColor: AppColors.ash,
+                                  fieldHeight: 64.r,
+                                  fieldWidth: 64.r,
+                                  activeFillColor: AppColors.transparent,
+                                  inactiveFillColor: AppColors.transparent,
+                                  selectedFillColor: AppColors.transparent,
+                                ),
+                              ),
+                            ),
+                            Visibility(
+                              visible: clipData.hasData,
+                              child: Container(
+                                height: 32,
+                                decoration: BoxDecoration(
                                     color: AppColors.primary,
+                                    borderRadius: BorderRadius.circular(8.0)),
+                                child: TextButton(
+                                  onPressed: () =>
+                                      pinController.text = clipData.data!,
+                                  child: Text(
+                                    "Paste",
+                                    style: AppTextStyles.blacklight,
                                   ),
                                 ),
-                                TextSpan(
-                                  text:
-                                      "\nCheck your spam folder, refresh or try again with\nanother email",
-                                  style: AppTextStyles.whiteMedium,
-                                ),
-                              ],
-                            ),
-                          ),
-                          const SizedBox(height: 62),
-                          Center(
-                            child: PinCodeTextField(
-                              appContext: context,
-                              length: 6,
-                              onCompleted: (value) {},
-                              onChanged: (value) {},
-                              controller: pinController,
-                              autoDisposeControllers: false,
-                              autovalidateMode:
-                                  AutovalidateMode.onUserInteraction,
-                              keyboardType: TextInputType.number,
-                              cursorColor: AppColors.ash,
-                              obscureText: !true,
-                              textStyle: AppTextStyles.whiteBold.copyWith(
-                                fontSize: 20.0,
-                              ),
-                              obscuringCharacter: "*",
-                              backgroundColor: AppColors.transparent,
-                              enableActiveFill: true,
-                              pinTheme: PinTheme(
-                                shape: PinCodeFieldShape.box,
-                                borderRadius: BorderRadius.circular(10),
-                                selectedColor: AppColors.primary,
-                                activeColor: AppColors.primary,
-                                inactiveColor: AppColors.ash,
-                                fieldHeight: 64.r,
-                                fieldWidth: 64.r,
-                                activeFillColor: AppColors.transparent,
-                                inactiveFillColor: AppColors.transparent,
-                                selectedFillColor: AppColors.transparent,
                               ),
                             ),
-                          ),
-                          Visibility(
-                            visible: clipData.hasData,
-                            child: Container(
-                              height: 32,
-                              decoration: BoxDecoration(
-                                  color: AppColors.primary,
-                                  borderRadius: BorderRadius.circular(8.0)),
-                              child: TextButton(
-                                onPressed: () =>
-                                    pinController.text = clipData.data!,
-                                child: Text(
-                                  "Paste",
-                                  style: AppTextStyles.blacklight,
-                                ),
-                              ),
+                            const SizedBox(height: 32.0),
+                            BlocBuilder(
+                              bloc: context.watch<VerifyEmailBloc>(),
+                              buildWhen: (previous, current) {
+                                if (current is TimerFinishedState) return true;
+                                if (previous is TimerFinishedState &&
+                                    current is TimerChangedState) return true;
+                                return false;
+                              },
+                              builder: (context, state) {
+                                if (state is! TimerFinishedState) {
+                                  return const SizedBox();
+                                }
+                                return Center(
+                                  child: RichText(
+                                    textAlign: TextAlign.start,
+                                    text: TextSpan(
+                                      style: const TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.normal,
+                                        fontFamily: AppFonts.gtWalshPro,
+                                        color: AppColors.primary,
+                                      ),
+                                      children: [
+                                        TextSpan(
+                                          text: AppText.aTAuthDNReceiveCodeText,
+                                          style: AppTextStyles.whiteMedium,
+                                        ),
+                                        TextSpan(
+                                          text: AppText.aTAuthResendCodeText,
+                                          style: AppTextStyles.whiteMedium
+                                              .copyWith(
+                                            color: AppColors.primary,
+                                          ),
+                                          recognizer: TapGestureRecognizer()
+                                            ..onTap = () {
+                                              context
+                                                  .read<VerifyEmailBloc>()
+                                                  .add(ResendCodeEvent());
+                                            },
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              },
                             ),
-                          ),
-                          const SizedBox(
-                            height: 32.0,
-                          ),
-                          BlocBuilder(
-                            bloc: context.watch<VerifyEmailBloc>(),
-                            buildWhen: (previous, current) {
-                              if (current is TimerFinishedState) return true;
-                              if (previous is TimerFinishedState &&
-                                  current is TimerChangedState) return true;
-                              return false;
-                            },
-                            builder: (context, state) {
-                              if (state is! TimerFinishedState) {
-                                return const SizedBox();
-                              }
-                              return Center(
-                                child: RichText(
-                                  textAlign: TextAlign.start,
-                                  text: TextSpan(
+                            BlocBuilder(
+                              bloc: context.watch<VerifyEmailBloc>(),
+                              buildWhen: (previous, current) {
+                                return current is TimerChangedState ||
+                                    current is TimerFinishedState;
+                              },
+                              builder: (context, state) {
+                                if (state is! TimerChangedState) {
+                                  return const SizedBox();
+                                }
+                                return Center(
+                                  child: Text(
+                                    state.parsedTime,
                                     style: const TextStyle(
                                       fontSize: 14,
                                       fontWeight: FontWeight.normal,
                                       fontFamily: AppFonts.gtWalshPro,
                                       color: AppColors.primary,
                                     ),
-                                    children: [
-                                      TextSpan(
-                                        text: AppText.aTAuthDNReceiveCodeText,
-                                        style: AppTextStyles.whiteMedium,
-                                      ),
-                                      TextSpan(
-                                        text: AppText.aTAuthResendCodeText,
-                                        style:
-                                            AppTextStyles.whiteMedium.copyWith(
-                                          color: AppColors.primary,
-                                        ),
-                                        recognizer: TapGestureRecognizer()
-                                          ..onTap = () {
-                                            context
-                                                .read<VerifyEmailBloc>()
-                                                .add(ResendCodeEvent());
-                                          },
-                                      ),
-                                    ],
                                   ),
-                                ),
-                              );
-                            },
-                          ),
-                          BlocBuilder(
-                            bloc: context.watch<VerifyEmailBloc>(),
-                            buildWhen: (previous, current) {
-                              return current is TimerChangedState ||
-                                  current is TimerFinishedState;
-                            },
-                            builder: (context, state) {
-                              if (state is! TimerChangedState) {
-                                return const SizedBox();
-                              }
-                              return Center(
-                                child: Text(
-                                  state.parsedTime,
-                                  style: const TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.normal,
-                                    fontFamily: AppFonts.gtWalshPro,
-                                    color: AppColors.primary,
-                                  ),
-                                ),
-                              );
-                            },
-                          ),
-                          const SizedBox(
-                            height: 32.0,
-                          ),
-                          AppOrangeBtn(
-                            label: AppText.aTAuthVerifyEmailText,
-                            onTap: () => context
-                                .read<VerifyEmailBloc>()
-                                .add(VerifyEmailTapEvent(
-                                  email: email,
-                                  otp: pinController.text,
-                                )),
-                          ),
-                        ],
+                                );
+                              },
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
+                      AppOrangeBtn(
+                        label: AppText.aTAuthVerifyEmailText,
+                        onTap: () => context
+                            .read<VerifyEmailBloc>()
+                            .add(VerifyEmailTapEvent(
+                              email: email,
+                              otp: pinController.text,
+                            )),
+                      ),
+                    ],
                   ),
                 ],
               ),

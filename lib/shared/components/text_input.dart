@@ -59,59 +59,45 @@ class AppTextField extends StatelessWidget {
       minLines: minLines,
       maxLength: maxLength,
       onEditingComplete: function ?? () => FocusScope.of(context).nextFocus(),
-      style: const TextStyle(
-        color: AppColors.black,
-        fontSize: 16,
-        fontWeight: FontWeight.normal,
-        fontFamily: AppFonts.gtWalshPro,
+      style: AppTextStyles.regular14.copyWith(
+        color: AppColors.white,
       ),
       decoration: InputDecoration(
         hintText: hint,
         labelText: label,
         suffixIcon: suffix,
         prefixIcon: prefix,
-        filled: true,
         enabled: enabled,
-        fillColor: AppColors.primary,
-        contentPadding:
-            const EdgeInsets.symmetric(vertical: 25, horizontal: 12),
+        floatingLabelAlignment: FloatingLabelAlignment.start,
+        // floatingLabelBehavior: FloatingLabelBehavior.always,
+        floatingLabelStyle: AppTextStyles.regular14.copyWith(
+          color: AppColors.white,
+        ),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(14),
           borderSide: const BorderSide(
-            color: AppColors.primary,
+            color: AppColors.gray333,
             width: 1,
           ),
         ),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(14),
           borderSide: const BorderSide(
-            color: AppColors.primary,
+            color: AppColors.gray333,
             width: 1,
           ),
         ),
-        disabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
-          borderSide: const BorderSide(
-            color: AppColors.green,
-            width: 1,
-          ),
+        labelStyle: AppTextStyles.regular14.copyWith(
+          color: AppColors.white,
         ),
-        labelStyle: const TextStyle(
-          color: AppColors.primary,
-          fontSize: 16,
-          fontWeight: FontWeight.normal,
-          fontFamily: AppFonts.gtWalshPro,
-        ),
-        hintStyle: const TextStyle(
-          color: AppColors.primary,
-          fontSize: 16,
-          fontWeight: FontWeight.normal,
-          fontFamily: AppFonts.gtWalshPro,
+        hintStyle: AppTextStyles.regular14.copyWith(
+          color: AppColors.gray333,
+          fontWeight: FontWeight.w300,
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(14),
           borderSide: const BorderSide(
-            color: AppColors.primary,
+            color: AppColors.gray333,
             width: 1,
           ),
         ),
