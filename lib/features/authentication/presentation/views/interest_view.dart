@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:funconnect/features/authentication/presentation/blocs/interest_bloc/interest_bloc.dart';
+import 'package:funconnect/features/authentication/presentation/blocs/interest_bloc/interest_event.dart';
 import 'package:funconnect/features/authentication/presentation/blocs/interest_bloc/interest_state.dart';
 
 import '../../../../core/presentation/widgets/app_orange_button.dart';
@@ -46,28 +47,34 @@ class _InterestViewState extends State<InterestView> {
                         style: AppTextStyles.light14,
                       ),
                       const SizedBox(height: 20),
-                      Flexible(
-                        child: GridView.builder(
-                          itemCount: 20,
-                          shrinkWrap: true,
-                          padding: EdgeInsets.zero,
-                          gridDelegate:
-                              const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            childAspectRatio: 3,
-                            crossAxisSpacing: 10,
-                            mainAxisSpacing: 10,
+                      if (state is InterestsInitialState)
+                        Flexible(
+                          child: GridView.builder(
+                            itemCount: 20,
+                            shrinkWrap: true,
+                            padding: EdgeInsets.zero,
+                            gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2,
+                              childAspectRatio: 3,
+                              crossAxisSpacing: 10,
+                              mainAxisSpacing: 10,
+                            ),
+                            itemBuilder: (context, index) {
+                              final interest = state.interests[index];
+                              return InterestSelectionWidget(
+                                title: interest,
+                                image: "",
+                                isSelected:
+                                    state.selectedInterest.contains(interest),
+                                onSelected: (val) =>
+                                    context.read<InterestsBloc>().add(
+                                          InterestTapEvent(interest: interest),
+                                        ),
+                              );
+                            },
                           ),
-                          itemBuilder: (context, index) {
-                            return InterestSelectionWidget(
-                              title: "Fine dining Restaurant",
-                              image: "",
-                              isSelected: false,
-                              onSelected: (p0) {},
-                            );
-                          },
                         ),
-                      ),
                       const SizedBox(height: 20),
                     ],
                   ),

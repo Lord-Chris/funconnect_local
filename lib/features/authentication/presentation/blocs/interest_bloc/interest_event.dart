@@ -5,6 +5,11 @@ abstract class InterestsEvent extends Equatable {
   List<Object?> get props => [];
 }
 
-class InterestTapEvent extends InterestsEvent {}
+class InterestTapEvent extends InterestsEvent {
+  final String interest;
+  InterestTapEvent({
+    required this.interest,
+  });
+}
 
 class ContinueTapEvent extends InterestsEvent {}

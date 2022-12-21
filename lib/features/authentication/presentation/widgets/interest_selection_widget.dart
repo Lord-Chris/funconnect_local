@@ -39,6 +39,7 @@ class InterestSelectionWidget extends StatelessWidget {
             value: isSelected,
             onChanged: onSelected,
             shape: const CircleBorder(),
+            activeColor: AppColors.primary,
             visualDensity: VisualDensity.compact,
           )
         ],

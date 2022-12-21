@@ -38,6 +38,8 @@ class ProfileSetupBloc extends Bloc<ProfileSetupEvent, ProfileSetupState> {
       _navigationService.toNamed(Routes.interestViewRoute);
     } on Failure {
       emit(ProfileSetupErrorState());
+    } finally {
+      emit(ProfileSetupSuccessState());
     }
   }
 }

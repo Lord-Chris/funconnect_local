@@ -146,8 +146,8 @@ class ProfileSetUpView extends HookWidget {
                 ),
                 AppOrangeBtn(
                   label: "Continue",
+                  isBusy: state is ProfileSetupLoadingState,
                   onTap: () {
-                    print(formKey.currentState!.validate());
                     if (!formKey.currentState!.validate()) return;
                     context.read<ProfileSetupBloc>().add(SetupProfileEvent(
                           fullName: nameController.text,
