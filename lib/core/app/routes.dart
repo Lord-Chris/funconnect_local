@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:funconnect/features/authentication/presentation/views/Profile_setup_view.dart';
 import 'package:funconnect/features/authentication/presentation/views/email_verified_view.dart';
+import 'package:funconnect/features/authentication/presentation/views/interest_view.dart';
 import 'package:funconnect/features/authentication/presentation/views/verify_email_view.dart';
 import 'package:funconnect/features/authentication/presentation/views/welcome_view.dart';
 import 'package:funconnect/features/dashboard/presentation/views/dashboard_view.dart';
@@ -20,6 +21,7 @@ class Routes {
   static const locationAuthRoute = '/location-auth';
   static const successViewRoute = '/success-view';
   static const setUpProfile = '/setUp-Profile';
+  static const interestViewRoute = '/interests';
   static const dashboardViewRoute = '/dashboard-view';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -40,7 +42,9 @@ class Routes {
       case emailVerifiedRoute:
         return MaterialPageRoute(builder: (_) => const EmailVerifiedScreen());
       case profileSetupViewRoute:
-        return MaterialPageRoute(builder: (_) => const ProfileSetUpView());
+        return MaterialPageRoute(builder: (_) => ProfileSetUpView());
+      case interestViewRoute:
+        return MaterialPageRoute(builder: (_) => const InterestView());
       // case locationAuthRoute:
       //   return MaterialPageRoute(builder: (_) => const LocationAuthView());
       case successViewRoute:

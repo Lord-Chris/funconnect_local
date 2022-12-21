@@ -4,36 +4,45 @@ import '../../../../shared/constants/colors.dart';
 import '../../../../shared/constants/textstyles.dart';
 
 class InterestSelectionWidget extends StatelessWidget {
+  final bool isSelected;
+  final void Function(bool?)? onSelected;
+  final String title;
+  final String image;
   const InterestSelectionWidget({
     Key? key,
+    required this.isSelected,
+    this.onSelected,
+    required this.title,
+    required this.image,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 4.0),
-      child: Container(
-        height: 65,
-        width: 185,
-        decoration: BoxDecoration(
-          color: AppColors.interestWidgetAsh,
-          borderRadius: BorderRadius.circular(32.0),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            const CircleAvatar(),
-            Text(
-              "Fine dining\nRestaurant",
-              style: AppTextStyles.whitelight,
+    return Container(
+      padding: const EdgeInsets.all(5),
+      decoration: BoxDecoration(
+        color: AppColors.interestWidgetAsh,
+        borderRadius: BorderRadius.circular(32),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          const CircleAvatar(),
+          const SizedBox(width: 8),
+          Expanded(
+            child: Text(
+              title,
+              style: AppTextStyles.regular12,
             ),
-            Checkbox(
-              value: false,
-              onChanged: (String) {},
-              shape: const CircleBorder(),
-            )
-          ],
-        ),
+          ),
+          Checkbox(
+            value: isSelected,
+            onChanged: onSelected,
+            shape: const CircleBorder(),
+            activeColor: AppColors.primary,
+            visualDensity: VisualDensity.compact,
+          )
+        ],
       ),
     );
   }

@@ -5,9 +5,9 @@ import 'package:funconnect/core/extensions/_extensions.dart';
 import 'package:funconnect/features/authentication/presentation/blocs/welcome_bloc/welcome_bloc.dart';
 import 'package:funconnect/features/authentication/presentation/blocs/welcome_bloc/welcome_event.dart';
 import 'package:funconnect/features/authentication/presentation/blocs/welcome_bloc/welcome_state.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:funconnect/shared/components/_components.dart';
+import 'package:funconnect/shared/constants/_constants.dart';
 
-import '../../../../core/presentation/widgets/app_auth_text_form_field.dart';
 import '../../../../core/presentation/widgets/app_black_modal.dart';
 import '../../../../core/presentation/widgets/app_orange_button.dart';
 import '../../../../core/presentation/widgets/app_text.dart';
@@ -20,123 +20,167 @@ class WelcomeView extends HookWidget {
     final formKey = GlobalKey<FormState>();
     return BlocProvider(
       create: (context) => WelcomeBloc(),
-      child: BlocBuilder<WelcomeBloc, WelcomeState>(builder: (context, state) {
-        return Scaffold(
-          body: AppBlackModalWidget(
-            imageContainerHeight: 400.0,
-            modalHeight: 480.0,
-            children: [
-              Form(
-                key: formKey,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      AppText.aTAuthWelcomeText,
-                      style: GoogleFonts.inter(
-                          color: Colors.white, fontSize: 24.0),
-                    ),
-                    const SizedBox(
-                      height: 8.0,
-                    ),
-                    Text(
-                      AppText.aTAuthContinueWithSocialsText,
-                      style: GoogleFonts.inter(
-                          color: Colors.white, fontSize: 14.0),
-                    ),
-                    const SizedBox(
-                      height: 32.0,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        GestureDetector(
-                          onTap: () => context
+      child: BlocBuilder<WelcomeBloc, WelcomeState>(
+        builder: (context, state) {
+          return Scaffold(
+            body: AppBlackModalWidget(
+              imageContainerHeight: 400.0,
+              showBackButton: true,
+              children: [
+                Form(
+                  key: formKey,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(20),
+                        child: Column(
+                          children: [
+                            Text(
+                              "Welcome!",
+                              style: AppTextStyles.medium24.copyWith(
+                                color: Colors.white,
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 8.0,
+                            ),
+                            Text(
+                              "Continue with your socials",
+                              style: AppTextStyles.dynamic(
+                                14,
+                                color: Colors.white,
+                                weight: FontWeight.w300,
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 32.0,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                GestureDetector(
+                                  onTap: () => context
+                                      .read<WelcomeBloc>()
+                                      .add(GoogleSignInEvent()),
+                                  child: const CircleAvatar(
+                                    backgroundColor: Colors.white,
+                                    radius: 30,
+                                  ),
+                                ),
+                                const SizedBox(width: 16.0),
+                                GestureDetector(
+                                  onTap: () => context
+                                      .read<WelcomeBloc>()
+                                      .add(AppleSignInEvent()),
+                                  child: const CircleAvatar(
+                                    radius: 30,
+                                    backgroundColor: Colors.white,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 32.0,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Expanded(
+                                  child: Container(
+                                    height: 1.0,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                const SizedBox(width: 16.0),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 8.0),
+                                  child: Text(
+                                    "Or with email ID",
+                                    style: AppTextStyles.regular14.copyWith(
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(width: 16.0),
+                                Expanded(
+                                  child: Container(
+                                    height: 1.0,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                const Divider(
+                                  height: 5.0,
+                                  thickness: 5.0,
+                                  color: Colors.white,
+                                ),
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 32.0,
+                            ),
+                            AppTextField(
+                              label: AppText.aTAuthEmailText,
+                              controller: controller,
+                              validator: context.validateEmail,
+                              keyboardType: TextInputType.emailAddress,
+                              prefix: const Icon(
+                                Icons.email,
+                                color: AppColors.gray333,
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 32.0,
+                            ),
+                            Text.rich(
+                              TextSpan(
+                                children: [
+                                  const TextSpan(
+                                      text:
+                                          "By registering, you agree to our "),
+                                  TextSpan(
+                                    text: "Terms & Conditions",
+                                    style: AppTextStyles.regular14.copyWith(
+                                      color: AppColors.primary,
+                                    ),
+                                  ),
+                                  const TextSpan(text: " and "),
+                                  TextSpan(
+                                    text: "Privacy policy",
+                                    style: AppTextStyles.regular14.copyWith(
+                                      color: AppColors.primary,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              style: AppTextStyles.regular14.copyWith(
+                                color: AppColors.white,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      AppOrangeBtn(
+                        label: AppText.aTAuthSignUpText,
+                        isBusy: state is WelcomeLoadingState,
+                        onTap: () {
+                          if (!formKey.currentState!.validate()) return;
+                          context
                               .read<WelcomeBloc>()
-                              .add(GoogleSignInEvent()),
-                          child: const CircleAvatar(
-                            backgroundColor: Colors.white,
-                            radius: 30,
-                          ),
-                        ),
-                        const SizedBox(width: 16.0),
-                        GestureDetector(
-                          onTap: () => context
-                              .read<WelcomeBloc>()
-                              .add(AppleSignInEvent()),
-                          child: const CircleAvatar(
-                            radius: 30,
-                            backgroundColor: Colors.white,
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 32.0,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                          height: 1.0,
-                          width: MediaQuery.of(context).size.width / 4,
-                          color: Colors.white,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                          child: Text(
-                            AppText.aTAuthEmailID,
-                            style: GoogleFonts.inter(color: Colors.white),
-                          ),
-                        ),
-                        Container(
-                          height: 1.0,
-                          width: MediaQuery.of(context).size.width / 4,
-                          color: Colors.white,
-                        ),
-                        const Divider(
-                          height: 5.0,
-                          thickness: 5.0,
-                          color: Colors.white,
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 32.0,
-                    ),
-                    AppTextForm(
-                      labelText: AppText.aTAuthEmailText,
-                      controller: controller,
-                      validator: context.validateEmail,
-                    ),
-                    const SizedBox(
-                      height: 32.0,
-                    ),
-                    Text(
-                      AppText.aTAuthAgreementText,
-                      style: GoogleFonts.inter(color: Colors.white),
-                    ),
-                    const SizedBox(
-                      height: 24.0,
-                    ),
-                    AppOrangeBtn(
-                      label: AppText.aTAuthSignUpText,
-                      onTap: () {
-                        // print(!formKey.currentState!.validate());
-                        if (!formKey.currentState!.validate()) return;
-                        // print("Yes");
-                        context.read<WelcomeBloc>().add(EmailSignInEvent(
-                            email: "maduekechris65@gmail.com"));
-                      },
-                    ),
-                  ],
+                              .add(EmailSignInEvent(email: controller.text));
+                        },
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
-          ),
-        );
-      }),
+              ],
+            ),
+          );
+        },
+      ),
     );
   }
 }

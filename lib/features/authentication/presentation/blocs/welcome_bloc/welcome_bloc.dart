@@ -11,6 +11,8 @@ import 'package:funconnect/features/authentication/presentation/blocs/welcome_bl
 import 'package:funconnect/models/failure.dart';
 import 'package:funconnect/services/_services.dart';
 
+import '../../../domain/usecases/email_signin_usecase.dart';
+
 class WelcomeBloc extends Bloc<WelcomeEvent, WelcomeState> {
   WelcomeBloc() : super(WelcomeInitialState()) {
     on<EmailSignInEvent>(_onEmailSignInEvent);
@@ -28,9 +30,8 @@ class WelcomeBloc extends Bloc<WelcomeEvent, WelcomeState> {
   ) async {
     try {
       FocusManager.instance.primaryFocus?.unfocus();
-      emit(WelcomeInitialState());
-      await Future.delayed(const Duration(seconds: 2));
-      // await EmailSignInUsecase().call(event.email);
+      emit(WelcomeLoadingState());
+      await EmailSignInUsecase().call(event.email);
       emit(WelcomeSuccessState());
       _navigationService.toNamed(
         Routes.verifyEmailRoute,

@@ -23,6 +23,7 @@ class MyApp extends StatelessWidget {
         return MaterialApp(
           theme: ThemeData(
             primarySwatch: Colors.orange,
+            brightness: Brightness.dark,
           ),
           debugShowCheckedModeBanner: false,
           // home: EventDescription(),

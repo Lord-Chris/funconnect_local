@@ -46,6 +46,7 @@ class _OnboardingViewState extends State<OnboardingView> {
   @override
   void dispose() {
     controller.dispose();
+    timer?.cancel();
     super.dispose();
   }
 
