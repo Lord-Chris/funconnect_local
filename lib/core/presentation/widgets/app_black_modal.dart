@@ -37,23 +37,14 @@ class AppBlackModalWidget extends StatelessWidget {
             ),
           ),
         ),
-        if (showBackButton)
-          Positioned(
-            top: 50,
-            left: 16,
-            child: IconButton(
-              onPressed: () => Navigator.maybePop(context),
-              icon: const Icon(
-                CupertinoIcons.back,
-                color: AppColors.white,
-              ),
-            ),
-          ),
         Positioned(
           bottom: -20.0,
           child: Container(
             // height: modalHeight ?? 350,
             padding: padding,
+            constraints: modalHeight != null
+                ? BoxConstraints(maxHeight: modalHeight!)
+                : null,
             width: MediaQuery.of(context).size.width,
             decoration: const BoxDecoration(
               color: AppColors.black,
@@ -70,6 +61,18 @@ class AppBlackModalWidget extends StatelessWidget {
             ),
           ),
         ),
+        if (showBackButton)
+          Positioned(
+            top: 50,
+            left: 16,
+            child: IconButton(
+              onPressed: () => Navigator.maybePop(context),
+              icon: const Icon(
+                CupertinoIcons.back,
+                color: AppColors.white,
+              ),
+            ),
+          ),
       ],
     );
   }

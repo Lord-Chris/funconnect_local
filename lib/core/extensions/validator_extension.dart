@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 extension ValidatorExtension on BuildContext {
   String? validateNotEmpty(String? value) =>
-      value != null && value.isEmpty ? 'Field cannot be empty' : null;
+      (value ?? "").isEmpty ? 'Field cannot be empty' : null;
 
   String? validateLength(String? value, int length) {
     if (value != null && value.isEmpty) {

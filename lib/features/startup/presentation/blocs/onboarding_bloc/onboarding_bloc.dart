@@ -26,7 +26,7 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
     GetStartedEvent event,
     Emitter<OnboardingState> emit,
   ) {
-    _navigationService.toNamed(Routes.welcomeViewRoute);
+    _navigationService.offAllNamed(Routes.welcomeViewRoute, (_) => false);
   }
 
   FutureOr<void> _onLoginTapEvent(

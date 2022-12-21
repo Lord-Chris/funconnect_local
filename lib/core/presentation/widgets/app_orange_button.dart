@@ -7,6 +7,7 @@ class AppOrangeBtn extends StatelessWidget {
   final double height;
   final double? weight;
   final VoidCallback? onTap;
+  final double bottomPadding;
   final bool isBusy;
 
   const AppOrangeBtn({
@@ -15,6 +16,7 @@ class AppOrangeBtn extends StatelessWidget {
     this.height = 80,
     this.weight,
     this.onTap,
+    this.bottomPadding = 0,
     this.isBusy = false,
   }) : super(key: key);
 
@@ -24,7 +26,7 @@ class AppOrangeBtn extends StatelessWidget {
       onPressed: onTap,
       minWidth: MediaQuery.of(context).size.width,
       height: height,
-      padding: EdgeInsets.only(bottom: height * 0.1),
+      padding: EdgeInsets.only(bottom: (height * 0.1) + bottomPadding),
       color: AppColors.primary,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(

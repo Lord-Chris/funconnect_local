@@ -105,3 +105,119 @@ class AppTextField extends StatelessWidget {
     );
   }
 }
+
+class AppDropdownField<T extends Object> extends StatelessWidget {
+  final List<T> items;
+  final T? value;
+  final void Function(T?)? onChanged;
+  final String? Function(T?)? validator;
+  final Widget Function(T)? customItem;
+  final String Function(T)? displayItem;
+  final String? label, hint;
+  final String? headingText;
+  final Widget? prefix;
+  final FocusNode? focusNode;
+  final bool enabled;
+  final Color? fillColor;
+  final bool hasBorder;
+
+  const AppDropdownField({
+    Key? key,
+    required this.items,
+    required this.value,
+    this.onChanged,
+    this.validator,
+    this.label,
+    this.hint,
+    this.headingText,
+    this.prefix,
+    this.enabled = true,
+    this.fillColor,
+    this.focusNode,
+    this.customItem,
+    this.displayItem,
+    this.hasBorder = true,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return DropdownButtonFormField<T>(
+      items: items.map(
+        (T item) {
+          if (customItem != null) {
+            return DropdownMenuItem(
+              value: item,
+              child: customItem!(item),
+            );
+          }
+          return DropdownMenuItem(
+            value: item,
+            child: Text(
+              displayItem != null ? displayItem!(item) : item.toString(),
+              overflow: TextOverflow.ellipsis,
+              softWrap: true,
+            ),
+          );
+        },
+      ).toList(),
+      isExpanded: true,
+      onChanged: onChanged,
+      value: value,
+      focusNode: focusNode,
+      icon: const Icon(
+        Icons.arrow_drop_down_sharp,
+        color: AppColors.gray333,
+        size: 0,
+      ),
+      style: AppTextStyles.medium14.copyWith(
+        height: 1.2,
+        color: AppColors.white,
+      ),
+      decoration: InputDecoration(
+        hintText: hint,
+        labelText: label,
+        suffixIcon: const Icon(
+          Icons.arrow_drop_down_sharp,
+          color: AppColors.gray333,
+          size: 25,
+        ),
+        prefixIcon: prefix,
+        enabled: enabled,
+        contentPadding: const EdgeInsets.fromLTRB(16, 15, 16, 15),
+        floatingLabelAlignment: FloatingLabelAlignment.start,
+        // floatingLabelBehavior: FloatingLabelBehavior.always,
+        floatingLabelStyle: AppTextStyles.regular14.copyWith(
+          color: AppColors.white,
+        ),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(14),
+          borderSide: const BorderSide(
+            color: AppColors.gray333,
+            width: 1,
+          ),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(14),
+          borderSide: const BorderSide(
+            color: AppColors.gray333,
+            width: 1,
+          ),
+        ),
+        labelStyle: AppTextStyles.regular14.copyWith(
+          color: AppColors.white,
+        ),
+        hintStyle: AppTextStyles.regular14.copyWith(
+          color: AppColors.gray333,
+          fontWeight: FontWeight.w300,
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(14),
+          borderSide: const BorderSide(
+            color: AppColors.gray333,
+            width: 1,
+          ),
+        ),
+      ),
+    );
+  }
+}
