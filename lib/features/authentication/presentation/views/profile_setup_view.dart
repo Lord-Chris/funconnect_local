@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:funconnect/core/extensions/_extensions.dart';
 import 'package:funconnect/features/authentication/presentation/blocs/profile_setup_bloc/profile_setup_bloc.dart';
 import 'package:funconnect/features/authentication/presentation/blocs/profile_setup_bloc/profile_setup_event.dart';
@@ -77,9 +78,10 @@ class ProfileSetUpView extends HookWidget {
                       Column(
                         children: [
                           AppTextField(
-                            prefix: const Icon(
-                              Icons.person,
-                              color: AppColors.ash,
+                            prefix: Align(
+                              widthFactor: 1.0,
+                              heightFactor: 1.0,
+                              child: SvgPicture.asset(AppAssets.profileIconSvg),
                             ),
                             label: "Full name",
                             controller: nameController,
@@ -90,9 +92,10 @@ class ProfileSetUpView extends HookWidget {
                           ),
                           const SizedBox(height: 20),
                           AppTextField(
-                            prefix: const Icon(
-                              Icons.person,
-                              color: AppColors.ash,
+                            prefix: Align(
+                              widthFactor: 1.0,
+                              heightFactor: 1.0,
+                              child: SvgPicture.asset(AppAssets.profileIconSvg),
                             ),
                             label: "Username",
                             controller: usernameController,
@@ -107,9 +110,10 @@ class ProfileSetUpView extends HookWidget {
                             value: gender.value,
                             onChanged: (val) => gender.value = val,
                             validator: context.validateNotEmpty,
-                            prefix: const Icon(
-                              Icons.person,
-                              color: AppColors.ash,
+                            prefix: Align(
+                              widthFactor: 1.0,
+                              heightFactor: 1.0,
+                              child: SvgPicture.asset(AppAssets.profileIconSvg),
                             ),
                           ),
                         ],
