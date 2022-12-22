@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 
 extension ValidatorExtension on BuildContext {
-  String? validateNotEmpty(String? value) =>
-      (value ?? "").isEmpty ? 'Field cannot be empty' : null;
+  String? validateNotEmpty(String? value) {
+    return (value ?? "").isEmpty ? 'Field cannot be empty' : null;
+  }
+
+  String? validateNotNull(String? value) {
+    return value == null ? 'Field cannot be empty' : null;
+  }
 
   String? validateLength(String? value, int length) {
     if (value != null && value.isEmpty) {
@@ -14,10 +19,11 @@ extension ValidatorExtension on BuildContext {
     }
   }
 
-  String? validateFullName(String? value) =>
-      value != null && value.split(' ').length < 2
-          ? 'Enter a valid Full Name'
-          : null;
+  String? validateFullName(String? value) {
+    return value != null && value.split(' ').length < 2
+        ? 'Enter a valid Full Name'
+        : null;
+  }
 
   String? validateEmail(String? value) {
     if (value == null || value.isEmpty) return 'Please enter an email address';
