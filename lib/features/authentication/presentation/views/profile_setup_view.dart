@@ -75,53 +75,48 @@ class ProfileSetUpView extends HookWidget {
                         ),
                       ),
                       const SizedBox(height: 29),
-                      Form(
-                        child: Column(
-                          children: [
-                            AppTextField(
-                              prefix: Align(
-                                widthFactor: 1.0,
-                                heightFactor: 1.0,
-                                child:
-                                    SvgPicture.asset(AppAssets.profileIconSvg),
-                              ),
-                              label: "Full name",
-                              controller: nameController,
-                              keyboardType: TextInputType.name,
-                              textCapitalization: TextCapitalization.words,
-                              maxLines: 1,
-                              validator: context.validateFullName,
+                      Column(
+                        children: [
+                          AppTextField(
+                            prefix: Align(
+                              widthFactor: 1.0,
+                              heightFactor: 1.0,
+                              child: SvgPicture.asset(AppAssets.profileIconSvg),
                             ),
-                            const SizedBox(height: 20),
-                            AppTextField(
-                              prefix: Align(
-                                widthFactor: 1.0,
-                                heightFactor: 1.0,
-                                child:
-                                    SvgPicture.asset(AppAssets.profileIconSvg),
-                              ),
-                              label: "Username",
-                              controller: usernameController,
-                              keyboardType: TextInputType.name,
-                              textCapitalization: TextCapitalization.none,
-                              validator: context.validateNotEmpty,
+                            label: "Full name",
+                            controller: nameController,
+                            keyboardType: TextInputType.name,
+                            textCapitalization: TextCapitalization.words,
+                            maxLines: 1,
+                            validator: context.validateFullName,
+                          ),
+                          const SizedBox(height: 20),
+                          AppTextField(
+                            prefix: Align(
+                              widthFactor: 1.0,
+                              heightFactor: 1.0,
+                              child: SvgPicture.asset(AppAssets.profileIconSvg),
                             ),
-                            const SizedBox(height: 20),
-                            AppDropdownField<String>(
-                              label: "Gender",
-                              items: const ["Male", "Female"],
-                              value: gender.value,
-                              onChanged: (val) => gender.value = val,
-                              validator: context.validateNotEmpty,
-                              prefix: Align(
-                                widthFactor: 1.0,
-                                heightFactor: 1.0,
-                                child:
-                                    SvgPicture.asset(AppAssets.profileIconSvg),
-                              ),
+                            label: "Username",
+                            controller: usernameController,
+                            keyboardType: TextInputType.name,
+                            textCapitalization: TextCapitalization.none,
+                            validator: context.validateNotEmpty,
+                          ),
+                          const SizedBox(height: 20),
+                          AppDropdownField<String>(
+                            label: "Gender",
+                            items: const ["Male", "Female"],
+                            value: gender.value,
+                            onChanged: (val) => gender.value = val,
+                            validator: context.validateNotEmpty,
+                            prefix: Align(
+                              widthFactor: 1.0,
+                              heightFactor: 1.0,
+                              child: SvgPicture.asset(AppAssets.profileIconSvg),
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                       const SizedBox(height: 5),
                       Row(

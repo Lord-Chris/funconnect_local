@@ -164,6 +164,7 @@ class AppDropdownField<T extends Object> extends StatelessWidget {
       onChanged: onChanged,
       value: value,
       focusNode: focusNode,
+      validator: validator,
       icon: const Icon(
         Icons.arrow_drop_down_sharp,
         color: AppColors.gray333,
