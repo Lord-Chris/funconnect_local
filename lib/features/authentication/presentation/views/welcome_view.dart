@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:funconnect/core/extensions/_extensions.dart';
 import 'package:funconnect/features/authentication/presentation/blocs/welcome_bloc/welcome_bloc.dart';
 import 'package:funconnect/features/authentication/presentation/blocs/welcome_bloc/welcome_event.dart';
@@ -65,9 +66,11 @@ class WelcomeView extends HookWidget {
                                   onTap: () => context
                                       .read<WelcomeBloc>()
                                       .add(GoogleSignInEvent()),
-                                  child: const CircleAvatar(
+                                  child: CircleAvatar(
                                     backgroundColor: Colors.white,
                                     radius: 30,
+                                    child: SvgPicture.asset(
+                                        AppAssets.googleIconSvg),
                                   ),
                                 ),
                                 const SizedBox(width: 16.0),
@@ -75,9 +78,11 @@ class WelcomeView extends HookWidget {
                                   onTap: () => context
                                       .read<WelcomeBloc>()
                                       .add(AppleSignInEvent()),
-                                  child: const CircleAvatar(
+                                  child: CircleAvatar(
                                     radius: 30,
                                     backgroundColor: Colors.white,
+                                    child: SvgPicture.asset(
+                                        AppAssets.appleIconSvg),
                                   ),
                                 ),
                               ],
@@ -127,9 +132,10 @@ class WelcomeView extends HookWidget {
                               controller: controller,
                               validator: context.validateEmail,
                               keyboardType: TextInputType.emailAddress,
-                              prefix: const Icon(
-                                Icons.email,
-                                color: AppColors.gray333,
+                              prefix: Align(
+                                widthFactor: 1.0,
+                                heightFactor: 1.0,
+                                child: SvgPicture.asset(AppAssets.emailIconSvg),
                               ),
                             ),
                             const SizedBox(
