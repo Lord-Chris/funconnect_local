@@ -4,8 +4,8 @@ import 'package:funconnect/core/presentation/widgets/app_spacer.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
 
 import '../../../../shared/dumb_widgets/dumb_app_strings.dart';
-import '../../../dashboard/widgets/home_categories_lable_widget.dart';
-import '../../../dashboard/widgets/home_categories_small_widget.dart';
+import '../../../dashboard/presentation/widgets/home_categories_lable_widget.dart';
+import '../../../dashboard/presentation/widgets/home_categories_small_widget.dart';
 
 class EventDescription extends StatelessWidget {
   const EventDescription({Key? key}) : super(key: key);

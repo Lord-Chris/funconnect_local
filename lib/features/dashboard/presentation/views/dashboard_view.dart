@@ -18,6 +18,7 @@ class _DashboardViewState extends State<DashboardView> {
   final List<Widget> _tabs = const [
     HomeView(),
     FavouritesView(),
+    SizedBox(),
     ExploreView(),
     EventsView(),
   ];
@@ -35,26 +36,27 @@ class _DashboardViewState extends State<DashboardView> {
     return Scaffold(
       body: _tabs[_index],
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.white,
-        unselectedItemColor: AppColors.green,
+        backgroundColor: AppColors.black,
         currentIndex: _index,
         onTap: onTap,
         selectedFontSize: 20,
         unselectedFontSize: 14,
         type: BottomNavigationBarType.fixed,
+        unselectedItemColor: AppColors.secondary400,
         selectedItemColor: AppColors.primary,
         selectedLabelStyle: const TextStyle(
-            height: 1.3,
-            fontSize: 12,
-            fontFamily: AppFonts.gtWalshPro,
-            fontWeight: FontWeight.w400,
-            color: AppColors.primary),
+          height: 1.3,
+          fontSize: 12,
+          fontFamily: AppFonts.gtWalshPro,
+          fontWeight: FontWeight.w400,
+          color: AppColors.primary,
+        ),
         unselectedLabelStyle: const TextStyle(
           fontSize: 12,
           height: 1.3,
           fontFamily: AppFonts.gtWalshPro,
           fontWeight: FontWeight.w400,
-          color: AppColors.primary,
+          color: AppColors.secondary400,
         ),
         showUnselectedLabels: true,
         iconSize: 16,
@@ -82,7 +84,15 @@ class _DashboardViewState extends State<DashboardView> {
             activeIcon: SvgPicture.asset(
               AppAssets.activeFavIconSvg,
             ),
-            label: "Favourites",
+            label: "Events",
+            backgroundColor: Colors.white,
+          ),
+          BottomNavigationBarItem(
+            icon: SvgPicture.asset(AppAssets.favIconSvg),
+            activeIcon: SvgPicture.asset(
+              AppAssets.activeFavIconSvg,
+            ),
+            label: "Saved",
             backgroundColor: Colors.white,
           ),
           BottomNavigationBarItem(
@@ -90,7 +100,7 @@ class _DashboardViewState extends State<DashboardView> {
             activeIcon: SvgPicture.asset(
               AppAssets.activeEventIconSvg,
             ),
-            label: "Events",
+            label: "Profile",
             backgroundColor: Colors.white,
           ),
         ],

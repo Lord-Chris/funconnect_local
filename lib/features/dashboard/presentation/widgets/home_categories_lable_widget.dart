@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../shared/constants/_constants.dart';
+import '../../../../shared/constants/_constants.dart';
 
 class HomeViewCategoriesWidget extends StatelessWidget {
   String label;

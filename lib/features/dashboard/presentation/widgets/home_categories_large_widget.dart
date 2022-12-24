@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../shared/constants/_constants.dart';
-import '../../../shared/dumb_widgets/dumb_app_strings.dart';
+import '../../../../shared/constants/_constants.dart';
+import '../../../../shared/dumb_widgets/dumb_app_strings.dart';
 
 class HomeCategoriesLargeWidget extends StatefulWidget {
   double? width;
