@@ -4,11 +4,11 @@ class AppAssets {
   static const splashDownSvg = "assets/images/splash_down_curve.svg";
   static const homeIconSvg = "assets/icons/home_icon.svg";
   static const exploreIconSvg = "assets/icons/explore_icon.svg";
-  static const favIconSvg = "assets/icons/fav_icon.svg";
+  static const savedIconSvg = "assets/icons/bookmark.svg";
   static const eventIconSvg = "assets/icons/event_icon.svg";
   static const activeHomeIconSvg = "assets/icons/active_home_icon.svg";
   static const activeExploreIconSvg = "assets/icons/active_explore_icon.svg";
-  static const activeFavIconSvg = "assets/icons/active_fav_icon.svg";
+  static const activeSavedIconSvg = "assets/icons/active_bookmark.svg";
   static const activeEventIconSvg = "assets/icons/active_event_icon.svg";
   static const notIconSvg = "assets/icons/notification_icon.svg";
   static const appleIconSvg = "assets/icons/apple_icon.svg";
@@ -16,4 +16,7 @@ class AppAssets {
   static const favouriteIconSvg = "assets/icons/favourite.svg";
   static const googleIconSvg = "assets/icons/google_icon.svg";
   static const profileIconSvg = "assets/icons/profile.svg";
+  static const profIconSvg = "assets/icons/profile_icon.svg";
+  static const activeProfileIconSvg = "assets/icons/active_profile.svg";
+
 }
