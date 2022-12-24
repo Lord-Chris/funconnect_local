@@ -3,7 +3,7 @@ import '../../domain/params/profile_setup.dart';
 import '../../domain/params/verify_otp.dart';
 
 abstract class IAuthenticationRepository {
-  Future<void> signInWithGoogle(EmailSignInParams params);
+  Future<void> signInWithGoogle(String authCode);
   Future<void> signInWithApple(EmailSignInParams params);
   Future<void> signInWithEmail(EmailSignInParams params);
   Future<void> verifyOtp(VerifyOtpParams params);

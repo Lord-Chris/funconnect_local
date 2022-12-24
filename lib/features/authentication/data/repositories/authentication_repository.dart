@@ -21,9 +21,8 @@ class AuthenticationRepository extends IAuthenticationRepository {
   }
 
   @override
-  Future<void> signInWithGoogle(EmailSignInParams params) {
-    // TODO: implement signInWithGoogle
-    throw UnimplementedError();
+  Future<void> signInWithGoogle(String authCode) async {
+    await _httpDS.loginWithGoogle(authCode);
   }
 
   @override

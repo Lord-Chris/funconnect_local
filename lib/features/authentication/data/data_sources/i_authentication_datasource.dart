@@ -18,4 +18,8 @@ abstract class IAuthenticationDataSource {
   Future<ApiResponse<VerifyOtpResponse>> verifyOtp(
     VerifyOtpParams params,
   );
+
+  Future<ApiResponse<VerifyOtpResponse>> loginWithGoogle(
+    String token,
+  );
 }
