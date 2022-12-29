@@ -6,12 +6,12 @@ import 'package:get_it/get_it.dart';
 import '../../features/authentication/data/repositories/_authentication_repo.dart';
 
 final locator = GetIt.instance;
-const bool isMock = true;
-void setUpLocator() {
+const bool isMock = false;
+Future<void> setUpLocator() async {
   // Services
   locator.registerLazySingleton<INavigationService>(() => NavigationService());
   locator.registerLazySingleton<INetworkService>(() => NetworkService());
-
+  await _setUpLocalStorage();
   // Repositories
   locator.registerLazySingleton<IAuthenticationRepository>(
     () => isMock ? MockAuthenticationRepository() : AuthenticationRepository(),
@@ -21,4 +21,10 @@ void setUpLocator() {
   locator.registerLazySingleton<IAuthenticationDataSource>(
     () => HttpAuthenticationDataSource(),
   );
+}
+
+Future<void> _setUpLocalStorage() async {
+  locator
+      .registerLazySingleton<ILocalStorageService>(() => LocalStorageService());
+  await locator<ILocalStorageService>().init();
 }

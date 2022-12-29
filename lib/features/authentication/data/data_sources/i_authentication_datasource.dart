@@ -4,6 +4,7 @@ import 'package:funconnect/models/api_response.dart';
 
 import '../dto/check_email_response.dart';
 import '../dto/request_otp_response.dart';
+import '../dto/user_model.dart';
 import '../dto/verify_otp_response.dart';
 
 abstract class IAuthenticationDataSource {
@@ -15,7 +16,7 @@ abstract class IAuthenticationDataSource {
     EmailSignInParams params,
   );
 
-  Future<ApiResponse<VerifyOtpResponse>> verifyOtp(
+  Future<ApiResponse<UserModel>> verifyOtp(
     VerifyOtpParams params,
   );
 
