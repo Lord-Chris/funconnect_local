@@ -52,6 +52,10 @@ android {
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
 //        multiDexEnabled true
+
+        manifestPlaceholders += [
+            'appAuthRedirectScheme': 'com.googleusercontent.apps.72010274266-6drs994dl4a00k83jfbf6njtf6phtq4e'
+        ]
     }
 
     buildTypes {

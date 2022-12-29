@@ -6,7 +6,7 @@ import 'package:get_it/get_it.dart';
 import '../../features/authentication/data/repositories/_authentication_repo.dart';
 
 final locator = GetIt.instance;
-
+const bool isMock = true;
 void setUpLocator() {
   // Services
   locator.registerLazySingleton<INavigationService>(() => NavigationService());
@@ -14,7 +14,7 @@ void setUpLocator() {
 
   // Repositories
   locator.registerLazySingleton<IAuthenticationRepository>(
-    () => MockAuthenticationRepository(),
+    () => isMock ? MockAuthenticationRepository() : AuthenticationRepository(),
   );
 
   // DataSources

@@ -22,8 +22,8 @@ class GoogleSignInUsecase with UseCases<bool, NoParams> {
       final acct = await _googleSignIn.signIn();
       if (acct == null) return false;
       GoogleSignInAuthentication? auth = await acct.authentication;
-      if (auth.idToken == null) null;
-      await repo.signInWithGoogle(auth.idToken!);
+      if (auth.accessToken == null) null;
+      await repo.signInWithGoogle(auth.accessToken!);
       return true;
     } on Failure {
       rethrow;
