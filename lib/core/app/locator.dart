@@ -11,6 +11,7 @@ Future<void> setUpLocator() async {
   // Services
   locator.registerLazySingleton<INavigationService>(() => NavigationService());
   locator.registerLazySingleton<INetworkService>(() => NetworkService());
+  locator.registerLazySingleton<ILocationService>(() => LocationService());
   await _setUpLocalStorage();
   // Repositories
   locator.registerLazySingleton<IAuthenticationRepository>(

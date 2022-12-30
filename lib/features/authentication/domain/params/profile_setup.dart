@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:funconnect/core/model/app_location.dart';
+
 class ProfileSetupParam {
   final String name;
   final String username;
@@ -22,6 +24,20 @@ class ProfileSetupParam {
     this.lat,
     this.long,
   });
+
+  ProfileSetupParam addLocation(AppLocation location) {
+    return ProfileSetupParam(
+      name: name,
+      username: username,
+      gender: gender,
+      address: location.address,
+      city: location.city,
+      state: location.state,
+      country: location.country,
+      lat: location.lat.toString(),
+      long: location.long.toString(),
+    );
+  }
 
   Map<String, dynamic> toMap() {
     return {
