@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:funconnect/core/app/_app.dart';
-import 'package:funconnect/features/authentication/data/repositories/i_authentication_repository.dart';
+import 'package:funconnect/features/authentication/domain/usecases/profile_setup_usecase.dart';
 import 'package:funconnect/features/authentication/presentation/blocs/profile_setup_bloc/profile_setup_event.dart';
 import 'package:funconnect/features/authentication/presentation/blocs/profile_setup_bloc/profile_setup_state.dart';
 import 'package:funconnect/models/failure.dart';
@@ -15,7 +15,6 @@ class ProfileSetupBloc extends Bloc<ProfileSetupEvent, ProfileSetupState> {
     on<SetupProfileEvent>(_onSetupProfileEvent);
   }
 
-  final _authenticationRepository = locator<IAuthenticationRepository>();
   final _navigationService = locator<INavigationService>();
 
   FutureOr<void> _onAddImageEvent(
@@ -34,12 +33,12 @@ class ProfileSetupBloc extends Bloc<ProfileSetupEvent, ProfileSetupState> {
   ) async {
     try {
       emit(ProfileSetupLoadingState());
-      await _authenticationRepository.setUpProfile(event.param);
-      _navigationService.toNamed(Routes.interestViewRoute);
+      await ProfileSetupUseCase().call(event.param);
+      // _navigationService.offNamed(Routes.interestViewRoute);
     } on Failure {
       emit(ProfileSetupErrorState());
     } finally {
-      emit(ProfileSetupSuccessState());
+      emit(ProfileSetupInitialState());
     }
   }
 }

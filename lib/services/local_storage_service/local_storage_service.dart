@@ -11,20 +11,9 @@ class LocalStorageService extends ILocalStorageService {
   @override
   Future<void> init() async {
     await Hive.initFlutter();
+    // await clearAll();
     await _openBoxes();
   }
-
-  // void _registerAdpaters() {
-  //   if (!Hive.isAdapterRegistered(HiveKeys.userAdapterId)) {
-  //     Hive.registerAdapter(UserAdapter());
-  //     Hive.registerAdapter(UserLevelAdapter());
-  //   }
-  //   if (!Hive.isAdapterRegistered(HiveKeys.notificationAdapterId)) {
-  //     Hive.registerAdapter(NotificationModelAdapter());
-  //     Hive.registerAdapter(NotificationDataAdapter());
-  //     Hive.registerAdapter(NotificationTypeAdapter());
-  //   }
-  // }
 
   Future<void> _openBoxes() async {
     try {

@@ -15,6 +15,7 @@ class VerifyOtpParams extends Equatable {
   Map<String, dynamic> toMap() {
     return {
       'email': email,
+      'otp': otp,
     };
   }
 }

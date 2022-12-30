@@ -1,4 +1,5 @@
 import 'package:funconnect/features/authentication/domain/params/email_sign_in.dart';
+import 'package:funconnect/features/authentication/domain/params/profile_setup.dart';
 import 'package:funconnect/features/authentication/domain/params/verify_otp.dart';
 import 'package:funconnect/models/api_response.dart';
 
@@ -22,5 +23,9 @@ abstract class IAuthenticationDataSource {
 
   Future<ApiResponse<VerifyOtpResponse>> loginWithGoogle(
     String token,
+  );
+
+  Future<ApiResponse<VerifyOtpResponse>> setUpProfile(
+    ProfileSetupParam params,
   );
 }

@@ -8,4 +8,6 @@ abstract class IAuthenticationRepository {
   Future<void> signInWithEmail(EmailSignInParams params);
   Future<void> verifyOtp(VerifyOtpParams params);
   Future<void> setUpProfile(ProfileSetupParam params);
+
+  bool get isFirstTime;
 }

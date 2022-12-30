@@ -40,6 +40,6 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
       key: StorageKeys.isFirstTime, def: true);
 
   bool get isAuthenticated =>
-      _localStorageService.read(HiveKeys.userBoxId, key: StorageKeys.token) ==
+      _localStorageService.read(HiveKeys.userBoxId, key: StorageKeys.token) !=
       null;
 }

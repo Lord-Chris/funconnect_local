@@ -12,7 +12,7 @@ abstract class INetworkService {
     Map<String, String>? headers,
   });
 
-  Future<ApiResponse<Map<String, dynamic>>> patch(
+  Future<ApiResponse<Map<String, dynamic>>> put(
     String url, {
     Map body,
     Map<String, String>? headers,

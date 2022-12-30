@@ -57,7 +57,9 @@ class VerifyEmailView extends HookWidget {
                             children: [
                               const SizedBox(height: 20),
                               Text(
-                                AppText.aTAuthVerifyEmailIdText,
+                                context.read<VerifyEmailBloc>().isFirstTime
+                                    ? AppText.aTAuthVerifyEmailIdText
+                                    : "Enter OTP",
                                 style: AppTextStyles.medium24.copyWith(
                                   color: AppColors.white,
                                 ),
@@ -67,25 +69,44 @@ class VerifyEmailView extends HookWidget {
                                 textAlign: TextAlign.center,
                                 text: TextSpan(
                                   children: [
-                                    TextSpan(
-                                      text: "We’ve sent a code to ",
-                                      style: AppTextStyles.light14.copyWith(
-                                        color: AppColors.white,
+                                    if (context
+                                        .read<VerifyEmailBloc>()
+                                        .isFirstTime)
+                                      TextSpan(
+                                        text: "We’ve sent a code to ",
+                                        style: AppTextStyles.light14.copyWith(
+                                          color: AppColors.white,
+                                        ),
                                       ),
-                                    ),
+                                    if (!context
+                                        .read<VerifyEmailBloc>()
+                                        .isFirstTime)
+                                      TextSpan(
+                                        text: "We’ve sent an OTP to ",
+                                        style: AppTextStyles.light14.copyWith(
+                                          color: AppColors.white,
+                                        ),
+                                      ),
                                     TextSpan(
                                       text: GeneralUtils.hideEmail(email),
                                       style: AppTextStyles.medium14.copyWith(
-                                        color: AppColors.primary,
+                                        color: context
+                                                .read<VerifyEmailBloc>()
+                                                .isFirstTime
+                                            ? AppColors.primary
+                                            : AppColors.white,
                                       ),
                                     ),
-                                    TextSpan(
-                                      text:
-                                          "\nCheck your spam folder, refresh or try again with\nanother email",
-                                      style: AppTextStyles.light14.copyWith(
-                                        color: AppColors.white,
+                                    if (context
+                                        .read<VerifyEmailBloc>()
+                                        .isFirstTime)
+                                      TextSpan(
+                                        text:
+                                            "\nCheck your spam folder, refresh or try again with\nanother email",
+                                        style: AppTextStyles.light14.copyWith(
+                                          color: AppColors.white,
+                                        ),
                                       ),
-                                    ),
                                   ],
                                 ),
                               ),

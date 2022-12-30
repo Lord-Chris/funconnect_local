@@ -29,4 +29,7 @@ class MockAuthenticationRepository extends IAuthenticationRepository {
   Future<void> setUpProfile(ProfileSetupParam params) async {
     await Future.delayed(const Duration(seconds: 2));
   }
+
+  @override
+  bool get isFirstTime => true;
 }
