@@ -1,8 +1,9 @@
 import 'package:funconnect/core/app/_app.dart';
 import 'package:funconnect/core/constants/hive_keys.dart';
 import 'package:funconnect/core/constants/storage_keys.dart';
+import 'package:funconnect/core/model/paginated_data.dart';
 import 'package:funconnect/features/authentication/data/data_sources/i_authentication_datasource.dart';
-import 'package:funconnect/features/authentication/data/dto/user_model.dart';
+import 'package:funconnect/features/authentication/data/dto/interest_model.dart';
 import 'package:funconnect/features/authentication/domain/params/email_sign_in.dart';
 import 'package:funconnect/features/authentication/domain/params/profile_setup.dart';
 import 'package:funconnect/features/authentication/domain/params/verify_otp.dart';
@@ -49,6 +50,12 @@ class AuthenticationRepository extends IAuthenticationRepository {
     //   key: StorageKeys.user,
     //   data: res.data.toMap(),
     // );
+  }
+
+  @override
+  Future<PaginatedData<InterestModel>> fetchInterests() async {
+    final res = await _httpDS.fetchInterests();
+    return res.data;
   }
 
   @override

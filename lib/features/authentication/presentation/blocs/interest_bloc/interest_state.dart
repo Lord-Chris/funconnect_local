@@ -1,17 +1,23 @@
 import 'package:equatable/equatable.dart';
+import 'package:funconnect/features/authentication/data/dto/interest_model.dart';
 
 abstract class InterestsState extends Equatable {
+  final List<InterestModel> interests;
+  final List<InterestModel> selectedInterest;
+
+  const InterestsState({
+    this.interests = const [],
+    this.selectedInterest = const [],
+  });
+
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [interests, selectedInterest];
 }
 
 class InterestsInitialState extends InterestsState {
-  final List<String> interests;
-  final List<String> selectedInterest;
-
-  InterestsInitialState({
-    required this.interests,
-    required this.selectedInterest,
+  const InterestsInitialState({
+    super.interests = const [],
+    super.selectedInterest = const [],
   });
 
   @override

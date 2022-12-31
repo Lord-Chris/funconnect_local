@@ -1,22 +1,26 @@
 import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:funconnect/core/usecases/usecase.dart';
+import 'package:funconnect/features/authentication/domain/usecases/fetch_interest_usecase.dart';
+import 'package:funconnect/features/authentication/domain/usecases/save_interests_usecase.dart';
 import 'package:funconnect/features/authentication/presentation/blocs/interest_bloc/interest_event.dart';
 import 'package:funconnect/features/authentication/presentation/blocs/interest_bloc/interest_state.dart';
 import 'package:funconnect/models/failure.dart';
 
 class InterestsBloc extends Bloc<InterestsEvent, InterestsState> {
-  InterestsBloc()
-      : super(InterestsInitialState(
-          selectedInterest: const [],
-          interests: List.generate(
-            20,
-            (index) => "Fine Dining Restaurant $index",
-            growable: true,
-          ),
-        )) {
+  InterestsBloc() : super(InterestsLoadingState()) {
+    on<LoadInterestsEvent>(_onLoadInterestsEvent);
     on<InterestTapEvent>(_onInterestTapEvent);
     on<ContinueTapEvent>(_onContinueTapEvent);
+  }
+
+  FutureOr<void> _onLoadInterestsEvent(
+    LoadInterestsEvent event,
+    Emitter<InterestsState> emit,
+  ) async {
+    final res = await FetchInterestUseCase().call(NoParams());
+    emit(InterestsInitialState(interests: res.data));
   }
 
   FutureOr<void> _onInterestTapEvent(
@@ -38,18 +42,18 @@ class InterestsBloc extends Bloc<InterestsEvent, InterestsState> {
     ));
   }
 
-  FutureOr<void> _onContinueTapEvent(
+  Future<FutureOr<void>> _onContinueTapEvent(
     ContinueTapEvent event,
     Emitter<InterestsState> emit,
-  ) {
+  ) async {
     try {
       emit(InterestsLoadingState());
-      // await _authenticationRepository.setUpProfile(event.param);
+      await SaveInterestsUseCases().call(NoParams());
       // _navigationService.toNamed(Routes.interestViewRoute);
     } on Failure {
       emit(InterestsErrorState());
     } finally {
-      // emit(InterestsInitialState());
+      emit(InterestsSuccessState());
     }
   }
 }

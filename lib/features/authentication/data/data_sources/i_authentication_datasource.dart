@@ -1,3 +1,5 @@
+import 'package:funconnect/core/model/paginated_data.dart';
+import 'package:funconnect/features/authentication/data/dto/interest_model.dart';
 import 'package:funconnect/features/authentication/domain/params/email_sign_in.dart';
 import 'package:funconnect/features/authentication/domain/params/profile_setup.dart';
 import 'package:funconnect/features/authentication/domain/params/verify_otp.dart';
@@ -28,4 +30,6 @@ abstract class IAuthenticationDataSource {
   Future<ApiResponse<VerifyOtpResponse>> setUpProfile(
     ProfileSetupParam params,
   );
+
+  Future<ApiResponse<PaginatedData<InterestModel>>> fetchInterests();
 }

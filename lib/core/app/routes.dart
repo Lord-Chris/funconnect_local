@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:funconnect/features/authentication/presentation/blocs/interest_bloc/interest_bloc.dart';
 import 'package:funconnect/features/authentication/presentation/views/Profile_setup_view.dart';
 import 'package:funconnect/features/authentication/presentation/views/email_verified_view.dart';
 import 'package:funconnect/features/authentication/presentation/views/interest_view.dart';
@@ -44,7 +46,10 @@ class Routes {
       case profileSetupViewRoute:
         return MaterialPageRoute(builder: (_) => ProfileSetUpView());
       case interestViewRoute:
-        return MaterialPageRoute(builder: (_) => const InterestView());
+        return _registerBlocView(
+          view: const InterestView(),
+          bloc: InterestsBloc(),
+        );
       // case locationAuthRoute:
       //   return MaterialPageRoute(builder: (_) => const LocationAuthView());
       case successViewRoute:
@@ -60,5 +65,17 @@ class Routes {
           ),
         );
     }
+  }
+
+  static MaterialPageRoute _registerBlocView<T extends Bloc>({
+    required Widget view,
+    required T bloc,
+  }) {
+    return MaterialPageRoute(
+      builder: (_) => BlocProvider<T>(
+        create: (context) => bloc,
+        child: view,
+      ),
+    );
   }
 }

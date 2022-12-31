@@ -31,7 +31,6 @@ class ProfileSetupBloc extends Bloc<ProfileSetupEvent, ProfileSetupState> {
     Emitter<ProfileSetupState> emit,
   ) async {
     location = await GetLocationUseCase().call(NoParams());
-    print(location);
   }
 
   Future<FutureOr<void>> _onSetupProfileEvent(

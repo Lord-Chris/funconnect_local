@@ -6,7 +6,8 @@ import 'package:get_it/get_it.dart';
 import '../../features/authentication/data/repositories/_authentication_repo.dart';
 
 final locator = GetIt.instance;
-const bool isMock = false;
+const bool isMock = true;
+
 Future<void> setUpLocator() async {
   // Services
   locator.registerLazySingleton<INavigationService>(() => NavigationService());
