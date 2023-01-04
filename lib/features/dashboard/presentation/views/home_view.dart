@@ -15,6 +15,7 @@ class HomeView extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.black,
       body: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
         child: SafeArea(
           child: Column(
             children: [
@@ -106,8 +107,6 @@ class HomeView extends StatelessWidget {
                 label: "Recently added",
                 child: const HomeCategoriesLargeWidget(),
               ),
-              AppSpacer.xtraHeightSpace,
-              AppSpacer.normalHeightSpace,
             ],
           ),
         ),
