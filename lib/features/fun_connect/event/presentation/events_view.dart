@@ -1,19 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:funconnect/core/app/_app.dart';
 import 'package:funconnect/features/fun_connect/event/presentation/widgets/events_page_event_widget.dart';
+import 'package:funconnect/services/_services.dart';
 
 import '../../../../core/presentation/widgets/app_text.dart';
 import '../../../../shared/constants/colors.dart';
 import '../../../../shared/constants/textstyles.dart';
 
-class EventsPage extends StatelessWidget {
-  EventsPage({Key? key}) : super(key: key);
+class EventsView extends StatelessWidget {
+  const EventsView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () =>
+            locator<INavigationService>().toNamed(Routes.createEventRoute),
         child: const Center(
           child: Icon(Icons.add),
         ),
@@ -55,21 +58,15 @@ class EventsPage extends StatelessWidget {
                 style: AppTextStyles.whiteMedium.copyWith(fontSize: 16.0.sp),
               ),
             ),
-            SizedBox(
-              height: MediaQuery.of(context).size.height - 256,
+            Expanded(
               child: ListView.builder(
-                  itemBuilder: (BuildContext context, int index) {
-                return Column(
-                  children: [
-                    EventsPageEventWidget(
-                      isPublic: false,
-                    ),
-                    EventsPageEventWidget(
-                      isPublic: true,
-                    ),
-                  ],
-                );
-              }),
+                itemCount: 12,
+                itemBuilder: (BuildContext context, int index) {
+                  return EventsPageEventWidget(
+                    isPublic: index.isEven,
+                  );
+                },
+              ),
             ),
           ],
         ),

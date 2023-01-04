@@ -7,8 +7,8 @@ import '../../../../shared/dumb_widgets/dumb_app_strings.dart';
 import '../../../dashboard/presentation/widgets/home_categories_lable_widget.dart';
 import '../../../dashboard/presentation/widgets/home_categories_small_widget.dart';
 
-class EventDescription extends StatelessWidget {
-  const EventDescription({Key? key}) : super(key: key);
+class EventDescriptionView extends StatelessWidget {
+  const EventDescriptionView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
