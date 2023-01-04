@@ -21,7 +21,7 @@ class HomeViewCategoriesWidget extends StatelessWidget {
       child: Column(
         children: [
           Padding(
-            padding: EdgeInsets.symmetric(vertical: 4.0.h),
+            padding: EdgeInsets.symmetric(vertical: 16.0.h, horizontal: 16.0.h),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [

@@ -14,8 +14,8 @@ class HomeViewCategoriesSmallSubWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 135,
-      width: 135,
+      height: 136.h,
+      width: 136.w,
       decoration: BoxDecoration(
         color: AppColors.primary,
         borderRadius: BorderRadius.circular(25.0),
@@ -28,7 +28,7 @@ class HomeViewCategoriesSmallSubWidget extends StatelessWidget {
             child: BackdropFilter(
               filter: ImageFilter.blur(sigmaX: 15.0, sigmaY: 15.0),
               child: Container(
-                height: 35.0.h,
+                height: 24.0.h,
                 // width: 70.0.w,
                 decoration: BoxDecoration(
                   color: Colors.black.withOpacity(0.7),
@@ -40,9 +40,12 @@ class HomeViewCategoriesSmallSubWidget extends StatelessWidget {
                 ),
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                  child: Text(
-                    DumbAppStrings.categoriesLabel,
-                    style: AppTextStyles.whitelight,
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      DumbAppStrings.categoriesLabel,
+                      style: AppTextStyles.whitelight,
+                    ),
                   ),
                 ),
               ),

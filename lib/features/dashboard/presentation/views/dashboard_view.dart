@@ -62,43 +62,73 @@ class _DashboardViewState extends State<DashboardView> {
         iconSize: 16,
         items: [
           BottomNavigationBarItem(
-            icon: SvgPicture.asset(
-              AppAssets.homeIconSvg,
+            icon: Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: SvgPicture.asset(
+                AppAssets.homeIconSvg,
+              ),
             ),
-            activeIcon: SvgPicture.asset(
-              AppAssets.activeHomeIconSvg,
+            activeIcon: Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: SvgPicture.asset(
+                AppAssets.activeHomeIconSvg,
+              ),
             ),
             label: "Home",
             backgroundColor: Colors.white,
           ),
           BottomNavigationBarItem(
-            icon: SvgPicture.asset(AppAssets.exploreIconSvg),
-            activeIcon: SvgPicture.asset(
-              AppAssets.activeExploreIconSvg,
+            icon: Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: SvgPicture.asset(AppAssets.exploreIconSvg),
+            ),
+            activeIcon: Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: SvgPicture.asset(
+                AppAssets.activeExploreIconSvg,
+              ),
             ),
             label: "Explore",
             backgroundColor: Colors.white,
           ),
           BottomNavigationBarItem(
-            icon: SvgPicture.asset(AppAssets.favIconSvg),
-            activeIcon: SvgPicture.asset(
-              AppAssets.activeFavIconSvg,
+            icon: Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: SvgPicture.asset(AppAssets.eventIconSvg),
+            ),
+            activeIcon: Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: SvgPicture.asset(
+                AppAssets.activeEventIconSvg,
+              ),
             ),
             label: "Events",
             backgroundColor: Colors.white,
           ),
           BottomNavigationBarItem(
-            icon: SvgPicture.asset(AppAssets.favIconSvg),
-            activeIcon: SvgPicture.asset(
-              AppAssets.activeFavIconSvg,
+            icon: Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: SvgPicture.asset(AppAssets.savedIconSvg),
+            ),
+            activeIcon: Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: SvgPicture.asset(
+                AppAssets.activeSavedIconSvg,
+              ),
             ),
             label: "Saved",
             backgroundColor: Colors.white,
           ),
           BottomNavigationBarItem(
-            icon: SvgPicture.asset(AppAssets.eventIconSvg),
-            activeIcon: SvgPicture.asset(
-              AppAssets.activeEventIconSvg,
+            icon: Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: SvgPicture.asset(AppAssets.profIconSvg),
+            ),
+            activeIcon: Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: SvgPicture.asset(
+                AppAssets.activeProfileIconSvg,
+              ),
             ),
             label: "Profile",
             backgroundColor: Colors.white,

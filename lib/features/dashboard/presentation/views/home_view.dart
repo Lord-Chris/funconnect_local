@@ -15,6 +15,7 @@ class HomeView extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.black,
       body: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
         child: SafeArea(
           child: Column(
             children: [
@@ -25,7 +26,8 @@ class HomeView extends StatelessWidget {
                     children: [
                       const SizedBox(width: 8),
                       const AppNetworkImage(
-                        size: Size.square(50),
+                        borderRadius: 50,
+                        isCircular: true,
                         url: AppConstants.mockImage,
                       ),
                       AppSpacer.xtraWeightSpace,
@@ -97,18 +99,14 @@ class HomeView extends StatelessWidget {
               ),
               AppSpacer.normalHeightSpace,
               HomeViewCategoriesWidget(
-                height: 200,
                 label: "Best for you",
-                child: HomeCategoriesLargeWidget(),
+                child: const HomeCategoriesLargeWidget(),
               ),
               AppSpacer.normalHeightSpace,
               HomeViewCategoriesWidget(
-                height: 200,
                 label: "Recently added",
-                child: HomeCategoriesLargeWidget(),
+                child: const HomeCategoriesLargeWidget(),
               ),
-              AppSpacer.xtraHeightSpace,
-              AppSpacer.normalHeightSpace,
             ],
           ),
         ),
