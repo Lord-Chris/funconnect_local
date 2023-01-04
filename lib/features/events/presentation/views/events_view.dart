@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:funconnect/core/app/_app.dart';
-import 'package:funconnect/features/fun_connect/event/presentation/widgets/events_page_event_widget.dart';
 import 'package:funconnect/services/_services.dart';
 
 import '../../../../core/presentation/widgets/app_text.dart';
 import '../../../../shared/constants/colors.dart';
 import '../../../../shared/constants/textstyles.dart';
+import '../widgets/events_page_event_widget.dart';
 
 class EventsView extends StatelessWidget {
   const EventsView({Key? key}) : super(key: key);

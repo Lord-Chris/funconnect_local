@@ -7,11 +7,12 @@ import 'package:funconnect/features/authentication/presentation/views/interest_v
 import 'package:funconnect/features/authentication/presentation/views/verify_email_view.dart';
 import 'package:funconnect/features/authentication/presentation/views/welcome_view.dart';
 import 'package:funconnect/features/dashboard/presentation/views/dashboard_view.dart';
-import 'package:funconnect/features/fun_connect/event/presentation/create_event_view.dart';
-import 'package:funconnect/features/fun_connect/event/presentation/event_description_view.dart';
 import 'package:funconnect/features/startup/presentation/views/onboarding_view.dart';
 import 'package:funconnect/features/startup/presentation/views/splash_view.dart';
 import 'package:funconnect/success_view.dart';
+
+import '../../features/events/presentation/views/create_event_view.dart';
+import '../../features/events/presentation/views/event_description_view.dart';
 
 class Routes {
   static const initialRoute = splashRoute;

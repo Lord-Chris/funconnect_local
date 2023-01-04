@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:funconnect/features/fun_connect/event/presentation/widgets/create_event_add_image_widget.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
 
 import '../../../../core/presentation/widgets/core_widgets.dart';
 import '../../../../shared/components/custom_button.dart';
+import '../widgets/create_event_add_image_widget.dart';
 
 class CreateEventView extends StatelessWidget {
   const CreateEventView({Key? key}) : super(key: key);
