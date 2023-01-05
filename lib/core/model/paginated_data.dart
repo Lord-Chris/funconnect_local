@@ -36,7 +36,7 @@ class PaginatedData<T> {
   }
 
   factory PaginatedData.fromMap(
-      Map<String, dynamic> map, T Function(Map<String, dynamic> x) fromMap) {
+      Map<String, dynamic> map, T Function(dynamic x) fromMap) {
     return PaginatedData<T>(
       currentPage: map['current_page']?.toInt() ?? 0,
       firstPageUrl: map['first_page_url'],
@@ -46,7 +46,7 @@ class PaginatedData<T> {
       perPage: map['per_page']?.toInt() ?? 0,
       prevPageUrl: map['prev_page_url']?.toInt(),
       to: map['to']?.toInt() ?? 0,
-      data: List<T>.from(map['data']?.map(fromMap)),
+      data: (map['data'] as List).map(fromMap).toList(),
     );
   }
 }

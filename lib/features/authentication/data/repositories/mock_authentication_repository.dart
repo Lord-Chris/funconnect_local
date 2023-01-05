@@ -123,7 +123,7 @@ class MockAuthenticationRepository extends IAuthenticationRepository {
         "prev_page_url": null,
         "to": 15
       },
-      InterestModel.fromMap,
+      (e) => InterestModel.fromMap(e),
     );
   }
 

@@ -1,19 +1,22 @@
 import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:funconnect/core/app/_app.dart';
 import 'package:funconnect/core/usecases/usecase.dart';
 import 'package:funconnect/features/authentication/domain/usecases/fetch_interest_usecase.dart';
 import 'package:funconnect/features/authentication/domain/usecases/save_interests_usecase.dart';
 import 'package:funconnect/features/authentication/presentation/blocs/interest_bloc/interest_event.dart';
 import 'package:funconnect/features/authentication/presentation/blocs/interest_bloc/interest_state.dart';
 import 'package:funconnect/models/failure.dart';
+import 'package:funconnect/services/_services.dart';
 
 class InterestsBloc extends Bloc<InterestsEvent, InterestsState> {
-  InterestsBloc() : super(InterestsLoadingState()) {
+  InterestsBloc() : super(const InterestsLoadingState()) {
     on<LoadInterestsEvent>(_onLoadInterestsEvent);
     on<InterestTapEvent>(_onInterestTapEvent);
     on<ContinueTapEvent>(_onContinueTapEvent);
   }
+  final _navigationService = locator<INavigationService>();
 
   FutureOr<void> _onLoadInterestsEvent(
     LoadInterestsEvent event,
@@ -27,17 +30,16 @@ class InterestsBloc extends Bloc<InterestsEvent, InterestsState> {
     InterestTapEvent event,
     Emitter<InterestsState> emit,
   ) {
-    if (state is! InterestsInitialState) return null;
-    // ignore: no_leading_underscores_for_local_identifiers
-    final _state = (state as InterestsInitialState);
-    final selected = [..._state.selectedInterest];
+    if (state is InterestsLoadingState) return null;
+
+    final selected = [...state.selectedInterest];
     if (selected.contains(event.interest)) {
       selected.remove(event.interest);
     } else {
       selected.add(event.interest);
     }
     emit(InterestsInitialState(
-      interests: _state.interests,
+      interests: state.interests,
       selectedInterest: selected,
     ));
   }
@@ -47,13 +49,22 @@ class InterestsBloc extends Bloc<InterestsEvent, InterestsState> {
     Emitter<InterestsState> emit,
   ) async {
     try {
-      emit(InterestsLoadingState());
+      emit(InterestsLoadingState(
+        interests: state.interests,
+        selectedInterest: state.selectedInterest,
+      ));
       await SaveInterestsUseCases().call(NoParams());
-      // _navigationService.toNamed(Routes.interestViewRoute);
+      _navigationService.offAllNamed(Routes.dashboardViewRoute, (_) => false);
     } on Failure {
-      emit(InterestsErrorState());
+      emit(InterestsErrorState(
+        interests: state.interests,
+        selectedInterest: state.selectedInterest,
+      ));
     } finally {
-      emit(InterestsSuccessState());
+      emit(InterestsSuccessState(
+        interests: state.interests,
+        selectedInterest: state.selectedInterest,
+      ));
     }
   }
 }

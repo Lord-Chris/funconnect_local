@@ -24,8 +24,32 @@ class InterestsInitialState extends InterestsState {
   List<Object?> get props => [interests, selectedInterest];
 }
 
-class InterestsLoadingState extends InterestsState {}
+class InterestsLoadingState extends InterestsState {
+  const InterestsLoadingState({
+    super.interests = const [],
+    super.selectedInterest = const [],
+  });
 
-class InterestsSuccessState extends InterestsState {}
+  @override
+  List<Object?> get props => [interests, selectedInterest];
+}
 
-class InterestsErrorState extends InterestsState {}
+class InterestsSuccessState extends InterestsState {
+  const InterestsSuccessState({
+    super.interests = const [],
+    super.selectedInterest = const [],
+  });
+
+  @override
+  List<Object?> get props => [interests, selectedInterest];
+}
+
+class InterestsErrorState extends InterestsState {
+  const InterestsErrorState({
+    super.interests = const [],
+    super.selectedInterest = const [],
+  });
+
+  @override
+  List<Object?> get props => [interests, selectedInterest];
+}

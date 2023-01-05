@@ -71,17 +71,13 @@ class HttpAuthenticationDataSource extends IAuthenticationDataSource
   }
 
   @override
-  Future<ApiResponse<VerifyOtpResponse>> setUpProfile(
-      ProfileSetupParam params) async {
+  Future<ApiResponse<UserModel>> setUpProfile(ProfileSetupParam params) async {
     final res = await _networkService.put(
       ApiConstants.profileSetup,
       headers: headers,
-      body: {
-        'email': user!.email,
-        ...params.toMap(),
-      },
+      body: params.toMap(),
     );
-    return ApiResponse(data: VerifyOtpResponse.fromMap(res.data));
+    return ApiResponse(data: UserModel.fromMap(res.data["data"]));
   }
 
   @override
@@ -94,7 +90,7 @@ class HttpAuthenticationDataSource extends IAuthenticationDataSource
     return ApiResponse(
       data: PaginatedData<InterestModel>.fromMap(
         res.data['data'],
-        InterestModel.fromMap,
+        (e) => InterestModel.fromMap(e),
       ),
     );
   }

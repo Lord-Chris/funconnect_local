@@ -45,11 +45,11 @@ class AuthenticationRepository extends IAuthenticationRepository {
   Future<void> setUpProfile(ProfileSetupParam params) async {
     final res = await _httpDS.setUpProfile(params);
 
-    // await _localStorageService.write(
-    //   HiveKeys.userBoxId,
-    //   key: StorageKeys.user,
-    //   data: res.data.toMap(),
-    // );
+    await _localStorageService.write(
+      HiveKeys.userBoxId,
+      key: StorageKeys.user,
+      data: res.data.toMap(),
+    );
   }
 
   @override

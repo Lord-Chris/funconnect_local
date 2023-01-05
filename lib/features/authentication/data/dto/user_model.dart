@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import '../../../../core/model/app_location.dart';
+
 class UserModel {
   final String id;
   final String email;
@@ -8,7 +10,7 @@ class UserModel {
   final String? gender;
   final String? dob;
   final String? phoneE164;
-  final List location;
+  final AppLocation location;
 
   UserModel({
     required this.id,
@@ -30,20 +32,20 @@ class UserModel {
       'gender': gender,
       'dob': dob,
       'phone_e164': phoneE164,
-      'location': location,
+      'location': location.toMap(),
     };
   }
 
   factory UserModel.fromMap(Map<String, dynamic> map) {
     return UserModel(
-      id: map['id'],
-      email: map['email'],
+      id: map['id'] ?? '',
+      email: map['email'] ?? '',
       name: map['name'],
       username: map['username'],
       gender: map['gender'],
       dob: map['dob'],
       phoneE164: map['phone_e164'],
-      location: List.from(map['location']),
+      location: AppLocation.fromMap(map['location']),
     );
   }
 

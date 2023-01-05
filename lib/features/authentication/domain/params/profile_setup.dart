@@ -44,14 +44,12 @@ class ProfileSetupParam {
       'name': name,
       'username': username,
       'gender': gender.toLowerCase(),
-      'address': address ?? "",
-      'city': city ?? "",
-      'state': state ?? "",
-      'country': country ?? "",
-      'lat': lat ?? "",
-      'long': long ?? "",
-      'dob': "",
-      "phone_e164": "",
+      if (address != null) 'address': address,
+      if (city != null) 'city': city,
+      if (state != null) 'state': state,
+      if (country != null) 'country': country,
+      if (lat != null) 'lat': lat,
+      if (long != null) 'long': long,
     };
   }
 

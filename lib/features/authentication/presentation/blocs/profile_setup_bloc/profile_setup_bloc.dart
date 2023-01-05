@@ -42,7 +42,7 @@ class ProfileSetupBloc extends Bloc<ProfileSetupEvent, ProfileSetupState> {
       final param =
           location == null ? event.param : event.param.addLocation(location!);
       await ProfileSetupUseCase().call(param);
-      // _navigationService.offNamed(Routes.interestViewRoute);
+      _navigationService.toNamed(Routes.interestViewRoute);
     } on Failure {
       emit(ProfileSetupErrorState());
     } finally {

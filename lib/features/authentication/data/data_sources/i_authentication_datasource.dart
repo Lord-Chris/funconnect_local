@@ -27,7 +27,7 @@ abstract class IAuthenticationDataSource {
     String token,
   );
 
-  Future<ApiResponse<VerifyOtpResponse>> setUpProfile(
+  Future<ApiResponse<UserModel>> setUpProfile(
     ProfileSetupParam params,
   );
 
