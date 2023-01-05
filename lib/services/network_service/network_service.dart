@@ -14,7 +14,6 @@ class NetworkService extends INetworkService {
 
   NetworkService() {
     _dio = Dio();
-    _dio.options.baseUrl = "ApiStrings.base_url";
     _dio.options.receiveTimeout = 60 * 1000;
     _dio.options.sendTimeout = 60 * 1000;
     _dio.interceptors.add(NetworkLoggerInterceptor());
@@ -35,7 +34,7 @@ class NetworkService extends INetworkService {
       if (res.statusCode == 200 || res.statusCode == 201) {
         return ApiResponse(data: res.data);
       }
-      throw res.statusMessage!;
+      throw Failure(res.statusMessage!);
     } on DioError catch (e) {
       _logger.e(e.toString());
       throw convertException(e);
@@ -59,7 +58,7 @@ class NetworkService extends INetworkService {
       if (res.statusCode == 200 || res.statusCode == 201) {
         return ApiResponse(data: res.data);
       }
-      throw res.statusMessage!;
+      throw Failure(res.statusMessage!);
     } on DioError catch (e) {
       _logger.e(e.toString());
       throw convertException(e);
@@ -70,13 +69,13 @@ class NetworkService extends INetworkService {
   }
 
   @override
-  Future<ApiResponse<Map<String, dynamic>>> patch(String url,
+  Future<ApiResponse<Map<String, dynamic>>> put(String url,
       {dynamic body, Map<String, String>? headers}) async {
     try {
       if (headers != null) {
         _headers.addAll(headers);
       }
-      final res = await _dio.patch(
+      final res = await _dio.put(
         url,
         data: body,
         options: Options(headers: _headers),
@@ -84,7 +83,7 @@ class NetworkService extends INetworkService {
       if (res.statusCode == 200 || res.statusCode == 201) {
         return ApiResponse(data: res.data);
       }
-      throw res.statusMessage!;
+      throw Failure(res.statusMessage!);
     } on DioError catch (e) {
       _logger.e(e.toString());
       throw convertException(e);
@@ -109,7 +108,7 @@ class NetworkService extends INetworkService {
       if (res.statusCode == 200 || res.statusCode == 201) {
         return ApiResponse(data: res.data);
       }
-      throw res.statusMessage!;
+      throw Failure(res.statusMessage!);
     } on DioError catch (e) {
       _logger.e(e.toString());
       throw convertException(e);
@@ -129,10 +128,10 @@ class NetworkService extends INetworkService {
         return const Failure("Connection Timed Out");
       case DioErrorType.response:
         return Failure(
-            e.response?.data['message'] ?? e.response?.data['error']);
+            e.response?.data['message'] ?? e.response?.data['errors']);
       case DioErrorType.cancel:
         return Failure(
-            e.response?.data['message'] ?? e.response?.data['error']);
+            e.response?.data['message'] ?? e.response?.data['errors']);
       case DioErrorType.other:
         return const Failure("No Internet Connection");
     }

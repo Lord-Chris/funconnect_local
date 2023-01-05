@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../shared/constants/_constants.dart';
+import '../../../../shared/constants/_constants.dart';
 
 class HomeViewCategoriesWidget extends StatelessWidget {
   String label;
@@ -21,7 +21,7 @@ class HomeViewCategoriesWidget extends StatelessWidget {
       child: Column(
         children: [
           Padding(
-            padding: EdgeInsets.symmetric(vertical: 4.0.h),
+            padding: EdgeInsets.symmetric(vertical: 16.0.h, horizontal: 16.0.h),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [

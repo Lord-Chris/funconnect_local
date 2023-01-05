@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:funconnect/features/dashboard/presentation/views/events_view.dart';
 import 'package:funconnect/features/dashboard/presentation/views/favourites_view.dart';
 import 'package:funconnect/features/dashboard/presentation/views/home_view.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
 
+import '../../../events/presentation/views/events_view.dart';
 import '../../../fun_connect/explore/presentation/explore_view.dart';
 
 class DashboardView extends StatefulWidget {
@@ -18,8 +18,9 @@ class _DashboardViewState extends State<DashboardView> {
   final List<Widget> _tabs = const [
     HomeView(),
     FavouritesView(),
-    ExploreView(),
     EventsView(),
+    ExploreView(),
+    SizedBox(),
   ];
 
   int _index = 0;
@@ -35,62 +36,101 @@ class _DashboardViewState extends State<DashboardView> {
     return Scaffold(
       body: _tabs[_index],
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.white,
-        unselectedItemColor: AppColors.green,
+        backgroundColor: AppColors.black,
         currentIndex: _index,
         onTap: onTap,
         selectedFontSize: 20,
         unselectedFontSize: 14,
         type: BottomNavigationBarType.fixed,
+        unselectedItemColor: AppColors.secondary400,
         selectedItemColor: AppColors.primary,
         selectedLabelStyle: const TextStyle(
-            height: 1.3,
-            fontSize: 12,
-            fontFamily: AppFonts.gtWalshPro,
-            fontWeight: FontWeight.w400,
-            color: AppColors.primary),
+          height: 1.3,
+          fontSize: 12,
+          fontFamily: AppFonts.gtWalshPro,
+          fontWeight: FontWeight.w400,
+          color: AppColors.primary,
+        ),
         unselectedLabelStyle: const TextStyle(
           fontSize: 12,
           height: 1.3,
           fontFamily: AppFonts.gtWalshPro,
           fontWeight: FontWeight.w400,
-          color: AppColors.primary,
+          color: AppColors.secondary400,
         ),
         showUnselectedLabels: true,
         iconSize: 16,
         items: [
           BottomNavigationBarItem(
-            icon: SvgPicture.asset(
-              AppAssets.homeIconSvg,
+            icon: Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: SvgPicture.asset(
+                AppAssets.homeIconSvg,
+              ),
             ),
-            activeIcon: SvgPicture.asset(
-              AppAssets.activeHomeIconSvg,
+            activeIcon: Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: SvgPicture.asset(
+                AppAssets.activeHomeIconSvg,
+              ),
             ),
             label: "Home",
             backgroundColor: Colors.white,
           ),
           BottomNavigationBarItem(
-            icon: SvgPicture.asset(AppAssets.exploreIconSvg),
-            activeIcon: SvgPicture.asset(
-              AppAssets.activeExploreIconSvg,
+            icon: Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: SvgPicture.asset(AppAssets.exploreIconSvg),
+            ),
+            activeIcon: Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: SvgPicture.asset(
+                AppAssets.activeExploreIconSvg,
+              ),
             ),
             label: "Explore",
             backgroundColor: Colors.white,
           ),
           BottomNavigationBarItem(
-            icon: SvgPicture.asset(AppAssets.favIconSvg),
-            activeIcon: SvgPicture.asset(
-              AppAssets.activeFavIconSvg,
+            icon: Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: SvgPicture.asset(AppAssets.eventIconSvg),
             ),
-            label: "Favourites",
+            activeIcon: Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: SvgPicture.asset(
+                AppAssets.activeEventIconSvg,
+              ),
+            ),
+            label: "Events",
             backgroundColor: Colors.white,
           ),
           BottomNavigationBarItem(
-            icon: SvgPicture.asset(AppAssets.eventIconSvg),
-            activeIcon: SvgPicture.asset(
-              AppAssets.activeEventIconSvg,
+            icon: Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: SvgPicture.asset(AppAssets.savedIconSvg),
             ),
-            label: "Events",
+            activeIcon: Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: SvgPicture.asset(
+                AppAssets.activeSavedIconSvg,
+              ),
+            ),
+            label: "Saved",
+            backgroundColor: Colors.white,
+          ),
+          BottomNavigationBarItem(
+            icon: Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: SvgPicture.asset(AppAssets.profIconSvg),
+            ),
+            activeIcon: Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: SvgPicture.asset(
+                AppAssets.activeProfileIconSvg,
+              ),
+            ),
+            label: "Profile",
             backgroundColor: Colors.white,
           ),
         ],

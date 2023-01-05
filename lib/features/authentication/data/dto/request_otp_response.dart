@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:equatable/equatable.dart';
 
 class RequestOtpResponse extends Equatable {
-  final bool email;
+  final String email;
   final String message;
 
   const RequestOtpResponse({
@@ -22,8 +22,8 @@ class RequestOtpResponse extends Equatable {
 
   factory RequestOtpResponse.fromMap(Map<String, dynamic> map) {
     return RequestOtpResponse(
-      email: map['data']['email'] ?? false,
-      message: map['message'] ?? '',
+      email: map['data']['email'],
+      message: map['message'],
     );
   }
 

@@ -2,7 +2,10 @@ import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:funconnect/core/app/_app.dart';
-import 'package:funconnect/features/authentication/data/repositories/i_authentication_repository.dart';
+import 'package:funconnect/core/model/app_location.dart';
+import 'package:funconnect/core/usecases/usecase.dart';
+import 'package:funconnect/features/authentication/domain/usecases/get_location_usecase.dart';
+import 'package:funconnect/features/authentication/domain/usecases/profile_setup_usecase.dart';
 import 'package:funconnect/features/authentication/presentation/blocs/profile_setup_bloc/profile_setup_event.dart';
 import 'package:funconnect/features/authentication/presentation/blocs/profile_setup_bloc/profile_setup_state.dart';
 import 'package:funconnect/models/failure.dart';
@@ -15,18 +18,20 @@ class ProfileSetupBloc extends Bloc<ProfileSetupEvent, ProfileSetupState> {
     on<SetupProfileEvent>(_onSetupProfileEvent);
   }
 
-  final _authenticationRepository = locator<IAuthenticationRepository>();
   final _navigationService = locator<INavigationService>();
+  AppLocation? location;
 
   FutureOr<void> _onAddImageEvent(
     AddImageEvent event,
     Emitter<ProfileSetupState> emit,
   ) {}
 
-  FutureOr<void> _onShareLocationEvent(
+  Future<FutureOr<void>> _onShareLocationEvent(
     ShareLocationEvent event,
     Emitter<ProfileSetupState> emit,
-  ) {}
+  ) async {
+    location = await GetLocationUseCase().call(NoParams());
+  }
 
   Future<FutureOr<void>> _onSetupProfileEvent(
     SetupProfileEvent event,
@@ -34,12 +39,14 @@ class ProfileSetupBloc extends Bloc<ProfileSetupEvent, ProfileSetupState> {
   ) async {
     try {
       emit(ProfileSetupLoadingState());
-      await _authenticationRepository.setUpProfile(event.param);
+      final param =
+          location == null ? event.param : event.param.addLocation(location!);
+      await ProfileSetupUseCase().call(param);
       _navigationService.toNamed(Routes.interestViewRoute);
     } on Failure {
       emit(ProfileSetupErrorState());
     } finally {
-      emit(ProfileSetupSuccessState());
+      emit(ProfileSetupInitialState());
     }
   }
 }

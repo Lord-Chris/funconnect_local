@@ -4,7 +4,7 @@ import 'package:funconnect/core/app/_app.dart';
 import 'package:funconnect/services/_services.dart';
 
 void main() async {
-  setUpLocator();
+  await setUpLocator();
   await ScreenUtil.ensureScreenSize();
   runApp(const MyApp());
 }
