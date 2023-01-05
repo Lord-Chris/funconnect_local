@@ -136,9 +136,14 @@ class AppNetworkImage extends StatelessWidget {
           );
         }
         return Container(
-          color: AppColors.red,
           width: double.maxFinite,
           height: double.maxFinite,
+          decoration: BoxDecoration(
+            color: AppColors.red,
+            borderRadius:
+                isCircular ? null : BorderRadius.circular(borderRadius),
+            shape: isCircular ? BoxShape.circle : BoxShape.rectangle,
+          ),
         );
       },
     );

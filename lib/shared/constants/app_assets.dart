@@ -19,4 +19,5 @@ class AppAssets {
   static const profIconSvg = "assets/icons/profile_icon.svg";
   static const activeProfileIconSvg = "assets/icons/active_profile.svg";
 
+  static const calenderSvg = "assets/svgs/calender.svg";
 }

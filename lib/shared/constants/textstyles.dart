@@ -59,6 +59,19 @@ class AppTextStyles {
         height: 1.5,
       );
 
+  // Semi-Bold
+  static TextStyle get semiBold24 => GoogleFonts.inter(
+        fontSize: 24,
+        fontWeight: FontWeight.w600,
+        height: 1.33,
+      );
+
+  static TextStyle get semiBold14 => GoogleFonts.inter(
+        fontSize: 14,
+        fontWeight: FontWeight.w600,
+        height: 1.33,
+      );
+
   // Medium
   static TextStyle get medium24 => GoogleFonts.inter(
         fontSize: 24,
