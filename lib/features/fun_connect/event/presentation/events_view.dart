@@ -7,7 +7,7 @@ import '../../../../shared/constants/colors.dart';
 import '../../../../shared/constants/textstyles.dart';
 
 class EventsPage extends StatelessWidget {
-  EventsPage({Key? key}) : super(key: key);
+  const EventsPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,58 +20,65 @@ class EventsPage extends StatelessWidget {
       ),
       backgroundColor: AppColors.black,
       body: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.only(left: 16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // AppTextForm(onChanged: (String) {}, validator: (_) {}),
-                CircleAvatar(
-                  radius: 25.0.r,
-                  backgroundColor: AppColors.exploreIconAsh,
-                  child: IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.horizontal_split_sharp,
-                      color: AppColors.white,
+                Row(
+                  children: [
+                    // AppTextForm(onChanged: (String) {}, validator: (_) {}),
+                    CircleAvatar(
+                      radius: 25.0.r,
+                      backgroundColor: AppColors.exploreIconAsh,
+                      child: IconButton(
+                        onPressed: () {},
+                        icon: const Icon(
+                          Icons.horizontal_split_sharp,
+                          color: AppColors.white,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                Padding(
+                  padding:
+                      EdgeInsets.only(left: 8.0.w, bottom: 8.0.h, top: 32.0.h),
+                  child: Text(
+                    AppText.aTEvents,
+                    style: AppTextStyles.whiteMedium.copyWith(
+                      fontSize: 28.0.sp,
                     ),
                   ),
                 ),
+                Padding(
+                  padding: EdgeInsets.only(left: 8.0.w, bottom: 32.0.h),
+                  child: Text(
+                    AppText.aTEventBased,
+                    style:
+                        AppTextStyles.whiteMedium.copyWith(fontSize: 16.0.sp),
+                  ),
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height - 256,
+                  child: ListView.builder(
+                      itemBuilder: (BuildContext context, int index) {
+                    return Column(
+                      children: [
+                        EventsPageEventWidget(
+                          isPublic: false,
+                        ),
+                        EventsPageEventWidget(
+                          isPublic: true,
+                        ),
+                      ],
+                    );
+                  }),
+                ),
               ],
             ),
-            Padding(
-              padding: EdgeInsets.only(left: 8.0.w, bottom: 8.0.h, top: 32.0.h),
-              child: Text(
-                AppText.aTEvents,
-                style: AppTextStyles.whiteMedium.copyWith(
-                  fontSize: 28.0.sp,
-                ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(left: 8.0.w, bottom: 32.0.h),
-              child: Text(
-                AppText.aTEventBased,
-                style: AppTextStyles.whiteMedium.copyWith(fontSize: 16.0.sp),
-              ),
-            ),
-            SizedBox(
-              height: MediaQuery.of(context).size.height - 256,
-              child: ListView.builder(
-                  itemBuilder: (BuildContext context, int index) {
-                return Column(
-                  children: [
-                    EventsPageEventWidget(
-                      isPublic: false,
-                    ),
-                    EventsPageEventWidget(
-                      isPublic: true,
-                    ),
-                  ],
-                );
-              }),
-            ),
-          ],
+          ),
         ),
       ),
     );
