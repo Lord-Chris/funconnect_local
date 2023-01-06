@@ -197,7 +197,7 @@ class _AppTextFormState extends State<AppTextForm>
                                 color: AppColors.white, fontSize: 16.0),
                             border: OutlineInputBorder(
                               borderRadius: widget.borderRadius ??
-                                  BorderRadius.circular(8.0),
+                                  BorderRadius.circular(14.0),
                               borderSide:
                                   const BorderSide(color: AppColors.ash),
                             ),
@@ -205,18 +205,16 @@ class _AppTextFormState extends State<AppTextForm>
                               borderSide:
                                   const BorderSide(color: AppColors.ash),
                               borderRadius: widget.borderRadius ??
-                                  BorderRadius.circular(8.0),
+                                  BorderRadius.circular(14.0),
                             ),
                             disabledBorder: OutlineInputBorder(
                               borderSide:
                                   const BorderSide(color: AppColors.ash),
                               borderRadius: widget.borderRadius ??
-                                  BorderRadius.circular(8.0),
+                                  BorderRadius.circular(14.0),
                             ),
-                            contentPadding: const EdgeInsets.symmetric(
-                              horizontal: 19,
-                              vertical: 15,
-                            ),
+                            contentPadding: const EdgeInsets.only(
+                                top: 20, bottom: 19, left: 19),
                             hintText: widget.hintText,
                             hintStyle: const TextStyle(
                                 fontSize: 14, color: AppColors.ash),

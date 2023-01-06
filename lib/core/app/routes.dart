@@ -5,6 +5,7 @@ import 'package:funconnect/features/authentication/presentation/views/interest_v
 import 'package:funconnect/features/authentication/presentation/views/verify_email_view.dart';
 import 'package:funconnect/features/authentication/presentation/views/welcome_view.dart';
 import 'package:funconnect/features/dashboard/presentation/views/dashboard_view.dart';
+import 'package:funconnect/features/fun_connect/event/presentation/create_event_view.dart';
 import 'package:funconnect/features/startup/presentation/views/onboarding_view.dart';
 import 'package:funconnect/features/startup/presentation/views/splash_view.dart';
 import 'package:funconnect/success_view.dart';
@@ -23,6 +24,7 @@ class Routes {
   static const setUpProfile = '/setUp-Profile';
   static const interestViewRoute = '/interests';
   static const dashboardViewRoute = '/dashboard-view';
+  static const createEventViewRoute = '/create-event-view';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -47,6 +49,8 @@ class Routes {
         return MaterialPageRoute(builder: (_) => const InterestView());
       // case locationAuthRoute:
       //   return MaterialPageRoute(builder: (_) => const LocationAuthView());
+      case createEventViewRoute:
+        return MaterialPageRoute(builder: (_) => const CreateEventView());
       case successViewRoute:
         return MaterialPageRoute(builder: (_) => const SuccessView());
       case dashboardViewRoute:
