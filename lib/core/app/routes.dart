@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:funconnect/features/authentication/presentation/blocs/interest_bloc/interest_bloc.dart';
 import 'package:funconnect/features/authentication/presentation/views/Profile_setup_view.dart';
 import 'package:funconnect/features/authentication/presentation/views/email_verified_view.dart';
 import 'package:funconnect/features/authentication/presentation/views/interest_view.dart';
@@ -8,6 +10,9 @@ import 'package:funconnect/features/dashboard/presentation/views/dashboard_view.
 import 'package:funconnect/features/startup/presentation/views/onboarding_view.dart';
 import 'package:funconnect/features/startup/presentation/views/splash_view.dart';
 import 'package:funconnect/success_view.dart';
+
+import '../../features/events/presentation/views/create_event_view.dart';
+import '../../features/events/presentation/views/event_description_view.dart';
 
 class Routes {
   static const initialRoute = splashRoute;
@@ -23,6 +28,10 @@ class Routes {
   static const setUpProfile = '/setUp-Profile';
   static const interestViewRoute = '/interests';
   static const dashboardViewRoute = '/dashboard-view';
+
+  // Events
+  static const createEventRoute = '/create-event-route';
+  static const eventDescriptionRoute = '/event-description-route';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -44,13 +53,20 @@ class Routes {
       case profileSetupViewRoute:
         return MaterialPageRoute(builder: (_) => ProfileSetUpView());
       case interestViewRoute:
-        return MaterialPageRoute(builder: (_) => const InterestView());
+        return _registerBlocView(
+          view: const InterestView(),
+          bloc: InterestsBloc(),
+        );
       // case locationAuthRoute:
       //   return MaterialPageRoute(builder: (_) => const LocationAuthView());
       case successViewRoute:
         return MaterialPageRoute(builder: (_) => const SuccessView());
       case dashboardViewRoute:
         return MaterialPageRoute(builder: (_) => const DashboardView());
+      case createEventRoute:
+        return MaterialPageRoute(builder: (_) => const CreateEventView());
+      case eventDescriptionRoute:
+        return MaterialPageRoute(builder: (_) => const EventDescriptionView());
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(
@@ -60,5 +76,17 @@ class Routes {
           ),
         );
     }
+  }
+
+  static MaterialPageRoute _registerBlocView<T extends Bloc>({
+    required Widget view,
+    required T bloc,
+  }) {
+    return MaterialPageRoute(
+      builder: (_) => BlocProvider<T>(
+        create: (context) => bloc,
+        child: view,
+      ),
+    );
   }
 }

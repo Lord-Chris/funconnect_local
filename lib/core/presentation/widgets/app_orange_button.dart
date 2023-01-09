@@ -26,6 +26,7 @@ class AppOrangeBtn extends StatelessWidget {
       onPressed: onTap,
       minWidth: MediaQuery.of(context).size.width,
       height: height,
+      disabledColor: AppColors.primary.withOpacity(0.5),
       padding: EdgeInsets.only(bottom: (height * 0.1) + bottomPadding),
       color: AppColors.primary,
       shape: const RoundedRectangleBorder(

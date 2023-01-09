@@ -1,25 +1,55 @@
 import 'package:equatable/equatable.dart';
+import 'package:funconnect/features/authentication/data/dto/interest_model.dart';
 
 abstract class InterestsState extends Equatable {
-  @override
-  List<Object?> get props => [];
-}
+  final List<InterestModel> interests;
+  final List<InterestModel> selectedInterest;
 
-class InterestsInitialState extends InterestsState {
-  final List<String> interests;
-  final List<String> selectedInterest;
-
-  InterestsInitialState({
-    required this.interests,
-    required this.selectedInterest,
+  const InterestsState({
+    this.interests = const [],
+    this.selectedInterest = const [],
   });
 
   @override
   List<Object?> get props => [interests, selectedInterest];
 }
 
-class InterestsLoadingState extends InterestsState {}
+class InterestsInitialState extends InterestsState {
+  const InterestsInitialState({
+    super.interests = const [],
+    super.selectedInterest = const [],
+  });
 
-class InterestsSuccessState extends InterestsState {}
+  @override
+  List<Object?> get props => [interests, selectedInterest];
+}
 
-class InterestsErrorState extends InterestsState {}
+class InterestsLoadingState extends InterestsState {
+  const InterestsLoadingState({
+    super.interests = const [],
+    super.selectedInterest = const [],
+  });
+
+  @override
+  List<Object?> get props => [interests, selectedInterest];
+}
+
+class InterestsSuccessState extends InterestsState {
+  const InterestsSuccessState({
+    super.interests = const [],
+    super.selectedInterest = const [],
+  });
+
+  @override
+  List<Object?> get props => [interests, selectedInterest];
+}
+
+class InterestsErrorState extends InterestsState {
+  const InterestsErrorState({
+    super.interests = const [],
+    super.selectedInterest = const [],
+  });
+
+  @override
+  List<Object?> get props => [interests, selectedInterest];
+}

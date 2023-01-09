@@ -128,7 +128,9 @@ class ProfileSetUpView extends HookWidget {
                             size: 20,
                           ),
                           TextButton(
-                            onPressed: () {},
+                            onPressed: () => context
+                                .read<ProfileSetupBloc>()
+                                .add(ShareLocationEvent()),
                             style: TextButton.styleFrom(
                               padding: EdgeInsets.zero,
                             ),

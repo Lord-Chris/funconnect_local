@@ -42,14 +42,14 @@ class WelcomeBloc extends Bloc<WelcomeEvent, WelcomeState> {
     }
   }
 
-  FutureOr<void> _onGoogleSignInEvent(
+  Future<FutureOr<void>> _onGoogleSignInEvent(
     GoogleSignInEvent event,
     Emitter<WelcomeState> emit,
-  ) {
+  ) async {
     try {
       FocusManager.instance.primaryFocus?.unfocus();
-      emit(WelcomeInitialState());
-      GoogleSignInUsecase().call(NoParams());
+      emit(WelcomeLoadingState());
+      await GoogleSignInUsecase().call(NoParams());
       emit(WelcomeSuccessState());
     } on Failure {
       emit(WelcomeFailureState());
@@ -62,7 +62,7 @@ class WelcomeBloc extends Bloc<WelcomeEvent, WelcomeState> {
   ) {
     try {
       FocusManager.instance.primaryFocus?.unfocus();
-      emit(WelcomeInitialState());
+      emit(WelcomeLoadingState());
       AppleSignInUsecase().call(NoParams());
       emit(WelcomeSuccessState());
     } on Failure {

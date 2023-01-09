@@ -26,7 +26,6 @@ class WelcomeView extends HookWidget {
           return Scaffold(
             body: AppBlackModalWidget(
               imageContainerHeight: 400.0,
-              showBackButton: true,
               children: [
                 Form(
                   key: formKey,
@@ -40,7 +39,7 @@ class WelcomeView extends HookWidget {
                         child: Column(
                           children: [
                             Text(
-                              "Welcome!",
+                              state.isFirstTime ? "Welcome!" : "Hello again!",
                               style: AppTextStyles.medium24.copyWith(
                                 color: Colors.white,
                               ),
@@ -49,7 +48,9 @@ class WelcomeView extends HookWidget {
                               height: 8.0,
                             ),
                             Text(
-                              "Continue with your socials",
+                              state.isFirstTime
+                                  ? "Continue with your socials"
+                                  : "Please enter email ID associated with your account",
                               style: AppTextStyles.dynamic(
                                 14,
                                 color: Colors.white,
@@ -138,39 +139,38 @@ class WelcomeView extends HookWidget {
                                 child: SvgPicture.asset(AppAssets.emailIconSvg),
                               ),
                             ),
-                            const SizedBox(
-                              height: 32.0,
-                            ),
-                            Text.rich(
-                              TextSpan(
-                                children: [
-                                  const TextSpan(
-                                      text:
-                                          "By registering, you agree to our "),
-                                  TextSpan(
-                                    text: "Terms & Conditions",
-                                    style: AppTextStyles.regular14.copyWith(
-                                      color: AppColors.primary,
+                            if (state.isFirstTime) const SizedBox(height: 32),
+                            if (state.isFirstTime)
+                              Text.rich(
+                                TextSpan(
+                                  children: [
+                                    const TextSpan(
+                                        text:
+                                            "By registering, you agree to our "),
+                                    TextSpan(
+                                      text: "Terms & Conditions",
+                                      style: AppTextStyles.regular14.copyWith(
+                                        color: AppColors.primary,
+                                      ),
                                     ),
-                                  ),
-                                  const TextSpan(text: " and "),
-                                  TextSpan(
-                                    text: "Privacy policy",
-                                    style: AppTextStyles.regular14.copyWith(
-                                      color: AppColors.primary,
+                                    const TextSpan(text: " and "),
+                                    TextSpan(
+                                      text: "Privacy policy",
+                                      style: AppTextStyles.regular14.copyWith(
+                                        color: AppColors.primary,
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
+                                style: AppTextStyles.regular14.copyWith(
+                                  color: AppColors.white,
+                                ),
                               ),
-                              style: AppTextStyles.regular14.copyWith(
-                                color: AppColors.white,
-                              ),
-                            ),
                           ],
                         ),
                       ),
                       AppOrangeBtn(
-                        label: AppText.aTAuthSignUpText,
+                        label: state.isFirstTime ? "Sign Up" : "Sign in",
                         isBusy: state is WelcomeLoadingState,
                         onTap: () {
                           if (!formKey.currentState!.validate()) return;

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:funconnect/core/presentation/widgets/app_spacer.dart';
+import 'package:funconnect/shared/components/app_network_image.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
 
-import '../../../../core/presentation/widgets/custom_drawer.dart';
-import '../../widgets/home_view_widgets.dart';
+import '../../../../shared/constants/app_constants.dart';
+import '../widgets/home_view_widgets.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({Key? key}) : super(key: key);
@@ -14,6 +15,7 @@ class HomeView extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.black,
       body: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
         child: SafeArea(
           child: Column(
             children: [
@@ -22,20 +24,19 @@ class HomeView extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      const CircleAvatar(
-                        radius: 25.0,
+                      const SizedBox(width: 8),
+                      const AppNetworkImage(
+                        borderRadius: 50,
+                        isCircular: true,
+                        url: AppConstants.mockImage,
                       ),
                       AppSpacer.xtraWeightSpace,
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Padding(
-                            padding: EdgeInsets.only(left: 8.0.w),
-                            child: Text(
-                              "Hi John",
-                              style: AppTextStyles.whiteBold
-                                  .copyWith(fontSize: 24.0.sp),
-                            ),
+                          Text(
+                            "Hi John",
+                            style: AppTextStyles.medium20,
                           ),
                           AppSpacer.normalHeightSpace,
                           Row(
@@ -43,11 +44,13 @@ class HomeView extends StatelessWidget {
                               const Icon(
                                 Icons.location_on,
                                 color: AppColors.locationIconAsh,
+                                size: 13,
                               ),
                               Text(
                                 "Yaba, Lagos",
-                                style: AppTextStyles.whitelight
-                                    .copyWith(color: AppColors.homeViewAsh),
+                                style: AppTextStyles.regular14.copyWith(
+                                  color: AppColors.secondary400,
+                                ),
                               ),
                             ],
                           ),
@@ -65,41 +68,45 @@ class HomeView extends StatelessWidget {
                 ],
               ),
               AppSpacer.normalHeightSpace,
-              CustomDrawer(),
+              const Divider(
+                color: AppColors.secondary400,
+                height: 1,
+              ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 16.0),
                 child: SizedBox(
-                  height: 56.0.h,
+                  height: 35.h,
                   width: MediaQuery.of(context).size.width,
                   child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (BuildContext context, int index) {
-                        return Padding(
-                          padding: EdgeInsets.only(right: 8.0.w),
-                          child: const HomeInterestWidget(),
-                        );
-                      }),
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: EdgeInsets.only(left: 8.0.w),
+                        child: const HomeInterestWidget(),
+                      );
+                    },
+                  ),
                 ),
               ),
-              CustomDrawer(),
+              const Divider(
+                color: AppColors.secondary400,
+                height: 1,
+              ),
+              const SizedBox(height: 8),
               HomeViewCategoriesWidget(
                 label: "Categories",
                 child: const HomeViewCategoriesSmallSubWidget(),
               ),
               AppSpacer.normalHeightSpace,
               HomeViewCategoriesWidget(
-                height: 200,
                 label: "Best for you",
-                child: HomeCategoriesLargeWidget(),
+                child: const HomeCategoriesLargeWidget(),
               ),
               AppSpacer.normalHeightSpace,
               HomeViewCategoriesWidget(
-                height: 200,
                 label: "Recently added",
-                child: HomeCategoriesLargeWidget(),
+                child: const HomeCategoriesLargeWidget(),
               ),
-              AppSpacer.xtraHeightSpace,
-              AppSpacer.normalHeightSpace,
             ],
           ),
         ),

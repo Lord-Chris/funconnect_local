@@ -47,4 +47,9 @@ class AppColors {
   static const tertiary = Color(0XFF000825);
   static const bridalHealth = Color(0XFFF6EDE2);
   static const stroke = Color(0xffb2e8e8e8);
+
+  static const secondary200 = Color(0XFFB3B3B3);
+  static const secondary400 = Color(0XFF808080);
+  static const secondary500 = Color(0XFF666666);
+  static const secondary800 = Color(0XFF0E0E0E);
 }
