@@ -149,20 +149,18 @@ class BookingView extends StatelessWidget {
                 Text(
                   "Free",
                   style: AppTextStyles.regular20.copyWith(
-                    color: AppColors.gray1,
+                    color: AppColors.gray97,
                   ),
                 ),
                 AppSpacer.xtraWeightSpace,
                 Expanded(
                   child: AppButton(
                     label: "Request",
-                    hasBorder: true,
-                    buttonColor: AppColors.primary.withOpacity(.4),
-                    borderColor: AppColors.primary.withOpacity(.4),
-                    labelColor: AppColors.primary,
+                    buttonColor: AppColors.primary,
+                    labelColor: AppColors.black,
                     labelSize: 14,
                     onTap: () => locator<INavigationService>()
-                        .toNamed(Routes.bookingRoute),
+                        .toNamed(Routes.checkoutRoute),
                   ),
                 ),
               ],

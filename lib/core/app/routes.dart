@@ -8,6 +8,7 @@ import 'package:funconnect/features/authentication/presentation/views/verify_ema
 import 'package:funconnect/features/authentication/presentation/views/welcome_view.dart';
 import 'package:funconnect/features/dashboard/presentation/views/dashboard_view.dart';
 import 'package:funconnect/features/events/presentation/views/booking_view.dart';
+import 'package:funconnect/features/events/presentation/views/checkout_view.dart';
 import 'package:funconnect/features/startup/presentation/views/onboarding_view.dart';
 import 'package:funconnect/features/startup/presentation/views/splash_view.dart';
 import 'package:funconnect/success_view.dart';
@@ -34,6 +35,7 @@ class Routes {
   static const createEventRoute = '/create-event-route';
   static const eventDescriptionRoute = '/event-description-route';
   static const bookingRoute = '/booking-route';
+  static const checkoutRoute = '/checkout-route';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -71,6 +73,8 @@ class Routes {
         return MaterialPageRoute(builder: (_) => const EventDescriptionView());
       case bookingRoute:
         return MaterialPageRoute(builder: (_) => const BookingView());
+      case checkoutRoute:
+        return MaterialPageRoute(builder: (_) => const CheckoutView());
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(
