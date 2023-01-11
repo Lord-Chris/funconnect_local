@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
 
 class AppTextField extends StatelessWidget {
@@ -217,6 +218,46 @@ class AppDropdownField<T extends Object> extends StatelessWidget {
             color: AppColors.gray333,
             width: 1,
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class AppSearchField extends StatelessWidget {
+  final String? hintText;
+  final String? labelText;
+
+  void Function()? onPressed;
+
+  AppSearchField({Key? key, this.hintText, this.labelText, this.onPressed})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return TextField(
+      decoration: InputDecoration(
+        fillColor: AppColors.searchBarColor,
+        filled: true,
+        contentPadding: const EdgeInsets.fromLTRB(10.0, 18.0, 10.0, 17.0),
+        prefixIcon: Padding(
+          padding: const EdgeInsets.all(12),
+          child: SvgPicture.asset(
+            "assets/icons/search.svg",
+            height: 13,
+            width: 12,
+          ),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(39.0),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(39.0),
+        ),
+        hintText: hintText,
+        labelText: labelText,
+        labelStyle: AppTextStyles.regular14.copyWith(
+          color: AppColors.white,
         ),
       ),
     );

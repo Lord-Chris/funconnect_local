@@ -18,4 +18,7 @@ class ApiConstants {
 
   //
   static get categories => "$_places/categories";
+
+  //
+  static get createEvent => "${_baseUrl}events";
 }

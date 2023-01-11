@@ -30,6 +30,7 @@ class Routes {
   static const setUpProfile = '/setUp-Profile';
   static const interestViewRoute = '/interests';
   static const dashboardViewRoute = '/dashboard-view';
+  static const createEventViewRoute = '/create-event-view';
 
   // Events
   static const createEventRoute = '/create-event-route';
@@ -63,12 +64,12 @@ class Routes {
         );
       // case locationAuthRoute:
       //   return MaterialPageRoute(builder: (_) => const LocationAuthView());
+      case createEventViewRoute:
+        return MaterialPageRoute(builder: (_) => const CreateEventView());
       case successViewRoute:
         return MaterialPageRoute(builder: (_) => const SuccessView());
       case dashboardViewRoute:
         return MaterialPageRoute(builder: (_) => const DashboardView());
-      case createEventRoute:
-        return MaterialPageRoute(builder: (_) => const CreateEventView());
       case eventDescriptionRoute:
         return MaterialPageRoute(builder: (_) => const EventDescriptionView());
       case bookingRoute:
