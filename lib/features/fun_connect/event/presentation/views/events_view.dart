@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:funconnect/features/fun_connect/event/presentation/create_event_view.dart';
+import 'package:funconnect/features/fun_connect/event/presentation/views/create_event_view.dart';
 import 'package:funconnect/features/fun_connect/event/presentation/widgets/events_page_event_widget.dart';
 import 'package:funconnect/shared/components/text_input.dart';
 
-import '../../../../core/presentation/widgets/app_text.dart';
-import '../../../../shared/constants/colors.dart';
-import '../../../../shared/constants/textstyles.dart';
+import '../../../../../core/presentation/widgets/app_text.dart';
+import '../../../../../shared/constants/colors.dart';
+import '../../../../../shared/constants/textstyles.dart';
 
 class EventsPage extends StatelessWidget {
   const EventsPage({Key? key}) : super(key: key);
