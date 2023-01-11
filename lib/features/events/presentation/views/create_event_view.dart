@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:funconnect/core/app/_app.dart';
+import 'package:funconnect/services/_services.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
 
 import '../../../../../core/presentation/widgets/core_widgets.dart';
@@ -15,10 +17,13 @@ class CreateEventView extends StatelessWidget {
       backgroundColor: AppColors.black,
       appBar: AppBar(
         backgroundColor: AppColors.black,
-        leading: const Icon(
-          Icons.arrow_back_ios,
-          color: AppColors.white,
-          size: 14,
+        leading: IconButton(
+          onPressed: () => locator<INavigationService>().back(),
+          icon: const Icon(
+            Icons.arrow_back_ios,
+            color: AppColors.white,
+            size: 14,
+          ),
         ),
         title: Text(
           AppText.aTCreateEventAppBarText,
@@ -128,7 +133,6 @@ class CreateEventView extends StatelessWidget {
                 ),
               ),
               AppSpacer.xtraHeightSpace,
-             
               const AppButton(
                 height: 50.0,
                 //width: MediaQuery.of(context).size.width - 50,

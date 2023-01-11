@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:funconnect/features/fun_connect/event/presentation/widgets/events_page_event_widget.dart';
+import 'package:funconnect/core/app/_app.dart';
+import 'package:funconnect/features/events/presentation/widgets/events_page_event_widget.dart';
+import 'package:funconnect/services/_services.dart';
 import 'package:funconnect/shared/components/text_input.dart';
 
 import '../../../../../core/presentation/widgets/app_text.dart';
 import '../../../../../shared/constants/colors.dart';
 import '../../../../../shared/constants/textstyles.dart';
-import 'create_event_view.dart';
 
 class EventsView extends StatelessWidget {
   const EventsView({Key? key}) : super(key: key);
@@ -16,13 +17,9 @@ class EventsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const CreateEventView(),
-              ));
-        },
+        backgroundColor: AppColors.primary,
+        onPressed: () =>
+            locator<INavigationService>().toNamed(Routes.createEventViewRoute),
         child: const Center(
           child: Icon(Icons.add),
         ),
@@ -83,15 +80,8 @@ class EventsView extends StatelessWidget {
                   height: MediaQuery.of(context).size.height - 256,
                   child: ListView.builder(
                       itemBuilder: (BuildContext context, int index) {
-                    return Column(
-                      children: [
-                        EventsPageEventWidget(
-                          isPublic: false,
-                        ),
-                        EventsPageEventWidget(
-                          isPublic: true,
-                        ),
-                      ],
+                    return EventsPageEventWidget(
+                      isPublic: index.isEven,
                     );
                   }),
                 ),
