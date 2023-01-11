@@ -19,6 +19,7 @@ class AppTextField extends StatelessWidget {
   final bool enabled;
   final Function()? function;
   final void Function(String)? onChanged;
+  final FloatingLabelBehavior? floatingLabelBehavior;
 
   const AppTextField({
     Key? key,
@@ -40,6 +41,7 @@ class AppTextField extends StatelessWidget {
     this.enabled = true,
     this.function,
     this.onChanged,
+    this.floatingLabelBehavior,
   })  : assert(initialValue == null || controller == null),
         super(key: key);
 
@@ -70,7 +72,8 @@ class AppTextField extends StatelessWidget {
         prefixIcon: prefix,
         enabled: enabled,
         floatingLabelAlignment: FloatingLabelAlignment.start,
-        // floatingLabelBehavior: FloatingLabelBehavior.always,
+        floatingLabelBehavior:
+            floatingLabelBehavior ?? FloatingLabelBehavior.always,
         floatingLabelStyle: AppTextStyles.regular14.copyWith(
           color: AppColors.white,
         ),

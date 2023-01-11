@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../../core/presentation/widgets/core_widgets.dart';
 import '../../../../../shared/constants/colors.dart';
 import '../../../../../shared/constants/textstyles.dart';
 
@@ -21,18 +20,15 @@ class CreateEventAddImageWidget extends StatelessWidget {
       ),
       child: Center(
         child: Container(
-          height: 40.0.h,
-          width: 140.0.w,
+          padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8.0.r),
             border: Border.all(width: 3.0.w, color: AppColors.exploreIconAsh),
           ),
-          child: Center(
-            child: Text(
-              AppText.aTCreateEventAddImageText,
-              style: AppTextStyles.whiteMedium
-                  .copyWith(color: AppColors.locationIconAsh),
-            ),
+          child: Text(
+            "Add Photo",
+            style: AppTextStyles.whiteMedium
+                .copyWith(color: AppColors.locationIconAsh),
           ),
         ),
       ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:funconnect/core/app/_app.dart';
 import 'package:funconnect/services/_services.dart';
+import 'package:funconnect/shared/components/text_input.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
 
 import '../../../../../core/presentation/widgets/core_widgets.dart';
@@ -42,22 +43,16 @@ class CreateEventView extends StatelessWidget {
                 child: CreateEventAddImageWidget(),
               ),
               AppSpacer.xtraHeightSpace,
-              AppTextForm(
-                onChanged: (String) {},
-                validator: (String) {
-                  return null;
-                },
-                labelText: AppText.aTCreateEventTextFormTitleText,
-                hintText: AppText.aTCreateEventTextFormSubTitleText,
+              const AppTextField(
+                label: AppText.aTCreateEventTextFormTitleText,
+                hint: AppText.aTCreateEventTextFormSubTitleText,
+                textCapitalization: TextCapitalization.words,
               ),
               AppSpacer.xtraHeightSpace,
-              AppTextForm(
-                onChanged: (String) {},
-                validator: (String) {
-                  return null;
-                },
-                labelText: AppText.aTCreateEventDiscriptionFormText,
-                hintText: AppText.aTCreateEventDiscriptionFormSubText,
+              const AppTextField(
+                label: AppText.aTCreateEventDiscriptionFormText,
+                hint: AppText.aTCreateEventDiscriptionFormSubText,
+                textCapitalization: TextCapitalization.sentences,
                 maxLines: 5,
               ),
               AppSpacer.xtraHeightSpace,
@@ -65,55 +60,57 @@ class CreateEventView extends StatelessWidget {
                 children: [
                   SizedBox(
                     width: 190.w,
-                    child: AppTextForm(
-                      onChanged: (String) {},
-                      validator: (String) {
-                        return null;
-                      },
-                      labelText: "Date",
-                      hintText: "DD/MM/YYYY",
+                    child: const AppTextField(
+                      label: "Date",
+                      hint: "DD/MM/YYYY",
                     ),
                   ),
                   AppSpacer.xtraWeightSpace,
                   SizedBox(
                     width: 190.w,
-                    child: AppTextForm(
-                      onChanged: (String) {},
-                      validator: (String) {
-                        return null;
-                      },
-                      labelText: "Time",
-                      hintText: "10:00 AM",
+                    child: const AppTextField(
+                      label: "Time",
+                      hint: "10:00 AM",
                     ),
                   ),
                 ],
               ),
               AppSpacer.xtraHeightSpace,
-              AppTextForm(
-                onChanged: (String) {},
-                validator: (String) {
-                  return null;
-                },
-                labelText: AppText.aTCreateEventSeatFormText,
-                hintText: AppText.aTCreateEventSeatFormSubText,
+              const AppTextField(
+                label: AppText.aTCreateEventSeatFormText,
+                hint: AppText.aTCreateEventSeatFormSubText,
+                keyboardType: TextInputType.number,
               ),
               AppSpacer.xtraHeightSpace,
-              AppTextForm(
-                onChanged: (String) {},
-                validator: (String) {
-                  return null;
-                },
-                labelText: AppText.aTCreateEventCategoryFormText,
-                hintText: AppText.aTCreateEventCategoryFormSubText,
+              AppDropdownField<String>(
+                items: const [
+                  "Concerts",
+                  "Games",
+                  "Picnics",
+                  "Sip & Paints",
+                  "Summit",
+                  "Beach/Pool",
+                  "Networking",
+                  "Tour",
+                  "Wine tasting",
+                  "Fashion",
+                  "Food",
+                ],
+                value: null,
+                onChanged: (val) {},
+                label: AppText.aTCreateEventCategoryFormText,
+                hint: AppText.aTCreateEventCategoryFormSubText,
               ),
               AppSpacer.xtraHeightSpace,
-              AppTextForm(
-                onChanged: (String) {},
-                validator: (String) {
-                  return null;
-                },
-                labelText: AppText.aTCreateEventTypeFormText,
-                hintText: AppText.aTCreateEventTypeFormSubText,
+              AppDropdownField<String>(
+                items: const [
+                  "Public",
+                  "Private",
+                ],
+                value: null,
+                onChanged: (val) {},
+                label: AppText.aTCreateEventTypeFormText,
+                hint: AppText.aTCreateEventTypeFormSubText,
               ),
               AppSpacer.xtraHeightSpace,
               ListTile(

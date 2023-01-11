@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 
 import '../../../shared/constants/colors.dart';
 
+@Deprecated("Make use of AppTextField instead")
 class AppTextForm extends StatefulWidget {
   const AppTextForm({
     Key? key,
