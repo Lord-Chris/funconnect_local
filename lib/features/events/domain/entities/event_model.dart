@@ -17,7 +17,7 @@ import 'dart:convert';
 class EventModel {
   final String id;
   final String userId;
-  final String catergoryId;
+  final String categoryId;
   final String title;
   final String cover;
   final String description;
@@ -30,7 +30,7 @@ class EventModel {
   EventModel({
     required this.id,
     required this.userId,
-    required this.catergoryId,
+    required this.categoryId,
     required this.title,
     required this.cover,
     required this.description,
@@ -45,7 +45,7 @@ class EventModel {
     return {
       'id': id,
       'user_id': userId,
-      'catergory_id': catergoryId,
+      'category_id': categoryId,
       'title': title,
       'cover': cover,
       'description': description,
@@ -61,7 +61,7 @@ class EventModel {
     return EventModel(
       id: map['id'],
       userId: map['user_id'],
-      catergoryId: map['catergory_id'],
+      categoryId: map['category_id'],
       title: map['title'],
       cover: map['cover'],
       description: map['description'],
@@ -77,4 +77,6 @@ class EventModel {
 
   factory EventModel.fromJson(String source) =>
       EventModel.fromMap(json.decode(source));
+
+  bool get isPublic => type == 'public';
 }

@@ -20,7 +20,6 @@ class AppAssets {
   static const activeProfileIconSvg = "assets/icons/active_profile.svg";
   static const bookmarkIconSvg = "assets/icons/bookmark.svg";
 
-
   static const calenderSvg = "assets/svgs/calender.svg";
   static const chatIconSvg = "assets/svgs/chat_icon.svg";
 }
