@@ -10,6 +10,7 @@ import 'package:funconnect/features/authentication/presentation/blocs/welcome_bl
 import 'package:funconnect/features/authentication/presentation/blocs/welcome_bloc/welcome_state.dart';
 import 'package:funconnect/models/failure.dart';
 import 'package:funconnect/services/_services.dart';
+import 'package:funconnect/shared/dialogs/status_dialog.dart';
 
 import '../../../domain/usecases/email_signin_usecase.dart';
 
@@ -23,6 +24,7 @@ class WelcomeBloc extends Bloc<WelcomeEvent, WelcomeState> {
   }
 
   final _navigationService = locator<INavigationService>();
+  final _dialogAndSheetService = locator<IDialogAndSheetService>();
 
   Future<FutureOr<void>> _onEmailSignInEvent(
     EmailSignInEvent event,
@@ -37,8 +39,10 @@ class WelcomeBloc extends Bloc<WelcomeEvent, WelcomeState> {
         Routes.verifyEmailRoute,
         arguments: event.email,
       );
-    } on Failure {
+    } on Failure catch (e) {
       emit(WelcomeFailureState());
+      _dialogAndSheetService.showAppDialog(StatusDialog(
+          isError: true, title: "Error Signing In", body: e.message));
     }
   }
 
