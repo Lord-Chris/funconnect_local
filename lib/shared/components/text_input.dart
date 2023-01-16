@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
 
 class AppTextField extends StatelessWidget {
@@ -18,6 +19,7 @@ class AppTextField extends StatelessWidget {
   final bool enabled;
   final Function()? function;
   final void Function(String)? onChanged;
+  final List<TextInputFormatter>? inputFormatters;
 
   const AppTextField({
     Key? key,
@@ -39,6 +41,7 @@ class AppTextField extends StatelessWidget {
     this.enabled = true,
     this.function,
     this.onChanged,
+    this.inputFormatters,
   })  : assert(initialValue == null || controller == null),
         super(key: key);
 
@@ -55,6 +58,7 @@ class AppTextField extends StatelessWidget {
       readOnly: readOnly,
       expands: expands,
       maxLines: maxLines,
+      inputFormatters: inputFormatters,
       onChanged: onChanged,
       minLines: minLines,
       maxLength: maxLength,
