@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:funconnect/features/dashboard/presentation/views/favourites_view.dart';
 import 'package:funconnect/features/dashboard/presentation/views/home_view.dart';
+import 'package:funconnect/features/events/presentation/blocs/events_bloc/events_bloc.dart';
+import 'package:funconnect/features/fun_connect/saved/saved_view.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
 
 import '../../../events/presentation/views/events_view.dart';
@@ -15,14 +17,6 @@ class DashboardView extends StatefulWidget {
 }
 
 class _DashboardViewState extends State<DashboardView> {
-  final List<Widget> _tabs = const [
-    HomeView(),
-    FavouritesView(),
-    EventsView(),
-    ExploreView(),
-    SizedBox(),
-  ];
-
   int _index = 0;
 
   void onTap(int index) {
@@ -34,7 +28,16 @@ class _DashboardViewState extends State<DashboardView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _tabs[_index],
+      body: [
+        const HomeView(),
+        const ExploreView(),
+        BlocProvider<EventsBloc>(
+          create: (context) => EventsBloc(),
+          child: const EventsView(),
+        ),
+        const SavedView(),
+        const SizedBox(),
+      ][_index],
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: AppColors.black,
         currentIndex: _index,

@@ -7,7 +7,7 @@ class ApiConstants {
   static const _core = "$_baseUrl/core";
   static const _places = "$_baseUrl/places";
 
-  //
+  // AUTH
   static get checkEmail => "$_auth/check-email";
   static get requestOtp => "$_auth/login/send-otp";
   static get loginWithOtp => "$_auth/login/otp";
@@ -18,4 +18,7 @@ class ApiConstants {
 
   //
   static get categories => "$_places/categories";
+
+  // EVENTS
+  static get events => "$_baseUrl/events";
 }

@@ -45,7 +45,6 @@ class _HomeCategoriesLargeWidgetState extends State<HomeCategoriesLargeWidget> {
                       padding: EdgeInsets.symmetric(horizontal: 8.0.w),
                       child: Container(
                         width: double.infinity,
-                        height: 58.0.h,
                         decoration: BoxDecoration(
                           color: Colors.black.withOpacity(0.7),
                           borderRadius: BorderRadius.circular(20.0.r),
@@ -88,37 +87,40 @@ class _HomeCategoriesLargeWidgetState extends State<HomeCategoriesLargeWidget> {
                                     DumbAppStrings.ratingLabel,
                                     style: AppTextStyles.whiteMedium,
                                   ),
-                                  RatingStars(
-                                    value: value,
-                                    onValueChanged: (v) {
-                                      setState(() {
-                                        value = v;
-                                      });
-                                    },
-                                    starBuilder: (index, color) => Icon(
-                                      Icons.star,
-                                      color: color,
-                                      size: 10.0,
+                                  Flexible(
+                                    child: RatingStars(
+                                      value: value,
+                                      onValueChanged: (v) {
+                                        setState(() {
+                                          value = v;
+                                        });
+                                      },
+                                      starBuilder: (index, color) => Icon(
+                                        Icons.star,
+                                        color: color,
+                                        size: 10.0,
+                                      ),
+                                      starSize: 10,
+                                      starCount: 5,
+                                      // valueLabelColor: const Color(0xff9b9b9b),
+                                      // valueLabelTextStyle: const TextStyle(
+                                      //     color: Colors.white,
+                                      //     fontWeight: FontWeight.w400,
+                                      //     fontStyle: FontStyle.normal,
+                                      //     fontSize: 12.0),
+                                      // valueLabelRadius: 10,
+                                      maxValue: 5,
+                                      // starSpacing: -1,
+                                      maxValueVisibility: false,
+                                      valueLabelVisibility: false,
+                                      animationDuration:
+                                          const Duration(milliseconds: 1000),
+                                      // valueLabelPadding: const EdgeInsets.symmetric(
+                                      //     vertical: 1, horizontal: 8),
+                                      // valueLabelMargin: const EdgeInsets.only(right: 8),
+                                      starOffColor: AppColors.white,
+                                      starColor: AppColors.primary,
                                     ),
-                                    starCount: 5,
-                                    // valueLabelColor: const Color(0xff9b9b9b),
-                                    // valueLabelTextStyle: const TextStyle(
-                                    //     color: Colors.white,
-                                    //     fontWeight: FontWeight.w400,
-                                    //     fontStyle: FontStyle.normal,
-                                    //     fontSize: 12.0),
-                                    // valueLabelRadius: 10,
-                                    maxValue: 5,
-                                    // starSpacing: -1,
-                                    maxValueVisibility: false,
-                                    valueLabelVisibility: false,
-                                    animationDuration:
-                                        const Duration(milliseconds: 1000),
-                                    // valueLabelPadding: const EdgeInsets.symmetric(
-                                    //     vertical: 1, horizontal: 8),
-                                    // valueLabelMargin: const EdgeInsets.only(right: 8),
-                                    starOffColor: AppColors.white,
-                                    starColor: AppColors.primary,
                                   ),
                                   Text(
                                     DumbAppStrings.ratiedLabel,

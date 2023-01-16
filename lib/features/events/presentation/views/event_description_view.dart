@@ -3,7 +3,9 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:funconnect/core/app/_app.dart';
 import 'package:funconnect/core/presentation/widgets/app_spacer.dart';
+import 'package:funconnect/services/_services.dart';
 import 'package:funconnect/shared/components/app_network_image.dart';
 import 'package:funconnect/shared/components/custom_button.dart';
 import 'package:funconnect/shared/components/scrollable_column.dart';
@@ -246,9 +248,12 @@ class EventDescriptionView extends StatelessWidget {
                         child: AppButton(
                           label: "Request",
                           hasBorder: true,
+                          buttonColor: AppColors.primary.withOpacity(.4),
                           borderColor: AppColors.primary.withOpacity(.4),
                           labelColor: AppColors.primary,
                           labelSize: 14,
+                          onTap: () => locator<INavigationService>()
+                              .toNamed(Routes.bookingRoute),
                         ),
                       ),
                     ],
@@ -275,7 +280,7 @@ class EventDescriptionView extends StatelessWidget {
                   child: Row(
                     children: [
                       MaterialButton(
-                        onPressed: () {},
+                        onPressed: locator<INavigationService>().back,
                         color: AppColors.black.withOpacity(0.5),
                         shape: const CircleBorder(),
                         minWidth: 30,

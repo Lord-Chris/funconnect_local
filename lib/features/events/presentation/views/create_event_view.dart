@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:funconnect/core/app/_app.dart';
+import 'package:funconnect/services/_services.dart';
+import 'package:funconnect/shared/components/text_input.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
 
-import '../../../../core/presentation/widgets/core_widgets.dart';
-import '../../../../shared/components/custom_button.dart';
+import '../../../../../core/presentation/widgets/core_widgets.dart';
+import '../../../../../shared/components/custom_button.dart';
 import '../widgets/create_event_add_image_widget.dart';
 
 class CreateEventView extends StatelessWidget {
@@ -14,107 +18,130 @@ class CreateEventView extends StatelessWidget {
       backgroundColor: AppColors.black,
       appBar: AppBar(
         backgroundColor: AppColors.black,
+        leading: IconButton(
+          onPressed: () => locator<INavigationService>().back(),
+          icon: const Icon(
+            Icons.arrow_back_ios,
+            color: AppColors.white,
+            size: 14,
+          ),
+        ),
         title: Text(
           AppText.aTCreateEventAppBarText,
           style: AppTextStyles.whiteMedium,
         ),
+        centerTitle: true,
       ),
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            AppSpacer.xtraHeightSpace,
-            const Center(
-              child: CreateEventAddImageWidget(),
-            ),
-            AppSpacer.xtraHeightSpace,
-            AppTextForm(
-              onChanged: (String) {},
-              validator: (String) {
-                return null;
-              },
-              labelText: AppText.aTCreateEventTextFormTitleText,
-              hintText: AppText.aTCreateEventTextFormSubTitleText,
-            ),
-            AppTextForm(
-              onChanged: (String) {},
-              validator: (String) {
-                return null;
-              },
-              labelText: AppText.aTCreateEventDiscriptionFormText,
-              hintText: AppText.aTCreateEventDiscriptionFormSubText,
-              maxLines: 3,
-            ),
-            // SizedBox(
-            //   width: MediaQuery.of(context).size.width,
-            //   child: Row(
-            //     children: [
-            //       AppTextForm(
-            //         onChanged: (String) {},
-            //         validator: (String) {},
-            //         labelText: "Date",
-            //         hintText: "DD/MM/YYYY",
-            //       ),
-            //       AppTextForm(
-            //         onChanged: (String) {},
-            //         validator: (String) {},
-            //         labelText: "Time",
-            //         hintText: "10:00 AM",
-            //       ),
-            //     ],
-            //   ),
-            // ),
-            AppTextForm(
-              onChanged: (String) {},
-              validator: (String) {
-                return null;
-              },
-              labelText: AppText.aTCreateEventSeatFormText,
-              hintText: AppText.aTCreateEventSeatFormSubText,
-            ),
-            AppTextForm(
-              onChanged: (String) {},
-              validator: (String) {
-                return null;
-              },
-              labelText: AppText.aTCreateEventCategoryFormText,
-              hintText: AppText.aTCreateEventCategoryFormSubText,
-            ),
-            AppTextForm(
-              onChanged: (String) {},
-              validator: (String) {
-                return null;
-              },
-              labelText: AppText.aTCreateEventTypeFormText,
-              hintText: AppText.aTCreateEventTypeFormSubText,
-            ),
-            AppSpacer.xtraHeightSpace,
-            ListTile(
-              onTap: () {},
-              leading: const Icon(
-                Icons.location_on,
-                color: AppColors.exploreIconAsh,
+        physics: const BouncingScrollPhysics(),
+        child: Padding(
+          padding: EdgeInsets.only(left: 16.w, right: 16.w),
+          child: Column(
+            children: [
+              AppSpacer.xtraHeightSpace,
+              const Center(
+                child: CreateEventAddImageWidget(),
               ),
-              trailing: const Icon(
-                Icons.arrow_forward_ios_sharp,
-                color: AppColors.exploreIconAsh,
+              AppSpacer.xtraHeightSpace,
+              const AppTextField(
+                label: AppText.aTCreateEventTextFormTitleText,
+                hint: AppText.aTCreateEventTextFormSubTitleText,
+                textCapitalization: TextCapitalization.words,
               ),
-              title: Text(
-                AppText.aTCreateEventAddLocationText,
-                style: AppTextStyles.whiteMedium,
+              AppSpacer.xtraHeightSpace,
+              const AppTextField(
+                label: AppText.aTCreateEventDiscriptionFormText,
+                hint: AppText.aTCreateEventDiscriptionFormSubText,
+                textCapitalization: TextCapitalization.sentences,
+                maxLines: 5,
               ),
-            ),
-            AppSpacer.xtraHeightSpace,
-            const AppButton(
-              height: 50.0,
-              //width: MediaQuery.of(context).size.width - 50,
-              label: AppText.aTCreateEventCreateEventText,
-              labelColor: Colors.white,
-              buttonColor: AppColors.primary,
-              // function: () => context
-              //     .read<LocationAuthBloc>()
-              //     .add(RequestLocationPermissionEvent(),
-            ),
-          ],
+              AppSpacer.xtraHeightSpace,
+              Row(
+                children: [
+                  SizedBox(
+                    width: 190.w,
+                    child: const AppTextField(
+                      label: "Date",
+                      hint: "DD/MM/YYYY",
+                    ),
+                  ),
+                  AppSpacer.xtraWeightSpace,
+                  SizedBox(
+                    width: 190.w,
+                    child: const AppTextField(
+                      label: "Time",
+                      hint: "10:00 AM",
+                    ),
+                  ),
+                ],
+              ),
+              AppSpacer.xtraHeightSpace,
+              const AppTextField(
+                label: AppText.aTCreateEventSeatFormText,
+                hint: AppText.aTCreateEventSeatFormSubText,
+                keyboardType: TextInputType.number,
+              ),
+              AppSpacer.xtraHeightSpace,
+              AppDropdownField<String>(
+                items: const [
+                  "Concerts",
+                  "Games",
+                  "Picnics",
+                  "Sip & Paints",
+                  "Summit",
+                  "Beach/Pool",
+                  "Networking",
+                  "Tour",
+                  "Wine tasting",
+                  "Fashion",
+                  "Food",
+                ],
+                value: null,
+                onChanged: (val) {},
+                label: AppText.aTCreateEventCategoryFormText,
+                hint: AppText.aTCreateEventCategoryFormSubText,
+              ),
+              AppSpacer.xtraHeightSpace,
+              AppDropdownField<String>(
+                items: const [
+                  "Public",
+                  "Private",
+                ],
+                value: null,
+                onChanged: (val) {},
+                label: AppText.aTCreateEventTypeFormText,
+                hint: AppText.aTCreateEventTypeFormSubText,
+              ),
+              AppSpacer.xtraHeightSpace,
+              ListTile(
+                onTap: () {},
+                leading: const Icon(
+                  Icons.location_on,
+                  color: AppColors.exploreIconAsh,
+                ),
+                trailing: const Icon(
+                  Icons.arrow_forward_ios_sharp,
+                  color: AppColors.exploreIconAsh,
+                  size: 14,
+                ),
+                title: Text(
+                  AppText.aTCreateEventAddLocationText,
+                  style: AppTextStyles.whiteMedium,
+                ),
+              ),
+              AppSpacer.xtraHeightSpace,
+              const AppButton(
+                height: 50.0,
+                //width: MediaQuery.of(context).size.width - 50,
+                label: AppText.aTCreateEventCreateEventText,
+                labelColor: Colors.white,
+                buttonColor: AppColors.primary,
+                // function: () => context
+                //     .read<LocationAuthBloc>()
+                //     .add(RequestLocationPermissionEvent(),
+              ),
+            ],
+          ),
         ),
       ),
     );

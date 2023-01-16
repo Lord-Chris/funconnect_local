@@ -1,5 +1,9 @@
 import 'package:funconnect/features/authentication/data/data_sources/http_authentication_datasource.dart';
 import 'package:funconnect/features/authentication/data/data_sources/i_authentication_datasource.dart';
+import 'package:funconnect/features/events/data/data_sources/http_events_data_source.dart';
+import 'package:funconnect/features/events/data/data_sources/i_events_data_source.dart';
+import 'package:funconnect/features/events/data/repositories/events_repository.dart';
+import 'package:funconnect/features/events/data/repositories/i_events_repository.dart';
 import 'package:funconnect/services/_services.dart';
 import 'package:get_it/get_it.dart';
 
@@ -21,10 +25,16 @@ Future<void> setUpLocator() async {
   locator.registerLazySingleton<IAuthenticationRepository>(
     () => isMock ? MockAuthenticationRepository() : AuthenticationRepository(),
   );
+  locator.registerLazySingleton<IEventsRepository>(
+    () => EventsRepository(),
+  );
 
   // DataSources
   locator.registerLazySingleton<IAuthenticationDataSource>(
     () => HttpAuthenticationDataSource(),
+  );
+  locator.registerLazySingleton<IEventsDataSource>(
+    () => HttpEventsDataSource(),
   );
 }
 
