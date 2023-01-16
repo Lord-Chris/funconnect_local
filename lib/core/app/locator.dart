@@ -15,6 +15,8 @@ const bool isMock = false;
 Future<void> setUpLocator() async {
   // Services
   locator.registerLazySingleton<INavigationService>(() => NavigationService());
+  locator.registerLazySingleton<IDialogAndSheetService>(
+      () => DialogAndSheetService());
   locator.registerLazySingleton<INetworkService>(() => NetworkService());
   locator.registerLazySingleton<ILocationService>(() => LocationService());
   await _setUpLocalStorage();

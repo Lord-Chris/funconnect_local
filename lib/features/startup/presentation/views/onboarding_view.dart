@@ -12,7 +12,7 @@ import 'package:funconnect/shared/constants/_constants.dart';
 
 import '../../../../core/presentation/widgets/app_orange_button.dart';
 import '../../models/onBoarding_carousel_model.dart';
-import 'video_player_widget.dart';
+import '../../../../shared/components/video_player_widget.dart';
 
 class OnboardingView extends StatefulHookWidget {
   const OnboardingView({Key? key}) : super(key: key);

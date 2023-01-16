@@ -11,6 +11,8 @@ import 'package:funconnect/features/authentication/presentation/blocs/profile_se
 import 'package:funconnect/models/failure.dart';
 import 'package:funconnect/services/_services.dart';
 
+import '../../../../../shared/dialogs/status_dialog.dart';
+
 class ProfileSetupBloc extends Bloc<ProfileSetupEvent, ProfileSetupState> {
   ProfileSetupBloc() : super(ProfileSetupInitialState()) {
     on<AddImageEvent>(_onAddImageEvent);
@@ -19,6 +21,7 @@ class ProfileSetupBloc extends Bloc<ProfileSetupEvent, ProfileSetupState> {
   }
 
   final _navigationService = locator<INavigationService>();
+  final _dialogAndSheetService = locator<IDialogAndSheetService>();
   AppLocation? location;
 
   FutureOr<void> _onAddImageEvent(
@@ -43,8 +46,10 @@ class ProfileSetupBloc extends Bloc<ProfileSetupEvent, ProfileSetupState> {
           location == null ? event.param : event.param.addLocation(location!);
       await ProfileSetupUseCase().call(param);
       _navigationService.toNamed(Routes.interestViewRoute);
-    } on Failure {
+    } on Failure catch (e) {
       emit(ProfileSetupErrorState());
+      _dialogAndSheetService.showAppDialog(StatusDialog(
+          isError: true, title: "Error Setting up profile", body: e.message));
     } finally {
       emit(ProfileSetupInitialState());
     }

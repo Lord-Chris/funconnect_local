@@ -9,6 +9,7 @@ import 'package:funconnect/features/authentication/presentation/blocs/interest_b
 import 'package:funconnect/features/authentication/presentation/blocs/interest_bloc/interest_state.dart';
 import 'package:funconnect/models/failure.dart';
 import 'package:funconnect/services/_services.dart';
+import 'package:funconnect/shared/dialogs/status_dialog.dart';
 
 class InterestsBloc extends Bloc<InterestsEvent, InterestsState> {
   InterestsBloc() : super(const InterestsLoadingState()) {
@@ -17,6 +18,7 @@ class InterestsBloc extends Bloc<InterestsEvent, InterestsState> {
     on<ContinueTapEvent>(_onContinueTapEvent);
   }
   final _navigationService = locator<INavigationService>();
+  final _dialogAndSheetService = locator<IDialogAndSheetService>();
 
   FutureOr<void> _onLoadInterestsEvent(
     LoadInterestsEvent event,
@@ -55,11 +57,13 @@ class InterestsBloc extends Bloc<InterestsEvent, InterestsState> {
       ));
       await SaveInterestsUseCases().call(NoParams());
       _navigationService.offAllNamed(Routes.dashboardViewRoute, (_) => false);
-    } on Failure {
+    } on Failure catch (e) {
       emit(InterestsErrorState(
         interests: state.interests,
         selectedInterest: state.selectedInterest,
       ));
+      _dialogAndSheetService.showAppDialog(StatusDialog(
+          isError: true, title: "Error Saving Interests", body: e.message));
     } finally {
       emit(InterestsSuccessState(
         interests: state.interests,

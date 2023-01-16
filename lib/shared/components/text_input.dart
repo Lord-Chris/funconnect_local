@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
 
@@ -20,6 +21,7 @@ class AppTextField extends StatelessWidget {
   final Function()? function;
   final void Function(String)? onChanged;
   final FloatingLabelBehavior? floatingLabelBehavior;
+  final List<TextInputFormatter>? inputFormatters;
 
   const AppTextField({
     Key? key,
@@ -42,6 +44,7 @@ class AppTextField extends StatelessWidget {
     this.function,
     this.onChanged,
     this.floatingLabelBehavior,
+    this.inputFormatters,
   })  : assert(initialValue == null || controller == null),
         super(key: key);
 
@@ -58,6 +61,7 @@ class AppTextField extends StatelessWidget {
       readOnly: readOnly,
       expands: expands,
       maxLines: maxLines,
+      inputFormatters: inputFormatters,
       onChanged: onChanged,
       minLines: minLines,
       maxLength: maxLength,
@@ -230,10 +234,10 @@ class AppDropdownField<T extends Object> extends StatelessWidget {
 class AppSearchField extends StatelessWidget {
   final String? hintText;
   final String? labelText;
+  final void Function()? onPressed;
 
-  void Function()? onPressed;
-
-  AppSearchField({Key? key, this.hintText, this.labelText, this.onPressed})
+  const AppSearchField(
+      {Key? key, this.hintText, this.labelText, this.onPressed})
       : super(key: key);
 
   @override
