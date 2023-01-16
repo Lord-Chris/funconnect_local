@@ -10,6 +10,8 @@ import 'package:funconnect/features/authentication/presentation/blocs/verify_ema
 import 'package:funconnect/models/failure.dart';
 import 'package:funconnect/services/_services.dart';
 
+import '../../../../../shared/dialogs/status_dialog.dart';
+
 class VerifyEmailBloc extends Bloc<VerifyEmailEvent, VerifyEmailState> {
   VerifyEmailBloc() : super(VerifyEmailInitialState()) {
     on<ResendCodeEvent>(_onResendCodeEvent);
@@ -21,6 +23,7 @@ class VerifyEmailBloc extends Bloc<VerifyEmailEvent, VerifyEmailState> {
   static const otpTimer = 10;
   final _navigationService = locator<INavigationService>();
   final _authenticationRepo = locator<IAuthenticationRepository>();
+  final _dialogAndSheetService = locator<IDialogAndSheetService>();
 
   FutureOr<void> _onResendCodeEvent(
     ResendCodeEvent event,
@@ -46,8 +49,10 @@ class VerifyEmailBloc extends Bloc<VerifyEmailEvent, VerifyEmailState> {
       ));
       _navigationService.offNamed(Routes.profileSetupViewRoute);
       emit(VerifyEmailSuccessState());
-    } on Failure {
+    } on Failure catch (e) {
       emit(VerifyEmailErrorState());
+      _dialogAndSheetService.showAppDialog(StatusDialog(
+          isError: true, title: "Error Verifying OTP", body: e.message));
     }
   }
 

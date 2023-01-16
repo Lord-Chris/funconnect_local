@@ -12,32 +12,34 @@ class EmailVerifiedScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: AppBlackModalWidget(
-      imageContainerHeight: 400.0,
-      modalHeight: 350,
-      children: [
-        Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const Text(
-              AppText.aTAuthEmailIDVerificationText,
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                fontFamily: AppFonts.merriweather,
-                color: AppColors.white,
+      body: AppBlackModalWidget(
+        imageContainerHeight: 400.0,
+        modalHeight: 350,
+        children: [
+          Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const Text(
+                AppText.aTAuthEmailIDVerificationText,
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: AppFonts.merriweather,
+                  color: AppColors.white,
+                ),
               ),
-            ),
-            Text(AppText.aTAuthEmailIDVerificationSuccessText,
-                textAlign: TextAlign.center, style: AppTextStyles.whiteMedium),
-            const SizedBox(height: 62),
-            const AppOrangeBtn(
-              label: AppText.aTAuthContinueText,
-            ),
-          ],
-        ),
-      ],
-    ));
+              Text(AppText.aTAuthEmailIDVerificationSuccessText,
+                  textAlign: TextAlign.center,
+                  style: AppTextStyles.whiteMedium),
+              const SizedBox(height: 62),
+              const AppOrangeBtn(
+                label: AppText.aTAuthContinueText,
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
   }
 }
