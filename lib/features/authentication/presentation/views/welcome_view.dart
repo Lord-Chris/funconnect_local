@@ -136,6 +136,7 @@ class WelcomeView extends HookWidget {
                                 controller: controller,
                                 validator: context.validateEmail,
                                 keyboardType: TextInputType.emailAddress,
+                                textCapitalization: TextCapitalization.none,
                                 prefix: Align(
                                   widthFactor: 1.0,
                                   heightFactor: 1.0,

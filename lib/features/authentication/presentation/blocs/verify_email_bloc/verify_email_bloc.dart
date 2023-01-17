@@ -21,7 +21,6 @@ class VerifyEmailBloc extends Bloc<VerifyEmailEvent, VerifyEmailState> {
   }
 
   static const otpTimer = 10;
-  final _navigationService = locator<INavigationService>();
   final _authenticationRepo = locator<IAuthenticationRepository>();
   final _dialogAndSheetService = locator<IDialogAndSheetService>();
 
@@ -47,7 +46,6 @@ class VerifyEmailBloc extends Bloc<VerifyEmailEvent, VerifyEmailState> {
         email: event.email.trim(),
         otp: event.otp.trim(),
       ));
-      _navigationService.offNamed(Routes.profileSetupViewRoute);
       emit(VerifyEmailSuccessState());
     } on Failure catch (e) {
       emit(VerifyEmailErrorState());
