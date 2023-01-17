@@ -7,6 +7,7 @@ import 'package:funconnect/features/authentication/presentation/views/interest_v
 import 'package:funconnect/features/authentication/presentation/views/verify_email_view.dart';
 import 'package:funconnect/features/authentication/presentation/views/welcome_view.dart';
 import 'package:funconnect/features/dashboard/presentation/views/dashboard_view.dart';
+import 'package:funconnect/features/events/domain/entities/event_model.dart';
 import 'package:funconnect/features/events/presentation/views/booking_view.dart';
 import 'package:funconnect/features/events/presentation/views/checkout_view.dart';
 import 'package:funconnect/features/startup/presentation/views/onboarding_view.dart';
@@ -71,7 +72,10 @@ class Routes {
       case dashboardViewRoute:
         return MaterialPageRoute(builder: (_) => const DashboardView());
       case eventDescriptionRoute:
-        return MaterialPageRoute(builder: (_) => const EventDescriptionView());
+        final event = settings.arguments as EventModel;
+        return MaterialPageRoute(
+          builder: (_) => EventDescriptionView(event: event),
+        );
       case bookingRoute:
         return MaterialPageRoute(builder: (_) => const BookingView());
       case checkoutRoute:

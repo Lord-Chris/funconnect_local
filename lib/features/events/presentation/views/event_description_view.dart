@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:funconnect/core/app/_app.dart';
+import 'package:funconnect/core/extensions/_extensions.dart';
 import 'package:funconnect/core/presentation/widgets/app_spacer.dart';
+import 'package:funconnect/features/events/domain/entities/event_model.dart';
 import 'package:funconnect/services/_services.dart';
 import 'package:funconnect/shared/components/app_network_image.dart';
 import 'package:funconnect/shared/components/custom_button.dart';
@@ -17,7 +19,11 @@ import '../../../dashboard/presentation/widgets/home_categories_lable_widget.dar
 import '../../../dashboard/presentation/widgets/home_categories_small_widget.dart';
 
 class EventDescriptionView extends StatelessWidget {
-  const EventDescriptionView({Key? key}) : super(key: key);
+  final EventModel event;
+  const EventDescriptionView({
+    Key? key,
+    required this.event,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -33,15 +39,15 @@ class EventDescriptionView extends StatelessWidget {
                   child: ScrollableColumn(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const AppNetworkImage(
-                        size: Size.fromHeight(350),
-                        url: "AppConstants.mockImage",
+                      AppNetworkImage(
+                        size: const Size.fromHeight(350),
+                        url: event.cover,
                         borderRadius: 20,
                         fit: BoxFit.cover,
                       ),
                       AppSpacer.xtraHeightSpace,
                       Text(
-                        "Food is Art (The art of food photography + Street food fair)",
+                        event.title,
                         style: AppTextStyles.semiBold24,
                       ),
                       AppSpacer.xtraHeightSpace,
@@ -57,7 +63,7 @@ class EventDescriptionView extends StatelessWidget {
                               ),
                             ),
                             child: Text(
-                              "Private",
+                              event.type.capitalize(),
                               style: AppTextStyles.regular14.copyWith(
                                 color: AppColors.gray97,
                               ),
@@ -71,7 +77,8 @@ class EventDescriptionView extends StatelessWidget {
                               color: AppColors.primary,
                             ),
                             child: Text(
-                              "Free",
+                              double.tryParse(event.price)?.toString() ??
+                                  "Free",
                               style: AppTextStyles.regular14.copyWith(
                                 color: AppColors.black,
                               ),
@@ -176,7 +183,7 @@ class EventDescriptionView extends StatelessWidget {
                       AppSpacer.smallHeightSpace,
                       AppSpacer.smallHeightSpace,
                       Text(
-                        DumbAppStrings.eventDescriptionAboutDescriptionText,
+                        event.description,
                         style: AppTextStyles.regular14,
                       ),
                       AppSpacer.xtraHeightSpace,
@@ -292,7 +299,8 @@ class EventDescriptionView extends StatelessWidget {
                       ),
                       Expanded(
                         child: Text(
-                          "Food is Art",
+                          event.title,
+                          maxLines: 1,
                           textAlign: TextAlign.center,
                           style: AppTextStyles.semiBold24,
                         ),

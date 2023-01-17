@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:funconnect/core/app/_app.dart';
 import 'package:funconnect/features/events/domain/entities/event_model.dart';
-import 'package:funconnect/services/_services.dart';
+import 'package:funconnect/features/events/presentation/blocs/events_bloc/events_bloc.dart';
 import 'package:funconnect/shared/components/app_network_image.dart';
 import 'package:funconnect/shared/constants/app_constants.dart';
 
 import '../../../../core/presentation/widgets/core_widgets.dart';
 import '../../../../shared/constants/colors.dart';
 import '../../../../shared/constants/textstyles.dart';
+import '../blocs/events_bloc/events_event.dart';
 
 class EventsPageEventWidget extends StatelessWidget {
   final EventModel event;
@@ -24,7 +25,7 @@ class EventsPageEventWidget extends StatelessWidget {
       padding: EdgeInsets.only(bottom: 16.0.h),
       child: InkWell(
         onTap: () =>
-            locator<INavigationService>().toNamed(Routes.eventDescriptionRoute),
+            context.read<EventsBloc>().add(EventClickedEvent(event: event)),
         child: Container(
           height: 200.0.h,
           decoration: BoxDecoration(
