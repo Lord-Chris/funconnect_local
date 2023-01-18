@@ -1,4 +1,5 @@
 export 'app_loader.dart';
+export 'app_switcher.dart';
 export 'card_view.dart';
 export 'custom_button.dart';
 export 'headers.dart';

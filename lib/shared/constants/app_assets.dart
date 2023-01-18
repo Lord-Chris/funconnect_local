@@ -20,4 +20,9 @@ class AppAssets {
   static const activeProfileIconSvg = "assets/icons/active_profile.svg";
 
   static const calenderSvg = "assets/svgs/calender.svg";
+
+  // Profile
+  static const twitterLogo = "assets/svgs/twitter_logo.svg";
+  static const instagramLogo = "assets/images/instagram_logo.png";
+  static const telegramLogo = "assets/images/telegram_logo.png";
 }

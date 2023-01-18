@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:funconnect/features/dashboard/presentation/views/favourites_view.dart';
 import 'package:funconnect/features/dashboard/presentation/views/home_view.dart';
+import 'package:funconnect/features/profile/presentation/views/profile_view.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
 
 import '../../../events/presentation/views/events_view.dart';
@@ -20,7 +21,7 @@ class _DashboardViewState extends State<DashboardView> {
     FavouritesView(),
     EventsView(),
     ExploreView(),
-    SizedBox(),
+    ProfileView(),
   ];
 
   int _index = 0;
