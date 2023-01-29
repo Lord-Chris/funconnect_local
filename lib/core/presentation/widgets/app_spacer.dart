@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+@Deprecated("Use `Spacing` instead")
 class AppSpacer {
   static Widget normalWeightSpace = SizedBox(
     width: 8.0.w,

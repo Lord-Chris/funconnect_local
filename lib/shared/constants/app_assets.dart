@@ -22,4 +22,9 @@ class AppAssets {
 
   static const calenderSvg = "assets/svgs/calender.svg";
   static const chatIconSvg = "assets/svgs/chat_icon.svg";
+
+  // Profile
+  static const twitterLogo = "assets/svgs/twitter_logo.svg";
+  static const instagramLogo = "assets/images/instagram_logo.png";
+  static const telegramLogo = "assets/images/telegram_logo.png";
 }

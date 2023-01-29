@@ -22,7 +22,7 @@ class AppButton extends StatelessWidget {
     this.customChild,
     this.buttonColor = AppColors.primary,
     required this.label,
-    this.labelColor = AppColors.white,
+    this.labelColor,
     this.disabledColor,
     this.borderColor,
     this.isCollapsed = false,

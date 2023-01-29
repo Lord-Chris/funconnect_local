@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:funconnect/features/dashboard/presentation/views/home_view.dart';
 import 'package:funconnect/features/events/presentation/blocs/events_bloc/events_bloc.dart';
 import 'package:funconnect/features/fun_connect/saved/saved_view.dart';
+import 'package:funconnect/features/profile/presentation/views/profile_view.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
 
 import '../../../events/presentation/views/events_view.dart';
@@ -36,7 +37,7 @@ class _DashboardViewState extends State<DashboardView> {
           child: const EventsView(),
         ),
         const SavedView(),
-        const SizedBox(),
+        const ProfileView(),
       ][_index],
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: AppColors.black,
