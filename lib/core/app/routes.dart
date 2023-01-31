@@ -12,7 +12,6 @@ import 'package:funconnect/features/events/presentation/views/booking_view.dart'
 import 'package:funconnect/features/events/presentation/views/checkout_view.dart';
 import 'package:funconnect/features/startup/presentation/views/onboarding_view.dart';
 import 'package:funconnect/features/startup/presentation/views/splash_view.dart';
-import 'package:funconnect/success_view.dart';
 
 import '../../features/events/presentation/views/create_event_view.dart';
 import '../../features/events/presentation/views/event_description_view.dart';
@@ -23,11 +22,9 @@ class Routes {
   static const onboardingRoute = '/onboarding';
   static const welcomeViewRoute = '/welcome-view';
   static const profileSetupViewRoute = '/profile_setup';
-  // static const emailSignInRoute = '/email-sign-in';
   static const verifyEmailRoute = '/verify-email';
   static const emailVerifiedRoute = '/email-verified';
   static const locationAuthRoute = '/location-auth';
-  static const successViewRoute = '/success-view';
   static const setUpProfile = '/setUp-Profile';
   static const interestViewRoute = '/interests';
   static const dashboardViewRoute = '/dashboard-view';
@@ -47,8 +44,6 @@ class Routes {
         return MaterialPageRoute(builder: (_) => const OnboardingView());
       case welcomeViewRoute:
         return MaterialPageRoute(builder: (_) => const WelcomeView());
-      // case emailSignInRoute:
-      //   return MaterialPageRoute(builder: (_) => const EmailSigninView());
       case verifyEmailRoute:
         final email = settings.arguments as String;
         return MaterialPageRoute(
@@ -63,12 +58,10 @@ class Routes {
           view: const InterestView(),
           bloc: InterestsBloc(),
         );
-      // case locationAuthRoute:
-      //   return MaterialPageRoute(builder: (_) => const LocationAuthView());
+
+      // Events
       case createEventViewRoute:
         return MaterialPageRoute(builder: (_) => const CreateEventView());
-      case successViewRoute:
-        return MaterialPageRoute(builder: (_) => const SuccessView());
       case dashboardViewRoute:
         return MaterialPageRoute(builder: (_) => const DashboardView());
       case eventDescriptionRoute:
