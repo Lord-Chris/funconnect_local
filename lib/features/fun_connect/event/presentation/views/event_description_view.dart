@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
 
-import '../../../../dashboard/presentation/widgets/home_categories_lable_widget.dart';
-import '../../../../dashboard/presentation/widgets/home_categories_small_widget.dart';
+import '../../../../places/presentation/widgets/home_categories_widget.dart';
+import '../../../../places/presentation/widgets/home_categories_small_widget.dart';
 
 class EventDescription extends StatelessWidget {
   const EventDescription({Key? key}) : super(key: key);

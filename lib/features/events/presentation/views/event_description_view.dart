@@ -12,8 +12,8 @@ import 'package:funconnect/shared/components/custom_button.dart';
 import 'package:funconnect/shared/components/scrollable_column.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
 
-import '../../../dashboard/presentation/widgets/home_categories_lable_widget.dart';
-import '../../../dashboard/presentation/widgets/home_categories_small_widget.dart';
+import '../../../places/presentation/widgets/home_categories_widget.dart';
+import '../../../places/presentation/widgets/home_categories_small_widget.dart';
 
 class EventDescriptionView extends StatelessWidget {
   final EventModel event;

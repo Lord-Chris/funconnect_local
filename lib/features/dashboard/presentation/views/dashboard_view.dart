@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:funconnect/features/dashboard/presentation/views/home_view.dart';
+import 'package:funconnect/features/places/presentation/views/home_view.dart';
 import 'package:funconnect/features/events/presentation/blocs/events_bloc/events_bloc.dart';
 import 'package:funconnect/features/fun_connect/saved/saved_view.dart';
 import 'package:funconnect/features/profile/presentation/views/profile_view.dart';

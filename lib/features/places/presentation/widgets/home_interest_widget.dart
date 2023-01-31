@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:funconnect/shared/components/app_network_image.dart';
 
 import '../../../../shared/constants/_constants.dart';
 
@@ -19,8 +20,11 @@ class HomeInterestWidget extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            const CircleAvatar(
-              radius: 10,
+            const AppNetworkImage(
+              size: Size.fromRadius(10),
+              url: AppConstants.mockImage,
+              fit: BoxFit.cover,
+              isCircular: true,
             ),
             Spacing.horizSmall(),
             Text(
@@ -28,6 +32,7 @@ class HomeInterestWidget extends StatelessWidget {
               maxLines: 1,
               style: AppTextStyles.regular12,
             ),
+            Spacing.horizTiny(),
           ],
         ),
       ),
