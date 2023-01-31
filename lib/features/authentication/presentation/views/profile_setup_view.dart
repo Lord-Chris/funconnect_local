@@ -10,8 +10,8 @@ import 'package:funconnect/features/authentication/presentation/blocs/profile_se
 import 'package:funconnect/shared/components/text_input.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
 
-import '../../../../core/presentation/widgets/app_black_modal.dart';
 import '../../../../core/presentation/widgets/app_orange_button.dart';
+import '../widgets/app_black_modal.dart';
 
 class ProfileSetUpView extends HookWidget {
   ProfileSetUpView({super.key});

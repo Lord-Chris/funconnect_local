@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:funconnect/shared/components/video_player_widget.dart';
 
-import '../../../shared/constants/colors.dart';
+import '../../../../shared/constants/colors.dart';
 
 class AppBlackModalWidget extends StatelessWidget {
   final List<Widget> children;

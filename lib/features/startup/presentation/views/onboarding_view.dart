@@ -12,7 +12,6 @@ import 'package:funconnect/shared/constants/_constants.dart';
 
 import '../../../../core/presentation/widgets/app_orange_button.dart';
 import '../../../../shared/components/video_player_widget.dart';
-import '../../models/onBoarding_carousel_model.dart';
 
 class OnboardingView extends StatefulHookWidget {
   const OnboardingView({Key? key}) : super(key: key);
@@ -68,7 +67,7 @@ class _OnboardingViewState extends State<OnboardingView> {
                         .add(PageChangedEvent(page: val)),
                     controller: controller,
                     physics: const ClampingScrollPhysics(),
-                    children: onBoardingCarouselItems.map((e) {
+                    children: List.filled(3, false).map((e) {
                       return const VideoPlayerWidget();
                     }).toList(),
                   ),
