@@ -23,7 +23,7 @@ class HomeInterestWidget extends StatelessWidget {
             const CircleAvatar(
               radius: 10,
             ),
-            AppSpacer.normalWeightSpace,
+            Spacing.horizSmall(),
             Text(
               "Fine dining",
               maxLines: 1,

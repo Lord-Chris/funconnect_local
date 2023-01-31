@@ -51,7 +51,7 @@ class BookingView extends StatelessWidget {
                           ),
                         ),
                       ),
-                      AppSpacer.xtraHeightSpace,
+                      Spacing.vertRegular(),
                       Text(
                         "Food is Art (The art of food photography + Street food fair)",
                         style: AppTextStyles.semiBold20,
@@ -69,7 +69,7 @@ class BookingView extends StatelessWidget {
                                   "Visitors ticket",
                                   style: AppTextStyles.regular16,
                                 ),
-                                AppSpacer.normalHeightSpace,
+                                Spacing.vertSmall(),
                                 Row(
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
@@ -88,7 +88,7 @@ class BookingView extends StatelessWidget {
                                         ),
                                       ),
                                     ),
-                                    AppSpacer.normalWeightSpace,
+                                    Spacing.horizSmall(),
                                     Text(
                                       "NGN 0.00",
                                       style: AppTextStyles.regular16.copyWith(
@@ -98,7 +98,7 @@ class BookingView extends StatelessWidget {
                                     )
                                   ],
                                 ),
-                                AppSpacer.normalHeightSpace,
+                                Spacing.vertSmall(),
                                 Text(
                                   "Booking ends Oct 13, 2022",
                                   style: AppTextStyles.regular14.copyWith(
@@ -127,9 +127,9 @@ class BookingView extends StatelessWidget {
                       )
                     ],
                   ),
-                  AppSpacer.xtraHeightSpace,
+                  Spacing.vertRegular(),
                   const Divider(),
-                  AppSpacer.xtraHeightSpace,
+                  Spacing.vertRegular(),
                   const Expanded(
                     child: AppNetworkImage(
                       url: AppConstants.mockImage,
@@ -152,7 +152,7 @@ class BookingView extends StatelessWidget {
                     color: AppColors.gray97,
                   ),
                 ),
-                AppSpacer.xtraWeightSpace,
+                Spacing.horizRegular(),
                 Expanded(
                   child: AppButton(
                     label: "Request",

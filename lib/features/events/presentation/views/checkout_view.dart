@@ -36,7 +36,7 @@ class CheckoutView extends StatelessWidget {
                   Icons.error,
                   color: AppColors.primary,
                 ),
-                AppSpacer.normalWeightSpace,
+                Spacing.horizSmall(),
                 Expanded(
                   child: Text(
                     "Please accept Funconnect terms of service to complete this purchase.",
@@ -172,7 +172,7 @@ class CheckoutView extends StatelessWidget {
                 AppAssets.chatIconSvg,
                 color: AppColors.gray97,
               ),
-              AppSpacer.normalWeightSpace,
+              Spacing.horizSmall(),
               Expanded(
                 child: Text.rich(
                   TextSpan(
@@ -211,7 +211,7 @@ class CheckoutView extends StatelessWidget {
                     color: AppColors.gray97,
                   ),
                 ),
-                AppSpacer.xtraWeightSpace,
+                Spacing.horizRegular(),
                 const Expanded(
                   child: AppButton(
                     label: "Register",
@@ -238,7 +238,7 @@ class CheckoutView extends StatelessWidget {
           color: AppColors.gray97,
           width: 15,
         ),
-        AppSpacer.normalWeightSpace,
+        Spacing.horizSmall(),
         Expanded(
           child: Text(
             text,

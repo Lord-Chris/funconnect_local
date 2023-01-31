@@ -32,7 +32,7 @@ class EventDescription extends StatelessWidget {
               onPressed: () {},
             ),
           ),
-          AppSpacer.xtraWeightSpace,
+          Spacing.horizRegular(),
         ],
       ),
       body: SingleChildScrollView(
@@ -49,12 +49,12 @@ class EventDescription extends StatelessWidget {
                 ),
               ),
             ),
-            AppSpacer.xtraHeightSpace,
+            Spacing.vertRegular(),
             Text(
               DumbAppStrings.eventDescriptionSubTitleText,
               style: AppTextStyles.whiteBold.copyWith(fontSize: 24.0.sp),
             ),
-            AppSpacer.xtraHeightSpace,
+            Spacing.vertRegular(),
             Row(
               children: [
                 Container(
@@ -78,7 +78,7 @@ class EventDescription extends StatelessWidget {
                     ),
                   ),
                 ),
-                AppSpacer.normalWeightSpace,
+                Spacing.horizSmall(),
                 Container(
                   height: 30.0.h,
                   decoration: BoxDecoration(
@@ -99,7 +99,7 @@ class EventDescription extends StatelessWidget {
                 ),
               ],
             ),
-            AppSpacer.xtraHeightSpace,
+            Spacing.vertRegular(),
             ListTile(
               leading: const CircleAvatar(),
               title: Text(
@@ -111,14 +111,14 @@ class EventDescription extends StatelessWidget {
                 style: AppTextStyles.whitelight,
               ),
             ),
-            AppSpacer.xtraHeightSpace,
+            Spacing.vertRegular(),
             Row(
               children: [
                 const Icon(
                   Icons.calendar_month,
                   color: AppColors.ash,
                 ),
-                AppSpacer.smallWeightSpace,
+                Spacing.horizTiny(),
                 Text(
                   DumbAppStrings.eventDescriptionDateAndTimeText,
                   style: AppTextStyles.whitelight,
@@ -133,19 +133,19 @@ class EventDescription extends StatelessWidget {
                     AppTextStyles.whiteBold.copyWith(color: AppColors.primary),
               ),
             ),
-            AppSpacer.xtraHeightSpace,
+            Spacing.vertRegular(),
             Text(
               DumbAppStrings.eventDescriptionAboutText,
               style: AppTextStyles.whiteBold,
             ),
-            AppSpacer.smallHeightSpace,
-            AppSpacer.smallHeightSpace,
+            Spacing.vertTiny(),
+            Spacing.vertTiny(),
             Text(
               DumbAppStrings.eventDescriptionAboutDescriptionText,
               style: AppTextStyles.whitelight.copyWith(fontSize: 14.0.sp),
             ),
-            AppSpacer.xtraHeightSpace,
-            AppSpacer.xtraHeightSpace,
+            Spacing.vertRegular(),
+            Spacing.vertRegular(),
             Container(
               height: 300.0.h,
               width: MediaQuery.of(context).size.width,
@@ -157,12 +157,12 @@ class EventDescription extends StatelessWidget {
                   CircleAvatar(
                     radius: 50.0.r,
                   ),
-                  AppSpacer.xtraHeightSpace,
+                  Spacing.vertRegular(),
                   Text(
                     DumbAppStrings.eventDescriptionFirstEventText,
                     style: AppTextStyles.whiteBold.copyWith(fontSize: 24.0.sp),
                   ),
-                  AppSpacer.xtraHeightSpace,
+                  Spacing.vertRegular(),
                   Text(
                     DumbAppStrings.eventDescriptionSubText1,
                     style: AppTextStyles.whiteBold.copyWith(
@@ -176,20 +176,20 @@ class EventDescription extends StatelessWidget {
                 ],
               ),
             ),
-            AppSpacer.xtraHeightSpace,
-            AppSpacer.xtraHeightSpace,
-            AppSpacer.xtraHeightSpace,
-            AppSpacer.xtraHeightSpace,
+            Spacing.vertRegular(),
+            Spacing.vertRegular(),
+            Spacing.vertRegular(),
+            Spacing.vertRegular(),
             HomeViewCategoriesWidget(
               label: DumbAppStrings.eventDescriptionMoreLikeText,
               child: const HomeViewCategoriesSmallSubWidget(),
             ),
-            AppSpacer.xtraHeightSpace,
-            AppSpacer.xtraHeightSpace,
-            AppSpacer.xtraHeightSpace,
-            AppSpacer.xtraHeightSpace,
-            AppSpacer.xtraHeightSpace,
-            AppSpacer.xtraHeightSpace,
+            Spacing.vertRegular(),
+            Spacing.vertRegular(),
+            Spacing.vertRegular(),
+            Spacing.vertRegular(),
+            Spacing.vertRegular(),
+            Spacing.vertRegular(),
           ],
         ),
       ),

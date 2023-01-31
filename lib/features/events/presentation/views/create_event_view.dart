@@ -38,24 +38,24 @@ class CreateEventView extends StatelessWidget {
           padding: EdgeInsets.only(left: 16.w, right: 16.w),
           child: Column(
             children: [
-              AppSpacer.xtraHeightSpace,
+              Spacing.vertRegular(),
               const Center(
                 child: CreateEventAddImageWidget(),
               ),
-              AppSpacer.xtraHeightSpace,
+              Spacing.vertRegular(),
               const AppTextField(
                 label: AppText.aTCreateEventTextFormTitleText,
                 hint: AppText.aTCreateEventTextFormSubTitleText,
                 textCapitalization: TextCapitalization.words,
               ),
-              AppSpacer.xtraHeightSpace,
+              Spacing.vertRegular(),
               const AppTextField(
                 label: AppText.aTCreateEventDiscriptionFormText,
                 hint: AppText.aTCreateEventDiscriptionFormSubText,
                 textCapitalization: TextCapitalization.sentences,
                 maxLines: 5,
               ),
-              AppSpacer.xtraHeightSpace,
+              Spacing.vertRegular(),
               Row(
                 children: [
                   SizedBox(
@@ -65,7 +65,7 @@ class CreateEventView extends StatelessWidget {
                       hint: "DD/MM/YYYY",
                     ),
                   ),
-                  AppSpacer.xtraWeightSpace,
+                  Spacing.horizRegular(),
                   SizedBox(
                     width: 190.w,
                     child: const AppTextField(
@@ -75,13 +75,13 @@ class CreateEventView extends StatelessWidget {
                   ),
                 ],
               ),
-              AppSpacer.xtraHeightSpace,
+              Spacing.vertRegular(),
               const AppTextField(
                 label: AppText.aTCreateEventSeatFormText,
                 hint: AppText.aTCreateEventSeatFormSubText,
                 keyboardType: TextInputType.number,
               ),
-              AppSpacer.xtraHeightSpace,
+              Spacing.vertRegular(),
               AppDropdownField<String>(
                 items: const [
                   "Concerts",
@@ -101,7 +101,7 @@ class CreateEventView extends StatelessWidget {
                 label: AppText.aTCreateEventCategoryFormText,
                 hint: AppText.aTCreateEventCategoryFormSubText,
               ),
-              AppSpacer.xtraHeightSpace,
+              Spacing.vertRegular(),
               AppDropdownField<String>(
                 items: const [
                   "Public",
@@ -112,7 +112,7 @@ class CreateEventView extends StatelessWidget {
                 label: AppText.aTCreateEventTypeFormText,
                 hint: AppText.aTCreateEventTypeFormSubText,
               ),
-              AppSpacer.xtraHeightSpace,
+              Spacing.vertRegular(),
               ListTile(
                 onTap: () {},
                 leading: const Icon(
@@ -129,7 +129,7 @@ class CreateEventView extends StatelessWidget {
                   style: AppTextStyles.whiteMedium,
                 ),
               ),
-              AppSpacer.xtraHeightSpace,
+              Spacing.vertRegular(),
               const AppButton(
                 height: 50.0,
                 //width: MediaQuery.of(context).size.width - 50,

@@ -45,12 +45,12 @@ class EventDescriptionView extends StatelessWidget {
                         borderRadius: 20,
                         fit: BoxFit.cover,
                       ),
-                      AppSpacer.xtraHeightSpace,
+                      Spacing.vertRegular(),
                       Text(
                         event.title,
                         style: AppTextStyles.semiBold24,
                       ),
-                      AppSpacer.xtraHeightSpace,
+                      Spacing.vertRegular(),
                       Row(
                         children: [
                           Container(
@@ -69,7 +69,7 @@ class EventDescriptionView extends StatelessWidget {
                               ),
                             ),
                           ),
-                          AppSpacer.normalWeightSpace,
+                          Spacing.horizSmall(),
                           Container(
                             padding: REdgeInsets.fromLTRB(15, 6, 15, 6),
                             decoration: BoxDecoration(
@@ -86,7 +86,7 @@ class EventDescriptionView extends StatelessWidget {
                           ),
                         ],
                       ),
-                      AppSpacer.xtraHeightSpace,
+                      Spacing.vertRegular(),
                       ListTile(
                         contentPadding: EdgeInsets.zero,
                         leading: const AppNetworkImage(
@@ -106,7 +106,7 @@ class EventDescriptionView extends StatelessWidget {
                           ),
                         ),
                       ),
-                      AppSpacer.xtraHeightSpace,
+                      Spacing.vertRegular(),
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -114,8 +114,8 @@ class EventDescriptionView extends StatelessWidget {
                             AppAssets.calenderSvg,
                             height: 18,
                           ),
-                          AppSpacer.normalWeightSpace,
-                          AppSpacer.smallWeightSpace,
+                          Spacing.horizSmall(),
+                          Spacing.horizTiny(),
                           Expanded(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -124,12 +124,12 @@ class EventDescriptionView extends StatelessWidget {
                                   "Saturday October 15th, 2022",
                                   style: AppTextStyles.regular14,
                                 ),
-                                AppSpacer.normalHeightSpace,
+                                Spacing.vertSmall(),
                                 Text(
                                   "11:00 AM (GMT +1)",
                                   style: AppTextStyles.regular14,
                                 ),
-                                AppSpacer.normalHeightSpace,
+                                Spacing.vertSmall(),
                                 Text(
                                   "Add to calender",
                                   style: AppTextStyles.semiBold14.copyWith(
@@ -141,8 +141,8 @@ class EventDescriptionView extends StatelessWidget {
                           ),
                         ],
                       ),
-                      AppSpacer.xtraHeightSpace,
-                      AppSpacer.xtraHeightSpace,
+                      Spacing.vertRegular(),
+                      Spacing.vertRegular(),
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -151,8 +151,8 @@ class EventDescriptionView extends StatelessWidget {
                             size: 18,
                             color: AppColors.secondary500,
                           ),
-                          AppSpacer.normalWeightSpace,
-                          AppSpacer.smallWeightSpace,
+                          Spacing.horizSmall(),
+                          Spacing.horizTiny(),
                           Expanded(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -161,8 +161,8 @@ class EventDescriptionView extends StatelessWidget {
                                   "Freedom park, Lagos Island",
                                   style: AppTextStyles.regular14,
                                 ),
-                                AppSpacer.normalHeightSpace,
-                                AppSpacer.normalHeightSpace,
+                                Spacing.vertSmall(),
+                                Spacing.vertSmall(),
                                 Text(
                                   "Freedom park, Old hospital road, Lagos Island",
                                   style: AppTextStyles.regular14.copyWith(
@@ -174,20 +174,20 @@ class EventDescriptionView extends StatelessWidget {
                           ),
                         ],
                       ),
-                      AppSpacer.xtraHeightSpace,
-                      AppSpacer.xtraHeightSpace,
+                      Spacing.vertRegular(),
+                      Spacing.vertRegular(),
                       Text(
                         DumbAppStrings.eventDescriptionAboutText,
                         style: AppTextStyles.medium16,
                       ),
-                      AppSpacer.smallHeightSpace,
-                      AppSpacer.smallHeightSpace,
+                      Spacing.vertTiny(),
+                      Spacing.vertTiny(),
                       Text(
                         event.description,
                         style: AppTextStyles.regular14,
                       ),
-                      AppSpacer.xtraHeightSpace,
-                      AppSpacer.xtraHeightSpace,
+                      Spacing.vertRegular(),
+                      Spacing.vertRegular(),
                       Container(
                         height: 300.0.h,
                         width: MediaQuery.of(context).size.width,
@@ -202,12 +202,12 @@ class EventDescriptionView extends StatelessWidget {
                               fit: BoxFit.cover,
                               size: Size.square(56),
                             ),
-                            AppSpacer.xtraHeightSpace,
+                            Spacing.vertRegular(),
                             Text(
                               DumbAppStrings.eventDescriptionFirstEventText,
                               style: AppTextStyles.medium24,
                             ),
-                            AppSpacer.xtraHeightSpace,
+                            Spacing.vertRegular(),
                             Text(
                               DumbAppStrings.eventDescriptionSubText1,
                               style: AppTextStyles.regular16.copyWith(
@@ -223,20 +223,20 @@ class EventDescriptionView extends StatelessWidget {
                           ],
                         ),
                       ),
-                      AppSpacer.xtraHeightSpace,
-                      AppSpacer.xtraHeightSpace,
-                      AppSpacer.xtraHeightSpace,
-                      AppSpacer.xtraHeightSpace,
+                      Spacing.vertRegular(),
+                      Spacing.vertRegular(),
+                      Spacing.vertRegular(),
+                      Spacing.vertRegular(),
                       HomeViewCategoriesWidget(
                         label: DumbAppStrings.eventDescriptionMoreLikeText,
                         child: const HomeViewCategoriesSmallSubWidget(),
                       ),
-                      AppSpacer.xtraHeightSpace,
-                      AppSpacer.xtraHeightSpace,
-                      AppSpacer.xtraHeightSpace,
-                      AppSpacer.xtraHeightSpace,
-                      AppSpacer.xtraHeightSpace,
-                      AppSpacer.xtraHeightSpace,
+                      Spacing.vertRegular(),
+                      Spacing.vertRegular(),
+                      Spacing.vertRegular(),
+                      Spacing.vertRegular(),
+                      Spacing.vertRegular(),
+                      Spacing.vertRegular(),
                     ],
                   ),
                 ),
@@ -250,7 +250,7 @@ class EventDescriptionView extends StatelessWidget {
                           color: AppColors.gray1,
                         ),
                       ),
-                      AppSpacer.xtraWeightSpace,
+                      Spacing.horizRegular(),
                       Expanded(
                         child: AppButton(
                           label: "Request",

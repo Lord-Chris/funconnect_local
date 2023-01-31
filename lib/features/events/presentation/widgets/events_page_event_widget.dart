@@ -42,12 +42,12 @@ class EventsPageEventWidget extends StatelessWidget {
                   fit: BoxFit.cover,
                   size: Size.fromWidth(165.w),
                 ),
-                AppSpacer.xtraWeightSpace,
+                Spacing.horizRegular(),
                 const VerticalDivider(
                   color: AppColors.exploreIconAsh,
                   thickness: 1.0,
                 ),
-                AppSpacer.xtraWeightSpace,
+                Spacing.horizRegular(),
                 Flexible(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -88,7 +88,7 @@ class EventsPageEventWidget extends StatelessWidget {
                           ),
                         ),
                       ),
-                      AppSpacer.xtraHeightSpace,
+                      Spacing.vertRegular(),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [

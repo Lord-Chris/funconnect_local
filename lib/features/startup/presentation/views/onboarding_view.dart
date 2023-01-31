@@ -11,8 +11,8 @@ import 'package:funconnect/features/startup/presentation/blocs/onboarding_bloc/o
 import 'package:funconnect/shared/constants/_constants.dart';
 
 import '../../../../core/presentation/widgets/app_orange_button.dart';
-import '../../models/onBoarding_carousel_model.dart';
 import '../../../../shared/components/video_player_widget.dart';
+import '../../models/onBoarding_carousel_model.dart';
 
 class OnboardingView extends StatefulHookWidget {
   const OnboardingView({Key? key}) : super(key: key);
@@ -164,7 +164,7 @@ class _OnboardingViewState extends State<OnboardingView> {
                                 color: AppColors.white,
                               ),
                             ),
-                            AppSpacer.xtraHeightSpace,
+                            Spacing.vertRegular(),
                             Text(
                               "Let’s help you create memorable moments by planning your next hangout",
                               textAlign: TextAlign.center,
@@ -175,8 +175,8 @@ class _OnboardingViewState extends State<OnboardingView> {
                           ],
                         ),
                       ),
-                      AppSpacer.xtraHeightSpace,
-                      AppSpacer.xtraHeightSpace,
+                      Spacing.vertRegular(),
+                      Spacing.vertRegular(),
                       AppOrangeBtn(
                         label: "Get Started",
                         onTap: () => context

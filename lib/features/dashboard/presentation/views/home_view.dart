@@ -30,7 +30,7 @@ class HomeView extends StatelessWidget {
                         isCircular: true,
                         url: AppConstants.mockImage,
                       ),
-                      AppSpacer.xtraWeightSpace,
+                      Spacing.horizRegular(),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -38,7 +38,7 @@ class HomeView extends StatelessWidget {
                             "Hi John",
                             style: AppTextStyles.medium20,
                           ),
-                          AppSpacer.normalHeightSpace,
+                          Spacing.vertSmall(),
                           Row(
                             children: [
                               const Icon(
@@ -67,7 +67,7 @@ class HomeView extends StatelessWidget {
                   ),
                 ],
               ),
-              AppSpacer.normalHeightSpace,
+              Spacing.vertSmall(),
               const Divider(
                 color: AppColors.secondary400,
                 height: 1,
@@ -97,12 +97,12 @@ class HomeView extends StatelessWidget {
                 label: "Categories",
                 child: const HomeViewCategoriesSmallSubWidget(),
               ),
-              AppSpacer.normalHeightSpace,
+              Spacing.vertSmall(),
               HomeViewCategoriesWidget(
                 label: "Best for you",
                 child: const HomeCategoriesLargeWidget(),
               ),
-              AppSpacer.normalHeightSpace,
+              Spacing.vertSmall(),
               HomeViewCategoriesWidget(
                 label: "Recently added",
                 child: const HomeCategoriesLargeWidget(),

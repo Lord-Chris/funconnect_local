@@ -54,12 +54,12 @@ class ExploreView extends StatelessWidget {
               ),
               Row(
                 children: [
-                  Expanded(
+                  const Expanded(
                     child: HomeCategoriesLargeWidget(
                         // width: 250.0.w,
                         ),
                   ),
-                  AppSpacer.smallWeightSpace,
+                  Spacing.vertTiny(),
                   Column(
                     children: [
                       Container(
@@ -70,7 +70,7 @@ class ExploreView extends StatelessWidget {
                           borderRadius: BorderRadius.circular(20.0.r),
                         ),
                       ),
-                      AppSpacer.smallHeightSpace,
+                      Spacing.horizTiny(),
                       Container(
                         height: 150.0.h,
                         width: 110.0.w,
@@ -83,7 +83,7 @@ class ExploreView extends StatelessWidget {
                   ),
                 ],
               ),
-              AppSpacer.xtraHeightSpace,
+              Spacing.vertRegular(),
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(
@@ -110,17 +110,17 @@ class ExploreView extends StatelessWidget {
                 label: "",
                 child: const HomeViewCategoriesSmallSubWidget(),
               ),
-              AppSpacer.xtraHeightSpace,
+              Spacing.vertRegular(),
               HomeViewCategoriesWidget(
                 label: AppText.aTShareMoments,
                 child: const HomeViewCategoriesSmallSubWidget(),
               ),
-              AppSpacer.xtraHeightSpace,
+              Spacing.vertRegular(),
               HomeViewCategoriesWidget(
                 label: AppText.aTFeelRefreshed,
                 child: const HomeViewCategoriesSmallSubWidget(),
               ),
-              AppSpacer.xtraHeightSpace,
+              Spacing.vertRegular(),
             ],
           ),
         ),
