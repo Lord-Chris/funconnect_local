@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/presentation/widgets/app_spacer.dart';
+import '../../../../shared/constants/app_spacer.dart';
 import '../../../../shared/constants/_constants.dart';
 
 class HomeInterestWidget extends StatelessWidget {

@@ -45,11 +45,11 @@ class NotificationWidget extends StatelessWidget {
                 children: [
                   TextSpan(
                     text: DumbAppStrings.notificationMainText,
-                    style: AppTextStyles.whiteMedium,
+                    style: AppTextStyles.medium12,
                   ),
                   TextSpan(
                     text: DumbAppStrings.notificationSubMainText,
-                    style: AppTextStyles.whitelight.copyWith(
+                    style: AppTextStyles.medium12.copyWith(
                       color: AppColors.primary,
                     ),
                     recognizer: TapGestureRecognizer()..onTap = () {},
@@ -70,8 +70,7 @@ class NotificationWidget extends StatelessWidget {
                         onPressed: () {},
                         child: Text(
                           DumbAppStrings.notificationButtonText,
-                          style:
-                              AppTextStyles.blackBold.copyWith(fontSize: 7.0),
+                          style: AppTextStyles.medium12.copyWith(fontSize: 7.0),
                         ),
                       ),
                     ),

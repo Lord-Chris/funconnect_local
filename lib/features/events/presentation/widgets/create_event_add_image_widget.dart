@@ -27,8 +27,9 @@ class CreateEventAddImageWidget extends StatelessWidget {
           ),
           child: Text(
             "Add Photo",
-            style: AppTextStyles.whiteMedium
-                .copyWith(color: AppColors.locationIconAsh),
+            style: AppTextStyles.medium20.copyWith(
+              color: AppColors.locationIconAsh,
+            ),
           ),
         ),
       ),

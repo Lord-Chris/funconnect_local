@@ -29,9 +29,11 @@ class EmailVerifiedScreen extends StatelessWidget {
                   color: AppColors.white,
                 ),
               ),
-              Text(AppText.aTAuthEmailIDVerificationSuccessText,
-                  textAlign: TextAlign.center,
-                  style: AppTextStyles.whiteMedium),
+              Text(
+                AppText.aTAuthEmailIDVerificationSuccessText,
+                textAlign: TextAlign.center,
+                style: AppTextStyles.medium24,
+              ),
               const SizedBox(height: 62),
               const AppOrangeBtn(
                 label: AppText.aTAuthContinueText,

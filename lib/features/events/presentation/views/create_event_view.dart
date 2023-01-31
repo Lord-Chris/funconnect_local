@@ -28,7 +28,7 @@ class CreateEventView extends StatelessWidget {
         ),
         title: Text(
           AppText.aTCreateEventAppBarText,
-          style: AppTextStyles.whiteMedium,
+          style: AppTextStyles.medium20,
         ),
         centerTitle: true,
       ),
@@ -126,7 +126,7 @@ class CreateEventView extends StatelessWidget {
                 ),
                 title: Text(
                   AppText.aTCreateEventAddLocationText,
-                  style: AppTextStyles.whiteMedium,
+                  style: AppTextStyles.medium20,
                 ),
               ),
               Spacing.vertRegular(),

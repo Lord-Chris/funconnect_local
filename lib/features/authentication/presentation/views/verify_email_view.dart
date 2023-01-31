@@ -126,9 +126,7 @@ class VerifyEmailView extends HookWidget {
                                     validator: context.validateOtp,
                                     cursorColor: AppColors.ash,
                                     obscureText: !true,
-                                    textStyle: AppTextStyles.whiteBold.copyWith(
-                                      fontSize: 20.0,
-                                    ),
+                                    textStyle: AppTextStyles.bold20,
                                     obscuringCharacter: "*",
                                     backgroundColor: AppColors.transparent,
                                     enableActiveFill: true,
@@ -160,7 +158,9 @@ class VerifyEmailView extends HookWidget {
                                           pinController.text = clipData.data!,
                                       child: Text(
                                         "Paste",
-                                        style: AppTextStyles.blacklight,
+                                        style: AppTextStyles.light12.copyWith(
+                                          color: AppColors.black,
+                                        ),
                                       ),
                                     ),
                                   ),

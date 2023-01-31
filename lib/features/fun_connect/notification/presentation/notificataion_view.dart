@@ -16,7 +16,7 @@ class NotificationView extends StatelessWidget {
         centerTitle: true,
         title: Text(
           DumbAppStrings.notificationAppBarText,
-          style: AppTextStyles.whiteMedium,
+          style: AppTextStyles.medium12,
         ),
       ),
       body: ListView.builder(itemBuilder: (BuildContext context, int index) {

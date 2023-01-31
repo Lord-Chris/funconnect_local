@@ -94,8 +94,9 @@ class EventsPageEventWidget extends StatelessWidget {
                         children: [
                           Text(
                             event.type.toUpperCase(),
-                            style: AppTextStyles.whiteMedium
-                                .copyWith(color: AppColors.locationIconAsh),
+                            style: AppTextStyles.medium20.copyWith(
+                              color: AppColors.locationIconAsh,
+                            ),
                           ),
                           Spacing.horizRegular(),
                           if (double.tryParse(event.price) == null)

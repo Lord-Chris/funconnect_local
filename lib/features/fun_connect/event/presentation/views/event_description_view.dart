@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:funconnect/core/presentation/widgets/app_spacer.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
+import 'package:funconnect/shared/constants/app_spacer.dart';
 
 import '../../../../../shared/dumb_widgets/dumb_app_strings.dart';
 import '../../../../dashboard/presentation/widgets/home_categories_lable_widget.dart';
@@ -19,7 +19,7 @@ class EventDescription extends StatelessWidget {
         backgroundColor: AppColors.interestWidgetAsh,
         title: Text(
           DumbAppStrings.eventTitleText,
-          style: AppTextStyles.whiteMedium,
+          style: AppTextStyles.medium24,
         ),
         actions: [
           CircleAvatar(
@@ -52,7 +52,7 @@ class EventDescription extends StatelessWidget {
             Spacing.vertRegular(),
             Text(
               DumbAppStrings.eventDescriptionSubTitleText,
-              style: AppTextStyles.whiteBold.copyWith(fontSize: 24.0.sp),
+              style: AppTextStyles.medium24,
             ),
             Spacing.vertRegular(),
             Row(
@@ -71,7 +71,7 @@ class EventDescription extends StatelessWidget {
                       padding: EdgeInsets.symmetric(horizontal: 16.0.w),
                       child: Text(
                         DumbAppStrings.eventDescriptionPrivateLAbelText,
-                        style: AppTextStyles.blacklight.copyWith(
+                        style: AppTextStyles.medium12.copyWith(
                           color: AppColors.exploreIconAsh,
                         ),
                       ),
@@ -90,7 +90,7 @@ class EventDescription extends StatelessWidget {
                       padding: EdgeInsets.symmetric(horizontal: 16.0.w),
                       child: Text(
                         DumbAppStrings.eventDescriptionFreeLAbelText,
-                        style: AppTextStyles.blacklight.copyWith(
+                        style: AppTextStyles.medium12.copyWith(
                           color: AppColors.exploreIconAsh,
                         ),
                       ),
@@ -104,11 +104,11 @@ class EventDescription extends StatelessWidget {
               leading: const CircleAvatar(),
               title: Text(
                 DumbAppStrings.eventDescriptionSubText0,
-                style: AppTextStyles.whiteMedium,
+                style: AppTextStyles.medium12,
               ),
               subtitle: Text(
                 DumbAppStrings.eventDescriptionSubText1,
-                style: AppTextStyles.whitelight,
+                style: AppTextStyles.medium12,
               ),
             ),
             Spacing.vertRegular(),
@@ -121,7 +121,7 @@ class EventDescription extends StatelessWidget {
                 Spacing.horizTiny(),
                 Text(
                   DumbAppStrings.eventDescriptionDateAndTimeText,
-                  style: AppTextStyles.whitelight,
+                  style: AppTextStyles.medium12,
                 ),
               ],
             ),
@@ -130,19 +130,19 @@ class EventDescription extends StatelessWidget {
               child: Text(
                 DumbAppStrings.eventDescriptionCalenderText,
                 style:
-                    AppTextStyles.whiteBold.copyWith(color: AppColors.primary),
+                    AppTextStyles.medium12.copyWith(color: AppColors.primary),
               ),
             ),
             Spacing.vertRegular(),
             Text(
               DumbAppStrings.eventDescriptionAboutText,
-              style: AppTextStyles.whiteBold,
+              style: AppTextStyles.medium12,
             ),
             Spacing.vertTiny(),
             Spacing.vertTiny(),
             Text(
               DumbAppStrings.eventDescriptionAboutDescriptionText,
-              style: AppTextStyles.whitelight.copyWith(fontSize: 14.0.sp),
+              style: AppTextStyles.medium12.copyWith(fontSize: 14.0.sp),
             ),
             Spacing.vertRegular(),
             Spacing.vertRegular(),
@@ -160,17 +160,17 @@ class EventDescription extends StatelessWidget {
                   Spacing.vertRegular(),
                   Text(
                     DumbAppStrings.eventDescriptionFirstEventText,
-                    style: AppTextStyles.whiteBold.copyWith(fontSize: 24.0.sp),
+                    style: AppTextStyles.medium12.copyWith(fontSize: 24.0.sp),
                   ),
                   Spacing.vertRegular(),
                   Text(
                     DumbAppStrings.eventDescriptionSubText1,
-                    style: AppTextStyles.whiteBold.copyWith(
+                    style: AppTextStyles.medium12.copyWith(
                         fontSize: 16.0.sp, color: AppColors.emailAddressAsh),
                   ),
                   Text(
                     DumbAppStrings.eventDescriptionRsvpMailText,
-                    style: AppTextStyles.whiteBold.copyWith(
+                    style: AppTextStyles.medium12.copyWith(
                         fontSize: 16.0.sp, color: AppColors.emailAddressAsh),
                   ),
                 ],

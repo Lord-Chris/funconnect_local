@@ -52,7 +52,7 @@ class _EventsViewState extends State<EventsView> {
                 children: [
                   SizedBox(
                     width: 323.w,
-                    child: AppSearchField(
+                    child: const AppSearchField(
                       labelText: 'Search places, people',
                     ),
                   ),
@@ -70,17 +70,16 @@ class _EventsViewState extends State<EventsView> {
                       EdgeInsets.only(left: 8.0.w, bottom: 8.0.h, top: 32.0.h),
                   child: Text(
                     AppText.aTEvents,
-                    style: AppTextStyles.whiteMedium.copyWith(
-                      fontSize: 28.0.sp,
-                    ),
+                    style: AppTextStyles.medium28,
                   ),
                 ),
                 subtitle: Padding(
                   padding: EdgeInsets.only(left: 8.0.w, bottom: 32.0.h),
                   child: Text(
                     AppText.aTEventBased,
-                    style: AppTextStyles.whiteMedium.copyWith(
-                        fontSize: 16.0.sp, color: AppColors.eventBasedColor),
+                    style: AppTextStyles.medium16.copyWith(
+                      color: AppColors.eventBasedColor,
+                    ),
                   ),
                 ),
                 trailing: Padding(

@@ -44,7 +44,7 @@ class HomeViewCategoriesSmallSubWidget extends StatelessWidget {
                     alignment: Alignment.center,
                     child: Text(
                       DumbAppStrings.categoriesLabel,
-                      style: AppTextStyles.whitelight,
+                      style: AppTextStyles.medium20,
                     ),
                   ),
                 ),

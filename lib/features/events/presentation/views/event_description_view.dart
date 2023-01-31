@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:funconnect/core/app/_app.dart';
 import 'package:funconnect/core/extensions/_extensions.dart';
-import 'package:funconnect/core/presentation/widgets/app_spacer.dart';
+import 'package:funconnect/shared/constants/app_spacer.dart';
 import 'package:funconnect/features/events/domain/entities/event_model.dart';
 import 'package:funconnect/services/_services.dart';
 import 'package:funconnect/shared/components/app_network_image.dart';
