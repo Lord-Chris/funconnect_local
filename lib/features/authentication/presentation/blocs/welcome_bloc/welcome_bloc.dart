@@ -3,12 +3,12 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:funconnect/core/app/_app.dart';
+import 'package:funconnect/core/models/_models.dart';
 import 'package:funconnect/core/usecases/usecase.dart';
 import 'package:funconnect/features/authentication/domain/usecases/apple_signin_usecase.dart';
 import 'package:funconnect/features/authentication/domain/usecases/google_signin_usecase.dart';
 import 'package:funconnect/features/authentication/presentation/blocs/welcome_bloc/welcome_event.dart';
 import 'package:funconnect/features/authentication/presentation/blocs/welcome_bloc/welcome_state.dart';
-import 'package:funconnect/models/failure.dart';
 import 'package:funconnect/services/_services.dart';
 import 'package:funconnect/shared/dialogs/status_dialog.dart';
 

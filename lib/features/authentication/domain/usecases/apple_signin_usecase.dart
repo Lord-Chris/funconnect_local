@@ -1,5 +1,5 @@
+import 'package:funconnect/core/models/_models.dart';
 import 'package:funconnect/core/usecases/usecase.dart';
-import 'package:funconnect/models/failure.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 class AppleSignInUsecase with UseCases<bool, NoParams> {

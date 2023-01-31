@@ -1,9 +1,8 @@
-import 'package:funconnect/core/model/paginated_data.dart';
+import 'package:funconnect/core/models/_models.dart';
 import 'package:funconnect/features/authentication/data/dto/interest_model.dart';
 import 'package:funconnect/features/authentication/domain/params/email_sign_in.dart';
 import 'package:funconnect/features/authentication/domain/params/profile_setup.dart';
 import 'package:funconnect/features/authentication/domain/params/verify_otp.dart';
-import 'package:funconnect/models/api_response.dart';
 
 import '../dto/check_email_response.dart';
 import '../dto/request_otp_response.dart';

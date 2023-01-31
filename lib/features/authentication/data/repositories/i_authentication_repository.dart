@@ -1,4 +1,4 @@
-import 'package:funconnect/core/model/paginated_data.dart';
+import 'package:funconnect/core/models/paginated_data.dart';
 
 import '../../domain/params/email_sign_in.dart';
 import '../../domain/params/profile_setup.dart';

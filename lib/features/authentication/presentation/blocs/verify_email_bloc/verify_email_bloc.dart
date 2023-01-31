@@ -2,12 +2,12 @@ import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:funconnect/core/app/_app.dart';
+import 'package:funconnect/core/models/_models.dart';
 import 'package:funconnect/features/authentication/data/repositories/_authentication_repo.dart';
 import 'package:funconnect/features/authentication/domain/params/verify_otp.dart';
 import 'package:funconnect/features/authentication/domain/usecases/verify_otp_usecase.dart';
 import 'package:funconnect/features/authentication/presentation/blocs/verify_email_bloc/verify_email_event.dart';
 import 'package:funconnect/features/authentication/presentation/blocs/verify_email_bloc/verify_email_state.dart';
-import 'package:funconnect/models/failure.dart';
 import 'package:funconnect/services/_services.dart';
 
 import '../../../../../shared/dialogs/status_dialog.dart';

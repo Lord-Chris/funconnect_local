@@ -1,8 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:funconnect/models/failure.dart';
+import 'package:funconnect/core/models/_models.dart';
 import 'package:logger/logger.dart';
 
-import '../../models/api_response.dart';
 import 'i_network_service.dart';
 import 'network_logger.dart';
 

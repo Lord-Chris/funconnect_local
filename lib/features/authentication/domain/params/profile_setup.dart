@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:funconnect/core/model/app_location.dart';
+import 'package:funconnect/core/models/app_location.dart';
 
 class ProfileSetupParam {
   final String name;

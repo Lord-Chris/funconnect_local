@@ -1,5 +1,5 @@
 import 'package:funconnect/core/app/_app.dart';
-import 'package:funconnect/core/model/paginated_data.dart';
+import 'package:funconnect/core/models/paginated_data.dart';
 import 'package:funconnect/features/events/data/data_sources/i_events_data_source.dart';
 import 'package:funconnect/features/events/domain/entities/event_model.dart';
 

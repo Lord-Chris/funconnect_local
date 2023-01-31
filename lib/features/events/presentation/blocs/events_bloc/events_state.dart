@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
+import 'package:funconnect/core/models/_models.dart';
 import 'package:funconnect/features/events/domain/entities/event_model.dart';
-import 'package:funconnect/models/failure.dart';
 
 abstract class EventsState extends Equatable {
   @override

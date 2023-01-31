@@ -1,4 +1,4 @@
-import 'package:funconnect/models/api_response.dart';
+import 'package:funconnect/core/models/_models.dart';
 
 abstract class INetworkService {
   Future<ApiResponse<Map<String, dynamic>>> get(

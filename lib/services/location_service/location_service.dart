@@ -1,5 +1,4 @@
-import 'package:funconnect/core/model/app_location.dart';
-import 'package:funconnect/models/failure.dart';
+import 'package:funconnect/core/models/_models.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:logger/logger.dart';

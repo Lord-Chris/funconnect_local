@@ -1,4 +1,4 @@
-import 'package:funconnect/core/model/app_location.dart';
+import 'package:funconnect/core/models/app_location.dart';
 
 abstract class ILocationService {
   Future<bool> canGetLocation();

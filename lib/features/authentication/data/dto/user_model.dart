@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import '../../../../core/model/app_location.dart';
+import '../../../../core/models/app_location.dart';
 
 class UserModel {
   final String id;
