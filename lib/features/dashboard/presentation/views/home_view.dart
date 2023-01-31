@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:funconnect/shared/constants/app_spacer.dart';
 import 'package:funconnect/shared/components/app_network_image.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
 
-import '../../../../shared/constants/app_constants.dart';
 import '../widgets/home_view_widgets.dart';
 
 class HomeView extends StatelessWidget {

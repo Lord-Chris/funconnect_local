@@ -9,8 +9,6 @@ import 'package:funconnect/features/authentication/presentation/blocs/welcome_bl
 import 'package:funconnect/shared/components/_components.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
 
-import '../../../../shared/components/app_orange_button.dart';
-import '../../../../shared/constants/app_text.dart';
 import '../widgets/app_black_modal.dart';
 
 class WelcomeView extends HookWidget {

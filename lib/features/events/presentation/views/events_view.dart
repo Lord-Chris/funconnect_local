@@ -8,12 +8,11 @@ import 'package:funconnect/features/events/presentation/blocs/events_bloc/events
 import 'package:funconnect/features/events/presentation/blocs/events_bloc/events_state.dart';
 import 'package:funconnect/features/events/presentation/widgets/events_page_event_widget.dart';
 import 'package:funconnect/services/_services.dart';
-import 'package:funconnect/shared/components/app_loader.dart';
 
-import '../../../../shared/components/_components.dart';
-import '../../../../shared/constants/app_text.dart';
 import '../../../../../shared/constants/colors.dart';
 import '../../../../../shared/constants/textstyles.dart';
+import '../../../../shared/components/_components.dart';
+import '../../../../shared/constants/app_text.dart';
 
 class EventsView extends StatefulWidget {
   const EventsView({Key? key}) : super(key: key);

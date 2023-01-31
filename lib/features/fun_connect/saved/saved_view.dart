@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class SavedView extends StatefulWidget {
@@ -11,6 +10,6 @@ class SavedView extends StatefulWidget {
 class _SavedViewState extends State<SavedView> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return const Scaffold();
   }
 }

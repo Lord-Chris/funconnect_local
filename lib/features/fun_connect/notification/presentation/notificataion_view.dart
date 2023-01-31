@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:funconnect/shared/dumb_widgets/dumb_app_strings.dart';
 
 import '../../../../shared/constants/_constants.dart';
 import '../widgets/notification_widget.dart';

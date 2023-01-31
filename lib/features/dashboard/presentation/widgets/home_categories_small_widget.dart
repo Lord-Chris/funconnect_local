@@ -2,7 +2,6 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:funconnect/shared/dumb_widgets/dumb_app_strings.dart';
 
 import '../../../../shared/constants/_constants.dart';
 
