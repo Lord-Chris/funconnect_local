@@ -1,3 +1,7 @@
+/// This is on Pause for now, do not use.
+/// When we are sure the content of the application is stable, then
+/// we can proceed with it.
+///
 class AppText {
   ///Explore page Strings
   static const aTexplore = 'Explore';
