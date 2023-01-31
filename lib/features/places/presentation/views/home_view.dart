@@ -104,14 +104,12 @@ class HomeView extends HookWidget {
                 label: "Categories",
                 itemHeight: 136.r,
                 showAll: showAllCategory.value,
-                // crossAxisCount: 3,
                 onSeeAllTap: (val) => showAllCategory.value = val,
                 child: const HomeViewCategoriesSmallSubWidget(),
               ),
               Spacing.vertSmall(),
               HomeViewCategoriesWidget(
                 label: "Best for you",
-                // crossAxisCount: 2,
                 showAll: showAllBest.value,
                 onSeeAllTap: (val) => showAllBest.value = val,
                 child: const HomeCategoriesLargeWidget(),
@@ -119,7 +117,6 @@ class HomeView extends HookWidget {
               Spacing.vertSmall(),
               HomeViewCategoriesWidget(
                 label: "Recently added",
-                // crossAxisCount: 2,
                 showAll: showAllRecents.value,
                 onSeeAllTap: (val) => showAllRecents.value = val,
                 child: const HomeCategoriesLargeWidget(),
