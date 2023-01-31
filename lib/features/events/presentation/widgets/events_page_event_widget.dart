@@ -4,11 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:funconnect/features/events/domain/entities/event_model.dart';
 import 'package:funconnect/features/events/presentation/blocs/events_bloc/events_bloc.dart';
 import 'package:funconnect/shared/components/app_network_image.dart';
-import 'package:funconnect/shared/constants/app_constants.dart';
 
-import '../../../../core/presentation/widgets/core_widgets.dart';
-import '../../../../shared/constants/colors.dart';
-import '../../../../shared/constants/textstyles.dart';
+import '../../../../shared/constants/_constants.dart';
 import '../blocs/events_bloc/events_event.dart';
 
 class EventsPageEventWidget extends StatelessWidget {

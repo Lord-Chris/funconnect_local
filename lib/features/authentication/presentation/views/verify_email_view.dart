@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:funconnect/core/extensions/_extensions.dart';
-import 'package:funconnect/core/presentation/widgets/core_widgets.dart';
 import 'package:funconnect/core/utils/general_utils.dart';
 import 'package:funconnect/features/authentication/presentation/blocs/verify_email_bloc/verify_email_bloc.dart';
 import 'package:funconnect/features/authentication/presentation/blocs/verify_email_bloc/verify_email_event.dart';
@@ -12,7 +11,8 @@ import 'package:funconnect/features/authentication/presentation/blocs/verify_ema
 import 'package:funconnect/shared/constants/_constants.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
-import '../../../../core/presentation/widgets/app_orange_button.dart';
+import '../../../../shared/components/app_orange_button.dart';
+import '../widgets/app_black_modal.dart';
 
 class VerifyEmailView extends HookWidget {
   final String email;

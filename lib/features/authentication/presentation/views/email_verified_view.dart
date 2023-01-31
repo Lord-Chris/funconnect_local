@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:funconnect/shared/constants/_constants.dart';
 
-import '../../../../core/presentation/widgets/app_orange_button.dart';
-import '../../../../core/presentation/widgets/core_widgets.dart';
-import '../../../../shared/constants/colors.dart';
-import '../../../../shared/constants/fonts.dart';
-import '../../../../shared/constants/textstyles.dart';
+import '../../../../shared/components/app_orange_button.dart';
+import '../widgets/app_black_modal.dart';
 
 class EmailVerifiedScreen extends StatelessWidget {
   const EmailVerifiedScreen({Key? key}) : super(key: key);

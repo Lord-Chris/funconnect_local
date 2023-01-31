@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:funconnect/core/presentation/widgets/core_widgets.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
 
 import '../widgets/home_categories_lable_widget.dart';

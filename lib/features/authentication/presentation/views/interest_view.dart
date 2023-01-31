@@ -6,9 +6,10 @@ import 'package:funconnect/features/authentication/presentation/blocs/interest_b
 import 'package:funconnect/shared/components/app_loader.dart';
 import 'package:funconnect/shared/constants/colors.dart';
 
-import '../../../../core/presentation/widgets/app_orange_button.dart';
-import '../../../../core/presentation/widgets/core_widgets.dart';
+import '../../../../shared/components/app_orange_button.dart';
+import '../../../../shared/constants/_constants.dart';
 import '../../../../shared/constants/textstyles.dart';
+import '../widgets/app_black_modal.dart';
 import '../widgets/interest_selection_widget.dart';
 
 class InterestView extends StatefulWidget {

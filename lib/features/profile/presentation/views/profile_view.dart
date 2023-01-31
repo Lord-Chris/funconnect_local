@@ -1,14 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:funconnect/core/presentation/widgets/core_widgets.dart';
 import 'package:funconnect/shared/components/_components.dart';
-import 'package:funconnect/shared/components/app_network_image.dart';
-import 'package:funconnect/shared/components/scrollable_column.dart';
-import 'package:funconnect/shared/constants/app_assets.dart';
-import 'package:funconnect/shared/constants/app_constants.dart';
-import 'package:funconnect/shared/constants/colors.dart';
-import 'package:funconnect/shared/constants/textstyles.dart';
+import 'package:funconnect/shared/constants/_constants.dart';
 
 class ProfileView extends StatelessWidget {
   const ProfileView({super.key});

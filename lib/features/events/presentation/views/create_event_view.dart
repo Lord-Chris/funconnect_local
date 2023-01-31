@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:funconnect/core/app/_app.dart';
 import 'package:funconnect/services/_services.dart';
-import 'package:funconnect/shared/components/text_input.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
 
-import '../../../../../core/presentation/widgets/core_widgets.dart';
-import '../../../../../shared/components/custom_button.dart';
+import '../../../../shared/components/_components.dart';
 import '../widgets/create_event_add_image_widget.dart';
 
 class CreateEventView extends StatelessWidget {

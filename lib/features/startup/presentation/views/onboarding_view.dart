@@ -4,13 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:funconnect/core/presentation/widgets/core_widgets.dart';
 import 'package:funconnect/features/startup/presentation/blocs/onboarding_bloc/onboarding_bloc.dart';
 import 'package:funconnect/features/startup/presentation/blocs/onboarding_bloc/onboarding_event.dart';
 import 'package:funconnect/features/startup/presentation/blocs/onboarding_bloc/onboarding_state.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
 
-import '../../../../core/presentation/widgets/app_orange_button.dart';
+import '../../../../shared/components/app_orange_button.dart';
 import '../../../../shared/components/video_player_widget.dart';
 
 class OnboardingView extends StatefulHookWidget {
