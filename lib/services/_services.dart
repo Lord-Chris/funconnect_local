@@ -10,6 +10,10 @@ export 'location_service/i_location_service.dart';
 export 'location_service/location_service.dart';
 
 ///
+export 'media_service/i_media_service.dart';
+export 'media_service/media_service.dart';
+
+///
 export 'navigation_service/i_navigation_service.dart';
 export 'navigation_service/navigation_service.dart';
 
