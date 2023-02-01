@@ -4,6 +4,7 @@ import 'package:funconnect/features/authentication/domain/params/email_sign_in.d
 import 'package:funconnect/features/authentication/domain/params/profile_setup.dart';
 import 'package:funconnect/features/authentication/domain/params/verify_otp.dart';
 
+import '../dto/request_otp_response.dart';
 import '../dto/user_model.dart';
 import 'i_authentication_repository.dart';
 
@@ -14,8 +15,9 @@ class MockAuthenticationRepository extends IAuthenticationRepository {
   }
 
   @override
-  Future<void> signInWithEmail(EmailSignInParams params) async {
+  Future<RequestOtpResponse> signInWithEmail(EmailSignInParams params) async {
     await Future.delayed(const Duration(seconds: 2));
+    return const RequestOtpResponse(email: "", message: "", requestId: "");
   }
 
   @override

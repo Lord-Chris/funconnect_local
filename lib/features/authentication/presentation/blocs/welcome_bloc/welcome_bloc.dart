@@ -33,11 +33,11 @@ class WelcomeBloc extends Bloc<WelcomeEvent, WelcomeState> {
     try {
       FocusManager.instance.primaryFocus?.unfocus();
       emit(WelcomeLoadingState());
-      await EmailSignInUsecase().call(event.email);
+      final res = await EmailSignInUsecase().call(event.email);
       emit(WelcomeSuccessState());
       _navigationService.toNamed(
         Routes.verifyEmailRoute,
-        arguments: event.email,
+        arguments: res,
       );
     } on Failure catch (e) {
       emit(WelcomeFailureState());

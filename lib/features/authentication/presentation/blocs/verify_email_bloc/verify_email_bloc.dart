@@ -43,7 +43,8 @@ class VerifyEmailBloc extends Bloc<VerifyEmailEvent, VerifyEmailState> {
     try {
       emit(VerifyEmailLoadingState());
       await VerifyOtpUsecase().call(VerifyOtpParams(
-        email: event.email.trim(),
+        email: event.response.email.trim(),
+        requestId: event.response.requestId.trim(),
         otp: event.otp.trim(),
       ));
       emit(VerifyEmailSuccessState());

@@ -10,6 +10,7 @@ import 'package:funconnect/features/authentication/domain/params/profile_setup.d
 import 'package:funconnect/features/authentication/domain/params/verify_otp.dart';
 import 'package:funconnect/services/_services.dart';
 
+import '../dto/request_otp_response.dart';
 import 'i_authentication_repository.dart';
 
 class AuthenticationRepository extends IAuthenticationRepository {
@@ -23,8 +24,9 @@ class AuthenticationRepository extends IAuthenticationRepository {
   }
 
   @override
-  Future<void> signInWithEmail(EmailSignInParams params) async {
-    await _httpDS.requestLoginOtp(params);
+  Future<RequestOtpResponse> signInWithEmail(EmailSignInParams params) async {
+    final res = await _httpDS.requestLoginOtp(params);
+    return res.data;
   }
 
   @override
