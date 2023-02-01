@@ -100,26 +100,68 @@ class HomeView extends HookWidget {
                 height: 1,
               ),
               const SizedBox(height: 8),
-              HomeViewCategoriesWidget(
-                label: "Categories",
-                itemHeight: 136.r,
-                showAll: showAllCategory.value,
-                onSeeAllTap: (val) => showAllCategory.value = val,
-                child: const HomeViewCategoriesSmallSubWidget(),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Spacing.vertRegular(),
+                  Padding(
+                    padding: REdgeInsets.symmetric(horizontal: 16),
+                    child: Text(
+                      "Fine Dining",
+                      style: AppTextStyles.medium28,
+                    ),
+                  ),
+                  Spacing.vertTiny(),
+                  Padding(
+                    padding: REdgeInsets.symmetric(horizontal: 16),
+                    child: Text(
+                      "Explore the best cuisines",
+                      style: AppTextStyles.regular16,
+                    ),
+                  ),
+                  Spacing.vertRegular(),
+                  GridView.builder(
+                    shrinkWrap: true,
+                    itemCount: 5,
+                    padding: REdgeInsets.symmetric(horizontal: 16),
+                    physics: const NeverScrollableScrollPhysics(),
+                    gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                      maxCrossAxisExtent: 182.r * 1.3,
+                      childAspectRatio: 1,
+                      mainAxisSpacing: 10.r,
+                      crossAxisSpacing: 8.r,
+                    ),
+                    itemBuilder: (context, index) {
+                      return const HomeCategoriesLargeWidget();
+                    },
+                  ),
+                ],
               ),
-              Spacing.vertSmall(),
-              HomeViewCategoriesWidget(
-                label: "Best for you",
-                showAll: showAllBest.value,
-                onSeeAllTap: (val) => showAllBest.value = val,
-                child: const HomeCategoriesLargeWidget(),
-              ),
-              Spacing.vertSmall(),
-              HomeViewCategoriesWidget(
-                label: "Recently added",
-                showAll: showAllRecents.value,
-                onSeeAllTap: (val) => showAllRecents.value = val,
-                child: const HomeCategoriesLargeWidget(),
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  HomeViewCategoriesWidget(
+                    label: "Categories",
+                    itemHeight: 136.r,
+                    showAll: showAllCategory.value,
+                    onSeeAllTap: (val) => showAllCategory.value = val,
+                    child: const HomeViewCategoriesSmallSubWidget(),
+                  ),
+                  Spacing.vertSmall(),
+                  HomeViewCategoriesWidget(
+                    label: "Best for you",
+                    showAll: showAllBest.value,
+                    onSeeAllTap: (val) => showAllBest.value = val,
+                    child: const HomeCategoriesLargeWidget(),
+                  ),
+                  Spacing.vertSmall(),
+                  HomeViewCategoriesWidget(
+                    label: "Recently added",
+                    showAll: showAllRecents.value,
+                    onSeeAllTap: (val) => showAllRecents.value = val,
+                    child: const HomeCategoriesLargeWidget(),
+                  ),
+                ],
               ),
             ],
           ),

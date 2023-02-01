@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:funconnect/features/places/presentation/views/home_view.dart';
 import 'package:funconnect/features/events/presentation/blocs/events_bloc/events_bloc.dart';
 import 'package:funconnect/features/fun_connect/saved/saved_view.dart';
+import 'package:funconnect/features/places/presentation/blocs/home_bloc/home_bloc.dart';
+import 'package:funconnect/features/places/presentation/views/home_view.dart';
 import 'package:funconnect/features/profile/presentation/views/profile_view.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
 
@@ -30,7 +31,10 @@ class _DashboardViewState extends State<DashboardView> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: [
-        const HomeView(),
+        BlocProvider<HomeBloc>(
+          create: (context) => HomeBloc(),
+          child: const HomeView(),
+        ),
         const ExploreView(),
         BlocProvider<EventsBloc>(
           create: (context) => EventsBloc(),
