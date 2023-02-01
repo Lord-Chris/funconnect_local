@@ -24,7 +24,19 @@ class SplashView extends StatelessWidget {
             color: AppColors.mediumBlack,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [Image.asset("assets/gifs/funconnect_logo.gif")],
+              children: [
+                Container(
+                  height: 125.0,
+                  width: 125.0,
+                  decoration: const BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage(
+                        "assets/gifs/funconnect_logo.gif",
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
         ),
