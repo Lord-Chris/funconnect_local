@@ -1,15 +1,20 @@
 import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:funconnect/core/app/_app.dart';
 import 'package:funconnect/core/models/_models.dart';
 import 'package:funconnect/features/places/presentation/blocs/home_bloc/home_event.dart';
 import 'package:funconnect/features/places/presentation/blocs/home_bloc/home_state.dart';
+import 'package:funconnect/services/_services.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   HomeBloc() : super(HomeLoadingState()) {
     on<HomeInitEvent>(_onHomeInitEvent);
     on<InterestTapEvent>(_onInterestTapEvent);
+    on<PlaceTapEvent>(_onPlaceTapEvent);
   }
+
+  final _navigationService = locator<INavigationService>();
 
   FutureOr<void> _onHomeInitEvent(
     HomeInitEvent event,
@@ -49,5 +54,12 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         interestPlaces: data.interestPlaces,
       ));
     }
+  }
+
+  FutureOr<void> _onPlaceTapEvent(
+    PlaceTapEvent event,
+    Emitter<HomeState> emit,
+  ) {
+    _navigationService.toNamed(Routes.placeDetailRoute);
   }
 }

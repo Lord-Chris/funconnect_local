@@ -18,3 +18,5 @@ class InterestTapEvent extends HomeEvent {
   @override
   List<Object> get props => [interest];
 }
+
+class PlaceTapEvent extends HomeEvent {}
