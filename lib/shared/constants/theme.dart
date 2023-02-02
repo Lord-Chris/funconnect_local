@@ -14,5 +14,6 @@ class AppTheme {
     useMaterial3: true,
     backgroundColor: AppColors.black,
     brightness: Brightness.dark,
+    appBarTheme: const AppBarTheme(backgroundColor: AppColors.black),
   );
 }
