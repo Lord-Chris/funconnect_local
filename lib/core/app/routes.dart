@@ -10,6 +10,8 @@ import 'package:funconnect/features/dashboard/presentation/views/dashboard_view.
 import 'package:funconnect/features/events/domain/entities/event_model.dart';
 import 'package:funconnect/features/events/presentation/views/booking_view.dart';
 import 'package:funconnect/features/events/presentation/views/checkout_view.dart';
+import 'package:funconnect/features/places/presentation/blocs/place_detail_bloc/place_detail_bloc.dart';
+import 'package:funconnect/features/places/presentation/views/place_detail_view.dart';
 import 'package:funconnect/features/startup/presentation/views/onboarding_view.dart';
 import 'package:funconnect/features/startup/presentation/views/splash_view.dart';
 
@@ -29,6 +31,9 @@ class Routes {
   static const interestViewRoute = '/interests';
   static const dashboardViewRoute = '/dashboard-view';
   static const createEventViewRoute = '/create-event-view';
+
+  // Places
+  static const placeDetailRoute = '/place-detail';
 
   // Events
   static const createEventRoute = '/create-event-route';
@@ -57,6 +62,13 @@ class Routes {
         return _registerBlocView(
           view: const InterestView(),
           bloc: InterestsBloc(),
+        );
+
+      // Places
+      case placeDetailRoute:
+        return _registerBlocView(
+          view: const PlaceDetailView(),
+          bloc: PlaceDetailBloc(),
         );
 
       // Events
