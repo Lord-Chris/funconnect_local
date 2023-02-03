@@ -57,4 +57,38 @@ class AppText {
   static const aTCreateEventAddLocationText = 'Add Location';
   static const aTCreateEventCreateEventText = 'Create Event';
   static const aTCreateEventAddImageText = 'Add Image';
+
+
+  ///Profile View Texts
+  static const aTEditProfile = 'Edit Profile';
+  static const aTPersonalInformation = 'Personal Information';
+  static const aTOtherInformation = 'Other Information';
+  static const aTSocialNetworkInformation = 'Social Network Information';
+  static const aTFullName = 'Full name';
+  static const aTUserName = 'Username';
+  static const aTEmail = 'E-mail';
+  static const aTGenderHint = 'Please select an option';
+  static const aTGender = 'Gender';
+  static const aTDateOfBirth = 'Date of birth';
+  static const aTDateOfBirthHint = 'DD/MM/YYYY';
+  static const aTMobileNumber = 'Mobile number';
+  static const aTMobileNumberHint = '+234';
+  static const aTContinue = 'Continue';
+  static const aTChangeThis = 'change this?';
+  static const aTAddBio = 'Add Bio';
+  static const aTChange = 'Change';
+  static const aTSkip = 'Skip';
+  static const aTWriteSomething = 'Write something';
+  static const aTWordsMax = 'words max';
+  static const aTCurrentLocation = 'Current Location';
+  static const aTCheckMap = 'Check Map';
+  static const aTInterests = 'Interests';
+  static const aTAddInterests = 'Add Interest...';
+  static const aTAddMore = 'Add more';
+  static const aTOptional = '(Optional)';
+  static const aTTwitter = 'Twitter';
+  static const aTInstagram = 'Instagram';
+  static const aTFacebook = 'Facebook';
+  static const aTLinkedIn = 'LinkedIn';
+  static const aTUpdateProfile = 'Update Profile';
 }

@@ -124,6 +124,7 @@ class AppDropdownField<T extends Object> extends StatelessWidget {
   final String? label, hint;
   final String? headingText;
   final Widget? prefix;
+  final Widget? suffix;
   final FocusNode? focusNode;
   final bool enabled;
   final Color? fillColor;
@@ -139,6 +140,7 @@ class AppDropdownField<T extends Object> extends StatelessWidget {
     this.hint,
     this.headingText,
     this.prefix,
+    this.suffix,
     this.enabled = true,
     this.fillColor,
     this.focusNode,
@@ -185,7 +187,7 @@ class AppDropdownField<T extends Object> extends StatelessWidget {
       decoration: InputDecoration(
         hintText: hint,
         labelText: label,
-        suffixIcon: const Icon(
+        suffixIcon: suffix??const Icon(
           Icons.arrow_drop_down_sharp,
           color: AppColors.gray333,
           size: 25,

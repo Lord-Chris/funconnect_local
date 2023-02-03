@@ -34,7 +34,7 @@ class _EventsViewState extends State<EventsView> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: AppColors.primary,
         onPressed: () =>
-            locator<INavigationService>().toNamed(Routes.createEventViewRoute),
+            locator<INavigationService>().toNamed(Routes.createEventRoute),
         child: const Center(
           child: Icon(Icons.add),
         ),

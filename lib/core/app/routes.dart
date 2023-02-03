@@ -13,6 +13,9 @@ import 'package:funconnect/features/events/presentation/views/booking_view.dart'
 import 'package:funconnect/features/events/presentation/views/checkout_view.dart';
 import 'package:funconnect/features/places/presentation/blocs/place_detail_bloc/place_detail_bloc.dart';
 import 'package:funconnect/features/places/presentation/views/place_detail_view.dart';
+import 'package:funconnect/features/profile/presentation/blocs/edit_profile_bloc/edit_profile_bloc.dart';
+import 'package:funconnect/features/profile/presentation/blocs/profile/profile_bloc.dart';
+import 'package:funconnect/features/profile/presentation/views/edit_profile_view.dart';
 import 'package:funconnect/features/startup/presentation/views/onboarding_view.dart';
 import 'package:funconnect/features/startup/presentation/views/splash_view.dart';
 
@@ -20,6 +23,7 @@ import '../../features/events/presentation/views/create_event_view.dart';
 import '../../features/events/presentation/views/event_description_view.dart';
 
 class Routes {
+  // Onboarding
   static const initialRoute = splashRoute;
   static const splashRoute = '/';
   static const onboardingRoute = '/onboarding';
@@ -30,8 +34,9 @@ class Routes {
   static const locationAuthRoute = '/location-auth';
   static const setUpProfile = '/setUp-Profile';
   static const interestViewRoute = '/interests';
+
+  // Dashboard
   static const dashboardViewRoute = '/dashboard-view';
-  static const createEventViewRoute = '/create-event-view';
 
   // Places
   static const placeDetailRoute = '/place-detail';
@@ -42,8 +47,12 @@ class Routes {
   static const bookingRoute = '/booking-route';
   static const checkoutRoute = '/checkout-route';
 
+  // Profile
+  static const editProfileViewRoute = '/edit-profile';
+
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
+      // Onboarding
       case splashRoute:
         return MaterialPageRoute(builder: (_) => const SplashView());
       case onboardingRoute:
@@ -73,10 +82,13 @@ class Routes {
         );
 
       // Events
-      case createEventViewRoute:
+      case createEventRoute:
         return MaterialPageRoute(builder: (_) => const CreateEventView());
       case dashboardViewRoute:
-        return MaterialPageRoute(builder: (_) => const DashboardView());
+        return _registerBlocView(
+          view: const DashboardView(),
+          bloc: ProfileBloc(),
+        );
       case eventDescriptionRoute:
         final event = settings.arguments as EventModel;
         return MaterialPageRoute(
@@ -86,6 +98,13 @@ class Routes {
         return MaterialPageRoute(builder: (_) => const BookingView());
       case checkoutRoute:
         return MaterialPageRoute(builder: (_) => const CheckoutView());
+
+      // Profile
+      case editProfileViewRoute:
+        return _registerBlocView(
+          view: const EditProfileView(),
+          bloc: EditProfileBloc(),
+        );
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(

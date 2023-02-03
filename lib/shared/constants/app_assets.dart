@@ -29,4 +29,14 @@ class AppAssets {
   static const twitterLogo = "assets/svgs/twitter_logo.svg";
   static const instagramLogo = "assets/images/instagram_logo.png";
   static const telegramLogo = "assets/images/telegram_logo.png";
+
+  static const addImageCamera = "assets/svgs/add_image_camera.svg";
+  static const userProfile = "assets/svgs/user_profile.svg";
+  static const mail = "assets/svgs/mail.svg";
+  static const calendar = "assets/svgs/calender.svg";
+  static const phone = "assets/svgs/phone.svg";
+  static const arrowDown = "assets/svgs/arrow_down.svg";
+  static const arrowRight = "assets/svgs/arrow_right.svg";
+  static const add = "assets/svgs/add.svg";
+  static const mention = "assets/svgs/mention.svg";
 }
