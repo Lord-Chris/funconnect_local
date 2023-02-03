@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:funconnect/core/app/_app.dart';
 import 'package:funconnect/core/constants/api_constants.dart';
 import 'package:funconnect/core/constants/hive_keys.dart';
@@ -74,7 +75,11 @@ class HttpAuthenticationDataSource extends IAuthenticationDataSource
     final res = await _networkService.put(
       ApiConstants.profileSetup,
       headers: headers,
-      body: params.toMap(),
+      body: FormData.fromMap({
+        ...params.toMap(),
+        if (params.profilePhoto != null)
+          'image': await MultipartFile.fromFile(params.profilePhoto!.path)
+      }),
     );
     return ApiResponse(data: UserModel.fromMap(res.data["data"]));
   }

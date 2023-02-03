@@ -56,21 +56,38 @@ class ProfileSetUpView extends HookWidget {
                         ),
                         const SizedBox(height: 29),
                         GestureDetector(
-                          onTap: () {},
-                          child: const CircleAvatar(
-                            radius: 58.0,
-                            backgroundColor: AppColors.lightAsh,
-                            child: Center(
-                              child: Icon(
-                                Icons.camera_alt,
-                                size: 50,
-                              ),
-                            ),
+                          onTap: () => context
+                              .read<ProfileSetupBloc>()
+                              .add(AddImageEvent()),
+                          child:
+                              BlocBuilder<ProfileSetupBloc, ProfileSetupState>(
+                            buildWhen: (_, current) =>
+                                current is ProfileSetupIdleState,
+                            builder: (context, state) {
+                              if (state is! ProfileSetupIdleState ||
+                                  state.image == null) {
+                                return const CircleAvatar(
+                                  radius: 58.0,
+                                  backgroundColor: AppColors.lightAsh,
+                                  child: Center(
+                                    child: Icon(
+                                      Icons.camera_alt,
+                                      size: 50,
+                                    ),
+                                  ),
+                                );
+                              }
+                              return CircleAvatar(
+                                radius: 58.0,
+                                backgroundColor: AppColors.lightAsh,
+                                backgroundImage: FileImage(state.image!),
+                              );
+                            },
                           ),
                         ),
                         const SizedBox(height: 8.0),
                         Text(
-                          "Add image",
+                          "Select image",
                           textAlign: TextAlign.center,
                           style: AppTextStyles.light14.copyWith(
                             color: AppColors.white,

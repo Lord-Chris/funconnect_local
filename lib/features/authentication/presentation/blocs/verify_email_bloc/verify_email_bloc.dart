@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:funconnect/core/app/_app.dart';
 import 'package:funconnect/core/models/_models.dart';
+import 'package:funconnect/features/authentication/data/dto/request_otp_response.dart';
 import 'package:funconnect/features/authentication/data/repositories/_authentication_repo.dart';
 import 'package:funconnect/features/authentication/domain/params/verify_otp.dart';
 import 'package:funconnect/features/authentication/domain/usecases/verify_otp_usecase.dart';
@@ -11,6 +12,7 @@ import 'package:funconnect/features/authentication/presentation/blocs/verify_ema
 import 'package:funconnect/services/_services.dart';
 
 import '../../../../../shared/dialogs/status_dialog.dart';
+import '../../../domain/usecases/email_signin_usecase.dart';
 
 class VerifyEmailBloc extends Bloc<VerifyEmailEvent, VerifyEmailState> {
   VerifyEmailBloc() : super(VerifyEmailInitialState()) {
@@ -20,15 +22,22 @@ class VerifyEmailBloc extends Bloc<VerifyEmailEvent, VerifyEmailState> {
     on<ChangeTimerEvent>(_onChangeTimerEvent);
   }
 
-  static const otpTimer = 10;
+  static const otpTimer = 30;
   final _authenticationRepo = locator<IAuthenticationRepository>();
   final _dialogAndSheetService = locator<IDialogAndSheetService>();
+  RequestOtpResponse? newResponse;
 
   FutureOr<void> _onResendCodeEvent(
     ResendCodeEvent event,
     Emitter<VerifyEmailState> emit,
-  ) {
-    emit(TimerChangedState(time: otpTimer));
+  ) async {
+    try {
+      newResponse = await EmailSignInUsecase().call(event.email);
+      emit(TimerChangedState(time: otpTimer));
+    } on Failure catch (e) {
+      _dialogAndSheetService.showAppDialog(StatusDialog(
+          isError: true, title: "Error Signing In", body: e.message));
+    }
   }
 
   FutureOr<void> _onPinFieldChangedEvent(
@@ -43,7 +52,8 @@ class VerifyEmailBloc extends Bloc<VerifyEmailEvent, VerifyEmailState> {
     try {
       emit(VerifyEmailLoadingState());
       await VerifyOtpUsecase().call(VerifyOtpParams(
-        email: event.email.trim(),
+        email: (newResponse ?? event.response).email.trim(),
+        requestId: (newResponse ?? event.response).requestId.trim(),
         otp: event.otp.trim(),
       ));
       emit(VerifyEmailSuccessState());

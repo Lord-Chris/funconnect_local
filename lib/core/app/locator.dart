@@ -19,6 +19,7 @@ Future<void> setUpLocator() async {
       () => DialogAndSheetService());
   locator.registerLazySingleton<INetworkService>(() => NetworkService());
   locator.registerLazySingleton<ILocationService>(() => LocationService());
+  locator.registerLazySingleton<IMediaService>(() => MediaService());
   await _setUpLocalStorage();
 
   // Repositories

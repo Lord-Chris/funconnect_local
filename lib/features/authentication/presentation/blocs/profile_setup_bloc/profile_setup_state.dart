@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:equatable/equatable.dart';
 
 abstract class ProfileSetupState extends Equatable {
@@ -5,7 +7,15 @@ abstract class ProfileSetupState extends Equatable {
   List<Object?> get props => [];
 }
 
-class ProfileSetupInitialState extends ProfileSetupState {}
+class ProfileSetupIdleState extends ProfileSetupState {
+  final File? image;
+  ProfileSetupIdleState({
+    this.image,
+  });
+
+  @override
+  List<Object> get props => [image?.path ?? ""];
+}
 
 class ProfileSetupLoadingState extends ProfileSetupState {}
 

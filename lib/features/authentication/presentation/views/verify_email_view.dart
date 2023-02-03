@@ -12,12 +12,13 @@ import 'package:funconnect/shared/constants/_constants.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 import '../../../../shared/components/app_orange_button.dart';
+import '../../data/dto/request_otp_response.dart';
 import '../widgets/app_black_modal.dart';
 
 class VerifyEmailView extends HookWidget {
-  final String email;
+  final RequestOtpResponse response;
   VerifyEmailView({
-    required this.email,
+    required this.response,
     Key? key,
   }) : super(key: key);
   final formKey = GlobalKey<FormState>();
@@ -90,7 +91,8 @@ class VerifyEmailView extends HookWidget {
                                           ),
                                         ),
                                       TextSpan(
-                                        text: GeneralUtils.hideEmail(email),
+                                        text: GeneralUtils.hideEmail(
+                                            response.email),
                                         style: AppTextStyles.medium14.copyWith(
                                           color: context
                                                   .read<VerifyEmailBloc>()
@@ -209,7 +211,9 @@ class VerifyEmailView extends HookWidget {
                                                 ..onTap = () {
                                                   context
                                                       .read<VerifyEmailBloc>()
-                                                      .add(ResendCodeEvent());
+                                                      .add(ResendCodeEvent(
+                                                        email: response.email,
+                                                      ));
                                                 },
                                             ),
                                           ],
@@ -249,7 +253,7 @@ class VerifyEmailView extends HookWidget {
                               context
                                   .read<VerifyEmailBloc>()
                                   .add(VerifyEmailTapEvent(
-                                    email: email,
+                                    response: response,
                                     otp: pinController.text,
                                   ));
                             },

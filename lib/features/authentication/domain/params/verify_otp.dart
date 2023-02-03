@@ -2,10 +2,12 @@ import 'package:equatable/equatable.dart';
 
 class VerifyOtpParams extends Equatable {
   final String email;
+  final String requestId;
   final String otp;
 
   const VerifyOtpParams({
     required this.email,
+    required this.requestId,
     required this.otp,
   });
 
@@ -15,6 +17,7 @@ class VerifyOtpParams extends Equatable {
   Map<String, dynamic> toMap() {
     return {
       'email': email,
+      'request_id': requestId,
       'otp': otp,
     };
   }

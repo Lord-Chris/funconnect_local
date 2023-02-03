@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:equatable/equatable.dart';
 import 'package:funconnect/features/authentication/domain/params/profile_setup.dart';
 
@@ -11,11 +13,13 @@ class AddImageEvent extends ProfileSetupEvent {}
 class ShareLocationEvent extends ProfileSetupEvent {}
 
 class SetupProfileEvent extends ProfileSetupEvent {
+  final File? image;
   final String fullName;
   final String username;
   final String gender;
 
   SetupProfileEvent({
+    this.image,
     required this.fullName,
     required this.username,
     required this.gender,
@@ -25,5 +29,6 @@ class SetupProfileEvent extends ProfileSetupEvent {
         name: fullName,
         username: username,
         gender: gender,
+        profilePhoto: image,
       );
 }

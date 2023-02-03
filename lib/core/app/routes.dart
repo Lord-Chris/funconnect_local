@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:funconnect/features/authentication/data/dto/request_otp_response.dart';
 import 'package:funconnect/features/authentication/presentation/blocs/interest_bloc/interest_bloc.dart';
 import 'package:funconnect/features/authentication/presentation/views/Profile_setup_view.dart';
 import 'package:funconnect/features/authentication/presentation/views/email_verified_view.dart';
@@ -50,9 +51,9 @@ class Routes {
       case welcomeViewRoute:
         return MaterialPageRoute(builder: (_) => const WelcomeView());
       case verifyEmailRoute:
-        final email = settings.arguments as String;
+        final res = settings.arguments as RequestOtpResponse;
         return MaterialPageRoute(
-          builder: (_) => VerifyEmailView(email: email),
+          builder: (_) => VerifyEmailView(response: res),
         );
       case emailVerifiedRoute:
         return MaterialPageRoute(builder: (_) => const EmailVerifiedScreen());

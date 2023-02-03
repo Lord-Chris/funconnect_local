@@ -20,6 +20,96 @@ class OnboardingView extends StatefulHookWidget {
 }
 
 class _OnboardingViewState extends State<OnboardingView> {
+  final titles = <Widget>[
+    RichText(
+      key: const ValueKey(1),
+      textAlign: TextAlign.center,
+      textScaleFactor: 1,
+      text: TextSpan(
+        text: 'Create ',
+        style: AppTextStyles.bold36.copyWith(
+          color: AppColors.white,
+        ),
+        children: [
+          TextSpan(
+            text: 'events ',
+            style: AppTextStyles.bold36.copyWith(
+              color: AppColors.primary,
+            ),
+          ),
+          TextSpan(
+            text: 'for meet-ups',
+            style: AppTextStyles.bold36.copyWith(
+              color: AppColors.white,
+            ),
+          )
+        ],
+      ),
+    ),
+    RichText(
+      key: const ValueKey(2),
+      textAlign: TextAlign.center,
+      textScaleFactor: 1,
+      text: TextSpan(
+        text: 'Explore ',
+        style: AppTextStyles.bold36.copyWith(
+          color: AppColors.primary,
+        ),
+        children: [
+          TextSpan(
+            text: 'amazing places near you ',
+            style: AppTextStyles.bold36.copyWith(
+              color: AppColors.white,
+            ),
+          ),
+        ],
+      ),
+    ),
+    RichText(
+      key: const ValueKey(3),
+      textAlign: TextAlign.center,
+      textScaleFactor: 1,
+      text: TextSpan(
+        text: 'Share your best',
+        style: AppTextStyles.bold36.copyWith(
+          color: AppColors.white,
+        ),
+        children: [
+          TextSpan(
+            text: ' experiences',
+            style: AppTextStyles.bold36.copyWith(
+              color: AppColors.primary,
+            ),
+          )
+        ],
+      ),
+    ),
+  ];
+
+  final subtitles = <Widget>[
+    Text(
+      "Let’s help you create memorable moments by planning your next hangout",
+      textAlign: TextAlign.center,
+      style: AppTextStyles.regular16.copyWith(
+        color: AppColors.white,
+      ),
+    ),
+    Text(
+      "Every place has its specialty, we ought to feel the freedom that comes with adventures",
+      textAlign: TextAlign.center,
+      style: AppTextStyles.regular16.copyWith(
+        color: AppColors.white,
+      ),
+    ),
+    Text(
+      "We help you establish human connections within the context of shared experience.",
+      textAlign: TextAlign.center,
+      style: AppTextStyles.regular16.copyWith(
+        color: AppColors.white,
+      ),
+    ),
+  ];
+
   final controller = PageController(initialPage: 0);
   static const int delay = 5;
   Timer? timer;
@@ -152,23 +242,26 @@ class _OnboardingViewState extends State<OnboardingView> {
                       ),
                       const Spacer(),
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 30),
+                        padding: const EdgeInsets.symmetric(horizontal: 25.0),
                         child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text(
-                              "Create events for meet-ups",
-                              textAlign: TextAlign.center,
-                              style: AppTextStyles.bold36.copyWith(
-                                color: AppColors.white,
-                              ),
+                            AnimatedSwitcher(
+                              duration: const Duration(milliseconds: 300),
+                              transitionBuilder: (child, animation) {
+                                return ScaleTransition(
+                                    scale: animation, child: child);
+                              },
+                              child: titles[state.page],
                             ),
                             Spacing.vertRegular(),
-                            Text(
-                              "Let’s help you create memorable moments by planning your next hangout",
-                              textAlign: TextAlign.center,
-                              style: AppTextStyles.regular16.copyWith(
-                                color: AppColors.white,
-                              ),
+                            AnimatedSwitcher(
+                              duration: const Duration(milliseconds: 300),
+                              transitionBuilder: (child, animation) {
+                                return ScaleTransition(
+                                    scale: animation, child: child);
+                              },
+                              child: subtitles[state.page],
                             ),
                           ],
                         ),
