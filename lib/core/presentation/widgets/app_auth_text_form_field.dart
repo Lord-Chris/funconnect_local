@@ -192,6 +192,7 @@ class _AppTextFormState extends State<AppTextForm>
                           onFieldSubmitted: widget.onFieldSubmitted,
                           decoration: InputDecoration(
                             prefix: widget.prefixIcon,
+                            suffix: widget.suffixIcon,
                             labelText: widget.labelText,
                             labelStyle: const TextStyle(
                                 color: AppColors.white, fontSize: 16.0),

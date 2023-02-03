@@ -7,6 +7,9 @@ import 'package:funconnect/features/authentication/presentation/views/interest_v
 import 'package:funconnect/features/authentication/presentation/views/verify_email_view.dart';
 import 'package:funconnect/features/authentication/presentation/views/welcome_view.dart';
 import 'package:funconnect/features/dashboard/presentation/views/dashboard_view.dart';
+import 'package:funconnect/features/profile/presentation/blocs/edit_profile_bloc/edit_profile_bloc.dart';
+import 'package:funconnect/features/profile/presentation/blocs/profile/profile_bloc.dart';
+import 'package:funconnect/features/profile/presentation/views/edit_profile_view.dart';
 import 'package:funconnect/features/startup/presentation/views/onboarding_view.dart';
 import 'package:funconnect/features/startup/presentation/views/splash_view.dart';
 import 'package:funconnect/success_view.dart';
@@ -20,6 +23,7 @@ class Routes {
   static const onboardingRoute = '/onboarding';
   static const welcomeViewRoute = '/welcome-view';
   static const profileSetupViewRoute = '/profile_setup';
+  static const editProfileViewRoute = '/edit-profile';
   // static const emailSignInRoute = '/email-sign-in';
   static const verifyEmailRoute = '/verify-email';
   static const emailVerifiedRoute = '/email-verified';
@@ -62,11 +66,19 @@ class Routes {
       case successViewRoute:
         return MaterialPageRoute(builder: (_) => const SuccessView());
       case dashboardViewRoute:
-        return MaterialPageRoute(builder: (_) => const DashboardView());
+        return _registerBlocView(
+          view: const DashboardView(),
+          bloc: ProfileBloc(),
+        );
       case createEventRoute:
         return MaterialPageRoute(builder: (_) => const CreateEventView());
       case eventDescriptionRoute:
         return MaterialPageRoute(builder: (_) => const EventDescriptionView());
+        case editProfileViewRoute:
+        return  _registerBlocView(
+          view: const EditProfileView(),
+          bloc: EditProfileBloc(),
+        );
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(

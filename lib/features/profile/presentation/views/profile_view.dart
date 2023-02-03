@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:funconnect/core/presentation/widgets/core_widgets.dart';
+import 'package:funconnect/features/profile/presentation/blocs/edit_profile_bloc/edit_profile_bloc.dart';
+import 'package:funconnect/features/profile/presentation/blocs/profile/profile_bloc.dart';
 import 'package:funconnect/shared/components/_components.dart';
 import 'package:funconnect/shared/components/app_network_image.dart';
 import 'package:funconnect/shared/components/scrollable_column.dart';
@@ -95,7 +98,8 @@ class ProfileView extends StatelessWidget {
             isCollapsed: true,
             padding: REdgeInsets.fromLTRB(88, 19, 88, 19),
             labelColor: AppColors.black,
-            onTap: () {},
+            onTap: () => context
+              .read<ProfileBloc>().add(EditMyProfileEvent()),
           ),
           Spacing.vertLarge(),
           _ProfileSubButton(
