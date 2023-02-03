@@ -52,42 +52,36 @@ class PersonalInformationView extends StatelessWidget {
             height: 48.h,
           ),
           AppTextField(
-            onChanged: (val) {},
-            validator: (val) {
-              return null;
-            },
             label: AppText.aTFullName,
             hint: AppText.aTFullName,
-            prefix: Padding(
-              padding: const EdgeInsets.only(right: 8.0),
+            prefix: Align(
+              widthFactor: 1.0,
+              heightFactor: 1.0,
               child: SvgPicture.asset(
                 AppAssets.userProfile,
-                height: 17.h,
+                height: 20.h,
               ),
             ),
           ),
           Align(
-              alignment: Alignment.centerRight,
-              child: Text(
-                AppText.aTChangeThis,
-                style:
-                    AppTextStyles.regular12.copyWith(color: AppColors.primary),
-              )),
+            alignment: Alignment.centerRight,
+            child: Text(
+              AppText.aTChangeThis,
+              style: AppTextStyles.regular12.copyWith(color: AppColors.primary),
+            ),
+          ),
           SizedBox(
             height: 24.h,
           ),
           AppTextField(
-            onChanged: (val) {},
-            validator: (val) {
-              return null;
-            },
             label: AppText.aTUserName,
             hint: AppText.aTUserName,
-            prefix: Padding(
-              padding: const EdgeInsets.only(right: 8.0),
+            prefix: Align(
+              widthFactor: 1.0,
+              heightFactor: 1.0,
               child: SvgPicture.asset(
                 AppAssets.userProfile,
-                height: 17.h,
+                height: 20.h,
               ),
             ),
           ),
@@ -102,17 +96,14 @@ class PersonalInformationView extends StatelessWidget {
             height: 24.h,
           ),
           AppTextField(
-            onChanged: (val) {},
-            validator: (val) {
-              return null;
-            },
             label: AppText.aTEmail,
             hint: AppText.aTEmail,
-            prefix: Padding(
-              padding: const EdgeInsets.only(right: 8.0),
+            prefix: Align(
+              widthFactor: 1.0,
+              heightFactor: 1.0,
               child: SvgPicture.asset(
                 AppAssets.mail,
-                height: 17.h,
+                height: 20.h,
               ),
             ),
           ),
@@ -129,10 +120,14 @@ class PersonalInformationView extends StatelessWidget {
           AppDropdownField<String>(
             label: "Gender",
             items: const ["Male", "Female"],
-            prefix: SvgPicture.asset(
-              AppAssets.userProfile,
-              height: 17.h,
-              fit: BoxFit.scaleDown,
+            prefix: Align(
+              widthFactor: 1.0,
+              heightFactor: 1.0,
+              child: SvgPicture.asset(
+                AppAssets.userProfile,
+                height: 20.h,
+                fit: BoxFit.scaleDown,
+              ),
             ),
             suffix: Padding(
               padding: const EdgeInsets.only(right: 8.0),
@@ -150,43 +145,45 @@ class PersonalInformationView extends StatelessWidget {
             height: 24.h,
           ),
           AppTextField(
-            onChanged: (val) {},
-            validator: (val) {
-              return null;
-            },
             label: AppText.aTDateOfBirth,
             hint: AppText.aTDateOfBirthHint,
-            prefix: Padding(
-              padding: const EdgeInsets.only(right: 8.0),
+            prefix: Align(
+              widthFactor: 1.0,
+              heightFactor: 1.0,
               child: SvgPicture.asset(
                 AppAssets.calendar,
-                height: 17.h,
+                height: 20.h,
               ),
             ),
-            suffix: SvgPicture.asset(
-              AppAssets.arrowDown,
-              width: 20,
+            suffix: Align(
+              widthFactor: 1.0,
+              heightFactor: 1.0,
+              child: SvgPicture.asset(
+                AppAssets.arrowDown,
+                width: 20,
+              ),
             ),
           ),
           SizedBox(
             height: 24.h,
           ),
           AppTextField(
-            onChanged: (val) {},
-            validator: (val) {
-              return null;
-            },
             label: AppText.aTMobileNumber,
             hint: AppText.aTMobileNumberHint,
-            suffix: SvgPicture.asset(
-              AppAssets.arrowDown,
-              width: 20,
+            suffix: Align(
+              widthFactor: 1.0,
+              heightFactor: 1.0,
+              child: SvgPicture.asset(
+                AppAssets.arrowDown,
+                width: 20,
+              ),
             ),
-            prefix: Padding(
-              padding: const EdgeInsets.only(right: 8.0),
+            prefix: Align(
+              widthFactor: 1.0,
+              heightFactor: 1.0,
               child: SvgPicture.asset(
                 AppAssets.phone,
-                height: 17.h,
+                height: 20.h,
               ),
             ),
           ),

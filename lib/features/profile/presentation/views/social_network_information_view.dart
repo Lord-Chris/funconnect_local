@@ -37,17 +37,14 @@ class SocialNetworkInformationView extends StatelessWidget {
                   height: 24.h,
                 ),
                 AppTextField(
-                  onChanged: (val) {},
-                  validator: (val) {
-                    return null;
-                  },
                   label: AppText.aTTwitter,
                   hint: AppText.aTTwitter,
-                  prefix: Padding(
-                    padding: const EdgeInsets.only(right: 8.0),
+                  prefix: Align(
+                    widthFactor: 1.0,
+                    heightFactor: 1.0,
                     child: SvgPicture.asset(
                       AppAssets.mention,
-                      height: 17.h,
+                      height: 20.h,
                     ),
                   ),
                 ),
@@ -55,39 +52,28 @@ class SocialNetworkInformationView extends StatelessWidget {
                   height: 24.h,
                 ),
                 AppTextField(
-                  onChanged: (val) {},
-                  validator: (val) {
-                    return null;
-                  },
                   label: AppText.aTInstagram,
                   hint: AppText.aTInstagram,
-                  prefix: Padding(
-                    padding: const EdgeInsets.only(right: 8.0),
+                  prefix: Align(
+                    widthFactor: 1.0,
+                    heightFactor: 1.0,
                     child: SvgPicture.asset(
                       AppAssets.mention,
-                      height: 17.h,
+                      height: 20.h,
                     ),
                   ),
                 ),
                 SizedBox(
                   height: 24.h,
                 ),
-                AppTextField(
-                  onChanged: (val) {},
-                  validator: (val) {
-                    return null;
-                  },
+                const AppTextField(
                   label: AppText.aTFacebook,
                   hint: AppText.aTFacebook,
                 ),
                 SizedBox(
                   height: 24.h,
                 ),
-                AppTextField(
-                  onChanged: (val) {},
-                  validator: (val) {
-                    return null;
-                  },
+                const AppTextField(
                   label: AppText.aTLinkedIn,
                   hint: AppText.aTLinkedIn,
                 ),

@@ -50,11 +50,7 @@ class OtherInformationView extends StatelessWidget {
           SizedBox(
             height: 16.h,
           ),
-          AppTextField(
-            onChanged: (val) {},
-            validator: (val) {
-              return null;
-            },
+          const AppTextField(
             maxLines: 7,
             hint: AppText.aTWriteSomething,
           ),
