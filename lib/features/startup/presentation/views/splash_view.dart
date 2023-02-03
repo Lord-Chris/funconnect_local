@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:funconnect/features/startup/presentation/blocs/splash_bloc/splash_bloc.dart';
 import 'package:funconnect/features/startup/presentation/blocs/splash_bloc/splash_event.dart';
 import 'package:funconnect/features/startup/presentation/blocs/splash_bloc/splash_state.dart';
@@ -26,8 +27,8 @@ class SplashView extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
-                  height: 125.0,
-                  width: 125.0,
+                  height: 500.h,
+                  width: 500.w,
                   decoration: const BoxDecoration(
                     image: DecorationImage(
                       image: AssetImage(
@@ -44,5 +45,3 @@ class SplashView extends StatelessWidget {
     );
   }
 }
-
-

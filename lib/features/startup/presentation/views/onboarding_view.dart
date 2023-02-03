@@ -242,7 +242,7 @@ class _OnboardingViewState extends State<OnboardingView> {
                       ),
                       const Spacer(),
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 60.0),
+                        padding: const EdgeInsets.symmetric(horizontal: 25.0),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
