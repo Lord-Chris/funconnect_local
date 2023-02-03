@@ -25,10 +25,10 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
   }
 
   void _onSplashFinished(FinishSplashEvent event, Emitter<SplashState> emit) {
-    if (isAuthenticated) {
+    if (!isAuthenticated) {
       _navigationService.toNamed(Routes.dashboardViewRoute);
     } else {
-      if (isFirstTime) {
+      if (!isFirstTime) {
         _navigationService.toNamed(Routes.onboardingRoute);
       } else {
         _navigationService.toNamed(Routes.welcomeViewRoute);

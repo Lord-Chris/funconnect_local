@@ -6,7 +6,15 @@ abstract class VerifyEmailEvent extends Equatable {
   List<Object?> get props => [];
 }
 
-class ResendCodeEvent extends VerifyEmailEvent {}
+class ResendCodeEvent extends VerifyEmailEvent {
+  final String email;
+  ResendCodeEvent({
+    required this.email,
+  });
+
+  @override
+  List<Object> get props => [email];
+}
 
 class ChangeTimerEvent extends VerifyEmailEvent {
   final int time;

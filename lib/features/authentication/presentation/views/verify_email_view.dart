@@ -211,7 +211,9 @@ class VerifyEmailView extends HookWidget {
                                                 ..onTap = () {
                                                   context
                                                       .read<VerifyEmailBloc>()
-                                                      .add(ResendCodeEvent());
+                                                      .add(ResendCodeEvent(
+                                                        email: response.email,
+                                                      ));
                                                 },
                                             ),
                                           ],
