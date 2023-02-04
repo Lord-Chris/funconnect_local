@@ -3,6 +3,7 @@ class StorageKeys {
 
   // General
   static const isFirstTime = "is-first-time";
+  static const showOnboarding = "show-onboarding";
 
   // User
   static const token = "token";
