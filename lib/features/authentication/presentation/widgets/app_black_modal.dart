@@ -23,7 +23,7 @@ class AppBlackModalWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Stack(
-      fit: StackFit.loose,
+      fit: StackFit.expand,
       children: [
         SizedBox(
           height: MediaQuery.of(context).size.height,
@@ -31,13 +31,13 @@ class AppBlackModalWidget extends StatelessWidget {
         ),
         Positioned(
           bottom: -20.0,
+          left: 0,
+          right: 0,
           child: Container(
-            // height: modalHeight ?? 350,
             padding: padding,
             constraints: modalHeight != null
                 ? BoxConstraints(maxHeight: modalHeight!)
                 : null,
-            width: MediaQuery.of(context).size.width,
             decoration: const BoxDecoration(
               color: AppColors.black,
               borderRadius: BorderRadius.only(

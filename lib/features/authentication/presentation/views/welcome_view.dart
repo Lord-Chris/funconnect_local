@@ -173,7 +173,7 @@ class WelcomeView extends HookWidget {
                           ),
                         ),
                         AppOrangeBtn(
-                          label: state.isFirstTime ? "Sign Up" : "Sign in",
+                          label: state.isFirstTime ? "Sign Up" : "Sign In",
                           isBusy: state is WelcomeLoadingState,
                           onTap: () {
                             if (!formKey.currentState!.validate()) return;
