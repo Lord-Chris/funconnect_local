@@ -61,6 +61,8 @@ class VerifyEmailBloc extends Bloc<VerifyEmailEvent, VerifyEmailState> {
       emit(VerifyEmailErrorState());
       _dialogAndSheetService.showAppDialog(StatusDialog(
           isError: true, title: "Error Verifying OTP", body: e.message));
+    } finally {
+      emit(TimerFinishedState());
     }
   }
 
