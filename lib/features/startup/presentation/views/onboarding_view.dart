@@ -140,148 +140,144 @@ class _OnboardingViewState extends State<OnboardingView> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => OnboardingBloc(),
-      child: BlocBuilder<OnboardingBloc, OnboardingState>(
-        builder: (context, state) {
-          if (state is! OnboardingInitialState) return const SizedBox();
-          return Scaffold(
-            body: Stack(
-              fit: StackFit.expand,
-              children: [
-                Positioned.fill(
-                  child: PageView(
-                    onPageChanged: (val) => context
-                        .read<OnboardingBloc>()
-                        .add(PageChangedEvent(page: val)),
-                    controller: controller,
-                    physics: const ClampingScrollPhysics(),
-                    children: List.filled(3, false).map((e) {
-                      return const VideoPlayerWidget();
-                    }).toList(),
+    return BlocBuilder<OnboardingBloc, OnboardingState>(
+      builder: (context, state) {
+        if (state is! OnboardingInitialState) return const SizedBox();
+        return Scaffold(
+          body: Stack(
+            fit: StackFit.expand,
+            children: [
+              Positioned.fill(
+                child: PageView(
+                  onPageChanged: (val) => context
+                      .read<OnboardingBloc>()
+                      .add(PageChangedEvent(page: val)),
+                  controller: controller,
+                  physics: const ClampingScrollPhysics(),
+                  children: List.filled(3, false).map((e) {
+                    return const VideoPlayerWidget();
+                  }).toList(),
+                ),
+              ),
+              Positioned.fill(
+                  child: Container(
+                decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      AppColors.black,
+                      AppColors.transparent,
+                      AppColors.transparent,
+                      AppColors.black,
+                    ],
+                    stops: [0.1, 0.3, 0.6, 1],
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    tileMode: TileMode.clamp,
                   ),
                 ),
-                Positioned.fill(
-                    child: Container(
-                  decoration: const BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [
-                        AppColors.black,
-                        AppColors.transparent,
-                        AppColors.transparent,
-                        AppColors.black,
-                      ],
-                      stops: [0.1, 0.3, 0.6, 1],
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      tileMode: TileMode.clamp,
-                    ),
-                  ),
-                )),
-                Positioned.fill(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 16.0,
-                          vertical: 40.0,
-                        ),
-                        child: HookBuilder(builder: (context) {
-                          final anim = useAnimationController(
-                              duration: const Duration(seconds: delay));
-                          anim.repeat();
-                          final value = useAnimation(
-                              Tween<double>(begin: 0, end: 1).animate(anim));
-                          return Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Expanded(
-                                child: Padding(
-                                  padding: EdgeInsets.only(top: 6.h),
-                                  child: LinearProgressIndicator(
-                                    value: state.page > 0 ? 1 : value,
-                                    color: AppColors.primary,
-                                    backgroundColor: AppColors.white,
-                                    minHeight: 4,
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(width: 7),
-                              Expanded(
-                                child: Padding(
-                                  padding: EdgeInsets.only(top: 6.h),
-                                  child: LinearProgressIndicator(
-                                    value: state.page < 1
-                                        ? 0
-                                        : state.page > 1
-                                            ? 1
-                                            : value,
-                                    color: AppColors.primary,
-                                    backgroundColor: AppColors.white,
-                                    minHeight: 4,
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(width: 7),
-                              Expanded(
-                                child: Padding(
-                                  padding: EdgeInsets.only(top: 6.h),
-                                  child: LinearProgressIndicator(
-                                    value: state.page < 2 ? 0 : value,
-                                    color: AppColors.primary,
-                                    backgroundColor: AppColors.white,
-                                    minHeight: 4,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          );
-                        }),
+              )),
+              Positioned.fill(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16.0,
+                        vertical: 40.0,
                       ),
-                      const Spacer(),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                      child: HookBuilder(builder: (context) {
+                        final anim = useAnimationController(
+                            duration: const Duration(seconds: delay));
+                        anim.repeat();
+                        final value = useAnimation(
+                            Tween<double>(begin: 0, end: 1).animate(anim));
+                        return Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            AnimatedSwitcher(
-                              duration: const Duration(milliseconds: 300),
-                              transitionBuilder: (child, animation) {
-                                return ScaleTransition(
-                                    scale: animation, child: child);
-                              },
-                              child: titles[state.page],
+                            Expanded(
+                              child: Padding(
+                                padding: EdgeInsets.only(top: 6.h),
+                                child: LinearProgressIndicator(
+                                  value: state.page > 0 ? 1 : value,
+                                  color: AppColors.primary,
+                                  backgroundColor: AppColors.white,
+                                  minHeight: 4,
+                                ),
+                              ),
                             ),
-                            Spacing.vertRegular(),
-                            AnimatedSwitcher(
-                              duration: const Duration(milliseconds: 300),
-                              transitionBuilder: (child, animation) {
-                                return ScaleTransition(
-                                    scale: animation, child: child);
-                              },
-                              child: subtitles[state.page],
+                            const SizedBox(width: 7),
+                            Expanded(
+                              child: Padding(
+                                padding: EdgeInsets.only(top: 6.h),
+                                child: LinearProgressIndicator(
+                                  value: state.page < 1
+                                      ? 0
+                                      : state.page > 1
+                                          ? 1
+                                          : value,
+                                  color: AppColors.primary,
+                                  backgroundColor: AppColors.white,
+                                  minHeight: 4,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(width: 7),
+                            Expanded(
+                              child: Padding(
+                                padding: EdgeInsets.only(top: 6.h),
+                                child: LinearProgressIndicator(
+                                  value: state.page < 2 ? 0 : value,
+                                  color: AppColors.primary,
+                                  backgroundColor: AppColors.white,
+                                  minHeight: 4,
+                                ),
+                              ),
                             ),
                           ],
-                        ),
+                        );
+                      }),
+                    ),
+                    const Spacer(),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          AnimatedSwitcher(
+                            duration: const Duration(milliseconds: 300),
+                            transitionBuilder: (child, animation) {
+                              return ScaleTransition(
+                                  scale: animation, child: child);
+                            },
+                            child: titles[state.page],
+                          ),
+                          Spacing.vertRegular(),
+                          AnimatedSwitcher(
+                            duration: const Duration(milliseconds: 300),
+                            transitionBuilder: (child, animation) {
+                              return ScaleTransition(
+                                  scale: animation, child: child);
+                            },
+                            child: subtitles[state.page],
+                          ),
+                        ],
                       ),
-                      Spacing.vertRegular(),
-                      Spacing.vertRegular(),
-                      AppOrangeBtn(
-                        label: "Get Started",
-                        onTap: () => context
-                            .read<OnboardingBloc>()
-                            .add(GetStartedEvent()),
-                      ),
-                    ],
-                  ),
+                    ),
+                    Spacing.vertRegular(),
+                    Spacing.vertRegular(),
+                    AppOrangeBtn(
+                      label: "Get Started",
+                      onTap: () =>
+                          context.read<OnboardingBloc>().add(GetStartedEvent()),
+                    ),
+                  ],
                 ),
-              ],
-            ),
-          );
-        },
-      ),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }

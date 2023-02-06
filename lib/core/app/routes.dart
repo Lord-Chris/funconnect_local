@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:funconnect/features/authentication/data/dto/request_otp_response.dart';
 import 'package:funconnect/features/authentication/presentation/blocs/interest_bloc/interest_bloc.dart';
+import 'package:funconnect/features/authentication/presentation/blocs/profile_setup_bloc/profile_setup_bloc.dart';
+import 'package:funconnect/features/authentication/presentation/blocs/verify_email_bloc/verify_email_bloc.dart';
+import 'package:funconnect/features/authentication/presentation/blocs/welcome_bloc/welcome_bloc.dart';
 import 'package:funconnect/features/authentication/presentation/views/Profile_setup_view.dart';
-import 'package:funconnect/features/authentication/presentation/views/email_verified_view.dart';
 import 'package:funconnect/features/authentication/presentation/views/interest_view.dart';
 import 'package:funconnect/features/authentication/presentation/views/verify_email_view.dart';
 import 'package:funconnect/features/authentication/presentation/views/welcome_view.dart';
@@ -16,6 +18,8 @@ import 'package:funconnect/features/places/presentation/views/place_detail_view.
 import 'package:funconnect/features/profile/presentation/blocs/edit_profile_bloc/edit_profile_bloc.dart';
 import 'package:funconnect/features/profile/presentation/blocs/profile/profile_bloc.dart';
 import 'package:funconnect/features/profile/presentation/views/edit_profile_view.dart';
+import 'package:funconnect/features/startup/presentation/blocs/onboarding_bloc/onboarding_bloc.dart';
+import 'package:funconnect/features/startup/presentation/blocs/splash_bloc/splash_bloc.dart';
 import 'package:funconnect/features/startup/presentation/views/onboarding_view.dart';
 import 'package:funconnect/features/startup/presentation/views/splash_view.dart';
 
@@ -30,7 +34,7 @@ class Routes {
   static const welcomeViewRoute = '/welcome-view';
   static const profileSetupViewRoute = '/profile_setup';
   static const verifyEmailRoute = '/verify-email';
-  static const emailVerifiedRoute = '/email-verified';
+  // static const emailVerifiedRoute = '/email-verified';
   static const locationAuthRoute = '/location-auth';
   static const setUpProfile = '/setUp-Profile';
   static const interestViewRoute = '/interests';
@@ -54,20 +58,31 @@ class Routes {
     switch (settings.name) {
       // Onboarding
       case splashRoute:
-        return MaterialPageRoute(builder: (_) => const SplashView());
+        return _registerBlocView(
+          view: const SplashView(),
+          bloc: SplashBloc(),
+        );
       case onboardingRoute:
-        return MaterialPageRoute(builder: (_) => const OnboardingView());
+        return _registerBlocView(
+          view: const OnboardingView(),
+          bloc: OnboardingBloc(),
+        );
       case welcomeViewRoute:
-        return MaterialPageRoute(builder: (_) => const WelcomeView());
+        return _registerBlocView(
+          view: const WelcomeView(),
+          bloc: WelcomeBloc(),
+        );
       case verifyEmailRoute:
         final res = settings.arguments as RequestOtpResponse;
-        return MaterialPageRoute(
-          builder: (_) => VerifyEmailView(response: res),
+        return _registerBlocView(
+          view: VerifyEmailView(response: res),
+          bloc: VerifyEmailBloc(),
         );
-      case emailVerifiedRoute:
-        return MaterialPageRoute(builder: (_) => const EmailVerifiedScreen());
       case profileSetupViewRoute:
-        return MaterialPageRoute(builder: (_) => ProfileSetUpView());
+        return _registerBlocView(
+          view: ProfileSetUpView(),
+          bloc: ProfileSetupBloc(),
+        );
       case interestViewRoute:
         return _registerBlocView(
           view: const InterestView(),
