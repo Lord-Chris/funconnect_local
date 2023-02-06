@@ -24,11 +24,12 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
     emit(SplashFinishedState());
   }
 
-  void _onSplashFinished(FinishSplashEvent event, Emitter<SplashState> emit) {
+  Future<void> _onSplashFinished(
+      FinishSplashEvent event, Emitter<SplashState> emit) async {
     if (isAuthenticated) {
       _navigationService.toNamed(Routes.dashboardViewRoute);
     } else {
-      if (isFirstTime) {
+      if (showOnboarding) {
         _navigationService.toNamed(Routes.onboardingRoute);
       } else {
         _navigationService.toNamed(Routes.welcomeViewRoute);
@@ -36,10 +37,10 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
     }
   }
 
-  bool get isFirstTime => _localStorageService.read(HiveKeys.appBoxId,
-      key: StorageKeys.isFirstTime, def: true);
+  bool get showOnboarding => _localStorageService.read(HiveKeys.appBoxId,
+      key: StorageKeys.showOnboarding, def: true);
 
-  bool get isAuthenticated =>
-      _localStorageService.read(HiveKeys.userBoxId, key: StorageKeys.token) !=
-      null;
+  bool get isAuthenticated => _localStorageService
+      .read(HiveKeys.userBoxId, key: StorageKeys.token, def: "")
+      .isNotEmpty;
 }

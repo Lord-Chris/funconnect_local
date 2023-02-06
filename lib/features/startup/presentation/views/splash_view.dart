@@ -11,34 +11,32 @@ class SplashView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<SplashBloc>(
-      create: (context) => SplashBloc()..add(InitializeSplashEvent()),
-      child: BlocListener<SplashBloc, SplashState>(
-        listener: (context, state) {
-          if (state is SplashFinishedState) {
-            context.read<SplashBloc>().add(FinishSplashEvent());
-          }
-        },
-        child: Scaffold(
-          body: Container(
-            width: double.maxFinite,
-            color: AppColors.mediumBlack,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  height: 500.h,
-                  width: 500.w,
-                  decoration: const BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage(
-                        "assets/gifs/funconnect_logo.gif",
-                      ),
+    context.read<SplashBloc>().add(InitializeSplashEvent());
+    return BlocListener<SplashBloc, SplashState>(
+      listener: (context, state) {
+        if (state is SplashFinishedState) {
+          context.read<SplashBloc>().add(FinishSplashEvent());
+        }
+      },
+      child: Scaffold(
+        body: Container(
+          width: double.maxFinite,
+          color: AppColors.mediumBlack,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                height: 500.h,
+                width: 500.w,
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage(
+                      "assets/gifs/funconnect_logo.gif",
                     ),
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

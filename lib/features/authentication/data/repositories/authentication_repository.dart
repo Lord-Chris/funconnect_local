@@ -42,6 +42,11 @@ class AuthenticationRepository extends IAuthenticationRepository {
       key: StorageKeys.user,
       data: res.data.toMap(),
     );
+    await _localStorageService.write(
+      HiveKeys.appBoxId,
+      key: StorageKeys.isFirstTime,
+      data: false,
+    );
     return res.data;
   }
 
