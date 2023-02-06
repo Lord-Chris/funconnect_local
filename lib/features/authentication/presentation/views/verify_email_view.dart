@@ -15,13 +15,27 @@ import '../../../../shared/components/app_orange_button.dart';
 import '../../data/dto/request_otp_response.dart';
 import '../widgets/app_black_modal.dart';
 
-class VerifyEmailView extends HookWidget {
+class VerifyEmailView extends StatefulHookWidget {
   final RequestOtpResponse response;
-  VerifyEmailView({
+  const VerifyEmailView({
     required this.response,
     Key? key,
   }) : super(key: key);
+
+  @override
+  State<VerifyEmailView> createState() => _VerifyEmailViewState();
+}
+
+class _VerifyEmailViewState extends State<VerifyEmailView> {
   final formKey = GlobalKey<FormState>();
+
+  @override
+  void initState() {
+    super.initState();
+    context
+        .read<VerifyEmailBloc>()
+        .add(ChangeTimerEvent(time: VerifyEmailBloc.otpTimer));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -89,7 +103,7 @@ class VerifyEmailView extends HookWidget {
                                       ),
                                     TextSpan(
                                       text: GeneralUtils.hideEmail(
-                                          response.email),
+                                          widget.response.email),
                                       style: AppTextStyles.medium14.copyWith(
                                         color: context
                                                 .read<VerifyEmailBloc>()
@@ -207,7 +221,8 @@ class VerifyEmailView extends HookWidget {
                                                 context
                                                     .read<VerifyEmailBloc>()
                                                     .add(ResendCodeEvent(
-                                                      email: response.email,
+                                                      email:
+                                                          widget.response.email,
                                                     ));
                                               },
                                           ),
@@ -248,7 +263,7 @@ class VerifyEmailView extends HookWidget {
                             context
                                 .read<VerifyEmailBloc>()
                                 .add(VerifyEmailTapEvent(
-                                  response: response,
+                                  response: widget.response,
                                   otp: pinController.text,
                                 ));
                           },

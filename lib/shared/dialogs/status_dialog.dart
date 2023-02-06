@@ -45,7 +45,7 @@ class StatusDialog extends StatelessWidget {
             SizedBox(height: 16.h),
             Flexible(
               child: Text(
-                title,
+                body,
                 textAlign: TextAlign.center,
                 style: AppTextStyles.light14.copyWith(),
               ),
