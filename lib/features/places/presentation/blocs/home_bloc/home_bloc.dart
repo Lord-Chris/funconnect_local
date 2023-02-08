@@ -12,6 +12,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<HomeInitEvent>(_onHomeInitEvent);
     on<InterestTapEvent>(_onInterestTapEvent);
     on<PlaceTapEvent>(_onPlaceTapEvent);
+    on<NotificationTapEvent>(_onNotificationTapEvent);
   }
 
   final _navigationService = locator<INavigationService>();
@@ -61,5 +62,12 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     Emitter<HomeState> emit,
   ) {
     _navigationService.toNamed(Routes.placeDetailRoute);
+  }
+
+  FutureOr<void> _onNotificationTapEvent(
+    NotificationTapEvent event,
+    Emitter<HomeState> emit,
+  ) {
+    _navigationService.toNamed(Routes.notificationsViewRoute);
   }
 }
