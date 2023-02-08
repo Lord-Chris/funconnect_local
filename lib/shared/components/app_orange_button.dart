@@ -21,17 +21,19 @@ class AppOrangeBtn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onTap,
-      child: Container(
-        padding: REdgeInsets.all(24),
-        height: height,
-        decoration: const BoxDecoration(
-          color: AppColors.primary,
-          borderRadius: BorderRadius.vertical(
-            top: Radius.circular(36),
-          ),
+    return MaterialButton(
+      onPressed: onTap,
+      minWidth: MediaQuery.of(context).size.width,
+      disabledColor: AppColors.primary.withOpacity(0.5),
+      color: AppColors.primary,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(36),
         ),
+      ),
+      child: Container(
+        height: height,
+        padding: EdgeInsets.only(top: 24.r),
         alignment: Alignment.topCenter,
         child: Visibility(
           visible: !isBusy,

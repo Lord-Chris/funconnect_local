@@ -41,6 +41,20 @@ class _InterestViewState extends State<InterestView> {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
+                        Align(
+                          alignment: Alignment.topRight,
+                          child: InkWell(
+                            onTap: () => context
+                                .read<InterestsBloc>()
+                                .add(SkipTapEvent()),
+                            child: Text(
+                              "Skip",
+                              style: AppTextStyles.regular16.copyWith(
+                                decoration: TextDecoration.underline,
+                              ),
+                            ),
+                          ),
+                        ),
                         const SizedBox(height: 16.0),
                         Text(
                           AppText.aTInterestText,
