@@ -11,8 +11,8 @@ class EmailVerifiedScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: AppBlackModalWidget(
-        imageContainerHeight: 400.0,
-        modalHeight: 350,
+        imageContainerHeight: 300.0,
+        modalHeight: 450,
         children: [
           Column(
             mainAxisAlignment: MainAxisAlignment.end,

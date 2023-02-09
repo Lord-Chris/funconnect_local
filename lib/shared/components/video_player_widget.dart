@@ -18,7 +18,8 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
   @override
   void initState() {
     super.initState();
-    _controller = VideoPlayerController.asset(assetVideo)
+    _controller = VideoPlayerController.asset(assetVideo,
+        videoPlayerOptions: VideoPlayerOptions(mixWithOthers: true))
       ..initialize().then((_) {
         setState(() {});
         _controller.play();
@@ -37,7 +38,9 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
     return _controller.value.isInitialized
         ? AspectRatio(
             aspectRatio: _controller.value.aspectRatio,
-            child: VideoPlayer(_controller),
+            child: VideoPlayer(
+              _controller,
+            ),
           )
         : Container();
   }

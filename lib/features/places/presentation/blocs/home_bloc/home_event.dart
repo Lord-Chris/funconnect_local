@@ -20,3 +20,5 @@ class InterestTapEvent extends HomeEvent {
 }
 
 class PlaceTapEvent extends HomeEvent {}
+
+class NotificationTapEvent extends HomeEvent {}

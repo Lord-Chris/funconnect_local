@@ -69,7 +69,8 @@ class _HomeViewState extends State<HomeView> {
         ),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () =>
+                context.read<HomeBloc>().add(NotificationTapEvent()),
             icon: const Icon(
               CupertinoIcons.bell_fill,
               color: AppColors.white,
