@@ -22,6 +22,7 @@ class PlaceDetailView extends StatelessWidget {
           ),
           Spacing.vertRegular(),
           Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -81,6 +82,54 @@ class PlaceDetailView extends StatelessWidget {
                     style: AppTextStyles.regular16,
                   ),
                 ],
+              ),
+              Spacing.vertMedium(),
+              Text(
+                "About",
+                style: AppTextStyles.regular16,
+              ),
+              Spacing.vertSmall(),
+              RichText(
+                textScaleFactor: 1,
+                text: TextSpan(
+                  text:
+                      'The mall house has numerous retail stores and outlets offering different types of products and services such as garments, food and beverages, electronics, and everything that is required in our day-to-day lives under a single roof. Hundreds of',
+                  style: AppTextStyles.regular14.copyWith(
+                    color: AppColors.white,
+                  ),
+                  children: [
+                    TextSpan(
+                      text: ' Read more.',
+                      style: AppTextStyles.regular14.copyWith(
+                        color: AppColors.primary,
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              Spacing.vertRegular(),
+              Text(
+                "Features",
+                style: AppTextStyles.regular16,
+              ),
+              Spacing.vertSmall(),
+              RichText(
+                textScaleFactor: 1,
+                text: TextSpan(
+                  text:
+                      'Modern and sophisticated in its architecture, the self-styled \'Comprehensive Shopping Centre\' really delivers with its range of stores available from gadgets to gifts and',
+                  style: AppTextStyles.regular14.copyWith(
+                    color: AppColors.white,
+                  ),
+                  children: [
+                    TextSpan(
+                      text: ' Read more.',
+                      style: AppTextStyles.regular14.copyWith(
+                        color: AppColors.primary,
+                      ),
+                    )
+                  ],
+                ),
               ),
             ],
           ),

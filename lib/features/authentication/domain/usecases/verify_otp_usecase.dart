@@ -14,7 +14,7 @@ class VerifyOtpUsecase with UseCases<void, VerifyOtpParams> {
     if ((user.username ?? "").isNotEmpty) {
       _navigationService.offAllNamed(Routes.dashboardViewRoute, (_) => false);
     } else {
-      _navigationService.offNamed(Routes.profileSetupViewRoute);
+      _navigationService.offNamed(Routes.emailVerifiedRoute);
     }
   }
 }
