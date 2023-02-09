@@ -126,7 +126,7 @@ class ExploreView extends StatelessWidget {
                 },
               ),
             ),
-            Spacing.vertMedium(),
+            Spacing.vertRegular(),
             HomeViewCategoriesWidget(
               itemHeight: 136.r,
               child: const HomeViewCategoriesSmallSubWidget(),
