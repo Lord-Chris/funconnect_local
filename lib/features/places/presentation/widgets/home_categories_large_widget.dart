@@ -10,8 +10,10 @@ import 'package:funconnect/features/places/presentation/blocs/home_bloc/home_eve
 import '../../../../shared/constants/_constants.dart';
 
 class HomeCategoriesLargeWidget extends StatelessWidget {
+  final Size? size;
   const HomeCategoriesLargeWidget({
     Key? key,
+    this.size,
   }) : super(key: key);
 
   @override
@@ -19,8 +21,8 @@ class HomeCategoriesLargeWidget extends StatelessWidget {
     return InkWell(
       onTap: () => context.read<HomeBloc>().add(PlaceTapEvent()),
       child: Container(
-        height: 182.r,
-        width: 182.r,
+        height: size?.height.r,
+        width: size?.width.r,
         padding: EdgeInsets.all(4.r),
         alignment: Alignment.bottomCenter,
         decoration: BoxDecoration(

@@ -176,7 +176,9 @@ class _HomeViewState extends State<HomeView> {
                                           crossAxisSpacing: 8.r,
                                         ),
                                         itemBuilder: (context, index) {
-                                          return const HomeCategoriesLargeWidget();
+                                          return const HomeCategoriesLargeWidget(
+                                            size: Size.square(182),
+                                          );
                                         },
                                       ),
                                     ],
@@ -203,8 +205,9 @@ class _HomeViewState extends State<HomeView> {
                                         showAll: showAllBest.value,
                                         onSeeAllTap: (val) =>
                                             showAllBest.value = val,
-                                        child:
-                                            const HomeCategoriesLargeWidget(),
+                                        child: const HomeCategoriesLargeWidget(
+                                          size: Size.square(182),
+                                        ),
                                       ),
                                       Spacing.vertSmall(),
                                       HomeViewCategoriesWidget(
@@ -212,8 +215,9 @@ class _HomeViewState extends State<HomeView> {
                                         showAll: showAllRecents.value,
                                         onSeeAllTap: (val) =>
                                             showAllRecents.value = val,
-                                        child:
-                                            const HomeCategoriesLargeWidget(),
+                                        child: const HomeCategoriesLargeWidget(
+                                          size: Size.square(182),
+                                        ),
                                       ),
                                     ],
                                   ),
