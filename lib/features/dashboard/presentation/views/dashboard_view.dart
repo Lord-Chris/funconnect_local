@@ -9,7 +9,7 @@ import 'package:funconnect/features/profile/presentation/views/profile_view.dart
 import 'package:funconnect/shared/constants/_constants.dart';
 
 import '../../../events/presentation/views/events_view.dart';
-import '../../../fun_connect/explore/presentation/explore_view.dart';
+import '../../../places/presentation/views/explore_view.dart';
 
 class DashboardView extends StatefulWidget {
   const DashboardView({Key? key}) : super(key: key);
