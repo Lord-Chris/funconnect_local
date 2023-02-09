@@ -4,6 +4,10 @@ import 'package:funconnect/features/places/presentation/widgets/home_categories_
 import 'package:funconnect/shared/components/_components.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
 
+import '../widgets/explore_section.dart';
+import '../widgets/home_categories_small_widget.dart';
+import '../widgets/home_categories_widget.dart';
+
 class ExploreView extends StatelessWidget {
   const ExploreView({Key? key}) : super(key: key);
 
@@ -101,6 +105,43 @@ class ExploreView extends StatelessWidget {
                   )
                 ],
               ),
+            ),
+            Spacing.vertMedium(),
+            SizedBox(
+              height: 45.h,
+              width: MediaQuery.of(context).size.width,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                padding: EdgeInsets.symmetric(vertical: 8.h),
+                itemCount: 10,
+                itemBuilder: (context, index) {
+                  // final interest = state.interests[index];
+                  return Padding(
+                    padding: EdgeInsets.only(left: 5.r),
+                    child: const ExploreSection(
+                      section: "Categories",
+                      isSelected: false,
+                    ),
+                  );
+                },
+              ),
+            ),
+            Spacing.vertMedium(),
+            HomeViewCategoriesWidget(
+              itemHeight: 136.r,
+              child: const HomeViewCategoriesSmallSubWidget(),
+            ),
+            Spacing.vertRegular(),
+            HomeViewCategoriesWidget(
+              label: "Share moments",
+              itemHeight: 136.r,
+              child: const HomeViewCategoriesSmallSubWidget(),
+            ),
+            Spacing.vertRegular(),
+            HomeViewCategoriesWidget(
+              label: "Feel refreshed",
+              itemHeight: 136.r,
+              child: const HomeViewCategoriesSmallSubWidget(),
             ),
           ],
         ),
