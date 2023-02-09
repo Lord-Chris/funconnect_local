@@ -15,6 +15,7 @@ import 'package:funconnect/features/events/domain/entities/event_model.dart';
 import 'package:funconnect/features/events/presentation/views/booking_view.dart';
 import 'package:funconnect/features/events/presentation/views/checkout_view.dart';
 import 'package:funconnect/features/places/presentation/blocs/place_detail_bloc/place_detail_bloc.dart';
+import 'package:funconnect/features/places/presentation/views/notifications_view.dart';
 import 'package:funconnect/features/places/presentation/views/place_detail_view.dart';
 import 'package:funconnect/features/profile/presentation/blocs/edit_profile_bloc/edit_profile_bloc.dart';
 import 'package:funconnect/features/profile/presentation/blocs/profile/profile_bloc.dart';
@@ -42,6 +43,7 @@ class Routes {
 
   // Dashboard
   static const dashboardViewRoute = '/dashboard-view';
+  static const notificationsViewRoute = '/notifications-view';
 
   // Places
   static const placeDetailRoute = '/place-detail';
@@ -102,14 +104,22 @@ class Routes {
           bloc: PlaceDetailBloc(),
         );
 
-      // Events
-      case createEventRoute:
-        return MaterialPageRoute(builder: (_) => const CreateEventView());
+      // Dashboard
       case dashboardViewRoute:
         return _registerBlocView(
           view: const DashboardView(),
           bloc: ProfileBloc(),
         );
+
+      case notificationsViewRoute:
+        return _registerBlocView(
+          view: const NotificationsView(),
+          bloc: ProfileBloc(),
+        );
+      // Events
+      case createEventRoute:
+        return MaterialPageRoute(builder: (_) => const CreateEventView());
+
       case eventDescriptionRoute:
         final event = settings.arguments as EventModel;
         return MaterialPageRoute(
