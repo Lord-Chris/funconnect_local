@@ -39,4 +39,10 @@ class AppAssets {
   static const arrowRight = "assets/svgs/arrow_right.svg";
   static const add = "assets/svgs/add.svg";
   static const mention = "assets/svgs/mention.svg";
+
+  // Places
+  static const bookRideSvg = "assets/svgs/book_ride_icon.svg";
+  static const reviewSvg = "assets/svgs/review_icon.svg";
+  static const uploadSvg = "assets/svgs/upload_icon.svg";
+
 }
