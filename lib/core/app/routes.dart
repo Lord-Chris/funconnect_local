@@ -6,6 +6,7 @@ import 'package:funconnect/features/authentication/presentation/blocs/profile_se
 import 'package:funconnect/features/authentication/presentation/blocs/verify_email_bloc/verify_email_bloc.dart';
 import 'package:funconnect/features/authentication/presentation/blocs/welcome_bloc/welcome_bloc.dart';
 import 'package:funconnect/features/authentication/presentation/views/Profile_setup_view.dart';
+import 'package:funconnect/features/authentication/presentation/views/email_verified_view.dart';
 import 'package:funconnect/features/authentication/presentation/views/interest_view.dart';
 import 'package:funconnect/features/authentication/presentation/views/verify_email_view.dart';
 import 'package:funconnect/features/authentication/presentation/views/welcome_view.dart';
@@ -35,7 +36,7 @@ class Routes {
   static const welcomeViewRoute = '/welcome-view';
   static const profileSetupViewRoute = '/profile_setup';
   static const verifyEmailRoute = '/verify-email';
-  // static const emailVerifiedRoute = '/email-verified';
+  static const emailVerifiedRoute = '/email-verified';
   static const locationAuthRoute = '/location-auth';
   static const setUpProfile = '/setUp-Profile';
   static const interestViewRoute = '/interests';
@@ -78,6 +79,11 @@ class Routes {
         final res = settings.arguments as RequestOtpResponse;
         return _registerBlocView(
           view: VerifyEmailView(response: res),
+          bloc: VerifyEmailBloc(),
+        );
+      case emailVerifiedRoute:
+        return _registerBlocView(
+          view: const EmailVerifiedScreen(),
           bloc: VerifyEmailBloc(),
         );
       case profileSetupViewRoute:

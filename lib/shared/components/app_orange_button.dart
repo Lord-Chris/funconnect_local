@@ -30,8 +30,9 @@ class AppOrangeBtn extends StatelessWidget {
       padding: EdgeInsets.only(bottom: (height * 0.1) + bottomPadding),
       color: AppColors.primary,
       shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(
-          top: Radius.circular(36),
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(36),
+          topRight: Radius.circular(36),
         ),
       ),
       child: Align(
