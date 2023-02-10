@@ -3,9 +3,12 @@ import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:funconnect/core/app/_app.dart';
 import 'package:funconnect/core/models/_models.dart';
+import 'package:funconnect/core/usecases/usecase.dart';
 import 'package:funconnect/features/places/presentation/blocs/home_bloc/home_event.dart';
 import 'package:funconnect/features/places/presentation/blocs/home_bloc/home_state.dart';
 import 'package:funconnect/services/_services.dart';
+
+import '../../../domain/usecases/fetch_home_trends.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   HomeBloc() : super(HomeLoadingState()) {
@@ -21,8 +24,11 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     HomeInitEvent event,
     Emitter<HomeState> emit,
   ) async {
-    await Future.delayed(const Duration(seconds: 3));
-    emit(HomeIdleState(interests: List.generate(10, (_) => "Fine Dining $_")));
+    final res = await FetchHomeTrends().call(NoParams());
+    emit(HomeIdleState(
+      interests: List.generate(10, (_) => "Fine Dining $_"),
+      homeTrends: res,
+    ));
   }
 
   FutureOr<void> _onInterestTapEvent(
@@ -33,8 +39,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     final data = state as HomeIdleState;
 
     if (data.interest == event.interest) {
-      emit(
-          HomeIdleState(interests: List.generate(10, (_) => "Fine Dining $_")));
+      emit(HomeIdleState(
+        interests: List.generate(10, (_) => "Fine Dining $_"),
+        homeTrends: data.homeTrends,
+      ));
       return;
     }
 
@@ -46,6 +54,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         interest: event.interest,
         interests: data.interests,
         interestPlaces: List.generate(10, (_) => "$_ Fine Dining $_"),
+        homeTrends: data.homeTrends,
       ));
     } on Failure catch (e) {
       emit(HomeFailureState(failure: e));
@@ -53,6 +62,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         interest: data.interest,
         interests: data.interests,
         interestPlaces: data.interestPlaces,
+        homeTrends: data.homeTrends,
       ));
     }
   }

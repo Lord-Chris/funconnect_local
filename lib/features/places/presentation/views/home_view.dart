@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:funconnect/features/places/domain/entities/category_model.dart';
+import 'package:funconnect/features/places/domain/entities/place_model.dart';
 import 'package:funconnect/features/places/presentation/blocs/home_bloc/home_bloc.dart';
 import 'package:funconnect/features/places/presentation/blocs/home_bloc/home_event.dart';
 import 'package:funconnect/features/places/presentation/blocs/home_bloc/home_state.dart';
@@ -14,7 +15,7 @@ import '../widgets/home_categories_small_widget.dart';
 import '../widgets/home_categories_widget.dart';
 import '../widgets/home_interest_widget.dart';
 
-class HomeView extends StatefulHookWidget {
+class HomeView extends StatefulWidget {
   const HomeView({Key? key}) : super(key: key);
 
   @override
@@ -30,9 +31,6 @@ class _HomeViewState extends State<HomeView> {
 
   @override
   Widget build(BuildContext context) {
-    final showAllCategory = useState(false);
-    final showAllBest = useState(false);
-    final showAllRecents = useState(false);
     return Scaffold(
       backgroundColor: AppColors.black,
       appBar: AppBar(
@@ -177,7 +175,14 @@ class _HomeViewState extends State<HomeView> {
                                           crossAxisSpacing: 8.r,
                                         ),
                                         itemBuilder: (context, index) {
-                                          return const HomeCategoriesLargeWidget();
+                                          final place = mockPlace;
+                                          return HomeCategoriesLargeWidget(
+                                            coverImage: place.coverImagePath,
+                                            name: place.name,
+                                            isBookmarked: false,
+                                            rating: place.avgRating,
+                                            ratingCount: place.avgReviewCount,
+                                          );
                                         },
                                       ),
                                     ],
@@ -185,40 +190,7 @@ class _HomeViewState extends State<HomeView> {
                                 );
                               }
                               if (state.interestPlaces.isEmpty) {
-                                return SingleChildScrollView(
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      HomeViewCategoriesWidget(
-                                        label: "Categories",
-                                        itemHeight: 136.r,
-                                        showAll: showAllCategory.value,
-                                        onSeeAllTap: (val) =>
-                                            showAllCategory.value = val,
-                                        child:
-                                            const HomeViewCategoriesSmallSubWidget(),
-                                      ),
-                                      Spacing.vertSmall(),
-                                      HomeViewCategoriesWidget(
-                                        label: "Best for you",
-                                        showAll: showAllBest.value,
-                                        onSeeAllTap: (val) =>
-                                            showAllBest.value = val,
-                                        child:
-                                            const HomeCategoriesLargeWidget(),
-                                      ),
-                                      Spacing.vertSmall(),
-                                      HomeViewCategoriesWidget(
-                                        label: "Recently added",
-                                        showAll: showAllRecents.value,
-                                        onSeeAllTap: (val) =>
-                                            showAllRecents.value = val,
-                                        child:
-                                            const HomeCategoriesLargeWidget(),
-                                      ),
-                                    ],
-                                  ),
-                                );
+                                return _DefaultHomeView(state: state);
                               }
                             }
                             return const SizedBox();
@@ -230,6 +202,58 @@ class _HomeViewState extends State<HomeView> {
                 },
               ),
             ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _DefaultHomeView extends StatelessWidget {
+  final HomeIdleState state;
+  const _DefaultHomeView({
+    Key? key,
+    required this.state,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return RefreshIndicator(
+      onRefresh: () async => context.read<HomeBloc>().add(HomeInitEvent()),
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ...state.homeTrends.map((e) {
+              if (e.isPlace) {
+                return HomeSection<PlaceModel>(
+                  label: e.name,
+                  children: List.filled(10, mockPlace).map((e) => e).toList(),
+                  widget: (PlaceModel place) {
+                    return HomeCategoriesLargeWidget(
+                      coverImage: place.coverImagePath,
+                      name: place.name,
+                      isBookmarked: false,
+                      rating: place.avgRating,
+                      ratingCount: place.avgReviewCount,
+                    );
+                  },
+                );
+              }
+              return HomeSection<CategoryModel>(
+                label: e.name,
+                itemHeight: 136.r,
+                children: e.data.map((e) => e as CategoryModel).toList(),
+                widget: (CategoryModel place) {
+                  return HomeViewCategoriesSmallSubWidget(
+                    coverImage: place.coverPhoto.isEmpty
+                        ? AppConstants.mockImage
+                        : place.coverPhoto,
+                    name: place.name,
+                  );
+                },
+              );
+            }),
           ],
         ),
       ),

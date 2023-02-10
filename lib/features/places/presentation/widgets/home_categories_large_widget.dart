@@ -10,8 +10,19 @@ import 'package:funconnect/features/places/presentation/blocs/home_bloc/home_eve
 import '../../../../shared/constants/_constants.dart';
 
 class HomeCategoriesLargeWidget extends StatelessWidget {
+  final String name;
+  final bool isBookmarked;
+  final double rating;
+  final double ratingCount;
+  final String coverImage;
+
   const HomeCategoriesLargeWidget({
     Key? key,
+    required this.name,
+    required this.isBookmarked,
+    required this.rating,
+    required this.ratingCount,
+    required this.coverImage,
   }) : super(key: key);
 
   @override
@@ -26,10 +37,10 @@ class HomeCategoriesLargeWidget extends StatelessWidget {
         decoration: BoxDecoration(
           color: AppColors.primary,
           borderRadius: BorderRadius.circular(18),
-          image: const DecorationImage(
+          image: DecorationImage(
             fit: BoxFit.cover,
             image: CachedNetworkImageProvider(
-              AppConstants.mockImage,
+              coverImage,
             ),
           ),
         ),
@@ -48,7 +59,7 @@ class HomeCategoriesLargeWidget extends StatelessWidget {
                 children: [
                   Flexible(
                     child: Text(
-                      DumbAppStrings.bestForYouLabel,
+                      name,
                       style: AppTextStyles.regular14,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -68,7 +79,7 @@ class HomeCategoriesLargeWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
-                    DumbAppStrings.ratingLabel,
+                    rating.toString(),
                     style: AppTextStyles.dynamic(
                       10,
                       weight: FontWeight.w300,
@@ -78,7 +89,7 @@ class HomeCategoriesLargeWidget extends StatelessWidget {
                   Flexible(
                     child: FittedBox(
                       child: RatingStars(
-                        value: 3,
+                        value: rating,
                         onValueChanged: (v) {},
                         starBuilder: (index, color) => Icon(
                           Icons.star,
@@ -98,7 +109,7 @@ class HomeCategoriesLargeWidget extends StatelessWidget {
                   ),
                   Spacing.horizTiny(),
                   Text(
-                    DumbAppStrings.ratiedLabel,
+                    ratingCount.toString(),
                     style: AppTextStyles.dynamic(
                       10,
                       weight: FontWeight.w300,

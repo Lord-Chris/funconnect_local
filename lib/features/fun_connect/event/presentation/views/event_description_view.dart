@@ -178,10 +178,10 @@ class EventDescription extends StatelessWidget {
             Spacing.vertRegular(),
             Spacing.vertRegular(),
             Spacing.vertRegular(),
-            HomeViewCategoriesWidget(
-              label: DumbAppStrings.eventDescriptionMoreLikeText,
-              child: const HomeViewCategoriesSmallSubWidget(),
-            ),
+            // HomeViewCategoriesWidget(
+            //   label: DumbAppStrings.eventDescriptionMoreLikeText,
+            //   child: const HomeViewCategoriesSmallSubWidget(),
+            // ),
             Spacing.vertRegular(),
             Spacing.vertRegular(),
             Spacing.vertRegular(),

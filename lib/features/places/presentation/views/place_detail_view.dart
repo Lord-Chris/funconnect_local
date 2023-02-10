@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_stars/flutter_rating_stars.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:funconnect/features/places/domain/entities/place_model.dart';
 import 'package:funconnect/features/places/presentation/widgets/home_categories_large_widget.dart';
 import 'package:funconnect/features/places/presentation/widgets/home_categories_widget.dart';
 import 'package:funconnect/shared/components/_components.dart';
@@ -304,9 +305,18 @@ class PlaceDetailView extends StatelessWidget {
                     textCapitalization: TextCapitalization.sentences,
                   ),
                   Spacing.vertMedium(),
-                  const HomeViewCategoriesWidget(
+                  HomeViewCategoriesWidget(
                     label: "More like this",
-                    child: HomeCategoriesLargeWidget(),
+                    child: (index) {
+                      final place = mockPlace;
+                      return HomeCategoriesLargeWidget(
+                        coverImage: place.coverImagePath,
+                        name: place.name,
+                        isBookmarked: false,
+                        rating: place.avgRating,
+                        ratingCount: place.avgReviewCount,
+                      );
+                    },
                   ),
                 ],
               ),

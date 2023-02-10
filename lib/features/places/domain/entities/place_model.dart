@@ -12,8 +12,8 @@ class PlaceModel extends Equatable {
   final String opensAt;
   final String closesAt;
   final String phoneE164;
-  final int avgRating;
-  final int avgReviewCount;
+  final double avgRating;
+  final double avgReviewCount;
   final double distance;
 
   const PlaceModel({
@@ -59,8 +59,8 @@ class PlaceModel extends Equatable {
       opensAt: map['opens_at'] ?? '',
       closesAt: map['closes_at'] ?? '',
       phoneE164: map['phone_e164'] ?? '',
-      avgRating: map['avg_rating']?.toInt() ?? 0,
-      avgReviewCount: map['avg_review_count']?.toInt() ?? 0,
+      avgRating: map['avg_rating']?.toDouble() ?? 0,
+      avgReviewCount: map['avg_review_count']?.toDouble() ?? 0,
       distance: map['distance']?.toDouble() ?? 0.0,
     );
   }
