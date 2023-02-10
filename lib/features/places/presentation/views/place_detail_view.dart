@@ -3,15 +3,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_stars/flutter_rating_stars.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:readmore/readmore.dart';
+
 import 'package:funconnect/features/places/domain/entities/place_model.dart';
 import 'package:funconnect/features/places/presentation/widgets/home_categories_large_widget.dart';
 import 'package:funconnect/features/places/presentation/widgets/home_categories_widget.dart';
 import 'package:funconnect/shared/components/_components.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
-import 'package:readmore/readmore.dart';
 
 class PlaceDetailView extends StatelessWidget {
-  const PlaceDetailView({super.key});
+  final PlaceModel place;
+  const PlaceDetailView({
+    Key? key,
+    required this.place,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_stars/flutter_rating_stars.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:funconnect/features/places/presentation/blocs/home_bloc/home_bloc.dart';
 import 'package:funconnect/features/places/presentation/blocs/home_bloc/home_event.dart';
 
@@ -15,6 +16,7 @@ class HomeCategoriesLargeWidget extends StatelessWidget {
   final double rating;
   final double ratingCount;
   final String coverImage;
+  final VoidCallback? onTap;
 
   const HomeCategoriesLargeWidget({
     Key? key,
@@ -23,12 +25,13 @@ class HomeCategoriesLargeWidget extends StatelessWidget {
     required this.rating,
     required this.ratingCount,
     required this.coverImage,
+    this.onTap,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => context.read<HomeBloc>().add(PlaceTapEvent()),
+      onTap: onTap,
       child: Container(
         height: 182.r,
         width: 182.r,
