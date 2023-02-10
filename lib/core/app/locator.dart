@@ -8,6 +8,8 @@ import 'package:funconnect/services/_services.dart';
 import 'package:get_it/get_it.dart';
 
 import '../../features/authentication/data/repositories/_authentication_repo.dart';
+import '../../features/places/data/repository/i_place_repository.dart';
+import '../../features/places/data/repository/place_repository.dart';
 
 final locator = GetIt.instance;
 const bool isMock = false;
@@ -28,6 +30,9 @@ Future<void> setUpLocator() async {
   );
   locator.registerLazySingleton<IEventsRepository>(
     () => EventsRepository(),
+  );
+  locator.registerLazySingleton<IPlaceRepository>(
+    () => PlaceRepository(),
   );
 
   // DataSources
