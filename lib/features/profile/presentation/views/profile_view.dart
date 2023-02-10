@@ -3,8 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:funconnect/core/presentation/widgets/core_widgets.dart';
-import 'package:funconnect/features/profile/presentation/blocs/edit_profile_bloc/edit_profile_bloc.dart';
-import 'package:funconnect/features/profile/presentation/blocs/profile/profile_bloc.dart';
+import 'package:funconnect/features/profile/presentation/blocs/profile_bloc/profile_bloc.dart';
 import 'package:funconnect/shared/components/_components.dart';
 import 'package:funconnect/shared/components/app_network_image.dart';
 import 'package:funconnect/shared/components/scrollable_column.dart';
@@ -99,7 +98,7 @@ class ProfileView extends StatelessWidget {
             padding: REdgeInsets.fromLTRB(88, 19, 88, 19),
             labelColor: AppColors.black,
             onTap: () => context
-              .read<ProfileBloc>().add(EditMyProfileEvent()),
+              .read<ProfileBloc>().add(EditProfileTapEvent()),
           ),
           Spacing.vertLarge(),
           _ProfileSubButton(
@@ -134,6 +133,8 @@ class ProfileView extends StatelessWidget {
                     Icons.arrow_forward_ios,
                     size: 15,
                   ),
+                    onTap: () => context
+                        .read<ProfileBloc>().add(ManageLoginOptionsTapEvent())
                 ),
                 _buildProfileItems(
                   "Notifications",

@@ -13,8 +13,33 @@ class UpdateProfileEvent extends EditProfileEvent{
   UpdateProfileEvent();
 }
 
+class ImageTapEvent extends EditProfileEvent{
+  ImageTapEvent();
+}
+
 class ContinueTapEvent extends EditProfileEvent{
   ContinueTapEvent();
+}
+
+class SkipTapEvent extends EditProfileEvent{
+  SkipTapEvent();
+}
+
+class CheckMapTapEvent extends EditProfileEvent{
+  CheckMapTapEvent();
+}
+
+class ChangeLocationTapEvent extends EditProfileEvent{
+  ChangeLocationTapEvent();
+}
+
+class InterestTapEvent extends EditProfileEvent{
+  InterestTapEvent();
+}
+
+class EditProfileFieldsEvent extends EditProfileEvent{
+  final ProfileModel profileModel;
+  EditProfileFieldsEvent(this.profileModel);
 }
 
 class PageChangeEvent extends EditProfileEvent{

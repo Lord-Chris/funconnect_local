@@ -21,8 +21,7 @@ class EditProfileView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    PageController _pageController = PageController(initialPage: 0);
-    List<Widget> pages = [
+    List<Widget> pages = const [
       PersonalInformationView(),
       OtherInformationView(),
       SocialNetworkInformationView(),

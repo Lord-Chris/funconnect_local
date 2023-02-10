@@ -29,9 +29,9 @@ class MyApp extends StatelessWidget {
           // home: EventDescription(),
           navigatorKey: NavigationService.navigatorKey,
           onGenerateRoute: Routes.generateRoute,
-          initialRoute: Routes.initialRoute,
+          initialRoute: Routes.dashboardViewRoute,
         );
-      },
+      }     ,
     );
   }
 }

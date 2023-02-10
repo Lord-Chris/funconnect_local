@@ -8,8 +8,10 @@ import 'package:funconnect/features/authentication/presentation/views/verify_ema
 import 'package:funconnect/features/authentication/presentation/views/welcome_view.dart';
 import 'package:funconnect/features/dashboard/presentation/views/dashboard_view.dart';
 import 'package:funconnect/features/profile/presentation/blocs/edit_profile_bloc/edit_profile_bloc.dart';
-import 'package:funconnect/features/profile/presentation/blocs/profile/profile_bloc.dart';
+import 'package:funconnect/features/profile/presentation/blocs/manage_login_options_bloc/manage_login_options_bloc.dart';
+import 'package:funconnect/features/profile/presentation/blocs/profile_bloc/profile_bloc.dart';
 import 'package:funconnect/features/profile/presentation/views/edit_profile_view.dart';
+import 'package:funconnect/features/profile/presentation/views/manage_login_options_view.dart';
 import 'package:funconnect/features/startup/presentation/views/onboarding_view.dart';
 import 'package:funconnect/features/startup/presentation/views/splash_view.dart';
 import 'package:funconnect/success_view.dart';
@@ -24,6 +26,7 @@ class Routes {
   static const welcomeViewRoute = '/welcome-view';
   static const profileSetupViewRoute = '/profile_setup';
   static const editProfileViewRoute = '/edit-profile';
+  static const manageLoginOptionsRoute = '/manage-login-options';
   // static const emailSignInRoute = '/email-sign-in';
   static const verifyEmailRoute = '/verify-email';
   static const emailVerifiedRoute = '/email-verified';
@@ -78,6 +81,11 @@ class Routes {
         return  _registerBlocView(
           view: const EditProfileView(),
           bloc: EditProfileBloc(),
+        );
+        case manageLoginOptionsRoute:
+        return  _registerBlocView(
+          view: const ManageLogInOptionsView(),
+          bloc: ManageLoginOptionsBloc(),
         );
       default:
         return MaterialPageRoute(

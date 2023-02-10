@@ -11,21 +11,28 @@ part 'profile_state.dart';
 
 class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   ProfileBloc() : super(ProfileInitialState()) {
-    on<EditMyProfileEvent>(_onEditProfileEvent);
+    on<EditProfileTapEvent>(_onEditProfileEvent);
+    on<ManageLoginOptionsTapEvent>(_onManageLoginOptionsTapEvent);
   }
 
   final _navigationService = locator<INavigationService>();
 
   Future<FutureOr<void>> _onEditProfileEvent(
-      EditMyProfileEvent event,
+      EditProfileTapEvent event,
       Emitter<ProfileState> emit,
       ) async {
     _navigationService.toNamed(Routes.editProfileViewRoute);
   }
   Future<FutureOr<void>> _onMyTicketEvent(
-      MyEventEvent event,
+      MyEventTapEvent event,
       Emitter<ProfileState> emit,
       ) async {
     _navigationService.toNamed(Routes.editProfileViewRoute);
+  }
+  Future<FutureOr<void>> _onManageLoginOptionsTapEvent(
+      ManageLoginOptionsTapEvent event,
+      Emitter<ProfileState> emit,
+      ) async {
+    _navigationService.toNamed(Routes.manageLoginOptionsRoute);
   }
 }

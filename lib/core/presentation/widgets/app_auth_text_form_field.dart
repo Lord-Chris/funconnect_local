@@ -40,6 +40,9 @@ class AppTextForm extends StatefulWidget {
     this.textAlignVertical,
     this.borderRadius,
     this.topLabelText,
+    this.enableInteractiveSelection=true,
+    this.showCursor=true,
+    this.onTap
   }) : super(key: key);
 
   final String? hintText;
@@ -74,6 +77,9 @@ class AppTextForm extends StatefulWidget {
   final TextAlign? textAlign;
   final TextAlignVertical? textAlignVertical;
   final BorderRadius? borderRadius;
+  final bool enableInteractiveSelection;
+  final bool showCursor;
+  final Function()? onTap;
 
   @override
   _AppTextFormState createState() => _AppTextFormState();
@@ -190,6 +196,9 @@ class _AppTextFormState extends State<AppTextForm>
                           textAlign: widget.textAlign ?? TextAlign.start,
                           inputFormatters: widget.inputFormatters,
                           onFieldSubmitted: widget.onFieldSubmitted,
+                          enableInteractiveSelection: widget.enableInteractiveSelection,
+                          showCursor: widget.showCursor,
+                          onTap: widget.onTap,
                           decoration: InputDecoration(
                             prefix: widget.prefixIcon,
                             suffix: widget.suffixIcon,
