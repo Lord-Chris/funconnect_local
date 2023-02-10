@@ -1,18 +1,21 @@
 import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
+import 'package:funconnect/features/places/domain/entities/pivot_model.dart';
 
 class CategoryModel extends Equatable {
   final String id;
   final String name;
   final String status;
   final String coverPhoto;
+  final PivotModel? pivot;
 
   const CategoryModel({
     required this.id,
     required this.name,
     required this.status,
     required this.coverPhoto,
+    this.pivot,
   });
 
   Map<String, dynamic> toMap() {
@@ -21,6 +24,7 @@ class CategoryModel extends Equatable {
       'name': name,
       'status': status,
       'cover_photo': coverPhoto,
+      'pivot': pivot?.toMap(),
     };
   }
 
@@ -30,6 +34,7 @@ class CategoryModel extends Equatable {
       name: map['name'] ?? '',
       status: map['status'] ?? '',
       coverPhoto: map['cover_photo'] ?? '',
+      pivot: map['pivot'] != null ? PivotModel.fromMap(map['pivot']) : null,
     );
   }
 
@@ -39,7 +44,14 @@ class CategoryModel extends Equatable {
       CategoryModel.fromMap(json.decode(source));
 
   @override
-  List<Object> get props => [id, name, status, coverPhoto];
+  List<Object> get props {
+    return [
+      id,
+      name,
+      status,
+      coverPhoto,
+    ];
+  }
 }
 
 final mockCategory = CategoryModel.fromMap(const {

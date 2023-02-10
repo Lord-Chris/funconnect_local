@@ -2,6 +2,7 @@ import 'package:funconnect/core/app/_app.dart';
 import 'package:funconnect/core/constants/_constants.dart';
 import 'package:funconnect/core/models/app_location.dart';
 import 'package:funconnect/features/places/data/data_sources/remote_places_data_source.dart';
+import 'package:funconnect/features/places/domain/entities/full_place_model.dart';
 import 'package:funconnect/features/places/domain/entities/home_trend_item_model.dart';
 import 'package:funconnect/services/_services.dart';
 
@@ -39,5 +40,10 @@ class PlaceRepository extends IPlaceRepository {
       // ],
     );
     return homeTrend;
+  }
+
+  @override
+  Future<FullPlaceModel> fetchPlaceDetail(String placeId) async {
+    return await _remoteDS.fetchPlaceDetail(placeId);
   }
 }
