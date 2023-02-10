@@ -1,3 +1,7 @@
+export 'connectivity_service/connectivity_service.dart';
+export 'connectivity_service/i_connectivity_service.dart';
+
+///
 export 'dialog_and_sheet_service/dialog_and_sheet_service.dart';
 export 'dialog_and_sheet_service/i_dialog_and_sheet_service.dart';
 
