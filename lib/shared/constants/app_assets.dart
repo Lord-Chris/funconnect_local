@@ -19,6 +19,7 @@ class AppAssets {
   static const googleIconSvg = "assets/icons/google_icon.svg";
   static const profileIconSvg = "assets/icons/profile.svg";
   static const profIconSvg = "assets/icons/profile_icon.svg";
+  static const interestPageTopSvg = "assets/svgs/interest_page_top_icon.svg";
   static const activeProfileIconSvg = "assets/icons/active_profile.svg";
   static const bookmarkIconSvg = "assets/icons/bookmark.svg";
 

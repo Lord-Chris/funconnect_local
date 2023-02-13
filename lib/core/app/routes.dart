@@ -82,9 +82,9 @@ class Routes {
           bloc: VerifyEmailBloc(),
         );
       case emailVerifiedRoute:
-        return _registerBlocView(
-          view: const EmailVerifiedScreen(),
-          bloc: VerifyEmailBloc(),
+        final res = settings.arguments as bool;
+        return MaterialPageRoute(
+          builder: (_) => EmailVerifiedScreen(goToDashboard: res),
         );
       case profileSetupViewRoute:
         return _registerBlocView(

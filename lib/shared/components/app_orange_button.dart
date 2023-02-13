@@ -41,7 +41,7 @@ class AppOrangeBtn extends StatelessWidget {
           replacement: const SizedBox.square(
             child: FittedBox(
               child: AppLoader(
-                padding: 15,
+                padding: 0,
                 size: 25,
                 color: AppColors.black,
               ),
