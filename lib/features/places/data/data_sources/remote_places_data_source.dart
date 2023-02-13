@@ -26,7 +26,7 @@ class RemotePlaceDataSource with ApiMixin {
 
   Future<FullPlaceModel> fetchPlaceDetail(String placeId) async {
     final res = await _networkService.get(
-      ApiConstants.singlePlace("97f837d4-be25-4dd0-8b69-25270968d41d"),
+      ApiConstants.singlePlace(placeId),
       headers: headers,
     );
     return FullPlaceModel.fromMap(res.data['data']);

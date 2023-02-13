@@ -223,37 +223,39 @@ class _InfoSection extends StatelessWidget {
                 color: AppColors.primary,
               ),
             ),
-            Spacing.vertRegular(),
-            Text(
-              "Features",
-              style: AppTextStyles.medium16,
-            ),
-            Spacing.vertSmall(),
-            ReadMoreText(
-              state.place.features
-                  .map((e) => "● ${e.name.capitalize()}")
-                  .join("\n"),
-              trimLines: 4,
-              colorClickableText: AppColors.primary,
-              trimMode: TrimMode.Line,
-              trimCollapsedText: 'Read more',
-              trimExpandedText: '',
-              style: AppTextStyles.regular14.copyWith(
-                height: 1.5,
+            if (state.place.features.isNotEmpty) Spacing.vertRegular(),
+            if (state.place.features.isNotEmpty)
+              Text(
+                "Features",
+                style: AppTextStyles.medium16,
               ),
-              moreStyle: AppTextStyles.regular14.copyWith(
-                color: AppColors.primary,
+            if (state.place.features.isNotEmpty) Spacing.vertSmall(),
+            if (state.place.features.isNotEmpty)
+              ReadMoreText(
+                state.place.features
+                    .map((e) => "● ${e.name.capitalize()}")
+                    .join("\n"),
+                trimLines: 4,
+                colorClickableText: AppColors.primary,
+                trimMode: TrimMode.Line,
+                trimCollapsedText: 'Read more',
+                trimExpandedText: '',
+                style: AppTextStyles.regular14.copyWith(
+                  height: 1.5,
+                ),
+                moreStyle: AppTextStyles.regular14.copyWith(
+                  color: AppColors.primary,
+                ),
               ),
-            ),
             Spacing.vertMedium(),
             _buildTile(
               Icons.location_on,
-              state.place.address,
+              state.place.location.address,
             ),
             Spacing.vertSmall(),
             _buildTile(
               Icons.timer,
-              "${state.place.opensAt} AM - ${state.place.closesAt} PM",
+              "${state.place.opensAtParsed.format(context)} - ${state.place.closesAtParsed.format(context)}",
             ),
             Spacing.vertSmall(),
             _buildTile(

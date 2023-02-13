@@ -1,9 +1,13 @@
 import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
+import 'package:funconnect/core/utils/general_utils.dart';
 import 'package:funconnect/features/places/domain/entities/category_model.dart';
 import 'package:funconnect/features/places/domain/entities/feature_model.dart';
 import 'package:funconnect/features/places/domain/entities/image_model.dart';
+
+import 'place_location_model.dart';
 
 class FullPlaceModel extends Equatable {
   final String id;
@@ -22,7 +26,7 @@ class FullPlaceModel extends Equatable {
   final double reviewsCount;
   final List<CategoryModel> categories;
   final List<FeatureModel> features;
-  final String location;
+  final PlaceLocationModel location;
   final List<ImageModel> images;
   final String similarPlaces;
 
@@ -66,7 +70,7 @@ class FullPlaceModel extends Equatable {
       'reviews_count': reviewsCount,
       'categories': categories.map((x) => x.toMap()).toList(),
       'features': features.map((x) => x.toMap()).toList(),
-      'location': location,
+      'location': location.toMap(),
       'images': images.map((x) => x.toMap()).toList(),
       'similar_places': similarPlaces,
     };
@@ -92,13 +96,12 @@ class FullPlaceModel extends Equatable {
           map['categories']?.map((x) => CategoryModel.fromMap(x))),
       features: List<FeatureModel>.from(
           map['features']?.map((x) => FeatureModel.fromMap(x))),
-      location: map['location'] ?? '',
+      location: PlaceLocationModel.fromMap(map['location']),
       images: List<ImageModel>.from(
           map['images']?.map((x) => ImageModel.fromMap(x))),
       similarPlaces: map['similar_places'] ?? '',
     );
   }
-
   String toJson() => json.encode(toMap());
 
   factory FullPlaceModel.fromJson(String source) =>
@@ -127,6 +130,9 @@ class FullPlaceModel extends Equatable {
       similarPlaces,
     ];
   }
+
+  TimeOfDay get opensAtParsed => GeneralUtils.stringToTimeOfDay(opensAt);
+  TimeOfDay get closesAtParsed => GeneralUtils.stringToTimeOfDay(closesAt);
 }
 
 final mockFullPlace = {

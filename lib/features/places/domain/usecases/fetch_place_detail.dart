@@ -9,6 +9,7 @@ class FetchPlaceDetail with UseCases<FullPlaceModel, PlaceModel> {
 
   @override
   Future<FullPlaceModel> call(PlaceModel params) async {
+    // "97f837d4-be25-4dd0-8b69-25270968d41d"
     return await _placeRepository.fetchPlaceDetail(params.id);
   }
 }

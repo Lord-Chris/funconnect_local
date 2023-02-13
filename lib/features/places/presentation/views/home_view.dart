@@ -228,7 +228,7 @@ class _DefaultHomeView extends StatelessWidget {
               if (e.isPlace) {
                 return HomeSection<PlaceModel>(
                   label: e.name,
-                  children: List.filled(10, mockPlace).map((e) => e).toList(),
+                  children: e.data.map((e) => e as PlaceModel).toList(),
                   widget: (PlaceModel place) {
                     return HomeCategoriesLargeWidget(
                       coverImage: place.coverImagePath,
