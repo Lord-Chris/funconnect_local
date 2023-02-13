@@ -10,7 +10,6 @@ import 'package:funconnect/features/startup/presentation/blocs/onboarding_bloc/o
 import 'package:funconnect/shared/constants/_constants.dart';
 
 import '../../../../shared/components/app_orange_button.dart';
-import '../../../../shared/components/video_player_widget.dart';
 
 class OnboardingView extends StatefulHookWidget {
   const OnboardingView({Key? key}) : super(key: key);
@@ -20,6 +19,12 @@ class OnboardingView extends StatefulHookWidget {
 }
 
 class _OnboardingViewState extends State<OnboardingView> {
+  final assetVideo = [
+    "assets/videos/pexels-rodnae-productions-6193113.mp4",
+    "assets/videos/pexels-olia-danilevich-8524215.mp4",
+    "assets/videos/pexels-kindel-media-7293406.mp4"
+  ];
+
   final titles = <Widget>[
     RichText(
       key: const ValueKey(1),
@@ -154,8 +159,15 @@ class _OnboardingViewState extends State<OnboardingView> {
                       .add(PageChangedEvent(page: val)),
                   controller: controller,
                   physics: const ClampingScrollPhysics(),
-                  children: List.filled(3, false).map((e) {
-                    return const VideoPlayerWidget();
+                  children: [
+                    AppAssets.onboardingOnePng,
+                    AppAssets.onboardingTwoPng,
+                    AppAssets.onboardingThreePng,
+                  ].map((e) {
+                    return Image.asset(
+                      e,
+                      fit: BoxFit.cover,
+                    );
                   }).toList(),
                 ),
               ),

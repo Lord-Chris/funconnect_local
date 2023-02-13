@@ -4,6 +4,10 @@ class AppAssets {
   static const splashUpSvg = "assets/images/splash_up_curve.svg";
   static const funconnectSvg = "assets/icons/funconnect_logo.svg";
   static const splashDownSvg = "assets/images/splash_down_curve.svg";
+  static const onboardingOnePng = "assets/images/onboarding_one.png";
+  static const onboardingTwoPng = "assets/images/onboarding_two.png";
+  static const onboardingThreePng = "assets/images/onboarding_three.png";
+  static const authFlowPng = "assets/images/auth_flow_image.png";
   static const homeIconSvg = "assets/icons/home_icon.svg";
   static const exploreIconSvg = "assets/icons/explore_icon.svg";
   static const savedIconSvg = "assets/icons/saved.svg";
@@ -19,6 +23,7 @@ class AppAssets {
   static const googleIconSvg = "assets/icons/google_icon.svg";
   static const profileIconSvg = "assets/icons/profile.svg";
   static const profIconSvg = "assets/icons/profile_icon.svg";
+  static const interestPageTopSvg = "assets/svgs/interest_page_top_icon.svg";
   static const activeProfileIconSvg = "assets/icons/active_profile.svg";
   static const bookmarkIconSvg = "assets/icons/bookmark.svg";
 

@@ -11,10 +11,9 @@ class VerifyOtpUsecase with UseCases<void, VerifyOtpParams> {
   @override
   Future<void> call(VerifyOtpParams params) async {
     final user = await _repo.verifyOtp(params);
-    if ((user.username ?? "").isNotEmpty) {
-      _navigationService.offAllNamed(Routes.dashboardViewRoute, (_) => false);
-    } else {
-      _navigationService.offNamed(Routes.profileSetupViewRoute);
-    }
+    _navigationService.offNamed(
+      Routes.emailVerifiedRoute,
+      arguments: (user.username ?? "").isNotEmpty,
+    );
   }
 }

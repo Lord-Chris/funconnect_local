@@ -6,6 +6,7 @@ import 'package:funconnect/features/authentication/presentation/blocs/profile_se
 import 'package:funconnect/features/authentication/presentation/blocs/verify_email_bloc/verify_email_bloc.dart';
 import 'package:funconnect/features/authentication/presentation/blocs/welcome_bloc/welcome_bloc.dart';
 import 'package:funconnect/features/authentication/presentation/views/Profile_setup_view.dart';
+import 'package:funconnect/features/authentication/presentation/views/email_verified_view.dart';
 import 'package:funconnect/features/authentication/presentation/views/interest_view.dart';
 import 'package:funconnect/features/authentication/presentation/views/verify_email_view.dart';
 import 'package:funconnect/features/authentication/presentation/views/welcome_view.dart';
@@ -14,6 +15,7 @@ import 'package:funconnect/features/events/domain/entities/event_model.dart';
 import 'package:funconnect/features/events/presentation/views/booking_view.dart';
 import 'package:funconnect/features/events/presentation/views/checkout_view.dart';
 import 'package:funconnect/features/places/presentation/blocs/place_detail_bloc/place_detail_bloc.dart';
+import 'package:funconnect/features/places/presentation/views/notifications_view.dart';
 import 'package:funconnect/features/places/presentation/views/place_detail_view.dart';
 import 'package:funconnect/features/profile/presentation/blocs/edit_profile_bloc/edit_profile_bloc.dart';
 import 'package:funconnect/features/profile/presentation/blocs/profile/profile_bloc.dart';
@@ -34,13 +36,14 @@ class Routes {
   static const welcomeViewRoute = '/welcome-view';
   static const profileSetupViewRoute = '/profile_setup';
   static const verifyEmailRoute = '/verify-email';
-  // static const emailVerifiedRoute = '/email-verified';
+  static const emailVerifiedRoute = '/email-verified';
   static const locationAuthRoute = '/location-auth';
   static const setUpProfile = '/setUp-Profile';
   static const interestViewRoute = '/interests';
 
   // Dashboard
   static const dashboardViewRoute = '/dashboard-view';
+  static const notificationsViewRoute = '/notifications-view';
 
   // Places
   static const placeDetailRoute = '/place-detail';
@@ -78,6 +81,11 @@ class Routes {
           view: VerifyEmailView(response: res),
           bloc: VerifyEmailBloc(),
         );
+      case emailVerifiedRoute:
+        final res = settings.arguments as bool;
+        return MaterialPageRoute(
+          builder: (_) => EmailVerifiedScreen(goToDashboard: res),
+        );
       case profileSetupViewRoute:
         return _registerBlocView(
           view: ProfileSetUpView(),
@@ -96,14 +104,22 @@ class Routes {
           bloc: PlaceDetailBloc(),
         );
 
-      // Events
-      case createEventRoute:
-        return MaterialPageRoute(builder: (_) => const CreateEventView());
+      // Dashboard
       case dashboardViewRoute:
         return _registerBlocView(
           view: const DashboardView(),
           bloc: ProfileBloc(),
         );
+
+      case notificationsViewRoute:
+        return _registerBlocView(
+          view: const NotificationsView(),
+          bloc: ProfileBloc(),
+        );
+      // Events
+      case createEventRoute:
+        return MaterialPageRoute(builder: (_) => const CreateEventView());
+
       case eventDescriptionRoute:
         final event = settings.arguments as EventModel;
         return MaterialPageRoute(

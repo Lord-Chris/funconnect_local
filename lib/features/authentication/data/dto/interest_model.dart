@@ -6,11 +6,13 @@ class InterestModel extends Equatable {
   final String id;
   final String name;
   final String status;
+  final String coverPhoto;
 
   const InterestModel({
     required this.id,
     required this.name,
     required this.status,
+    required this.coverPhoto,
   });
 
   Map<String, dynamic> toMap() {
@@ -18,6 +20,7 @@ class InterestModel extends Equatable {
       'id': id,
       'name': name,
       'status': status,
+      'cover_photo': coverPhoto,
     };
   }
 
@@ -26,6 +29,7 @@ class InterestModel extends Equatable {
       id: map['id'],
       name: map['name'],
       status: map['status'],
+      coverPhoto: map['cover_photo'],
     );
   }
 
@@ -35,5 +39,5 @@ class InterestModel extends Equatable {
       InterestModel.fromMap(json.decode(source));
 
   @override
-  List<Object> get props => [id, name, status];
+  List<Object> get props => [id, name, status, coverPhoto];
 }

@@ -22,6 +22,7 @@ class ProfileSetUpView extends HookWidget {
     final usernameController = useTextEditingController();
     final gender = useState<String?>(null);
     return Scaffold(
+      backgroundColor: AppColors.primary,
       body: SafeArea(
         top: false,
         child: BlocBuilder<ProfileSetupBloc, ProfileSetupState>(
@@ -31,6 +32,10 @@ class ProfileSetUpView extends HookWidget {
             child: AppBlackModalWidget(
               showBackButton: true,
               modalHeight: MediaQuery.of(context).size.height,
+              topIcon: SvgPicture.asset(
+                AppAssets.profIconSvg,
+                color: AppColors.white,
+              ),
               children: [
                 Padding(
                   padding: const EdgeInsets.all(20),
@@ -102,6 +107,7 @@ class ProfileSetUpView extends HookWidget {
                             label: "Full name",
                             controller: nameController,
                             keyboardType: TextInputType.name,
+                            floatingLabelBehavior: FloatingLabelBehavior.auto,
                             textCapitalization: TextCapitalization.words,
                             maxLines: 1,
                             validator: context.validateFullName,
@@ -120,6 +126,7 @@ class ProfileSetUpView extends HookWidget {
                             ],
                             keyboardType: TextInputType.name,
                             textCapitalization: TextCapitalization.none,
+                            floatingLabelBehavior: FloatingLabelBehavior.auto,
                             validator: context.validateNotEmpty,
                           ),
                           const SizedBox(height: 20),

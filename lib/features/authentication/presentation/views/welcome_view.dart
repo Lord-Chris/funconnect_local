@@ -17,10 +17,11 @@ class WelcomeView extends HookWidget {
   Widget build(BuildContext context) {
     final controller = useTextEditingController();
     final formKey = GlobalKey<FormState>();
+
     return BlocBuilder<WelcomeBloc, WelcomeState>(
       builder: (context, state) {
         return Scaffold(
-          backgroundColor: AppColors.black,
+          backgroundColor: AppColors.primary,
           body: SafeArea(
             top: false,
             child: AppBlackModalWidget(
