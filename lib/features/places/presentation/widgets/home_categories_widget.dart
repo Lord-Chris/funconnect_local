@@ -5,20 +5,18 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../shared/constants/_constants.dart';
 
 class HomeViewCategoriesWidget extends StatelessWidget {
-  final String label;
+  final String? label;
   final Widget Function(int) child;
   final double? itemHeight;
-  final bool showAll;
-  // final int crossAxisCount;
+  final bool? showAll;
   final void Function(bool)? onSeeAllTap;
 
   const HomeViewCategoriesWidget({
     Key? key,
-    required this.label,
+    this.label,
     required this.child,
     this.itemHeight,
-    this.showAll = false,
-    // this.crossAxisCount = 3,
+    this.showAll,
     this.onSeeAllTap,
   }) : super(key: key);
 
@@ -27,27 +25,29 @@ class HomeViewCategoriesWidget extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Padding(
-          padding: EdgeInsets.symmetric(vertical: 16.0.h, horizontal: 16.0.h),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                label,
-                style: AppTextStyles.medium20,
-              ),
-              InkWell(
-                onTap: () => onSeeAllTap?.call(!showAll),
-                child: Text(
-                  "See all",
-                  style: AppTextStyles.medium14,
+        if (label != null)
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 16.w),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  label!,
+                  style: AppTextStyles.medium20,
                 ),
-              ),
-            ],
+                if (showAll != null)
+                  InkWell(
+                    onTap: () => onSeeAllTap?.call(!showAll!),
+                    child: Text(
+                      "See all",
+                      style: AppTextStyles.medium14,
+                    ),
+                  ),
+              ],
+            ),
           ),
-        ),
         Visibility(
-          visible: showAll,
+          visible: showAll ?? false,
           replacement: SizedBox(
             height: itemHeight ?? 182.r,
             child: ListView.builder(

@@ -1,12 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_stars/flutter_rating_stars.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import 'package:funconnect/features/places/presentation/blocs/home_bloc/home_bloc.dart';
-import 'package:funconnect/features/places/presentation/blocs/home_bloc/home_event.dart';
 
 import '../../../../shared/constants/_constants.dart';
 
@@ -16,6 +12,7 @@ class HomeCategoriesLargeWidget extends StatelessWidget {
   final double rating;
   final double ratingCount;
   final String coverImage;
+  final Size? size;
   final VoidCallback? onTap;
 
   const HomeCategoriesLargeWidget({
@@ -25,6 +22,7 @@ class HomeCategoriesLargeWidget extends StatelessWidget {
     required this.rating,
     required this.ratingCount,
     required this.coverImage,
+    this.size,
     this.onTap,
   }) : super(key: key);
 
@@ -33,8 +31,8 @@ class HomeCategoriesLargeWidget extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Container(
-        height: 182.r,
-        width: 182.r,
+        height: (size?.height ?? 182).r,
+        width: (size?.width ?? 182).r,
         padding: EdgeInsets.all(4.r),
         alignment: Alignment.bottomCenter,
         decoration: BoxDecoration(
