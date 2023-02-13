@@ -90,7 +90,7 @@ class FullPlaceModel extends Equatable {
       address: map['address'] ?? '',
       avgRating: map['avg_rating']?.toDouble() ?? 0.0,
       avgReviewCount: map['avg_review_count']?.toDouble() ?? 0.0,
-      reviewsAvgRating: map['reviews_avg_rating']?.toDouble(),
+      reviewsAvgRating: double.tryParse(map['reviews_avg_rating'] ?? ""),
       reviewsCount: map['reviews_count']?.toDouble() ?? 0.0,
       categories: List<CategoryModel>.from(
           map['categories']?.map((x) => CategoryModel.fromMap(x))),

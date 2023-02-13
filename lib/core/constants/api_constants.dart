@@ -23,6 +23,7 @@ class ApiConstants {
       "$_places/home-trends?lat=${loc?.lat}&long=${loc?.long}&city=${loc?.city}&state=${loc?.state}&country=${loc?.country}";
   static get categories => "$_places/categories";
   static String singlePlace(String placeId) => "$_places/$placeId";
+  static String placeReview(String placeId) => "$_places/reviews/$placeId";
 
   // EVENTS
   static get events => "$_baseUrl/events";

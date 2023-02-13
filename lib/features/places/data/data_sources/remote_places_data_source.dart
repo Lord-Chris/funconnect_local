@@ -6,6 +6,8 @@ import 'package:funconnect/features/places/domain/entities/full_place_model.dart
 import 'package:funconnect/features/places/domain/entities/home_trend_item_model.dart';
 import 'package:funconnect/services/_services.dart';
 
+import '../../domain/entities/review_model.dart';
+
 class RemotePlaceDataSource with ApiMixin {
   final _networkService = locator<INetworkService>();
 
@@ -30,5 +32,14 @@ class RemotePlaceDataSource with ApiMixin {
       headers: headers,
     );
     return FullPlaceModel.fromMap(res.data['data']);
+  }
+
+  Future<PaginatedData<ReviewModel>> fetchPlaceReviews(String placeId) async {
+    final res = await _networkService.get(
+      ApiConstants.placeReview(placeId),
+      headers: headers,
+    );
+    return PaginatedData.fromMap(
+        res.data['data'], (x) => ReviewModel.fromMap(x));
   }
 }

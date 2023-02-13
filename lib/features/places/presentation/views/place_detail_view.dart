@@ -7,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:funconnect/core/extensions/_extensions.dart';
 import 'package:funconnect/features/places/domain/entities/place_model.dart';
+import 'package:funconnect/features/places/domain/entities/review_model.dart';
 import 'package:funconnect/features/places/presentation/blocs/place_detail_bloc/place_detail_bloc.dart';
 import 'package:funconnect/features/places/presentation/blocs/place_detail_bloc/place_detail_event.dart';
 import 'package:funconnect/features/places/presentation/blocs/place_detail_bloc/place_detail_state.dart';
@@ -69,74 +70,6 @@ class PlaceDetailView extends HookWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                        child: Text(
-                          place.name,
-                          style: AppTextStyles.medium24,
-                        ),
-                      ),
-                      AnimatedContainer(
-                        duration: const Duration(milliseconds: 1),
-                        child: SvgPicture.asset(
-                          AppAssets.uploadSvg,
-                          color: AppColors.white,
-                          height: 20,
-                        ),
-                      ),
-                      Spacing.horizMedium(),
-                      AnimatedContainer(
-                        duration: const Duration(milliseconds: 1),
-                        child: SvgPicture.asset(
-                          AppAssets.bookmarkIconSvg,
-                          color: AppColors.white,
-                          height: 20,
-                        ),
-                      ),
-                    ],
-                  ),
-                  Spacing.vertTiny(),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Text(
-                        place.avgRating.toString(),
-                        style: AppTextStyles.regular16,
-                      ),
-                      Spacing.horizExtraTiny(),
-                      Flexible(
-                        child: FittedBox(
-                          child: RatingStars(
-                            value: place.avgRating,
-                            onValueChanged: (v) {},
-                            starBuilder: (index, color) => Icon(
-                              Icons.star,
-                              color: color,
-                              size: 14,
-                            ),
-                            starSize: 14,
-                            starCount: 5,
-                            starSpacing: 0,
-                            maxValue: 5,
-                            maxValueVisibility: false,
-                            valueLabelVisibility: false,
-                            animationDuration:
-                                const Duration(milliseconds: 1000),
-                            starOffColor: AppColors.white,
-                            starColor: AppColors.primary,
-                          ),
-                        ),
-                      ),
-                      Spacing.horizTiny(),
-                      Text(
-                        "(${place.avgReviewCount})",
-                        style: AppTextStyles.regular16,
-                      ),
-                    ],
-                  ),
-                  Spacing.vertMedium(),
                   _InfoSection(place: place),
                   const _ReviewSection(),
                   Row(
@@ -195,10 +128,81 @@ class _InfoSection extends StatelessWidget {
       buildWhen: (_, current) => current is PlaceDetailIdleState,
       builder: (context, state) {
         if (state is PlaceDetailFetchingState) {
-          return const Center(
-            child: AppLoader(
-              color: AppColors.primary,
-            ),
+          return Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    child: Text(
+                      place.name,
+                      style: AppTextStyles.medium24,
+                    ),
+                  ),
+                  AnimatedContainer(
+                    duration: const Duration(milliseconds: 1),
+                    child: SvgPicture.asset(
+                      AppAssets.uploadSvg,
+                      color: AppColors.white,
+                      height: 20,
+                    ),
+                  ),
+                  Spacing.horizMedium(),
+                  AnimatedContainer(
+                    duration: const Duration(milliseconds: 1),
+                    child: SvgPicture.asset(
+                      AppAssets.bookmarkIconSvg,
+                      color: AppColors.white,
+                      height: 20,
+                    ),
+                  ),
+                ],
+              ),
+              Spacing.vertTiny(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text(
+                    place.avgRating.toString(),
+                    style: AppTextStyles.regular16,
+                  ),
+                  Spacing.horizExtraTiny(),
+                  Flexible(
+                    child: FittedBox(
+                      child: RatingStars(
+                        value: place.avgRating,
+                        onValueChanged: (v) {},
+                        starBuilder: (index, color) => Icon(
+                          Icons.star,
+                          color: color,
+                          size: 14,
+                        ),
+                        starSize: 14,
+                        starCount: 5,
+                        starSpacing: 0,
+                        maxValue: 5,
+                        maxValueVisibility: false,
+                        valueLabelVisibility: false,
+                        animationDuration: const Duration(milliseconds: 1000),
+                        starOffColor: AppColors.white,
+                        starColor: AppColors.primary,
+                      ),
+                    ),
+                  ),
+                  Spacing.horizTiny(),
+                  Text(
+                    "(${place.avgReviewCount})",
+                    style: AppTextStyles.regular16,
+                  ),
+                ],
+              ),
+              Spacing.vertMedium(),
+              const Center(
+                child: AppLoader(
+                  color: AppColors.primary,
+                ),
+              ),
+            ],
           );
         }
         if (state is! PlaceDetailIdleState) return const SizedBox();
@@ -206,6 +210,75 @@ class _InfoSection extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  child: Text(
+                    state.place.name,
+                    style: AppTextStyles.medium24,
+                  ),
+                ),
+                AnimatedContainer(
+                  duration: const Duration(milliseconds: 1),
+                  child: SvgPicture.asset(
+                    AppAssets.uploadSvg,
+                    color: AppColors.white,
+                    height: 20,
+                  ),
+                ),
+                Spacing.horizMedium(),
+                AnimatedContainer(
+                  duration: const Duration(milliseconds: 1),
+                  child: SvgPicture.asset(
+                    AppAssets.bookmarkIconSvg,
+                    color: AppColors.white,
+                    height: 20,
+                  ),
+                ),
+              ],
+            ),
+            Spacing.vertTiny(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Text(
+                  state.place.reviewsAvgRating?.toStringAsFixed(1) ??
+                      state.place.avgRating.toString(),
+                  style: AppTextStyles.regular16,
+                ),
+                Spacing.horizExtraTiny(),
+                Flexible(
+                  child: FittedBox(
+                    child: RatingStars(
+                      value:
+                          state.place.reviewsAvgRating ?? state.place.avgRating,
+                      onValueChanged: (v) {},
+                      starBuilder: (index, color) => Icon(
+                        Icons.star,
+                        color: color,
+                        size: 14,
+                      ),
+                      starSize: 14,
+                      starCount: 5,
+                      starSpacing: 0,
+                      maxValue: 5,
+                      maxValueVisibility: false,
+                      valueLabelVisibility: false,
+                      animationDuration: const Duration(milliseconds: 1000),
+                      starOffColor: AppColors.white,
+                      starColor: AppColors.primary,
+                    ),
+                  ),
+                ),
+                Spacing.horizTiny(),
+                Text(
+                  "(${state.place.reviewsCount.toInt()})",
+                  style: AppTextStyles.regular16,
+                ),
+              ],
+            ),
+            Spacing.vertMedium(),
             Text(
               "About",
               style: AppTextStyles.medium16,
@@ -316,111 +389,128 @@ class _ReviewSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Spacing.vertSmall(),
-        Text(
-          "Ratings & Reviews",
-          style: AppTextStyles.regular14,
-        ),
-        Spacing.vertSmall(),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return BlocBuilder<PlaceDetailBloc, PlaceDetailState>(
+      buildWhen: (_, current) => current is PlaceDetailIdleState,
+      builder: (context, state) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
           children: [
-            Text(
-              "4 of 50",
-              style: AppTextStyles.regular12.copyWith(
-                color: AppColors.gray97,
-              ),
-            ),
-            DropdownButton<String>(
-              value: "Sorted by most helpful",
-              alignment: Alignment.center,
-              items: ["Sorted by most helpful"]
-                  .map((e) => DropdownMenuItem<String>(
-                        value: e,
-                        child: Text(
-                          e,
+            if (state is PlaceDetailIdleState)
+              if (state.reviews.isNotEmpty)
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Spacing.vertSmall(),
+                    Text(
+                      "Ratings & Reviews",
+                      style: AppTextStyles.regular14,
+                    ),
+                    Spacing.vertSmall(),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "4 of 50",
                           style: AppTextStyles.regular12.copyWith(
                             color: AppColors.gray97,
                           ),
                         ),
-                      ))
-                  .toList(),
-              onChanged: (val) {},
-              underline: Container(),
-              isDense: true,
-              icon: Icon(
-                Icons.keyboard_arrow_down,
-                color: AppColors.gray97,
-                size: 15.sp,
-              ),
-              style: AppTextStyles.regular12.copyWith(
-                color: AppColors.gray97,
-              ),
+                        DropdownButton<String>(
+                          value: "Sorted by most helpful",
+                          alignment: Alignment.center,
+                          items: ["Sorted by most helpful"]
+                              .map((e) => DropdownMenuItem<String>(
+                                    value: e,
+                                    child: Text(
+                                      e,
+                                      style: AppTextStyles.regular12.copyWith(
+                                        color: AppColors.gray97,
+                                      ),
+                                    ),
+                                  ))
+                              .toList(),
+                          onChanged: (val) {},
+                          underline: Container(),
+                          isDense: true,
+                          icon: Icon(
+                            Icons.keyboard_arrow_down,
+                            color: AppColors.gray97,
+                            size: 15.sp,
+                          ),
+                          style: AppTextStyles.regular12.copyWith(
+                            color: AppColors.gray97,
+                          ),
+                        ),
+                      ],
+                    ),
+                    ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: state.reviews.length,
+                      padding: EdgeInsets.zero,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        return _ReviewItem(
+                          review: state.reviews[index],
+                        );
+                      },
+                    ),
+                    Spacing.vertRegular(),
+                  ],
+                ),
+            Spacing.vertSmall(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Tap to rate",
+                  style: AppTextStyles.regular14.copyWith(
+                    color: AppColors.gray97,
+                  ),
+                ),
+                RatingStars(
+                  value: 2,
+                  onValueChanged: (v) {},
+                  starBuilder: (index, color) {
+                    if (color == AppColors.primary) {
+                      return Icon(
+                        Icons.star_rounded,
+                        color: color,
+                        size: 14,
+                      );
+                    }
+                    return Icon(
+                      Icons.star_border_rounded,
+                      color: color,
+                      size: 14,
+                    );
+                  },
+                  starSize: 14,
+                  starCount: 5,
+                  starSpacing: 0,
+                  maxValue: 5,
+                  maxValueVisibility: false,
+                  valueLabelVisibility: false,
+                  animationDuration: const Duration(milliseconds: 1000),
+                  starOffColor: AppColors.white.withOpacity(.7),
+                  starColor: AppColors.primary,
+                ),
+              ],
             ),
+            Spacing.vertSmall(),
           ],
-        ),
-        ListView.builder(
-          shrinkWrap: true,
-          itemCount: 3,
-          padding: EdgeInsets.zero,
-          physics: const NeverScrollableScrollPhysics(),
-          itemBuilder: (context, index) {
-            return const _ReviewItem();
-          },
-        ),
-        Spacing.vertRegular(),
-        Spacing.vertSmall(),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              "Tap to rate",
-              style: AppTextStyles.regular14.copyWith(
-                color: AppColors.gray97,
-              ),
-            ),
-            RatingStars(
-              value: 2,
-              onValueChanged: (v) {},
-              starBuilder: (index, color) {
-                if (color == AppColors.primary) {
-                  return Icon(
-                    Icons.star_rounded,
-                    color: color,
-                    size: 14,
-                  );
-                }
-                return Icon(
-                  Icons.star_border_rounded,
-                  color: color,
-                  size: 14,
-                );
-              },
-              starSize: 14,
-              starCount: 5,
-              starSpacing: 0,
-              maxValue: 5,
-              maxValueVisibility: false,
-              valueLabelVisibility: false,
-              animationDuration: const Duration(milliseconds: 1000),
-              starOffColor: AppColors.white.withOpacity(.7),
-              starColor: AppColors.primary,
-            ),
-          ],
-        ),
-        Spacing.vertSmall(),
-      ],
+        );
+      },
     );
   }
 }
 
 class _ReviewItem extends StatelessWidget {
+  final ReviewModel review;
   const _ReviewItem({
     Key? key,
+    required this.review,
   }) : super(key: key);
 
   @override
@@ -460,7 +550,7 @@ class _ReviewItem extends StatelessWidget {
                       child: Row(
                         children: [
                           RatingStars(
-                            value: 3,
+                            value: review.rating.toDouble(),
                             onValueChanged: (v) {},
                             starBuilder: (index, color) => Icon(
                               Icons.star,
@@ -480,7 +570,7 @@ class _ReviewItem extends StatelessWidget {
                           ),
                           Spacing.horizExtraTiny(),
                           Text(
-                            "4.8",
+                            review.rating.toString(),
                             style: AppTextStyles.regular10.copyWith(
                               color: AppColors.gray97,
                             ),
@@ -501,7 +591,7 @@ class _ReviewItem extends StatelessWidget {
           ),
           Spacing.vertRegular(),
           Text(
-            "The place is an amazing space. My 3 kids had a lovely time, oh please don’t use the lift on the down floor it is broken. Real nice staffs, saw the swing rolls, did chareoke and I must say this is a must visit for everyone in Lagos. we can talk all day about what",
+            review.comment,
             style: AppTextStyles.regular14,
           ),
         ],

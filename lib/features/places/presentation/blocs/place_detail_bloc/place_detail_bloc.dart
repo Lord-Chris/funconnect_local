@@ -1,6 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:funconnect/core/models/_models.dart';
+import 'package:funconnect/features/places/domain/entities/full_place_model.dart';
+import 'package:funconnect/features/places/domain/entities/review_model.dart';
 import 'package:funconnect/features/places/presentation/blocs/place_detail_bloc/place_detail_event.dart';
 import 'package:funconnect/features/places/presentation/blocs/place_detail_bloc/place_detail_state.dart';
 
@@ -15,7 +18,10 @@ class PlaceDetailBloc extends Bloc<PlaceDetailEvent, PlaceDetailState> {
     PlaceInitEvent event,
     Emitter<PlaceDetailState> emit,
   ) async {
-    final place = await FetchPlaceDetail().call(event.place);
-    emit(PlaceDetailIdleState(place: place));
+    final data = await FetchPlaceDetail().call(event.place);
+    emit(PlaceDetailIdleState(
+      place: data[0] as FullPlaceModel,
+      reviews: (data[1] as PaginatedData<ReviewModel>).data,
+    ));
   }
 }
