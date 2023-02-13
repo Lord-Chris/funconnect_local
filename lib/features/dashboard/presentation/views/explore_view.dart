@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:funconnect/features/places/domain/entities/place_model.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
 
 import '../../../places/presentation/widgets/home_categories_large_widget.dart';
@@ -51,10 +52,14 @@ class ExploreView extends StatelessWidget {
               ),
               Row(
                 children: [
-                  const Expanded(
+                  Expanded(
                     child: HomeCategoriesLargeWidget(
-                        // width: 250.0.w,
-                        ),
+                      coverImage: mockPlace.coverImagePath,
+                      name: mockPlace.name,
+                      isBookmarked: false,
+                      rating: mockPlace.avgRating,
+                      ratingCount: mockPlace.avgReviewCount,
+                    ),
                   ),
                   Spacing.vertTiny(),
                   Column(
@@ -103,19 +108,28 @@ class ExploreView extends StatelessWidget {
                   ],
                 ),
               ),
-              const HomeViewCategoriesWidget(
+              HomeViewCategoriesWidget(
                 label: "",
-                child: HomeViewCategoriesSmallSubWidget(),
+                child: (index) => const HomeViewCategoriesSmallSubWidget(
+                  name: "Arts & Culture",
+                  coverImage: AppConstants.mockImage,
+                ),
               ),
               Spacing.vertRegular(),
-              const HomeViewCategoriesWidget(
+              HomeViewCategoriesWidget(
                 label: AppText.aTShareMoments,
-                child: HomeViewCategoriesSmallSubWidget(),
+                child: (index) => const HomeViewCategoriesSmallSubWidget(
+                  name: "Arts & Culture",
+                  coverImage: AppConstants.mockImage,
+                ),
               ),
               Spacing.vertRegular(),
-              const HomeViewCategoriesWidget(
+              HomeViewCategoriesWidget(
                 label: AppText.aTFeelRefreshed,
-                child: HomeViewCategoriesSmallSubWidget(),
+                child: (index) => const HomeViewCategoriesSmallSubWidget(
+                  name: "Arts & Culture",
+                  coverImage: AppConstants.mockImage,
+                ),
               ),
               Spacing.vertRegular(),
             ],

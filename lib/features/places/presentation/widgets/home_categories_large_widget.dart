@@ -4,20 +4,34 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_stars/flutter_rating_stars.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:funconnect/features/places/presentation/blocs/home_bloc/home_bloc.dart';
 import 'package:funconnect/features/places/presentation/blocs/home_bloc/home_event.dart';
 
 import '../../../../shared/constants/_constants.dart';
 
 class HomeCategoriesLargeWidget extends StatelessWidget {
+  final String name;
+  final bool isBookmarked;
+  final double rating;
+  final double ratingCount;
+  final String coverImage;
+  final VoidCallback? onTap;
+
   const HomeCategoriesLargeWidget({
     Key? key,
+    required this.name,
+    required this.isBookmarked,
+    required this.rating,
+    required this.ratingCount,
+    required this.coverImage,
+    this.onTap,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => context.read<HomeBloc>().add(PlaceTapEvent()),
+      onTap: onTap,
       child: Container(
         height: 182.r,
         width: 182.r,
@@ -26,10 +40,10 @@ class HomeCategoriesLargeWidget extends StatelessWidget {
         decoration: BoxDecoration(
           color: AppColors.primary,
           borderRadius: BorderRadius.circular(18),
-          image: const DecorationImage(
+          image: DecorationImage(
             fit: BoxFit.cover,
             image: CachedNetworkImageProvider(
-              AppConstants.mockImage,
+              coverImage,
             ),
           ),
         ),
@@ -48,7 +62,7 @@ class HomeCategoriesLargeWidget extends StatelessWidget {
                 children: [
                   Flexible(
                     child: Text(
-                      DumbAppStrings.bestForYouLabel,
+                      name,
                       style: AppTextStyles.regular14,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -68,7 +82,7 @@ class HomeCategoriesLargeWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
-                    DumbAppStrings.ratingLabel,
+                    rating.toString(),
                     style: AppTextStyles.dynamic(
                       10,
                       weight: FontWeight.w300,
@@ -78,7 +92,7 @@ class HomeCategoriesLargeWidget extends StatelessWidget {
                   Flexible(
                     child: FittedBox(
                       child: RatingStars(
-                        value: 3,
+                        value: rating,
                         onValueChanged: (v) {},
                         starBuilder: (index, color) => Icon(
                           Icons.star,
@@ -98,7 +112,7 @@ class HomeCategoriesLargeWidget extends StatelessWidget {
                   ),
                   Spacing.horizTiny(),
                   Text(
-                    DumbAppStrings.ratiedLabel,
+                    ratingCount.toString(),
                     style: AppTextStyles.dynamic(
                       10,
                       weight: FontWeight.w300,

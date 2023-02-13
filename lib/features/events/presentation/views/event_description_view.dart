@@ -6,14 +6,15 @@ import 'package:flutter_svg/svg.dart';
 import 'package:funconnect/core/app/_app.dart';
 import 'package:funconnect/core/extensions/_extensions.dart';
 import 'package:funconnect/features/events/domain/entities/event_model.dart';
+import 'package:funconnect/features/places/domain/entities/place_model.dart';
 import 'package:funconnect/services/_services.dart';
 import 'package:funconnect/shared/components/app_network_image.dart';
 import 'package:funconnect/shared/components/custom_button.dart';
 import 'package:funconnect/shared/components/scrollable_column.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
 
+import '../../../places/presentation/widgets/home_categories_large_widget.dart';
 import '../../../places/presentation/widgets/home_categories_widget.dart';
-import '../../../places/presentation/widgets/home_categories_small_widget.dart';
 
 class EventDescriptionView extends StatelessWidget {
   final EventModel event;
@@ -226,7 +227,16 @@ class EventDescriptionView extends StatelessWidget {
                       Spacing.vertRegular(),
                       HomeViewCategoriesWidget(
                         label: DumbAppStrings.eventDescriptionMoreLikeText,
-                        child: const HomeViewCategoriesSmallSubWidget(),
+                        child: (index) {
+                          final place = mockPlace;
+                          return HomeCategoriesLargeWidget(
+                            coverImage: place.coverImagePath,
+                            name: place.name,
+                            isBookmarked: false,
+                            rating: place.avgRating,
+                            ratingCount: place.avgReviewCount,
+                          );
+                        },
                       ),
                       Spacing.vertRegular(),
                       Spacing.vertRegular(),

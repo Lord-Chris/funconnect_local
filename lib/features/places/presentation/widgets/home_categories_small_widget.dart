@@ -7,8 +7,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../shared/constants/_constants.dart';
 
 class HomeViewCategoriesSmallSubWidget extends StatelessWidget {
+  final String name;
+  final String coverImage;
+
   const HomeViewCategoriesSmallSubWidget({
     Key? key,
+    required this.name,
+    required this.coverImage,
   }) : super(key: key);
 
   @override
@@ -21,10 +26,10 @@ class HomeViewCategoriesSmallSubWidget extends StatelessWidget {
       decoration: BoxDecoration(
         color: AppColors.primary,
         borderRadius: BorderRadius.circular(18),
-        image: const DecorationImage(
+        image: DecorationImage(
           fit: BoxFit.cover,
           image: CachedNetworkImageProvider(
-            AppConstants.mockImage,
+            coverImage,
           ),
         ),
       ),
@@ -40,7 +45,7 @@ class HomeViewCategoriesSmallSubWidget extends StatelessWidget {
             child: Padding(
               padding: REdgeInsets.symmetric(vertical: 4, horizontal: 12),
               child: Text(
-                "Art & Culture",
+                name,
                 style: AppTextStyles.regular12,
                 overflow: TextOverflow.ellipsis,
               ),
