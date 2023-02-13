@@ -16,3 +16,5 @@ class InterestTapEvent extends InterestsEvent {
 }
 
 class ContinueTapEvent extends InterestsEvent {}
+
+class SkipTapEvent extends InterestsEvent {}

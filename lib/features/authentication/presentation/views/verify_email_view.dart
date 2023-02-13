@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:funconnect/core/extensions/_extensions.dart';
 import 'package:funconnect/core/utils/general_utils.dart';
 import 'package:funconnect/features/authentication/presentation/blocs/verify_email_bloc/verify_email_bloc.dart';
@@ -53,10 +54,15 @@ class _VerifyEmailViewState extends State<VerifyEmailView> {
             }
           },
           child: Scaffold(
+            backgroundColor: AppColors.primary,
             body: SafeArea(
               top: false,
               child: AppBlackModalWidget(
                 showBackButton: true,
+                topIcon: SvgPicture.asset(
+                  AppAssets.emailIconSvg,
+                  color: AppColors.white,
+                ),
                 children: [
                   Form(
                     key: formKey,

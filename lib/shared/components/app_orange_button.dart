@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:funconnect/shared/components/_components.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
 
@@ -7,7 +8,6 @@ class AppOrangeBtn extends StatelessWidget {
   final double height;
   final double? weight;
   final VoidCallback? onTap;
-  final double bottomPadding;
   final bool isBusy;
 
   const AppOrangeBtn({
@@ -16,7 +16,6 @@ class AppOrangeBtn extends StatelessWidget {
     this.height = 80,
     this.weight,
     this.onTap,
-    this.bottomPadding = 0,
     this.isBusy = false,
   }) : super(key: key);
 
@@ -25,9 +24,7 @@ class AppOrangeBtn extends StatelessWidget {
     return MaterialButton(
       onPressed: onTap,
       minWidth: MediaQuery.of(context).size.width,
-      height: height,
       disabledColor: AppColors.primary.withOpacity(0.5),
-      padding: EdgeInsets.only(bottom: (height * 0.1) + bottomPadding),
       color: AppColors.primary,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
@@ -35,14 +32,16 @@ class AppOrangeBtn extends StatelessWidget {
           topRight: Radius.circular(36),
         ),
       ),
-      child: Align(
-        alignment: Alignment.bottomCenter,
+      child: Container(
+        height: height,
+        padding: EdgeInsets.only(top: 24.r),
+        alignment: Alignment.topCenter,
         child: Visibility(
           visible: !isBusy,
           replacement: const SizedBox.square(
             child: FittedBox(
               child: AppLoader(
-                padding: 15,
+                padding: 0,
                 size: 25,
                 color: AppColors.black,
               ),

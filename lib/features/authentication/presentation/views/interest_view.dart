@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:funconnect/features/authentication/presentation/blocs/interest_bloc/interest_bloc.dart';
 import 'package:funconnect/features/authentication/presentation/blocs/interest_bloc/interest_event.dart';
 import 'package:funconnect/features/authentication/presentation/blocs/interest_bloc/interest_state.dart';
@@ -34,6 +35,10 @@ class _InterestViewState extends State<InterestView> {
             return AppBlackModalWidget(
               modalHeight: MediaQuery.of(context).size.height * 0.85,
               showBackButton: true,
+              topIcon: SvgPicture.asset(
+                AppAssets.interestPageTopSvg,
+                color: AppColors.white,
+              ),
               children: [
                 Flexible(
                   child: Padding(
@@ -41,6 +46,20 @@ class _InterestViewState extends State<InterestView> {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
+                        Align(
+                          alignment: Alignment.topRight,
+                          child: InkWell(
+                            onTap: () => context
+                                .read<InterestsBloc>()
+                                .add(SkipTapEvent()),
+                            child: Text(
+                              "Skip",
+                              style: AppTextStyles.regular16.copyWith(
+                                decoration: TextDecoration.underline,
+                              ),
+                            ),
+                          ),
+                        ),
                         const SizedBox(height: 16.0),
                         Text(
                           AppText.aTInterestText,
@@ -90,7 +109,7 @@ class _InterestViewState extends State<InterestView> {
                                     final interest = state.interests[index];
                                     return InterestSelectionWidget(
                                       title: interest.name,
-                                      image: "",
+                                      image: interest.coverPhoto,
                                       isSelected: state.selectedInterest
                                           .contains(interest),
                                       onSelected: (val) =>
