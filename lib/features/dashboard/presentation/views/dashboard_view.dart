@@ -30,19 +30,22 @@ class _DashboardViewState extends State<DashboardView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: [
-        BlocProvider<HomeBloc>(
-          create: (context) => HomeBloc(),
-          child: const HomeView(),
-        ),
-        const ExploreView(),
-        BlocProvider<EventsBloc>(
-          create: (context) => EventsBloc(),
-          child: const EventsView(),
-        ),
-        const SavedView(),
-        const ProfileView(),
-      ][_index],
+      body: IndexedStack(
+        index: _index,
+        children: [
+          BlocProvider<HomeBloc>(
+            create: (context) => HomeBloc(),
+            child: const HomeView(),
+          ),
+          const ExploreView(),
+          BlocProvider<EventsBloc>(
+            create: (context) => EventsBloc(),
+            child: const EventsView(),
+          ),
+          const SavedView(),
+          const ProfileView(),
+        ],
+      ),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: AppColors.black,
         currentIndex: _index,
