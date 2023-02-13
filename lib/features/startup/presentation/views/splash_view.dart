@@ -25,13 +25,14 @@ class SplashView extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+            
               Container(
                 height: 500.h,
                 width: 500.w,
                 decoration: const BoxDecoration(
                   image: DecorationImage(
                     image: AssetImage(
-                      "assets/gifs/funconnect_logo.gif",
+                      "assets/images/funconnect.png",
                     ),
                   ),
                 ),

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:funconnect/shared/components/video_player_widget.dart';
 
 import '../../../../shared/constants/colors.dart';
@@ -29,6 +30,7 @@ class AppBlackModalWidget extends StatelessWidget {
           height: MediaQuery.of(context).size.height,
           child: const VideoPlayerWidget(),
         ),
+       
         Positioned(
           bottom: -20.0,
           left: 0,

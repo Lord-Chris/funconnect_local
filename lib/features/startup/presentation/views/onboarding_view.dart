@@ -20,6 +20,13 @@ class OnboardingView extends StatefulHookWidget {
 }
 
 class _OnboardingViewState extends State<OnboardingView> {
+
+  final assetVideo = [
+    "assets/videos/pexels-rodnae-productions-6193113.mp4",
+    "assets/videos/pexels-olia-danilevich-8524215.mp4",
+    "assets/videos/pexels-kindel-media-7293406.mp4"
+  ];
+
   final titles = <Widget>[
     RichText(
       key: const ValueKey(1),
@@ -154,8 +161,8 @@ class _OnboardingViewState extends State<OnboardingView> {
                       .add(PageChangedEvent(page: val)),
                   controller: controller,
                   physics: const ClampingScrollPhysics(),
-                  children: List.filled(3, false).map((e) {
-                    return const VideoPlayerWidget();
+                  children: assetVideo.map((e) {
+                    return  VideoPlayerWidget(assetVideo: e);
                   }).toList(),
                 ),
               ),

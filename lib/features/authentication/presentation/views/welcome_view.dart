@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:funconnect/core/app/locator.dart';
 import 'package:funconnect/core/extensions/_extensions.dart';
 import 'package:funconnect/features/authentication/presentation/blocs/welcome_bloc/welcome_bloc.dart';
 import 'package:funconnect/features/authentication/presentation/blocs/welcome_bloc/welcome_event.dart';
 import 'package:funconnect/features/authentication/presentation/blocs/welcome_bloc/welcome_state.dart';
+import 'package:funconnect/services/navigation_service/i_navigation_service.dart';
 import 'package:funconnect/shared/components/_components.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
 
@@ -17,6 +19,7 @@ class WelcomeView extends HookWidget {
   Widget build(BuildContext context) {
     final controller = useTextEditingController();
     final formKey = GlobalKey<FormState>();
+
     return BlocBuilder<WelcomeBloc, WelcomeState>(
       builder: (context, state) {
         return Scaffold(

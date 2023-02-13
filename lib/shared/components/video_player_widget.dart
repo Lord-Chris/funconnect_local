@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
 class VideoPlayerWidget extends StatefulWidget {
-  const VideoPlayerWidget({Key? key}) : super(key: key);
+  final String? assetVideo;
+  const VideoPlayerWidget({Key? key,  this.assetVideo}) : super(key: key);
 
   @override
   State<VideoPlayerWidget> createState() => _VideoPlayerWidgetState();
@@ -11,14 +12,14 @@ class VideoPlayerWidget extends StatefulWidget {
 class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
   late VideoPlayerController _controller;
 
-  String assetVideo = "assets/videos/pexels-rodnae-productions-6193112.mp4";
+  String assetVideo = "assets/videos/pexels-rodnae-productions-6193113.mp4";
   String networkVideo =
       'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4';
 
   @override
   void initState() {
     super.initState();
-    _controller = VideoPlayerController.asset(assetVideo,
+    _controller = VideoPlayerController.asset(widget.assetVideo ?? assetVideo,
         videoPlayerOptions: VideoPlayerOptions(mixWithOthers: true))
       ..initialize().then((_) {
         setState(() {});
