@@ -19,8 +19,11 @@ class ApiConstants {
   static get profileSetup => "$_core/profile";
 
   // PLACES
-  static String homeTrends(AppLocation? loc) =>
-      "$_places/home-trends?lat=${loc?.lat}&long=${loc?.long}&city=${loc?.city}&state=${loc?.state}&country=${loc?.country}";
+  static String homeTrends(AppLocation? loc) {
+    if (loc == null) return "$_places/home-trends";
+    return "$_places/home-trends?lat=${loc.lat}&long=${loc.long}&city=${loc.city}&state=${loc.state}&country=${loc.country}";
+  }
+
   static get categories => "$_places/categories";
   static String singlePlace(String placeId) => "$_places/$placeId";
   static String placeReview(String placeId) => "$_places/reviews/$placeId";

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:funconnect/core/models/_models.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
@@ -15,29 +17,35 @@ class LocationService extends ILocationService {
   }
 
   @override
-  Future<AppLocation> getCurrentLocation() async {
-    final hasPermission = await requestPermission();
-    if (!hasPermission) {
-      throw const Failure("Application requires location access");
-    }
-    _logger.i("Getting current location");
-    final res = await Geolocator.getCurrentPosition(
-      desiredAccuracy: LocationAccuracy.high,
-      forceAndroidLocationManager: true,
-    );
-    final place = await placemarkFromCoordinates(res.latitude, res.longitude);
-    if (place.isEmpty) {
-      return AppLocation(lat: res.latitude, long: res.longitude);
-    }
+  Future<AppLocation?> getCurrentLocation() async {
+    try {
+      final hasPermission = await requestPermission();
+      if (!hasPermission) {
+        throw const Failure("Application requires location access");
+      }
+      _logger.i("Getting current location");
+      final res = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.best,
+        forceAndroidLocationManager: true,
+      ).timeout(const Duration(seconds: 30));
+      final place = await placemarkFromCoordinates(res.latitude, res.longitude);
+      if (place.isEmpty) {
+        return AppLocation(lat: res.latitude, long: res.longitude);
+      }
 
-    return AppLocation(
-      lat: res.latitude,
-      long: res.longitude,
-      address: "${place.first.name} ${place.first.thoroughfare}",
-      city: place.first.locality,
-      state: place.first.administrativeArea,
-      country: place.first.country,
-    );
+      return AppLocation(
+        lat: res.latitude,
+        long: res.longitude,
+        address: "${place.first.name} ${place.first.thoroughfare}",
+        city: place.first.locality,
+        state: place.first.administrativeArea,
+        country: place.first.country,
+      );
+    } on TimeoutException {
+      return null;
+    } on Exception catch (e) {
+      throw Failure("Unable to get location", extraData: e.toString());
+    }
   }
 
   @override
