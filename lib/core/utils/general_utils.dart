@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class GeneralUtils {
@@ -25,5 +26,11 @@ class GeneralUtils {
       return email.replaceRange(0, email.indexOf('@'), '*****');
     }
     return email.replaceRange(1, email.indexOf('@') - 1, '*****');
+  }
+
+  static TimeOfDay stringToTimeOfDay(String time) {
+    assert(RegExp(r'[0-9][0-9]:[0-9][0-9]:[0-9][0-9]').hasMatch(time));
+    final data = time.split(":");
+    return TimeOfDay(hour: int.parse(data[0]), minute: int.parse(data[1]));
   }
 }

@@ -1,6 +1,7 @@
 import 'dart:convert';
+import 'dart:io';
 
-import 'package:funconnect/core/model/app_location.dart';
+import 'package:funconnect/core/models/app_location.dart';
 
 class ProfileSetupParam {
   final String name;
@@ -12,6 +13,7 @@ class ProfileSetupParam {
   final String? country;
   final String? lat;
   final String? long;
+  final File? profilePhoto;
 
   ProfileSetupParam({
     required this.name,
@@ -23,6 +25,7 @@ class ProfileSetupParam {
     this.country,
     this.lat,
     this.long,
+    this.profilePhoto,
   });
 
   ProfileSetupParam addLocation(AppLocation location) {

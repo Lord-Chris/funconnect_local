@@ -170,24 +170,4 @@ class AppTextStyles {
         fontWeight: FontWeight.w300,
         height: 1.21,
       );
-
-  static TextStyle whiteMedium = GoogleFonts.inter(
-      // fontFamily: VeloxFonts.markPro,
-      fontWeight: FontWeight.w500,
-      color: Colors.white);
-
-  static TextStyle whiteBold = GoogleFonts.inter(
-      // fontFamily: VeloxFonts.markPro,
-      fontWeight: FontWeight.bold,
-      color: Colors.white);
-
-  static TextStyle whitelight = GoogleFonts.inter(color: Colors.white);
-
-  static TextStyle blacklight = GoogleFonts.inter(color: Colors.black);
-
-  static TextStyle blackMedium =
-      GoogleFonts.inter(fontWeight: FontWeight.w500, color: Colors.black);
-
-  static TextStyle blackBold =
-      GoogleFonts.inter(fontWeight: FontWeight.bold, color: Colors.black);
 }

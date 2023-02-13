@@ -1,11 +1,20 @@
 import 'package:equatable/equatable.dart';
+import 'package:funconnect/features/authentication/data/dto/request_otp_response.dart';
 
 abstract class VerifyEmailEvent extends Equatable {
   @override
   List<Object?> get props => [];
 }
 
-class ResendCodeEvent extends VerifyEmailEvent {}
+class ResendCodeEvent extends VerifyEmailEvent {
+  final String email;
+  ResendCodeEvent({
+    required this.email,
+  });
+
+  @override
+  List<Object> get props => [email];
+}
 
 class ChangeTimerEvent extends VerifyEmailEvent {
   final int time;
@@ -17,11 +26,11 @@ class ChangeTimerEvent extends VerifyEmailEvent {
 class PinFieldChangedEvent extends VerifyEmailEvent {}
 
 class VerifyEmailTapEvent extends VerifyEmailEvent {
-  final String email;
+  final RequestOtpResponse response;
   final String otp;
 
   VerifyEmailTapEvent({
-    required this.email,
+    required this.response,
     required this.otp,
   });
 }

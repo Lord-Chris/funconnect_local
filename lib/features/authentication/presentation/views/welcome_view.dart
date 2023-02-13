@@ -9,9 +9,7 @@ import 'package:funconnect/features/authentication/presentation/blocs/welcome_bl
 import 'package:funconnect/shared/components/_components.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
 
-import '../../../../core/presentation/widgets/app_black_modal.dart';
-import '../../../../core/presentation/widgets/app_orange_button.dart';
-import '../../../../core/presentation/widgets/app_text.dart';
+import '../widgets/app_black_modal.dart';
 
 class WelcomeView extends HookWidget {
   const WelcomeView({Key? key}) : super(key: key);
@@ -19,12 +17,14 @@ class WelcomeView extends HookWidget {
   Widget build(BuildContext context) {
     final controller = useTextEditingController();
     final formKey = GlobalKey<FormState>();
-    return BlocProvider(
-      create: (context) => WelcomeBloc(),
-      child: BlocBuilder<WelcomeBloc, WelcomeState>(
-        builder: (context, state) {
-          return Scaffold(
-            body: AppBlackModalWidget(
+
+    return BlocBuilder<WelcomeBloc, WelcomeState>(
+      builder: (context, state) {
+        return Scaffold(
+          backgroundColor: AppColors.primary,
+          body: SafeArea(
+            top: false,
+            child: AppBlackModalWidget(
               imageContainerHeight: 400.0,
               children: [
                 Form(
@@ -133,6 +133,7 @@ class WelcomeView extends HookWidget {
                               controller: controller,
                               validator: context.validateEmail,
                               keyboardType: TextInputType.emailAddress,
+                              textCapitalization: TextCapitalization.none,
                               prefix: Align(
                                 widthFactor: 1.0,
                                 heightFactor: 1.0,
@@ -170,7 +171,7 @@ class WelcomeView extends HookWidget {
                         ),
                       ),
                       AppOrangeBtn(
-                        label: state.isFirstTime ? "Sign Up" : "Sign in",
+                        label: state.isFirstTime ? "Sign Up" : "Sign In",
                         isBusy: state is WelcomeLoadingState,
                         onTap: () {
                           if (!formKey.currentState!.validate()) return;
@@ -184,9 +185,9 @@ class WelcomeView extends HookWidget {
                 ),
               ],
             ),
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 }

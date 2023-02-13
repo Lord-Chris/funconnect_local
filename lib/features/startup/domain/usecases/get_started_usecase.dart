@@ -10,7 +10,7 @@ class GetStartedUseCase with UseCases<void, NoParams> {
   Future<void> call(NoParams params) async {
     await _localStorageService.write(
       HiveKeys.appBoxId,
-      key: StorageKeys.isFirstTime,
+      key: StorageKeys.showOnboarding,
       data: false,
     );
   }

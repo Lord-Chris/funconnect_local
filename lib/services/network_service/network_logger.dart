@@ -15,11 +15,14 @@ class NetworkLoggerInterceptor implements Interceptor {
 
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
+    final data = options.data is FormData
+        ? (options.data as FormData).files + (options.data as FormData).files
+        : options.data ?? options.queryParameters;
     _logger.d(
       '>>>METHOD: ${options.method}\n'
       '>>>ENDPOINT: ${options.uri}\n'
       // log('HEADERS: ' + options.headers.toString());
-      '>>>DATA: ${options.data ?? options.queryParameters}',
+      '>>>DATA: $data',
     );
     handler.next(options);
   }

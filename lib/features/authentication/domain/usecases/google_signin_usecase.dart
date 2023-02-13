@@ -1,9 +1,9 @@
 import 'dart:io';
 
 import 'package:funconnect/core/app/_app.dart';
+import 'package:funconnect/core/models/_models.dart';
 import 'package:funconnect/core/usecases/usecase.dart';
 import 'package:funconnect/features/authentication/data/repositories/_authentication_repo.dart';
-import 'package:funconnect/models/failure.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class GoogleSignInUsecase with UseCases<bool, NoParams> {
@@ -23,7 +23,7 @@ class GoogleSignInUsecase with UseCases<bool, NoParams> {
       if (acct == null) return false;
       GoogleSignInAuthentication? auth = await acct.authentication;
       if (auth.idToken == null) null;
-      await repo.signInWithGoogle(auth.idToken!);
+      await repo.signInWithGoogle(auth.accessToken!);
       return true;
     } on Failure {
       rethrow;

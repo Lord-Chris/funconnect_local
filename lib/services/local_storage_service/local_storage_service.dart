@@ -1,5 +1,5 @@
 import 'package:funconnect/core/constants/hive_keys.dart';
-import 'package:funconnect/models/failure.dart';
+import 'package:funconnect/core/models/_models.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:logger/logger.dart';
 

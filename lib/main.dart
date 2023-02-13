@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:funconnect/core/app/_app.dart';
 import 'package:funconnect/services/_services.dart';
+import 'package:funconnect/shared/constants/theme.dart';
 
 void main() async {
   await setUpLocator();
@@ -21,12 +22,8 @@ class MyApp extends StatelessWidget {
       builder: (context, _) {
         // ScreenUtil.init(context);
         return MaterialApp(
-          theme: ThemeData(
-            primarySwatch: Colors.orange,
-            brightness: Brightness.dark,
-          ),
+          theme: AppTheme.theme,
           debugShowCheckedModeBanner: false,
-          // home: EventDescription(),
           navigatorKey: NavigationService.navigatorKey,
           onGenerateRoute: Routes.generateRoute,
           initialRoute: Routes.dashboardViewRoute,

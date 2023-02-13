@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:funconnect/core/extensions/_extensions.dart';
-import 'package:funconnect/core/presentation/widgets/core_widgets.dart';
 import 'package:funconnect/core/utils/general_utils.dart';
 import 'package:funconnect/features/authentication/presentation/blocs/verify_email_bloc/verify_email_bloc.dart';
 import 'package:funconnect/features/authentication/presentation/blocs/verify_email_bloc/verify_email_event.dart';
@@ -12,37 +12,57 @@ import 'package:funconnect/features/authentication/presentation/blocs/verify_ema
 import 'package:funconnect/shared/constants/_constants.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
-import '../../../../core/presentation/widgets/app_orange_button.dart';
+import '../../../../shared/components/app_orange_button.dart';
+import '../../data/dto/request_otp_response.dart';
+import '../widgets/app_black_modal.dart';
 
-class VerifyEmailView extends HookWidget {
-  final String email;
-  VerifyEmailView({
-    required this.email,
+class VerifyEmailView extends StatefulHookWidget {
+  final RequestOtpResponse response;
+  const VerifyEmailView({
+    required this.response,
     Key? key,
   }) : super(key: key);
+
+  @override
+  State<VerifyEmailView> createState() => _VerifyEmailViewState();
+}
+
+class _VerifyEmailViewState extends State<VerifyEmailView> {
   final formKey = GlobalKey<FormState>();
+
+  @override
+  void initState() {
+    super.initState();
+    context
+        .read<VerifyEmailBloc>()
+        .add(ChangeTimerEvent(time: VerifyEmailBloc.otpTimer));
+  }
 
   @override
   Widget build(BuildContext context) {
     final clipData = useStream(GeneralUtils.checkClipBoard());
     final pinController = useTextEditingController();
-    return BlocProvider<VerifyEmailBloc>(
-      create: (context) => VerifyEmailBloc()
-        ..add(ChangeTimerEvent(time: VerifyEmailBloc.otpTimer)),
-      child: BlocBuilder<VerifyEmailBloc, VerifyEmailState>(
-        builder: (context, state) {
-          return BlocListener(
-            bloc: context.read<VerifyEmailBloc>(),
-            listener: (context, state) {
-              if (state is TimerChangedState) {
-                context
-                    .read<VerifyEmailBloc>()
-                    .add(ChangeTimerEvent(time: state.time));
-              }
-            },
-            child: Scaffold(
-              body: AppBlackModalWidget(
+    return BlocBuilder<VerifyEmailBloc, VerifyEmailState>(
+      builder: (context, state) {
+        return BlocListener(
+          bloc: context.read<VerifyEmailBloc>(),
+          listener: (context, state) {
+            if (state is TimerChangedState) {
+              context
+                  .read<VerifyEmailBloc>()
+                  .add(ChangeTimerEvent(time: state.time));
+            }
+          },
+          child: Scaffold(
+            backgroundColor: AppColors.primary,
+            body: SafeArea(
+              top: false,
+              child: AppBlackModalWidget(
                 showBackButton: true,
+                topIcon: SvgPicture.asset(
+                  AppAssets.emailIconSvg,
+                  color: AppColors.white,
+                ),
                 children: [
                   Form(
                     key: formKey,
@@ -88,7 +108,8 @@ class VerifyEmailView extends HookWidget {
                                         ),
                                       ),
                                     TextSpan(
-                                      text: GeneralUtils.hideEmail(email),
+                                      text: GeneralUtils.hideEmail(
+                                          widget.response.email),
                                       style: AppTextStyles.medium14.copyWith(
                                         color: context
                                                 .read<VerifyEmailBloc>()
@@ -124,9 +145,7 @@ class VerifyEmailView extends HookWidget {
                                   validator: context.validateOtp,
                                   cursorColor: AppColors.ash,
                                   obscureText: !true,
-                                  textStyle: AppTextStyles.whiteBold.copyWith(
-                                    fontSize: 20.0,
-                                  ),
+                                  textStyle: AppTextStyles.bold20,
                                   obscuringCharacter: "*",
                                   backgroundColor: AppColors.transparent,
                                   enableActiveFill: true,
@@ -157,7 +176,9 @@ class VerifyEmailView extends HookWidget {
                                         pinController.text = clipData.data!,
                                     child: Text(
                                       "Paste",
-                                      style: AppTextStyles.blacklight,
+                                      style: AppTextStyles.light12.copyWith(
+                                        color: AppColors.black,
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -170,7 +191,9 @@ class VerifyEmailView extends HookWidget {
                                     return true;
                                   }
                                   if (previous is TimerFinishedState &&
-                                      current is TimerChangedState) return true;
+                                      current is TimerChangedState) {
+                                    return true;
+                                  }
                                   return false;
                                 },
                                 builder: (context, state) {
@@ -203,7 +226,10 @@ class VerifyEmailView extends HookWidget {
                                               ..onTap = () {
                                                 context
                                                     .read<VerifyEmailBloc>()
-                                                    .add(ResendCodeEvent());
+                                                    .add(ResendCodeEvent(
+                                                      email:
+                                                          widget.response.email,
+                                                    ));
                                               },
                                           ),
                                         ],
@@ -243,7 +269,7 @@ class VerifyEmailView extends HookWidget {
                             context
                                 .read<VerifyEmailBloc>()
                                 .add(VerifyEmailTapEvent(
-                                  email: email,
+                                  response: widget.response,
                                   otp: pinController.text,
                                 ));
                           },
@@ -254,9 +280,9 @@ class VerifyEmailView extends HookWidget {
                 ],
               ),
             ),
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 }

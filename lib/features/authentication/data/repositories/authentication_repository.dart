@@ -1,14 +1,16 @@
 import 'package:funconnect/core/app/_app.dart';
 import 'package:funconnect/core/constants/hive_keys.dart';
 import 'package:funconnect/core/constants/storage_keys.dart';
-import 'package:funconnect/core/model/paginated_data.dart';
+import 'package:funconnect/core/models/paginated_data.dart';
 import 'package:funconnect/features/authentication/data/data_sources/i_authentication_datasource.dart';
 import 'package:funconnect/features/authentication/data/dto/interest_model.dart';
+import 'package:funconnect/features/authentication/data/dto/user_model.dart';
 import 'package:funconnect/features/authentication/domain/params/email_sign_in.dart';
 import 'package:funconnect/features/authentication/domain/params/profile_setup.dart';
 import 'package:funconnect/features/authentication/domain/params/verify_otp.dart';
 import 'package:funconnect/services/_services.dart';
 
+import '../dto/request_otp_response.dart';
 import 'i_authentication_repository.dart';
 
 class AuthenticationRepository extends IAuthenticationRepository {
@@ -22,8 +24,9 @@ class AuthenticationRepository extends IAuthenticationRepository {
   }
 
   @override
-  Future<void> signInWithEmail(EmailSignInParams params) async {
-    await _httpDS.requestLoginOtp(params);
+  Future<RequestOtpResponse> signInWithEmail(EmailSignInParams params) async {
+    final res = await _httpDS.requestLoginOtp(params);
+    return res.data;
   }
 
   @override
@@ -32,13 +35,19 @@ class AuthenticationRepository extends IAuthenticationRepository {
   }
 
   @override
-  Future<void> verifyOtp(VerifyOtpParams params) async {
+  Future<UserModel> verifyOtp(VerifyOtpParams params) async {
     final res = await _httpDS.verifyOtp(params);
     await _localStorageService.write(
       HiveKeys.userBoxId,
       key: StorageKeys.user,
       data: res.data.toMap(),
     );
+    await _localStorageService.write(
+      HiveKeys.appBoxId,
+      key: StorageKeys.isFirstTime,
+      data: false,
+    );
+    return res.data;
   }
 
   @override

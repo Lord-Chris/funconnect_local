@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import '../../../../core/model/app_location.dart';
+import '../../../../core/models/app_location.dart';
 
 class UserModel {
   final String id;
@@ -10,7 +10,7 @@ class UserModel {
   final String? gender;
   final String? dob;
   final String? phoneE164;
-  final AppLocation location;
+  final AppLocation? location;
 
   UserModel({
     required this.id,
@@ -20,7 +20,7 @@ class UserModel {
     this.gender,
     this.dob,
     this.phoneE164,
-    required this.location,
+    this.location,
   });
 
   Map<String, dynamic> toMap() {
@@ -32,7 +32,7 @@ class UserModel {
       'gender': gender,
       'dob': dob,
       'phone_e164': phoneE164,
-      'location': location.toMap(),
+      'location': location?.toMap(),
     };
   }
 
@@ -45,7 +45,8 @@ class UserModel {
       gender: map['gender'],
       dob: map['dob'],
       phoneE164: map['phone_e164'],
-      location: AppLocation.fromMap(map['location']),
+      location:
+          map['location'] != null ? AppLocation.fromMap(map['location']) : null,
     );
   }
 

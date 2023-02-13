@@ -1,5 +1,5 @@
 import 'package:funconnect/core/app/_app.dart';
-import 'package:funconnect/core/model/app_location.dart';
+import 'package:funconnect/core/models/app_location.dart';
 import 'package:funconnect/core/usecases/usecase.dart';
 import 'package:funconnect/services/_services.dart';
 

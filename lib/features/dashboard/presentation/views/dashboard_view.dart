@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:funconnect/features/dashboard/presentation/views/favourites_view.dart';
-import 'package:funconnect/features/dashboard/presentation/views/home_view.dart';
+import 'package:funconnect/features/events/presentation/blocs/events_bloc/events_bloc.dart';
+import 'package:funconnect/features/fun_connect/saved/saved_view.dart';
+import 'package:funconnect/features/places/presentation/blocs/home_bloc/home_bloc.dart';
+import 'package:funconnect/features/places/presentation/views/home_view.dart';
 import 'package:funconnect/features/profile/presentation/views/profile_view.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
 
 import '../../../events/presentation/views/events_view.dart';
-import '../../../fun_connect/explore/presentation/explore_view.dart';
+import '../../../places/presentation/views/explore_view.dart';
 
 class DashboardView extends StatefulWidget {
   const DashboardView({Key? key}) : super(key: key);
@@ -16,14 +19,6 @@ class DashboardView extends StatefulWidget {
 }
 
 class _DashboardViewState extends State<DashboardView> {
-  final List<Widget> _tabs = const [
-    HomeView(),
-    FavouritesView(),
-    EventsView(),
-    ExploreView(),
-    ProfileView(),
-  ];
-
   int _index = 0;
 
   void onTap(int index) {
@@ -35,7 +30,22 @@ class _DashboardViewState extends State<DashboardView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _tabs[_index],
+      body: IndexedStack(
+        index: _index,
+        children: [
+          BlocProvider<HomeBloc>(
+            create: (context) => HomeBloc(),
+            child: const HomeView(),
+          ),
+          const ExploreView(),
+          BlocProvider<EventsBloc>(
+            create: (context) => EventsBloc(),
+            child: const EventsView(),
+          ),
+          const SavedView(),
+          const ProfileView(),
+        ],
+      ),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: AppColors.black,
         currentIndex: _index,

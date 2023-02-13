@@ -2,15 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+<<<<<<< HEAD
 import 'package:funconnect/core/presentation/widgets/core_widgets.dart';
 import 'package:funconnect/features/profile/presentation/blocs/profile_bloc/profile_bloc.dart';
+=======
+import 'package:funconnect/features/profile/presentation/blocs/profile/profile_bloc.dart';
+>>>>>>> c3d8ec6e55619e09dae7806a4e654fbf7484ceaa
 import 'package:funconnect/shared/components/_components.dart';
-import 'package:funconnect/shared/components/app_network_image.dart';
-import 'package:funconnect/shared/components/scrollable_column.dart';
-import 'package:funconnect/shared/constants/app_assets.dart';
-import 'package:funconnect/shared/constants/app_constants.dart';
-import 'package:funconnect/shared/constants/colors.dart';
-import 'package:funconnect/shared/constants/textstyles.dart';
+import 'package:funconnect/shared/constants/_constants.dart';
 
 class ProfileView extends StatelessWidget {
   const ProfileView({super.key});
@@ -97,8 +96,12 @@ class ProfileView extends StatelessWidget {
             isCollapsed: true,
             padding: REdgeInsets.fromLTRB(88, 19, 88, 19),
             labelColor: AppColors.black,
+<<<<<<< HEAD
             onTap: () => context
               .read<ProfileBloc>().add(EditProfileTapEvent()),
+=======
+            onTap: () => context.read<ProfileBloc>().add(EditMyProfileEvent()),
+>>>>>>> c3d8ec6e55619e09dae7806a4e654fbf7484ceaa
           ),
           Spacing.vertLarge(),
           _ProfileSubButton(

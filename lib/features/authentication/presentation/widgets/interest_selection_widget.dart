@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:funconnect/shared/components/app_network_image.dart';
 
 import '../../../../shared/constants/colors.dart';
 import '../../../../shared/constants/textstyles.dart';
@@ -27,7 +28,11 @@ class InterestSelectionWidget extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          const CircleAvatar(),
+          AppNetworkImage(
+            isCircular: true,
+            url: image,
+            fit: BoxFit.cover,
+          ),
           const SizedBox(width: 8),
           Expanded(
             child: Text(

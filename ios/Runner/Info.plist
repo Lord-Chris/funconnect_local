@@ -58,5 +58,11 @@
     </array>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Funconnect requires location access to suggest locations near you</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Funconnect needs access to your photos to select images</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Funconnect needs access to your camera to take camera images</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Funconnect needs access to your microphone to take videos</string>
 </dict>
 </plist>

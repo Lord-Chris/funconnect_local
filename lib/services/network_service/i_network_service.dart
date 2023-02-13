@@ -1,4 +1,4 @@
-import 'package:funconnect/models/api_response.dart';
+import 'package:funconnect/core/models/_models.dart';
 
 abstract class INetworkService {
   Future<ApiResponse<Map<String, dynamic>>> get(
@@ -8,19 +8,19 @@ abstract class INetworkService {
 
   Future<ApiResponse<Map<String, dynamic>>> post(
     String url, {
-    Map body,
+    dynamic body,
     Map<String, String>? headers,
   });
 
   Future<ApiResponse<Map<String, dynamic>>> put(
     String url, {
-    Map body,
+    dynamic body,
     Map<String, String>? headers,
   });
 
   Future<ApiResponse<Map<String, dynamic>>> delete(
     String url, {
-    Map body,
+    dynamic body,
     Map<String, String>? headers,
   });
 }

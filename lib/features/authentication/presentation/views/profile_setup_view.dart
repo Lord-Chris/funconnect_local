@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/svg.dart';
@@ -6,11 +7,10 @@ import 'package:funconnect/core/extensions/_extensions.dart';
 import 'package:funconnect/features/authentication/presentation/blocs/profile_setup_bloc/profile_setup_bloc.dart';
 import 'package:funconnect/features/authentication/presentation/blocs/profile_setup_bloc/profile_setup_event.dart';
 import 'package:funconnect/features/authentication/presentation/blocs/profile_setup_bloc/profile_setup_state.dart';
-import 'package:funconnect/shared/components/text_input.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
 
-import '../../../../core/presentation/widgets/app_black_modal.dart';
-import '../../../../core/presentation/widgets/app_orange_button.dart';
+import '../../../../shared/components/_components.dart';
+import '../widgets/app_black_modal.dart';
 
 class ProfileSetUpView extends HookWidget {
   ProfileSetUpView({super.key});
@@ -22,8 +22,9 @@ class ProfileSetUpView extends HookWidget {
     final usernameController = useTextEditingController();
     final gender = useState<String?>(null);
     return Scaffold(
-      body: BlocProvider<ProfileSetupBloc>(
-        create: (context) => ProfileSetupBloc(),
+      backgroundColor: AppColors.primary,
+      body: SafeArea(
+        top: false,
         child: BlocBuilder<ProfileSetupBloc, ProfileSetupState>(
             builder: (context, state) {
           return Form(
@@ -31,6 +32,10 @@ class ProfileSetUpView extends HookWidget {
             child: AppBlackModalWidget(
               showBackButton: true,
               modalHeight: MediaQuery.of(context).size.height,
+              topIcon: SvgPicture.asset(
+                AppAssets.profIconSvg,
+                color: AppColors.white,
+              ),
               children: [
                 Padding(
                   padding: const EdgeInsets.all(20),
@@ -54,21 +59,37 @@ class ProfileSetUpView extends HookWidget {
                       ),
                       const SizedBox(height: 29),
                       GestureDetector(
-                        onTap: () {},
-                        child: const CircleAvatar(
-                          radius: 58.0,
-                          backgroundColor: AppColors.lightAsh,
-                          child: Center(
-                            child: Icon(
-                              Icons.camera_alt,
-                              size: 50,
-                            ),
-                          ),
+                        onTap: () => context
+                            .read<ProfileSetupBloc>()
+                            .add(AddImageEvent()),
+                        child: BlocBuilder<ProfileSetupBloc, ProfileSetupState>(
+                          buildWhen: (_, current) =>
+                              current is ProfileSetupIdleState,
+                          builder: (context, state) {
+                            if (state is! ProfileSetupIdleState ||
+                                state.image == null) {
+                              return const CircleAvatar(
+                                radius: 58.0,
+                                backgroundColor: AppColors.lightAsh,
+                                child: Center(
+                                  child: Icon(
+                                    Icons.camera_alt,
+                                    size: 50,
+                                  ),
+                                ),
+                              );
+                            }
+                            return CircleAvatar(
+                              radius: 58.0,
+                              backgroundColor: AppColors.lightAsh,
+                              backgroundImage: FileImage(state.image!),
+                            );
+                          },
                         ),
                       ),
                       const SizedBox(height: 8.0),
                       Text(
-                        "Add image",
+                        "Select image",
                         textAlign: TextAlign.center,
                         style: AppTextStyles.light14.copyWith(
                           color: AppColors.white,
@@ -86,6 +107,7 @@ class ProfileSetUpView extends HookWidget {
                             label: "Full name",
                             controller: nameController,
                             keyboardType: TextInputType.name,
+                            floatingLabelBehavior: FloatingLabelBehavior.auto,
                             textCapitalization: TextCapitalization.words,
                             maxLines: 1,
                             validator: context.validateFullName,
@@ -99,8 +121,12 @@ class ProfileSetUpView extends HookWidget {
                             ),
                             label: "Username",
                             controller: usernameController,
+                            inputFormatters: [
+                              FilteringTextInputFormatter.deny(" "),
+                            ],
                             keyboardType: TextInputType.name,
                             textCapitalization: TextCapitalization.none,
+                            floatingLabelBehavior: FloatingLabelBehavior.auto,
                             validator: context.validateNotEmpty,
                           ),
                           const SizedBox(height: 20),
