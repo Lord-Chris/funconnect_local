@@ -28,8 +28,10 @@ class ProfileSetupBloc extends Bloc<ProfileSetupEvent, ProfileSetupState> {
     AddImageEvent event,
     Emitter<ProfileSetupState> emit,
   ) async {
+    if (state is! ProfileSetupIdleState) return;
     final image = await PickImageUseCase().call(NoParams());
-    emit(ProfileSetupIdleState(image: image));
+    emit(ProfileSetupIdleState(
+        image: image ?? (state as ProfileSetupIdleState).image));
   }
 
   FutureOr<void> _onShareLocationEvent(

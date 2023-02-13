@@ -16,6 +16,7 @@ class InterestsBloc extends Bloc<InterestsEvent, InterestsState> {
     on<LoadInterestsEvent>(_onLoadInterestsEvent);
     on<InterestTapEvent>(_onInterestTapEvent);
     on<ContinueTapEvent>(_onContinueTapEvent);
+    on<SkipTapEvent>(_onSkipTapEvent);
   }
   final _navigationService = locator<INavigationService>();
   final _dialogAndSheetService = locator<IDialogAndSheetService>();
@@ -70,5 +71,12 @@ class InterestsBloc extends Bloc<InterestsEvent, InterestsState> {
         selectedInterest: state.selectedInterest,
       ));
     }
+  }
+
+  FutureOr<void> _onSkipTapEvent(
+    SkipTapEvent event,
+    Emitter<InterestsState> emit,
+  ) {
+    _navigationService.offAllNamed(Routes.dashboardViewRoute, (_) => false);
   }
 }
