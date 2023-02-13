@@ -9,4 +9,7 @@ class StorageKeys {
   static const token = "token";
   static const user = "user";
   static const stayLoggedIn = "stay_logged_in";
+
+  // Places
+  static const homeTrends = "home-trends";
 }

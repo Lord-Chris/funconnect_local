@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:funconnect/features/places/domain/entities/place_model.dart';
 import 'package:funconnect/features/places/presentation/widgets/home_categories_large_widget.dart';
 import 'package:funconnect/shared/components/_components.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
@@ -72,10 +73,15 @@ class ExploreView extends StatelessWidget {
               height: 317.h,
               child: Row(
                 children: [
-                  const Expanded(
+                  Expanded(
                     flex: 5,
                     child: HomeCategoriesLargeWidget(
                       size: Size.infinite,
+                      coverImage: mockPlace.coverImagePath,
+                      name: mockPlace.name,
+                      isBookmarked: false,
+                      rating: mockPlace.avgRating,
+                      ratingCount: mockPlace.avgReviewCount,
                     ),
                   ),
                   Spacing.horizSmall(),
@@ -129,19 +135,28 @@ class ExploreView extends StatelessWidget {
             Spacing.vertRegular(),
             HomeViewCategoriesWidget(
               itemHeight: 136.r,
-              child: const HomeViewCategoriesSmallSubWidget(),
+              child: (val) => const HomeViewCategoriesSmallSubWidget(
+                name: "Arts & culture",
+                coverImage: AppConstants.mockImage,
+              ),
             ),
             Spacing.vertRegular(),
             HomeViewCategoriesWidget(
               label: "Share moments",
               itemHeight: 136.r,
-              child: const HomeViewCategoriesSmallSubWidget(),
+              child: (val) => const HomeViewCategoriesSmallSubWidget(
+                name: "Arts & culture",
+                coverImage: AppConstants.mockImage,
+              ),
             ),
             Spacing.vertRegular(),
             HomeViewCategoriesWidget(
               label: "Feel refreshed",
               itemHeight: 136.r,
-              child: const HomeViewCategoriesSmallSubWidget(),
+              child: (val) => const HomeViewCategoriesSmallSubWidget(
+                name: "Arts & culture",
+                coverImage: AppConstants.mockImage,
+              ),
             ),
           ],
         ),

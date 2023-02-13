@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:funconnect/features/places/domain/entities/place_model.dart';
 
 abstract class HomeEvent extends Equatable {
   const HomeEvent();
@@ -19,6 +20,15 @@ class InterestTapEvent extends HomeEvent {
   List<Object> get props => [interest];
 }
 
-class PlaceTapEvent extends HomeEvent {}
+class PlaceTapEvent extends HomeEvent {
+  final PlaceModel place;
+
+  const PlaceTapEvent({
+    required this.place,
+  });
+
+  @override
+  List<Object> get props => [place];
+}
 
 class NotificationTapEvent extends HomeEvent {}

@@ -14,6 +14,7 @@ import 'package:funconnect/features/dashboard/presentation/views/dashboard_view.
 import 'package:funconnect/features/events/domain/entities/event_model.dart';
 import 'package:funconnect/features/events/presentation/views/booking_view.dart';
 import 'package:funconnect/features/events/presentation/views/checkout_view.dart';
+import 'package:funconnect/features/places/domain/entities/place_model.dart';
 import 'package:funconnect/features/places/presentation/blocs/place_detail_bloc/place_detail_bloc.dart';
 import 'package:funconnect/features/places/presentation/views/notifications_view.dart';
 import 'package:funconnect/features/places/presentation/views/place_detail_view.dart';
@@ -99,8 +100,9 @@ class Routes {
 
       // Places
       case placeDetailRoute:
+        final place = settings.arguments as PlaceModel;
         return _registerBlocView(
-          view: const PlaceDetailView(),
+          view: PlaceDetailView(place: place),
           bloc: PlaceDetailBloc(),
         );
 
