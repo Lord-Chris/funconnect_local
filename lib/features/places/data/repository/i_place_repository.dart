@@ -7,4 +7,5 @@ abstract class IPlaceRepository {
   Future<List<HomeTrendItemModel>> fetchHomeTrends(AppLocation? location);
   Future<FullPlaceModel> fetchPlaceDetail(String placeId);
   Future<PaginatedData<ReviewModel>> fetchPlaceReviews(String placeId);
+  Future<void> reviewPlace(String placeId, ReviewParam review);
 }

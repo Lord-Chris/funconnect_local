@@ -53,4 +53,9 @@ class PlaceRepository extends IPlaceRepository {
   Future<PaginatedData<ReviewModel>> fetchPlaceReviews(String placeId) async {
     return await _remoteDS.fetchPlaceReviews(placeId);
   }
+
+  @override
+  Future<void> reviewPlace(String placeId, ReviewParam review) async {
+    return await _remoteDS.reviewPlace(placeId, review);
+  }
 }

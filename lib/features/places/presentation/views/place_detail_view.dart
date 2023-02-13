@@ -72,25 +72,6 @@ class PlaceDetailView extends HookWidget {
                 children: [
                   _InfoSection(place: place),
                   const _ReviewSection(),
-                  Row(
-                    children: [
-                      SvgPicture.asset(
-                        AppAssets.reviewSvg,
-                        height: 17.sp,
-                      ),
-                      Spacing.horizSmall(),
-                      Text(
-                        "Write a review",
-                        style: AppTextStyles.medium12,
-                      ),
-                    ],
-                  ),
-                  Spacing.vertRegular(),
-                  const AppTextField(
-                    maxLines: 4,
-                    hint: "Would you like to write anything about us?",
-                    textCapitalization: TextCapitalization.sentences,
-                  ),
                   Spacing.vertMedium(),
                   HomeViewCategoriesWidget(
                     label: "More like this",
@@ -382,126 +363,192 @@ class _InfoSection extends StatelessWidget {
   }
 }
 
-class _ReviewSection extends StatelessWidget {
+class _ReviewSection extends HookWidget {
   const _ReviewSection({
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<PlaceDetailBloc, PlaceDetailState>(
-      buildWhen: (_, current) => current is PlaceDetailIdleState,
-      builder: (context, state) {
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            if (state is PlaceDetailIdleState)
-              if (state.reviews.isNotEmpty)
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
+    final controller = useTextEditingController();
+    final newRating = useState(0);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        BlocBuilder<PlaceDetailBloc, PlaceDetailState>(
+          buildWhen: (_, current) => current is PlaceDetailIdleState,
+          builder: (context, state) {
+            if (state is! PlaceDetailIdleState) return const SizedBox();
+            if (state.reviews.isEmpty) return const SizedBox();
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Spacing.vertSmall(),
+                Text(
+                  "Ratings & Reviews",
+                  style: AppTextStyles.regular14,
+                ),
+                Spacing.vertSmall(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Spacing.vertSmall(),
                     Text(
-                      "Ratings & Reviews",
-                      style: AppTextStyles.regular14,
+                      "4 of 50",
+                      style: AppTextStyles.regular12.copyWith(
+                        color: AppColors.gray97,
+                      ),
                     ),
-                    Spacing.vertSmall(),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "4 of 50",
-                          style: AppTextStyles.regular12.copyWith(
-                            color: AppColors.gray97,
-                          ),
-                        ),
-                        DropdownButton<String>(
-                          value: "Sorted by most helpful",
-                          alignment: Alignment.center,
-                          items: ["Sorted by most helpful"]
-                              .map((e) => DropdownMenuItem<String>(
-                                    value: e,
-                                    child: Text(
-                                      e,
-                                      style: AppTextStyles.regular12.copyWith(
-                                        color: AppColors.gray97,
-                                      ),
-                                    ),
-                                  ))
-                              .toList(),
-                          onChanged: (val) {},
-                          underline: Container(),
-                          isDense: true,
-                          icon: Icon(
-                            Icons.keyboard_arrow_down,
-                            color: AppColors.gray97,
-                            size: 15.sp,
-                          ),
-                          style: AppTextStyles.regular12.copyWith(
-                            color: AppColors.gray97,
-                          ),
-                        ),
-                      ],
+                    DropdownButton<String>(
+                      value: "Sorted by most helpful",
+                      alignment: Alignment.center,
+                      items: ["Sorted by most helpful"]
+                          .map((e) => DropdownMenuItem<String>(
+                                value: e,
+                                child: Text(
+                                  e,
+                                  style: AppTextStyles.regular12.copyWith(
+                                    color: AppColors.gray97,
+                                  ),
+                                ),
+                              ))
+                          .toList(),
+                      onChanged: (val) {},
+                      underline: Container(),
+                      isDense: true,
+                      icon: Icon(
+                        Icons.keyboard_arrow_down,
+                        color: AppColors.gray97,
+                        size: 15.sp,
+                      ),
+                      style: AppTextStyles.regular12.copyWith(
+                        color: AppColors.gray97,
+                      ),
                     ),
-                    ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: state.reviews.length,
-                      padding: EdgeInsets.zero,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemBuilder: (context, index) {
-                        return _ReviewItem(
-                          review: state.reviews[index],
-                        );
-                      },
-                    ),
-                    Spacing.vertRegular(),
                   ],
                 ),
-            Spacing.vertSmall(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "Tap to rate",
-                  style: AppTextStyles.regular14.copyWith(
-                    color: AppColors.gray97,
-                  ),
-                ),
-                RatingStars(
-                  value: 2,
-                  onValueChanged: (v) {},
-                  starBuilder: (index, color) {
-                    if (color == AppColors.primary) {
-                      return Icon(
-                        Icons.star_rounded,
-                        color: color,
-                        size: 14,
-                      );
-                    }
-                    return Icon(
-                      Icons.star_border_rounded,
-                      color: color,
-                      size: 14,
+                ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: state.reviews.length,
+                  padding: EdgeInsets.zero,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemBuilder: (context, index) {
+                    return _ReviewItem(
+                      review: state.reviews[index],
                     );
                   },
-                  starSize: 14,
-                  starCount: 5,
-                  starSpacing: 0,
-                  maxValue: 5,
-                  maxValueVisibility: false,
-                  valueLabelVisibility: false,
-                  animationDuration: const Duration(milliseconds: 1000),
-                  starOffColor: AppColors.white.withOpacity(.7),
-                  starColor: AppColors.primary,
+                ),
+                Spacing.vertRegular(),
+              ],
+            );
+          },
+        ),
+        BlocBuilder<PlaceDetailBloc, PlaceDetailState>(
+          buildWhen: (_, current) => current is PlaceDetailIdleState,
+          builder: (context, state) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Spacing.vertSmall(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Tap to rate",
+                      style: AppTextStyles.regular14.copyWith(
+                        color: AppColors.gray97,
+                      ),
+                    ),
+                    RatingStars(
+                      value: newRating.value.toDouble(),
+                      onValueChanged: (val) {
+                        newRating.value = val.toInt();
+                      },
+                      starBuilder: (index, color) {
+                        if (color == AppColors.primary) {
+                          return Icon(
+                            Icons.star_rounded,
+                            color: color,
+                            size: 14,
+                          );
+                        }
+                        return Icon(
+                          Icons.star_border_rounded,
+                          color: color,
+                          size: 14,
+                        );
+                      },
+                      starSize: 14,
+                      starCount: 5,
+                      starSpacing: 0,
+                      maxValue: 5,
+                      maxValueVisibility: false,
+                      valueLabelVisibility: false,
+                      animationDuration: const Duration(milliseconds: 1000),
+                      starOffColor: AppColors.white.withOpacity(.7),
+                      starColor: AppColors.primary,
+                    ),
+                  ],
+                ),
+                Spacing.vertSmall(),
+                Row(
+                  children: [
+                    SvgPicture.asset(
+                      AppAssets.reviewSvg,
+                      height: 17.sp,
+                    ),
+                    Spacing.horizSmall(),
+                    Text(
+                      "Write a review",
+                      style: AppTextStyles.medium12,
+                    ),
+                  ],
+                ),
+                Spacing.vertRegular(),
+                AppTextField(
+                  maxLines: 4,
+                  hint: "Would you like to write anything about us?",
+                  textCapitalization: TextCapitalization.sentences,
+                  keyboardType: TextInputType.multiline,
+                  controller: controller,
+                  onEditingComplete: () {},
+                ),
+                HookBuilder(
+                  builder: (context) {
+                    useListenable(newRating);
+                    useListenable(controller);
+                    if (newRating.value > 0 && controller.text.isNotEmpty) {
+                      return Container(
+                        padding: REdgeInsets.symmetric(vertical: 8),
+                        alignment: Alignment.topRight,
+                        child: AppButton(
+                          label: "Send",
+                          isCollapsed: true,
+                          labelColor: AppColors.black,
+                          borderRadius: 8,
+                          padding: REdgeInsets.fromLTRB(40, 12, 40, 12),
+                          onTap: () {
+                            context.read<PlaceDetailBloc>().add(
+                                  ReviewPlaceEvent(
+                                      rating: newRating.value,
+                                      comment: controller.text),
+                                );
+                            newRating.value = 0;
+                            controller.clear();
+                          },
+                        ),
+                      );
+                    }
+                    return const SizedBox();
+                  },
                 ),
               ],
-            ),
-            Spacing.vertSmall(),
-          ],
-        );
-      },
+            );
+          },
+        ),
+      ],
     );
   }
 }
@@ -524,6 +571,7 @@ class _ReviewItem extends StatelessWidget {
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
@@ -592,6 +640,7 @@ class _ReviewItem extends StatelessWidget {
           Spacing.vertRegular(),
           Text(
             review.comment,
+            textAlign: TextAlign.start,
             style: AppTextStyles.regular14,
           ),
         ],

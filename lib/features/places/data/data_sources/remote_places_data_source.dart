@@ -42,4 +42,12 @@ class RemotePlaceDataSource with ApiMixin {
     return PaginatedData.fromMap(
         res.data['data'], (x) => ReviewModel.fromMap(x));
   }
+
+  Future<void> reviewPlace(String placeId, ReviewParam review) async {
+    await _networkService.post(
+      ApiConstants.placeReview(placeId),
+      headers: headers,
+      body: review.toBody(),
+    );
+  }
 }

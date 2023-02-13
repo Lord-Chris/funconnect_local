@@ -94,3 +94,23 @@ final mockReview = ReviewModel.fromMap(const {
   "status": "pending",
   "deleted_at": null
 });
+
+class ReviewParam {
+  final String title;
+  final String comment;
+  final int rating;
+
+  ReviewParam({
+    required this.title,
+    required this.comment,
+    required this.rating,
+  });
+
+  Map<String, dynamic> toBody() {
+    return {
+      'title': "Not sooo big",
+      'comment': comment,
+      'rating': rating,
+    };
+  }
+}

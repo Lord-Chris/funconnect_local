@@ -18,7 +18,7 @@ class AppTextField extends StatelessWidget {
   final bool expands;
   final int? minLines, maxLines, maxLength;
   final bool enabled;
-  final Function()? function;
+  final Function()? onEditingComplete;
   final void Function(String)? onChanged;
   final FloatingLabelBehavior? floatingLabelBehavior;
   final List<TextInputFormatter>? inputFormatters;
@@ -41,7 +41,7 @@ class AppTextField extends StatelessWidget {
     this.maxLines,
     this.maxLength,
     this.enabled = true,
-    this.function,
+    this.onEditingComplete,
     this.onChanged,
     this.floatingLabelBehavior,
     this.inputFormatters,
@@ -65,7 +65,7 @@ class AppTextField extends StatelessWidget {
       onChanged: onChanged,
       minLines: minLines,
       maxLength: maxLength,
-      onEditingComplete: function ?? () => FocusScope.of(context).nextFocus(),
+      onEditingComplete: onEditingComplete ?? () => FocusScope.of(context).nextFocus(),
       style: AppTextStyles.regular14.copyWith(
         color: AppColors.white,
       ),
