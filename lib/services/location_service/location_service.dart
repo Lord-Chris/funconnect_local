@@ -23,12 +23,20 @@ class LocationService extends ILocationService {
       if (!hasPermission) {
         throw const Failure("Application requires location access");
       }
-      _logger.i("Getting current location");
-      final res = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.best,
-        forceAndroidLocationManager: true,
-      ).timeout(const Duration(seconds: 30));
+      Position? res;
+      try {
+        _logger.i("Getting current location");
+        res = await Geolocator.getCurrentPosition(
+          desiredAccuracy: LocationAccuracy.best,
+          timeLimit: const Duration(seconds: 10),
+        );
+      } on TimeoutException {
+        _logger.i("Getting Last known location");
+        res = await Geolocator.getLastKnownPosition();
+      }
+      if (res == null) return null;
       final place = await placemarkFromCoordinates(res.latitude, res.longitude);
+      _logger.i(res);
       if (place.isEmpty) {
         return AppLocation(lat: res.latitude, long: res.longitude);
       }
@@ -41,8 +49,6 @@ class LocationService extends ILocationService {
         state: place.first.administrativeArea,
         country: place.first.country,
       );
-    } on TimeoutException {
-      return null;
     } on Exception catch (e) {
       throw Failure("Unable to get location", extraData: e.toString());
     }
