@@ -17,6 +17,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<HomeInitEvent>(_onHomeInitEvent);
     on<InterestTapEvent>(_onInterestTapEvent);
     on<PlaceTapEvent>(_onPlaceTapEvent);
+    on<CategoryTapEvent>(_onCategoryTapEvent);
     on<NotificationTapEvent>(_onNotificationTapEvent);
   }
 
@@ -76,6 +77,14 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     Emitter<HomeState> emit,
   ) {
     _navigationService.toNamed(Routes.placeDetailRoute, arguments: event.place);
+  }
+
+  FutureOr<void> _onCategoryTapEvent(
+    CategoryTapEvent event,
+    Emitter<HomeState> emit,
+  ) {
+    _navigationService.toNamed(Routes.categoryDetailRoute,
+        arguments: event.category);
   }
 
   FutureOr<void> _onNotificationTapEvent(

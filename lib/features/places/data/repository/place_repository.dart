@@ -9,6 +9,7 @@ import 'package:funconnect/features/places/domain/entities/review_model.dart';
 import 'package:funconnect/services/_services.dart';
 
 import '../../../authentication/data/dto/user_model.dart';
+import '../../domain/entities/place_model.dart';
 import '../data_sources/local_data_source.dart';
 import 'i_place_repository.dart';
 
@@ -43,6 +44,12 @@ class PlaceRepository extends IPlaceRepository {
       // ],
     );
     return homeTrend;
+  }
+
+  @override
+  Future<PaginatedData<PlaceModel>> fetchPlacesByCategory(
+      String categoryId) async {
+    return await _remoteDS.fetchPlacesByCategory(categoryId);
   }
 
   @override

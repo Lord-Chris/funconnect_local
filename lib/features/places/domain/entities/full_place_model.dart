@@ -26,7 +26,7 @@ class FullPlaceModel extends Equatable {
   final double reviewsCount;
   final List<CategoryModel> categories;
   final List<FeatureModel> features;
-  final PlaceLocationModel location;
+  final PlaceLocationModel? location;
   final List<ImageModel> images;
   final String similarPlaces;
 
@@ -47,7 +47,7 @@ class FullPlaceModel extends Equatable {
     required this.reviewsCount,
     required this.categories,
     required this.features,
-    required this.location,
+    this.location,
     required this.images,
     required this.similarPlaces,
   });
@@ -70,7 +70,7 @@ class FullPlaceModel extends Equatable {
       'reviews_count': reviewsCount,
       'categories': categories.map((x) => x.toMap()).toList(),
       'features': features.map((x) => x.toMap()).toList(),
-      'location': location.toMap(),
+      'location': location?.toMap(),
       'images': images.map((x) => x.toMap()).toList(),
       'similar_places': similarPlaces,
     };
@@ -96,7 +96,9 @@ class FullPlaceModel extends Equatable {
           map['categories']?.map((x) => CategoryModel.fromMap(x))),
       features: List<FeatureModel>.from(
           map['features']?.map((x) => FeatureModel.fromMap(x))),
-      location: PlaceLocationModel.fromMap(map['location']),
+      location: map['location'] != null
+          ? PlaceLocationModel.fromMap(map['location'])
+          : null,
       images: List<ImageModel>.from(
           map['images']?.map((x) => ImageModel.fromMap(x))),
       similarPlaces: map['similar_places'] ?? '',
@@ -125,7 +127,6 @@ class FullPlaceModel extends Equatable {
       reviewsCount,
       categories,
       features,
-      location,
       images,
       similarPlaces,
     ];

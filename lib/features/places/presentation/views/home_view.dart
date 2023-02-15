@@ -254,12 +254,15 @@ class _DefaultHomeView extends StatelessWidget {
                 label: e.name,
                 itemHeight: 136.r,
                 children: e.data.map((e) => e as CategoryModel).toList(),
-                widget: (CategoryModel place) {
+                widget: (CategoryModel category) {
                   return HomeViewCategoriesSmallSubWidget(
-                    coverImage: place.coverPhoto.isEmpty
+                    coverImage: category.coverPhoto.isEmpty
                         ? AppConstants.mockImage
-                        : place.coverPhoto,
-                    name: place.name,
+                        : category.coverPhoto,
+                    name: category.name,
+                    onTap: () => context.read<HomeBloc>().add(
+                          CategoryTapEvent(category: category),
+                        ),
                   );
                 },
               );
