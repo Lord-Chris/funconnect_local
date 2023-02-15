@@ -4,6 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:funconnect/core/app/_app.dart';
 import 'package:funconnect/core/models/_models.dart';
 import 'package:funconnect/core/usecases/usecase.dart';
+import 'package:funconnect/features/authentication/data/dto/user_model.dart';
+import 'package:funconnect/features/places/data/repository/i_place_repository.dart';
 import 'package:funconnect/features/places/presentation/blocs/home_bloc/home_event.dart';
 import 'package:funconnect/features/places/presentation/blocs/home_bloc/home_state.dart';
 import 'package:funconnect/services/_services.dart';
@@ -19,6 +21,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   }
 
   final _navigationService = locator<INavigationService>();
+  final _locationService = locator<ILocationService>();
+  final _placeRepository = locator<IPlaceRepository>();
 
   FutureOr<void> _onHomeInitEvent(
     HomeInitEvent event,
@@ -80,4 +84,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   ) {
     _navigationService.toNamed(Routes.notificationsViewRoute);
   }
+
+  UserModel get user => _placeRepository.user;
+  AppLocation? get location => _locationService.userLocation;
 }

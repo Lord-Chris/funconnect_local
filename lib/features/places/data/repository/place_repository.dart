@@ -8,6 +8,7 @@ import 'package:funconnect/features/places/domain/entities/home_trend_item_model
 import 'package:funconnect/features/places/domain/entities/review_model.dart';
 import 'package:funconnect/services/_services.dart';
 
+import '../../../authentication/data/dto/user_model.dart';
 import '../data_sources/local_data_source.dart';
 import 'i_place_repository.dart';
 
@@ -57,5 +58,12 @@ class PlaceRepository extends IPlaceRepository {
   @override
   Future<void> reviewPlace(String placeId, ReviewParam review) async {
     return await _remoteDS.reviewPlace(placeId, review);
+  }
+
+  @override
+  UserModel get user {
+    final data = _localStorageService
+        .read<Map<String, dynamic>?>(HiveKeys.userBoxId, key: StorageKeys.user);
+    return UserModel.fromMap(data!);
   }
 }

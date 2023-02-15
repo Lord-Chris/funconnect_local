@@ -34,17 +34,22 @@ class _HomeViewState extends State<HomeView> {
     return Scaffold(
       backgroundColor: AppColors.black,
       appBar: AppBar(
-        leading: AppNetworkImage(
-          borderRadius: 50.r,
-          isCircular: true,
-          url: AppConstants.mockImage,
-          fit: BoxFit.cover,
+        titleSpacing: 10,
+        leading: Center(
+          // padding: const EdgeInsets.only(left: 16),
+          child: AppNetworkImage(
+            size: Size.fromRadius(25.r),
+            isCircular: true,
+            url: context.watch<HomeBloc>().user.photoUrl,
+            fit: BoxFit.cover,
+            placeholderAssetImage: AppAssets.fallbackUserProfileSvg,
+          ),
         ),
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Hi John",
+              "Hi ${context.watch<HomeBloc>().user.name}",
               style: AppTextStyles.medium20,
             ),
             Spacing.vertTiny(),
@@ -55,10 +60,12 @@ class _HomeViewState extends State<HomeView> {
                   color: AppColors.locationIconAsh,
                   size: 13,
                 ),
-                Text(
-                  "Yaba, Lagos",
-                  style: AppTextStyles.regular14.copyWith(
-                    color: AppColors.secondary400,
+                Flexible(
+                  child: Text(
+                    context.watch<HomeBloc>().location?.address ?? "",
+                    style: AppTextStyles.regular14.copyWith(
+                      color: AppColors.secondary400,
+                    ),
                   ),
                 ),
               ],
