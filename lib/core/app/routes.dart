@@ -119,6 +119,7 @@ class Routes {
           view: PlaceDetailView(place: place),
           bloc: PlaceDetailBloc(),
         );
+
       case categoryDetailRoute:
         final category = settings.arguments as CategoryModel;
         return _registerBlocView(
@@ -128,10 +129,7 @@ class Routes {
 
       // Dashboard
       case dashboardViewRoute:
-        return _registerBlocView(
-          view: const DashboardView(),
-          bloc: ProfileBloc(),
-        );
+        return  MaterialPageRoute(builder: (_) => const DashboardView());
 
       case notificationsViewRoute:
         return _registerBlocView(

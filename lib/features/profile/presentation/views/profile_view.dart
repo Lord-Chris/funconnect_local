@@ -54,6 +54,7 @@ class _ProfileViewState extends State<ProfileView> {
         children: [
           AppNetworkImage(
             url: userProfile.profileImageUrl,
+            placeholderAssetImage: AppAssets.fallbackUserProfileSvg,
             isCircular: true,
             size: Size.fromRadius(54.r),
             fit: BoxFit.cover,

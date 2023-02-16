@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:equatable/equatable.dart';
 
 class ProfileModel extends Equatable {
+  final String id;
   final String? profileImageUrl;
   final String fullName;
   final String userName;
@@ -23,8 +24,9 @@ class ProfileModel extends Equatable {
   final String? facebookHandle;
   final String? linkedInHandle;
 
-  ProfileModel(
+  const ProfileModel(
       {this.profileImageUrl,
+      required this.id,
       required this.fullName,
       required this.userName,
       required this.email,
@@ -46,6 +48,7 @@ class ProfileModel extends Equatable {
 
   ProfileModel copyWith(
       {String? profileImageUrl,
+      String? id,
       String? fullName,
       String? userName,
       String? email,
@@ -68,6 +71,7 @@ class ProfileModel extends Equatable {
     return ProfileModel(
         profileImageUrl: profileImageUrl ?? this.profileImageUrl,
         fullName: fullName ?? this.fullName,
+        id: id ?? this.id,
         userName: userName ?? this.userName,
         email: email ?? this.email,
         gender: gender ?? this.gender,
@@ -87,36 +91,14 @@ class ProfileModel extends Equatable {
         linkedInHandle: linkedInHandle ?? this.linkedInHandle);
   }
 
-  factory ProfileModel.empty() => ProfileModel(
+  factory ProfileModel.empty() => const ProfileModel(
+      id:"",
       fullName: "",
       userName: "",
       email: "",
       gender: "",
       dateOfBirth: "",
       mobileNumber: "");
-
-  factory ProfileModel.fromMap(Map<String, dynamic> map) {
-    return ProfileModel(
-      email: map['email'],
-      fullName: map['name'],
-      userName: map['username'],
-      gender: map['gender'],
-      dateOfBirth: map['dob'],
-      mobileNumber: map['phone_e164'],
-      address: map['address'],
-      city: map['city'],
-      state: map['state'],
-      country: map['country'],
-      lat: num.tryParse(map['lat']) ?? 0,
-      long: num.tryParse(map['long']) ?? 0,
-      bio: map['bio'],
-      facebookHandle: map['facebook_handle'],
-      twitterHandle: map['twitter_handle'],
-      instagramHandle: map['instagram_handle'],
-      linkedInHandle: map['linkedIn_handle'],
-      profileImageUrl: map['profile_photo'],
-    );
-  }
 
   Map<String, dynamic> toMap(){
     return {
@@ -139,6 +121,31 @@ class ProfileModel extends Equatable {
       'linkedIn_handle':linkedInHandle,
       'profile_photo': profileImageUrl
     };
+  }
+
+  factory ProfileModel.fromMap(Map<String, dynamic> map) {
+
+    return ProfileModel(
+      id: map['id'],
+      email: map['email'],
+      fullName: map['name'].toString(),
+      userName: map['username'].toString(),
+      gender: map['gender']??'Male',
+      dateOfBirth: map['dob']??DateTime.now().toString(),
+      mobileNumber: map['phone_e164'].toString(),
+      address: map['location']['address'],
+      city: map['location']['city'],
+      state: map['location']['state'],
+      country: map['location']['country'],
+      lat: num.tryParse(map['location']['lat']) ?? 0,
+      long: num.tryParse(map['location']['long']) ?? 0,
+      bio: map['bio'],
+      facebookHandle: map['facebook_handle'],
+      twitterHandle: map['twitter_handle'],
+      instagramHandle: map['instagram_handle'],
+      linkedInHandle: map['linkedIn_handle'],
+      profileImageUrl: map['profile_photo'],
+    );
   }
 
   String toJson() => json.encode(toMap());
