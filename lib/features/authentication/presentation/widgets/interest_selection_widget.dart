@@ -38,6 +38,8 @@ class InterestSelectionWidget extends StatelessWidget {
             child: Text(
               title,
               style: AppTextStyles.regular12,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
             ),
           ),
           Checkbox(

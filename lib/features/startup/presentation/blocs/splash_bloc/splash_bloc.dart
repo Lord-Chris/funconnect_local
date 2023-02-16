@@ -27,12 +27,12 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
   Future<void> _onSplashFinished(
       FinishSplashEvent event, Emitter<SplashState> emit) async {
     if (isAuthenticated) {
-      _navigationService.toNamed(Routes.dashboardViewRoute);
+      _navigationService.offNamed(Routes.dashboardViewRoute);
     } else {
       if (showOnboarding) {
-        _navigationService.toNamed(Routes.onboardingRoute);
+        _navigationService.offNamed(Routes.onboardingRoute);
       } else {
-        _navigationService.toNamed(Routes.welcomeViewRoute);
+        _navigationService.offNamed(Routes.welcomeViewRoute);
       }
     }
   }
