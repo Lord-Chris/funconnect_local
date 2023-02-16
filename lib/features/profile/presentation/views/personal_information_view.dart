@@ -7,7 +7,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:funconnect/core/extensions/_extensions.dart';
 
-import 'package:funconnect/core/presentation/widgets/app_auth_text_form_field.dart';
 import 'package:funconnect/features/profile/domain/entities/profile_model.dart';
 import 'package:funconnect/features/profile/presentation/blocs/edit_profile_bloc/edit_profile_bloc.dart';
 import 'package:funconnect/shared/components/_components.dart';
@@ -72,14 +71,14 @@ class PersonalInformationView extends StatelessWidget {
                 ),
               ),
               Spacing.vertLarge(),
-              AppTextForm(
+              AppTextField(
                 onChanged: (val) {},
                 validator: (val) {
                   return null;
                 },
-                labelText: AppText.aTFullName,
-                hintText: AppText.aTFullName,
-                prefixIcon: Padding(
+                label: AppText.aTFullName,
+                hint: AppText.aTFullName,
+                prefix: Padding(
                   padding: const EdgeInsets.only(right: 8.0),
                   child: SvgPicture.asset(
                     AppAssets.userProfile,
@@ -95,14 +94,14 @@ class PersonalInformationView extends StatelessWidget {
                         .copyWith(color: AppColors.primary),
                   )),
               Spacing.vertMedium(),
-              AppTextForm(
+              AppTextField(
                 onChanged: (val) {},
                 validator: (val) {
                   return null;
                 },
-                labelText: AppText.aTUserName,
-                hintText: AppText.aTUserName,
-                prefixIcon: Padding(
+                label: AppText.aTUserName,
+                hint: AppText.aTUserName,
+                prefix: Padding(
                   padding: const EdgeInsets.only(right: 8.0),
                   child: SvgPicture.asset(
                     AppAssets.userProfile,
@@ -118,14 +117,14 @@ class PersonalInformationView extends StatelessWidget {
                         .copyWith(color: AppColors.primary),
                   )),
               Spacing.vertMedium(),
-              AppTextForm(
+              AppTextField(
                 onChanged: (val) {},
                 validator: (val) {
                   return null;
                 },
-                labelText: AppText.aTEmail,
-                hintText: AppText.aTEmail,
-                prefixIcon: Padding(
+                label: AppText.aTEmail,
+                hint: AppText.aTEmail,
+                prefix: Padding(
                   padding: const EdgeInsets.only(right: 8.0),
                   child: SvgPicture.asset(
                     AppAssets.mail,
@@ -162,7 +161,7 @@ class PersonalInformationView extends StatelessWidget {
                 value: null,
               ),
               Spacing.vertMedium(),
-              AppTextForm(
+              AppTextField(
                 onChanged: (val) {},
                 controller: dateOfBirthController,
                 onTap: () async{
@@ -180,33 +179,33 @@ class PersonalInformationView extends StatelessWidget {
                 validator: (val) {
                   return null;
                 },
-                labelText: AppText.aTDateOfBirth,
-                hintText: AppText.aTDateOfBirthHint,
-                prefixIcon: Padding(
+                label: AppText.aTDateOfBirth,
+                hint: AppText.aTDateOfBirthHint,
+                prefix: Padding(
                   padding: const EdgeInsets.only(right: 8.0),
                   child: SvgPicture.asset(
                     AppAssets.calendar,
                     height: 17.h,
                   ),
                 ),
-                suffixIcon: SvgPicture.asset(
+                suffix: SvgPicture.asset(
                   AppAssets.arrowDown,
                   width: 20,
                 ),
               ),
               Spacing.vertMedium(),
-              AppTextForm(
+              AppTextField(
                 onChanged: (val) {},
                 validator: (val) {
                   return null;
                 },
-                labelText: AppText.aTMobileNumber,
-                hintText: AppText.aTMobileNumberHint,
-                suffixIcon: SvgPicture.asset(
+                label: AppText.aTMobileNumber,
+                hint: AppText.aTMobileNumberHint,
+                suffix: SvgPicture.asset(
                   AppAssets.arrowDown,
                   width: 20,
                 ),
-                prefixIcon: Padding(
+                prefix: Padding(
                   padding: const EdgeInsets.only(right: 8.0),
                   child: SvgPicture.asset(
                     AppAssets.phone,

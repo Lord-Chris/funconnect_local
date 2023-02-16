@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
 import 'package:funconnect/core/extensions/_extensions.dart';
-import 'package:funconnect/core/presentation/widgets/app_auth_text_form_field.dart';
 import 'package:funconnect/features/profile/presentation/blocs/edit_profile_bloc/edit_profile_bloc.dart';
 import 'package:funconnect/features/profile/presentation/views/widgets/interests_chip.dart';
 import 'package:funconnect/shared/components/_components.dart';
@@ -47,13 +46,13 @@ class OtherInformationView extends StatelessWidget {
             ],
           ),
           Spacing.vertRegular(),
-          AppTextForm(
+          AppTextField(
             onChanged: (val) {},
             validator: (val) {
               return null;
             },
             maxLines: 7,
-            hintText: AppText.aTWriteSomething,
+            hint: AppText.aTWriteSomething,
           ),
           Spacing.vertExtraMedium(),
           Text(AppText.aTCurrentLocation, style: AppTextStyles.medium16

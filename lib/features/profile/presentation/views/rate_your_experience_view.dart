@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:funconnect/core/presentation/widgets/app_auth_text_form_field.dart';
 import 'package:funconnect/shared/components/_components.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
 
@@ -101,14 +100,14 @@ class RateYourExperienceView extends StatelessWidget {
                 color: AppColors.secondary500,
               ),),
               Spacing.vertExtraMedium(),
-              AppTextForm(
+              AppTextField(
                 onChanged: (val) {},
                 validator: (val) {
                   return null;
                 },
                 maxLines: 6,
                 borderRadius: BorderRadius.circular(16.h),
-                hintText: AppText.aTWriteSomething,
+                hint: AppText.aTWriteSomething,
               ),
               Spacing.vertExtraLarge(),
               AppButton(
