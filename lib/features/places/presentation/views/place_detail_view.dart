@@ -301,22 +301,23 @@ class _InfoSection extends StatelessWidget {
                   color: AppColors.primary,
                 ),
               ),
-            Spacing.vertMedium(),
-            _buildTile(
-              Icons.location_on,
-              state.place.location.address,
-            ),
+            Spacing.vertRegular(),
             Spacing.vertSmall(),
+            if (state.place.location?.address != null)
+              _buildTile(
+                Icons.location_on,
+                state.place.location!.address,
+              ),
             _buildTile(
               Icons.timer,
               "${state.place.opensAtParsed.format(context)} - ${state.place.closesAtParsed.format(context)}",
             ),
-            Spacing.vertSmall(),
             _buildTile(
               CupertinoIcons.phone_fill,
               state.place.phoneE164,
             ),
-            Spacing.vertMedium(),
+            Spacing.vertSmall(),
+            Spacing.vertRegular(),
             Container(
               padding: REdgeInsets.fromLTRB(20, 10, 20, 10),
               color: AppColors.secondary800,
@@ -342,23 +343,26 @@ class _InfoSection extends StatelessWidget {
   }
 
   Widget _buildTile(IconData icon, String label) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Icon(
-          icon,
-          size: 20,
-          color: AppColors.primary,
-        ),
-        Spacing.horizSmall(),
-        Spacing.horizTiny(),
-        Expanded(
-          child: Text(
-            label,
-            style: AppTextStyles.regular14.copyWith(height: 1.5),
+    return Padding(
+      padding: REdgeInsets.symmetric(vertical: 4.r),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Icon(
+            icon,
+            size: 20,
+            color: AppColors.primary,
           ),
-        ),
-      ],
+          Spacing.horizSmall(),
+          Spacing.horizTiny(),
+          Expanded(
+            child: Text(
+              label,
+              style: AppTextStyles.regular14.copyWith(height: 1.5),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

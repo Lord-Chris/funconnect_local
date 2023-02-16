@@ -14,8 +14,11 @@ import 'package:funconnect/features/dashboard/presentation/views/dashboard_view.
 import 'package:funconnect/features/events/domain/entities/event_model.dart';
 import 'package:funconnect/features/events/presentation/views/booking_view.dart';
 import 'package:funconnect/features/events/presentation/views/checkout_view.dart';
+import 'package:funconnect/features/places/domain/entities/category_model.dart';
 import 'package:funconnect/features/places/domain/entities/place_model.dart';
+import 'package:funconnect/features/places/presentation/blocs/category_detail_bloc/category_detail_bloc.dart';
 import 'package:funconnect/features/places/presentation/blocs/place_detail_bloc/place_detail_bloc.dart';
+import 'package:funconnect/features/places/presentation/views/category_detail_view.dart';
 import 'package:funconnect/features/places/presentation/views/notifications_view.dart';
 import 'package:funconnect/features/places/presentation/views/place_detail_view.dart';
 import 'package:funconnect/features/profile/presentation/blocs/edit_profile_bloc/edit_profile_bloc.dart';
@@ -48,6 +51,7 @@ class Routes {
 
   // Places
   static const placeDetailRoute = '/place-detail';
+  static const categoryDetailRoute = '/category-detail';
 
   // Events
   static const createEventRoute = '/create-event-route';
@@ -104,6 +108,12 @@ class Routes {
         return _registerBlocView(
           view: PlaceDetailView(place: place),
           bloc: PlaceDetailBloc(),
+        );
+      case categoryDetailRoute:
+        final category = settings.arguments as CategoryModel;
+        return _registerBlocView(
+          view: CategoryDetailView(category: category),
+          bloc: CategoryDetailBloc(),
         );
 
       // Dashboard
