@@ -21,7 +21,7 @@ extension ValidatorExtension on BuildContext {
 
   String? validateFullName(String? value) {
     return value != null && value.split(' ').length < 2
-        ? 'Enter a valid Full Name'
+        ? 'Enter your first and last name'
         : null;
   }
 

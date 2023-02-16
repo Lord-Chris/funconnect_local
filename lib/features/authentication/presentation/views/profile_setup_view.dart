@@ -89,7 +89,7 @@ class ProfileSetUpView extends HookWidget {
                       ),
                       const SizedBox(height: 8.0),
                       Text(
-                        "Select image",
+                        "Add image",
                         textAlign: TextAlign.center,
                         style: AppTextStyles.light14.copyWith(
                           color: AppColors.white,
