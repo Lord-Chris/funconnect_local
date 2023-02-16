@@ -50,4 +50,10 @@ class AppAssets {
   static const reviewSvg = "assets/svgs/review_icon.svg";
   static const uploadSvg = "assets/svgs/upload_icon.svg";
 
+  // Profile
+  static const mailSvg = "assets/svgs/mail.svg";
+  static const appleSvg = "assets/svgs/apple.svg";
+  static const googleSvg = "assets/svgs/google.svg";
+  static const ratingStarSvg = "assets/svgs/rating_star.svg";
+
 }

@@ -5,10 +5,20 @@ abstract class ProfileEvent extends Equatable {
   List<Object?> get props => [];
 }
 
+class InitProfileEvent extends ProfileEvent{
+
+}
 class EditProfileTapEvent extends ProfileEvent{
 
 }
 class ManageLoginOptionsTapEvent extends ProfileEvent{
+
+}
+class NotificationsTapEvent extends ProfileEvent{
+
+}
+
+class RateYourExperienceTapEvent extends ProfileEvent{
 
 }
 

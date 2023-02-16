@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           navigatorKey: NavigationService.navigatorKey,
           onGenerateRoute: Routes.generateRoute,
-          initialRoute: Routes.dashboardViewRoute,
+          initialRoute: Routes.initialRoute,
         );
       }     ,
     );

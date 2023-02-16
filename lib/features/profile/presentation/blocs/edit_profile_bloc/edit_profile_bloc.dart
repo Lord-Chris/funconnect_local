@@ -4,7 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:funconnect/core/app/locator.dart';
-import 'package:funconnect/features/profile/models/profile_model.dart';
+import 'package:funconnect/features/profile/domain/entities/profile_model.dart';
 import 'package:funconnect/services/navigation_service/i_navigation_service.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
 import 'package:image_cropper/image_cropper.dart';
@@ -49,7 +49,7 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
       PageChangeEvent event,
       Emitter<EditProfileState> emit,
       ) async {
-    emit(state.copyWith(pageController:state.pageController));
+    emit(state.copyWith(currentIndex:event.pageIndex));
   }
 
   Future<FutureOr<void>> _onUpdateProfileEvent(

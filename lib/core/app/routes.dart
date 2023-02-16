@@ -22,15 +22,14 @@ import 'package:funconnect/features/profile/presentation/blocs/edit_profile_bloc
 import 'package:funconnect/features/profile/presentation/blocs/manage_login_options_bloc/manage_login_options_bloc.dart';
 import 'package:funconnect/features/profile/presentation/blocs/profile_bloc/profile_bloc.dart';
 import 'package:funconnect/features/profile/presentation/views/edit_profile_view.dart';
-<<<<<<< HEAD
 import 'package:funconnect/features/profile/presentation/views/manage_login_options_view.dart';
-=======
+import 'package:funconnect/features/profile/presentation/views/my_events_view.dart';
+import 'package:funconnect/features/profile/presentation/views/my_tickets_view.dart';
+import 'package:funconnect/features/profile/presentation/views/rate_your_experience_view.dart';
 import 'package:funconnect/features/startup/presentation/blocs/onboarding_bloc/onboarding_bloc.dart';
 import 'package:funconnect/features/startup/presentation/blocs/splash_bloc/splash_bloc.dart';
->>>>>>> c3d8ec6e55619e09dae7806a4e654fbf7484ceaa
 import 'package:funconnect/features/startup/presentation/views/onboarding_view.dart';
 import 'package:funconnect/features/startup/presentation/views/splash_view.dart';
-
 import '../../features/events/presentation/views/create_event_view.dart';
 import '../../features/events/presentation/views/event_description_view.dart';
 
@@ -40,13 +39,7 @@ class Routes {
   static const splashRoute = '/';
   static const onboardingRoute = '/onboarding';
   static const welcomeViewRoute = '/welcome-view';
-  static const profileSetupViewRoute = '/profile_setup';
-<<<<<<< HEAD
-  static const editProfileViewRoute = '/edit-profile';
-  static const manageLoginOptionsRoute = '/manage-login-options';
   // static const emailSignInRoute = '/email-sign-in';
-=======
->>>>>>> c3d8ec6e55619e09dae7806a4e654fbf7484ceaa
   static const verifyEmailRoute = '/verify-email';
   static const emailVerifiedRoute = '/email-verified';
   static const locationAuthRoute = '/location-auth';
@@ -68,6 +61,12 @@ class Routes {
 
   // Profile
   static const editProfileViewRoute = '/edit-profile';
+  static const profileSetupViewRoute = '/profile_setup';
+  static const manageLoginOptionsRoute = '/manage-login-options';
+  static const rateYourExperienceRoute = '/rate-your-experience';
+  static const notificationsRoute = '/notifications';
+  static const myTicketRoute = '/my-ticket';
+  static const myEventRoute = '/my-event';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -154,6 +153,17 @@ class Routes {
           view: const ManageLogInOptionsView(),
           bloc: ManageLoginOptionsBloc(),
         );
+        case rateYourExperienceRoute:
+          return MaterialPageRoute(builder: (_) => const RateYourExperienceView());
+
+          case notificationsRoute:
+          return MaterialPageRoute(builder: (_) => const NotificationsView());
+
+          case myTicketRoute:
+          return MaterialPageRoute(builder: (_) => const MyTicketView());
+
+          case myEventRoute:
+          return MaterialPageRoute(builder: (_) => const MyEventsView());
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(
