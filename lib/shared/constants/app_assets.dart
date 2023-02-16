@@ -26,6 +26,7 @@ class AppAssets {
   static const interestPageTopSvg = "assets/svgs/interest_page_top_icon.svg";
   static const activeProfileIconSvg = "assets/icons/active_profile.svg";
   static const bookmarkIconSvg = "assets/icons/bookmark.svg";
+  static const fallbackUserProfileSvg = "assets/svgs/fallback_user_profile.svg";
 
   static const calenderSvg = "assets/svgs/calender.svg";
   static const chatIconSvg = "assets/svgs/chat_icon.svg";
@@ -34,7 +35,6 @@ class AppAssets {
   static const twitterLogo = "assets/svgs/twitter_logo.svg";
   static const instagramLogo = "assets/images/instagram_logo.png";
   static const telegramLogo = "assets/images/telegram_logo.png";
-
   static const addImageCamera = "assets/svgs/add_image_camera.svg";
   static const userProfile = "assets/svgs/user_profile.svg";
   static const mail = "assets/svgs/mail.svg";
@@ -49,5 +49,4 @@ class AppAssets {
   static const bookRideSvg = "assets/svgs/book_ride_icon.svg";
   static const reviewSvg = "assets/svgs/review_icon.svg";
   static const uploadSvg = "assets/svgs/upload_icon.svg";
-
 }

@@ -1,6 +1,8 @@
 import 'package:equatable/equatable.dart';
 import 'package:funconnect/features/places/domain/entities/place_model.dart';
 
+import '../../../domain/entities/category_model.dart';
+
 abstract class HomeEvent extends Equatable {
   const HomeEvent();
 
@@ -29,6 +31,17 @@ class PlaceTapEvent extends HomeEvent {
 
   @override
   List<Object> get props => [place];
+}
+
+class CategoryTapEvent extends HomeEvent {
+  final CategoryModel category;
+
+  const CategoryTapEvent({
+    required this.category,
+  });
+
+  @override
+  List<Object> get props => [category];
 }
 
 class NotificationTapEvent extends HomeEvent {}
