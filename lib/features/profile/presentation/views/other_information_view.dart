@@ -2,12 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-<<<<<<< HEAD
+
 import 'package:funconnect/core/extensions/_extensions.dart';
 import 'package:funconnect/core/presentation/widgets/app_auth_text_form_field.dart';
-import 'package:funconnect/core/presentation/widgets/core_widgets.dart';
-=======
->>>>>>> c3d8ec6e55619e09dae7806a4e654fbf7484ceaa
 import 'package:funconnect/features/profile/presentation/blocs/edit_profile_bloc/edit_profile_bloc.dart';
 import 'package:funconnect/features/profile/presentation/views/widgets/interests_chip.dart';
 import 'package:funconnect/shared/components/_components.dart';
@@ -44,7 +41,7 @@ class OtherInformationView extends StatelessWidget {
             children: [
               Text(AppText.aTAddBio, style: AppTextStyles.regular16),
               const Spacer(),
-<<<<<<< HEAD
+
               InkWell(onTap:()=>context
                   .read<EditProfileBloc>().add(ContinueTapEvent()),child: Text(AppText.aTSkip, style: AppTextStyles.regular16.copyWith(decoration: TextDecoration.underline),))
             ],
@@ -55,32 +52,12 @@ class OtherInformationView extends StatelessWidget {
             validator: (val) {
               return null;
             },
-=======
-              Text(
-                AppText.aTSkip,
-                style: AppTextStyles.regular16
-                    .copyWith(decoration: TextDecoration.underline),
-              )
-            ],
-          ),
-          SizedBox(
-            height: 16.h,
-          ),
-          const AppTextField(
->>>>>>> c3d8ec6e55619e09dae7806a4e654fbf7484ceaa
             maxLines: 7,
-            hint: AppText.aTWriteSomething,
+            hintText: AppText.aTWriteSomething,
           ),
-<<<<<<< HEAD
           Spacing.vertExtraMedium(),
           Text(AppText.aTCurrentLocation, style: AppTextStyles.medium16
           ),
-=======
-          SizedBox(
-            height: 32.h,
-          ),
-          Text(AppText.aTCurrentLocation, style: AppTextStyles.medium16),
->>>>>>> c3d8ec6e55619e09dae7806a4e654fbf7484ceaa
           Row(
             children: [
               Expanded(
@@ -97,7 +74,7 @@ class OtherInformationView extends StatelessWidget {
                   ))
             ],
           ),
-<<<<<<< HEAD
+
           Align(alignment: Alignment.centerLeft,child: InkWell(onTap: (){}, child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 8.0),
             child: Text(AppText.aTChange, style: AppTextStyles.regular14.copyWith(color: AppColors.primary),),
@@ -108,34 +85,6 @@ class OtherInformationView extends StatelessWidget {
           Spacing.vertSmall(),
           Text(AppText.aTAddInterests, style: AppTextStyles.regular14.copyWith(color: AppColors.ash),),
           Spacing.vertSmall(),
-=======
-          Align(
-              alignment: Alignment.centerLeft,
-              child: InkWell(
-                  onTap: () {},
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8.0),
-                    child: Text(
-                      AppText.aTChange,
-                      style: AppTextStyles.regular14
-                          .copyWith(color: AppColors.primary),
-                    ),
-                  ))),
-          SizedBox(
-            height: 32.h,
-          ),
-          Text(AppText.aTInterests, style: AppTextStyles.medium16),
-          SizedBox(
-            height: 8.h,
-          ),
-          Text(
-            AppText.aTAddInterests,
-            style: AppTextStyles.regular14.copyWith(color: AppColors.ash),
-          ),
-          SizedBox(
-            height: 8.h,
-          ),
->>>>>>> c3d8ec6e55619e09dae7806a4e654fbf7484ceaa
           Wrap(
             spacing: 8.w,
             runSpacing: 12.h,

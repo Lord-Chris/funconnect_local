@@ -12,18 +12,11 @@ class EditProfileView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-<<<<<<< HEAD
+
     List<Widget> pages = const [
       PersonalInformationView(),
       OtherInformationView(),
       SocialNetworkInformationView(),
-=======
-    PageController pageController = PageController(initialPage: 0);
-    List<Widget> pages = [
-      const PersonalInformationView(),
-      const OtherInformationView(),
-      const SocialNetworkInformationView(),
->>>>>>> c3d8ec6e55619e09dae7806a4e654fbf7484ceaa
     ];
     int currentPageIndex = 0;
     return Scaffold(

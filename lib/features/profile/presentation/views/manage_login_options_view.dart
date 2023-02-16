@@ -1,9 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:funconnect/core/presentation/widgets/app_text.dart';
-import 'package:funconnect/core/presentation/widgets/core_widgets.dart';
 import 'package:funconnect/shared/components/_components.dart';
+import 'package:funconnect/shared/constants/_constants.dart';
 import 'package:funconnect/shared/components/app_network_image.dart';
 import 'package:funconnect/shared/constants/app_constants.dart';
 import 'package:funconnect/shared/constants/colors.dart';

@@ -21,13 +21,10 @@ class AppColors {
   static const homeViewDrawerAsh = Color(0XFF1A1A1A);
   static const red = Color(0XFFF1002E);
   static const eventTextRed = Color(0XFFFF0031);
-<<<<<<< HEAD
   static const deleteTextRed = Color(0XFFFE4343);
-=======
   static const searchBarColor = Color(0xFF292929);
   static const eventBasedColor = Color(0xFF979797);
   static const mediumBlack = Color(0xFF0E0E0E);
->>>>>>> c3d8ec6e55619e09dae7806a4e654fbf7484ceaa
 
   // static const par = Color(0XFF767D85);
   // static const stroke = Color.fromRGBO(232, 232, 232, 0.7);
