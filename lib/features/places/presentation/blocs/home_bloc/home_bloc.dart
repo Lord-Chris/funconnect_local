@@ -9,6 +9,7 @@ import 'package:funconnect/features/places/data/repository/i_place_repository.da
 import 'package:funconnect/features/places/presentation/blocs/home_bloc/home_event.dart';
 import 'package:funconnect/features/places/presentation/blocs/home_bloc/home_state.dart';
 import 'package:funconnect/services/_services.dart';
+import 'package:logger/logger.dart';
 
 import '../../../domain/usecases/fetch_home_trends.dart';
 
@@ -20,7 +21,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<CategoryTapEvent>(_onCategoryTapEvent);
     on<NotificationTapEvent>(_onNotificationTapEvent);
   }
-
+  final _logger = Logger();
   final _navigationService = locator<INavigationService>();
   final _locationService = locator<ILocationService>();
   final _placeRepository = locator<IPlaceRepository>();
@@ -29,11 +30,17 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     HomeInitEvent event,
     Emitter<HomeState> emit,
   ) async {
-    final res = await FetchHomeTrends().call(NoParams());
-    emit(HomeIdleState(
-      interests: List.generate(10, (_) => "Fine Dining $_"),
-      homeTrends: res,
-    ));
+    try {
+      if (event.showLoader) emit(HomeLoadingState());
+      final res = await FetchHomeTrends().call(NoParams());
+      emit(HomeIdleState(
+        interests: List.generate(10, (_) => "Fine Dining $_"),
+        homeTrends: res,
+      ));
+    } on Failure catch (e) {
+      _logger.e(e);
+      emit(const HomeIdleState(interests: []));
+    }
   }
 
   FutureOr<void> _onInterestTapEvent(
