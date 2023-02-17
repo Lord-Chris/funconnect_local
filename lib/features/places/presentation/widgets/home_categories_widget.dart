@@ -84,13 +84,15 @@ class HomeViewCategoriesWidget extends StatelessWidget {
 
 class HomeSection<T> extends HookWidget {
   final String label;
+  final bool showSeeAll;
   final List<T> children;
   final Widget Function(T) widget;
   final double? itemHeight;
 
   const HomeSection({
     Key? key,
-    required this.label,
+    this.label = "",
+    this.showSeeAll = true,
     required this.children,
     required this.widget,
     this.itemHeight,
@@ -103,25 +105,27 @@ class HomeSection<T> extends HookWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Padding(
-          padding: EdgeInsets.symmetric(vertical: 16.0.h, horizontal: 16.0.h),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                label,
-                style: AppTextStyles.medium20,
-              ),
-              InkWell(
-                onTap: () => showAll.value = !showAll.value,
-                child: Text(
-                  "See all",
-                  style: AppTextStyles.medium14,
+        if (label.isNotEmpty)
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: 16.0.h, horizontal: 16.0.h),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  label,
+                  style: AppTextStyles.medium20,
                 ),
-              ),
-            ],
+                if (showSeeAll)
+                  InkWell(
+                    onTap: () => showAll.value = !showAll.value,
+                    child: Text(
+                      "See all",
+                      style: AppTextStyles.medium14,
+                    ),
+                  ),
+              ],
+            ),
           ),
-        ),
         Visibility(
           visible: showAll.value,
           replacement: SizedBox(

@@ -73,25 +73,46 @@ class PlaceDetailView extends HookWidget {
                   _InfoSection(place: place),
                   const _ReviewSection(),
                   Spacing.vertMedium(),
-                  HomeViewCategoriesWidget(
-                    label: "More like this",
-                    child: (index) {
-                      final place = mockPlace;
-                      return HomeCategoriesLargeWidget(
-                        coverImage: place.coverImagePath,
-                        name: place.name,
-                        isBookmarked: false,
-                        rating: place.avgRating,
-                        ratingCount: place.avgReviewCount,
-                      );
-                    },
-                  ),
+                  const _MorePlacesSection(),
                 ],
               ),
             ),
           ],
         ),
       ),
+    );
+  }
+}
+
+class _MorePlacesSection extends StatelessWidget {
+  const _MorePlacesSection({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<PlaceDetailBloc, PlaceDetailState>(
+      buildWhen: (_, current) => current is PlaceDetailIdleState,
+      builder: (context, state) {
+        if (state is! PlaceDetailIdleState) return const SizedBox();
+        if (state.place.similarPlaces.isEmpty) return const SizedBox();
+        return HomeSection<PlaceModel>(
+          label: "More like this",
+          children: state.place.similarPlaces.map((e) => e).toList(),
+          widget: (PlaceModel place) {
+            return HomeCategoriesLargeWidget(
+              coverImage: place.coverImagePath,
+              name: place.name,
+              isBookmarked: false,
+              rating: place.avgRating,
+              ratingCount: place.avgReviewCount,
+              onTap: () => context.read<PlaceDetailBloc>().add(
+                    PlaceTapEvent(place: place),
+                  ),
+            );
+          },
+        );
+      },
     );
   }
 }
