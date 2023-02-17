@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:funconnect/core/models/_models.dart';
 import 'package:funconnect/features/places/domain/entities/full_place_model.dart';
 import 'package:funconnect/features/places/domain/entities/review_model.dart';
 
@@ -20,4 +21,15 @@ class PlaceDetailIdleState extends PlaceDetailState {
 
   @override
   List<Object> get props => [place, reviews];
+}
+
+class PlaceDetailFailureState extends PlaceDetailState {
+  final Failure failure;
+
+  PlaceDetailFailureState({
+    required this.failure,
+  });
+
+  @override
+  List<Object?> get props => [failure];
 }

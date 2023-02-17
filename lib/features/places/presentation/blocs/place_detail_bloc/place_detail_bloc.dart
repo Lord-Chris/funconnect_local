@@ -26,11 +26,16 @@ class PlaceDetailBloc extends Bloc<PlaceDetailEvent, PlaceDetailState> {
     PlaceInitEvent event,
     Emitter<PlaceDetailState> emit,
   ) async {
-    final data = await FetchPlaceDetail().call(event.place);
-    emit(PlaceDetailIdleState(
-      place: data[0] as FullPlaceModel,
-      reviews: (data[1] as PaginatedData<ReviewModel>).data,
-    ));
+    try {
+      final data = await FetchPlaceDetail().call(event.place);
+      emit(PlaceDetailIdleState(
+        place: data[0] as FullPlaceModel,
+        reviews: (data[1] as PaginatedData<ReviewModel>).data,
+      ));
+    } on Failure catch (e) {
+      _logger.e(e);
+      emit(PlaceDetailFailureState(failure: e));
+    }
   }
 
   FutureOr<void> _onReviewPlaceEvent(

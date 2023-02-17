@@ -31,53 +31,58 @@ class PlaceDetailView extends HookWidget {
       return null;
     }, []);
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Stack(
-              children: [
-                AppNetworkImage(
-                  size: Size.fromHeight(409.h),
-                  url: place.coverImagePath,
-                  borderRadius: 20,
-                  fit: BoxFit.cover,
-                ),
-                Positioned(
-                  left: 16,
-                  child: SafeArea(
-                    child: InkWell(
-                      onTap: () => Navigator.pop(context),
-                      child: CircleAvatar(
-                        radius: 18,
-                        backgroundColor: AppColors.black.withOpacity(.6),
-                        child: Icon(
-                          Icons.arrow_back_ios_rounded,
-                          size: 20.sp,
-                          color: AppColors.white,
+      body: RefreshIndicator(
+        onRefresh: () async =>
+            context.read<PlaceDetailBloc>().add(PlaceInitEvent(place)),
+        child: SingleChildScrollView(
+          physics: const AlwaysScrollableScrollPhysics(),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Stack(
+                children: [
+                  AppNetworkImage(
+                    size: Size.fromHeight(409.h),
+                    url: place.coverImagePath,
+                    borderRadius: 20,
+                    fit: BoxFit.cover,
+                  ),
+                  Positioned(
+                    left: 16,
+                    child: SafeArea(
+                      child: InkWell(
+                        onTap: () => Navigator.pop(context),
+                        child: CircleAvatar(
+                          radius: 18,
+                          backgroundColor: AppColors.black.withOpacity(.6),
+                          child: Icon(
+                            Icons.arrow_back_ios_rounded,
+                            size: 20.sp,
+                            color: AppColors.white,
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
-              ],
-            ),
-            Spacing.vertRegular(),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.w),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  _InfoSection(place: place),
-                  const _ReviewSection(),
-                  Spacing.vertMedium(),
-                  const _MorePlacesSection(),
                 ],
               ),
-            ),
-          ],
+              Spacing.vertRegular(),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16.w),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    _InfoSection(place: place),
+                    const _ReviewSection(),
+                    Spacing.vertMedium(),
+                    const _MorePlacesSection(),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -127,9 +132,10 @@ class _InfoSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<PlaceDetailBloc, PlaceDetailState>(
-      buildWhen: (_, current) => current is PlaceDetailIdleState,
+      // buildWhen: (_, current) => current is PlaceDetailIdleState,
       builder: (context, state) {
-        if (state is PlaceDetailFetchingState) {
+        if (state is PlaceDetailFetchingState ||
+            state is PlaceDetailFailureState) {
           return Column(
             children: [
               Row(
@@ -199,11 +205,12 @@ class _InfoSection extends StatelessWidget {
                 ],
               ),
               Spacing.vertMedium(),
-              const Center(
-                child: AppLoader(
-                  color: AppColors.primary,
+              if (state is PlaceDetailFetchingState)
+                const Center(
+                  child: AppLoader(
+                    color: AppColors.primary,
+                  ),
                 ),
-              ),
             ],
           );
         }
