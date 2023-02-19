@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
+import 'package:funconnect/features/profile/domain/entities/profile_location_model.dart';
 
 class ProfileModel extends Equatable {
   final String id;
@@ -12,12 +13,7 @@ class ProfileModel extends Equatable {
   final String dateOfBirth;
   final String mobileNumber;
   final String? bio;
-  final String? address;
-  final String? city;
-  final String? state;
-  final String? country;
-  final num? lat;
-  final num? long;
+  final ProfileLocationModel? locationModel;
   final List<String>? interests;
   final String? twitterHandle;
   final String? instagramHandle;
@@ -34,12 +30,7 @@ class ProfileModel extends Equatable {
       required this.dateOfBirth,
       required this.mobileNumber,
       this.bio,
-      this.address,
-      this.city,
-      this.state,
-      this.country,
-      this.lat,
-      this.long,
+      this.locationModel,
       this.interests,
       this.twitterHandle,
       this.instagramHandle,
@@ -78,12 +69,6 @@ class ProfileModel extends Equatable {
         dateOfBirth: dateOfBirth ?? this.dateOfBirth,
         mobileNumber: mobileNumber ?? this.mobileNumber,
         bio: bio ?? this.bio,
-        address: address ?? this.address,
-        city: city ?? this.city,
-        state: state ?? this.state,
-        country: country ?? this.country,
-        lat: lat ?? this.lat,
-        long: long ?? this.long,
         interests: interests ?? this.interests,
         twitterHandle: twitterHandle ?? this.twitterHandle,
         instagramHandle: instagramHandle ?? this.instagramHandle,
@@ -100,7 +85,24 @@ class ProfileModel extends Equatable {
       dateOfBirth: "",
       mobileNumber: "");
 
-  Map<String, dynamic> toMap(){
+  Map<String, dynamic> toMap() {
+    return {
+      'email': email,
+      'name': fullName,
+      'username': userName,
+      'gender': gender,
+      'dob': dateOfBirth,
+      'phone_e164': mobileNumber,
+      'bio': bio,
+      'location': locationModel!.toMap(),
+      'facebook_handle': facebookHandle,
+      'instagram_handle': instagramHandle,
+      'twitter_handle': twitterHandle,
+      'linkedIn_handle': linkedInHandle,
+      'profile_photo': profileImageUrl
+    };
+  }
+    Map<String, dynamic> toBody(){
     return {
       'email': email,
       'name': fullName,
@@ -108,13 +110,13 @@ class ProfileModel extends Equatable {
       'gender':gender,
        'dob':dateOfBirth,
       'phone_e164':mobileNumber,
-      'address': address,
-      'city': city,
-      'state': state,
-      'country': country,
-      'lat': lat,
-      'long':long,
       'bio':bio,
+      'address': locationModel!.address,
+      'city': locationModel!.city,
+      'state': locationModel!.state,
+      'country': locationModel!.country,
+      'lat': locationModel!.lat,
+      'long':locationModel!.long,
       'facebook_handle':facebookHandle,
       'instagram_handle':instagramHandle,
       'twitter_handle':twitterHandle,
@@ -133,12 +135,7 @@ class ProfileModel extends Equatable {
       gender: map['gender']??'Male',
       dateOfBirth: map['dob']??DateTime.now().toString(),
       mobileNumber: map['phone_e164'].toString(),
-      address: map['location']['address'],
-      city: map['location']['city'],
-      state: map['location']['state'],
-      country: map['location']['country'],
-      lat: num.tryParse(map['location']['lat']) ?? 0,
-      long: num.tryParse(map['location']['long']) ?? 0,
+      locationModel: ProfileLocationModel.fromMap(map['location']),
       bio: map['bio'],
       facebookHandle: map['facebook_handle'],
       twitterHandle: map['twitter_handle'],
@@ -166,17 +163,11 @@ class ProfileModel extends Equatable {
         dateOfBirth,
         mobileNumber,
         bio,
-        address,
-        city,
-        state,
-        country,
-        lat,
-        long,
         interests,
         twitterHandle,
         instagramHandle,
         facebookHandle,
-        linkedInHandle.hashCode
+        linkedInHandle
       ];
 
   @override
