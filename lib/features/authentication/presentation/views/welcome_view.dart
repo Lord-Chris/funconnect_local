@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:funconnect/core/extensions/_extensions.dart';
 import 'package:funconnect/features/authentication/presentation/blocs/welcome_bloc/welcome_bloc.dart';
@@ -35,7 +36,7 @@ class WelcomeView extends HookWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.all(20),
+                        padding: const EdgeInsets.fromLTRB(20, 32, 20, 32),
                         child: Column(
                           children: [
                             Text(
@@ -47,14 +48,16 @@ class WelcomeView extends HookWidget {
                             const SizedBox(
                               height: 8.0,
                             ),
-                            Text(
-                              state.isFirstTime
-                                  ? "Continue with your socials"
-                                  : "Please enter email ID associated with your account",
-                              style: AppTextStyles.dynamic(
-                                14,
-                                color: Colors.white,
-                                weight: FontWeight.w300,
+                            Padding(
+                              padding: REdgeInsets.symmetric(horizontal: 10),
+                              child: Text(
+                                state.isFirstTime
+                                    ? "Continue with your socials"
+                                    : "Please enter email ID associated with your account",
+                                textAlign: TextAlign.center,
+                                style: AppTextStyles.regular14.copyWith(
+                                  color: Colors.white,
+                                ),
                               ),
                             ),
                             const SizedBox(
@@ -91,39 +94,44 @@ class WelcomeView extends HookWidget {
                             const SizedBox(
                               height: 32.0,
                             ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Expanded(
-                                  child: Container(
-                                    height: 1.0,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                const SizedBox(width: 16.0),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 8.0),
-                                  child: Text(
-                                    "Or with email ID",
-                                    style: AppTextStyles.regular14.copyWith(
+                            Padding(
+                              padding: REdgeInsets.symmetric(horizontal: 30),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Expanded(
+                                    child: Container(
+                                      height: 0.5,
                                       color: Colors.white,
                                     ),
                                   ),
-                                ),
-                                const SizedBox(width: 16.0),
-                                Expanded(
-                                  child: Container(
-                                    height: 1.0,
+                                  const SizedBox(width: 11),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 8.0),
+                                    child: Text(
+                                      state.isFirstTime
+                                          ? "Or with email ID"
+                                          : "Or signin with e-mail",
+                                      style: AppTextStyles.regular14.copyWith(
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(width: 11),
+                                  Expanded(
+                                    child: Container(
+                                      height: 0.5,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  const Divider(
+                                    height: 5.0,
+                                    thickness: 5.0,
                                     color: Colors.white,
                                   ),
-                                ),
-                                const Divider(
-                                  height: 5.0,
-                                  thickness: 5.0,
-                                  color: Colors.white,
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                             const SizedBox(
                               height: 32.0,
