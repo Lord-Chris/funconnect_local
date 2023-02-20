@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:funconnect/core/app/_app.dart';
 import 'package:funconnect/core/constants/api_constants.dart';
@@ -75,10 +77,18 @@ class HttpAuthenticationDataSource extends IAuthenticationDataSource
     final res = await _networkService.put(
       ApiConstants.profileSetup,
       headers: headers,
+      body: params.toMap(),
+    );
+    return ApiResponse(data: UserModel.fromMap(res.data["data"]));
+  }
+
+  @override
+  Future<ApiResponse<UserModel>> uploadProfileImage(File image) async {
+    final res = await _networkService.post(
+      ApiConstants.profileImage,
+      headers: headers,
       body: FormData.fromMap({
-        ...params.toMap(),
-        if (params.profilePhoto != null)
-          'image': await MultipartFile.fromFile(params.profilePhoto!.path)
+        "image": await MultipartFile.fromFile(image.path),
       }),
     );
     return ApiResponse(data: UserModel.fromMap(res.data["data"]));
