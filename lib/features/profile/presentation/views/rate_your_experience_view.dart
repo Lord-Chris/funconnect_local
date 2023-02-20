@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -90,7 +89,7 @@ class RateYourExperienceView extends StatelessWidget {
                     fit: BoxFit.scaleDown,
                   ),
                 ),
-                itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
+                itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
                 onRatingUpdate: (rating) {},
               ),
               Spacing.vertMedium(),

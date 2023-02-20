@@ -72,12 +72,4 @@ class ProfileLocationModel extends Equatable {
         lat,
         long,
       ];
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    return other is ProfileLocationModel && other.hashCode == hashCode;
-  }
 }

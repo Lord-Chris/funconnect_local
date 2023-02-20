@@ -1,13 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:funconnect/shared/components/_components.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
-import 'package:funconnect/shared/components/app_network_image.dart';
-import 'package:funconnect/shared/constants/app_constants.dart';
-import 'package:funconnect/shared/constants/colors.dart';
-import 'package:funconnect/shared/constants/textstyles.dart';
 
 class MyTicketView extends StatelessWidget {
   const MyTicketView({Key? key}) : super(key: key);
@@ -59,10 +51,10 @@ class MyTicketView extends StatelessWidget {
         body: TabBarView(
           children: [
             ListView(
-              children: [Text("")],
+              children: const [Text("")],
             ),
             ListView(
-              children: [Text("")],
+              children: const [Text("")],
             ),
           ],
         ),

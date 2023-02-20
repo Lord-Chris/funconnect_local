@@ -19,7 +19,7 @@ class InterestsChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(24.h),
           border: Border.all(color: AppColors.locationIconAsh)),
@@ -30,7 +30,7 @@ class InterestsChip extends StatelessWidget {
             AppAssets.add,
             height: 9,
           ),
-          SizedBox(
+          const SizedBox(
             width: 6,
           ),
           Text(
