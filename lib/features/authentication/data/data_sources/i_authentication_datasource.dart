@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:funconnect/core/models/_models.dart';
 import 'package:funconnect/features/authentication/data/dto/interest_model.dart';
 import 'package:funconnect/features/authentication/domain/params/email_sign_in.dart';
@@ -29,6 +31,7 @@ abstract class IAuthenticationDataSource {
   Future<ApiResponse<UserModel>> setUpProfile(
     ProfileSetupParam params,
   );
+  Future<ApiResponse<UserModel>> uploadProfileImage(File image);
 
   Future<ApiResponse<PaginatedData<InterestModel>>> fetchInterests();
 }
