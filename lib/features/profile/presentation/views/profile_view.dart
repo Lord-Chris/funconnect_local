@@ -2,13 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:funconnect/features/profile/presentation/blocs/profile/profile_bloc.dart';
+import 'package:funconnect/features/profile/domain/entities/profile_model.dart';
+import 'package:funconnect/features/profile/presentation/blocs/profile_bloc/profile_bloc.dart';
 import 'package:funconnect/shared/components/_components.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
 
-class ProfileView extends StatelessWidget {
+class ProfileView extends StatefulWidget {
   const ProfileView({super.key});
 
+  @override
+  State<ProfileView> createState() => _ProfileViewState();
+}
+
+class _ProfileViewState extends State<ProfileView> {
+
+  @override
+  void initState() {
+    super.initState();
+    context.read<ProfileBloc>().add(InitProfileEvent());
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,24 +35,39 @@ class ProfileView extends StatelessWidget {
           style: AppTextStyles.medium28,
         ),
       ),
-      body: ScrollableColumn(
+      body: BlocBuilder<ProfileBloc, ProfileState>(
+        buildWhen: (previous, _) => previous is ProfileLoadingState,
+        builder: (context, state) {
+          if (state is ProfileLoadingState) {
+            return const AppLoader(
+              color: AppColors.primary,
+            );
+          }
+          if (state is! ProfileIdleState) return const SizedBox();
+    return BlocBuilder<ProfileBloc, ProfileState>(
+      buildWhen: (_, current) => current is ProfileIdleState,
+  builder: (context, state) {
+    if (state is! ProfileIdleState) return const SizedBox();
+    ProfileModel userProfile = state.userProfile;
+    return ScrollableColumn(
         padding: REdgeInsets.all(16),
         children: [
           AppNetworkImage(
-            url: AppConstants.mockImage,
+            url: userProfile.profileImageUrl,
+            placeholderAssetImage: AppAssets.fallbackUserProfileSvg,
             isCircular: true,
             size: Size.fromRadius(54.r),
             fit: BoxFit.cover,
           ),
           Spacing.vertMedium(),
           Text(
-            "John Doe",
+            userProfile.fullName,
             style: AppTextStyles.medium20,
           ),
           Spacing.vertTiny(),
           Spacing.vertSmall(),
           Text(
-            "@johndoe066",
+            userProfile.userName,
             style: AppTextStyles.regular16.copyWith(
               color: AppColors.secondary500,
             ),
@@ -48,7 +75,7 @@ class ProfileView extends StatelessWidget {
           Spacing.vertTiny(),
           Spacing.vertSmall(),
           Text(
-            "johndoe@gmail.com",
+            userProfile.email,
             style: AppTextStyles.regular16.copyWith(
               color: AppColors.secondary500,
             ),
@@ -56,7 +83,9 @@ class ProfileView extends StatelessWidget {
           Spacing.vertTiny(),
           Spacing.vertSmall(),
           Text(
-            "I know that no single approach is the...",
+            userProfile.bio??'',
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
             style: AppTextStyles.regular16.copyWith(
               color: AppColors.secondary200,
             ),
@@ -76,7 +105,7 @@ class ProfileView extends StatelessWidget {
                   padding: EdgeInsets.zero,
                 ),
                 child: Text(
-                  "Lagos, Nigeria",
+                  "${userProfile.locationModel!.state}, ${userProfile.locationModel!.country}",
                   textAlign: TextAlign.center,
                   style: AppTextStyles.regular14.copyWith(
                     color: AppColors.secondary500,
@@ -91,20 +120,23 @@ class ProfileView extends StatelessWidget {
             isCollapsed: true,
             padding: REdgeInsets.fromLTRB(88, 19, 88, 19),
             labelColor: AppColors.black,
-            onTap: () => context.read<ProfileBloc>().add(EditMyProfileEvent()),
+            onTap: () => context
+              .read<ProfileBloc>().add(EditProfileTapEvent()),
           ),
           Spacing.vertLarge(),
           _ProfileSubButton(
             buttonColor: AppColors.secondary800,
             label: "My Tickets",
-            onTap: () {},
+            onTap: () => context
+                .read<ProfileBloc>().add(MyTicketTapEvent()),
           ),
           Spacing.vertRegular(),
           _ProfileSubButton(
             buttonColor: AppColors.primary.withOpacity(.2),
             borderColor: AppColors.primary,
             label: "My Events",
-            onTap: () {},
+            onTap: () => context
+                .read<ProfileBloc>().add(MyEventTapEvent()),
           ),
           Spacing.vertRegular(),
           Container(
@@ -126,6 +158,8 @@ class ProfileView extends StatelessWidget {
                     Icons.arrow_forward_ios,
                     size: 15,
                   ),
+                    onTap: () => context
+                        .read<ProfileBloc>().add(ManageLoginOptionsTapEvent())
                 ),
                 _buildProfileItems(
                   "Notifications",
@@ -133,6 +167,9 @@ class ProfileView extends StatelessWidget {
                     Icons.arrow_forward_ios,
                     size: 15,
                   ),
+                    onTap: () => context
+                        .read<ProfileBloc>().add(NotificationsTapEvent())
+
                 ),
                 _buildProfileItems(
                   "Fingerprint/Face ID",
@@ -170,6 +207,8 @@ class ProfileView extends StatelessWidget {
                 ),
                 _buildProfileItems(
                   "Rate the app",
+                  onTap: () => context
+                      .read<ProfileBloc>().add(RateYourExperienceTapEvent())
                 ),
                 _buildProfileItems(
                   "Suggestions",
@@ -260,7 +299,11 @@ class ProfileView extends StatelessWidget {
             ),
           )
         ],
-      ),
+      );
+  },
+);
+  },
+),
     );
   }
 

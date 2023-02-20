@@ -5,6 +5,7 @@ import 'package:funconnect/features/events/presentation/blocs/events_bloc/events
 import 'package:funconnect/features/fun_connect/saved/saved_view.dart';
 import 'package:funconnect/features/places/presentation/blocs/home_bloc/home_bloc.dart';
 import 'package:funconnect/features/places/presentation/views/home_view.dart';
+import 'package:funconnect/features/profile/presentation/blocs/profile_bloc/profile_bloc.dart';
 import 'package:funconnect/features/profile/presentation/views/profile_view.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
 
@@ -43,7 +44,10 @@ class _DashboardViewState extends State<DashboardView> {
             child: const EventsView(),
           ),
           const SavedView(),
-          const ProfileView(),
+          BlocProvider(
+            create: (context) => ProfileBloc(),
+            child: const ProfileView(),
+          ),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
