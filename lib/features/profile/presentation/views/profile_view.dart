@@ -15,12 +15,12 @@ class ProfileView extends StatefulWidget {
 }
 
 class _ProfileViewState extends State<ProfileView> {
-
   @override
   void initState() {
     super.initState();
     context.read<ProfileBloc>().add(InitProfileEvent());
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,266 +44,263 @@ class _ProfileViewState extends State<ProfileView> {
             );
           }
           if (state is! ProfileIdleState) return const SizedBox();
-    return BlocBuilder<ProfileBloc, ProfileState>(
-      buildWhen: (_, current) => current is ProfileIdleState,
-  builder: (context, state) {
-    if (state is! ProfileIdleState) return const SizedBox();
-    ProfileModel userProfile = state.userProfile;
-    return ScrollableColumn(
-        padding: REdgeInsets.all(16),
-        children: [
-          AppNetworkImage(
-            url: userProfile.profileImageUrl,
-            placeholderAssetImage: AppAssets.fallbackUserProfileSvg,
-            isCircular: true,
-            size: Size.fromRadius(54.r),
-            fit: BoxFit.cover,
-          ),
-          Spacing.vertMedium(),
-          Text(
-            userProfile.fullName,
-            style: AppTextStyles.medium20,
-          ),
-          Spacing.vertTiny(),
-          Spacing.vertSmall(),
-          Text(
-            userProfile.userName,
-            style: AppTextStyles.regular16.copyWith(
-              color: AppColors.secondary500,
-            ),
-          ),
-          Spacing.vertTiny(),
-          Spacing.vertSmall(),
-          Text(
-            userProfile.email,
-            style: AppTextStyles.regular16.copyWith(
-              color: AppColors.secondary500,
-            ),
-          ),
-          Spacing.vertTiny(),
-          Spacing.vertSmall(),
-          Text(
-            userProfile.bio??'',
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: AppTextStyles.regular16.copyWith(
-              color: AppColors.secondary200,
-            ),
-          ),
-          Spacing.vertTiny(),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Icon(
-                Icons.location_on,
-                color: AppColors.secondary500,
-                size: 18,
-              ),
-              TextButton(
-                onPressed: () {},
-                style: TextButton.styleFrom(
-                  padding: EdgeInsets.zero,
-                ),
-                child: Text(
-                  "${userProfile.locationModel!.state}, ${userProfile.locationModel!.country}",
-                  textAlign: TextAlign.center,
-                  style: AppTextStyles.regular14.copyWith(
-                    color: AppColors.secondary500,
+          return BlocBuilder<ProfileBloc, ProfileState>(
+            buildWhen: (_, current) => current is ProfileIdleState,
+            builder: (context, state) {
+              if (state is! ProfileIdleState) return const SizedBox();
+              ProfileModel userProfile = state.userProfile;
+              return ScrollableColumn(
+                padding: REdgeInsets.all(16),
+                children: [
+                  AppNetworkImage(
+                    url: userProfile.profileImageUrl,
+                    placeholderAssetImage: AppAssets.fallbackUserProfileSvg,
+                    isCircular: true,
+                    size: Size.fromRadius(54.r),
+                    fit: BoxFit.cover,
                   ),
-                ),
-              ),
-            ],
-          ),
-          Spacing.vertExtraMedium(),
-          AppButton(
-            label: "Edit profile",
-            isCollapsed: true,
-            padding: REdgeInsets.fromLTRB(88, 19, 88, 19),
-            labelColor: AppColors.black,
-            onTap: () => context
-              .read<ProfileBloc>().add(EditProfileTapEvent()),
-          ),
-          Spacing.vertLarge(),
-          _ProfileSubButton(
-            buttonColor: AppColors.secondary800,
-            label: "My Tickets",
-            onTap: () => context
-                .read<ProfileBloc>().add(MyTicketTapEvent()),
-          ),
-          Spacing.vertRegular(),
-          _ProfileSubButton(
-            buttonColor: AppColors.primary.withOpacity(.2),
-            borderColor: AppColors.primary,
-            label: "My Events",
-            onTap: () => context
-                .read<ProfileBloc>().add(MyEventTapEvent()),
-          ),
-          Spacing.vertRegular(),
-          Container(
-            padding: REdgeInsets.fromLTRB(18, 22, 18, 20),
-            decoration: BoxDecoration(
-              color: AppColors.secondary800,
-              borderRadius: BorderRadius.circular(24),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Settings",
-                  style: AppTextStyles.semiBold20,
-                ),
-                _buildProfileItems(
-                  "Manage log-in options",
-                  icon: const Icon(
-                    Icons.arrow_forward_ios,
-                    size: 15,
+                  Spacing.vertMedium(),
+                  Text(
+                    userProfile.fullName,
+                    style: AppTextStyles.medium20,
                   ),
-                    onTap: () => context
-                        .read<ProfileBloc>().add(ManageLoginOptionsTapEvent())
-                ),
-                _buildProfileItems(
-                  "Notifications",
-                  icon: const Icon(
-                    Icons.arrow_forward_ios,
-                    size: 15,
-                  ),
-                    onTap: () => context
-                        .read<ProfileBloc>().add(NotificationsTapEvent())
-
-                ),
-                _buildProfileItems(
-                  "Fingerprint/Face ID",
-                  icon: AppSwitcher(
-                    value: false,
-                    onChanged: (val) {},
-                  ),
-                ),
-                _buildProfileItems(
-                  "Dark mode",
-                  icon: AppSwitcher(
-                    value: true,
-                    onChanged: (val) {},
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Spacing.vertRegular(),
-          Container(
-            padding: REdgeInsets.fromLTRB(18, 22, 18, 20),
-            decoration: BoxDecoration(
-              color: AppColors.secondary800,
-              borderRadius: BorderRadius.circular(24),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Support",
-                  style: AppTextStyles.semiBold20,
-                ),
-                _buildProfileItems(
-                  "Help desk",
-                ),
-                _buildProfileItems(
-                  "Rate the app",
-                  onTap: () => context
-                      .read<ProfileBloc>().add(RateYourExperienceTapEvent())
-                ),
-                _buildProfileItems(
-                  "Suggestions",
-                ),
-              ],
-            ),
-          ),
-          Spacing.vertRegular(),
-          Container(
-            padding: REdgeInsets.fromLTRB(18, 22, 18, 20),
-            decoration: BoxDecoration(
-              color: AppColors.secondary800,
-              borderRadius: BorderRadius.circular(24),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "About",
-                  style: AppTextStyles.semiBold20,
-                ),
-                _buildProfileItems(
-                  "Version",
-                  icon: Text(
-                    "v1.0",
-                    style: AppTextStyles.medium14.copyWith(
+                  Spacing.vertTiny(),
+                  Spacing.vertSmall(),
+                  Text(
+                    userProfile.userName,
+                    style: AppTextStyles.regular16.copyWith(
                       color: AppColors.secondary500,
                     ),
                   ),
-                ),
-                _buildProfileItems(
-                  "Privacy",
-                ),
-                _buildProfileItems(
-                  "Terms of use",
-                ),
-              ],
-            ),
-          ),
-          Spacing.vertLarge(),
-          Text(
-            "Connect with us",
-            style: AppTextStyles.medium20,
-          ),
-          Spacing.vertMedium(),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              CircleAvatar(
-                radius: 26.5,
-                backgroundColor: AppColors.secondary800,
-                child: Image.asset(
-                  AppAssets.telegramLogo,
-                  scale: 2,
-                ),
-              ),
-              Spacing.horizRegular(),
-              CircleAvatar(
-                radius: 26.5,
-                backgroundColor: AppColors.secondary800,
-                child: Image.asset(
-                  AppAssets.instagramLogo,
-                  scale: 2,
-                ),
-              ),
-              Spacing.horizRegular(),
-              CircleAvatar(
-                radius: 26.5,
-                backgroundColor: AppColors.secondary800,
-                child: SvgPicture.asset(AppAssets.twitterLogo),
-              ),
-            ],
-          ),
-          Spacing.vertLarge(),
-          Spacing.vertMedium(),
-          AppButton(
-            label: "Log out",
-            isCollapsed: true,
-            padding: REdgeInsets.fromLTRB(88, 19, 88, 19),
-            labelColor: AppColors.black,
-            onTap: () {},
-          ),
-          Spacing.vertExtraMedium(),
-          Text(
-            "Delete account",
-            style: AppTextStyles.regular14.copyWith(
-              color: AppColors.red,
-            ),
-          )
-        ],
-      );
-  },
-);
-  },
-),
+                  Spacing.vertTiny(),
+                  Spacing.vertSmall(),
+                  Text(
+                    userProfile.email,
+                    style: AppTextStyles.regular16.copyWith(
+                      color: AppColors.secondary500,
+                    ),
+                  ),
+                  Spacing.vertTiny(),
+                  Spacing.vertSmall(),
+                  Text(
+                    userProfile.bio ?? '',
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: AppTextStyles.regular16.copyWith(
+                      color: AppColors.secondary200,
+                    ),
+                  ),
+                  Spacing.vertTiny(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Icon(
+                        Icons.location_on,
+                        color: AppColors.secondary500,
+                        size: 18,
+                      ),
+                      TextButton(
+                        onPressed: () {},
+                        style: TextButton.styleFrom(
+                          padding: EdgeInsets.zero,
+                        ),
+                        child: Text(
+                          "${userProfile.locationModel!.state}, ${userProfile.locationModel!.country}",
+                          textAlign: TextAlign.center,
+                          style: AppTextStyles.regular14.copyWith(
+                            color: AppColors.secondary500,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Spacing.vertExtraMedium(),
+                  AppButton(
+                    label: "Edit profile",
+                    isCollapsed: true,
+                    padding: REdgeInsets.fromLTRB(88, 19, 88, 19),
+                    labelColor: AppColors.black,
+                    onTap: () =>
+                        context.read<ProfileBloc>().add(EditProfileTapEvent()),
+                  ),
+                  Spacing.vertLarge(),
+                  _ProfileSubButton(
+                    buttonColor: AppColors.secondary800,
+                    label: "My Tickets",
+                    onTap: () =>
+                        context.read<ProfileBloc>().add(MyTicketTapEvent()),
+                  ),
+                  Spacing.vertRegular(),
+                  _ProfileSubButton(
+                    buttonColor: AppColors.primary.withOpacity(.2),
+                    borderColor: AppColors.primary,
+                    label: "My Events",
+                    onTap: () =>
+                        context.read<ProfileBloc>().add(MyEventTapEvent()),
+                  ),
+                  Spacing.vertRegular(),
+                  Container(
+                    padding: REdgeInsets.fromLTRB(18, 22, 18, 20),
+                    decoration: BoxDecoration(
+                      color: AppColors.secondary800,
+                      borderRadius: BorderRadius.circular(24),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Settings",
+                          style: AppTextStyles.semiBold20,
+                        ),
+                        _buildProfileItems("Manage log-in options",
+                            icon: const Icon(
+                              Icons.arrow_forward_ios,
+                              size: 15,
+                            ),
+                            onTap: () => context
+                                .read<ProfileBloc>()
+                                .add(ManageLoginOptionsTapEvent())),
+                        _buildProfileItems("Notifications",
+                            icon: const Icon(
+                              Icons.arrow_forward_ios,
+                              size: 15,
+                            ),
+                            onTap: () => context
+                                .read<ProfileBloc>()
+                                .add(NotificationsTapEvent())),
+                        _buildProfileItems(
+                          "Fingerprint/Face ID",
+                          icon: AppSwitcher(
+                            value: false,
+                            onChanged: (val) {},
+                          ),
+                        ),
+                        _buildProfileItems(
+                          "Dark mode",
+                          icon: AppSwitcher(
+                            value: true,
+                            onChanged: (val) {},
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Spacing.vertRegular(),
+                  Container(
+                    padding: REdgeInsets.fromLTRB(18, 22, 18, 20),
+                    decoration: BoxDecoration(
+                      color: AppColors.secondary800,
+                      borderRadius: BorderRadius.circular(24),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Support",
+                          style: AppTextStyles.semiBold20,
+                        ),
+                        _buildProfileItems(
+                          "Help desk",
+                        ),
+                        _buildProfileItems("Rate the app",
+                            onTap: () => context
+                                .read<ProfileBloc>()
+                                .add(RateYourExperienceTapEvent())),
+                        _buildProfileItems(
+                          "Suggestions",
+                        ),
+                      ],
+                    ),
+                  ),
+                  Spacing.vertRegular(),
+                  Container(
+                    padding: REdgeInsets.fromLTRB(18, 22, 18, 20),
+                    decoration: BoxDecoration(
+                      color: AppColors.secondary800,
+                      borderRadius: BorderRadius.circular(24),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "About",
+                          style: AppTextStyles.semiBold20,
+                        ),
+                        _buildProfileItems(
+                          "Version",
+                          icon: Text(
+                            "v1.0",
+                            style: AppTextStyles.medium14.copyWith(
+                              color: AppColors.secondary500,
+                            ),
+                          ),
+                        ),
+                        _buildProfileItems(
+                          "Privacy",
+                        ),
+                        _buildProfileItems(
+                          "Terms of use",
+                        ),
+                      ],
+                    ),
+                  ),
+                  Spacing.vertLarge(),
+                  Text(
+                    "Connect with us",
+                    style: AppTextStyles.medium20,
+                  ),
+                  Spacing.vertMedium(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      CircleAvatar(
+                        radius: 26.5,
+                        backgroundColor: AppColors.secondary800,
+                        child: Image.asset(
+                          AppAssets.telegramLogo,
+                          scale: 2,
+                        ),
+                      ),
+                      Spacing.horizRegular(),
+                      CircleAvatar(
+                        radius: 26.5,
+                        backgroundColor: AppColors.secondary800,
+                        child: Image.asset(
+                          AppAssets.instagramLogo,
+                          scale: 2,
+                        ),
+                      ),
+                      Spacing.horizRegular(),
+                      CircleAvatar(
+                        radius: 26.5,
+                        backgroundColor: AppColors.secondary800,
+                        child: SvgPicture.asset(AppAssets.twitterLogo),
+                      ),
+                    ],
+                  ),
+                  Spacing.vertLarge(),
+                  Spacing.vertMedium(),
+                  AppButton(
+                    label: "Log out",
+                    isCollapsed: true,
+                    padding: REdgeInsets.fromLTRB(88, 19, 88, 19),
+                    labelColor: AppColors.black,
+                    onTap: () =>
+                        context.read<ProfileBloc>().add(LogoutTapEvent()),
+                  ),
+                  Spacing.vertExtraMedium(),
+                  Text(
+                    "Delete account",
+                    style: AppTextStyles.regular14.copyWith(
+                      color: AppColors.red,
+                    ),
+                  )
+                ],
+              );
+            },
+          );
+        },
+      ),
     );
   }
 

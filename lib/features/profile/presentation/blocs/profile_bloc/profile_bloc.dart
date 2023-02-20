@@ -4,14 +4,14 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:funconnect/core/app/locator.dart';
 import 'package:funconnect/core/app/routes.dart';
+import 'package:funconnect/core/constants/_constants.dart';
 import 'package:funconnect/core/models/_models.dart';
 import 'package:funconnect/core/usecases/usecase.dart';
 import 'package:funconnect/features/profile/domain/entities/profile_model.dart';
 import 'package:funconnect/features/profile/domain/usecases/fetch_user_profile.dart';
-import 'package:funconnect/services/navigation_service/i_navigation_service.dart';
+import 'package:funconnect/services/_services.dart';
 
 part 'profile_event.dart';
-
 part 'profile_state.dart';
 
 class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
@@ -23,9 +23,11 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     on<ManageLoginOptionsTapEvent>(_onManageLoginOptionsTapEvent);
     on<RateYourExperienceTapEvent>(_onRateYourExperienceTapEvent);
     on<NotificationsTapEvent>(_onNotificationsTapEvent);
+    on<LogoutTapEvent>(_onLogoutTapEvent);
   }
 
   final _navigationService = locator<INavigationService>();
+  final _localStorageService = locator<ILocalStorageService>();
 
   Future<FutureOr<void>> _onInitProfileEvent(
     InitProfileEvent event,
@@ -75,5 +77,15 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     Emitter<ProfileState> emit,
   ) async {
     _navigationService.toNamed(Routes.notificationsViewRoute);
+  }
+
+  FutureOr<void> _onLogoutTapEvent(
+    LogoutTapEvent event,
+    Emitter<ProfileState> emit,
+  ) async {
+    await _localStorageService.clearBox(HiveKeys.userBoxId);
+    await _localStorageService.clearBox(HiveKeys.placesBoxId);
+    await _localStorageService.clearBox(HiveKeys.profileBoxId);
+    _navigationService.offAllNamed(Routes.welcomeViewRoute, (_) => false);
   }
 }
