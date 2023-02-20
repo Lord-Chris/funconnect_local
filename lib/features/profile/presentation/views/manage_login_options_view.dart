@@ -22,9 +22,7 @@ class ManageLogInOptionsView extends StatelessWidget {
         automaticallyImplyLeading: false,
         elevation: 0,
         leading: IconButton(
-          onPressed: () {
-
-          },
+          onPressed: () {},
           icon: const Icon(
             Icons.arrow_back_ios_new_rounded,
             size: 11,

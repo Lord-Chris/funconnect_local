@@ -33,7 +33,6 @@ class ProfileRepository extends IProfileRepository {
     return userProfile;
   }
 
-
   @override
   Future<void> updateProfile(ProfileModel profileModel) {
     // TODO: implement updateProfile

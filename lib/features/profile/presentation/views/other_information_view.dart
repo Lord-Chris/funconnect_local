@@ -40,9 +40,14 @@ class OtherInformationView extends StatelessWidget {
             children: [
               Text(AppText.aTAddBio, style: AppTextStyles.regular16),
               const Spacer(),
-
-              InkWell(onTap:()=>context
-                  .read<EditProfileBloc>().add(ContinueTapEvent()),child: Text(AppText.aTSkip, style: AppTextStyles.regular16.copyWith(decoration: TextDecoration.underline),))
+              InkWell(
+                  onTap: () =>
+                      context.read<EditProfileBloc>().add(ContinueTapEvent()),
+                  child: Text(
+                    AppText.aTSkip,
+                    style: AppTextStyles.regular16
+                        .copyWith(decoration: TextDecoration.underline),
+                  ))
             ],
           ),
           Spacing.vertRegular(),
@@ -55,8 +60,7 @@ class OtherInformationView extends StatelessWidget {
             hint: AppText.aTWriteSomething,
           ),
           Spacing.vertExtraMedium(),
-          Text(AppText.aTCurrentLocation, style: AppTextStyles.medium16
-          ),
+          Text(AppText.aTCurrentLocation, style: AppTextStyles.medium16),
           Row(
             children: [
               Expanded(
@@ -73,16 +77,25 @@ class OtherInformationView extends StatelessWidget {
                   ))
             ],
           ),
-
-          Align(alignment: Alignment.centerLeft,child: InkWell(onTap: (){}, child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8.0),
-            child: Text(AppText.aTChange, style: AppTextStyles.regular14.copyWith(color: AppColors.primary),),
-          ))),
+          Align(
+              alignment: Alignment.centerLeft,
+              child: InkWell(
+                  onTap: () {},
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 8.0),
+                    child: Text(
+                      AppText.aTChange,
+                      style: AppTextStyles.regular14
+                          .copyWith(color: AppColors.primary),
+                    ),
+                  ))),
           Spacing.vertExtraMedium(),
-          Text(AppText.aTInterests, style: AppTextStyles.medium16
-          ),
+          Text(AppText.aTInterests, style: AppTextStyles.medium16),
           Spacing.vertSmall(),
-          Text(AppText.aTAddInterests, style: AppTextStyles.regular14.copyWith(color: AppColors.ash),),
+          Text(
+            AppText.aTAddInterests,
+            style: AppTextStyles.regular14.copyWith(color: AppColors.ash),
+          ),
           Spacing.vertSmall(),
           Wrap(
             spacing: 8.w,

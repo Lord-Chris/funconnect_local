@@ -6,7 +6,6 @@ import 'package:funconnect/features/profile/domain/entities/profile_model.dart';
 class FetchUserProfile with UseCases<ProfileModel, NoParams> {
   final _profileRepository = locator<IProfileRepository>();
 
-
   @override
   Future<ProfileModel> call(NoParams params) async {
     return await _profileRepository.fetchProfile();

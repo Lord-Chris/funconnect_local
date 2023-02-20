@@ -22,7 +22,10 @@ class PersonalInformationView extends StatelessWidget {
     return BlocBuilder<EditProfileBloc, EditProfileState>(
       builder: (context, state) {
         ProfileModel profile = state.profile;
-        dateOfBirthController.text = profile.dateOfBirth.isEmpty?"":DateFormat('dd/MM/yyyy').format(DateTime.parse(profile.dateOfBirth));
+        dateOfBirthController.text = profile.dateOfBirth.isEmpty
+            ? ""
+            : DateFormat('dd/MM/yyyy')
+                .format(DateTime.parse(profile.dateOfBirth));
         return SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Column(
@@ -62,11 +65,10 @@ class PersonalInformationView extends StatelessWidget {
                                 height: 64,
                               ))
                             : ClipOval(
-                              child: Image.file(
-                              File(profile.profileImageUrl!),
-
+                                child: Image.file(
+                                  File(profile.profileImageUrl!),
                                 ),
-                            ),
+                              ),
                   ),
                 ),
               ),
@@ -164,17 +166,19 @@ class PersonalInformationView extends StatelessWidget {
               AppTextField(
                 onChanged: (val) {},
                 controller: dateOfBirthController,
-                onTap: () async{
+                onTap: () async {
                   FocusScope.of(context).requestFocus(FocusNode());
-                 DateTime? dateOfBirth = await showDatePicker(
+                  DateTime? dateOfBirth = await showDatePicker(
                       context: context,
                       initialDate: DateTime.now(),
                       firstDate: DateTime(1970),
                       lastDate: DateTime.now());
 
-                 if(dateOfBirth!= null){
-                    context.read<EditProfileBloc>().add(EditProfileFieldsEvent(state.profile.copyWith(dateOfBirth: dateOfBirth.toIso8601String())));
-                 }
+                  if (dateOfBirth != null) {
+                    context.read<EditProfileBloc>().add(EditProfileFieldsEvent(
+                        state.profile.copyWith(
+                            dateOfBirth: dateOfBirth.toIso8601String())));
+                  }
                 },
                 validator: (val) {
                   return null;

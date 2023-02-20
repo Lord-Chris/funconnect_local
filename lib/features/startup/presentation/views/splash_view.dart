@@ -25,7 +25,6 @@ class SplashView extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-            
               Container(
                 height: 500.h,
                 width: 500.w,

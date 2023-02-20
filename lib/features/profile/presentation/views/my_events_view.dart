@@ -14,40 +14,43 @@ class MyEventsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
+      backgroundColor: AppColors.black,
+      appBar: AppBar(
         backgroundColor: AppColors.black,
-        appBar: AppBar(
-          backgroundColor: AppColors.black,
-          centerTitle: true,
-          automaticallyImplyLeading: false,
-          elevation: 0,
-          leading: IconButton(
+        centerTitle: true,
+        automaticallyImplyLeading: false,
+        elevation: 0,
+        leading: IconButton(
+          onPressed: () {},
+          icon: const Icon(
+            Icons.arrow_back_ios_new_rounded,
+            size: 11,
+          ),
+        ),
+        title: Text(
+          'My Events',
+          style: AppTextStyles.medium24,
+        ),
+        actions: [
+          IconButton(
             onPressed: () {},
-            icon: const Icon(
-              Icons.arrow_back_ios_new_rounded,
-              size: 11,
+            icon: Icon(
+              Icons.add,
+              size: 17,
             ),
           ),
-          title: Text(
-            'My Events',
-            style: AppTextStyles.medium24,
-          ),
-          actions: [
-            IconButton(
-              onPressed: (){},
-              icon: Icon(Icons.add, size: 17,),
-            ),
-          ],
-        ),
-        body: SingleChildScrollView(
+        ],
+      ),
+      body: SingleChildScrollView(
           child: Column(
-          children: [
-            Text(
-              'Events you’ve created',
-              style: AppTextStyles.medium16,
-            ),
-          ],)
-        ),
-      );
+        children: [
+          Text(
+            'Events you’ve created',
+            style: AppTextStyles.medium16,
+          ),
+        ],
+      )),
+    );
   }
 }

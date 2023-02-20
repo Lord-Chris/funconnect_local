@@ -77,7 +77,7 @@ class ProfileModel extends Equatable {
   }
 
   factory ProfileModel.empty() => const ProfileModel(
-      id:"",
+      id: "",
       fullName: "",
       userName: "",
       email: "",
@@ -102,38 +102,38 @@ class ProfileModel extends Equatable {
       'profile_photo': profileImageUrl
     };
   }
-    Map<String, dynamic> toBody(){
+
+  Map<String, dynamic> toBody() {
     return {
       'email': email,
       'name': fullName,
       'username': userName,
-      'gender':gender,
-       'dob':dateOfBirth,
-      'phone_e164':mobileNumber,
-      'bio':bio,
+      'gender': gender,
+      'dob': dateOfBirth,
+      'phone_e164': mobileNumber,
+      'bio': bio,
       'address': locationModel!.address,
       'city': locationModel!.city,
       'state': locationModel!.state,
       'country': locationModel!.country,
       'lat': locationModel!.lat,
-      'long':locationModel!.long,
-      'facebook_handle':facebookHandle,
-      'instagram_handle':instagramHandle,
-      'twitter_handle':twitterHandle,
-      'linkedIn_handle':linkedInHandle,
+      'long': locationModel!.long,
+      'facebook_handle': facebookHandle,
+      'instagram_handle': instagramHandle,
+      'twitter_handle': twitterHandle,
+      'linkedIn_handle': linkedInHandle,
       'profile_photo': profileImageUrl
     };
   }
 
   factory ProfileModel.fromMap(Map<String, dynamic> map) {
-
     return ProfileModel(
       id: map['id'],
       email: map['email'],
       fullName: map['name'].toString(),
       userName: map['username'].toString(),
-      gender: map['gender']??'Male',
-      dateOfBirth: map['dob']??DateTime.now().toString(),
+      gender: map['gender'] ?? 'Male',
+      dateOfBirth: map['dob'] ?? DateTime.now().toString(),
       mobileNumber: map['phone_e164'].toString(),
       locationModel: ProfileLocationModel.fromMap(map['location']),
       bio: map['bio'],
@@ -149,9 +149,6 @@ class ProfileModel extends Equatable {
 
   factory ProfileModel.fromJson(String source) =>
       ProfileModel.fromMap(json.decode(source));
-
-
-
 
   @override
   List<Object?> get props => [

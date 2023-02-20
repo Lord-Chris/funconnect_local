@@ -12,14 +12,13 @@ class NotificationsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(backgroundColor: AppColors.black,
+      appBar: AppBar(
+        backgroundColor: AppColors.black,
         centerTitle: true,
         automaticallyImplyLeading: false,
         elevation: 0,
         leading: IconButton(
-          onPressed: () {
-
-          },
+          onPressed: () {},
           icon: const Icon(
             Icons.arrow_back_ios_new_rounded,
             size: 11,

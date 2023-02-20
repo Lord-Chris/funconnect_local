@@ -12,14 +12,13 @@ class EditProfileView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     List<Widget> pages = const [
       PersonalInformationView(),
       OtherInformationView(),
       SocialNetworkInformationView(),
     ];
     return WillPopScope(
-      onWillPop: ()async{
+      onWillPop: () async {
         context.read<EditProfileBloc>().add(BackTapEvent());
         return false;
       },
@@ -31,7 +30,8 @@ class EditProfileView extends StatelessWidget {
           automaticallyImplyLeading: false,
           elevation: 0,
           leading: IconButton(
-            onPressed: () => context.read<EditProfileBloc>().add(BackTapEvent()),
+            onPressed: () =>
+                context.read<EditProfileBloc>().add(BackTapEvent()),
             icon: const Icon(
               Icons.arrow_back_ios_new_rounded,
               size: 11,

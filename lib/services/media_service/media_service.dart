@@ -32,7 +32,7 @@ class MediaService extends IMediaService {
 
   @override
   Future<File?> getImageCropped({required File file}) async {
-    CroppedFile? croppedFile =  await _cropper.cropImage(
+    CroppedFile? croppedFile = await _cropper.cropImage(
       sourcePath: file.path,
       aspectRatioPresets: [
         CropAspectRatioPreset.square,

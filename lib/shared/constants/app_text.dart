@@ -58,7 +58,6 @@ class AppText {
   static const aTCreateEventCreateEventText = 'Create Event';
   static const aTCreateEventAddImageText = 'Add Image';
 
-
   ///Profile View Texts
   static const aTEditProfile = 'Edit Profile';
   static const aTPersonalInformation = 'Personal Information';

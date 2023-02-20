@@ -14,7 +14,6 @@ class LocalPlaceDataSource {
       def: [],
     );
 
-
     assert(data.length == 3);
     return data.map((e) => HomeTrendItemModel.fromMap(e)).toList();
 

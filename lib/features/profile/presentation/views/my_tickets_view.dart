@@ -47,22 +47,22 @@ class MyTicketView extends StatelessWidget {
             labelColor: AppColors.primary,
             indicatorColor: AppColors.primary,
             tabs: [
-              Tab(icon: Text('Upcoming(2)'),),
-              Tab(icon: Text('Past(1)'),),
+              Tab(
+                icon: Text('Upcoming(2)'),
+              ),
+              Tab(
+                icon: Text('Past(1)'),
+              ),
             ],
           ),
         ),
         body: TabBarView(
           children: [
             ListView(
-              children: [
-                Text("")
-              ],
+              children: [Text("")],
             ),
             ListView(
-              children: [
-                Text("")
-              ],
+              children: [Text("")],
             ),
           ],
         ),
