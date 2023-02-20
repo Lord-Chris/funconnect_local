@@ -22,7 +22,7 @@ class VerifyEmailBloc extends Bloc<VerifyEmailEvent, VerifyEmailState> {
     on<ChangeTimerEvent>(_onChangeTimerEvent);
   }
 
-  static const otpTimer = 300;
+  static const otpTimer = 90;
   final _authenticationRepo = locator<IAuthenticationRepository>();
   final _dialogAndSheetService = locator<IDialogAndSheetService>();
   RequestOtpResponse? newResponse;

@@ -33,3 +33,14 @@ class ReviewPlaceEvent extends PlaceDetailEvent {
     return ReviewParam(rating: rating, title: "", comment: comment);
   }
 }
+
+class PlaceTapEvent extends PlaceDetailEvent {
+  final PlaceModel place;
+
+  PlaceTapEvent({
+    required this.place,
+  });
+
+  @override
+  List<Object> get props => [place];
+}

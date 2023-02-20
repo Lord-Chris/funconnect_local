@@ -13,7 +13,7 @@ class AppOrangeBtn extends StatelessWidget {
   const AppOrangeBtn({
     Key? key,
     required this.label,
-    this.height = 80,
+    this.height = 72,
     this.weight,
     this.onTap,
     this.isBusy = false,
@@ -34,7 +34,7 @@ class AppOrangeBtn extends StatelessWidget {
       ),
       child: Container(
         height: height,
-        padding: EdgeInsets.only(top: 24.r),
+        padding: EdgeInsets.only(top: 20.r),
         alignment: Alignment.topCenter,
         child: Visibility(
           visible: !isBusy,

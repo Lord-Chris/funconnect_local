@@ -18,12 +18,16 @@ class FetchHomeTrends with UseCases<List<HomeTrendItemModel>, NoParams> {
   }
 
   Future<AppLocation?> _getLocation() async {
-    if (!(await _locationService.canGetLocation())) {
-      final isGranted = await _locationService.requestPermission();
-      if (!isGranted) {
-        return null;
+    try {
+      if (!(await _locationService.canGetLocation())) {
+        final isGranted = await _locationService.requestPermission();
+        if (!isGranted) {
+          return null;
+        }
       }
+      return await _locationService.getCurrentLocation();
+    } on Failure {
+      return null;
     }
-    return await _locationService.getCurrentLocation();
   }
 }
