@@ -17,6 +17,8 @@ class ApiConstants {
 
   //
   static get profileSetup => "$_core/profile";
+  static get profileLocationSetup => "$_core/profile/location";
+  static get profileImageSetup => "$_core/profile/image";
 
   // PLACES
   static String homeTrends(AppLocation? loc) {

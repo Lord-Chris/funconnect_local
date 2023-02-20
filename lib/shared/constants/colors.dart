@@ -21,6 +21,7 @@ class AppColors {
   static const homeViewDrawerAsh = Color(0XFF1A1A1A);
   static const red = Color(0XFFF1002E);
   static const eventTextRed = Color(0XFFFF0031);
+  static const deleteTextRed = Color(0XFFFE4343);
   static const searchBarColor = Color(0xFF292929);
   static const eventBasedColor = Color(0xFF979797);
   static const mediumBlack = Color(0xFF0E0E0E);

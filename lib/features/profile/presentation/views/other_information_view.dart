@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+
+import 'package:funconnect/core/extensions/_extensions.dart';
 import 'package:funconnect/features/profile/presentation/blocs/edit_profile_bloc/edit_profile_bloc.dart';
 import 'package:funconnect/features/profile/presentation/views/widgets/interests_chip.dart';
 import 'package:funconnect/shared/components/_components.dart';
@@ -33,31 +35,28 @@ class OtherInformationView extends StatelessWidget {
             style: AppTextStyles.medium20,
             textAlign: TextAlign.center,
           ),
-          SizedBox(
-            height: 16.h,
-          ),
+          Spacing.vertRegular(),
           Row(
             children: [
               Text(AppText.aTAddBio, style: AppTextStyles.regular16),
               const Spacer(),
-              Text(
-                AppText.aTSkip,
-                style: AppTextStyles.regular16
-                    .copyWith(decoration: TextDecoration.underline),
-              )
+
+              InkWell(onTap:()=>context
+                  .read<EditProfileBloc>().add(ContinueTapEvent()),child: Text(AppText.aTSkip, style: AppTextStyles.regular16.copyWith(decoration: TextDecoration.underline),))
             ],
           ),
-          SizedBox(
-            height: 16.h,
-          ),
-          const AppTextField(
+          Spacing.vertRegular(),
+          AppTextField(
+            onChanged: (val) {},
+            validator: (val) {
+              return null;
+            },
             maxLines: 7,
             hint: AppText.aTWriteSomething,
           ),
-          SizedBox(
-            height: 32.h,
+          Spacing.vertExtraMedium(),
+          Text(AppText.aTCurrentLocation, style: AppTextStyles.medium16
           ),
-          Text(AppText.aTCurrentLocation, style: AppTextStyles.medium16),
           Row(
             children: [
               Expanded(
@@ -74,32 +73,17 @@ class OtherInformationView extends StatelessWidget {
                   ))
             ],
           ),
-          Align(
-              alignment: Alignment.centerLeft,
-              child: InkWell(
-                  onTap: () {},
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8.0),
-                    child: Text(
-                      AppText.aTChange,
-                      style: AppTextStyles.regular14
-                          .copyWith(color: AppColors.primary),
-                    ),
-                  ))),
-          SizedBox(
-            height: 32.h,
+
+          Align(alignment: Alignment.centerLeft,child: InkWell(onTap: (){}, child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
+            child: Text(AppText.aTChange, style: AppTextStyles.regular14.copyWith(color: AppColors.primary),),
+          ))),
+          Spacing.vertExtraMedium(),
+          Text(AppText.aTInterests, style: AppTextStyles.medium16
           ),
-          Text(AppText.aTInterests, style: AppTextStyles.medium16),
-          SizedBox(
-            height: 8.h,
-          ),
-          Text(
-            AppText.aTAddInterests,
-            style: AppTextStyles.regular14.copyWith(color: AppColors.ash),
-          ),
-          SizedBox(
-            height: 8.h,
-          ),
+          Spacing.vertSmall(),
+          Text(AppText.aTAddInterests, style: AppTextStyles.regular14.copyWith(color: AppColors.ash),),
+          Spacing.vertSmall(),
           Wrap(
             spacing: 8.w,
             runSpacing: 12.h,
@@ -108,9 +92,7 @@ class OtherInformationView extends StatelessWidget {
                 InterestsChip(title: title, onSelect: () {})
             ],
           ),
-          SizedBox(
-            height: 48.h,
-          ),
+          Spacing.vertLarge(),
           Align(
               alignment: Alignment.centerRight,
               child: AppButton(
@@ -126,9 +108,8 @@ class OtherInformationView extends StatelessWidget {
                 isCollapsed: true,
                 labelColor: AppColors.black,
               )),
-          SizedBox(
-            height: 64.h,
-          ),
+          Spacing.vertRegular(),
+          Spacing.vertLarge(),
         ],
       ),
     );

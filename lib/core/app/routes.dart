@@ -22,13 +22,17 @@ import 'package:funconnect/features/places/presentation/views/category_detail_vi
 import 'package:funconnect/features/places/presentation/views/notifications_view.dart';
 import 'package:funconnect/features/places/presentation/views/place_detail_view.dart';
 import 'package:funconnect/features/profile/presentation/blocs/edit_profile_bloc/edit_profile_bloc.dart';
-import 'package:funconnect/features/profile/presentation/blocs/profile/profile_bloc.dart';
+import 'package:funconnect/features/profile/presentation/blocs/manage_login_options_bloc/manage_login_options_bloc.dart';
+import 'package:funconnect/features/profile/presentation/blocs/profile_bloc/profile_bloc.dart';
 import 'package:funconnect/features/profile/presentation/views/edit_profile_view.dart';
+import 'package:funconnect/features/profile/presentation/views/manage_login_options_view.dart';
+import 'package:funconnect/features/profile/presentation/views/my_events_view.dart';
+import 'package:funconnect/features/profile/presentation/views/my_tickets_view.dart';
+import 'package:funconnect/features/profile/presentation/views/rate_your_experience_view.dart';
 import 'package:funconnect/features/startup/presentation/blocs/onboarding_bloc/onboarding_bloc.dart';
 import 'package:funconnect/features/startup/presentation/blocs/splash_bloc/splash_bloc.dart';
 import 'package:funconnect/features/startup/presentation/views/onboarding_view.dart';
 import 'package:funconnect/features/startup/presentation/views/splash_view.dart';
-
 import '../../features/events/presentation/views/create_event_view.dart';
 import '../../features/events/presentation/views/event_description_view.dart';
 
@@ -38,7 +42,7 @@ class Routes {
   static const splashRoute = '/';
   static const onboardingRoute = '/onboarding';
   static const welcomeViewRoute = '/welcome-view';
-  static const profileSetupViewRoute = '/profile_setup';
+  // static const emailSignInRoute = '/email-sign-in';
   static const verifyEmailRoute = '/verify-email';
   static const emailVerifiedRoute = '/email-verified';
   static const locationAuthRoute = '/location-auth';
@@ -61,6 +65,12 @@ class Routes {
 
   // Profile
   static const editProfileViewRoute = '/edit-profile';
+  static const profileSetupViewRoute = '/profile_setup';
+  static const manageLoginOptionsRoute = '/manage-login-options';
+  static const rateYourExperienceRoute = '/rate-your-experience';
+  static const notificationsRoute = '/notifications';
+  static const myTicketRoute = '/my-ticket';
+  static const myEventRoute = '/my-event';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -109,6 +119,7 @@ class Routes {
           view: PlaceDetailView(place: place),
           bloc: PlaceDetailBloc(),
         );
+
       case categoryDetailRoute:
         final category = settings.arguments as CategoryModel;
         return _registerBlocView(
@@ -118,10 +129,7 @@ class Routes {
 
       // Dashboard
       case dashboardViewRoute:
-        return _registerBlocView(
-          view: const DashboardView(),
-          bloc: ProfileBloc(),
-        );
+        return  MaterialPageRoute(builder: (_) => const DashboardView());
 
       case notificationsViewRoute:
         return _registerBlocView(
@@ -148,6 +156,22 @@ class Routes {
           view: const EditProfileView(),
           bloc: EditProfileBloc(),
         );
+        case manageLoginOptionsRoute:
+        return  _registerBlocView(
+          view: const ManageLogInOptionsView(),
+          bloc: ManageLoginOptionsBloc(),
+        );
+        case rateYourExperienceRoute:
+          return MaterialPageRoute(builder: (_) => const RateYourExperienceView());
+
+          case notificationsRoute:
+          return MaterialPageRoute(builder: (_) => const NotificationsView());
+
+          case myTicketRoute:
+          return MaterialPageRoute(builder: (_) => const MyTicketView());
+
+          case myEventRoute:
+          return MaterialPageRoute(builder: (_) => const MyEventsView());
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(
