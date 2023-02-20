@@ -18,6 +18,7 @@ class ApiConstants {
   //
   static get profileSetup => "$_core/profile";
   static get profileImage => "$profileSetup/image";
+  static get profileLocationSetup => "$_core/profile/location";
 
   // PLACES
 

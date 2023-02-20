@@ -12,12 +12,29 @@ class NotificationsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: AppBar(backgroundColor: AppColors.black,
         centerTitle: true,
-        title: Text(
-          "Notification",
-          style: AppTextStyles.regular20,
+        automaticallyImplyLeading: false,
+        elevation: 0,
+        leading: IconButton(
+          onPressed: () {
+
+          },
+          icon: const Icon(
+            Icons.arrow_back_ios_new_rounded,
+            size: 11,
+          ),
         ),
+        title: Text(
+          'Notification',
+          style: AppTextStyles.medium24,
+        ),
+        actions: [
+          IconButton(
+            onPressed: null,
+            icon: Container(),
+          ),
+        ],
       ),
       body: ListView.separated(
         padding: const EdgeInsets.all(16),
