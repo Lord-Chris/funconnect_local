@@ -18,9 +18,8 @@ class AuthenticationRepository extends IAuthenticationRepository {
   final _localStorageService = locator<ILocalStorageService>();
 
   @override
-  Future<void> signInWithApple(EmailSignInParams params) {
-    // TODO: implement signInWithApple
-    throw UnimplementedError();
+  Future<void> signInWithApple(String code, String idToken) async {
+    await _httpDS.loginWithApple(code);
   }
 
   @override
