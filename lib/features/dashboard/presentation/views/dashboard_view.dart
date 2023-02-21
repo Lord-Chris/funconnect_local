@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:funconnect/features/events/presentation/blocs/events_bloc/events_bloc.dart';
 import 'package:funconnect/features/fun_connect/saved/saved_view.dart';
+import 'package:funconnect/features/places/presentation/blocs/explore_bloc/explore_bloc.dart';
 import 'package:funconnect/features/places/presentation/blocs/home_bloc/home_bloc.dart';
 import 'package:funconnect/features/places/presentation/views/home_view.dart';
 import 'package:funconnect/features/profile/presentation/blocs/profile_bloc/profile_bloc.dart';
@@ -38,7 +39,10 @@ class _DashboardViewState extends State<DashboardView> {
             create: (context) => HomeBloc(),
             child: const HomeView(),
           ),
-          const ExploreView(),
+          BlocProvider<ExploreBloc>(
+            create: (context) => ExploreBloc(),
+            child: const ExploreView(),
+          ),
           BlocProvider<EventsBloc>(
             create: (context) => EventsBloc(),
             child: const EventsView(),
