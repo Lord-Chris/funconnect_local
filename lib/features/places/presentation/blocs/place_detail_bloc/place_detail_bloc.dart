@@ -33,7 +33,7 @@ class PlaceDetailBloc extends Bloc<PlaceDetailEvent, PlaceDetailState> {
       final data = await FetchPlaceDetail().call(event.place);
       emit(PlaceDetailIdleState(
         place: data[0] as FullPlaceModel,
-        reviews: (data[1] as PaginatedData<ReviewModel>).data,
+        reviewsData: data[1] as PaginatedData<ReviewModel>,
       ));
     } on Failure catch (e) {
       _logger.e(e);
@@ -53,7 +53,7 @@ class PlaceDetailBloc extends Bloc<PlaceDetailEvent, PlaceDetailState> {
           .call(event.toReviewParam());
       emit(PlaceDetailIdleState(
         place: prevState.place,
-        reviews: data.data,
+        reviewsData: data,
       ));
     } on Failure catch (e) {
       _logger.e(e);

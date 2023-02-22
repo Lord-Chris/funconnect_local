@@ -49,4 +49,6 @@ class PaginatedData<T> {
       data: (map['data'] as List).map(fromMap).toList(),
     );
   }
+
+  int get totalCount => (currentPage * perPage) + to;
 }

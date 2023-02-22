@@ -434,7 +434,7 @@ class _ReviewSection extends HookWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "4 of 50",
+                      "${state.reviewsData?.from} of ${state.reviewsData?.currentPage}",
                       style: AppTextStyles.regular12.copyWith(
                         color: AppColors.gray97,
                       ),
@@ -615,10 +615,11 @@ class _ReviewItem extends StatelessWidget {
           Row(
             children: [
               const AppNetworkImage(
-                url: AppConstants.mockImage,
+                url: "",
                 isCircular: true,
                 fit: BoxFit.cover,
                 size: Size.fromRadius(19),
+                placeholderAssetImage: AppAssets.fallbackUserProfileSvg,
               ),
               Spacing.horizTiny(),
               Expanded(

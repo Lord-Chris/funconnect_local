@@ -12,15 +12,17 @@ class PlaceDetailFetchingState extends PlaceDetailState {}
 
 class PlaceDetailIdleState extends PlaceDetailState {
   final FullPlaceModel place;
-  final List<ReviewModel> reviews;
+  final PaginatedData<ReviewModel>? reviewsData;
 
   PlaceDetailIdleState({
     required this.place,
-    this.reviews = const [],
+    this.reviewsData,
   });
 
   @override
   List<Object> get props => [place, reviews];
+
+  List<ReviewModel> get reviews => reviewsData?.data ?? [];
 }
 
 class PlaceDetailFailureState extends PlaceDetailState {

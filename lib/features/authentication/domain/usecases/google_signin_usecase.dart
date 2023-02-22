@@ -18,7 +18,7 @@ class GoogleSignInUsecase with UseCases<bool, NoParams> {
 
   @override
   Future<bool> call(NoParams params) async {
-    try { 
+    try {
       final acct = await _googleSignIn.signIn();
       if (acct == null) return false;
       GoogleSignInAuthentication? auth = await acct.authentication;
