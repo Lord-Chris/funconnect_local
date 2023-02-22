@@ -9,7 +9,7 @@ import '../dto/user_model.dart';
 
 abstract class IAuthenticationRepository {
   Future<void> signInWithGoogle(String authCode);
-  Future<void> signInWithApple(EmailSignInParams params);
+  Future<void> signInWithApple(String code, String idToken);
   Future<RequestOtpResponse> signInWithEmail(EmailSignInParams params);
   Future<UserModel> verifyOtp(VerifyOtpParams params);
   Future<void> setUpProfile(ProfileSetupParam params);

@@ -73,6 +73,12 @@ class HttpAuthenticationDataSource extends IAuthenticationDataSource
   }
 
   @override
+  Future<ApiResponse<VerifyOtpResponse>> loginWithApple(String token) async {
+    await Future.delayed(const Duration(seconds: 2));
+    return const ApiResponse(data: VerifyOtpResponse(email: true, message: ""));
+  }
+
+  @override
   Future<ApiResponse<UserModel>> setUpProfile(ProfileSetupParam params) async {
     final res = await _networkService.put(
       ApiConstants.profileSetup,
