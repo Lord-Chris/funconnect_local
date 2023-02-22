@@ -1,8 +1,10 @@
 import 'package:funconnect/core/app/_app.dart';
 import 'package:funconnect/core/constants/_constants.dart';
+import 'package:funconnect/core/enums/_enums.dart';
 import 'package:funconnect/core/models/app_location.dart';
 import 'package:funconnect/core/models/paginated_data.dart';
 import 'package:funconnect/features/places/data/data_sources/remote_places_data_source.dart';
+import 'package:funconnect/features/places/domain/entities/category_model.dart';
 import 'package:funconnect/features/places/domain/entities/full_place_model.dart';
 import 'package:funconnect/features/places/domain/entities/home_trend_item_model.dart';
 import 'package:funconnect/features/places/domain/entities/review_model.dart';
@@ -65,6 +67,24 @@ class PlaceRepository extends IPlaceRepository {
   @override
   Future<void> reviewPlace(String placeId, ReviewParam review) async {
     return await _remoteDS.reviewPlace(placeId, review);
+  }
+
+  @override
+  Future<PaginatedData<PlaceModel>> fetchExploreDetails(
+    AppLocation? location,
+  ) async {
+    return await _remoteDS.fetchExploreDetails(location);
+  }
+
+  @override
+  Future<PaginatedData<CategoryModel>> fetchExploreCategories() async {
+    return await _remoteDS.fetchExploreCategories();
+  }
+
+  @override
+  Future<PaginatedData<PlaceModel>> fetchExploreByFilter(
+      ExploreSearchEnum filter) async {
+    return await _remoteDS.fetchExploreByFilter(filter);
   }
 
   @override
