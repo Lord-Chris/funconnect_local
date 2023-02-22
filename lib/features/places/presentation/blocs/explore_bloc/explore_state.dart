@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:funconnect/core/models/_models.dart';
 import 'package:funconnect/features/places/domain/entities/category_model.dart';
 import 'package:funconnect/features/places/domain/entities/place_model.dart';
 
@@ -24,4 +25,12 @@ class ExploreIdleState extends ExploreState {
   @override
   List<Object> get props =>
       [exploreDetails, categories, recentlyAdded, bestRatings];
+}
+
+class ExploreFailureState extends ExploreState {
+  final Failure failure;
+  ExploreFailureState(this.failure);
+
+  @override
+  List<Object> get props => [failure];
 }
