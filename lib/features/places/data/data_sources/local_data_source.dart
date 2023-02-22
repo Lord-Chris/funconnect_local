@@ -13,6 +13,7 @@ class LocalPlaceDataSource {
       key: StorageKeys.homeTrends,
       def: [],
     );
+
     assert(data.length == 3);
     return data.map((e) => HomeTrendItemModel.fromMap(e)).toList();
 

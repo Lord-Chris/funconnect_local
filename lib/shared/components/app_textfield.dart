@@ -18,8 +18,10 @@ class AppTextField extends StatelessWidget {
   final bool expands;
   final int? minLines, maxLines, maxLength;
   final bool enabled;
+  final BorderRadius? borderRadius;
   final Function()? onEditingComplete;
   final void Function(String)? onChanged;
+  final void Function()? onTap;
   final FloatingLabelBehavior? floatingLabelBehavior;
   final List<TextInputFormatter>? inputFormatters;
 
@@ -43,6 +45,8 @@ class AppTextField extends StatelessWidget {
     this.enabled = true,
     this.onEditingComplete,
     this.onChanged,
+    this.onTap,
+    this.borderRadius,
     this.floatingLabelBehavior,
     this.inputFormatters,
   })  : assert(initialValue == null || controller == null),
@@ -63,9 +67,11 @@ class AppTextField extends StatelessWidget {
       maxLines: maxLines,
       inputFormatters: inputFormatters,
       onChanged: onChanged,
+      onTap: onTap,
       minLines: minLines,
       maxLength: maxLength,
-      onEditingComplete: onEditingComplete ?? () => FocusScope.of(context).nextFocus(),
+      onEditingComplete:
+          onEditingComplete ?? () => FocusScope.of(context).nextFocus(),
       style: AppTextStyles.regular14.copyWith(
         color: AppColors.white,
       ),
@@ -82,7 +88,7 @@ class AppTextField extends StatelessWidget {
           color: AppColors.white,
         ),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(14),
+          borderRadius: borderRadius ?? BorderRadius.circular(14),
           borderSide: const BorderSide(
             color: AppColors.gray333,
             width: 1,
@@ -187,11 +193,12 @@ class AppDropdownField<T extends Object> extends StatelessWidget {
       decoration: InputDecoration(
         hintText: hint,
         labelText: label,
-        suffixIcon: suffix??const Icon(
-          Icons.arrow_drop_down_sharp,
-          color: AppColors.gray333,
-          size: 25,
-        ),
+        suffixIcon: suffix ??
+            const Icon(
+              Icons.arrow_drop_down_sharp,
+              color: AppColors.gray333,
+              size: 25,
+            ),
         prefixIcon: prefix,
         enabled: enabled,
         contentPadding: const EdgeInsets.fromLTRB(16, 15, 16, 15),

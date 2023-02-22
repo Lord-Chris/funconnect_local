@@ -58,7 +58,6 @@ class AppText {
   static const aTCreateEventCreateEventText = 'Create Event';
   static const aTCreateEventAddImageText = 'Add Image';
 
-
   ///Profile View Texts
   static const aTEditProfile = 'Edit Profile';
   static const aTPersonalInformation = 'Personal Information';
@@ -91,4 +90,10 @@ class AppText {
   static const aTFacebook = 'Facebook';
   static const aTLinkedIn = 'LinkedIn';
   static const aTUpdateProfile = 'Update Profile';
+  static const aTLoginOptions = 'Log in options';
+  static const aTLoginWithEmail = 'Log in wih email';
+  static const aTLoginWithApple = 'Log in wih Apple';
+  static const aTLoginWithGoogle = 'Log in wih Google';
+  static const aTLogOut = 'Log out';
+  static const aTDeleteAccount = 'Delete account';
 }

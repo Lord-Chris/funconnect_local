@@ -12,4 +12,7 @@ class StorageKeys {
 
   // Places
   static const homeTrends = "home-trends";
+
+  // Profile
+  static const userProfile = "user-profile";
 }

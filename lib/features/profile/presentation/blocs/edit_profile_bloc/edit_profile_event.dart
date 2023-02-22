@@ -5,19 +5,44 @@ abstract class EditProfileEvent extends Equatable {
   List<Object?> get props => [];
 }
 
-class BackTapEvent extends EditProfileEvent{
+class BackTapEvent extends EditProfileEvent {
   BackTapEvent();
 }
 
-class UpdateProfileEvent extends EditProfileEvent{
+class UpdateProfileEvent extends EditProfileEvent {
   UpdateProfileEvent();
 }
 
-class ContinueTapEvent extends EditProfileEvent{
+class ImageTapEvent extends EditProfileEvent {
+  ImageTapEvent();
+}
+
+class ContinueTapEvent extends EditProfileEvent {
   ContinueTapEvent();
 }
 
-class PageChangeEvent extends EditProfileEvent{
+class SkipTapEvent extends EditProfileEvent {
+  SkipTapEvent();
+}
+
+class CheckMapTapEvent extends EditProfileEvent {
+  CheckMapTapEvent();
+}
+
+class ChangeLocationTapEvent extends EditProfileEvent {
+  ChangeLocationTapEvent();
+}
+
+class InterestTapEvent extends EditProfileEvent {
+  InterestTapEvent();
+}
+
+class EditProfileFieldsEvent extends EditProfileEvent {
+  final ProfileModel profileModel;
+  EditProfileFieldsEvent(this.profileModel);
+}
+
+class PageChangeEvent extends EditProfileEvent {
   final int pageIndex;
   PageChangeEvent(this.pageIndex);
   @override

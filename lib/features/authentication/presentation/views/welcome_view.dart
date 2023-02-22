@@ -49,7 +49,7 @@ class WelcomeView extends HookWidget {
                             ),
                             Text(
                               state.isFirstTime
-                                  ? "Continue with your socials"
+                                  ? "Continue with"
                                   : "Please enter email ID associated with your account",
                               style: AppTextStyles.dynamic(
                                 14,
