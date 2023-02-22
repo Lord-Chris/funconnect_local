@@ -30,11 +30,13 @@ dependencies:
   cached_network_image: ^3.2.3
   cupertino_icons: ^1.0.2
   dio: ^4.0.6
+  dotted_border: ^2.0.0+3
   equatable: ^2.0.5
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.1
   flutter_hooks: ^0.18.5+1
+  flutter_rating_bar: ^4.0.1
   flutter_rating_stars: ^1.0.3+4
   flutter_screenutil: ^5.6.0
   flutter_svg: null
@@ -44,17 +46,17 @@ dependencies:
   google_fonts: ^3.0.1
   google_sign_in: ^5.4.2
   hive_flutter: ^1.1.0
+  image_cropper: ^3.0.1
+  image_picker: ^0.8.6+1
+  intl: ^0.18.0
   location: ^4.4.0
   logger: ^1.1.0
   pin_code_fields: ^7.4.0
   readmore: ^2.2.0
-  sign_in_with_apple: ^4.2.0
+  sentry_flutter: ^6.20.1
+  sign_in_with_apple: ^4.3.0
+  url_launcher: ^6.1.9
   video_player: ^2.4.7
-  dotted_border: ^2.0.0+3
-  image_picker: ^0.8.6+1
-  image_cropper: ^3.0.1
-  intl: ^0.18.0
-  flutter_rating_bar: ^4.0.1
 
 dev_dependencies:
   flutter_lints: ^2.0.0
