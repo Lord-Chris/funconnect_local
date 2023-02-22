@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:funconnect/features/events/presentation/blocs/events_bloc/events_bloc.dart';
-import 'package:funconnect/features/fun_connect/saved/saved_view.dart';
 import 'package:funconnect/features/places/presentation/blocs/explore_bloc/explore_bloc.dart';
 import 'package:funconnect/features/places/presentation/blocs/home_bloc/home_bloc.dart';
 import 'package:funconnect/features/places/presentation/views/home_view.dart';
 import 'package:funconnect/features/profile/presentation/blocs/profile_bloc/profile_bloc.dart';
 import 'package:funconnect/features/profile/presentation/views/profile_view.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
+import 'package:lazy_load_indexed_stack/lazy_load_indexed_stack.dart';
 
 import '../../../events/presentation/views/events_view.dart';
 import '../../../places/presentation/views/explore_view.dart';
@@ -32,7 +32,7 @@ class _DashboardViewState extends State<DashboardView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: IndexedStack(
+      body: LazyLoadIndexedStack(
         index: _index,
         children: [
           BlocProvider<HomeBloc>(
@@ -47,7 +47,7 @@ class _DashboardViewState extends State<DashboardView> {
             create: (context) => EventsBloc(),
             child: const EventsView(),
           ),
-          const SavedView(),
+          const Placeholder(),
           BlocProvider(
             create: (context) => ProfileBloc(),
             child: const ProfileView(),
