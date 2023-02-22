@@ -333,17 +333,21 @@ class _InfoSection extends StatelessWidget {
             Spacing.vertSmall(),
             if (state.place.location?.address != null)
               _buildTile(
-                Icons.location_on,
-                state.place.location!.address,
-              ),
+                  Icons.location_on,
+                  state.place.location!.address,
+                  () => context
+                      .read<PlaceDetailBloc>()
+                      .add(AddressTapEvent(location: state.place.location!))),
             _buildTile(
               Icons.timer,
               "${state.place.opensAtParsed.format(context)} - ${state.place.closesAtParsed.format(context)}",
             ),
             _buildTile(
-              CupertinoIcons.phone_fill,
-              state.place.phoneE164,
-            ),
+                CupertinoIcons.phone_fill,
+                state.place.phoneE164,
+                () => context
+                    .read<PlaceDetailBloc>()
+                    .add(PhoneTapEvent(phone: state.place.phoneE164))),
             Spacing.vertSmall(),
             Spacing.vertRegular(),
             Container(
@@ -370,26 +374,29 @@ class _InfoSection extends StatelessWidget {
     );
   }
 
-  Widget _buildTile(IconData icon, String label) {
-    return Padding(
-      padding: REdgeInsets.symmetric(vertical: 4.r),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Icon(
-            icon,
-            size: 20,
-            color: AppColors.primary,
-          ),
-          Spacing.horizSmall(),
-          Spacing.horizTiny(),
-          Expanded(
-            child: Text(
-              label,
-              style: AppTextStyles.regular14.copyWith(height: 1.5),
+  Widget _buildTile(IconData icon, String label, [VoidCallback? onTap]) {
+    return InkWell(
+      onTap: onTap,
+      child: Padding(
+        padding: REdgeInsets.symmetric(vertical: 4.r),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Icon(
+              icon,
+              size: 20,
+              color: AppColors.primary,
             ),
-          ),
-        ],
+            Spacing.horizSmall(),
+            Spacing.horizTiny(),
+            Expanded(
+              child: Text(
+                label,
+                style: AppTextStyles.regular14.copyWith(height: 1.5),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -427,7 +434,7 @@ class _ReviewSection extends HookWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "4 of 50",
+                      "${state.reviewsData?.from} of ${state.reviewsData?.currentPage}",
                       style: AppTextStyles.regular12.copyWith(
                         color: AppColors.gray97,
                       ),
@@ -608,10 +615,11 @@ class _ReviewItem extends StatelessWidget {
           Row(
             children: [
               const AppNetworkImage(
-                url: AppConstants.mockImage,
+                url: "",
                 isCircular: true,
                 fit: BoxFit.cover,
                 size: Size.fromRadius(19),
+                placeholderAssetImage: AppAssets.fallbackUserProfileSvg,
               ),
               Spacing.horizTiny(),
               Expanded(
