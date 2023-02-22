@@ -64,5 +64,11 @@
 	<string>Funconnect needs access to your camera to take camera images</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Funconnect needs access to your microphone to take videos</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>https</string>
+		<string>http</string>
+		<string>tel</string>
+	</array>
 </dict>
 </plist>
