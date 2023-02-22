@@ -25,6 +25,7 @@ class ExploreBloc extends Bloc<ExploreEvent, ExploreState> {
     Emitter<ExploreState> emit,
   ) async {
     try {
+      if (event.showLoader) emit(ExploreLoadingState());
       final exploreUsecase = FetchExploreUseCase();
       await exploreUsecase(NoParams());
       emit(ExploreIdleState(

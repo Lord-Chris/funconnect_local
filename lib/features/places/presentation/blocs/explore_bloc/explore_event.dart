@@ -9,7 +9,15 @@ abstract class ExploreEvent extends Equatable {
   List<Object?> get props => [];
 }
 
-class ExploreInitEvent extends ExploreEvent {}
+class ExploreInitEvent extends ExploreEvent {
+  final bool showLoader;
+  const ExploreInitEvent({
+    this.showLoader = true,
+  });
+
+  @override
+  List<Object> get props => [showLoader];
+}
 
 class PlaceTapEvent extends ExploreEvent {
   final PlaceModel place;

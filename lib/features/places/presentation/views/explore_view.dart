@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:funconnect/features/events/presentation/blocs/events_bloc/events_state.dart';
 import 'package:funconnect/features/places/presentation/blocs/explore_bloc/explore_bloc.dart';
 import 'package:funconnect/features/places/presentation/blocs/explore_bloc/explore_event.dart';
 import 'package:funconnect/features/places/presentation/blocs/explore_bloc/explore_state.dart';
@@ -25,7 +24,7 @@ class _ExploreViewState extends State<ExploreView> {
   @override
   void initState() {
     super.initState();
-    context.read<ExploreBloc>().add(ExploreInitEvent());
+    context.read<ExploreBloc>().add(const ExploreInitEvent());
   }
 
   @override
@@ -36,6 +35,7 @@ class _ExploreViewState extends State<ExploreView> {
           children: [
             Row(
               children: [
+                Spacing.horizRegular(),
                 Expanded(
                   child: TextField(
                     textCapitalization: TextCapitalization.sentences,
@@ -70,6 +70,7 @@ class _ExploreViewState extends State<ExploreView> {
                     ),
                   ),
                 ),
+                Spacing.horizRegular(),
               ],
             ),
             Expanded(
@@ -82,14 +83,14 @@ class _ExploreViewState extends State<ExploreView> {
                       ),
                     );
                   }
-                  if (state is EventsFailureState) {
+                  if (state is ExploreFailureState) {
                     return Padding(
                       padding: const EdgeInsets.all(20),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            "Something went wrong. Please try again.",
+                            state.failure.message,
                             style: AppTextStyles.medium14,
                           ),
                           Spacing.vertRegular(),
@@ -99,7 +100,7 @@ class _ExploreViewState extends State<ExploreView> {
                             labelColor: AppColors.black,
                             onTap: () => context
                                 .read<ExploreBloc>()
-                                .add(ExploreInitEvent()),
+                                .add(const ExploreInitEvent()),
                           )
                         ],
                       ),
@@ -107,15 +108,19 @@ class _ExploreViewState extends State<ExploreView> {
                   }
                   if (state is! ExploreIdleState) return const SizedBox();
                   return RefreshIndicator(
-                    onRefresh: () async =>
-                        context.read<ExploreBloc>().add(ExploreInitEvent()),
+                    onRefresh: () async {
+                      context
+                          .read<ExploreBloc>()
+                          .add(const ExploreInitEvent(showLoader: false));
+                      await context.read<ExploreBloc>().stream.first;
+                    },
                     child: ScrollableColumn(
+                      physics: const AlwaysScrollableScrollPhysics(),
                       crossAxisAlignment: CrossAxisAlignment.start,
                       padding: REdgeInsets.symmetric(horizontal: 16),
                       children: [
-                        Spacing.vertExtraMedium(),
+                        Spacing.vertSmall(),
                         const FeaturedSection(),
-                        Spacing.vertMedium(),
                         // SizedBox(
                         //   height: 45.h,
                         //   width: MediaQuery.of(context).size.width,
@@ -222,6 +227,7 @@ class FeaturedSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        Spacing.vertMedium(),
         Text(
           "Explore",
           style: AppTextStyles.medium28,
@@ -288,6 +294,7 @@ class FeaturedSection extends StatelessWidget {
             ],
           ),
         ),
+        Spacing.vertMedium(),
       ],
     );
   }

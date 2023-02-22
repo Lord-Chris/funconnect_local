@@ -248,8 +248,11 @@ class _DefaultHomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RefreshIndicator(
-      onRefresh: () async =>
-          context.read<HomeBloc>().add(const HomeInitEvent(showLoader: false)),
+      onRefresh: () async {
+        // final bloc = context.read<HomeBloc>().stream.first;
+        context.read<HomeBloc>().add(const HomeInitEvent(showLoader: false));
+        // await bloc;
+      },
       child: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.min,
