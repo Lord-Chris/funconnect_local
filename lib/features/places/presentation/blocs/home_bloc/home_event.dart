@@ -10,7 +10,15 @@ abstract class HomeEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class HomeInitEvent extends HomeEvent {}
+class HomeInitEvent extends HomeEvent {
+  final bool showLoader;
+  const HomeInitEvent({
+    this.showLoader = true,
+  });
+
+  @override
+  List<Object> get props => [showLoader];
+}
 
 class InterestTapEvent extends HomeEvent {
   final String interest;

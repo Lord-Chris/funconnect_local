@@ -285,7 +285,8 @@ class _ProfileViewState extends State<ProfileView> {
                     isCollapsed: true,
                     padding: REdgeInsets.fromLTRB(88, 19, 88, 19),
                     labelColor: AppColors.black,
-                    onTap: () {},
+                    onTap: () =>
+                        context.read<ProfileBloc>().add(LogoutTapEvent()),
                   ),
                   Spacing.vertExtraMedium(),
                   Text(

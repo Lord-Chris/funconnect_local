@@ -49,12 +49,12 @@ class ProfileLocationModel extends Equatable {
 
   factory ProfileLocationModel.fromMap(Map<String, dynamic> map) {
     return ProfileLocationModel(
-      address: map['location']['address'],
-      city: map['location']['city'],
-      state: map['location']['state'],
-      country: map['location']['country'],
-      lat: num.tryParse(map['location']['lat']) ?? 0,
-      long: num.tryParse(map['location']['long']) ?? 0,
+      address: map['address'],
+      city: map['city'],
+      state: map['state'],
+      country: map['country'],
+      lat: num.tryParse(map['lat']) ?? 0,
+      long: num.tryParse(map['long']) ?? 0,
     );
   }
 
@@ -72,12 +72,4 @@ class ProfileLocationModel extends Equatable {
         lat,
         long,
       ];
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    return other is ProfileLocationModel && other.hashCode == hashCode;
-  }
 }

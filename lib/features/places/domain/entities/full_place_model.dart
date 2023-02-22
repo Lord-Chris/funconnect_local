@@ -6,6 +6,7 @@ import 'package:funconnect/core/utils/general_utils.dart';
 import 'package:funconnect/features/places/domain/entities/category_model.dart';
 import 'package:funconnect/features/places/domain/entities/feature_model.dart';
 import 'package:funconnect/features/places/domain/entities/image_model.dart';
+import 'package:funconnect/features/places/domain/entities/place_model.dart';
 
 import 'place_location_model.dart';
 
@@ -28,7 +29,7 @@ class FullPlaceModel extends Equatable {
   final List<FeatureModel> features;
   final PlaceLocationModel? location;
   final List<ImageModel> images;
-  final String similarPlaces;
+  final List<PlaceModel> similarPlaces;
 
   const FullPlaceModel({
     required this.id,
@@ -72,7 +73,7 @@ class FullPlaceModel extends Equatable {
       'features': features.map((x) => x.toMap()).toList(),
       'location': location?.toMap(),
       'images': images.map((x) => x.toMap()).toList(),
-      'similar_places': similarPlaces,
+      'similarPlaces': similarPlaces.map((x) => x.toMap()).toList(),
     };
   }
 
@@ -101,7 +102,8 @@ class FullPlaceModel extends Equatable {
           : null,
       images: List<ImageModel>.from(
           map['images']?.map((x) => ImageModel.fromMap(x))),
-      similarPlaces: map['similar_places'] ?? '',
+      similarPlaces: List<PlaceModel>.from(
+          map['similarPlaces']?.map((x) => PlaceModel.fromMap(x))),
     );
   }
   String toJson() => json.encode(toMap());

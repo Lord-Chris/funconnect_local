@@ -5,6 +5,7 @@ import 'package:funconnect/core/constants/api_constants.dart';
 import 'package:funconnect/core/mixins/_mixins.dart';
 import 'package:funconnect/features/profile/domain/entities/profile_model.dart';
 import 'package:funconnect/features/profile/domain/entities/profile_location_model.dart';
+import 'package:funconnect/features/profile/domain/entities/profile_model.dart';
 import 'package:funconnect/services/_services.dart';
 
 class RemotePlaceDataSource with ApiMixin {
@@ -38,7 +39,7 @@ class RemotePlaceDataSource with ApiMixin {
 
   Future<void> updateUserProfileImage(File file) async {
     await _networkService.put(
-      ApiConstants.profileImageSetup,
+      ApiConstants.profileImage,
       headers: headers,
     );
   }

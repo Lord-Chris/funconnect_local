@@ -32,3 +32,6 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+// Button on the dialog
+// Internet occured icon

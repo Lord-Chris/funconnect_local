@@ -1,13 +1,12 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:funconnect/core/app/locator.dart';
 import 'package:funconnect/features/profile/domain/entities/profile_model.dart';
 import 'package:funconnect/services/_services.dart';
-import 'package:image_picker/image_picker.dart';
 
 part 'edit_profile_event.dart';
 part 'edit_profile_state.dart';
@@ -28,8 +27,6 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
 
   final _navigationService = locator<INavigationService>();
   final _mediaService = locator<IMediaService>();
-
-  final ImagePicker _imagePicker = ImagePicker();
 
   Future<FutureOr<void>> _onBackTapEvent(
     BackTapEvent event,
