@@ -29,9 +29,9 @@ class FetchExploreUseCase with UseCases<void, NoParams> {
       _placeRepository
           .fetchExploreByFilter(ExploreSearchEnum.recentlyAdded)
           .then((value) => recentlyAdded = value),
-      // _placeRepository
-      //     .fetchExploreByFilter(ExploreSearchEnum.ratings)
-      //     .then((value) => bestRatings = value),
+      _placeRepository
+          .fetchExploreByFilter(ExploreSearchEnum.ratings)
+          .then((value) => bestRatings = value),
     ]);
   }
 
