@@ -32,10 +32,11 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   ) async {
     try {
       if (event.showLoader) emit(HomeLoadingState());
-      final res = await FetchHomeTrends().call(NoParams());
+      final usecase = FetchHomeTrends();
+      await usecase(NoParams());
       emit(HomeIdleState(
-        interests: List.generate(10, (_) => "Fine Dining $_"),
-        homeTrends: res,
+        interests: usecase.interests,
+        homeTrends: usecase.homeTrends,
       ));
     } on Failure catch (e) {
       _logger.e(e);
@@ -52,7 +53,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
     if (data.interest == event.interest) {
       emit(HomeIdleState(
-        interests: List.generate(10, (_) => "Fine Dining $_"),
+        interests: data.interests,
         homeTrends: data.homeTrends,
       ));
       return;

@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:funconnect/core/models/_models.dart';
+import 'package:funconnect/features/places/domain/entities/category_model.dart';
 import 'package:funconnect/features/places/domain/entities/home_trend_item_model.dart';
 
 import '../../../../authentication/data/dto/user_model.dart';
@@ -18,8 +19,8 @@ class HomeIdleState extends HomeState {
   final UserModel? user;
   final AppLocation? location;
 
-  final List<String> interests;
-  final String? interest;
+  final List<CategoryModel> interests;
+  final CategoryModel? interest;
   final List interestPlaces;
   final List<HomeTrendItemModel> homeTrends;
 
@@ -39,8 +40,8 @@ class HomeIdleState extends HomeState {
   HomeIdleState copyWith({
     UserModel? user,
     AppLocation? location,
-    List<String>? interests,
-    String? interest,
+    List<CategoryModel>? interests,
+    CategoryModel? interest,
     List? interestPlaces,
     List<HomeTrendItemModel>? homeTrends,
   }) {
