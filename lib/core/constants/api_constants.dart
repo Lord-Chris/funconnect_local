@@ -34,6 +34,11 @@ class ApiConstants {
     return "$places/home-trends?lat=${loc.lat}&long=${loc.long}&city=${loc.city}&state=${loc.state}&country=${loc.country}";
   }
 
+  static String categoryPlaces(String catId, AppLocation? loc) {
+    if (loc == null) return "$categories/$catId";
+    return "$categories/$catId?lat=${loc.lat}&long=${loc.long}&city=${loc.city}&state=${loc.state}&country=${loc.country}";
+  }
+
   static String explore(AppLocation? loc) {
     if (loc == null) return "$places/explore";
     return "$places/explore?lat=${loc.lat}&long=${loc.long}&city=${loc.city}&state=${loc.state}&country=${loc.country}";

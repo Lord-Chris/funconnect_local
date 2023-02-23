@@ -30,9 +30,9 @@ class RemotePlaceDataSource with ApiMixin {
   }
 
   Future<PaginatedData<PlaceModel>> fetchPlacesByCategory(
-      String categoryId) async {
+      String categoryId, AppLocation? location) async {
     final res = await _networkService.get(
-      ApiConstants.places,
+      ApiConstants.categoryPlaces(categoryId, location),
       headers: headers,
     );
     return PaginatedData.fromMap(

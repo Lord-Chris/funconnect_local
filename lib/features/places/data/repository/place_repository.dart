@@ -65,8 +65,8 @@ class PlaceRepository extends IPlaceRepository {
 
   @override
   Future<PaginatedData<PlaceModel>> fetchPlacesByCategory(
-      String categoryId) async {
-    return await _remoteDS.fetchPlacesByCategory(categoryId);
+      String categoryId, AppLocation? location) async {
+    return await _remoteDS.fetchPlacesByCategory(categoryId, location);
   }
 
   @override
