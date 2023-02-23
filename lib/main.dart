@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -10,6 +11,8 @@ import 'package:funconnect/core/utils/failure_handler.dart';
 import 'package:funconnect/services/_services.dart';
 import 'package:funconnect/shared/constants/theme.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
+
+import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -42,6 +45,9 @@ void main() async {
 }
 
 Future<void> _setupServices() async {
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   await setUpLocator();
   await ScreenUtil.ensureScreenSize();
   await FailureHandler.instance.initialize();
