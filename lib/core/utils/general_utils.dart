@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:funconnect/core/models/failure.dart';
+import 'package:store_redirect/store_redirect.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class GeneralUtils {
@@ -40,5 +41,9 @@ class GeneralUtils {
     if (!await launchUrl(url)) {
       throw Failure('Could not launch $url');
     }
+  }
+
+  static Future<void> updateApp() async {
+    await StoreRedirect.redirect();
   }
 }
