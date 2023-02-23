@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:equatable/equatable.dart';
 
 class VerifyOtpResponse extends Equatable {
+  // TODO: Verify this
   final bool email;
   final String message;
 

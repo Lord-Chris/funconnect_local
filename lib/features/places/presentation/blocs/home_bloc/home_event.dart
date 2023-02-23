@@ -21,7 +21,7 @@ class HomeInitEvent extends HomeEvent {
 }
 
 class InterestTapEvent extends HomeEvent {
-  final String interest;
+  final CategoryModel interest;
   const InterestTapEvent({
     required this.interest,
   });

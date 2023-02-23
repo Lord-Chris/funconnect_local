@@ -106,6 +106,7 @@ class _HomeViewState extends State<HomeView> {
                         buildWhen: (_, current) => current is HomeIdleState,
                         builder: (context, state) {
                           if (state is! HomeIdleState) return const SizedBox();
+                          if (state.interests.isEmpty) return const SizedBox();
                           return SizedBox(
                             height: 50.h,
                             width: MediaQuery.of(context).size.width,

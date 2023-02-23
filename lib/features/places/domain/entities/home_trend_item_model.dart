@@ -4,6 +4,16 @@ import 'package:equatable/equatable.dart';
 import 'package:funconnect/features/places/domain/entities/category_model.dart';
 import 'package:funconnect/features/places/domain/entities/place_model.dart';
 
+class HomeData {
+  final List<CategoryModel> interests;
+  final List<HomeTrendItemModel> homeTrends;
+
+  HomeData({
+    required this.interests,
+    required this.homeTrends,
+  });
+}
+
 class HomeTrendItemModel<T> extends Equatable {
   final String tag;
   final String name;

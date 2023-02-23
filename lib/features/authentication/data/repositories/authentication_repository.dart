@@ -18,9 +18,8 @@ class AuthenticationRepository extends IAuthenticationRepository {
   final _localStorageService = locator<ILocalStorageService>();
 
   @override
-  Future<void> signInWithApple(EmailSignInParams params) {
-    // TODO: implement signInWithApple
-    throw UnimplementedError();
+  Future<void> signInWithApple(String code, String idToken) async {
+    await _httpDS.loginWithApple(code);
   }
 
   @override
@@ -69,6 +68,11 @@ class AuthenticationRepository extends IAuthenticationRepository {
   Future<PaginatedData<InterestModel>> fetchInterests() async {
     final res = await _httpDS.fetchInterests();
     return res.data;
+  }
+
+  @override
+  Future<void> saveInterests(List<InterestModel> interests) async {
+    return await _httpDS.saveInterests(interests);
   }
 
   @override

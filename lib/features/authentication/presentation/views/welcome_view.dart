@@ -48,16 +48,14 @@ class WelcomeView extends HookWidget {
                             const SizedBox(
                               height: 8.0,
                             ),
-                            Padding(
-                              padding: REdgeInsets.symmetric(horizontal: 10),
-                              child: Text(
-                                state.isFirstTime
-                                    ? "Continue with your socials"
-                                    : "Please enter email ID associated with your account",
-                                textAlign: TextAlign.center,
-                                style: AppTextStyles.regular14.copyWith(
-                                  color: Colors.white,
-                                ),
+                            Text(
+                              state.isFirstTime
+                                  ? "Continue with"
+                                  : "Please enter email ID associated with your account",
+                              style: AppTextStyles.dynamic(
+                                14,
+                                color: Colors.white,
+                                weight: FontWeight.w300,
                               ),
                             ),
                             const SizedBox(

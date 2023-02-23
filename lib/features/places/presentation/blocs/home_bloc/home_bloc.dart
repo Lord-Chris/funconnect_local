@@ -12,6 +12,7 @@ import 'package:funconnect/services/_services.dart';
 import 'package:logger/logger.dart';
 
 import '../../../domain/usecases/fetch_home_trends.dart';
+import '../../../domain/usecases/fetch_places.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   HomeBloc() : super(HomeLoadingState()) {
@@ -32,10 +33,11 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   ) async {
     try {
       if (event.showLoader) emit(HomeLoadingState());
-      final res = await FetchHomeTrends().call(NoParams());
+      final usecase = FetchHomeTrends();
+      await usecase(NoParams());
       emit(HomeIdleState(
-        interests: List.generate(10, (_) => "Fine Dining $_"),
-        homeTrends: res,
+        interests: usecase.interests,
+        homeTrends: usecase.homeTrends,
       ));
     } on Failure catch (e) {
       _logger.e(e);
@@ -52,7 +54,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
     if (data.interest == event.interest) {
       emit(HomeIdleState(
-        interests: List.generate(10, (_) => "Fine Dining $_"),
+        interests: data.interests,
         homeTrends: data.homeTrends,
       ));
       return;
@@ -61,11 +63,11 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     try {
       emit(HomeIdleState(interests: data.interests, interest: event.interest));
       emit(HomeSubLoadingState());
-      await Future.delayed(const Duration(seconds: 3));
+      final res = await FetchPlacesByCategory().call(event.interest);
       emit(HomeIdleState(
         interest: event.interest,
         interests: data.interests,
-        interestPlaces: List.generate(10, (_) => "$_ Fine Dining $_"),
+        interestPlaces: res.data,
         homeTrends: data.homeTrends,
       ));
     } on Failure catch (e) {

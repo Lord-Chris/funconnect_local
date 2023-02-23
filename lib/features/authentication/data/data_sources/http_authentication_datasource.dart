@@ -73,6 +73,12 @@ class HttpAuthenticationDataSource extends IAuthenticationDataSource
   }
 
   @override
+  Future<ApiResponse<VerifyOtpResponse>> loginWithApple(String token) async {
+    await Future.delayed(const Duration(seconds: 2));
+    return const ApiResponse(data: VerifyOtpResponse(email: true, message: ""));
+  }
+
+  @override
   Future<ApiResponse<UserModel>> setUpProfile(ProfileSetupParam params) async {
     final res = await _networkService.put(
       ApiConstants.profileSetup,
@@ -107,6 +113,15 @@ class HttpAuthenticationDataSource extends IAuthenticationDataSource
         (e) => InterestModel.fromMap(e),
       ),
     );
+  }
+
+  @override
+  Future<void> saveInterests(List<InterestModel> interests) async {
+    final body = {
+      "categories": interests.map((e) => e.id).toList(),
+    };
+    await _networkService.post(ApiConstants.userInterests,
+        headers: headers, body: body);
   }
 
   UserModel? get user {
