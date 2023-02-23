@@ -60,11 +60,16 @@ class LocationService extends ILocationService {
 
   @override
   Future<bool> requestPermission() async {
-    final locationAllowed = await canGetLocation();
-    if (locationAllowed) return true;
-    final res = await Geolocator.requestPermission();
-    return res == LocationPermission.always ||
-        res == LocationPermission.whileInUse;
+    try {
+      final locationAllowed = await canGetLocation();
+      if (locationAllowed) return true;
+      final res = await Geolocator.requestPermission();
+      return res == LocationPermission.always ||
+          res == LocationPermission.whileInUse;
+    } on PermissionRequestInProgressException catch (e) {
+      _logger.e(e);
+      return false;
+    }
   }
 
   @override

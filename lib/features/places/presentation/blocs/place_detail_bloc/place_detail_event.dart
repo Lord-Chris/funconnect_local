@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:funconnect/features/places/domain/entities/place_location_model.dart';
 import 'package:funconnect/features/places/domain/entities/place_model.dart';
 import 'package:funconnect/features/places/domain/entities/review_model.dart';
 
@@ -43,4 +44,29 @@ class PlaceTapEvent extends PlaceDetailEvent {
 
   @override
   List<Object> get props => [place];
+}
+
+class AddressTapEvent extends PlaceDetailEvent {
+  final PlaceLocationModel location;
+  AddressTapEvent({
+    required this.location,
+  });
+
+  @override
+  List<Object> get props => [location];
+
+  Uri get uri => Uri.parse(
+      "https://www.google.com/maps/search/?api=1&query=${location.lat},${location.long}");
+}
+
+class PhoneTapEvent extends PlaceDetailEvent {
+  final String phone;
+  PhoneTapEvent({
+    required this.phone,
+  });
+
+  @override
+  List<Object> get props => [phone];
+
+  Uri get uri => Uri.parse("tel://$phone");
 }

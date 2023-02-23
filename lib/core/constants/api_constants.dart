@@ -1,3 +1,4 @@
+import 'package:funconnect/core/enums/_enums.dart';
 import 'package:funconnect/core/models/_models.dart';
 
 class ApiConstants {
@@ -26,8 +27,8 @@ class ApiConstants {
   static get categories => "$places/categories";
   static String singlePlace(String placeId) => "$places/$placeId";
   static String placeReview(String placeId) => "$places/reviews/$placeId";
-  static String exploreFilter(String filter) =>
-      "$places/explore?filter_by=$filter";
+  static String exploreFilter(ExploreSearchEnum filter) =>
+      "$places/explore?filter_by=${filter.value}";
   static String homeTrends(AppLocation? loc) {
     if (loc == null) return "$places/home-trends";
     return "$places/home-trends?lat=${loc.lat}&long=${loc.long}&city=${loc.city}&state=${loc.state}&country=${loc.country}";
