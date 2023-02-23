@@ -11,6 +11,7 @@ import 'package:funconnect/features/places/domain/entities/review_model.dart';
 import 'package:funconnect/services/_services.dart';
 
 import '../../../authentication/data/dto/user_model.dart';
+import '../../domain/entities/category_model.dart';
 import '../../domain/entities/place_model.dart';
 import '../data_sources/local_data_source.dart';
 import 'i_place_repository.dart';
@@ -47,6 +48,32 @@ class PlaceRepository extends IPlaceRepository {
     );
     return homeTrend;
   }
+
+  Future<List<CategoryModel>> fetchUserInterests()async{
+    final useRemote = await _connectivityService.checkInternetConnection();
+    if (!useRemote) {
+      return _localDS.fetchUserInterests();
+    }
+    final homeTrend = await _remoteDS.getHomeTrends(location);
+    await _localStorageService.write(
+      HiveKeys.placesBoxId,
+      key: StorageKeys.homeTrends,
+      data: homeTrend.map((e) => e.toMap()).toList(),
+      // data: [
+      //   (homeTrend[0] as HomeTrendItemModel<CategoryModel>).toMap(
+      //     (e) => e.toMap(),
+      //   ),
+      //   (homeTrend[1] as HomeTrendItemModel<PlaceModel>).toMap(
+      //     (e) => e.toMap(),
+      //   ),
+      //   (homeTrend[2] as HomeTrendItemModel<PlaceModel>).toMap(
+      //     (e) => e.toMap(),
+      //   ),
+      // ],
+    );
+    return homeTrend;
+  }
+
 
   @override
   Future<PaginatedData<PlaceModel>> fetchPlacesByCategory(
