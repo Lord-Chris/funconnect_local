@@ -95,6 +95,29 @@ class CategoryDetailView extends HookWidget {
                       if (state is! CategoryDetailIdleState) {
                         return const SizedBox();
                       }
+                      if (state.places.data.isEmpty) {
+                        return Padding(
+                          padding: const EdgeInsets.all(20),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                "No fun places in this category",
+                                style: AppTextStyles.medium14,
+                              ),
+                              Spacing.vertRegular(),
+                              AppButton(
+                                label: "Retry",
+                                isCollapsed: true,
+                                labelColor: AppColors.black,
+                                onTap: () => context
+                                    .read<CategoryDetailBloc>()
+                                    .add(CategoryInitEvent(category)),
+                              )
+                            ],
+                          ),
+                        );
+                      }
                       return SingleChildScrollView(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -111,7 +134,7 @@ class CategoryDetailView extends HookWidget {
                             Padding(
                               padding: REdgeInsets.symmetric(horizontal: 16),
                               child: Text(
-                                "Explore the best cuisines",
+                                "Explore the ${category.name.toLowerCase()}",
                                 style: AppTextStyles.regular16,
                               ),
                             ),
