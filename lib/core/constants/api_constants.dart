@@ -23,8 +23,8 @@ class ApiConstants {
   static get profileImageSetup => "$_core/profile/image";
 
   // PLACES
-
   static get categories => "$places/categories";
+  static get userInterests => "$places/user/interests";
   static String singlePlace(String placeId) => "$places/$placeId";
   static String placeReview(String placeId) => "$places/reviews/$placeId";
   static String exploreFilter(ExploreSearchEnum filter) =>

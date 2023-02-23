@@ -56,7 +56,7 @@ class InterestsBloc extends Bloc<InterestsEvent, InterestsState> {
         interests: state.interests,
         selectedInterest: state.selectedInterest,
       ));
-      await SaveInterestsUseCases().call(NoParams());
+      await SaveInterestsUseCases().call(event.interests);
       _navigationService.offAllNamed(Routes.dashboardViewRoute, (_) => false);
     } on Failure catch (e) {
       emit(InterestsErrorState(

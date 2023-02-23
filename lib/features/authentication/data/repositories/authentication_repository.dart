@@ -71,6 +71,11 @@ class AuthenticationRepository extends IAuthenticationRepository {
   }
 
   @override
+  Future<void> saveInterests(List<InterestModel> interests) async {
+    return await _httpDS.saveInterests(interests);
+  }
+
+  @override
   bool get isFirstTime => _localStorageService.read(HiveKeys.appBoxId,
       key: StorageKeys.isFirstTime, def: true);
 }
