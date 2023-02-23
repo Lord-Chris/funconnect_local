@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:funconnect/features/dashboard/presentation/blocs/dashboard_bloc/dashboard_bloc.dart';
+import 'package:funconnect/features/dashboard/presentation/blocs/dashboard_bloc/dashboard_event.dart';
 import 'package:funconnect/features/places/domain/entities/category_model.dart';
 import 'package:funconnect/features/places/domain/entities/place_model.dart';
 import 'package:funconnect/features/places/presentation/blocs/home_bloc/home_bloc.dart';
@@ -36,12 +38,15 @@ class _HomeViewState extends State<HomeView> {
       appBar: AppBar(
         titleSpacing: 10,
         leading: Center(
-          child: AppNetworkImage(
-            size: Size.fromRadius(25.r),
-            isCircular: true,
-            url: context.watch<HomeBloc>().user.photoUrl,
-            fit: BoxFit.cover,
-            placeholderAssetImage: AppAssets.fallbackUserProfileSvg,
+          child: InkWell(
+            onTap: () => context.read<DashboardBloc>().add(TabTapEvent(4)),
+            child: AppNetworkImage(
+              size: Size.fromRadius(25.r),
+              isCircular: true,
+              url: context.watch<HomeBloc>().user.photoUrl,
+              fit: BoxFit.cover,
+              placeholderAssetImage: AppAssets.fallbackUserProfileSvg,
+            ),
           ),
         ),
         title: Column(
