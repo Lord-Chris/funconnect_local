@@ -21,9 +21,11 @@ class PlaceDetailBloc extends Bloc<PlaceDetailEvent, PlaceDetailState> {
     on<PlaceTapEvent>(_onPlaceTapEvent);
     on<AddressTapEvent>(_onAddressTapEvent);
     on<PhoneTapEvent>(_onPhoneTapEvent);
+    on<ShareTapEvent>(_onShareTapEvent);
   }
   final _logger = Logger();
   final _navigationService = locator<INavigationService>();
+  final _dynamicLinkService = locator<IDynamicLinkService>();
 
   Future<FutureOr<void>> _onPlaceInitEvent(
     PlaceInitEvent event,
@@ -80,5 +82,17 @@ class PlaceDetailBloc extends Bloc<PlaceDetailEvent, PlaceDetailState> {
     Emitter<PlaceDetailState> emit,
   ) {
     GeneralUtils.openUrl(event.uri);
+  }
+
+  FutureOr<void> _onShareTapEvent(
+    ShareTapEvent event,
+    Emitter<PlaceDetailState> emit,
+  ) async {
+    _dynamicLinkService.shareLink(
+      await _dynamicLinkService.generateLink(
+          desc: event.place.name,
+          data: event.data,
+          image: event.place.coverImagePath),
+    );
   }
 }

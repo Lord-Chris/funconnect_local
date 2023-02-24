@@ -34,6 +34,7 @@ dependencies:
   equatable: ^2.0.5
   firebase_analytics: ^10.1.4
   firebase_core: ^2.7.0
+  firebase_dynamic_links: ^5.0.15
   firebase_remote_config: ^3.0.13
   flutter:
     sdk: flutter
@@ -58,6 +59,7 @@ dependencies:
   pin_code_fields: ^7.4.0
   readmore: ^2.2.0
   sentry_flutter: ^6.20.1
+  share_plus: ^6.3.1
   sign_in_with_apple: ^4.3.0
   store_redirect: ^2.0.1
   url_launcher: ^6.1.9

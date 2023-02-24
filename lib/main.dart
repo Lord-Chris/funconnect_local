@@ -9,6 +9,7 @@ import 'package:funconnect/core/app/_app.dart';
 import 'package:funconnect/core/constants/_constants.dart';
 import 'package:funconnect/core/utils/failure_handler.dart';
 import 'package:funconnect/services/_services.dart';
+import 'package:funconnect/shared/constants/_constants.dart';
 import 'package:funconnect/shared/constants/theme.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
@@ -66,6 +67,7 @@ class MyApp extends StatelessWidget {
         // ScreenUtil.init(context);
         return MaterialApp(
           theme: AppTheme.theme,
+          title: AppConstants.appName,
           debugShowCheckedModeBanner: false,
           navigatorKey: NavigationService.navigatorKey,
           onGenerateRoute: Routes.generateRoute,

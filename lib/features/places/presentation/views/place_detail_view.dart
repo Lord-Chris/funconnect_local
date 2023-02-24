@@ -228,8 +228,9 @@ class _InfoSection extends StatelessWidget {
                     style: AppTextStyles.medium24,
                   ),
                 ),
-                AnimatedContainer(
-                  duration: const Duration(milliseconds: 1),
+                InkWell(
+                  onTap: () =>
+                      context.read<PlaceDetailBloc>().add(ShareTapEvent(place)),
                   child: SvgPicture.asset(
                     AppAssets.uploadSvg,
                     color: AppColors.white,

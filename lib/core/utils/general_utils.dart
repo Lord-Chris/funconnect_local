@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:funconnect/core/models/failure.dart';
+import 'package:funconnect/shared/constants/_constants.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:store_redirect/store_redirect.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -45,5 +47,13 @@ class GeneralUtils {
 
   static Future<void> updateApp() async {
     await StoreRedirect.redirect();
+  }
+
+  static Future<void> shareText(String text) async {
+    try {
+      await Share.share(text, subject: AppConstants.appName);
+    } on Exception catch (e) {
+      throw Failure("Could not share text", extraData: e.toString());
+    }
   }
 }

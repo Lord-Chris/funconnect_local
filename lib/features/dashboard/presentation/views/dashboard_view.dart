@@ -10,6 +10,7 @@ import 'package:funconnect/features/places/presentation/blocs/home_bloc/home_blo
 import 'package:funconnect/features/places/presentation/views/home_view.dart';
 import 'package:funconnect/features/profile/presentation/blocs/profile_bloc/profile_bloc.dart';
 import 'package:funconnect/features/profile/presentation/views/profile_view.dart';
+import 'package:funconnect/shared/components/app_loader.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
 import 'package:lazy_load_indexed_stack/lazy_load_indexed_stack.dart';
 
@@ -30,16 +31,33 @@ class DashboardView extends StatelessWidget {
         BlocProvider(create: (context) => ProfileBloc()),
       ],
       child: BlocBuilder<DashboardBloc, DashboardState>(
+        buildWhen: (previous, current) => current is DashboardIdleState,
         builder: (context, state) {
+          if (state is! DashboardIdleState) return const SizedBox();
           return Scaffold(
-            body: LazyLoadIndexedStack(
-              index: state.navBarIndex,
-              children: const [
-                HomeView(),
-                ExploreView(),
-                EventsView(),
-                Placeholder(),
-                ProfileView(),
+            body: Stack(
+              children: [
+                LazyLoadIndexedStack(
+                  index: state.navBarIndex,
+                  children: const [
+                    HomeView(),
+                    ExploreView(),
+                    EventsView(),
+                    Placeholder(),
+                    ProfileView(),
+                  ],
+                ),
+                BlocBuilder<DashboardBloc, DashboardState>(
+                  builder: (context, state) {
+                    if (state is! LinkLoadingState) return const SizedBox();
+                    return Container(
+                      color: AppColors.black.withOpacity(.6),
+                      child: const AppLoader(
+                        color: AppColors.primary,
+                      ),
+                    );
+                  },
+                )
               ],
             ),
             bottomNavigationBar: BottomNavigationBar(
