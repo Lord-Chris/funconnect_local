@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:funconnect/core/app/_app.dart';
 import 'package:funconnect/core/constants/_constants.dart';
 import 'package:funconnect/core/models/app_location.dart';
@@ -6,6 +8,7 @@ import 'package:funconnect/features/profile/data/data_sources/remote_profile_dat
 import 'package:funconnect/features/places/domain/entities/full_place_model.dart';
 import 'package:funconnect/features/places/domain/entities/home_trend_item_model.dart';
 import 'package:funconnect/features/places/domain/entities/review_model.dart';
+import 'package:funconnect/features/profile/domain/entities/profile_location_model.dart';
 import 'package:funconnect/features/profile/domain/entities/profile_model.dart';
 import 'package:funconnect/services/_services.dart';
 
@@ -19,7 +22,7 @@ class ProfileRepository extends IProfileRepository {
   final _localDS = LocalPlaceDataSource();
 
   @override
-  Future<ProfileModel> fetchProfile() async {
+  Future<ProfileModel> fetchUserProfile() async {
     final useRemote = await _connectivityService.checkInternetConnection();
     if (!useRemote) {
       return _localDS.getUserProfile();
@@ -35,8 +38,17 @@ class ProfileRepository extends IProfileRepository {
 
 
   @override
-  Future<void> updateProfile(ProfileModel profileModel) {
-    // TODO: implement updateProfile
-    throw UnimplementedError();
+  Future<void> updateUserProfile(ProfileModel profile) async{
+    await _remoteDS.updateUserProfile(profile);
+  }
+
+  @override
+  Future<void> updateUserLocation(ProfileLocationModel location) async{
+    await _remoteDS.updateUserLocation(location);
+  }
+
+  @override
+  Future<void> updateProfileImage(File image) async{
+    await _remoteDS.updateUserProfileImage(image);
   }
 }

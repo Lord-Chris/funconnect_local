@@ -5,19 +5,24 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:funconnect/core/app/locator.dart';
+import 'package:funconnect/core/usecases/usecase.dart';
 import 'package:funconnect/features/profile/domain/entities/profile_model.dart';
+import 'package:funconnect/features/profile/domain/usecases/fetch_user_profile.dart';
+import 'package:funconnect/features/profile/domain/usecases/update_profile_image.dart';
+import 'package:funconnect/features/profile/domain/usecases/update_user_profile.dart';
 import 'package:funconnect/services/_services.dart';
-import 'package:image_picker/image_picker.dart';
 
 part 'edit_profile_event.dart';
 part 'edit_profile_state.dart';
 
 class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
-  EditProfileBloc()
+  ProfileModel profile;
+  EditProfileBloc(this.profile)
       : super(EditProfileInitialState(
             pageController: PageController(initialPage: 0),
             currentIndex: 0,
-            profile: ProfileModel.empty())) {
+            profile: profile, isUpdatingProfile: false)) {
+    on<InitEditProfileEvent>(_onInitEditProfileEvent);
     on<BackTapEvent>(_onBackTapEvent);
     on<ContinueTapEvent>(_onContinueTapEvent);
     on<PageChangeEvent>(_onPageChangeEvent);
@@ -29,7 +34,13 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
   final _navigationService = locator<INavigationService>();
   final _mediaService = locator<IMediaService>();
 
-  final ImagePicker _imagePicker = ImagePicker();
+  Future<FutureOr<void>> _onInitEditProfileEvent(
+      InitEditProfileEvent event,
+      Emitter<EditProfileState> emit,
+      ) async {
+    final res = await FetchUserProfile().call(NoParams());
+    emit(state.copyWith(profile: res));
+  }
 
   Future<FutureOr<void>> _onBackTapEvent(
     BackTapEvent event,
@@ -64,7 +75,10 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
     UpdateProfileEvent event,
     Emitter<EditProfileState> emit,
   ) async {
-    _navigationService.back();
+    emit(state.copyWith(isUpdatingProfile: true));
+   final res =await UpdateUserProfile().call(state.profile);
+    emit(state.copyWith(isUpdatingProfile: false));
+    _navigationService.back(res);
   }
 
   Future<FutureOr<void>> _onImageTapEvent(
@@ -74,8 +88,10 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
     final File? imageFile = (await _mediaService.pickImage(fromGallery: true));
     if (imageFile != null) {
       File? croppedFile = await _mediaService.getImageCropped(file: imageFile);
-      add(EditProfileFieldsEvent(
-          state.profile.copyWith(profileImageUrl: croppedFile!.path)));
+      final res = await UpdateProfileImage().call(croppedFile!);
+      emit(state.copyWith(profile: state.profile.copyWith(profileImageUrl: res.profileImageUrl)));
+      // add(EditProfileFieldsEvent(
+      //     state.profile.copyWith(profileImageUrl: croppedFile!.path)));
     }
   }
 
@@ -84,5 +100,6 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
     Emitter<EditProfileState> emit,
   ) async {
     emit(state.copyWith(profile: event.profileModel));
+
   }
 }

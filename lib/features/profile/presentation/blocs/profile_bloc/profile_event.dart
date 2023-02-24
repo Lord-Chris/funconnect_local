@@ -9,6 +9,8 @@ class InitProfileEvent extends ProfileEvent{
 
 }
 class EditProfileTapEvent extends ProfileEvent{
+  final ProfileModel userProfile;
+  EditProfileTapEvent({required this.userProfile});
 
 }
 class ManageLoginOptionsTapEvent extends ProfileEvent{

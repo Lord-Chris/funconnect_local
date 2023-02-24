@@ -39,9 +39,11 @@ class RemotePlaceDataSource with ApiMixin {
     );
   }
 
-  Future<void> updateUserProfileImage(File file) async {
-    await _networkService.put(
+  Future<void> updateUserProfileImage(File imageFile) async {
+    await _networkService.postFile(
       ApiConstants.profileImageSetup,
+      ApiConstants.imageKey,
+      imageFile,
       headers: headers,
     );
   }

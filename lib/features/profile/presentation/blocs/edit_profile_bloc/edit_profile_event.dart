@@ -5,6 +5,10 @@ abstract class EditProfileEvent extends Equatable {
   List<Object?> get props => [];
 }
 
+class InitEditProfileEvent extends EditProfileEvent{
+  InitEditProfileEvent();
+}
+
 class BackTapEvent extends EditProfileEvent{
   BackTapEvent();
 }

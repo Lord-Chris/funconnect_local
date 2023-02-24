@@ -18,11 +18,21 @@ class PersonalInformationView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController fullNameController = TextEditingController();
+    TextEditingController userNameController = TextEditingController();
+    TextEditingController emailController = TextEditingController();
     TextEditingController dateOfBirthController = TextEditingController();
+    TextEditingController mobileNumberController = TextEditingController();
     return BlocBuilder<EditProfileBloc, EditProfileState>(
       builder: (context, state) {
         ProfileModel profile = state.profile;
+        fullNameController.text = state.profile.fullName;
+        userNameController.text = state.profile.userName;
+        emailController.text = state.profile.email;
+        String? selectedGender = state.profile.gender.isEmpty?null:'${state.profile.gender[0].toUpperCase()}${state.profile.gender.substring(1).toLowerCase()}';
         dateOfBirthController.text = profile.dateOfBirth.isEmpty?"":DateFormat('dd/MM/yyyy').format(DateTime.parse(profile.dateOfBirth));
+        mobileNumberController.text = state.profile.mobileNumber=='null'?'':state.profile.mobileNumber;
+
         return SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Column(
@@ -78,11 +88,13 @@ class PersonalInformationView extends StatelessWidget {
                 },
                 label: AppText.aTFullName,
                 hint: AppText.aTFullName,
+                controller: fullNameController,
                 prefix: Padding(
                   padding: const EdgeInsets.only(right: 8.0),
                   child: SvgPicture.asset(
                     AppAssets.userProfile,
                     height: 17.h,
+                    fit: BoxFit.scaleDown,
                   ),
                 ),
               ),
@@ -101,11 +113,13 @@ class PersonalInformationView extends StatelessWidget {
                 },
                 label: AppText.aTUserName,
                 hint: AppText.aTUserName,
+                controller: userNameController,
                 prefix: Padding(
                   padding: const EdgeInsets.only(right: 8.0),
                   child: SvgPicture.asset(
                     AppAssets.userProfile,
                     height: 17.h,
+                    fit: BoxFit.scaleDown,
                   ),
                 ),
               ),
@@ -122,6 +136,7 @@ class PersonalInformationView extends StatelessWidget {
                 validator: (val) {
                   return null;
                 },
+                controller: emailController,
                 label: AppText.aTEmail,
                 hint: AppText.aTEmail,
                 prefix: Padding(
@@ -129,6 +144,7 @@ class PersonalInformationView extends StatelessWidget {
                   child: SvgPicture.asset(
                     AppAssets.mail,
                     height: 17.h,
+                    fit: BoxFit.scaleDown,
                   ),
                 ),
               ),
@@ -156,9 +172,9 @@ class PersonalInformationView extends StatelessWidget {
                     fit: BoxFit.scaleDown,
                   ),
                 ),
-                onChanged: (val) {},
+                onChanged: (val) => context.read<EditProfileBloc>().add(EditProfileFieldsEvent(state.profile.copyWith(gender: val))),
                 validator: context.validateNotEmpty,
-                value: null,
+                value: selectedGender,
               ),
               Spacing.vertMedium(),
               AppTextField(
@@ -186,11 +202,13 @@ class PersonalInformationView extends StatelessWidget {
                   child: SvgPicture.asset(
                     AppAssets.calendar,
                     height: 17.h,
+                    fit: BoxFit.scaleDown,
                   ),
                 ),
                 suffix: SvgPicture.asset(
                   AppAssets.arrowDown,
                   width: 20,
+                  fit: BoxFit.scaleDown,
                 ),
               ),
               Spacing.vertMedium(),
@@ -201,15 +219,18 @@ class PersonalInformationView extends StatelessWidget {
                 },
                 label: AppText.aTMobileNumber,
                 hint: AppText.aTMobileNumberHint,
+                controller: mobileNumberController,
                 suffix: SvgPicture.asset(
                   AppAssets.arrowDown,
                   width: 20,
+                  fit: BoxFit.scaleDown,
                 ),
                 prefix: Padding(
                   padding: const EdgeInsets.only(right: 8.0),
                   child: SvgPicture.asset(
                     AppAssets.phone,
                     height: 17.h,
+                    fit: BoxFit.scaleDown,
                   ),
                 ),
               ),
@@ -217,14 +238,18 @@ class PersonalInformationView extends StatelessWidget {
               Align(
                   alignment: Alignment.centerRight,
                   child: AppButton(
-                    onTap: () =>
-                        context.read<EditProfileBloc>().add(ContinueTapEvent()),
+                    onTap: () {
+                      context.read<EditProfileBloc>().add(EditProfileFieldsEvent(state.profile.copyWith(userName: userNameController.text,fullName:  fullNameController.text, gender: selectedGender, email: emailController.text, mobileNumber: mobileNumberController.text)));
+                          context.read<EditProfileBloc>().add(
+                              ContinueTapEvent());
+                    },
                     label: AppText.aTContinue,
                     padding: const EdgeInsets.symmetric(
                         horizontal: 32, vertical: 16),
                     suffixWidget: SvgPicture.asset(
                       AppAssets.arrowRight,
                       width: 17,
+                      fit: BoxFit.scaleDown,
                     ),
                     isCollapsed: true,
                     labelColor: AppColors.black,

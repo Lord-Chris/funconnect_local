@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:funconnect/features/profile/domain/entities/profile_model.dart';
 import 'package:funconnect/features/profile/presentation/blocs/edit_profile_bloc/edit_profile_bloc.dart';
 import 'package:funconnect/features/profile/presentation/views/other_information_view.dart';
 import 'package:funconnect/features/profile/presentation/views/personal_information_view.dart';

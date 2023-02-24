@@ -39,7 +39,13 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     EditProfileTapEvent event,
     Emitter<ProfileState> emit,
   ) async {
-    _navigationService.toNamed(Routes.editProfileViewRoute);
+      final userProfile = await _navigationService.toNamed(Routes.editProfileViewRoute,arguments:event.userProfile);
+      if(userProfile != null && userProfile is ProfileModel){
+        emit(ProfileIdleState(userProfile: userProfile));
+      }
+
+
+
   }
 
   Future<FutureOr<void>> _onMyTicketTapEvent(

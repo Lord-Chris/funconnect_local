@@ -14,6 +14,7 @@ class OtherInformationView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController bioControllerController = TextEditingController();
     List<String> tags = [
       "Fine dining",
       "Arts & Culture",
@@ -25,6 +26,8 @@ class OtherInformationView extends StatelessWidget {
       "Wine labs",
       "Beach house"
     ];
+    return BlocBuilder<EditProfileBloc, EditProfileState>(
+  builder: (context, state) {
     return SingleChildScrollView(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Column(
@@ -51,6 +54,7 @@ class OtherInformationView extends StatelessWidget {
             validator: (val) {
               return null;
             },
+            controller: bioControllerController,
             maxLines: 7,
             hint: AppText.aTWriteSomething,
           ),
@@ -96,8 +100,11 @@ class OtherInformationView extends StatelessWidget {
           Align(
               alignment: Alignment.centerRight,
               child: AppButton(
-                onTap: () =>
-                    context.read<EditProfileBloc>().add(ContinueTapEvent()),
+                onTap: () 
+                {
+                  context.read<EditProfileBloc>().add(EditProfileFieldsEvent(state.profile.copyWith(bio: bioControllerController.text)));
+                  context.read<EditProfileBloc>().add(ContinueTapEvent());
+                  },
                 label: AppText.aTContinue,
                 padding:
                     const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
@@ -113,5 +120,7 @@ class OtherInformationView extends StatelessWidget {
         ],
       ),
     );
+  },
+);
   }
 }

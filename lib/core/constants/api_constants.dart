@@ -32,4 +32,7 @@ class ApiConstants {
 
   // EVENTS
   static get events => "$_baseUrl/events";
+
+
+  static get imageKey => 'image';
 }

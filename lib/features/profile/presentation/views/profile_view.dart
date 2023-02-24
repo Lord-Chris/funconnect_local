@@ -21,6 +21,7 @@ class _ProfileViewState extends State<ProfileView> {
     super.initState();
     context.read<ProfileBloc>().add(InitProfileEvent());
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -121,7 +122,7 @@ class _ProfileViewState extends State<ProfileView> {
             padding: REdgeInsets.fromLTRB(88, 19, 88, 19),
             labelColor: AppColors.black,
             onTap: () => context
-              .read<ProfileBloc>().add(EditProfileTapEvent()),
+              .read<ProfileBloc>().add(EditProfileTapEvent(userProfile: userProfile)),
           ),
           Spacing.vertLarge(),
           _ProfileSubButton(
