@@ -16,6 +16,7 @@ import '../../../domain/usecases/fetch_place_detail.dart';
 class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
   DashboardBloc() : super(const DashboardIdleState(0)) {
     on<TabTapEvent>(_onTabTapEvent);
+    on<DynamicLinkEvent>(_onDynamicLinkEvent);
     _fetchProfile();
   }
 
@@ -41,20 +42,38 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
 
   void _watchDeepLink() {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      await _checkForDeepLink(_dynamicLinkService.data);
+      if (_dynamicLinkService.data != null) {
+        add(DynamicLinkEvent(_dynamicLinkService.data!));
+        await stream.first;
+      }
       _dynamicLinkService.linkStream.listen((link) {
-        _checkForDeepLink(link);
+        add(DynamicLinkEvent(_dynamicLinkService.data!));
       });
     });
   }
 
-  Future<void> _checkForDeepLink(DeepLinkDataModel? data) async {
+  Future<void> _handleDeepLink(DeepLinkDataModel? data) async {
     _logger.wtf(data);
     if (data == null) return;
     if (data.type != "place") return;
-    // ignore: invalid_use_of_visible_for_testing_member
-    emit(const LinkLoadingState());
     final place = await FetchPlaceDetail().call(data.value);
     _navigationService.toNamed(Routes.placeDetailRoute, arguments: place);
+    _dynamicLinkService.clearData();
+  }
+
+  FutureOr<void> _onDynamicLinkEvent(
+    DynamicLinkEvent event,
+    Emitter<DashboardState> emit,
+  ) async {
+    if (state is! DashboardIdleState) return null;
+    final prevState = (state as DashboardIdleState);
+    try {
+      emit(const LinkLoadingState());
+      await _handleDeepLink(event.data);
+    } on Failure catch (e) {
+      _logger.e(e);
+    } finally {
+      emit(prevState);
+    }
   }
 }
