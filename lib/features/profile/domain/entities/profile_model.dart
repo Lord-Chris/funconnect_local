@@ -77,7 +77,7 @@ class ProfileModel extends Equatable {
   }
 
   factory ProfileModel.empty() => const ProfileModel(
-      id:"",
+      id: "",
       fullName: "",
       userName: "",
       email: "",
@@ -102,7 +102,8 @@ class ProfileModel extends Equatable {
       'profile_photo': profileImageUrl
     };
   }
-    Map<String, dynamic> toBody(){
+
+  Map<String, dynamic> toBody() {
     return {
       'email': email,
       'name': fullName,
@@ -126,14 +127,13 @@ class ProfileModel extends Equatable {
   }
 
   factory ProfileModel.fromMap(Map<String, dynamic> map) {
-
     return ProfileModel(
       id: map['id'],
       email: map['email'],
       fullName: map['name'].toString(),
       userName: map['username'].toString(),
-      gender: map['gender']??'Male',
-      dateOfBirth: map['dob']??DateTime.now().toString(),
+      gender: map['gender'] ?? 'Male',
+      dateOfBirth: map['dob'] ?? DateTime.now().toString(),
       mobileNumber: map['phone_e164'].toString(),
       locationModel: ProfileLocationModel.fromMap(map['location']),
       bio: map['bio'],
@@ -149,9 +149,6 @@ class ProfileModel extends Equatable {
 
   factory ProfileModel.fromJson(String source) =>
       ProfileModel.fromMap(json.decode(source));
-
-
-
 
   @override
   List<Object?> get props => [
@@ -169,12 +166,4 @@ class ProfileModel extends Equatable {
         facebookHandle,
         linkedInHandle
       ];
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    return other is ProfileModel && other.hashCode == hashCode;
-  }
 }

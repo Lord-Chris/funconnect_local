@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:funconnect/core/models/failure.dart';
+import 'package:store_redirect/store_redirect.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class GeneralUtils {
   GeneralUtils._();
@@ -32,5 +35,15 @@ class GeneralUtils {
     assert(RegExp(r'[0-9][0-9]:[0-9][0-9]:[0-9][0-9]').hasMatch(time));
     final data = time.split(":");
     return TimeOfDay(hour: int.parse(data[0]), minute: int.parse(data[1]));
+  }
+
+  static Future<void> openUrl(Uri url) async {
+    if (!await launchUrl(url)) {
+      throw Failure('Could not launch $url');
+    }
+  }
+
+  static Future<void> updateApp() async {
+    await StoreRedirect.redirect();
   }
 }

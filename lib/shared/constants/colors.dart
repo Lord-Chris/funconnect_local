@@ -50,6 +50,7 @@ class AppColors {
   static const info = Color(0XFFFFCC00);
   static const tertiary = Color(0XFF000825);
   static const bridalHealth = Color(0XFFF6EDE2);
+  // ignore: use_full_hex_values_for_flutter_colors
   static const stroke = Color(0xffb2e8e8e8);
 
   static const secondary200 = Color(0XFFB3B3B3);

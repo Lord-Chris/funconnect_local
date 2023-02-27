@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -19,9 +18,7 @@ class RateYourExperienceView extends StatelessWidget {
         automaticallyImplyLeading: false,
         elevation: 0,
         leading: IconButton(
-          onPressed: () {
-
-          },
+          onPressed: () {},
           icon: const Icon(
             Icons.arrow_back_ios_new_rounded,
             size: 11,
@@ -76,7 +73,8 @@ class RateYourExperienceView extends StatelessWidget {
                     width: 48,
                     color: AppColors.primary,
                     fit: BoxFit.scaleDown,
-                  ),half: SvgPicture.asset(
+                  ),
+                  half: SvgPicture.asset(
                     AppAssets.ratingStarSvg,
                     height: 48,
                     width: 48,
@@ -91,14 +89,16 @@ class RateYourExperienceView extends StatelessWidget {
                     fit: BoxFit.scaleDown,
                   ),
                 ),
-                itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
-                onRatingUpdate: (rating) {
-                },
+                itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
+                onRatingUpdate: (rating) {},
               ),
               Spacing.vertMedium(),
-              Text('Don’t worry, this won’t be shared with anyone', style: AppTextStyles.regular12.copyWith(
-                color: AppColors.secondary500,
-              ),),
+              Text(
+                'Don’t worry, this won’t be shared with anyone',
+                style: AppTextStyles.regular12.copyWith(
+                  color: AppColors.secondary500,
+                ),
+              ),
               Spacing.vertExtraMedium(),
               AppTextField(
                 onChanged: (val) {},
@@ -118,7 +118,6 @@ class RateYourExperienceView extends StatelessWidget {
                 onTap: () {},
                 labelColor: AppColors.black,
               ),
-
             ],
           ),
         ),

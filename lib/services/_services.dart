@@ -6,6 +6,10 @@ export 'dialog_and_sheet_service/dialog_and_sheet_service.dart';
 export 'dialog_and_sheet_service/i_dialog_and_sheet_service.dart';
 
 ///
+export 'force_update_service/force_update_service.dart';
+export 'force_update_service/i_force_update_service.dart';
+
+///
 export 'local_storage_service/i_local_storage_service.dart';
 export 'local_storage_service/local_storage_service.dart';
 

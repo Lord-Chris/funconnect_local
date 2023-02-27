@@ -6,7 +6,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:funconnect/core/extensions/_extensions.dart';
-
 import 'package:funconnect/features/profile/domain/entities/profile_model.dart';
 import 'package:funconnect/features/profile/presentation/blocs/edit_profile_bloc/edit_profile_bloc.dart';
 import 'package:funconnect/shared/components/_components.dart';
@@ -32,7 +31,6 @@ class PersonalInformationView extends StatelessWidget {
         String? selectedGender = state.profile.gender.isEmpty?null:'${state.profile.gender[0].toUpperCase()}${state.profile.gender.substring(1).toLowerCase()}';
         dateOfBirthController.text = profile.dateOfBirth.isEmpty?"":DateFormat('dd/MM/yyyy').format(DateTime.parse(profile.dateOfBirth));
         mobileNumberController.text = state.profile.mobileNumber=='null'?'':state.profile.mobileNumber;
-
         return SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Column(
@@ -72,11 +70,10 @@ class PersonalInformationView extends StatelessWidget {
                                 height: 64,
                               ))
                             : ClipOval(
-                              child: Image.file(
-                              File(profile.profileImageUrl!),
-
+                                child: Image.file(
+                                  File(profile.profileImageUrl!),
                                 ),
-                            ),
+                              ),
                   ),
                 ),
               ),
@@ -180,17 +177,20 @@ class PersonalInformationView extends StatelessWidget {
               AppTextField(
                 onChanged: (val) {},
                 controller: dateOfBirthController,
-                onTap: () async{
+                onTap: () async {
                   FocusScope.of(context).requestFocus(FocusNode());
-                 DateTime? dateOfBirth = await showDatePicker(
+                  DateTime? dateOfBirth = await showDatePicker(
                       context: context,
                       initialDate: DateTime.now(),
                       firstDate: DateTime(1970),
                       lastDate: DateTime.now());
 
-                 if(dateOfBirth!= null){
-                    context.read<EditProfileBloc>().add(EditProfileFieldsEvent(state.profile.copyWith(dateOfBirth: dateOfBirth.toIso8601String())));
-                 }
+                  if (dateOfBirth != null) {
+                    // ignore: use_build_context_synchronously
+                    context.read<EditProfileBloc>().add(EditProfileFieldsEvent(
+                        state.profile.copyWith(
+                            dateOfBirth: dateOfBirth.toIso8601String())));
+                  }
                 },
                 validator: (val) {
                   return null;

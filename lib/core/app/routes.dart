@@ -130,7 +130,7 @@ class Routes {
 
       // Dashboard
       case dashboardViewRoute:
-        return  MaterialPageRoute(builder: (_) => const DashboardView());
+        return MaterialPageRoute(builder: (_) => const DashboardView());
 
       case notificationsViewRoute:
         return _registerBlocView(
@@ -158,22 +158,23 @@ class Routes {
           view: const EditProfileView(),
           bloc: EditProfileBloc(profile),
         );
-        case manageLoginOptionsRoute:
-        return  _registerBlocView(
+      case manageLoginOptionsRoute:
+        return _registerBlocView(
           view: const ManageLogInOptionsView(),
           bloc: ManageLoginOptionsBloc(),
         );
-        case rateYourExperienceRoute:
-          return MaterialPageRoute(builder: (_) => const RateYourExperienceView());
+      case rateYourExperienceRoute:
+        return MaterialPageRoute(
+            builder: (_) => const RateYourExperienceView());
 
-          case notificationsRoute:
-          return MaterialPageRoute(builder: (_) => const NotificationsView());
+      case notificationsRoute:
+        return MaterialPageRoute(builder: (_) => const NotificationsView());
 
-          case myTicketRoute:
-          return MaterialPageRoute(builder: (_) => const MyTicketView());
+      case myTicketRoute:
+        return MaterialPageRoute(builder: (_) => const MyTicketView());
 
-          case myEventRoute:
-          return MaterialPageRoute(builder: (_) => const MyEventsView());
+      case myEventRoute:
+        return MaterialPageRoute(builder: (_) => const MyEventsView());
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(

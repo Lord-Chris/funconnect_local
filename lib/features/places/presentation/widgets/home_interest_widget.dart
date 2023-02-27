@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:funconnect/features/places/domain/entities/category_model.dart';
 import 'package:funconnect/features/places/presentation/blocs/home_bloc/home_bloc.dart';
 import 'package:funconnect/features/places/presentation/blocs/home_bloc/home_event.dart';
 import 'package:funconnect/shared/components/app_network_image.dart';
@@ -7,7 +8,7 @@ import 'package:funconnect/shared/components/app_network_image.dart';
 import '../../../../shared/constants/_constants.dart';
 
 class HomeInterestWidget extends StatelessWidget {
-  final String interest;
+  final CategoryModel interest;
   final bool isSelected;
   const HomeInterestWidget({
     Key? key,
@@ -29,15 +30,15 @@ class HomeInterestWidget extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            const AppNetworkImage(
-              size: Size.fromRadius(10),
-              url: AppConstants.mockImage,
+            AppNetworkImage(
+              size: const Size.fromRadius(10),
+              url: interest.coverPhoto,
               fit: BoxFit.cover,
               isCircular: true,
             ),
             Spacing.horizSmall(),
             Text(
-              interest,
+              interest.name,
               maxLines: 1,
               style: AppTextStyles.regular12,
             ),

@@ -2,8 +2,6 @@ import 'dart:io';
 
 import 'package:funconnect/core/app/_app.dart';
 import 'package:funconnect/core/constants/_constants.dart';
-import 'package:funconnect/core/models/app_location.dart';
-import 'package:funconnect/core/models/paginated_data.dart';
 import 'package:funconnect/features/profile/data/data_sources/remote_profile_data_source.dart';
 import 'package:funconnect/features/places/domain/entities/full_place_model.dart';
 import 'package:funconnect/features/places/domain/entities/home_trend_item_model.dart';
@@ -35,7 +33,6 @@ class ProfileRepository extends IProfileRepository {
     );
     return userProfile;
   }
-
 
   @override
   Future<void> updateUserProfile(ProfileModel profile) async{

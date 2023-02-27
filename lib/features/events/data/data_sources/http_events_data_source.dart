@@ -9,7 +9,7 @@ import 'i_events_data_source.dart';
 
 class HttpEventsDataSource extends IEventsDataSource with ApiMixin {
   final _networkService = locator<INetworkService>();
-  final _localStorageService = locator<ILocalStorageService>();
+  // final _localStorageService = locator<ILocalStorageService>();
 
   @override
   Future<PaginatedData<EventModel>> getListOfEvents() async {

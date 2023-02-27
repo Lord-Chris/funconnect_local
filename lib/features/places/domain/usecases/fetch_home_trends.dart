@@ -4,26 +4,43 @@ import 'package:funconnect/core/usecases/usecase.dart';
 import 'package:funconnect/features/places/data/repository/i_place_repository.dart';
 import 'package:funconnect/services/_services.dart';
 
+import '../entities/category_model.dart';
 import '../entities/home_trend_item_model.dart';
 
-class FetchHomeTrends with UseCases<List<HomeTrendItemModel>, NoParams> {
+class FetchHomeTrends with UseCases<void, NoParams> {
   final _locationService = locator<ILocationService>();
   final _placeRepository = locator<IPlaceRepository>();
 
+  List<CategoryModel> interests = [];
+  List<HomeTrendItemModel> homeTrends = [];
+
   /// Switch to Records later
   @override
-  Future<List<HomeTrendItemModel>> call(NoParams params) async {
+  Future<void> call(NoParams params) async {
     final location = await _getLocation();
-    return await _placeRepository.fetchHomeTrends(location);
+    await Future.wait(
+      [
+        _placeRepository
+            .fetchHomeTrends(location)
+            .then((value) => homeTrends = value),
+        _placeRepository
+            .fetchUserInterests()
+            .then((value) => interests = value),
+      ],
+    );
   }
 
   Future<AppLocation?> _getLocation() async {
-    if (!(await _locationService.canGetLocation())) {
-      final isGranted = await _locationService.requestPermission();
-      if (!isGranted) {
-        return null;
+    try {
+      if (!(await _locationService.canGetLocation())) {
+        final isGranted = await _locationService.requestPermission();
+        if (!isGranted) {
+          return null;
+        }
       }
+      return await _locationService.getCurrentLocation();
+    } on Failure {
+      return null;
     }
-    return await _locationService.getCurrentLocation();
   }
 }

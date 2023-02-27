@@ -57,4 +57,30 @@ class ProfileSetupParam {
   }
 
   String toJson() => json.encode(toMap());
+
+  ProfileSetupParam copyWith({
+    String? name,
+    String? username,
+    String? gender,
+    String? address,
+    String? city,
+    String? state,
+    String? country,
+    String? lat,
+    String? long,
+    File? profilePhoto,
+  }) {
+    return ProfileSetupParam(
+      name: name ?? this.name,
+      username: username ?? this.username,
+      gender: gender ?? this.gender,
+      address: address ?? this.address,
+      city: city ?? this.city,
+      state: state ?? this.state,
+      country: country ?? this.country,
+      lat: lat ?? this.lat,
+      long: long ?? this.long,
+      profilePhoto: profilePhoto ?? this.profilePhoto,
+    );
+  }
 }

@@ -10,7 +10,7 @@ import 'i_authentication_repository.dart';
 
 class MockAuthenticationRepository extends IAuthenticationRepository {
   @override
-  Future<void> signInWithApple(EmailSignInParams params) async {
+  Future<void> signInWithApple(String code, String idToken) async {
     await Future.delayed(const Duration(seconds: 2));
   }
 
@@ -159,4 +159,9 @@ class MockAuthenticationRepository extends IAuthenticationRepository {
 
   @override
   bool get isFirstTime => true;
+
+  @override
+  Future<void> saveInterests(List<InterestModel> interests) async {
+    await Future.delayed(const Duration(seconds: 2));
+  }
 }

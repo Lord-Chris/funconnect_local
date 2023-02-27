@@ -11,6 +11,7 @@ import 'package:funconnect/features/authentication/presentation/blocs/welcome_bl
 import 'package:funconnect/features/authentication/presentation/blocs/welcome_bloc/welcome_state.dart';
 import 'package:funconnect/services/_services.dart';
 import 'package:funconnect/shared/dialogs/status_dialog.dart';
+import 'package:logger/logger.dart';
 
 import '../../../domain/usecases/email_signin_usecase.dart';
 
@@ -25,8 +26,9 @@ class WelcomeBloc extends Bloc<WelcomeEvent, WelcomeState> {
 
   final _navigationService = locator<INavigationService>();
   final _dialogAndSheetService = locator<IDialogAndSheetService>();
+  final _logger = Logger();
 
-  Future<FutureOr<void>> _onEmailSignInEvent(
+  FutureOr<void> _onEmailSignInEvent(
     EmailSignInEvent event,
     Emitter<WelcomeState> emit,
   ) async {
@@ -40,13 +42,14 @@ class WelcomeBloc extends Bloc<WelcomeEvent, WelcomeState> {
         arguments: res,
       );
     } on Failure catch (e) {
+      _logger.e(e);
       emit(WelcomeFailureState());
       _dialogAndSheetService.showAppDialog(StatusDialog(
           isError: true, title: "Error Signing In", body: e.message));
     }
   }
 
-  Future<FutureOr<void>> _onGoogleSignInEvent(
+  FutureOr<void> _onGoogleSignInEvent(
     GoogleSignInEvent event,
     Emitter<WelcomeState> emit,
   ) async {
@@ -63,11 +66,11 @@ class WelcomeBloc extends Bloc<WelcomeEvent, WelcomeState> {
   FutureOr<void> _onAppleSignInEvent(
     AppleSignInEvent event,
     Emitter<WelcomeState> emit,
-  ) {
+  ) async {
     try {
       FocusManager.instance.primaryFocus?.unfocus();
       emit(WelcomeLoadingState());
-      AppleSignInUsecase().call(NoParams());
+      await AppleSignInUsecase().call(NoParams());
       emit(WelcomeSuccessState());
     } on Failure {
       emit(WelcomeFailureState());

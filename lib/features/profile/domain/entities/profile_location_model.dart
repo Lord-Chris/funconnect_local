@@ -9,11 +9,9 @@ class ProfileLocationModel extends Equatable {
   final String? country;
   final num? lat;
   final num? long;
-  
 
   const ProfileLocationModel(
-      {
-      required this.address,
+      {required this.address,
       required this.city,
       required this.state,
       required this.country,
@@ -21,8 +19,7 @@ class ProfileLocationModel extends Equatable {
       required this.long});
 
   ProfileLocationModel copyWith(
-      {
-      String? address,
+      {String? address,
       String? city,
       String? state,
       String? country,
@@ -37,23 +34,20 @@ class ProfileLocationModel extends Equatable {
         long: long ?? this.long);
   }
 
- 
+  Map<String, dynamic> toBody() => toMap();
 
-  Map<String, dynamic> toBody()=> toMap();
-
-  Map<String, dynamic> toMap(){
+  Map<String, dynamic> toMap() {
     return {
       'address': address,
       'city': city,
       'state': state,
       'country': country,
       'lat': lat,
-      'long':long,
+      'long': long,
     };
   }
 
   factory ProfileLocationModel.fromMap(Map<String, dynamic> map) {
-
     return ProfileLocationModel(
       address: map['address'],
       city: map['city'],
@@ -69,9 +63,6 @@ class ProfileLocationModel extends Equatable {
   factory ProfileLocationModel.fromJson(String source) =>
       ProfileLocationModel.fromMap(json.decode(source));
 
-
-
-
   @override
   List<Object?> get props => [
         address,
@@ -81,12 +72,4 @@ class ProfileLocationModel extends Equatable {
         lat,
         long,
       ];
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    return other is ProfileLocationModel && other.hashCode == hashCode;
-  }
 }

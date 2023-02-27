@@ -136,9 +136,9 @@ class _InterestViewState extends State<InterestView> {
                       state.selectedInterest.isNotEmpty,
                   onTap: state.selectedInterest.isEmpty
                       ? null
-                      : () {
-                          context.read<InterestsBloc>().add(ContinueTapEvent());
-                        },
+                      : () => context.read<InterestsBloc>().add(
+                            ContinueTapEvent(interests: state.selectedInterest),
+                          ),
                 ),
               ],
             );

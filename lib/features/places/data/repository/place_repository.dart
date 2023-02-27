@@ -1,8 +1,10 @@
 import 'package:funconnect/core/app/_app.dart';
 import 'package:funconnect/core/constants/_constants.dart';
+import 'package:funconnect/core/enums/_enums.dart';
 import 'package:funconnect/core/models/app_location.dart';
 import 'package:funconnect/core/models/paginated_data.dart';
 import 'package:funconnect/features/places/data/data_sources/remote_places_data_source.dart';
+import 'package:funconnect/features/places/domain/entities/category_model.dart';
 import 'package:funconnect/features/places/domain/entities/full_place_model.dart';
 import 'package:funconnect/features/places/domain/entities/home_trend_item_model.dart';
 import 'package:funconnect/features/places/domain/entities/review_model.dart';
@@ -47,9 +49,24 @@ class PlaceRepository extends IPlaceRepository {
   }
 
   @override
+  Future<List<CategoryModel>> fetchUserInterests() async {
+    final useRemote = await _connectivityService.checkInternetConnection();
+    if (!useRemote) {
+      return _localDS.fetchUserInterests();
+    }
+    final interests = await _remoteDS.fetchUserInterests();
+    await _localStorageService.write(
+      HiveKeys.userBoxId,
+      key: StorageKeys.userInterests,
+      data: interests.data.map((e) => e.toMap()).toList(),
+    );
+    return interests.data;
+  }
+
+  @override
   Future<PaginatedData<PlaceModel>> fetchPlacesByCategory(
-      String categoryId) async {
-    return await _remoteDS.fetchPlacesByCategory(categoryId);
+      String categoryId, AppLocation? location) async {
+    return await _remoteDS.fetchPlacesByCategory(categoryId, location);
   }
 
   @override
@@ -65,6 +82,24 @@ class PlaceRepository extends IPlaceRepository {
   @override
   Future<void> reviewPlace(String placeId, ReviewParam review) async {
     return await _remoteDS.reviewPlace(placeId, review);
+  }
+
+  @override
+  Future<PaginatedData<PlaceModel>> fetchExploreDetails(
+    AppLocation? location,
+  ) async {
+    return await _remoteDS.fetchExploreDetails(location);
+  }
+
+  @override
+  Future<PaginatedData<CategoryModel>> fetchExploreCategories() async {
+    return await _remoteDS.fetchExploreCategories();
+  }
+
+  @override
+  Future<PaginatedData<PlaceModel>> fetchExploreByFilter(
+      ExploreSearchEnum filter) async {
+    return await _remoteDS.fetchExploreByFilter(filter);
   }
 
   @override

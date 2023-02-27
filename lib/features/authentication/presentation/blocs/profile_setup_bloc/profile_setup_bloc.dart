@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:funconnect/core/app/_app.dart';
 import 'package:funconnect/core/models/_models.dart';
 import 'package:funconnect/core/usecases/usecase.dart';
+import 'package:funconnect/features/authentication/domain/params/profile_setup.dart';
 import 'package:funconnect/features/authentication/domain/usecases/get_location_usecase.dart';
 import 'package:funconnect/features/authentication/domain/usecases/profile_setup_usecase.dart';
 import 'package:funconnect/features/authentication/presentation/blocs/profile_setup_bloc/profile_setup_event.dart';
@@ -49,8 +50,12 @@ class ProfileSetupBloc extends Bloc<ProfileSetupEvent, ProfileSetupState> {
     final prevIdleState = state;
     try {
       emit(ProfileSetupLoadingState());
-      final param =
+      ProfileSetupParam param =
           location == null ? event.param : event.param.addLocation(location!);
+
+      param = param.copyWith(
+        profilePhoto: (prevIdleState as ProfileSetupIdleState).image,
+      );
       await ProfileSetupUseCase().call(param);
       _navigationService.toNamed(Routes.interestViewRoute);
     } on Failure catch (e) {

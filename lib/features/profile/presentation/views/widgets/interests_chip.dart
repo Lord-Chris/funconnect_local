@@ -9,19 +9,37 @@ class InterestsChip extends StatelessWidget {
   final String title;
   final VoidCallback onSelect;
   final bool isSelected;
-  const InterestsChip({Key? key, required this.title, required this.onSelect, this.isSelected=false}) : super(key: key);
+  const InterestsChip(
+      {Key? key,
+      required this.title,
+      required this.onSelect,
+      this.isSelected = false})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return  Container(padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8), decoration: BoxDecoration(borderRadius: BorderRadius.circular(24.h), border: Border.all(color: AppColors.locationIconAsh)), child: Row(
-      mainAxisSize:MainAxisSize.min,
-      children: [SvgPicture.asset(
-        AppAssets.add,
-        height: 9,
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(24.h),
+          border: Border.all(color: AppColors.locationIconAsh)),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          SvgPicture.asset(
+            AppAssets.add,
+            height: 9,
+          ),
+          const SizedBox(
+            width: 6,
+          ),
+          Text(
+            title,
+            style: AppTextStyles.medium10
+                .copyWith(color: AppColors.locationIconAsh),
+          ),
+        ],
       ),
-        SizedBox(width: 6,),
-        Text(title, style: AppTextStyles.medium10.copyWith(color: AppColors.locationIconAsh),),
-      ],
-    ),);
+    );
   }
 }

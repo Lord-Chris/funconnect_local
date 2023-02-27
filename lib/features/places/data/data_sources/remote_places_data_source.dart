@@ -1,7 +1,9 @@
 import 'package:funconnect/core/app/_app.dart';
 import 'package:funconnect/core/constants/api_constants.dart';
+import 'package:funconnect/core/enums/_enums.dart';
 import 'package:funconnect/core/mixins/_mixins.dart';
 import 'package:funconnect/core/models/_models.dart';
+import 'package:funconnect/features/places/domain/entities/category_model.dart';
 import 'package:funconnect/features/places/domain/entities/full_place_model.dart';
 import 'package:funconnect/features/places/domain/entities/home_trend_item_model.dart';
 import 'package:funconnect/services/_services.dart';
@@ -28,9 +30,9 @@ class RemotePlaceDataSource with ApiMixin {
   }
 
   Future<PaginatedData<PlaceModel>> fetchPlacesByCategory(
-      String categoryId) async {
+      String categoryId, AppLocation? location) async {
     final res = await _networkService.get(
-      ApiConstants.places,
+      ApiConstants.categoryPlaces(categoryId, location),
       headers: headers,
     );
     return PaginatedData.fromMap(
@@ -60,5 +62,44 @@ class RemotePlaceDataSource with ApiMixin {
       headers: headers,
       body: review.toBody(),
     );
+  }
+
+  Future<PaginatedData<PlaceModel>> fetchExploreDetails(
+    AppLocation? location,
+  ) async {
+    final res = await _networkService.get(
+      ApiConstants.explore(location),
+      headers: headers,
+    );
+    return PaginatedData.fromMap(
+        res.data['data']['near_places'], (x) => PlaceModel.fromMap(x));
+  }
+
+  Future<PaginatedData<CategoryModel>> fetchExploreCategories() async {
+    final res = await _networkService.get(
+      ApiConstants.exploreFilter(ExploreSearchEnum.categories),
+      headers: headers,
+    );
+    return PaginatedData.fromMap(
+        res.data['data'], (x) => CategoryModel.fromMap(x));
+  }
+
+  Future<PaginatedData<PlaceModel>> fetchExploreByFilter(
+      ExploreSearchEnum filter) async {
+    final res = await _networkService.get(
+      ApiConstants.exploreFilter(filter),
+      headers: headers,
+    );
+    return PaginatedData.fromMap(
+        res.data['data'], (x) => PlaceModel.fromMap(x));
+  }
+
+  Future<PaginatedData<CategoryModel>> fetchUserInterests() async {
+    final res = await _networkService.get(
+      ApiConstants.userInterests,
+      headers: headers,
+    );
+    return PaginatedData.fromMap(
+        res.data['data'], (x) => CategoryModel.fromMap(x['category']));
   }
 }

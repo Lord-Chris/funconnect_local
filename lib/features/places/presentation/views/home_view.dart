@@ -26,7 +26,7 @@ class _HomeViewState extends State<HomeView> {
   @override
   void initState() {
     super.initState();
-    context.read<HomeBloc>().add(HomeInitEvent());
+    context.read<HomeBloc>().add(const HomeInitEvent());
   }
 
   @override
@@ -36,7 +36,6 @@ class _HomeViewState extends State<HomeView> {
       appBar: AppBar(
         titleSpacing: 10,
         leading: Center(
-          // padding: const EdgeInsets.only(left: 16),
           child: AppNetworkImage(
             size: Size.fromRadius(25.r),
             isCircular: true,
@@ -107,6 +106,7 @@ class _HomeViewState extends State<HomeView> {
                         buildWhen: (_, current) => current is HomeIdleState,
                         builder: (context, state) {
                           if (state is! HomeIdleState) return const SizedBox();
+                          if (state.interests.isEmpty) return const SizedBox();
                           return SizedBox(
                             height: 50.h,
                             width: MediaQuery.of(context).size.width,
@@ -142,6 +142,29 @@ class _HomeViewState extends State<HomeView> {
                               );
                             }
                             if (state is HomeIdleState) {
+                              if (state.homeTrends.isEmpty) {
+                                return Padding(
+                                  padding: const EdgeInsets.all(20),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        "Something went wrong. Please try again.",
+                                        style: AppTextStyles.medium14,
+                                      ),
+                                      Spacing.vertRegular(),
+                                      AppButton(
+                                        label: "Retry",
+                                        isCollapsed: true,
+                                        labelColor: AppColors.black,
+                                        onTap: () => context
+                                            .read<HomeBloc>()
+                                            .add(const HomeInitEvent()),
+                                      )
+                                    ],
+                                  ),
+                                );
+                              }
                               if (state.interestPlaces.isNotEmpty) {
                                 return SingleChildScrollView(
                                   child: Column(
@@ -226,7 +249,11 @@ class _DefaultHomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RefreshIndicator(
-      onRefresh: () async => context.read<HomeBloc>().add(HomeInitEvent()),
+      onRefresh: () async {
+        // final bloc = context.read<HomeBloc>().stream.first;
+        context.read<HomeBloc>().add(const HomeInitEvent(showLoader: false));
+        // await bloc;
+      },
       child: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.min,

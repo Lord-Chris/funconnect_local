@@ -14,7 +14,7 @@ class AppLoader extends StatelessWidget {
     Key? key,
     this.color = AppColors.white,
     this.padding,
-    this.size,
+    this.size = 25,
   }) : super(key: key);
 
   @override

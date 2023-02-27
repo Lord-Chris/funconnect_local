@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:funconnect/core/app/locator.dart';
 import 'package:funconnect/core/usecases/usecase.dart';
 import 'package:funconnect/features/profile/domain/entities/profile_model.dart';
@@ -33,6 +33,7 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
 
   final _navigationService = locator<INavigationService>();
   final _mediaService = locator<IMediaService>();
+
 
   Future<FutureOr<void>> _onInitEditProfileEvent(
       InitEditProfileEvent event,
