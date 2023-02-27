@@ -28,7 +28,7 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
 
   Future<void> _onSplashFinished(
       FinishSplashEvent event, Emitter<SplashState> emit) async {
-    if (await _forceUpdateAppService.needsUpdate) {
+    if (!await _forceUpdateAppService.needsUpdate) {
       return await GeneralUtils.updateApp();
     }
     if (isAuthenticated) {
