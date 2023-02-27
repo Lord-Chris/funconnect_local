@@ -5,12 +5,12 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:funconnect/core/app/locator.dart';
-import 'package:funconnect/core/usecases/usecase.dart';
+import 'package:funconnect/core/models/_models.dart';
 import 'package:funconnect/features/profile/domain/entities/profile_model.dart';
-import 'package:funconnect/features/profile/domain/usecases/fetch_user_profile.dart';
 import 'package:funconnect/features/profile/domain/usecases/update_profile_image.dart';
 import 'package:funconnect/features/profile/domain/usecases/update_user_profile.dart';
 import 'package:funconnect/services/_services.dart';
+import 'package:funconnect/shared/dialogs/status_dialog.dart';
 
 part 'edit_profile_event.dart';
 part 'edit_profile_state.dart';
@@ -22,7 +22,7 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
             pageController: PageController(initialPage: 0),
             currentIndex: 0,
             profile: profile, isUpdatingProfile: false)) {
-    on<InitEditProfileEvent>(_onInitEditProfileEvent);
+
     on<BackTapEvent>(_onBackTapEvent);
     on<ContinueTapEvent>(_onContinueTapEvent);
     on<PageChangeEvent>(_onPageChangeEvent);
@@ -33,15 +33,9 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
 
   final _navigationService = locator<INavigationService>();
   final _mediaService = locator<IMediaService>();
+  final _dialogAndSheetService = locator<IDialogAndSheetService>();
 
 
-  Future<FutureOr<void>> _onInitEditProfileEvent(
-      InitEditProfileEvent event,
-      Emitter<EditProfileState> emit,
-      ) async {
-    final res = await FetchUserProfile().call(NoParams());
-    emit(state.copyWith(profile: res));
-  }
 
   Future<FutureOr<void>> _onBackTapEvent(
     BackTapEvent event,
@@ -77,22 +71,37 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
     Emitter<EditProfileState> emit,
   ) async {
     emit(state.copyWith(isUpdatingProfile: true));
-   final res =await UpdateUserProfile().call(state.profile);
-    emit(state.copyWith(isUpdatingProfile: false));
-    _navigationService.back(res);
+    try {
+      final res = await UpdateUserProfile().call(state.profile);
+      emit(state.copyWith(isUpdatingProfile: false));
+      _navigationService.back(res);
+    }on Failure catch (e){
+      emit(state.copyWith(isUpdatingProfile: false));
+      _dialogAndSheetService.showAppDialog(StatusDialog(
+          isError: true, title: "Error Updating Profile", body: e.message));
+    }
   }
 
   Future<FutureOr<void>> _onImageTapEvent(
     ImageTapEvent event,
     Emitter<EditProfileState> emit,
   ) async {
-    final File? imageFile = (await _mediaService.pickImage(fromGallery: true));
-    if (imageFile != null) {
-      File? croppedFile = await _mediaService.getImageCropped(file: imageFile);
-      final res = await UpdateProfileImage().call(croppedFile!);
-      emit(state.copyWith(profile: state.profile.copyWith(profileImageUrl: res.profileImageUrl)));
-      // add(EditProfileFieldsEvent(
-      //     state.profile.copyWith(profileImageUrl: croppedFile!.path)));
+    try {
+      final File? imageFile = (await _mediaService.pickImage(
+          fromGallery: true));
+      if (imageFile != null) {
+        File? croppedFile = await _mediaService.getImageCropped(
+            file: imageFile);
+
+        final res = await UpdateProfileImage().call(croppedFile!);
+        emit(state.copyWith(profile: state.profile.copyWith(
+            profileImageUrl: res.profileImageUrl)));
+        // add(EditProfileFieldsEvent(
+        //     state.profile.copyWith(profileImageUrl: croppedFile!.path)));
+      }
+    }on Failure catch (e){
+      _dialogAndSheetService.showAppDialog(StatusDialog(
+          isError: true, title: "Error Updating Profile Image", body: e.message));
     }
   }
 

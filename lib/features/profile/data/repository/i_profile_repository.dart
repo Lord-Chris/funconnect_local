@@ -8,4 +8,6 @@ abstract class IProfileRepository {
   Future<void> updateUserProfile(ProfileModel profile);
   Future<void> updateUserLocation(ProfileLocationModel location);
   Future<void> updateProfileImage(File image);
+  Future<void> logout();
+  Future<void> deleteAccount();
 }

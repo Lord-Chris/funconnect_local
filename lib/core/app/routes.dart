@@ -159,9 +159,10 @@ class Routes {
           bloc: EditProfileBloc(profile),
         );
       case manageLoginOptionsRoute:
+        final profile = settings.arguments as ProfileModel;
         return _registerBlocView(
           view: const ManageLogInOptionsView(),
-          bloc: ManageLoginOptionsBloc(),
+          bloc: ManageLoginOptionsBloc(profile),
         );
       case rateYourExperienceRoute:
         return MaterialPageRoute(

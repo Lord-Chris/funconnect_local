@@ -15,6 +15,8 @@ class ApiConstants {
   static get requestOtp => "$_auth/login/send-otp";
   static get loginWithOtp => "$_auth/login/otp";
   static get loginWithGoogle => "$_auth/login/google";
+  static get logout => "$_auth/logout";
+  static get deleteAccount => "$_auth/delete-account";
 
   //
   static get profileSetup => "$_core/profile";

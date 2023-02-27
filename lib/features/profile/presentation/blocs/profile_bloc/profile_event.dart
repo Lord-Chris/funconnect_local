@@ -13,14 +13,18 @@ class EditProfileTapEvent extends ProfileEvent{
 
 }
 class ManageLoginOptionsTapEvent extends ProfileEvent{
-
+  final ProfileModel userProfile;
+  ManageLoginOptionsTapEvent({required this.userProfile});
 }
 class NotificationsTapEvent extends ProfileEvent{
 
 }
 
 
-class RateYourExperienceTapEvent extends ProfileEvent {}
+class RateYourExperienceTapEvent extends ProfileEvent {
+  final BuildContext context;
+  RateYourExperienceTapEvent({required this.context});
+}
 
 class MyTicketTapEvent extends ProfileEvent {}
 

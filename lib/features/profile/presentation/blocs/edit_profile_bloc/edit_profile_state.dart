@@ -18,7 +18,7 @@ class EditProfileState extends Equatable {
   }
 
   @override
-  List<Object> get props => [pageController, currentIndex, profile];
+  List<Object> get props => [pageController, currentIndex, profile, isUpdatingProfile];
 }
 
 class EditProfileInitialState extends EditProfileState {
