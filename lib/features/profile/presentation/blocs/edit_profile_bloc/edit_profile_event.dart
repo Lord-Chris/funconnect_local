@@ -22,6 +22,11 @@ class ContinueTapEvent extends EditProfileEvent {
   ContinueTapEvent();
 }
 
+
+class AutoValidateFormEvent extends EditProfileEvent {
+  AutoValidateFormEvent();
+}
+
 class SkipTapEvent extends EditProfileEvent {
   SkipTapEvent();
 }
@@ -36,6 +41,10 @@ class ChangeLocationTapEvent extends EditProfileEvent {
 
 class InterestTapEvent extends EditProfileEvent {
   InterestTapEvent();
+}
+
+class UpdateLocationTapEvent extends EditProfileEvent {
+  UpdateLocationTapEvent();
 }
 
 class EditProfileFieldsEvent extends EditProfileEvent {

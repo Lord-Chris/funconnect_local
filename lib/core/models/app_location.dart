@@ -44,6 +44,18 @@ class AppLocation extends Equatable {
     };
   }
 
+  Map<String, dynamic> toBody() {
+    return {
+      'lat': lat,
+      'long': long,
+      'address': address,
+      'city': city,
+      'state': state,
+      'country': country,
+    };
+  }
+
+
   factory AppLocation.fromMap(Map<String, dynamic> map) {
     return AppLocation(
       id: map['id'],
