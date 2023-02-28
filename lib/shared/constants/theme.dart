@@ -14,6 +14,10 @@ class AppTheme {
     useMaterial3: true,
     backgroundColor: AppColors.black,
     brightness: Brightness.dark,
-    appBarTheme: const AppBarTheme(backgroundColor: AppColors.black),
+    appBarTheme: const AppBarTheme(
+      backgroundColor: AppColors.black,
+      actionsIconTheme: IconThemeData(size: 25),
+      iconTheme: IconThemeData(size: 15),
+    ),
   );
 }
