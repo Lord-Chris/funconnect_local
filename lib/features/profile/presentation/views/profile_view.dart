@@ -231,7 +231,9 @@ class _ProfileViewState extends State<ProfileView> {
                         _buildProfileItems(
                           "Version",
                           icon: Text(
-                            "v1.0",
+                            context.read<ProfileBloc>().appVersion == null
+                                ? ""
+                                : "v${context.watch<ProfileBloc>().appVersion}",
                             style: AppTextStyles.medium14.copyWith(
                               color: AppColors.secondary500,
                             ),

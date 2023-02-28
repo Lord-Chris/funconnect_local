@@ -38,12 +38,15 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
 
   final _navigationService = locator<INavigationService>();
   final _localStorageService = locator<ILocalStorageService>();
+  final _forceUpateAppService = locator<IForceUpdateAppService>();
 
+  String? appVersion;
   Future<FutureOr<void>> _onInitProfileEvent(
     InitProfileEvent event,
     Emitter<ProfileState> emit,
   ) async {
     final res = await FetchUserProfile().call(NoParams());
+    appVersion = await _forceUpateAppService.currentVersionRaw;
     emit(ProfileIdleState(userProfile: res));
   }
 
