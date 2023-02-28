@@ -8,14 +8,12 @@ import 'package:funconnect/features/events/data/repositories/i_events_repository
 import 'package:funconnect/features/profile/data/repository/i_profile_repository.dart';
 import 'package:funconnect/features/profile/data/repository/profile_repository.dart';
 import 'package:funconnect/services/_services.dart';
-import 'package:funconnect/services/dynamic_link_service/i_dynamic_link_service.dart';
 import 'package:get_it/get_it.dart';
 
 import '../../features/authentication/data/repositories/_authentication_repo.dart';
 import '../../features/dashboard/data/repository/dashboard_repository.dart';
 import '../../features/places/data/repository/i_place_repository.dart';
 import '../../features/places/data/repository/place_repository.dart';
-import '../../services/dynamic_link_service/dynamic_link_service.dart';
 
 final locator = GetIt.instance;
 const bool isMock = false;

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -629,7 +631,7 @@ class _ReviewItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Tamara Jackson",
+                      "User${(Random().nextInt(200) * Random().nextInt(200))}",
                       style: AppTextStyles.dynamic(
                         10,
                         weight: FontWeight.w500,
