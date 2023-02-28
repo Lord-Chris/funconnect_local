@@ -115,6 +115,15 @@ class HttpAuthenticationDataSource extends IAuthenticationDataSource
     );
   }
 
+  @override
+  Future<void> saveInterests(List<InterestModel> interests) async {
+    final body = {
+      "categories": interests.map((e) => e.id).toList(),
+    };
+    await _networkService.post(ApiConstants.userInterests,
+        headers: headers, body: body);
+  }
+
   UserModel? get user {
     final data = _localStorageService
         .read<Map<String, dynamic>?>(HiveKeys.userBoxId, key: StorageKeys.user);

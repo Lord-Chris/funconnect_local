@@ -15,6 +15,15 @@ class InterestTapEvent extends InterestsEvent {
   });
 }
 
-class ContinueTapEvent extends InterestsEvent {}
+class ContinueTapEvent extends InterestsEvent {
+  final List<InterestModel> interests;
+
+  ContinueTapEvent({
+    required this.interests,
+  });
+
+  @override
+  List<Object> get props => [interests];
+}
 
 class SkipTapEvent extends InterestsEvent {}

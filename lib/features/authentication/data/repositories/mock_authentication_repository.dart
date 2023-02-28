@@ -159,4 +159,9 @@ class MockAuthenticationRepository extends IAuthenticationRepository {
 
   @override
   bool get isFirstTime => true;
+
+  @override
+  Future<void> saveInterests(List<InterestModel> interests) async {
+    await Future.delayed(const Duration(seconds: 2));
+  }
 }

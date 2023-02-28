@@ -38,4 +38,6 @@ abstract class IAuthenticationDataSource {
   Future<ApiResponse<UserModel>> uploadProfileImage(File image);
 
   Future<ApiResponse<PaginatedData<InterestModel>>> fetchInterests();
+
+  Future<void> saveInterests(List<InterestModel> interests);
 }

@@ -14,6 +14,7 @@ abstract class IAuthenticationRepository {
   Future<UserModel> verifyOtp(VerifyOtpParams params);
   Future<void> setUpProfile(ProfileSetupParam params);
   Future<PaginatedData<InterestModel>> fetchInterests();
+  Future<void> saveInterests(List<InterestModel> interests);
 
   bool get isFirstTime;
 }
