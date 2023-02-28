@@ -22,6 +22,7 @@ import 'package:funconnect/features/places/presentation/blocs/category_detail_bl
 import 'package:funconnect/features/places/presentation/blocs/place_detail_bloc/place_detail_bloc.dart';
 import 'package:funconnect/features/places/presentation/views/category_detail_view.dart';
 import 'package:funconnect/features/places/presentation/views/place_detail_view.dart';
+import 'package:funconnect/features/profile/domain/entities/profile_model.dart';
 import 'package:funconnect/features/profile/presentation/blocs/edit_profile_bloc/edit_profile_bloc.dart';
 import 'package:funconnect/features/profile/presentation/blocs/manage_login_options_bloc/manage_login_options_bloc.dart';
 import 'package:funconnect/features/profile/presentation/blocs/profile_bloc/profile_bloc.dart';
@@ -161,14 +162,16 @@ class Routes {
 
       // Profile
       case editProfileViewRoute:
+        final profile = settings.arguments as ProfileModel;
         return _registerBlocView(
           view: const EditProfileView(),
-          bloc: EditProfileBloc(),
+          bloc: EditProfileBloc(profile),
         );
       case manageLoginOptionsRoute:
+        final profile = settings.arguments as ProfileModel;
         return _registerBlocView(
           view: const ManageLogInOptionsView(),
-          bloc: ManageLoginOptionsBloc(),
+          bloc: ManageLoginOptionsBloc(profile),
         );
       case rateYourExperienceRoute:
         return MaterialPageRoute(

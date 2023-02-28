@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:funconnect/core/models/_models.dart';
 import 'package:logger/logger.dart';
@@ -102,6 +104,34 @@ class NetworkService extends INetworkService {
       final res = await _dio.post(
         url,
         data: body,
+        options: Options(headers: _headers),
+      );
+      if (res.statusCode == 200 || res.statusCode == 201) {
+        return ApiResponse(data: res.data);
+      }
+      throw Failure(res.statusMessage!);
+    } on DioError catch (e) {
+      _logger.e(e.toString());
+      throw convertException(e);
+    } catch (e) {
+      _logger.e(e.toString());
+      throw Failure(e.toString());
+    }
+  }
+
+  @override
+  Future<ApiResponse<Map<String, dynamic>>> postFile(String url, String key,File file,
+      {Map<String, String>? headers}) async {
+    try {
+      if (headers != null) {
+        _headers.addAll(headers);
+      }
+      String fileName = file.path.split('/').last;
+      FormData formData = FormData.fromMap({key: await MultipartFile.fromFile(file.path, filename: fileName)});
+
+      final res = await _dio.post(
+        url,
+        data: formData,
         options: Options(headers: _headers),
       );
       if (res.statusCode == 200 || res.statusCode == 201) {
