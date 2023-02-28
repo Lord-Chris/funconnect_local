@@ -105,7 +105,7 @@ class _ProfileViewState extends State<ProfileView> {
                           padding: EdgeInsets.zero,
                         ),
                         child: Text(
-                          "${userProfile.locationModel == null ? '' : userProfile.locationModel!.state}, ${userProfile.locationModel == null ? '' : userProfile.locationModel!.country}",
+                          context.watch<ProfileBloc>().location?.address ?? "",
                           textAlign: TextAlign.center,
                           style: AppTextStyles.regular14.copyWith(
                             color: AppColors.secondary500,

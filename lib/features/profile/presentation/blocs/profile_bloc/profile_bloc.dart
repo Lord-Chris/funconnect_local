@@ -39,8 +39,10 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   final _navigationService = locator<INavigationService>();
   final _localStorageService = locator<ILocalStorageService>();
   final _forceUpateAppService = locator<IForceUpdateAppService>();
+  final _locationService = locator<ILocationService>();
 
   String? appVersion;
+
   Future<FutureOr<void>> _onInitProfileEvent(
     InitProfileEvent event,
     Emitter<ProfileState> emit,
@@ -165,4 +167,6 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   ) {
     GeneralUtils.openUrl(Uri.parse(AppConstants.privacyPolicy));
   }
+
+  AppLocation? get location => _locationService.userLocation;
 }
