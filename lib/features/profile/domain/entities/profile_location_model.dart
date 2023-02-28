@@ -47,6 +47,8 @@ class ProfileLocationModel extends Equatable {
     };
   }
 
+  String toJson() => json.encode(toMap());
+
   factory ProfileLocationModel.fromMap(Map<String, dynamic> map) {
     return ProfileLocationModel(
       address: map['address'],
@@ -57,8 +59,6 @@ class ProfileLocationModel extends Equatable {
       long: num.tryParse(map['long']) ?? 0,
     );
   }
-
-  String toJson() => json.encode(toMap());
 
   factory ProfileLocationModel.fromJson(String source) =>
       ProfileLocationModel.fromMap(json.decode(source));

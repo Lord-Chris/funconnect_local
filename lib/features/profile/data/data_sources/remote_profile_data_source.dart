@@ -7,7 +7,7 @@ import 'package:funconnect/features/profile/domain/entities/profile_location_mod
 import 'package:funconnect/features/profile/domain/entities/profile_model.dart';
 import 'package:funconnect/services/_services.dart';
 
-class RemotePlaceDataSource with ApiMixin {
+class RemoteProfileDataSource with ApiMixin {
   final _networkService = locator<INetworkService>();
 
   Future<ProfileModel> getUserProfile() async {
@@ -36,9 +36,25 @@ class RemotePlaceDataSource with ApiMixin {
     );
   }
 
-  Future<void> updateUserProfileImage(File file) async {
-    await _networkService.put(
-      ApiConstants.profileImage,
+  Future<void> updateUserProfileImage(File imageFile) async {
+    await _networkService.postFile(
+      ApiConstants.profileImageSetup,
+      ApiConstants.imageKey,
+      imageFile,
+      headers: headers,
+    );
+  }
+
+  Future<void> deleteAccount() async {
+    await _networkService.delete(
+      ApiConstants.deleteAccount,
+      headers: headers,
+    );
+  }
+
+  Future<void> logout() async {
+    await _networkService.post(
+      ApiConstants.logout,
       headers: headers,
     );
   }
