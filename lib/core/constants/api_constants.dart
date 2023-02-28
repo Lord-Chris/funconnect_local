@@ -15,7 +15,7 @@ class ApiConstants {
   static get loginWithOtp => "$_auth/login/otp";
   static get loginWithGoogle => "$_auth/login/google";
 
-  //
+  //PROFILE
   static get profileSetup => "$_core/profile";
   static get profileImage => "$profileSetup/image";
   static get profileLocationSetup => "$_core/profile/location";
@@ -40,4 +40,7 @@ class ApiConstants {
 
   // EVENTS
   static get events => "$_baseUrl/events";
+
+  //SAVED
+  static get savedPlaces => "$places/saved-places";
 }

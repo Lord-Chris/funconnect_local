@@ -58,6 +58,10 @@ class AppText {
   static const aTCreateEventCreateEventText = 'Create Event';
   static const aTCreateEventAddImageText = 'Add Image';
 
+  ///Saved View Texts
+  static const aTSaved = 'Saved';
+  static const aTSavedSubtext = 'Bookmark your favourite places';
+
   ///Profile View Texts
   static const aTEditProfile = 'Edit Profile';
   static const aTPersonalInformation = 'Personal Information';

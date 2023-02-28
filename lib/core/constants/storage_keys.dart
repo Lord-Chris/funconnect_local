@@ -13,6 +13,9 @@ class StorageKeys {
   // Places
   static const homeTrends = "home-trends";
 
+  //Saved Places
+  static const userSavedPlaces = "user-saved-places";
+
   // Profile
   static const userProfile = "user-profile";
 }
