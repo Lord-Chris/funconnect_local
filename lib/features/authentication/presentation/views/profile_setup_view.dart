@@ -1,3 +1,4 @@
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -58,33 +59,42 @@ class ProfileSetUpView extends HookWidget {
                         ),
                       ),
                       const SizedBox(height: 29),
-                      GestureDetector(
-                        onTap: () => context
-                            .read<ProfileSetupBloc>()
-                            .add(AddImageEvent()),
-                        child: BlocBuilder<ProfileSetupBloc, ProfileSetupState>(
-                          buildWhen: (_, current) =>
-                              current is ProfileSetupIdleState,
-                          builder: (context, state) {
-                            if (state is! ProfileSetupIdleState ||
-                                state.image == null) {
-                              return const CircleAvatar(
-                                radius: 58.0,
-                                backgroundColor: AppColors.lightAsh,
-                                child: Center(
-                                  child: Icon(
-                                    Icons.camera_alt,
-                                    size: 50,
+                      DottedBorder(
+                        borderType: BorderType.Circle,
+                        padding: const EdgeInsets.all(8),
+                        color: AppColors.lightAsh,
+                        dashPattern: const [8, 6],
+                        strokeWidth: 1.6,
+                        strokeCap: StrokeCap.round,
+                        child: GestureDetector(
+                          onTap: () => context
+                              .read<ProfileSetupBloc>()
+                              .add(AddImageEvent()),
+                          child:
+                              BlocBuilder<ProfileSetupBloc, ProfileSetupState>(
+                            buildWhen: (_, current) =>
+                                current is ProfileSetupIdleState,
+                            builder: (context, state) {
+                              if (state is! ProfileSetupIdleState ||
+                                  state.image == null) {
+                                return const CircleAvatar(
+                                  radius: 55,
+                                  backgroundColor: AppColors.lightAsh,
+                                  child: Center(
+                                    child: Icon(
+                                      Icons.camera_alt,
+                                      size: 50,
+                                    ),
                                   ),
-                                ),
+                                );
+                              }
+                              return CircleAvatar(
+                                radius: 55,
+                                backgroundColor: AppColors.lightAsh,
+                                backgroundImage: FileImage(state.image!),
                               );
-                            }
-                            return CircleAvatar(
-                              radius: 58.0,
-                              backgroundColor: AppColors.lightAsh,
-                              backgroundImage: FileImage(state.image!),
-                            );
-                          },
+                            },
+                          ),
                         ),
                       ),
                       const SizedBox(height: 8.0),
