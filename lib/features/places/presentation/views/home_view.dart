@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:funconnect/features/dashboard/presentation/blocs/dashboard_bloc/dashboard_bloc.dart';
+import 'package:funconnect/features/dashboard/presentation/blocs/dashboard_bloc/dashboard_event.dart';
 import 'package:funconnect/features/places/domain/entities/category_model.dart';
 import 'package:funconnect/features/places/domain/entities/place_model.dart';
 import 'package:funconnect/features/places/presentation/blocs/home_bloc/home_bloc.dart';
@@ -36,12 +38,15 @@ class _HomeViewState extends State<HomeView> {
       appBar: AppBar(
         titleSpacing: 10,
         leading: Center(
-          child: AppNetworkImage(
-            size: Size.fromRadius(25.r),
-            isCircular: true,
-            url: context.watch<HomeBloc>().user.photoUrl,
-            fit: BoxFit.cover,
-            placeholderAssetImage: AppAssets.fallbackUserProfileSvg,
+          child: InkWell(
+            onTap: () => context.read<DashboardBloc>().add(TabTapEvent(4)),
+            child: AppNetworkImage(
+              size: Size.fromRadius(25.r),
+              isCircular: true,
+              url: context.watch<HomeBloc>().user.photoUrl,
+              fit: BoxFit.cover,
+              placeholderAssetImage: AppAssets.fallbackUserProfileSvg,
+            ),
           ),
         ),
         title: Column(
@@ -165,59 +170,8 @@ class _HomeViewState extends State<HomeView> {
                                   ),
                                 );
                               }
-                              if (state.interestPlaces.isNotEmpty) {
-                                return SingleChildScrollView(
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Spacing.vertRegular(),
-                                      Padding(
-                                        padding: REdgeInsets.symmetric(
-                                            horizontal: 16),
-                                        child: Text(
-                                          "Fine Dining",
-                                          style: AppTextStyles.medium28,
-                                        ),
-                                      ),
-                                      Spacing.vertTiny(),
-                                      Padding(
-                                        padding: REdgeInsets.symmetric(
-                                            horizontal: 16),
-                                        child: Text(
-                                          "Explore the best cuisines",
-                                          style: AppTextStyles.regular16,
-                                        ),
-                                      ),
-                                      Spacing.vertRegular(),
-                                      GridView.builder(
-                                        shrinkWrap: true,
-                                        itemCount: 5,
-                                        padding: REdgeInsets.symmetric(
-                                            horizontal: 16),
-                                        physics:
-                                            const NeverScrollableScrollPhysics(),
-                                        gridDelegate:
-                                            SliverGridDelegateWithMaxCrossAxisExtent(
-                                          maxCrossAxisExtent: 182.r * 1.3,
-                                          childAspectRatio: 1,
-                                          mainAxisSpacing: 10.r,
-                                          crossAxisSpacing: 8.r,
-                                        ),
-                                        itemBuilder: (context, index) {
-                                          final place = mockPlace;
-                                          return HomeCategoriesLargeWidget(
-                                            coverImage: place.coverImagePath,
-                                            name: place.name,
-                                            isBookmarked: false,
-                                            rating: place.avgRating,
-                                            ratingCount: place.avgReviewCount,
-                                          );
-                                        },
-                                      ),
-                                    ],
-                                  ),
-                                );
+                              if (state.interest != null) {
+                                return _InterestSelectedSection(state: state);
                               }
                               if (state.interestPlaces.isEmpty) {
                                 return _DefaultHomeView(state: state);
@@ -234,6 +188,80 @@ class _HomeViewState extends State<HomeView> {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class _InterestSelectedSection extends StatelessWidget {
+  final HomeIdleState state;
+  const _InterestSelectedSection({
+    Key? key,
+    required this.state,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    if (state.interestPlaces.isEmpty) {
+      return Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              "No fun places in this category",
+              style: AppTextStyles.medium14,
+            ),
+          ],
+        ),
+      );
+    }
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Spacing.vertRegular(),
+          Padding(
+            padding: REdgeInsets.symmetric(horizontal: 16),
+            child: Text(
+              state.interest!.name,
+              textAlign: TextAlign.start,
+              style: AppTextStyles.medium28,
+            ),
+          ),
+          Spacing.vertTiny(),
+          Padding(
+            padding: REdgeInsets.symmetric(horizontal: 16),
+            child: Text(
+              "Explore the best ${state.interest!.name.toLowerCase()}",
+              textAlign: TextAlign.start,
+              style: AppTextStyles.regular16,
+            ),
+          ),
+          Spacing.vertRegular(),
+          GridView.builder(
+            shrinkWrap: true,
+            itemCount: state.interestPlaces.length,
+            padding: REdgeInsets.symmetric(horizontal: 16),
+            physics: const NeverScrollableScrollPhysics(),
+            gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+              maxCrossAxisExtent: 182.r * 1.3,
+              childAspectRatio: 1,
+              mainAxisSpacing: 10.r,
+              crossAxisSpacing: 8.r,
+            ),
+            itemBuilder: (context, index) {
+              final place = state.interestPlaces[index];
+              return HomeCategoriesLargeWidget(
+                coverImage: place.coverImagePath,
+                name: place.name,
+                isBookmarked: false,
+                rating: place.avgRating,
+                ratingCount: place.avgReviewCount,
+              );
+            },
+          ),
+        ],
       ),
     );
   }

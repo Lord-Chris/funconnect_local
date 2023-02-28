@@ -37,8 +37,8 @@ class ApiConstants {
   }
 
   static String categoryPlaces(String catId, AppLocation? loc) {
-    if (loc == null) return "$categories/$catId";
-    return "$categories/$catId?lat=${loc.lat}&long=${loc.long}&city=${loc.city}&state=${loc.state}&country=${loc.country}";
+    if (loc == null) return "$places/category/$catId";
+    return "$places/category/$catId?lat=${loc.lat}&long=${loc.long}&city=${loc.city}&state=${loc.state}&country=${loc.country}";
   }
 
   static String explore(AppLocation? loc) {

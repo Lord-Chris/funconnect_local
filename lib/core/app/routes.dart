@@ -10,7 +10,9 @@ import 'package:funconnect/features/authentication/presentation/views/email_veri
 import 'package:funconnect/features/authentication/presentation/views/interest_view.dart';
 import 'package:funconnect/features/authentication/presentation/views/verify_email_view.dart';
 import 'package:funconnect/features/authentication/presentation/views/welcome_view.dart';
+import 'package:funconnect/features/dashboard/presentation/blocs/dashboard_bloc/dashboard_bloc.dart';
 import 'package:funconnect/features/dashboard/presentation/views/dashboard_view.dart';
+import 'package:funconnect/features/dashboard/presentation/views/notifications_view.dart';
 import 'package:funconnect/features/events/domain/entities/event_model.dart';
 import 'package:funconnect/features/events/presentation/views/booking_view.dart';
 import 'package:funconnect/features/events/presentation/views/checkout_view.dart';
@@ -19,7 +21,6 @@ import 'package:funconnect/features/places/domain/entities/place_model.dart';
 import 'package:funconnect/features/places/presentation/blocs/category_detail_bloc/category_detail_bloc.dart';
 import 'package:funconnect/features/places/presentation/blocs/place_detail_bloc/place_detail_bloc.dart';
 import 'package:funconnect/features/places/presentation/views/category_detail_view.dart';
-import 'package:funconnect/features/places/presentation/views/notifications_view.dart';
 import 'package:funconnect/features/places/presentation/views/place_detail_view.dart';
 import 'package:funconnect/features/profile/domain/entities/profile_model.dart';
 import 'package:funconnect/features/profile/presentation/blocs/edit_profile_bloc/edit_profile_bloc.dart';
@@ -34,6 +35,8 @@ import 'package:funconnect/features/startup/presentation/blocs/onboarding_bloc/o
 import 'package:funconnect/features/startup/presentation/blocs/splash_bloc/splash_bloc.dart';
 import 'package:funconnect/features/startup/presentation/views/onboarding_view.dart';
 import 'package:funconnect/features/startup/presentation/views/splash_view.dart';
+import 'package:funconnect/features/startup/presentation/views/version_update_view.dart';
+
 import '../../features/events/presentation/views/create_event_view.dart';
 import '../../features/events/presentation/views/event_description_view.dart';
 
@@ -41,6 +44,7 @@ class Routes {
   // Onboarding
   static const initialRoute = splashRoute;
   static const splashRoute = '/';
+  static const versionUpdateRoute = '/version-update';
   static const onboardingRoute = '/onboarding';
   static const welcomeViewRoute = '/welcome-view';
   // static const emailSignInRoute = '/email-sign-in';
@@ -81,6 +85,8 @@ class Routes {
           view: const SplashView(),
           bloc: SplashBloc(),
         );
+      case versionUpdateRoute:
+        return MaterialPageRoute(builder: (_) => const VersionUpdateView());
       case onboardingRoute:
         return _registerBlocView(
           view: const OnboardingView(),
@@ -130,7 +136,10 @@ class Routes {
 
       // Dashboard
       case dashboardViewRoute:
-        return MaterialPageRoute(builder: (_) => const DashboardView());
+        return _registerBlocView(
+          bloc: DashboardBloc(),
+          view: const DashboardView(),
+        );
 
       case notificationsViewRoute:
         return _registerBlocView(

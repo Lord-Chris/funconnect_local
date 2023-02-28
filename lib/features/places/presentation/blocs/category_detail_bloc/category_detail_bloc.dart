@@ -21,6 +21,7 @@ class CategoryDetailBloc
     CategoryInitEvent event,
     Emitter<CategoryDetailState> emit,
   ) async {
+    emit(CategoryDetailLoadingState());
     final res = await FetchPlacesByCategory().call(event.category);
     emit(CategoryDetailIdleState(places: res));
   }
