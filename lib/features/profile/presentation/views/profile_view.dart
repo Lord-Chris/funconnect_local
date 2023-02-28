@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -106,7 +105,7 @@ class _ProfileViewState extends State<ProfileView> {
                           padding: EdgeInsets.zero,
                         ),
                         child: Text(
-                          "${userProfile.locationModel==null?'':userProfile.locationModel!.state}, ${userProfile.locationModel==null?'':userProfile.locationModel!.country}",
+                          "${userProfile.locationModel == null ? '' : userProfile.locationModel!.state}, ${userProfile.locationModel == null ? '' : userProfile.locationModel!.country}",
                           textAlign: TextAlign.center,
                           style: AppTextStyles.regular14.copyWith(
                             color: AppColors.secondary500,
@@ -206,7 +205,8 @@ class _ProfileViewState extends State<ProfileView> {
                         ),
                         _buildProfileItems(
                           "Rate the app",
-                          onTap: () => context.read<ProfileBloc>().add(RateYourExperienceTapEvent(context: context)),
+                          onTap: () => context.read<ProfileBloc>().add(
+                              RateYourExperienceTapEvent(context: context)),
                         ),
                         _buildProfileItems(
                           "Suggestions",
@@ -239,9 +239,15 @@ class _ProfileViewState extends State<ProfileView> {
                         ),
                         _buildProfileItems(
                           "Privacy",
+                          onTap: () => context
+                              .read<ProfileBloc>()
+                              .add(PrivacyPolicyTapEvent()),
                         ),
                         _buildProfileItems(
                           "Terms of use",
+                          onTap: () => context
+                              .read<ProfileBloc>()
+                              .add(TermsOfUseTapEvent()),
                         ),
                       ],
                     ),
