@@ -12,10 +12,10 @@ import 'package:funconnect/features/authentication/presentation/views/verify_ema
 import 'package:funconnect/features/authentication/presentation/views/welcome_view.dart';
 import 'package:funconnect/features/dashboard/presentation/blocs/dashboard_bloc/dashboard_bloc.dart';
 import 'package:funconnect/features/dashboard/presentation/views/dashboard_view.dart';
+import 'package:funconnect/features/dashboard/presentation/views/notifications_view.dart';
 import 'package:funconnect/features/events/domain/entities/event_model.dart';
 import 'package:funconnect/features/events/presentation/views/booking_view.dart';
 import 'package:funconnect/features/events/presentation/views/checkout_view.dart';
-import 'package:funconnect/features/dashboard/presentation/views/notifications_view.dart';
 import 'package:funconnect/features/places/domain/entities/category_model.dart';
 import 'package:funconnect/features/places/domain/entities/place_model.dart';
 import 'package:funconnect/features/places/presentation/blocs/category_detail_bloc/category_detail_bloc.dart';
@@ -34,6 +34,7 @@ import 'package:funconnect/features/startup/presentation/blocs/onboarding_bloc/o
 import 'package:funconnect/features/startup/presentation/blocs/splash_bloc/splash_bloc.dart';
 import 'package:funconnect/features/startup/presentation/views/onboarding_view.dart';
 import 'package:funconnect/features/startup/presentation/views/splash_view.dart';
+import 'package:funconnect/features/startup/presentation/views/version_update_view.dart';
 
 import '../../features/events/presentation/views/create_event_view.dart';
 import '../../features/events/presentation/views/event_description_view.dart';
@@ -42,6 +43,7 @@ class Routes {
   // Onboarding
   static const initialRoute = splashRoute;
   static const splashRoute = '/';
+  static const versionUpdateRoute = '/version-update';
   static const onboardingRoute = '/onboarding';
   static const welcomeViewRoute = '/welcome-view';
   // static const emailSignInRoute = '/email-sign-in';
@@ -82,6 +84,8 @@ class Routes {
           view: const SplashView(),
           bloc: SplashBloc(),
         );
+      case versionUpdateRoute:
+        return MaterialPageRoute(builder: (_) => const VersionUpdateView());
       case onboardingRoute:
         return _registerBlocView(
           view: const OnboardingView(),

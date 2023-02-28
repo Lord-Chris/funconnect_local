@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:funconnect/core/app/_app.dart';
 import 'package:funconnect/core/constants/hive_keys.dart';
 import 'package:funconnect/core/constants/storage_keys.dart';
-import 'package:funconnect/core/utils/general_utils.dart';
 import 'package:funconnect/features/startup/presentation/blocs/splash_bloc/splash_event.dart';
 import 'package:funconnect/features/startup/presentation/blocs/splash_bloc/splash_state.dart';
 import 'package:funconnect/services/_services.dart';
@@ -28,8 +27,9 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
 
   Future<void> _onSplashFinished(
       FinishSplashEvent event, Emitter<SplashState> emit) async {
-    if (!await _forceUpdateAppService.needsUpdate) {
-      return await GeneralUtils.updateApp();
+    if (await _forceUpdateAppService.needsUpdate) {
+      _navigationService.offNamed(Routes.versionUpdateRoute);
+      return;
     }
     if (isAuthenticated) {
       _navigationService.offNamed(Routes.dashboardViewRoute);

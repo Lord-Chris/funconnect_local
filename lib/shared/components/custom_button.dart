@@ -14,6 +14,7 @@ class AppButton extends StatelessWidget {
   final FontWeight fontWeight;
   final EdgeInsetsGeometry? padding;
   final Widget? customChild, prefixWidget, suffixWidget;
+
   const AppButton({
     Key? key,
     this.onTap,
