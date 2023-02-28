@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:funconnect/core/app/_app.dart';
 import 'package:funconnect/core/models/_models.dart';
 import 'package:funconnect/core/usecases/usecase.dart';
+import 'package:funconnect/core/utils/general_utils.dart';
 import 'package:funconnect/features/authentication/domain/usecases/apple_signin_usecase.dart';
 import 'package:funconnect/features/authentication/domain/usecases/google_signin_usecase.dart';
 import 'package:funconnect/features/authentication/presentation/blocs/welcome_bloc/welcome_event.dart';
@@ -20,7 +21,7 @@ class WelcomeBloc extends Bloc<WelcomeEvent, WelcomeState> {
     on<EmailSignInEvent>(_onEmailSignInEvent);
     on<GoogleSignInEvent>(_onGoogleSignInEvent);
     on<AppleSignInEvent>(_onAppleSignInEvent);
-    on<TermsOfUseTapEvent>(_onTermsOfUseTapEvent);
+    on<TandCTapEvent>(_onTandCTapEvent);
     on<PrivacyPolicyTapEvent>(_onPrivacyPolicyTapEvent);
   }
 
@@ -77,13 +78,17 @@ class WelcomeBloc extends Bloc<WelcomeEvent, WelcomeState> {
     }
   }
 
-  FutureOr<void> _onTermsOfUseTapEvent(
-    TermsOfUseTapEvent event,
+  FutureOr<void> _onTandCTapEvent(
+    TandCTapEvent event,
     Emitter<WelcomeState> emit,
-  ) {}
+  ) {
+    GeneralUtils.openUrl(Uri.parse("https://funconnect.app"));
+  }
 
   FutureOr<void> _onPrivacyPolicyTapEvent(
     PrivacyPolicyTapEvent event,
     Emitter<WelcomeState> emit,
-  ) {}
+  ) {
+    GeneralUtils.openUrl(Uri.parse("https://funconnect.app"));
+  }
 }
