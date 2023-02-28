@@ -1,5 +1,6 @@
 import 'package:funconnect/features/authentication/data/data_sources/http_authentication_datasource.dart';
 import 'package:funconnect/features/authentication/data/data_sources/i_authentication_datasource.dart';
+import 'package:funconnect/features/dashboard/data/repository/i_dashboard_repository.dart';
 import 'package:funconnect/features/events/data/data_sources/http_events_data_source.dart';
 import 'package:funconnect/features/events/data/data_sources/i_events_data_source.dart';
 import 'package:funconnect/features/events/data/repositories/events_repository.dart';
@@ -10,6 +11,7 @@ import 'package:funconnect/services/_services.dart';
 import 'package:get_it/get_it.dart';
 
 import '../../features/authentication/data/repositories/_authentication_repo.dart';
+import '../../features/dashboard/data/repository/dashboard_repository.dart';
 import '../../features/places/data/repository/i_place_repository.dart';
 import '../../features/places/data/repository/place_repository.dart';
 
@@ -26,11 +28,17 @@ Future<void> setUpLocator() async {
   locator.registerLazySingleton<IMediaService>(() => MediaService());
   locator
       .registerLazySingleton<IConnectivityService>(() => ConnectivityService());
-  await _setUpLocalStorage();
+  locator.registerLazySingleton<IForceUpdateAppService>(
+      () => ForceUpdateAppService());
 
+  await _setUpLocalStorage();
+  await _setUpDynamicLinkService();
   // Repositories
   locator.registerLazySingleton<IAuthenticationRepository>(
     () => isMock ? MockAuthenticationRepository() : AuthenticationRepository(),
+  );
+  locator.registerLazySingleton<IDashboardRepository>(
+    () => DashboardRepository(),
   );
   locator.registerLazySingleton<IEventsRepository>(
     () => EventsRepository(),
@@ -55,4 +63,10 @@ Future<void> _setUpLocalStorage() async {
   locator
       .registerLazySingleton<ILocalStorageService>(() => LocalStorageService());
   await locator<ILocalStorageService>().init();
+}
+
+Future<void> _setUpDynamicLinkService() async {
+  locator
+      .registerLazySingleton<IDynamicLinkService>(() => DynamicLinkService());
+  await locator<IDynamicLinkService>().init();
 }

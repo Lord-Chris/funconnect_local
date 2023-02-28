@@ -105,7 +105,7 @@ class _ProfileViewState extends State<ProfileView> {
                           padding: EdgeInsets.zero,
                         ),
                         child: Text(
-                          "${userProfile.locationModel!.state}, ${userProfile.locationModel!.country}",
+                          context.watch<ProfileBloc>().location?.address ?? "",
                           textAlign: TextAlign.center,
                           style: AppTextStyles.regular14.copyWith(
                             color: AppColors.secondary500,
@@ -120,8 +120,9 @@ class _ProfileViewState extends State<ProfileView> {
                     isCollapsed: true,
                     padding: REdgeInsets.fromLTRB(88, 19, 88, 19),
                     labelColor: AppColors.black,
-                    onTap: () =>
-                        context.read<ProfileBloc>().add(EditProfileTapEvent()),
+                    onTap: () => context
+                        .read<ProfileBloc>()
+                        .add(EditProfileTapEvent(userProfile: userProfile)),
                   ),
                   Spacing.vertLarge(),
                   _ProfileSubButton(
@@ -157,9 +158,9 @@ class _ProfileViewState extends State<ProfileView> {
                               Icons.arrow_forward_ios,
                               size: 15,
                             ),
-                            onTap: () => context
-                                .read<ProfileBloc>()
-                                .add(ManageLoginOptionsTapEvent())),
+                            onTap: () => context.read<ProfileBloc>().add(
+                                ManageLoginOptionsTapEvent(
+                                    userProfile: userProfile))),
                         _buildProfileItems("Notifications",
                             icon: const Icon(
                               Icons.arrow_forward_ios,
@@ -202,10 +203,11 @@ class _ProfileViewState extends State<ProfileView> {
                         _buildProfileItems(
                           "Help desk",
                         ),
-                        _buildProfileItems("Rate the app",
-                            onTap: () => context
-                                .read<ProfileBloc>()
-                                .add(RateYourExperienceTapEvent())),
+                        _buildProfileItems(
+                          "Rate the app",
+                          onTap: () => context.read<ProfileBloc>().add(
+                              RateYourExperienceTapEvent(context: context)),
+                        ),
                         _buildProfileItems(
                           "Suggestions",
                         ),
@@ -229,7 +231,9 @@ class _ProfileViewState extends State<ProfileView> {
                         _buildProfileItems(
                           "Version",
                           icon: Text(
-                            "v1.0",
+                            context.read<ProfileBloc>().appVersion == null
+                                ? ""
+                                : "v${context.watch<ProfileBloc>().appVersion}",
                             style: AppTextStyles.medium14.copyWith(
                               color: AppColors.secondary500,
                             ),
@@ -237,9 +241,15 @@ class _ProfileViewState extends State<ProfileView> {
                         ),
                         _buildProfileItems(
                           "Privacy",
+                          onTap: () => context
+                              .read<ProfileBloc>()
+                              .add(PrivacyPolicyTapEvent()),
                         ),
                         _buildProfileItems(
                           "Terms of use",
+                          onTap: () => context
+                              .read<ProfileBloc>()
+                              .add(TermsOfUseTapEvent()),
                         ),
                       ],
                     ),
@@ -281,18 +291,24 @@ class _ProfileViewState extends State<ProfileView> {
                   Spacing.vertLarge(),
                   Spacing.vertMedium(),
                   AppButton(
-                    label: "Log out",
+                    label: AppText.aTLogOut,
                     isCollapsed: true,
-                    padding: REdgeInsets.fromLTRB(88, 19, 88, 19),
-                    labelColor: AppColors.black,
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 88, vertical: 16),
                     onTap: () =>
                         context.read<ProfileBloc>().add(LogoutTapEvent()),
+                    labelColor: AppColors.black,
                   ),
                   Spacing.vertExtraMedium(),
-                  Text(
-                    "Delete account",
-                    style: AppTextStyles.regular14.copyWith(
-                      color: AppColors.red,
+                  InkWell(
+                    onTap: () => context
+                        .read<ProfileBloc>()
+                        .add(DeleteTapAccountEvent()),
+                    child: Text(
+                      AppText.aTDeleteAccount,
+                      style: AppTextStyles.regular14.copyWith(
+                        color: AppColors.deleteTextRed,
+                      ),
                     ),
                   )
                 ],
@@ -333,6 +349,7 @@ class _ProfileSubButton extends StatelessWidget {
   final Color? borderColor;
   final String label;
   final VoidCallback onTap;
+
   const _ProfileSubButton({
     Key? key,
     required this.buttonColor,

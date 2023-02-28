@@ -9,8 +9,9 @@ class PickImageUseCase with UseCases<File?, NoParams> {
 
   @override
   Future<File?> call(NoParams params) async {
-    final res = await _mediaService.pickImage(fromGallery: true);
-    if (res == null) return null;
-    return res;
+    File? image = await _mediaService.pickImage(fromGallery: true);
+    if (image == null) return null;
+    image = await _mediaService.getImageCropped(file: image);
+    return image;
   }
 }

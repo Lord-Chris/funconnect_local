@@ -8,6 +8,6 @@ class FetchUserProfile with UseCases<ProfileModel, NoParams> {
 
   @override
   Future<ProfileModel> call(NoParams params) async {
-    return await _profileRepository.fetchProfile();
+    return await _profileRepository.fetchUserProfile();
   }
 }

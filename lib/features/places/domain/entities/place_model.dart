@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
+import 'package:funconnect/features/places/domain/entities/full_place_model.dart';
 
 class PlaceModel extends Equatable {
   final String id;
@@ -69,6 +70,23 @@ class PlaceModel extends Equatable {
 
   factory PlaceModel.fromJson(String source) =>
       PlaceModel.fromMap(json.decode(source));
+
+  factory PlaceModel.fromFullPlaceModel(FullPlaceModel placeModel) {
+    return PlaceModel(
+      id: placeModel.id,
+      name: placeModel.name,
+      headline: placeModel.headline,
+      coverImagePath: placeModel.coverImagePath,
+      description: placeModel.description,
+      addedBy: placeModel.addedBy,
+      opensAt: placeModel.opensAt,
+      closesAt: placeModel.closesAt,
+      phoneE164: placeModel.phoneE164,
+      avgRating: placeModel.avgRating,
+      avgReviewCount: placeModel.avgReviewCount,
+      distance: 0,
+    );
+  }
 
   @override
   List<Object> get props {

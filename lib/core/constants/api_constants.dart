@@ -15,6 +15,8 @@ class ApiConstants {
   static get requestOtp => "$_auth/login/send-otp";
   static get loginWithOtp => "$_auth/login/otp";
   static get loginWithGoogle => "$_auth/login/google";
+  static get logout => "$_auth/logout";
+  static get deleteAccount => "$_auth/delete-account";
 
   //PROFILE
   static get profileSetup => "$_core/profile";
@@ -34,6 +36,11 @@ class ApiConstants {
     return "$places/home-trends?lat=${loc.lat}&long=${loc.long}&city=${loc.city}&state=${loc.state}&country=${loc.country}";
   }
 
+  static String categoryPlaces(String catId, AppLocation? loc) {
+    if (loc == null) return "$places/category/$catId";
+    return "$places/category/$catId?lat=${loc.lat}&long=${loc.long}&city=${loc.city}&state=${loc.state}&country=${loc.country}";
+  }
+
   static String explore(AppLocation? loc) {
     if (loc == null) return "$places/explore";
     return "$places/explore?lat=${loc.lat}&long=${loc.long}&city=${loc.city}&state=${loc.state}&country=${loc.country}";
@@ -44,4 +51,6 @@ class ApiConstants {
 
   //SAVED
   static get savedPlaces => "$places/saved-places";
+
+  static get imageKey => 'image';
 }

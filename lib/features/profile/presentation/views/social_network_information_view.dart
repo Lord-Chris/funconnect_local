@@ -11,85 +11,101 @@ class SocialNetworkInformationView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Expanded(
-          child: SingleChildScrollView(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Text(
-                  AppText.aTSocialNetworkInformation,
-                  style: AppTextStyles.medium20,
-                  textAlign: TextAlign.center,
-                ),
-                SizedBox(
-                  height: 8.h,
-                ),
-                Text(
-                  AppText.aTOptional,
-                  style: AppTextStyles.regular14
-                      .copyWith(color: AppColors.locationIconAsh),
-                  textAlign: TextAlign.center,
-                ),
-                SizedBox(
-                  height: 24.h,
-                ),
-                AppTextField(
-                  label: AppText.aTTwitter,
-                  hint: AppText.aTTwitter,
-                  prefix: Align(
-                    widthFactor: 1.0,
-                    heightFactor: 1.0,
-                    child: SvgPicture.asset(
-                      AppAssets.mention,
-                      height: 20.h,
+    return BlocBuilder<EditProfileBloc, EditProfileState>(
+      builder: (context, state) {
+        TextEditingController twitterControllerController = TextEditingController();
+        TextEditingController instagramControllerController = TextEditingController();
+        TextEditingController facebookControllerController = TextEditingController();
+        TextEditingController linkedInControllerController = TextEditingController();
+        return Column(
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Text(
+                      AppText.aTSocialNetworkInformation,
+                      style: AppTextStyles.medium20,
+                      textAlign: TextAlign.center,
                     ),
-                  ),
-                ),
-                SizedBox(
-                  height: 24.h,
-                ),
-                AppTextField(
-                  label: AppText.aTInstagram,
-                  hint: AppText.aTInstagram,
-                  prefix: Align(
-                    widthFactor: 1.0,
-                    heightFactor: 1.0,
-                    child: SvgPicture.asset(
-                      AppAssets.mention,
-                      height: 20.h,
+                    SizedBox(
+                      height: 8.h,
                     ),
-                  ),
+                    Text(
+                      AppText.aTOptional,
+                      style: AppTextStyles.regular14
+                          .copyWith(color: AppColors.locationIconAsh),
+                      textAlign: TextAlign.center,
+                    ),
+                    SizedBox(
+                      height: 24.h,
+                    ),
+                    AppTextField(
+                      label: AppText.aTTwitter,
+                      hint: AppText.aTTwitter,
+                      controller: twitterControllerController,
+                      prefix: Align(
+                        widthFactor: 1.0,
+                        heightFactor: 1.0,
+                        child: SvgPicture.asset(
+                          AppAssets.mention,
+                          height: 20.h,
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 24.h,
+                    ),
+                    AppTextField(
+                      label: AppText.aTInstagram,
+                      hint: AppText.aTInstagram,
+                      controller: instagramControllerController,
+                      prefix: Align(
+                        widthFactor: 1.0,
+                        heightFactor: 1.0,
+                        child: SvgPicture.asset(
+                          AppAssets.mention,
+                          height: 20.h,
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 24.h,
+                    ),
+                     AppTextField(
+                      label: AppText.aTFacebook,
+                      hint: AppText.aTFacebook,
+                      controller: facebookControllerController,
+                    ),
+                    SizedBox(
+                      height: 24.h,
+                    ),
+                     AppTextField(
+                      label: AppText.aTLinkedIn,
+                      hint: AppText.aTLinkedIn,
+                      controller: linkedInControllerController,
+                    ),
+                    SizedBox(
+                      height: 48.h,
+                    ),
+                  ],
                 ),
-                SizedBox(
-                  height: 24.h,
-                ),
-                const AppTextField(
-                  label: AppText.aTFacebook,
-                  hint: AppText.aTFacebook,
-                ),
-                SizedBox(
-                  height: 24.h,
-                ),
-                const AppTextField(
-                  label: AppText.aTLinkedIn,
-                  hint: AppText.aTLinkedIn,
-                ),
-                SizedBox(
-                  height: 48.h,
-                ),
-              ],
+              ),
             ),
-          ),
-        ),
-        AppOrangeBtn(
-          label: AppText.aTUpdateProfile,
-          onTap: () =>
-              context.read<EditProfileBloc>().add(UpdateProfileEvent()),
-        ),
-      ],
+            AppOrangeBtn(
+              label: AppText.aTUpdateProfile,
+              isBusy: state.isUpdatingProfile,
+              onTap: () {
+                context.read<EditProfileBloc>().add(EditProfileFieldsEvent(state.profile.copyWith(twitterHandle: twitterControllerController.text,instagramHandle: instagramControllerController.text,facebookHandle: facebookControllerController.text,linkedInHandle: linkedInControllerController.text,)));
+
+                    context.read<EditProfileBloc>().add(UpdateProfileEvent());
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }

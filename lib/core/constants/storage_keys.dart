@@ -8,7 +8,8 @@ class StorageKeys {
   // User
   static const token = "token";
   static const user = "user";
-  static const stayLoggedIn = "stay_logged_in";
+  static const stayLoggedIn = "stay-logged-in";
+  static const userInterests = "user-interest";
 
   // Places
   static const homeTrends = "home-trends";
