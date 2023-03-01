@@ -15,6 +15,7 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
   }
   final _navigationService = locator<INavigationService>();
   final _localStorageService = locator<ILocalStorageService>();
+  final _forceUpdateAppService = locator<IForceUpdateAppService>();
 
   Future<void> _onSplashInit(
     InitializeSplashEvent event,
@@ -26,6 +27,10 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
 
   Future<void> _onSplashFinished(
       FinishSplashEvent event, Emitter<SplashState> emit) async {
+    if (await _forceUpdateAppService.needsUpdate) {
+      _navigationService.offNamed(Routes.versionUpdateRoute);
+      return;
+    }
     if (isAuthenticated) {
       _navigationService.offNamed(Routes.dashboardViewRoute);
     } else {

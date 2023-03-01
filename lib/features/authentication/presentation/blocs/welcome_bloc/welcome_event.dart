@@ -17,6 +17,6 @@ class GoogleSignInEvent extends WelcomeEvent {}
 
 class AppleSignInEvent extends WelcomeEvent {}
 
-class TermsOfUseTapEvent extends WelcomeEvent {}
+class TandCTapEvent extends WelcomeEvent {}
 
 class PrivacyPolicyTapEvent extends WelcomeEvent {}

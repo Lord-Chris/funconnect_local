@@ -5,7 +5,8 @@ abstract class EditProfileEvent extends Equatable {
   List<Object?> get props => [];
 }
 
-class BackTapEvent extends EditProfileEvent {
+class BackTapEvent extends EditProfileEvent{
+
   BackTapEvent();
 }
 

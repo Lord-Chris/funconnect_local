@@ -8,8 +8,10 @@ import 'package:funconnect/features/places/domain/entities/place_model.dart';
 import 'package:funconnect/features/places/domain/entities/review_model.dart';
 
 abstract class IPlaceRepository {
+  Future<List<CategoryModel>> fetchUserInterests();
   Future<List<HomeTrendItemModel>> fetchHomeTrends(AppLocation? location);
-  Future<PaginatedData<PlaceModel>> fetchPlacesByCategory(String categoryId);
+  Future<PaginatedData<PlaceModel>> fetchPlacesByCategory(
+      String categoryId, AppLocation? location);
   Future<FullPlaceModel> fetchPlaceDetail(String placeId);
   Future<PaginatedData<ReviewModel>> fetchPlaceReviews(String placeId);
   Future<void> reviewPlace(String placeId, ReviewParam review);

@@ -39,7 +39,9 @@ class InterestsBloc extends Bloc<InterestsEvent, InterestsState> {
     if (selected.contains(event.interest)) {
       selected.remove(event.interest);
     } else {
-      selected.add(event.interest);
+      if (selected.length < 5) {
+        selected.add(event.interest);
+      }
     }
     emit(InterestsInitialState(
       interests: state.interests,

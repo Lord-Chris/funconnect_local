@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -228,8 +230,9 @@ class _InfoSection extends StatelessWidget {
                     style: AppTextStyles.medium24,
                   ),
                 ),
-                AnimatedContainer(
-                  duration: const Duration(milliseconds: 1),
+                InkWell(
+                  onTap: () =>
+                      context.read<PlaceDetailBloc>().add(ShareTapEvent(place)),
                   child: SvgPicture.asset(
                     AppAssets.uploadSvg,
                     color: AppColors.white,
@@ -628,7 +631,7 @@ class _ReviewItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Tamara Jackson",
+                      "User${(Random().nextInt(200) * Random().nextInt(200))}",
                       style: AppTextStyles.dynamic(
                         10,
                         weight: FontWeight.w500,

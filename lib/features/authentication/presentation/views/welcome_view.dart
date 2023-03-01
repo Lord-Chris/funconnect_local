@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -159,6 +160,10 @@ class WelcomeView extends HookWidget {
                                       style: AppTextStyles.regular14.copyWith(
                                         color: AppColors.primary,
                                       ),
+                                      recognizer: TapGestureRecognizer()
+                                        ..onTap = () => context
+                                            .read<WelcomeBloc>()
+                                            .add(TandCTapEvent()),
                                     ),
                                     const TextSpan(text: " and "),
                                     TextSpan(
@@ -166,6 +171,10 @@ class WelcomeView extends HookWidget {
                                       style: AppTextStyles.regular14.copyWith(
                                         color: AppColors.primary,
                                       ),
+                                      recognizer: TapGestureRecognizer()
+                                        ..onTap = () => context
+                                            .read<WelcomeBloc>()
+                                            .add(PrivacyPolicyTapEvent()),
                                     ),
                                   ],
                                 ),
@@ -177,7 +186,7 @@ class WelcomeView extends HookWidget {
                         ),
                       ),
                       AppOrangeBtn(
-                        label: state.isFirstTime ? "Sign Up" : "Sign In",
+                        label: "Proceed",
                         isBusy: state is WelcomeLoadingState,
                         onTap: () {
                           if (!formKey.currentState!.validate()) return;

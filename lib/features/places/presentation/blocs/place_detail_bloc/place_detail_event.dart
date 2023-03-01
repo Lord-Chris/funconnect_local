@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:funconnect/core/models/_models.dart';
 import 'package:funconnect/features/places/domain/entities/place_location_model.dart';
 import 'package:funconnect/features/places/domain/entities/place_model.dart';
 import 'package:funconnect/features/places/domain/entities/review_model.dart';
@@ -69,4 +70,14 @@ class PhoneTapEvent extends PlaceDetailEvent {
   List<Object> get props => [phone];
 
   Uri get uri => Uri.parse("tel://$phone");
+}
+
+class ShareTapEvent extends PlaceDetailEvent {
+  final PlaceModel place;
+  ShareTapEvent(this.place);
+
+  @override
+  List<Object> get props => [place];
+
+  DeepLinkDataModel get data => DeepLinkDataModel.place(place.id);
 }

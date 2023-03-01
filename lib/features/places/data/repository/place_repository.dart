@@ -49,9 +49,24 @@ class PlaceRepository extends IPlaceRepository {
   }
 
   @override
+  Future<List<CategoryModel>> fetchUserInterests() async {
+    final useRemote = await _connectivityService.checkInternetConnection();
+    if (!useRemote) {
+      return _localDS.fetchUserInterests();
+    }
+    final interests = await _remoteDS.fetchUserInterests();
+    await _localStorageService.write(
+      HiveKeys.userBoxId,
+      key: StorageKeys.userInterests,
+      data: interests.data.map((e) => e.toMap()).toList(),
+    );
+    return interests.data;
+  }
+
+  @override
   Future<PaginatedData<PlaceModel>> fetchPlacesByCategory(
-      String categoryId) async {
-    return await _remoteDS.fetchPlacesByCategory(categoryId);
+      String categoryId, AppLocation? location) async {
+    return await _remoteDS.fetchPlacesByCategory(categoryId, location);
   }
 
   @override
