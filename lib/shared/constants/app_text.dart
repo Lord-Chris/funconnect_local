@@ -61,6 +61,8 @@ class AppText {
   ///Saved View Texts
   static const aTSaved = 'Saved';
   static const aTSavedSubtext = 'Bookmark your favourite places';
+  static const aTCreateCollectionAppBarText = 'Create Collection';
+
 
   ///Profile View Texts
   static const aTEditProfile = 'Edit Profile';

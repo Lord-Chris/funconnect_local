@@ -26,7 +26,6 @@ class _SavedViewState extends State<SavedView>
   void initState() {
     _tabController = TabController(length: 2, vsync: this);
     super.initState();
-    //context.read<EventsBloc>().add(EventInitEvent());
   }
 
   @override
@@ -103,33 +102,33 @@ class _SavedViewState extends State<SavedView>
                               style: AppTextStyles.regular16
                                   .copyWith(color: AppColors.white),
                             ),
-                            Spacing.vertExtraLarge(),
-                            Container(
-                              height: 30.0.h,
-                              width: 60.0.w,
-                              decoration: BoxDecoration(
-                                color: AppColors.imgContainerBlack,
-                                borderRadius: BorderRadius.circular(20.0.r),
-                              ),
-                              child: Center(
-                                child: Container(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(10, 5, 10, 5),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(8.0.r),
-                                    border: Border.all(
-                                        width: 3.0.w,
-                                        color: AppColors.exploreIconAsh),
-                                  ),
-                                  child: Text(
-                                    "Add collection",
-                                    style: AppTextStyles.medium20.copyWith(
-                                      color: AppColors.locationIconAsh,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
+                            // Spacing.vertExtraLarge(),
+                            // Container(
+                            //   height: 30.0.h,
+                            //   width: 60.0.w,
+                            //   decoration: BoxDecoration(
+                            //     color: AppColors.imgContainerBlack,
+                            //     borderRadius: BorderRadius.circular(20.0.r),
+                            //   ),
+                            //   child: Center(
+                            //     child: Container(
+                            //       padding:
+                            //           const EdgeInsets.fromLTRB(10, 5, 10, 5),
+                            //       decoration: BoxDecoration(
+                            //         borderRadius: BorderRadius.circular(8.0.r),
+                            //         border: Border.all(
+                            //             width: 3.0.w,
+                            //             color: AppColors.exploreIconAsh),
+                            //       ),
+                            //       child: Text(
+                            //         "Add collection",
+                            //         style: AppTextStyles.medium20.copyWith(
+                            //           color: AppColors.locationIconAsh,
+                            //         ),
+                            //       ),
+                            //     ),
+                            //   ),
+                            // ),
                           ],
                         ),
                       ),
@@ -146,33 +145,33 @@ class _SavedViewState extends State<SavedView>
                               style: AppTextStyles.regular16
                                   .copyWith(color: AppColors.white),
                             ),
-                            Spacing.vertExtraLarge(),
-                            Container(
-                              height: 30.0.h,
-                              width: 60.0.w,
-                              decoration: BoxDecoration(
-                                color: AppColors.imgContainerBlack,
-                                borderRadius: BorderRadius.circular(20.0.r),
-                              ),
-                              child: Center(
-                                child: Container(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(10, 5, 10, 5),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(8.0.r),
-                                    border: Border.all(
-                                        width: 3.0.w,
-                                        color: AppColors.exploreIconAsh),
-                                  ),
-                                  child: Text(
-                                    "Add collection",
-                                    style: AppTextStyles.medium20.copyWith(
-                                      color: AppColors.locationIconAsh,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
+                            // Spacing.vertExtraLarge(),
+                            // Container(
+                            //   height: 30.0.h,
+                            //   width: 60.0.w,
+                            //   decoration: BoxDecoration(
+                            //     color: AppColors.imgContainerBlack,
+                            //     borderRadius: BorderRadius.circular(20.0.r),
+                            //   ),
+                            //   child: Center(
+                            //     child: Container(
+                            //       padding:
+                            //           const EdgeInsets.fromLTRB(10, 5, 10, 5),
+                            //       decoration: BoxDecoration(
+                            //         borderRadius: BorderRadius.circular(8.0.r),
+                            //         border: Border.all(
+                            //             width: 3.0.w,
+                            //             color: AppColors.exploreIconAsh),
+                            //       ),
+                            //       child: Text(
+                            //         "Add collection",
+                            //         style: AppTextStyles.medium20.copyWith(
+                            //           color: AppColors.locationIconAsh,
+                            //         ),
+                            //       ),
+                            //     ),
+                            //   ),
+                            // ),
                           ],
                         ),
                       ),

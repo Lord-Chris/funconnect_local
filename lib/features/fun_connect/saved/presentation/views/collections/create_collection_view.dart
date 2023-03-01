@@ -26,10 +26,11 @@ class CreateEventView extends StatelessWidget {
           ),
         ),
         title: Text(
-          AppText.aTCreateEventAppBarText,
+          AppText.aTCreateCollectionAppBarText,
           style: AppTextStyles.medium20,
         ),
         centerTitle: true,
+        
       ),
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
