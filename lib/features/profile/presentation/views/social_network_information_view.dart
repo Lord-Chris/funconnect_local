@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:funconnect/features/profile/domain/entities/profile_model.dart';
 import 'package:funconnect/features/profile/presentation/blocs/edit_profile_bloc/edit_profile_bloc.dart';
 import 'package:funconnect/shared/components/_components.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
@@ -13,10 +14,7 @@ class SocialNetworkInformationView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<EditProfileBloc, EditProfileState>(
       builder: (context, state) {
-        TextEditingController twitterControllerController = TextEditingController();
-        TextEditingController instagramControllerController = TextEditingController();
-        TextEditingController facebookControllerController = TextEditingController();
-        TextEditingController linkedInControllerController = TextEditingController();
+        ProfileModel userProfile = state.profile;
         return Column(
           children: [
             Expanded(
@@ -45,7 +43,13 @@ class SocialNetworkInformationView extends StatelessWidget {
                     AppTextField(
                       label: AppText.aTTwitter,
                       hint: AppText.aTTwitter,
-                      controller: twitterControllerController,
+                      onChanged: (val) => context.read<EditProfileBloc>().add(
+                          EditProfileFieldsEvent(
+                              state.profile.copyWith(twitterHandle: val))),
+                      validator: (val) {
+                        return null;
+                      },
+                      initialValue: userProfile.twitterHandle,
                       prefix: Align(
                         widthFactor: 1.0,
                         heightFactor: 1.0,
@@ -61,7 +65,13 @@ class SocialNetworkInformationView extends StatelessWidget {
                     AppTextField(
                       label: AppText.aTInstagram,
                       hint: AppText.aTInstagram,
-                      controller: instagramControllerController,
+                      onChanged: (val) => context.read<EditProfileBloc>().add(
+                          EditProfileFieldsEvent(
+                              state.profile.copyWith(instagramHandle: val))),
+                      validator: (val) {
+                        return null;
+                      },
+                      initialValue: userProfile.instagramHandle,
                       prefix: Align(
                         widthFactor: 1.0,
                         heightFactor: 1.0,
@@ -74,18 +84,30 @@ class SocialNetworkInformationView extends StatelessWidget {
                     SizedBox(
                       height: 24.h,
                     ),
-                     AppTextField(
+                    AppTextField(
                       label: AppText.aTFacebook,
                       hint: AppText.aTFacebook,
-                      controller: facebookControllerController,
+                      onChanged: (val) => context.read<EditProfileBloc>().add(
+                          EditProfileFieldsEvent(
+                              state.profile.copyWith(facebookHandle: val))),
+                      validator: (val) {
+                        return null;
+                      },
+                      initialValue: userProfile.facebookHandle,
                     ),
                     SizedBox(
                       height: 24.h,
                     ),
-                     AppTextField(
+                    AppTextField(
                       label: AppText.aTLinkedIn,
                       hint: AppText.aTLinkedIn,
-                      controller: linkedInControllerController,
+                      onChanged: (val) => context.read<EditProfileBloc>().add(
+                          EditProfileFieldsEvent(
+                              state.profile.copyWith(linkedInHandle: val))),
+                      validator: (val) {
+                        return null;
+                      },
+                      initialValue: userProfile.linkedInHandle,
                     ),
                     SizedBox(
                       height: 48.h,
@@ -98,9 +120,7 @@ class SocialNetworkInformationView extends StatelessWidget {
               label: AppText.aTUpdateProfile,
               isBusy: state.isUpdatingProfile,
               onTap: () {
-                context.read<EditProfileBloc>().add(EditProfileFieldsEvent(state.profile.copyWith(twitterHandle: twitterControllerController.text,instagramHandle: instagramControllerController.text,facebookHandle: facebookControllerController.text,linkedInHandle: linkedInControllerController.text,)));
-
-                    context.read<EditProfileBloc>().add(UpdateProfileEvent());
+                context.read<EditProfileBloc>().add(UpdateProfileEvent());
               },
             ),
           ],

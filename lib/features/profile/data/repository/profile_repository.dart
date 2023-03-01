@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:funconnect/core/app/_app.dart';
 import 'package:funconnect/core/constants/_constants.dart';
+import 'package:funconnect/core/models/_models.dart';
 import 'package:funconnect/features/profile/data/data_sources/remote_profile_data_source.dart';
-import 'package:funconnect/features/profile/domain/entities/profile_location_model.dart';
 import 'package:funconnect/features/profile/domain/entities/profile_model.dart';
 import 'package:funconnect/services/_services.dart';
 
@@ -32,17 +32,17 @@ class ProfileRepository extends IProfileRepository {
   }
 
   @override
-  Future<void> updateUserProfile(ProfileModel profile) async{
+  Future<void> updateUserProfile(ProfileModel profile) async {
     await _remoteDS.updateUserProfile(profile);
   }
 
   @override
-  Future<void> updateUserLocation(ProfileLocationModel location) async{
+  Future<void> updateUserLocation(AppLocation location) async {
     await _remoteDS.updateUserLocation(location);
   }
 
   @override
-  Future<void> updateProfileImage(File image) async{
+  Future<void> updateProfileImage(File image) async {
     await _remoteDS.updateUserProfileImage(image);
   }
 
@@ -61,7 +61,8 @@ class ProfileRepository extends IProfileRepository {
     if (useRemote) {
       await _remoteDS.deleteAccount();
       await _localDS.clearAll();
+    } else {
+      throw const Failure("No Internet Connection");
     }
-
   }
 }

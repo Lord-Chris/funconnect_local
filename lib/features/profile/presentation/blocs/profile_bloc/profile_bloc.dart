@@ -16,6 +16,7 @@ import 'package:funconnect/features/profile/domain/usecases/logout_user.dart';
 import 'package:funconnect/services/_services.dart';
 import 'package:funconnect/shared/components/_components.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
+import 'package:funconnect/shared/dialogs/_dialogs.dart';
 import 'package:rate_my_app/rate_my_app.dart';
 
 part 'profile_event.dart';
@@ -34,12 +35,16 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     on<DeleteTapAccountEvent>(_onDeleteAccountTapEvent);
     on<TermsOfUseTapEvent>(_onTermsOfUseTapEvent);
     on<PrivacyPolicyTapEvent>(_onPrivacyPolicyTapEvent);
+    on<TelegramTapEvent>(_onTelegramTapEvent);
+    on<InstagramTapEvent>(_onInstagramTapEvent);
+    on<TwitterTapEvent>(_onTwitterTapEvent);
   }
 
   final _navigationService = locator<INavigationService>();
   final _localStorageService = locator<ILocalStorageService>();
-  final _forceUpateAppService = locator<IForceUpdateAppService>();
+  final _forceUpdateAppService = locator<IForceUpdateAppService>();
   final _locationService = locator<ILocationService>();
+  final _dialogAndSheetService = locator<IDialogAndSheetService>();
 
   String? appVersion;
 
@@ -48,8 +53,9 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     Emitter<ProfileState> emit,
   ) async {
     final res = await FetchUserProfile().call(NoParams());
-    appVersion = await _forceUpateAppService.currentVersionRaw;
-    emit(ProfileIdleState(userProfile: res));
+    appVersion = await _forceUpdateAppService.currentVersionRaw;
+    ProfileModel userProfileWithLocation = res.copyWith(appLocation: location);
+    emit(ProfileIdleState(userProfile: userProfileWithLocation));
   }
 
   Future<FutureOr<void>> _onEditProfileEvent(
@@ -142,16 +148,69 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     LogoutTapEvent event,
     Emitter<ProfileState> emit,
   ) async {
-    await LogoutUser().call(NoParams());
-    _navigationService.offAllNamed(Routes.welcomeViewRoute, (_) => false);
+    _dialogAndSheetService.showAppDialog(AppAlertDialog(
+        isHighPriority: false,
+        title: "Logout",
+        body: "Are you sure you want to logout of this device?",
+      positiveLabel: "Logout",
+      negativeLabel: "Cancel",
+      negativeCallBack: () {
+          _navigationService.back();
+      },
+      positiveCallBack: ()async{
+          try {
+            await LogoutUser().call(NoParams());
+            _navigationService.offAllNamed(
+                Routes.welcomeViewRoute, (_) => false);
+            _dialogAndSheetService.showAppDialog(const StatusDialog(
+                isError: false,
+                title: "Logout",
+                body: "User Logged out Successfully"));
+          } on Failure catch (e) {
+            _navigationService.back();
+            _dialogAndSheetService.showAppDialog(StatusDialog(
+                isError: true,
+                title: "Error Logging Out",
+                body: e.message));
+          }
+      },
+
+    ));
+
   }
 
   FutureOr<void> _onDeleteAccountTapEvent(
     DeleteTapAccountEvent event,
     Emitter<ProfileState> emit,
   ) async {
-    await DeleteUserAccount().call(NoParams());
-    _navigationService.offAllNamed(Routes.welcomeViewRoute, (_) => false);
+    _dialogAndSheetService.showAppDialog(AppAlertDialog(
+      isHighPriority: true,
+      title: "Delete Account",
+      body: "Are you sure you want to delete your account?",
+      positiveLabel: "Delete",
+      negativeLabel: "Cancel",
+      negativeCallBack: () {
+        _navigationService.back();
+      },
+      positiveCallBack: ()async{
+        try {
+          await DeleteUserAccount().call(NoParams());
+          _navigationService.offAllNamed(Routes.welcomeViewRoute, (_) => false);
+          _dialogAndSheetService.showAppDialog(const StatusDialog(
+              isError: false,
+              title: "Alert",
+              body: "User Account Deleted"));
+        }on Failure catch (e) {
+            _navigationService.back();
+          _dialogAndSheetService.showAppDialog(StatusDialog(
+              isError: true,
+              title: "Error Deleting Account",
+              body: e.message));
+        }
+      },
+
+    ));
+
   }
 
   FutureOr<void> _onTermsOfUseTapEvent(
@@ -166,6 +225,27 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     Emitter<ProfileState> emit,
   ) {
     GeneralUtils.openUrl(Uri.parse(AppConstants.privacyPolicy));
+  }
+
+  FutureOr<void> _onTelegramTapEvent(
+    TelegramTapEvent event,
+    Emitter<ProfileState> emit,
+  ) {
+    GeneralUtils.openUrl(Uri.parse(AppConstants.telegramUrl));
+  }
+
+  FutureOr<void> _onTwitterTapEvent(
+    TwitterTapEvent event,
+    Emitter<ProfileState> emit,
+  ) {
+    GeneralUtils.openUrl(Uri.parse(AppConstants.twitterUrl));
+  }
+
+  FutureOr<void> _onInstagramTapEvent(
+    InstagramTapEvent event,
+    Emitter<ProfileState> emit,
+  ) {
+    GeneralUtils.openUrl(Uri.parse(AppConstants.instagramUrl));
   }
 
   AppLocation? get location => _locationService.userLocation;

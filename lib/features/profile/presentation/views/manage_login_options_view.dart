@@ -158,16 +158,22 @@ class ManageLogInOptionsView extends StatelessWidget {
                     AppButton(
                       label: AppText.aTLogOut,
                       isCollapsed: true,
-                      padding:
-                      const EdgeInsets.symmetric(horizontal: 88, vertical: 16),
-                      onTap: () {},
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 88, vertical: 16),
+                      onTap: () =>
+                          context.read<ManageLoginOptionsBloc>().add(LogoutTapEvent()),
                       labelColor: AppColors.black,
                     ),
                     Spacing.vertExtraMedium(),
-                    Text(
-                      AppText.aTDeleteAccount,
-                      style: AppTextStyles.regular14.copyWith(
-                        color: AppColors.deleteTextRed,
+                    InkWell(
+                      onTap: () => context
+                          .read<ManageLoginOptionsBloc>()
+                          .add(DeleteTapAccountEvent()),
+                      child: Text(
+                        AppText.aTDeleteAccount,
+                        style: AppTextStyles.regular14.copyWith(
+                          color: AppColors.deleteTextRed,
+                        ),
                       ),
                     )
                   ],
