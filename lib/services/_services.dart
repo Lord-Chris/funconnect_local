@@ -32,3 +32,7 @@ export 'navigation_service/navigation_service.dart';
 ///
 export 'network_service/i_network_service.dart';
 export 'network_service/network_service.dart';
+
+///
+export 'notification_service/i_notification_service.dart';
+export 'notification_service/notification_service.dart';
