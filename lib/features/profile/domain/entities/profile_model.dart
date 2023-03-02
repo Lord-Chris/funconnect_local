@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
-import 'package:funconnect/features/profile/domain/entities/profile_location_model.dart';
+import 'package:funconnect/core/models/_models.dart';
 
 class ProfileModel extends Equatable {
   final String id;
@@ -13,7 +13,7 @@ class ProfileModel extends Equatable {
   final String dateOfBirth;
   final String mobileNumber;
   final String? bio;
-  final ProfileLocationModel? locationModel;
+  final AppLocation? appLocation;
   final List<String>? interests;
   final String? twitterHandle;
   final String? instagramHandle;
@@ -30,7 +30,7 @@ class ProfileModel extends Equatable {
       required this.dateOfBirth,
       required this.mobileNumber,
       this.bio,
-      this.locationModel,
+      this.appLocation,
       this.interests,
       this.twitterHandle,
       this.instagramHandle,
@@ -47,13 +47,7 @@ class ProfileModel extends Equatable {
       String? dateOfBirth,
       String? mobileNumber,
       String? bio,
-      String? location,
-      String? address,
-      String? city,
-      String? state,
-      String? country,
-      num? lat,
-      num? long,
+      AppLocation? appLocation,
       List<String>? interests,
       String? twitterHandle,
       String? instagramHandle,
@@ -69,6 +63,7 @@ class ProfileModel extends Equatable {
         dateOfBirth: dateOfBirth ?? this.dateOfBirth,
         mobileNumber: mobileNumber ?? this.mobileNumber,
         bio: bio ?? this.bio,
+        appLocation: appLocation ?? this.appLocation,
         interests: interests ?? this.interests,
         twitterHandle: twitterHandle ?? this.twitterHandle,
         instagramHandle: instagramHandle ?? this.instagramHandle,
@@ -94,12 +89,12 @@ class ProfileModel extends Equatable {
       'dob': dateOfBirth,
       'phone_e164': mobileNumber,
       'bio': bio,
-      'location': locationModel==null?null:locationModel!.toMap(),
+      'location': appLocation == null ? null : appLocation!.toMap(),
       'facebook_handle': facebookHandle,
       'instagram_handle': instagramHandle,
       'twitter_handle': twitterHandle,
       'linkedIn_handle': linkedInHandle,
-      'profile_photo': profileImageUrl
+      'photo_url': profileImageUrl
     };
   }
 
@@ -108,35 +103,30 @@ class ProfileModel extends Equatable {
       'email': email,
       'name': fullName,
       'username': userName,
-      'gender':gender.toLowerCase(),
-       'dob':dateOfBirth,
-      'phone_e164':mobileNumber.isEmpty?'null':mobileNumber,
-      'bio':bio,
-      // 'address':  locationModel!.address??'',
-      // 'city': locationModel!.city??'',
-      // 'state': locationModel!.state??'',
-      // 'country': locationModel!.country??'',
-      // 'lat': locationModel!.lat??0,
-      // 'long':locationModel!.long??0,
-      'facebook_handle':facebookHandle,
-      'instagram_handle':instagramHandle,
-      'twitter_handle':twitterHandle,
-      'linkedIn_handle':linkedInHandle,
+      'gender': gender.toLowerCase(),
+      'dob': dateOfBirth,
+      'phone_e164': mobileNumber.isEmpty ? 'null' : mobileNumber,
+      'bio': bio,
+      'facebook_handle': facebookHandle,
+      'instagram_handle': instagramHandle,
+      'twitter_handle': twitterHandle,
+      'linkedIn_handle': linkedInHandle,
       'profile_photo': profileImageUrl
     };
   }
 
   factory ProfileModel.fromMap(Map<String, dynamic> map) {
     return ProfileModel(
-      id: map['id'],
-      email: map['email'],
-      fullName: map['name'].toString(),
-      userName: map['username'].toString(),
+      id: map['id'] ?? '',
+      email: map['email'] ?? '',
+      fullName: map['name'] ?? '',
+      userName: map['username'] ?? '',
       gender: map['gender'] ?? 'male',
       dateOfBirth: map['dob'] ?? '',
       mobileNumber: (map['phone_e164'] ?? '').toString(),
-      locationModel: map['location']==null?null:ProfileLocationModel.fromMap(map['location']),
-      bio: map['bio']??'',
+      appLocation:
+          map['location'] == null ? null : AppLocation.fromMap(map['location']),
+      bio: map['bio'] ?? '',
       facebookHandle: map['facebook_handle'],
       twitterHandle: map['twitter_handle'],
       instagramHandle: map['instagram_handle'],
@@ -159,6 +149,7 @@ class ProfileModel extends Equatable {
         gender,
         dateOfBirth,
         mobileNumber,
+        appLocation,
         bio,
         interests,
         twitterHandle,
