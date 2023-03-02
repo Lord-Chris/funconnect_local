@@ -44,7 +44,7 @@ class DashboardView extends StatelessWidget {
                     HomeView(),
                     ExploreView(),
                     EventsView(),
-                    Placeholder(),
+                    SavedView(),
                     ProfileView(),
                   ],
                 ),
