@@ -353,21 +353,24 @@ class _InfoSection extends StatelessWidget {
                     .add(PhoneTapEvent(phone: state.place.phoneE164))),
             Spacing.vertSmall(),
             Spacing.vertRegular(),
-            Container(
-              padding: REdgeInsets.fromLTRB(20, 10, 20, 10),
-              color: AppColors.secondary800,
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  SvgPicture.asset(
-                    AppAssets.bookRideSvg,
-                  ),
-                  Spacing.horizSmall(),
-                  Text(
-                    "Book a ride",
-                    style: AppTextStyles.regular16,
-                  ),
-                ],
+            InkWell(
+              onTap: () => context.read<PlaceDetailBloc>().add(BookRideEvent()),
+              child: Container(
+                padding: REdgeInsets.fromLTRB(20, 10, 20, 10),
+                color: AppColors.secondary800,
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    SvgPicture.asset(
+                      AppAssets.bookRideSvg,
+                    ),
+                    Spacing.horizSmall(),
+                    Text(
+                      "Book a ride",
+                      style: AppTextStyles.regular16,
+                    ),
+                  ],
+                ),
               ),
             ),
             Spacing.vertMedium(),

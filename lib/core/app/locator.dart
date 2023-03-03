@@ -30,9 +30,10 @@ Future<void> setUpLocator() async {
       .registerLazySingleton<IConnectivityService>(() => ConnectivityService());
   locator.registerLazySingleton<IForceUpdateAppService>(
       () => ForceUpdateAppService());
-
   await _setUpLocalStorage();
   await _setUpDynamicLinkService();
+  _setUpNotificationService();
+
   // Repositories
   locator.registerLazySingleton<IAuthenticationRepository>(
     () => isMock ? MockAuthenticationRepository() : AuthenticationRepository(),
@@ -69,4 +70,10 @@ Future<void> _setUpDynamicLinkService() async {
   locator
       .registerLazySingleton<IDynamicLinkService>(() => DynamicLinkService());
   await locator<IDynamicLinkService>().init();
+}
+
+void _setUpNotificationService() {
+  locator
+      .registerLazySingleton<INotificationService>(() => NotificationService());
+  locator<INotificationService>().init();
 }

@@ -10,7 +10,7 @@ class RemoteDashboardDataSource with ApiMixin {
   final _networkService = locator<INetworkService>();
 
   Future<ApiResponse<UserModel>> fetchUserProfile() async {
-    final res = await _networkService.put(
+    final res = await _networkService.get(
       ApiConstants.profileSetup,
       headers: headers,
     );
