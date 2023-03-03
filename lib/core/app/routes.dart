@@ -16,6 +16,8 @@ import 'package:funconnect/features/dashboard/presentation/views/notifications_v
 import 'package:funconnect/features/events/domain/entities/event_model.dart';
 import 'package:funconnect/features/events/presentation/views/booking_view.dart';
 import 'package:funconnect/features/events/presentation/views/checkout_view.dart';
+import 'package:funconnect/features/fun_connect/saved/presentation/blocs/saved_bloc.dart';
+import 'package:funconnect/features/fun_connect/saved/presentation/views/saved_view.dart';
 import 'package:funconnect/features/places/domain/entities/category_model.dart';
 import 'package:funconnect/features/places/domain/entities/place_model.dart';
 import 'package:funconnect/features/places/presentation/blocs/category_detail_bloc/category_detail_bloc.dart';
@@ -67,6 +69,9 @@ class Routes {
   static const eventDescriptionRoute = '/event-description-route';
   static const bookingRoute = '/booking-route';
   static const checkoutRoute = '/checkout-route';
+
+  // Saved
+  static const savedViewRoute = '/saved-view';
 
   // Profile
   static const editProfileViewRoute = '/edit-profile';
@@ -159,6 +164,13 @@ class Routes {
         return MaterialPageRoute(builder: (_) => const BookingView());
       case checkoutRoute:
         return MaterialPageRoute(builder: (_) => const CheckoutView());
+
+      // Saved
+       case savedViewRoute:
+        return _registerBlocView(
+          bloc: SavedBloc(),
+          view: const SavedView(),
+        );
 
       // Profile
       case editProfileViewRoute:
