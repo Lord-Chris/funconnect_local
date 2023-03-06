@@ -46,9 +46,13 @@ class ApiConstants {
     return "$places/explore?lat=${loc.lat}&long=${loc.long}&city=${loc.city}&state=${loc.state}&country=${loc.country}";
   }
 
+  static String bookmarkPlace(String placeId) =>
+      '$places/saved-places/$placeId';
+  static String unBookmarkPlace(String savedPlaceId) =>
+      '$places/saved-places/$savedPlaceId';
+
   // EVENTS
   static get events => "$_baseUrl/events";
-
 
   static get imageKey => 'image';
 }

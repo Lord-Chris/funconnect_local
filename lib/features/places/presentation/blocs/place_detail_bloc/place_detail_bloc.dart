@@ -25,6 +25,7 @@ class PlaceDetailBloc extends Bloc<PlaceDetailEvent, PlaceDetailState> {
     on<PhoneTapEvent>(_onPhoneTapEvent);
     on<ShareTapEvent>(_onShareTapEvent);
     on<BookRideEvent>(_onBookRideEvent);
+    on<BookmarkTapEvent>(_onBookmarkTapEvent);
   }
   final _logger = Logger();
   final _navigationService = locator<INavigationService>();
@@ -111,4 +112,9 @@ class PlaceDetailBloc extends Bloc<PlaceDetailEvent, PlaceDetailState> {
       ),
     );
   }
+
+  FutureOr<void> _onBookmarkTapEvent(
+    BookmarkTapEvent event,
+    Emitter<PlaceDetailState> emit,
+  ) async {}
 }

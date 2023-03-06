@@ -10,10 +10,10 @@ class ReviewModel extends Equatable {
   final String title;
   final String comment;
   final int vote;
-  final String? reviewedAt;
+  final DateTime? reviewedAt;
   final String? reviewedBy;
   final String status;
-  final String? deletedAt;
+  final DateTime? deletedAt;
 
   const ReviewModel({
     required this.id,
@@ -38,10 +38,10 @@ class ReviewModel extends Equatable {
       'title': title,
       'comment': comment,
       'vote': vote,
-      'reviewed_at': reviewedAt,
+      'reviewed_at': reviewedAt?.toIso8601String(),
       'reviewed_by': reviewedBy,
       'status': status,
-      'deleted_at': deletedAt,
+      'deleted_at': deletedAt?.toIso8601String(),
     };
   }
 
@@ -54,10 +54,13 @@ class ReviewModel extends Equatable {
       title: map['title'] ?? '',
       comment: map['comment'] ?? '',
       vote: map['vote']?.toInt() ?? 0,
-      reviewedAt: map['reviewed_at'],
+      reviewedAt: map['reviewed_at'] != null
+          ? DateTime.parse(map['reviewed_at'])
+          : null,
       reviewedBy: map['reviewed_by'],
       status: map['status'] ?? '',
-      deletedAt: map['deleted_at'],
+      deletedAt:
+          map['deleted_at'] != null ? DateTime.parse(map['deleted_at']) : null,
     );
   }
 

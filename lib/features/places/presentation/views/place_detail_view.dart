@@ -8,6 +8,7 @@ import 'package:flutter_rating_stars/flutter_rating_stars.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:funconnect/core/extensions/_extensions.dart';
+import 'package:funconnect/core/utils/general_utils.dart';
 import 'package:funconnect/features/places/domain/entities/place_model.dart';
 import 'package:funconnect/features/places/domain/entities/review_model.dart';
 import 'package:funconnect/features/places/presentation/blocs/place_detail_bloc/place_detail_bloc.dart';
@@ -242,10 +243,15 @@ class _InfoSection extends StatelessWidget {
                 Spacing.horizMedium(),
                 AnimatedContainer(
                   duration: const Duration(milliseconds: 1),
-                  child: SvgPicture.asset(
-                    AppAssets.bookmarkIconSvg,
-                    color: AppColors.white,
-                    height: 20,
+                  child: InkWell(
+                    onTap: () => context
+                        .read<PlaceDetailBloc>()
+                        .add(ShareTapEvent(place)),
+                    child: SvgPicture.asset(
+                      AppAssets.bookmarkIconSvg,
+                      color: AppColors.white,
+                      height: 20,
+                    ),
                   ),
                 ),
               ],
@@ -675,12 +681,14 @@ class _ReviewItem extends StatelessWidget {
                   ],
                 ),
               ),
-              Text(
-                "2 days ago",
-                style: AppTextStyles.regular10.copyWith(
-                  color: AppColors.gray97,
+              if (review.reviewedAt != null)
+                Text(
+                  GeneralUtils.parseTime(
+                      DateTime.now().difference(review.reviewedAt!).inSeconds),
+                  style: AppTextStyles.regular10.copyWith(
+                    color: AppColors.gray97,
+                  ),
                 ),
-              ),
             ],
           ),
           Spacing.vertRegular(),

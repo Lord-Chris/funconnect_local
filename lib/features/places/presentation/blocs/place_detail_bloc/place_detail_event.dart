@@ -83,3 +83,5 @@ class ShareTapEvent extends PlaceDetailEvent {
 }
 
 class BookRideEvent extends PlaceDetailEvent {}
+
+class BookmarkTapEvent extends PlaceDetailEvent {}

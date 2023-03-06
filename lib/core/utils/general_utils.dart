@@ -56,4 +56,20 @@ class GeneralUtils {
       throw Failure("Could not share text", extraData: e.toString());
     }
   }
+
+  static String parseTime(int timeInSeconds) {
+    int timeMin = timeInSeconds ~/ 60;
+    if (timeMin < 1) return "$timeInSeconds secs";
+    int timeHr = timeInSeconds ~/ (60 * 60);
+    if (timeHr < 1) return "$timeMin mins";
+    int timeDay = timeInSeconds ~/ (60 * 60 * 24);
+    if (timeDay < 1) return "$timeHr hrs";
+    int timeWeek = timeInSeconds ~/ (60 * 60 * 24 * 7);
+    if (timeWeek < 1) return "$timeDay days";
+    int timeMths = timeInSeconds ~/ (60 * 60 * 24 * 7 * 30);
+    if (timeMths < 1) return "$timeWeek weeks";
+    int timeYrs = timeInSeconds ~/ (60 * 60 * 24 * 7 * 30 * 12);
+    if (timeYrs < 1) return "$timeMths months";
+    return "$timeYrs years";
+  }
 }
