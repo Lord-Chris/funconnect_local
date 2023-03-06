@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:funconnect/core/app/_app.dart';
-import 'package:funconnect/services/_services.dart';
 
 import '../../../../shared/constants/_constants.dart';
 
@@ -23,14 +21,14 @@ class _EventsViewState extends State<EventsView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: AppColors.primary,
-        onPressed: () =>
-            locator<INavigationService>().toNamed(Routes.createEventRoute),
-        child: const Center(
-          child: Icon(Icons.add),
-        ),
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //   backgroundColor: AppColors.primary,
+      //   onPressed: () =>
+      //       locator<INavigationService>().toNamed(Routes.createEventRoute),
+      //   child: const Center(
+      //     child: Icon(Icons.add),
+      //   ),
+      // ),
       backgroundColor: AppColors.black,
       body: SafeArea(
         child: Padding(

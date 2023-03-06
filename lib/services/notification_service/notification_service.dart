@@ -14,7 +14,9 @@ class NotificationService extends INotificationService {
     OneSignal.shared.setAppId(AppKeys.oneSignalAppId);
 
     // The promptForPushNotificationsWithUserResponse function will show the iOS or Android push notification prompt. We recommend removing the following code and instead using an In-App Message to prompt for notification permission
-    OneSignal.shared.promptUserForPushNotificationPermission().then((accepted) {
+    OneSignal.shared
+        .promptUserForPushNotificationPermission(fallbackToSettings: true)
+        .then((accepted) {
       _logger.i("Accepted permission: $accepted");
     });
 
@@ -54,13 +56,21 @@ class NotificationService extends INotificationService {
 
   @override
   Future<void> setUser(UserModel user) async {
-    await OneSignal.shared.setExternalUserId(user.id);
-    await OneSignal.shared.setEmail(email: user.email);
+    try {
+      await OneSignal.shared.setExternalUserId(user.id);
+      await OneSignal.shared.setEmail(email: user.email);
+    } catch (e) {
+      _logger.e(e);
+    }
   }
 
   @override
   Future<void> clearUser() async {
-    await OneSignal.shared.removeExternalUserId();
-    await OneSignal.shared.logoutEmail();
+    try {
+      await OneSignal.shared.removeExternalUserId();
+      await OneSignal.shared.logoutEmail();
+    } catch (e) {
+      _logger.e(e);
+    }
   }
 }
