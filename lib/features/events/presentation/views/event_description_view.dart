@@ -232,7 +232,7 @@ class EventDescriptionView extends StatelessWidget {
                           return HomeCategoriesLargeWidget(
                             coverImage: place.coverImagePath,
                             name: place.name,
-                            isBookmarked: false,
+                            isBookmarked: place.isBookmarked,
                             rating: place.avgRating,
                             ratingCount: place.avgReviewCount,
                           );

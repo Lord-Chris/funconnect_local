@@ -170,7 +170,7 @@ class _ExploreViewState extends State<ExploreView> {
                               return HomeCategoriesLargeWidget(
                                 coverImage: place.coverImagePath,
                                 name: place.name,
-                                isBookmarked: false,
+                                isBookmarked: place.isBookmarked,
                                 rating: place.avgRating,
                                 ratingCount: place.avgReviewCount,
                                 onTap: () => context.read<ExploreBloc>().add(
@@ -189,7 +189,7 @@ class _ExploreViewState extends State<ExploreView> {
                               return HomeCategoriesLargeWidget(
                                 coverImage: place.coverImagePath,
                                 name: place.name,
-                                isBookmarked: false,
+                                isBookmarked: place.isBookmarked,
                                 rating: place.avgRating,
                                 ratingCount: place.avgReviewCount,
                                 onTap: () => context.read<ExploreBloc>().add(
@@ -248,7 +248,7 @@ class FeaturedSection extends StatelessWidget {
                   size: Size.infinite,
                   coverImage: place1.coverImagePath,
                   name: place1.name,
-                  isBookmarked: false,
+                  isBookmarked: place1.isBookmarked,
                   rating: place1.avgRating,
                   ratingCount: place1.avgReviewCount,
                   onTap: () => context

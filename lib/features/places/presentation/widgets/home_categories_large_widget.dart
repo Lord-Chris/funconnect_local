@@ -70,13 +70,12 @@ class HomeCategoriesLargeWidget extends HookWidget {
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
-                    AnimatedContainer(
-                      duration: const Duration(milliseconds: 1),
-                      child: const Icon(
-                        CupertinoIcons.bookmark,
-                        color: AppColors.white,
-                        size: 15,
-                      ),
+                    Icon(
+                      isBookmarked
+                          ? CupertinoIcons.bookmark_fill
+                          : CupertinoIcons.bookmark,
+                      color: isBookmarked ? AppColors.primary : AppColors.white,
+                      size: 15,
                     ),
                   ],
                 ),
