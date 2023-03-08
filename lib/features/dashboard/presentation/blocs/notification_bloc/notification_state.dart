@@ -22,5 +22,5 @@ class NotificationIdleState extends NotificationState {
   List<NotificationModel> get notifications => notificationData?.data ?? [];
 
   @override
-  List<Object?> get props => [notifications];
+  List<Object?> get props => [notifications, DateTime.now()];
 }

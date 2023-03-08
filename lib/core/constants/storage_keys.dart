@@ -10,6 +10,7 @@ class StorageKeys {
   static const user = "user";
   static const stayLoggedIn = "stay-logged-in";
   static const userInterests = "user-interest";
+  static const notifications = "notifications";
 
   // Places
   static const homeTrends = "home-trends";

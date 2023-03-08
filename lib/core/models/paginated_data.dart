@@ -51,4 +51,18 @@ class PaginatedData<T> {
   }
 
   int get totalCount => (currentPage * perPage) + to;
+
+  PaginatedData<T> updateData({List<T>? data}) {
+    return PaginatedData<T>(
+      currentPage: currentPage,
+      firstPageUrl: firstPageUrl,
+      from: from,
+      nextPageUrl: nextPageUrl,
+      path: path,
+      perPage: perPage,
+      prevPageUrl: prevPageUrl,
+      to: to,
+      data: data ?? this.data,
+    );
+  }
 }

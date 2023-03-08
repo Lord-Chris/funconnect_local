@@ -55,4 +55,8 @@ class ApiConstants {
   static get events => "$_baseUrl/events";
 
   static get imageKey => 'image';
+
+  // GENERAL
+  static get notifications => "$_core/notifications";
+  static get readAllNotification => "$notifications/mark-all-as-read";
 }
