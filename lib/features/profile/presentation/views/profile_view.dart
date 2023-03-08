@@ -266,20 +266,6 @@ class _ProfileViewState extends State<ProfileView> {
                       InkWell(
                         onTap: ()=> context
                             .read<ProfileBloc>()
-                            .add(TelegramTapEvent()),
-                        child: CircleAvatar(
-                          radius: 26.5,
-                          backgroundColor: AppColors.secondary800,
-                          child: Image.asset(
-                            AppAssets.telegramLogo,
-                            scale: 2,
-                          ),
-                        ),
-                      ),
-                      Spacing.horizRegular(),
-                      InkWell(
-                        onTap: ()=> context
-                            .read<ProfileBloc>()
                             .add(InstagramTapEvent()),
                         child: CircleAvatar(
                           radius: 26.5,

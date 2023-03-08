@@ -17,6 +17,7 @@ import 'package:funconnect/services/_services.dart';
 import 'package:funconnect/shared/components/_components.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
 import 'package:funconnect/shared/dialogs/_dialogs.dart';
+import 'package:funconnect/shared/dialogs/coming_soon_dialog.dart';
 import 'package:rate_my_app/rate_my_app.dart';
 
 part 'profile_event.dart';
@@ -73,14 +74,24 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     MyTicketTapEvent event,
     Emitter<ProfileState> emit,
   ) async {
-    _navigationService.toNamed(Routes.myTicketRoute);
+    _dialogAndSheetService.showAppDialog(
+      const ComingSoonDialog(
+        icon: AppAssets.savedIconSvg,
+        label: "My Tickets is Coming Soon",
+      ),
+    );
   }
 
   Future<FutureOr<void>> _onMyEventsTapEvent(
     MyEventTapEvent event,
     Emitter<ProfileState> emit,
   ) async {
-    _navigationService.toNamed(Routes.myEventRoute);
+    _dialogAndSheetService.showAppDialog(
+      const ComingSoonDialog(
+        icon: AppAssets.eventIconSvg,
+        label: "My Events is Coming Soon",
+      ),
+    );
   }
 
   Future<FutureOr<void>> _onManageLoginOptionsTapEvent(
