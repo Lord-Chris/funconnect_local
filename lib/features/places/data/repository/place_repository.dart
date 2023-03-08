@@ -90,7 +90,7 @@ class PlaceRepository extends IPlaceRepository {
       await _remoteDS.bookmarkPlace(place);
       return true;
     } else {
-      // await _remoteDS.unBookmarkPlace(place);
+      await _remoteDS.unBookmarkPlace(place);
       return false;
     }
   }

@@ -3,16 +3,13 @@ import 'package:funconnect/core/usecases/usecase.dart';
 import 'package:funconnect/features/places/data/repository/i_place_repository.dart';
 import 'package:funconnect/features/places/domain/entities/full_place_model.dart';
 
-class BookmarkPlace with UseCases<bool, bool> {
-  final FullPlaceModel place;
-
-  BookmarkPlace(this.place);
-
+class BookmarkPlace with UseCases<FullPlaceModel, FullPlaceModel> {
   final _repo = locator<IPlaceRepository>();
 
   @override
-  Future<bool> call(bool params) async {
-    final isBookmarked = await _repo.toggleBookmark(place, params);
-    return isBookmarked;
+  Future<FullPlaceModel> call(FullPlaceModel params) async {
+    bool isBookMarked = params.isBookmarked;
+    isBookMarked = await _repo.toggleBookmark(params, !isBookMarked);
+    return params.copyWith();
   }
 }
