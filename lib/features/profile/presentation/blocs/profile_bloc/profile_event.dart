@@ -35,3 +35,9 @@ class DeleteTapAccountEvent extends ProfileEvent {}
 class TermsOfUseTapEvent extends ProfileEvent {}
 
 class PrivacyPolicyTapEvent extends ProfileEvent {}
+
+class TelegramTapEvent extends ProfileEvent {}
+
+class InstagramTapEvent extends ProfileEvent {}
+
+class TwitterTapEvent extends ProfileEvent {}

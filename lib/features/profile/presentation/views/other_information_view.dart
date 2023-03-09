@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:funconnect/features/profile/domain/entities/profile_model.dart';
 
 import 'package:funconnect/features/profile/presentation/blocs/edit_profile_bloc/edit_profile_bloc.dart';
-import 'package:funconnect/features/profile/presentation/views/widgets/interests_chip.dart';
 import 'package:funconnect/shared/components/_components.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
 
@@ -13,7 +12,6 @@ class OtherInformationView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController bioControllerController = TextEditingController();
     List<String> tags = [
       "Fine dining",
       "Arts & Culture",
@@ -27,6 +25,7 @@ class OtherInformationView extends StatelessWidget {
     ];
     return BlocBuilder<EditProfileBloc, EditProfileState>(
   builder: (context, state) {
+    ProfileModel userProfile = state.profile;
     return SingleChildScrollView(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Column(
@@ -54,11 +53,11 @@ class OtherInformationView extends StatelessWidget {
           ),
           Spacing.vertRegular(),
           AppTextField(
-            onChanged: (val) {},
+            onChanged: (val) =>context.read<EditProfileBloc>().add(EditProfileFieldsEvent(state.profile.copyWith(bio: val))),
             validator: (val) {
               return null;
             },
-            controller: bioControllerController,
+            initialValue: userProfile.bio,
             maxLines: 7,
             hint: AppText.aTWriteSomething,
           ),
@@ -68,22 +67,22 @@ class OtherInformationView extends StatelessWidget {
             children: [
               Expanded(
                   child: Text(
-                "67 Olumegbon road, Surulere",
+                userProfile.appLocation?.address??'',
                 style: AppTextStyles.regular14
                     .copyWith(color: AppColors.locationIconAsh),
               )),
-              TextButton(
-                  onPressed: () {},
-                  child: Text(
-                    AppText.aTCheckMap,
-                    style: AppTextStyles.regular14,
-                  ))
+              // TextButton(
+              //     onPressed: () {},
+              //     child: Text(
+              //       AppText.aTCheckMap,
+              //       style: AppTextStyles.regular14,
+              //     ))
             ],
           ),
           Align(
               alignment: Alignment.centerLeft,
               child: InkWell(
-                  onTap: () {},
+                  onTap: () => context.read<EditProfileBloc>().add(UpdateLocationTapEvent()),
                   child: Padding(
                     padding: const EdgeInsets.symmetric(vertical: 8.0),
                     child: Text(
@@ -93,7 +92,7 @@ class OtherInformationView extends StatelessWidget {
                     ),
                   ))),
           Spacing.vertExtraMedium(),
-          Text(AppText.aTInterests, style: AppTextStyles.medium16),
+          /*Text(AppText.aTInterests, style: AppTextStyles.medium16),
           Spacing.vertSmall(),
           Text(
             AppText.aTAddInterests,
@@ -107,14 +106,13 @@ class OtherInformationView extends StatelessWidget {
               for (String title in tags)
                 InterestsChip(title: title, onSelect: () {})
             ],
-          ),
+          ),*/
           Spacing.vertLarge(),
           Align(
               alignment: Alignment.centerRight,
               child: AppButton(
                 onTap: () 
                 {
-                  context.read<EditProfileBloc>().add(EditProfileFieldsEvent(state.profile.copyWith(bio: bioControllerController.text)));
                   context.read<EditProfileBloc>().add(ContinueTapEvent());
                   },
                 label: AppText.aTContinue,

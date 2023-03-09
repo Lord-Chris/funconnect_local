@@ -90,6 +90,10 @@ class RemotePlaceDataSource with ApiMixin {
       ApiConstants.exploreFilter(filter),
       headers: headers,
     );
+    if (filter == ExploreSearchEnum.ratings) {
+      return PaginatedData.fromMap(
+          res.data['data'], (x) => PlaceModel.fromMap(x['place']));
+    }
     return PaginatedData.fromMap(
         res.data['data'], (x) => PlaceModel.fromMap(x));
   }

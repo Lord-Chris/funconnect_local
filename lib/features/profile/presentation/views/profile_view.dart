@@ -263,31 +263,32 @@ class _ProfileViewState extends State<ProfileView> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      CircleAvatar(
-                        radius: 26.5,
-                        backgroundColor: AppColors.secondary800,
-                        child: Image.asset(
-                          AppAssets.telegramLogo,
-                          scale: 2,
+                      InkWell(
+                        onTap: ()=> context
+                            .read<ProfileBloc>()
+                            .add(InstagramTapEvent()),
+                        child: CircleAvatar(
+                          radius: 26.5,
+                          backgroundColor: AppColors.secondary800,
+                          child: Image.asset(
+                            AppAssets.instagramLogo,
+                            scale: 2,
+                          ),
                         ),
                       ),
                       Spacing.horizRegular(),
-                      CircleAvatar(
-                        radius: 26.5,
-                        backgroundColor: AppColors.secondary800,
-                        child: Image.asset(
-                          AppAssets.instagramLogo,
-                          scale: 2,
+                      InkWell(
+                        onTap: ()=> context
+                            .read<ProfileBloc>()
+                            .add(TwitterTapEvent()),
+                        child: CircleAvatar(
+                          radius: 26.5,
+                          backgroundColor: AppColors.secondary800,
+                          child: SvgPicture.asset(AppAssets.twitterLogo),
                         ),
-                      ),
-                      Spacing.horizRegular(),
-                      CircleAvatar(
-                        radius: 26.5,
-                        backgroundColor: AppColors.secondary800,
-                        child: SvgPicture.asset(AppAssets.twitterLogo),
                       ),
                     ],
-                  ),
+                              ),
                   Spacing.vertLarge(),
                   Spacing.vertMedium(),
                   AppButton(

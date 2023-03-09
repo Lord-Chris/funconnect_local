@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:funconnect/core/app/_app.dart';
 import 'package:funconnect/core/constants/api_constants.dart';
 import 'package:funconnect/core/mixins/_mixins.dart';
-import 'package:funconnect/features/profile/domain/entities/profile_location_model.dart';
+import 'package:funconnect/core/models/_models.dart';
 import 'package:funconnect/features/profile/domain/entities/profile_model.dart';
 import 'package:funconnect/services/_services.dart';
 
@@ -28,7 +28,7 @@ class RemoteProfileDataSource with ApiMixin {
     );
   }
 
-  Future<void> updateUserLocation(ProfileLocationModel location) async {
+  Future<void> updateUserLocation(AppLocation location) async {
     await _networkService.put(
       ApiConstants.profileLocationSetup,
       headers: headers,

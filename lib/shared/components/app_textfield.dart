@@ -24,6 +24,7 @@ class AppTextField extends StatelessWidget {
   final void Function()? onTap;
   final FloatingLabelBehavior? floatingLabelBehavior;
   final List<TextInputFormatter>? inputFormatters;
+  final AutovalidateMode? autovalidateMode;
 
   const AppTextField({
     Key? key,
@@ -49,6 +50,7 @@ class AppTextField extends StatelessWidget {
     this.borderRadius,
     this.floatingLabelBehavior,
     this.inputFormatters,
+    this.autovalidateMode
   })  : assert(initialValue == null || controller == null),
         super(key: key);
 
@@ -58,6 +60,7 @@ class AppTextField extends StatelessWidget {
       controller: controller,
       initialValue: initialValue,
       validator: validator,
+      autovalidateMode: autovalidateMode,
       keyboardType: keyboardType,
       cursorColor: AppColors.primary,
       textCapitalization: textCapitalization,
