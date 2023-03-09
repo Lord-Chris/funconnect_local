@@ -10,6 +10,7 @@ import 'package:funconnect/features/fun_connect/saved/domain/usecases/fetch_user
 import 'package:funconnect/features/fun_connect/saved/presentation/blocs/saved_event.dart';
 import 'package:funconnect/features/fun_connect/saved/presentation/blocs/saved_state.dart';
 import 'package:funconnect/features/places/data/repository/i_place_repository.dart';
+import 'package:funconnect/features/places/domain/entities/place_location_model.dart';
 import 'package:funconnect/features/places/presentation/blocs/home_bloc/home_event.dart';
 import 'package:funconnect/features/places/presentation/blocs/home_bloc/home_state.dart';
 import 'package:funconnect/services/_services.dart';
@@ -36,7 +37,7 @@ class SavedBloc extends Bloc<SavedEvent, SavedState> {
       if (event.showLoader) emit(SavedLoadingState());
       final res = await FetchUserSavedPlaces().call(event.place);
       emit(SavedLoadingIdleState(
-       places: res as PaginatedData<SavedPlaceModel>,
+       savedPlaces: res as List<SavedPlaceModel>,
       ));
     } on Failure catch (e) {
       _logger.e(e);

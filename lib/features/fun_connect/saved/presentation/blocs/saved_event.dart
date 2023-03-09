@@ -12,7 +12,7 @@ abstract class SavedEvent extends Equatable {
 
 class SavedInitEvent extends SavedEvent {
   final bool showLoader;
-  final SavedPlaceModel place;
+  final Place place;
   const SavedInitEvent({
     this.showLoader = true,
     required this.place,
@@ -23,7 +23,7 @@ class SavedInitEvent extends SavedEvent {
 }
 
 class SavedPlaceTapEvent extends SavedEvent {
-  final PlaceModel place;
+  final Place place;
 
   const SavedPlaceTapEvent({
     required this.place,

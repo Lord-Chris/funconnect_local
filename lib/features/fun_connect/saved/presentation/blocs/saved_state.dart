@@ -14,14 +14,27 @@ abstract class SavedState extends Equatable {
 class SavedLoadingState extends SavedState {}
 
 class SavedLoadingIdleState extends SavedState {
-  final PaginatedData<SavedPlaceModel> places;
+  final UserModel? user;
+  final List<SavedPlaceModel> savedPlaces;
 
  const SavedLoadingIdleState({
-    required this.places,
+    this.user,
+    required this.savedPlaces,
   });
 
   @override
-  List<Object> get props => [places];
+  List<Object> get props => [savedPlaces];
+
+   SavedLoadingIdleState copyWith({
+    UserModel? user,
+    final List<SavedPlaceModel>? savedPlaces,
+  }) {
+    return SavedLoadingIdleState(
+      user: user ?? this.user,
+      savedPlaces: savedPlaces ?? this.savedPlaces,
+     
+    );
+  }
 }
 
 

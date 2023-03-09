@@ -15,6 +15,6 @@ class RemoteSavedPlaceDataSource with ApiMixin {
       headers: headers,
     );
     return PaginatedData.fromMap(
-        res.data['data'], (x) => SavedPlaceModel.fromMap(x));
+        res.data['data'], (x) => SavedPlaceModel.fromJson(x));
   }
 }

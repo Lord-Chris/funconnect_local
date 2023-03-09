@@ -17,6 +17,7 @@ import 'package:funconnect/features/events/domain/entities/event_model.dart';
 import 'package:funconnect/features/events/presentation/views/booking_view.dart';
 import 'package:funconnect/features/events/presentation/views/checkout_view.dart';
 import 'package:funconnect/features/fun_connect/saved/presentation/blocs/saved_bloc.dart';
+import 'package:funconnect/features/fun_connect/saved/presentation/views/collections/create_collection_view.dart';
 import 'package:funconnect/features/fun_connect/saved/presentation/views/saved_view.dart';
 import 'package:funconnect/features/places/domain/entities/category_model.dart';
 import 'package:funconnect/features/places/domain/entities/place_model.dart';
@@ -72,6 +73,7 @@ class Routes {
 
   // Saved
   static const savedViewRoute = '/saved-view';
+  static const createCollectionViewRoute = '/create-collection-view';
 
   // Profile
   static const editProfileViewRoute = '/edit-profile';
@@ -166,11 +168,14 @@ class Routes {
         return MaterialPageRoute(builder: (_) => const CheckoutView());
 
       // Saved
-       case savedViewRoute:
+      case savedViewRoute:
         return _registerBlocView(
           bloc: SavedBloc(),
           view: const SavedView(),
         );
+
+      case createCollectionViewRoute:
+        return MaterialPageRoute(builder: (_) => const CreateCollectionView());
 
       // Profile
       case editProfileViewRoute:
