@@ -19,9 +19,9 @@ class SavedRepository extends ISavedRepository {
 
 
   @override
-  Future<PaginatedData<SavedPlaceModel>> fetchSavedPlaces(
-      String placeId) async {
-    return await _remoteDS.fetchUserSavedPlaces(placeId);
+  Future<PaginatedData<SavedPlaceModel>> fetchUserSavedPlaces(
+      String userId) async {
+    return await _remoteDS.fetchUserSavedPlaces(userId);
   }
 
   @override

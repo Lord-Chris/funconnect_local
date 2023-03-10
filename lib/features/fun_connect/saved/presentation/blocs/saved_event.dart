@@ -10,17 +10,19 @@ abstract class SavedEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class SavedInitEvent extends SavedEvent {
+class SavedInitial extends SavedEvent {
   final bool showLoader;
-  final Place place;
-  const SavedInitEvent({
+  
+  const SavedInitial({
     this.showLoader = true,
-    required this.place,
+   
   });
 
   @override
-  List<Object> get props => [showLoader,place];
+  List<Object> get props => [showLoader];
 }
+
+class GetAllUserSavedPlaces extends SavedEvent{}
 
 class SavedPlaceTapEvent extends SavedEvent {
   final Place place;

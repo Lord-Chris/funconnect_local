@@ -59,7 +59,6 @@ class SavedPlaceModel<T> extends Equatable {
     ];
   }
 
-  bool get isPlace => place == "place";
 }
 
 class Place extends Equatable {
@@ -118,6 +117,8 @@ class Place extends Equatable {
       'avg_review_count': avgReviewCount,
     };
   }
+
+  bool get isPlace => id == "place";
 
   @override
   List<Object> get props {

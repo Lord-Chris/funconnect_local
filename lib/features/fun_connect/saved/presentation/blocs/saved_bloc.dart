@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:funconnect/core/app/_app.dart';
@@ -21,7 +22,7 @@ import '../../data/repository/i_saved_repository.dart';
 
 class SavedBloc extends Bloc<SavedEvent, SavedState> {
   SavedBloc() : super(SavedLoadingState()) {
-    on<SavedInitEvent>(_onSavedInitEvent);
+    on<GetAllUserSavedPlaces>(_onGetAllUserSavedPlaces);
     on<SavedPlaceTapEvent>(_onSavedPlaceTapEvent);
   }
   final _logger = Logger();
@@ -29,15 +30,15 @@ class SavedBloc extends Bloc<SavedEvent, SavedState> {
   final _locationService = locator<ILocationService>();
   final _savedPlaceRepository = locator<ISavedRepository>();
 
-  FutureOr<void> _onSavedInitEvent(
-    SavedInitEvent event,
+  Future<void> _onGetAllUserSavedPlaces(
+    GetAllUserSavedPlaces event,
     Emitter<SavedState> emit,
   ) async {
     try {
-      if (event.showLoader) emit(SavedLoadingState());
-      final res = await FetchUserSavedPlaces().call(event.place);
-      emit(SavedLoadingIdleState(
-       savedPlaces: res as List<SavedPlaceModel>,
+      emit( SavedLoadingState());
+      final savedPlace = await FetchUserSavedPlaces().call();
+      emit(UserSavedPageFilledState(
+       savedPlaces: savedPlace,
       ));
     } on Failure catch (e) {
       _logger.e(e);
@@ -45,6 +46,7 @@ class SavedBloc extends Bloc<SavedEvent, SavedState> {
     }
   }
 
+ 
  
 
   FutureOr<void> _onSavedPlaceTapEvent(

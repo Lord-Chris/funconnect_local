@@ -85,7 +85,7 @@ class HomeViewCategoriesWidget extends StatelessWidget {
 class HomeSection<T> extends HookWidget {
   final String label;
   final bool showSeeAll;
-  final List<T> children;
+  final List<T>? children;
   final Widget Function(T) widget;
   final double? itemHeight;
 
@@ -93,7 +93,7 @@ class HomeSection<T> extends HookWidget {
     Key? key,
     this.label = "",
     this.showSeeAll = true,
-    required this.children,
+     this.children,
     required this.widget,
     this.itemHeight,
   }) : super(key: key);
@@ -133,18 +133,18 @@ class HomeSection<T> extends HookWidget {
             child: ListView.builder(
               padding: REdgeInsets.symmetric(horizontal: 16),
               scrollDirection: Axis.horizontal,
-              itemCount: children.length,
+              itemCount: children?.length ,
               itemBuilder: (context, index) {
                 return Padding(
                   padding: EdgeInsets.only(right: 8.r),
-                  child: widget(children[index]),
+                  child: widget(children![index]),
                 );
               },
             ),
           ),
           child: GridView.builder(
             shrinkWrap: true,
-            itemCount: children.length,
+            itemCount: children?.length,
             padding: REdgeInsets.symmetric(horizontal: 16),
             physics: const NeverScrollableScrollPhysics(),
             gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
@@ -154,7 +154,7 @@ class HomeSection<T> extends HookWidget {
               crossAxisSpacing: 8.r,
             ),
             itemBuilder: (context, index) {
-              return widget(children[index]);
+              return widget(children![index]);
             },
           ),
         ),

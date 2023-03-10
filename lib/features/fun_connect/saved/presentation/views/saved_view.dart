@@ -28,17 +28,22 @@ class _SavedViewState extends State<SavedView>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
   late Place place;
+  late final SavedBloc _savedBloc;
 
   @override
   void initState() {
     _tabController = TabController(length: 2, vsync: this);
     super.initState();
-    context.read<SavedBloc>().add(SavedInitEvent(place: place));
+    _savedBloc = SavedBloc();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return BlocProvider<SavedBloc>(
+        create: (context) {
+          return _savedBloc..add(GetAllUserSavedPlaces());
+        },
+    child: Scaffold(
       backgroundColor: AppColors.black,
       body: SafeArea(
         child: Padding(
@@ -112,85 +117,19 @@ class _SavedViewState extends State<SavedView>
                                 color: AppColors.primary,
                               );
                             }
-                            if (state is! SavedLoadingIdleState)
+                            if (state is! SavedEmptyPage)
                               return const SizedBox();
                             return Column(
                               children: [
                                 BlocBuilder<SavedBloc, SavedState>(
                                     buildWhen: (_, current) =>
-                                        current is SavedLoadingIdleState,
+                                        current is SavedLoadingState,
                                     builder: (context, state) {
-                                      if (state is! SavedLoadingIdleState)
+                                      if (state is! UserSavedPageFilledState)
                                         return const SizedBox();
                                       if (state.savedPlaces.isEmpty) {
                                         return SavedPage(state: state);
-                                      } else {
-                                        return Center(
-                                          child: Padding(
-                                            padding: EdgeInsets.symmetric(
-                                                vertical: 16.h,
-                                                horizontal: 24.w),
-                                            child: Expanded(
-                                              child: SingleChildScrollView(
-                                                child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.center,
-                                                  children: [
-                                                    Text(
-                                                      "No saved items yet",
-                                                      style: AppTextStyles
-                                                          .regular16
-                                                          .copyWith(
-                                                              color: AppColors
-                                                                  .secondary500),
-                                                    ),
-                                                    Spacing.vertMedium(),
-                                                    Container(
-                                                      width: 189.0.w,
-                                                      height: 48.0.h,
-                                                      decoration: BoxDecoration(
-                                                        color: AppColors
-                                                            .imgContainerBlack,
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(
-                                                                    12.0.r),
-                                                      ),
-                                                      child: GestureDetector(
-                                                        onTap: () => locator<
-                                                                INavigationService>()
-                                                            .toNamed(Routes
-                                                                .createCollectionViewRoute),
-                                                        child: Center(
-                                                          child: Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                        .fromLTRB(
-                                                                    40,
-                                                                    16,
-                                                                    40,
-                                                                    16),
-                                                            child: Text(
-                                                              "Add collection",
-                                                              style:
-                                                                  AppTextStyles
-                                                                      .medium20
-                                                                      .copyWith(
-                                                                color: AppColors
-                                                                    .gray97,
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        );
-                                      }
+                                      } else {}
                                       return const SizedBox();
                                     }),
                               ],
@@ -248,14 +187,67 @@ class _SavedViewState extends State<SavedView>
           ),
         ),
       ),
+    ),
+    );
+  }
+}
+
+class SavedEmptyPage extends StatelessWidget {
+  const SavedEmptyPage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Padding(
+        padding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 24.w),
+        child: Expanded(
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  "No saved items yet",
+                  style: AppTextStyles.regular16
+                      .copyWith(color: AppColors.secondary500),
+                ),
+                Spacing.vertMedium(),
+                Container(
+                  width: 189.0.w,
+                  height: 48.0.h,
+                  decoration: BoxDecoration(
+                    color: AppColors.imgContainerBlack,
+                    borderRadius: BorderRadius.circular(12.0.r),
+                  ),
+                  child: GestureDetector(
+                    onTap: () => locator<INavigationService>()
+                        .toNamed(Routes.createCollectionViewRoute),
+                    child: Center(
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(40, 16, 40, 16),
+                        child: Text(
+                          "Add collection",
+                          style: AppTextStyles.medium20.copyWith(
+                            color: AppColors.gray97,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
 
 class SavedPage extends StatelessWidget {
-  final SavedLoadingIdleState state;
+  final UserSavedPageFilledState state;
   final Place? place;
-  const SavedPage({Key? key, required this.state,this.place }) : super(key: key);
+  const SavedPage({Key? key, required this.state, this.place})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -263,17 +255,17 @@ class SavedPage extends StatelessWidget {
       onRefresh: () async {
         context
             .read<SavedBloc>()
-            .add(SavedInitEvent(showLoader: false, place: place!));
+            .add(SavedInitial(showLoader: false));
       },
       child: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             ...state.savedPlaces.map((e) {
-              if (e.isPlace) {
+              if (e.id.isNotEmpty) {
                 return HomeSection<Place>(
-                  label: e.id,
-                  children: e.data.map((e) => e as Place).toList(),
+                  label: e.name,
+                  //children: e.data.map((e) => e as Place).toList(),
                   widget: (Place place) {
                     return HomeCategoriesLargeWidget(
                       coverImage: place.coverImagePath,
