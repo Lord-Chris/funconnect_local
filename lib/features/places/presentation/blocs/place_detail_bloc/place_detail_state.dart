@@ -13,6 +13,7 @@ class PlaceDetailFetchingState extends PlaceDetailState {}
 class PlaceDetailIdleState extends PlaceDetailState {
   final FullPlaceModel place;
   final PaginatedData<ReviewModel>? reviewsData;
+  
 
   PlaceDetailIdleState({
     required this.place,
