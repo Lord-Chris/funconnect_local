@@ -20,7 +20,7 @@ class PlaceDetailIdleState extends PlaceDetailState {
   });
 
   @override
-  List<Object> get props => [place, reviews];
+  List<Object> get props => [place, reviews, DateTime.now()];
 
   List<ReviewModel> get reviews => reviewsData?.data ?? [];
 }
