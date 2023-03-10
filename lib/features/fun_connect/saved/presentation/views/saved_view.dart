@@ -40,154 +40,163 @@ class _SavedViewState extends State<SavedView>
   @override
   Widget build(BuildContext context) {
     return BlocProvider<SavedBloc>(
-        create: (context) {
-          return _savedBloc..add(GetAllUserSavedPlaces());
-        },
-    child: Scaffold(
-      backgroundColor: AppColors.black,
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.only(left: 16.0, top: 16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              ListTile(
-                contentPadding: EdgeInsets.zero,
-                title: Padding(
-                  padding:
-                      EdgeInsets.only(left: 8.0.w, bottom: 8.0.h, top: 32.0.h),
-                  child: Text(
-                    AppText.aTSaved,
-                    style: AppTextStyles.medium28,
-                  ),
-                ),
-                subtitle: Padding(
-                  padding: EdgeInsets.only(left: 8.0.w, bottom: 32.0.h),
-                  child: Text(
-                    AppText.aTSavedSubtext,
-                    style: AppTextStyles.medium16.copyWith(
-                      color: AppColors.eventBasedColor,
-                    ),
-                  ),
-                ),
-                trailing: GestureDetector(
-                  onTap: () => locator<INavigationService>()
-                      .toNamed(Routes.createCollectionViewRoute),
-                  child: Padding(
+      create: (context) {
+        return _savedBloc..add(GetAllUserSavedPlaces());
+      },
+      child: Scaffold(
+        backgroundColor: AppColors.black,
+        body: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.only(left: 16.0, top: 16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ListTile(
+                  contentPadding: EdgeInsets.zero,
+                  title: Padding(
                     padding: EdgeInsets.only(
-                        left: 8.0.w, right: 8.0.w, bottom: 8.0.h, top: 32.0.h),
-                    child: const Icon(
-                      Icons.more_vert,
-                      color: AppColors.white,
+                        left: 8.0.w, bottom: 8.0.h, top: 32.0.h),
+                    child: Text(
+                      AppText.aTSaved,
+                      style: AppTextStyles.medium28,
+                    ),
+                  ),
+                  subtitle: Padding(
+                    padding: EdgeInsets.only(left: 8.0.w, bottom: 32.0.h),
+                    child: Text(
+                      AppText.aTSavedSubtext,
+                      style: AppTextStyles.medium16.copyWith(
+                        color: AppColors.eventBasedColor,
+                      ),
+                    ),
+                  ),
+                  trailing: GestureDetector(
+                    onTap: () => locator<INavigationService>()
+                        .toNamed(Routes.createCollectionViewRoute),
+                    child: Padding(
+                      padding: EdgeInsets.only(
+                          left: 8.0.w,
+                          right: 8.0.w,
+                          bottom: 8.0.h,
+                          top: 32.0.h),
+                      child: const Icon(
+                        Icons.more_vert,
+                        color: AppColors.white,
+                      ),
                     ),
                   ),
                 ),
-              ),
-              TabBar(
-                controller: _tabController,
-                indicatorSize: TabBarIndicatorSize.label,
-                indicatorColor: AppColors.primary,
-                indicatorWeight: 4,
-                labelColor: AppColors.primary,
-                labelStyle:
-                    AppTextStyles.medium16.copyWith(color: AppColors.primary),
-                unselectedLabelColor: Colors.white,
-                unselectedLabelStyle:
-                    AppTextStyles.medium16.copyWith(color: Colors.white),
-                tabs: const [
-                  Tab(
-                    text: 'Recreation(0)',
-                  ),
-                  Tab(
-                    text: 'Events(0)',
-                  ),
-                ],
-              ),
-              Expanded(
-                child: TabBarView(
+                TabBar(
                   controller: _tabController,
-                  children: [
-                    Expanded(
-                      child: BlocBuilder<SavedBloc, SavedState>(
-                          buildWhen: (previous, _) =>
-                              previous is SavedLoadingState,
-                          builder: (context, state) {
-                            if (state is SavedLoadingState) {
-                              return const AppLoader(
-                                color: AppColors.primary,
-                              );
-                            }
-                            if (state is! SavedEmptyPage)
-                              return const SizedBox();
-                            return Column(
-                              children: [
-                                BlocBuilder<SavedBloc, SavedState>(
-                                    buildWhen: (_, current) =>
-                                        current is SavedLoadingState,
-                                    builder: (context, state) {
-                                      if (state is! UserSavedPageFilledState)
-                                        return const SizedBox();
-                                      if (state.savedPlaces.isEmpty) {
-                                        return SavedPage(state: state);
-                                      } else {}
-                                      return const SizedBox();
-                                    }),
-                              ],
-                            );
-                          }),
+                  indicatorSize: TabBarIndicatorSize.label,
+                  indicatorColor: AppColors.primary,
+                  indicatorWeight: 4,
+                  labelColor: AppColors.primary,
+                  labelStyle:
+                      AppTextStyles.medium16.copyWith(color: AppColors.primary),
+                  unselectedLabelColor: Colors.white,
+                  unselectedLabelStyle:
+                      AppTextStyles.medium16.copyWith(color: Colors.white),
+                  tabs: const [
+                    Tab(
+                      text: 'Recreation(0)',
                     ),
-                    Center(
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(
-                            vertical: 16.h, horizontal: 24.w),
-                        child: SingleChildScrollView(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text(
-                                "No saved items yet",
-                                style: AppTextStyles.regular16
-                                    .copyWith(color: AppColors.secondary500),
-                              ),
-                              Spacing.vertMedium(),
-                              Container(
-                                width: 189.0.w,
-                                height: 48.0.h,
-                                decoration: BoxDecoration(
-                                  color: AppColors.imgContainerBlack,
-                                  borderRadius: BorderRadius.circular(12.0.r),
+                    Tab(
+                      text: 'Events(0)',
+                    ),
+                  ],
+                ),
+                Expanded(
+                  child: TabBarView(
+                    controller: _tabController,
+                    children: [
+                      Expanded(
+                        child: BlocBuilder<SavedBloc, SavedState>(
+                            buildWhen: (previous, _) =>
+                                previous is SavedLoadingState,
+                            builder: (context, state) {
+                              if (state is SavedLoadingState) {
+                                return const AppLoader(
+                                  color: AppColors.primary,
+                                );
+                              }
+                              if (state is! SavedEmptyPage) {
+                                return const SizedBox();
+                              }
+                              return Column(
+                                children: [
+                                  BlocBuilder<SavedBloc, SavedState>(
+                                      buildWhen: (_, current) =>
+                                          current is SavedLoadingState,
+                                      builder: (context, state) {
+                                        if (state
+                                            is! UserSavedPageFilledState) {
+                                          return const SizedBox();
+                                        }
+                                        if (state.savedPlaces.isNotEmpty) {
+                                          return SavedPage(state: state);
+                                        } else if (state.savedPlaces.isEmpty) {
+                                          return const SavedEmptyPage();
+                                        }
+                                        return const SizedBox();
+                                      }),
+                                ],
+                              );
+                            }),
+                      ),
+                      Center(
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                              vertical: 16.h, horizontal: 24.w),
+                          child: SingleChildScrollView(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Text(
+                                  "No saved items yet",
+                                  style: AppTextStyles.regular16
+                                      .copyWith(color: AppColors.secondary500),
                                 ),
-                                child: GestureDetector(
-                                  onTap: () => locator<INavigationService>()
-                                      .toNamed(
-                                          Routes.createCollectionViewRoute),
-                                  child: Center(
-                                    child: Padding(
-                                      padding: const EdgeInsets.fromLTRB(
-                                          40, 16, 40, 16),
-                                      child: Text(
-                                        "Add collection",
-                                        style: AppTextStyles.medium20.copyWith(
-                                          color: AppColors.gray97,
+                                Spacing.vertMedium(),
+                                Container(
+                                  width: 189.0.w,
+                                  height: 48.0.h,
+                                  decoration: BoxDecoration(
+                                    color: AppColors.imgContainerBlack,
+                                    borderRadius: BorderRadius.circular(12.0.r),
+                                  ),
+                                  child: GestureDetector(
+                                    onTap: () => locator<INavigationService>()
+                                        .toNamed(
+                                            Routes.createCollectionViewRoute),
+                                    child: Center(
+                                      child: Padding(
+                                        padding: const EdgeInsets.fromLTRB(
+                                            40, 16, 40, 16),
+                                        child: Text(
+                                          "Add collection",
+                                          style:
+                                              AppTextStyles.medium20.copyWith(
+                                            color: AppColors.gray97,
+                                          ),
                                         ),
                                       ),
                                     ),
                                   ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
-    ),
     );
   }
 }
@@ -253,9 +262,7 @@ class SavedPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return RefreshIndicator(
       onRefresh: () async {
-        context
-            .read<SavedBloc>()
-            .add(SavedInitial(showLoader: false));
+        context.read<SavedBloc>().add(const SavedInitial(showLoader: false));
       },
       child: SingleChildScrollView(
         child: Column(
