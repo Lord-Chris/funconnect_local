@@ -30,6 +30,7 @@ class FullPlaceModel extends Equatable {
   final PlaceLocationModel? location;
   final List<ImageModel> images;
   final List<PlaceModel> similarPlaces;
+  final bool savedPlace;
 
   const FullPlaceModel({
     required this.id,
@@ -51,6 +52,7 @@ class FullPlaceModel extends Equatable {
     this.location,
     required this.images,
     required this.similarPlaces,
+    required this.savedPlace,
   });
 
   Map<String, dynamic> toMap() {
@@ -74,6 +76,7 @@ class FullPlaceModel extends Equatable {
       'location': location?.toMap(),
       'images': images.map((x) => x.toMap()).toList(),
       'similarPlaces': similarPlaces.map((x) => x.toMap()).toList(),
+      'saved_place': savedPlace,
     };
   }
 
@@ -104,6 +107,7 @@ class FullPlaceModel extends Equatable {
           map['images']?.map((x) => ImageModel.fromMap(x))),
       similarPlaces: List<PlaceModel>.from(
           map['similarPlaces']?.map((x) => PlaceModel.fromMap(x))),
+      savedPlace: map['saved_place'] ?? false,
     );
   }
   String toJson() => json.encode(toMap());
@@ -136,7 +140,7 @@ class FullPlaceModel extends Equatable {
 
   TimeOfDay get opensAtParsed => GeneralUtils.stringToTimeOfDay(opensAt);
   TimeOfDay get closesAtParsed => GeneralUtils.stringToTimeOfDay(closesAt);
-  bool get isBookmarked => true;
+  bool get isBookmarked => savedPlace;
 
   FullPlaceModel copyWith({
     String? id,
@@ -158,6 +162,7 @@ class FullPlaceModel extends Equatable {
     PlaceLocationModel? location,
     List<ImageModel>? images,
     List<PlaceModel>? similarPlaces,
+    bool? savedPlace,
   }) {
     return FullPlaceModel(
       id: id ?? this.id,
@@ -179,6 +184,7 @@ class FullPlaceModel extends Equatable {
       location: location ?? this.location,
       images: images ?? this.images,
       similarPlaces: similarPlaces ?? this.similarPlaces,
+      savedPlace: savedPlace ?? this.savedPlace,
     );
   }
 }
@@ -278,5 +284,6 @@ final mockFullPlace = {
       "updated_at": "2022-12-13T09:24:03.000000Z"
     }
   ],
-  "similarPlaces": []
+  "similarPlaces": [],
+  "saved_place": false,
 };

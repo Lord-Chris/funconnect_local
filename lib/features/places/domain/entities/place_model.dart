@@ -16,7 +16,7 @@ class PlaceModel extends Equatable {
   final double avgRating;
   final double avgReviewCount;
   final double distance;
-  final int? savedPlace;
+  final bool savedPlace;
 
   const PlaceModel({
     required this.id,
@@ -31,7 +31,7 @@ class PlaceModel extends Equatable {
     required this.avgRating,
     required this.avgReviewCount,
     required this.distance,
-    this.savedPlace,
+    required this.savedPlace,
   });
 
   Map<String, dynamic> toMap() {
@@ -66,7 +66,7 @@ class PlaceModel extends Equatable {
       avgRating: map['avg_rating']?.toDouble() ?? 0.0,
       avgReviewCount: map['avg_review_count']?.toDouble() ?? 0.0,
       distance: map['distance']?.toDouble() ?? 0.0,
-      savedPlace: map['saved_place']?.toInt(),
+      savedPlace: map['saved_place'] ?? false,
     );
   }
 
@@ -89,6 +89,7 @@ class PlaceModel extends Equatable {
       avgRating: placeModel.avgRating,
       avgReviewCount: placeModel.avgReviewCount,
       distance: 0,
+      savedPlace: placeModel.isBookmarked,
     );
   }
 
@@ -110,7 +111,7 @@ class PlaceModel extends Equatable {
     ];
   }
 
-  bool get isBookmarked => (savedPlace ?? 1).isEven;
+  bool get isBookmarked => savedPlace;
 }
 
 final mockPlace = PlaceModel.fromMap(const {
