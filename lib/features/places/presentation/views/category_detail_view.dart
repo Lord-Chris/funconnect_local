@@ -156,7 +156,7 @@ class CategoryDetailView extends HookWidget {
                                 return HomeCategoriesLargeWidget(
                                   coverImage: place.coverImagePath,
                                   name: place.name,
-                                  isBookmarked: false,
+                                  isBookmarked: place.isBookmarked,
                                   rating: place.avgRating,
                                   ratingCount: place.avgReviewCount,
                                   onTap: () => context

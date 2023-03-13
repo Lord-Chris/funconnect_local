@@ -6,6 +6,7 @@ import 'package:funconnect/core/models/_models.dart';
 import 'package:funconnect/core/utils/general_utils.dart';
 import 'package:funconnect/features/places/domain/entities/full_place_model.dart';
 import 'package:funconnect/features/places/domain/entities/review_model.dart';
+import 'package:funconnect/features/places/domain/usecases/bookmark_place.dart';
 import 'package:funconnect/features/places/domain/usecases/review_place.dart';
 import 'package:funconnect/features/places/presentation/blocs/place_detail_bloc/place_detail_event.dart';
 import 'package:funconnect/features/places/presentation/blocs/place_detail_bloc/place_detail_state.dart';
@@ -25,6 +26,7 @@ class PlaceDetailBloc extends Bloc<PlaceDetailEvent, PlaceDetailState> {
     on<PhoneTapEvent>(_onPhoneTapEvent);
     on<ShareTapEvent>(_onShareTapEvent);
     on<BookRideEvent>(_onBookRideEvent);
+    on<BookmarkTapEvent>(_onBookmarkTapEvent);
   }
   final _logger = Logger();
   final _navigationService = locator<INavigationService>();
@@ -110,5 +112,23 @@ class PlaceDetailBloc extends Bloc<PlaceDetailEvent, PlaceDetailState> {
         label: "Book a ride!",
       ),
     );
+  }
+
+  FutureOr<void> _onBookmarkTapEvent(
+    BookmarkTapEvent event,
+    Emitter<PlaceDetailState> emit,
+  ) async {
+    if (state is! PlaceDetailIdleState) return null;
+    final prevState = state as PlaceDetailIdleState;
+    try {
+      final data = await BookmarkPlace().call(prevState.place);
+      emit(PlaceDetailIdleState(
+        place: data,
+        reviewsData: prevState.reviewsData,
+      ));
+    } on Failure catch (e) {
+      _logger.e(e);
+      emit(prevState);
+    }
   }
 }

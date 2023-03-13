@@ -12,7 +12,7 @@ class AppLoader extends StatelessWidget {
   final double? size;
   const AppLoader({
     Key? key,
-    this.color = AppColors.white,
+    this.color = AppColors.primary,
     this.padding,
     this.size = 25,
   }) : super(key: key);

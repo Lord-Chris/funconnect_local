@@ -28,7 +28,6 @@ import 'package:funconnect/features/places/presentation/views/place_detail_view.
 import 'package:funconnect/features/profile/domain/entities/profile_model.dart';
 import 'package:funconnect/features/profile/presentation/blocs/edit_profile_bloc/edit_profile_bloc.dart';
 import 'package:funconnect/features/profile/presentation/blocs/manage_login_options_bloc/manage_login_options_bloc.dart';
-import 'package:funconnect/features/profile/presentation/blocs/profile_bloc/profile_bloc.dart';
 import 'package:funconnect/features/profile/presentation/views/edit_profile_view.dart';
 import 'package:funconnect/features/profile/presentation/views/manage_login_options_view.dart';
 import 'package:funconnect/features/profile/presentation/views/my_events_view.dart';
@@ -40,6 +39,7 @@ import 'package:funconnect/features/startup/presentation/views/onboarding_view.d
 import 'package:funconnect/features/startup/presentation/views/splash_view.dart';
 import 'package:funconnect/features/startup/presentation/views/version_update_view.dart';
 
+import '../../features/dashboard/presentation/blocs/notification_bloc/notification_bloc.dart';
 import '../../features/events/presentation/views/create_event_view.dart';
 import '../../features/events/presentation/views/event_description_view.dart';
 
@@ -80,7 +80,6 @@ class Routes {
   static const profileSetupViewRoute = '/profile_setup';
   static const manageLoginOptionsRoute = '/manage-login-options';
   static const rateYourExperienceRoute = '/rate-your-experience';
-  static const notificationsRoute = '/notifications';
   static const myTicketRoute = '/my-ticket';
   static const myEventRoute = '/my-event';
 
@@ -151,8 +150,9 @@ class Routes {
       case notificationsViewRoute:
         return _registerBlocView(
           view: const NotificationsView(),
-          bloc: ProfileBloc(),
+          bloc: NotificationBloc(),
         );
+
       // Events
       case createEventRoute:
         return MaterialPageRoute(builder: (_) => const CreateEventView());
@@ -193,9 +193,6 @@ class Routes {
       case rateYourExperienceRoute:
         return MaterialPageRoute(
             builder: (_) => const RateYourExperienceView());
-
-      case notificationsRoute:
-        return MaterialPageRoute(builder: (_) => const NotificationsView());
 
       case myTicketRoute:
         return MaterialPageRoute(builder: (_) => const MyTicketView());

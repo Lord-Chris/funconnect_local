@@ -136,6 +136,51 @@ class FullPlaceModel extends Equatable {
 
   TimeOfDay get opensAtParsed => GeneralUtils.stringToTimeOfDay(opensAt);
   TimeOfDay get closesAtParsed => GeneralUtils.stringToTimeOfDay(closesAt);
+  bool get isBookmarked => true;
+
+  FullPlaceModel copyWith({
+    String? id,
+    String? name,
+    String? headline,
+    String? coverImagePath,
+    String? description,
+    String? addedBy,
+    String? opensAt,
+    String? closesAt,
+    String? phoneE164,
+    String? address,
+    double? avgRating,
+    double? avgReviewCount,
+    double? reviewsAvgRating,
+    double? reviewsCount,
+    List<CategoryModel>? categories,
+    List<FeatureModel>? features,
+    PlaceLocationModel? location,
+    List<ImageModel>? images,
+    List<PlaceModel>? similarPlaces,
+  }) {
+    return FullPlaceModel(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      headline: headline ?? this.headline,
+      coverImagePath: coverImagePath ?? this.coverImagePath,
+      description: description ?? this.description,
+      addedBy: addedBy ?? this.addedBy,
+      opensAt: opensAt ?? this.opensAt,
+      closesAt: closesAt ?? this.closesAt,
+      phoneE164: phoneE164 ?? this.phoneE164,
+      address: address ?? this.address,
+      avgRating: avgRating ?? this.avgRating,
+      avgReviewCount: avgReviewCount ?? this.avgReviewCount,
+      reviewsAvgRating: reviewsAvgRating ?? this.reviewsAvgRating,
+      reviewsCount: reviewsCount ?? this.reviewsCount,
+      categories: categories ?? this.categories,
+      features: features ?? this.features,
+      location: location ?? this.location,
+      images: images ?? this.images,
+      similarPlaces: similarPlaces ?? this.similarPlaces,
+    );
+  }
 }
 
 final mockFullPlace = {

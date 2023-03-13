@@ -85,6 +85,17 @@ class PlaceRepository extends IPlaceRepository {
   }
 
   @override
+  Future<bool> toggleBookmark(FullPlaceModel place, bool shouldBookmark) async {
+    if (shouldBookmark) {
+      await _remoteDS.bookmarkPlace(place);
+      return true;
+    } else {
+      await _remoteDS.unBookmarkPlace(place);
+      return false;
+    }
+  }
+
+  @override
   Future<PaginatedData<PlaceModel>> fetchExploreDetails(
     AppLocation? location,
   ) async {
