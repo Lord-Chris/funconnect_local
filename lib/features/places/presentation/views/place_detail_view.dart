@@ -35,53 +35,51 @@ class PlaceDetailView extends HookWidget {
     }, []);
     return Scaffold(
       body: RefreshIndicator(
-        onRefresh: () async =>
-            context.read<PlaceDetailBloc>().add(PlaceInitEvent(place)),
-        child: SingleChildScrollView(
-          physics: const AlwaysScrollableScrollPhysics(),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+        onRefresh: () async {
+          final bloc = context.read<PlaceDetailBloc>();
+          bloc.add(PlaceInitEvent(place));
+          await bloc.stream.first;
+        },
+        child: SafeArea(
+          child: Stack(
             children: [
-              Stack(
-                children: [
-                  AppNetworkImage(
-                    size: Size.fromHeight(409.h),
-                    url: place.coverImagePath,
-                    borderRadius: 20,
-                    fit: BoxFit.cover,
-                  ),
-                  Positioned(
-                    left: 16,
-                    child: SafeArea(
-                      child: InkWell(
-                        onTap: () => Navigator.pop(context),
-                        child: CircleAvatar(
-                          radius: 18,
-                          backgroundColor: AppColors.black.withOpacity(.6),
-                          child: Icon(
-                            Icons.arrow_back_ios_rounded,
-                            size: 20.sp,
-                            color: AppColors.white,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              Spacing.vertRegular(),
-              Padding(
+              SingleChildScrollView(
                 padding: EdgeInsets.symmetric(horizontal: 16.w),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   mainAxisSize: MainAxisSize.min,
                   children: [
+                    AppNetworkImage(
+                      size: Size.fromHeight(409.h),
+                      url: place.coverImagePath,
+                      borderRadius: 20,
+                      fit: BoxFit.cover,
+                    ),
+                    Spacing.vertRegular(),
                     _InfoSection(place: place),
                     const _ReviewSection(),
                     Spacing.vertMedium(),
                     const _MorePlacesSection(),
                   ],
+                ),
+              ),
+              Positioned(
+                left: 23,
+                top: 23,
+                child: SafeArea(
+                  child: InkWell(
+                    onTap: () => Navigator.pop(context),
+                    child: CircleAvatar(
+                      radius: 18,
+                      backgroundColor: AppColors.black.withOpacity(.6),
+                      child: Icon(
+                        Icons.arrow_back_ios_rounded,
+                        size: 20.sp,
+                        color: AppColors.white,
+                      ),
+                    ),
+                  ),
                 ),
               ),
             ],
@@ -150,8 +148,10 @@ class _InfoSection extends StatelessWidget {
                       style: AppTextStyles.medium24,
                     ),
                   ),
-                  AnimatedContainer(
-                    duration: const Duration(milliseconds: 1),
+                  InkWell(
+                    onTap: () => context
+                        .read<PlaceDetailBloc>()
+                        .add(ShareTapEvent(place)),
                     child: SvgPicture.asset(
                       AppAssets.uploadSvg,
                       color: AppColors.white,
@@ -161,10 +161,19 @@ class _InfoSection extends StatelessWidget {
                   Spacing.horizMedium(),
                   AnimatedContainer(
                     duration: const Duration(milliseconds: 1),
-                    child: SvgPicture.asset(
-                      AppAssets.bookmarkIconSvg,
-                      color: AppColors.white,
-                      height: 20,
+                    child: InkWell(
+                      onTap: () => context
+                          .read<PlaceDetailBloc>()
+                          .add(BookmarkTapEvent()),
+                      child: SvgPicture.asset(
+                        place.isBookmarked
+                            ? AppAssets.savedIconSvg
+                            : AppAssets.bookmarkIconSvg,
+                        color: place.isBookmarked
+                            ? AppColors.primary
+                            : AppColors.white,
+                        height: 20,
+                      ),
                     ),
                   ),
                 ],
@@ -244,12 +253,15 @@ class _InfoSection extends StatelessWidget {
                 AnimatedContainer(
                   duration: const Duration(milliseconds: 1),
                   child: InkWell(
-                    onTap: () => context
-                        .read<PlaceDetailBloc>()
-                        .add(ShareTapEvent(place)),
+                    onTap: () =>
+                        context.read<PlaceDetailBloc>().add(BookmarkTapEvent()),
                     child: SvgPicture.asset(
-                      AppAssets.bookmarkIconSvg,
-                      color: AppColors.white,
+                      state.place.isBookmarked
+                          ? AppAssets.savedIconSvg
+                          : AppAssets.bookmarkIconSvg,
+                      color: state.place.isBookmarked
+                          ? AppColors.primary
+                          : AppColors.white,
                       height: 20,
                     ),
                   ),

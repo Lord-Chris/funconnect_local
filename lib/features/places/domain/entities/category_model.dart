@@ -50,6 +50,7 @@ class CategoryModel extends Equatable {
       name,
       status,
       coverPhoto,
+      if (pivot != null) pivot!,
     ];
   }
 }

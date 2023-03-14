@@ -5,6 +5,7 @@ import 'package:funconnect/core/app/_app.dart';
 import 'package:funconnect/core/models/_models.dart';
 import 'package:funconnect/core/utils/general_utils.dart';
 import 'package:funconnect/features/places/domain/entities/full_place_model.dart';
+import 'package:funconnect/features/places/domain/entities/place_model.dart';
 import 'package:funconnect/features/places/domain/entities/review_model.dart';
 import 'package:funconnect/features/places/domain/usecases/bookmark_place.dart';
 import 'package:funconnect/features/places/domain/usecases/review_place.dart';
@@ -32,12 +33,21 @@ class PlaceDetailBloc extends Bloc<PlaceDetailEvent, PlaceDetailState> {
   final _navigationService = locator<INavigationService>();
   final _dynamicLinkService = locator<IDynamicLinkService>();
   final _dialogAndSheetService = locator<IDialogAndSheetService>();
+  String? link;
+
+  Future<void> _getLink(PlaceModel place) async {
+    link = await _dynamicLinkService.generateLink(
+        desc: place.name,
+        data: DeepLinkDataModel.place(place.id),
+        image: place.coverImagePath);
+  }
 
   Future<FutureOr<void>> _onPlaceInitEvent(
     PlaceInitEvent event,
     Emitter<PlaceDetailState> emit,
   ) async {
     try {
+      _getLink(event.place);
       final data = await FetchPlaceDetail().call(event.place);
       emit(PlaceDetailIdleState(
         place: data[0] as FullPlaceModel,
@@ -94,12 +104,10 @@ class PlaceDetailBloc extends Bloc<PlaceDetailEvent, PlaceDetailState> {
     ShareTapEvent event,
     Emitter<PlaceDetailState> emit,
   ) async {
-    _dynamicLinkService.shareLink(
-      await _dynamicLinkService.generateLink(
-          desc: event.place.name,
-          data: event.data,
-          image: event.place.coverImagePath),
-    );
+    if (link == null) {
+      await _getLink(event.place);
+    }
+    _dynamicLinkService.shareLink(link!);
   }
 
   FutureOr<void> _onBookRideEvent(
@@ -122,10 +130,7 @@ class PlaceDetailBloc extends Bloc<PlaceDetailEvent, PlaceDetailState> {
     final prevState = state as PlaceDetailIdleState;
     try {
       final data = await BookmarkPlace().call(prevState.place);
-      emit(PlaceDetailIdleState(
-        place: data,
-        reviewsData: prevState.reviewsData,
-      ));
+      emit(prevState.copyWith(place: data));
     } on Failure catch (e) {
       _logger.e(e);
       emit(prevState);

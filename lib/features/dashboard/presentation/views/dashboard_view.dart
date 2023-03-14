@@ -5,7 +5,8 @@ import 'package:funconnect/features/dashboard/presentation/blocs/dashboard_bloc/
 import 'package:funconnect/features/dashboard/presentation/blocs/dashboard_bloc/dashboard_event.dart';
 import 'package:funconnect/features/dashboard/presentation/blocs/dashboard_bloc/dashboard_state.dart';
 import 'package:funconnect/features/events/presentation/blocs/events_bloc/events_bloc.dart';
-import 'package:funconnect/features/fun_connect/saved/presentation/views/saved_view.dart';
+import 'package:funconnect/features/saved/presentation/blocs/saved_bloc.dart';
+import 'package:funconnect/features/saved/presentation/views/saved_view.dart';
 import 'package:funconnect/features/places/presentation/blocs/explore_bloc/explore_bloc.dart';
 import 'package:funconnect/features/places/presentation/blocs/home_bloc/home_bloc.dart';
 import 'package:funconnect/features/places/presentation/views/home_view.dart';
@@ -30,6 +31,7 @@ class DashboardView extends StatelessWidget {
         BlocProvider(create: (context) => ExploreBloc()),
         BlocProvider(create: (context) => EventsBloc()),
         BlocProvider(create: (context) => ProfileBloc()),
+        BlocProvider(create: (context) => SavedBloc()),
       ],
       child: BlocBuilder<DashboardBloc, DashboardState>(
         buildWhen: (previous, current) => current is DashboardIdleState,

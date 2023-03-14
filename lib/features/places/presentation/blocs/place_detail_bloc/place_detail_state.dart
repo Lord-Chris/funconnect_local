@@ -20,9 +20,19 @@ class PlaceDetailIdleState extends PlaceDetailState {
   });
 
   @override
-  List<Object> get props => [place, reviews];
+  List<Object> get props => [place, reviews, DateTime.now()];
 
   List<ReviewModel> get reviews => reviewsData?.data ?? [];
+
+  PlaceDetailIdleState copyWith({
+    FullPlaceModel? place,
+    PaginatedData<ReviewModel>? reviewsData,
+  }) {
+    return PlaceDetailIdleState(
+      place: place ?? this.place,
+      reviewsData: reviewsData ?? this.reviewsData,
+    );
+  }
 }
 
 class PlaceDetailFailureState extends PlaceDetailState {

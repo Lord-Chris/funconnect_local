@@ -55,7 +55,6 @@ class AppLocation extends Equatable {
     };
   }
 
-
   factory AppLocation.fromMap(Map<String, dynamic> map) {
     return AppLocation(
       id: map['id'],
@@ -73,4 +72,6 @@ class AppLocation extends Equatable {
 
   factory AppLocation.fromJson(String source) =>
       AppLocation.fromMap(json.decode(source));
+
+  String get parsedAddress => '$city $state';
 }

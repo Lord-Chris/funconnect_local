@@ -16,6 +16,7 @@ class PlaceInitEvent extends PlaceDetailEvent {
 
   @override
   List<Object> get props => [place];
+  DeepLinkDataModel get data => DeepLinkDataModel.place(place.id);
 }
 
 class ReviewPlaceEvent extends PlaceDetailEvent {

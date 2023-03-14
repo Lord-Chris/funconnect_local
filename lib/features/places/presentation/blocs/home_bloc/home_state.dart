@@ -36,7 +36,7 @@ class HomeIdleState extends HomeState {
 
   @override
   List<Object> get props =>
-      [interests, interest ?? "", interestPlaces, homeTrends];
+      [interests, interest ?? "", interestPlaces, homeTrends, DateTime.now()];
 
   HomeIdleState copyWith({
     UserModel? user,
