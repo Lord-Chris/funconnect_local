@@ -5,6 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:funconnect/features/saved/presentation/blocs/saved_bloc.dart';
 import 'package:funconnect/features/saved/presentation/blocs/saved_event.dart';
 import 'package:funconnect/features/saved/presentation/blocs/saved_state.dart';
+import 'package:funconnect/features/saved/presentation/widgets/saved_place_widget.dart';
 import 'package:funconnect/shared/components/custom_button.dart';
 
 import '../../../../core/app/locator.dart';
@@ -12,7 +13,6 @@ import '../../../../core/app/routes.dart';
 import '../../../../services/navigation_service/i_navigation_service.dart';
 import '../../../../shared/components/app_loader.dart';
 import '../../../../shared/constants/_constants.dart';
-import '../../../places/presentation/widgets/home_categories_large_widget.dart';
 
 class SavedView extends StatefulWidget {
   const SavedView({Key? key}) : super(key: key);
@@ -237,46 +237,16 @@ class SavedPage extends StatelessWidget {
         ),
         itemBuilder: (context, index) {
           final place = state.savedPlaces[index];
-          return HomeCategoriesLargeWidget(
+          return SavedPlaceWidget(
             coverImage: place.place!.coverImagePath,
             name: place.place!.name,
             isBookmarked: true,
-            rating: place.place!.avgRating,
-            ratingCount: place.place!.avgReviewCount,
             size: Size.infinite,
             onTap: () =>
                 context.read<SavedBloc>().add(SavedPlaceTapEvent(place: place)),
           );
         },
       ),
-      // SingleChildScrollView(
-      //   child: Column(
-      //     mainAxisSize: MainAxisSize.min,
-      //     children: [
-      //       ...state.savedPlaces.map((e) {
-      //         if (e.id.isNotEmpty) {
-      //           return HomeSection<PlaceModel>(
-      //             // label: e.place.name,
-      //             children: e.data.map((e) => e as Place).toList(),
-      //             widget: (Place place) {
-      //               return HomeCategoriesLargeWidget(
-      //                 coverImage: place.coverImagePath,
-      //                 name: place.name,
-      //                 isBookmarked: false,
-      //                 rating: place.avgRating,
-      //                 ratingCount: place.avgReviewCount,
-      //                 onTap: () => context.read<SavedBloc>().add(
-      //                       SavedPlaceTapEvent(place: place),
-      //                     ),
-      //               );
-      //             },
-      //           );
-      //         }
-      //         return const SizedBox();
-      //       }),
-      //     ],
-      //   ),
-      // ),
     );
   }
 }
