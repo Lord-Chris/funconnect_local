@@ -1,10 +1,10 @@
 import 'package:funconnect/core/app/_app.dart';
 import 'package:funconnect/core/constants/_constants.dart';
-import 'package:funconnect/features/fun_connect/saved/domain/entities/saved_place_model.dart';
 
 import '../../../../../core/models/paginated_data.dart';
 import '../../../../../services/local_storage_service/i_local_storage_service.dart';
 import '../../../../authentication/data/dto/user_model.dart';
+import '../../../../places/domain/entities/saved_place_model.dart';
 import '../data_sources/remote_saved_data_source.dart';
 import 'i_saved_repository.dart';
 

@@ -1,21 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:funconnect/features/fun_connect/saved/domain/entities/saved_place_model.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:funconnect/features/fun_connect/saved/presentation/blocs/saved_bloc.dart';
 import 'package:funconnect/features/fun_connect/saved/presentation/blocs/saved_event.dart';
 import 'package:funconnect/features/fun_connect/saved/presentation/blocs/saved_state.dart';
-import 'package:funconnect/shared/constants/app_spacer.dart';
-import 'package:funconnect/shared/constants/colors.dart';
+import 'package:funconnect/shared/components/custom_button.dart';
 
 import '../../../../../core/app/locator.dart';
 import '../../../../../core/app/routes.dart';
 import '../../../../../services/navigation_service/i_navigation_service.dart';
 import '../../../../../shared/components/app_loader.dart';
-import '../../../../../shared/constants/app_text.dart';
-import '../../../../../shared/constants/textstyles.dart';
+import '../../../../../shared/constants/_constants.dart';
 import '../../../../places/presentation/widgets/home_categories_large_widget.dart';
-import '../../../../places/presentation/widgets/home_categories_widget.dart';
 
 class SavedView extends StatefulWidget {
   const SavedView({Key? key}) : super(key: key);
@@ -27,62 +24,42 @@ class SavedView extends StatefulWidget {
 class _SavedViewState extends State<SavedView>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
-  late Place place;
-  late final SavedBloc _savedBloc;
 
   @override
   void initState() {
-    _tabController = TabController(length: 2, vsync: this);
     super.initState();
-    _savedBloc = SavedBloc();
+    _tabController = TabController(length: 2, vsync: this);
+    context.read<SavedBloc>().add(const GetAllUserSavedPlaces());
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<SavedBloc>(
-      create: (context) {
-        return _savedBloc..add(GetAllUserSavedPlaces());
-      },
-      child: Scaffold(
-        backgroundColor: AppColors.black,
-        body: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.only(left: 16.0, top: 16.0),
+    return BlocBuilder<SavedBloc, SavedState>(
+      builder: (context, state) {
+        return Scaffold(
+          backgroundColor: AppColors.black,
+          body: SafeArea(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 ListTile(
-                  contentPadding: EdgeInsets.zero,
-                  title: Padding(
-                    padding: EdgeInsets.only(
-                        left: 8.0.w, bottom: 8.0.h, top: 32.0.h),
-                    child: Text(
-                      AppText.aTSaved,
-                      style: AppTextStyles.medium28,
-                    ),
+                  contentPadding: REdgeInsets.fromLTRB(16, 30, 16, 0),
+                  title: Text(
+                    AppText.aTSaved,
+                    style: AppTextStyles.medium28,
                   ),
-                  subtitle: Padding(
-                    padding: EdgeInsets.only(left: 8.0.w, bottom: 32.0.h),
-                    child: Text(
-                      AppText.aTSavedSubtext,
-                      style: AppTextStyles.medium16.copyWith(
-                        color: AppColors.eventBasedColor,
-                      ),
+                  subtitle: Text(
+                    AppText.aTSavedSubtext,
+                    style: AppTextStyles.regular16.copyWith(
+                      color: AppColors.eventBasedColor,
                     ),
                   ),
                   trailing: GestureDetector(
                     onTap: () => locator<INavigationService>()
                         .toNamed(Routes.createCollectionViewRoute),
-                    child: Padding(
-                      padding: EdgeInsets.only(
-                          left: 8.0.w,
-                          right: 8.0.w,
-                          bottom: 8.0.h,
-                          top: 32.0.h),
-                      child: const Icon(
-                        Icons.more_vert,
-                        color: AppColors.white,
-                      ),
+                    child: const Icon(
+                      Icons.more_vert,
+                      color: AppColors.white,
                     ),
                   ),
                 ),
@@ -90,19 +67,17 @@ class _SavedViewState extends State<SavedView>
                   controller: _tabController,
                   indicatorSize: TabBarIndicatorSize.label,
                   indicatorColor: AppColors.primary,
-                  indicatorWeight: 4,
+                  indicatorWeight: 3,
                   labelColor: AppColors.primary,
-                  labelStyle:
-                      AppTextStyles.medium16.copyWith(color: AppColors.primary),
+                  labelStyle: AppTextStyles.medium16,
                   unselectedLabelColor: Colors.white,
-                  unselectedLabelStyle:
-                      AppTextStyles.medium16.copyWith(color: Colors.white),
-                  tabs: const [
+                  unselectedLabelStyle: AppTextStyles.medium16,
+                  tabs: [
                     Tab(
-                      text: 'Recreation(0)',
+                      text: 'Recreation (${state.savedPlaces.length})',
                     ),
-                    Tab(
-                      text: 'Events(0)',
+                    const Tab(
+                      text: 'Events (0)',
                     ),
                   ],
                 ),
@@ -111,79 +86,70 @@ class _SavedViewState extends State<SavedView>
                     controller: _tabController,
                     children: [
                       BlocBuilder<SavedBloc, SavedState>(
-                          buildWhen: (previous, _) =>
-                              previous is SavedLoadingState,
-                          builder: (context, state) {
-                            if (state is SavedLoadingState) {
-                              return const AppLoader(
-                                color: AppColors.primary,
-                              );
-                            }
-                            if (state is! SavedEmptyPage) {
-                              return const SizedBox();
-                            }
-                            return Column(
-                              children: [
-                                BlocBuilder<SavedBloc, SavedState>(
-                                    buildWhen: (_, current) =>
-                                        current is SavedLoadingState,
-                                    builder: (context, state) {
-                                      if (state is! UserSavedPageFilledState) {
-                                        return const SizedBox();
-                                      }
-                                      if (state.savedPlaces.isNotEmpty) {
-                                        return SavedPage(state: state);
-                                      } else if (state.savedPlaces.isEmpty) {
-                                        return const SavedEmptyPage();
-                                      }
-                                      return const SizedBox();
-                                    }),
-                              ],
+                        builder: (context, state) {
+                          if (state is SavedLoadingState) {
+                            return const AppLoader(
+                              color: AppColors.primary,
                             );
-                          }),
+                          }
+                          if (state is! UserSavedPageFilledState) {
+                            return const SizedBox();
+                          }
+                          if (state.savedPlaces.isEmpty) {
+                            return const SavedEmptyPage();
+                          }
+                          return SavedPage(state: state);
+                        },
+                      ),
                       Center(
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(
-                              vertical: 16.h, horizontal: 24.w),
-                          child: SingleChildScrollView(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Text(
-                                  "No saved items yet",
-                                  style: AppTextStyles.regular16
-                                      .copyWith(color: AppColors.secondary500),
-                                ),
-                                Spacing.vertMedium(),
-                                Container(
-                                  width: 189.0.w,
-                                  height: 48.0.h,
-                                  decoration: BoxDecoration(
-                                    color: AppColors.imgContainerBlack,
-                                    borderRadius: BorderRadius.circular(12.0.r),
-                                  ),
-                                  child: GestureDetector(
-                                    onTap: () => locator<INavigationService>()
-                                        .toNamed(
-                                            Routes.createCollectionViewRoute),
-                                    child: Center(
-                                      child: Padding(
-                                        padding: const EdgeInsets.fromLTRB(
-                                            40, 16, 40, 16),
-                                        child: Text(
-                                          "Add collection",
-                                          style:
-                                              AppTextStyles.medium20.copyWith(
-                                            color: AppColors.gray97,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            SvgPicture.asset(
+                              AppAssets.eventIconSvg,
+                              height: 80.sp,
                             ),
-                          ),
+                            Spacing.vertExtraMedium(),
+                            Text(
+                              "Saved Events!",
+                              textAlign: TextAlign.center,
+                              style: AppTextStyles.regular20,
+                            ),
+                            Spacing.vertLarge(),
+                            Spacing.vertRegular(),
+                            Text(
+                              "Coming Soon!",
+                              textAlign: TextAlign.center,
+                              style: AppTextStyles.medium28,
+                            ),
+                            Spacing.vertRegular(),
+                            Flexible(
+                              child: Text(
+                                "You will recieve a notification\nwhen we launch.",
+                                textAlign: TextAlign.center,
+                                style: AppTextStyles.regular14.copyWith(
+                                  color: AppColors.gray97,
+                                ),
+                              ),
+                            ),
+                            Spacing.vertLarge(),
+                            Center(
+                              child: AppButton(
+                                label: 'Saved Places',
+                                labelColor: AppColors.black,
+                                isCollapsed: true,
+                                padding: REdgeInsets.fromLTRB(50, 17, 50, 17),
+                                prefixWidget: Icon(
+                                  Icons.arrow_back,
+                                  color: AppColors.black,
+                                  size: 20.sp,
+                                ),
+                                onTap: () => _tabController.animateTo(0),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ],
@@ -192,8 +158,8 @@ class _SavedViewState extends State<SavedView>
               ],
             ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }
@@ -216,29 +182,26 @@ class SavedEmptyPage extends StatelessWidget {
                     .copyWith(color: AppColors.secondary500),
               ),
               Spacing.vertMedium(),
-              Container(
-                width: 189.0.w,
-                height: 48.0.h,
-                decoration: BoxDecoration(
-                  color: AppColors.imgContainerBlack,
-                  borderRadius: BorderRadius.circular(12.0.r),
-                ),
-                child: GestureDetector(
-                  onTap: () => locator<INavigationService>()
-                      .toNamed(Routes.createCollectionViewRoute),
-                  child: Center(
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(40, 16, 40, 16),
-                      child: Text(
-                        "Add collection",
-                        style: AppTextStyles.medium20.copyWith(
-                          color: AppColors.gray97,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
+              AppButton(
+                label: 'Refresh',
+                labelColor: AppColors.black,
+                isCollapsed: true,
+                borderRadius: 12,
+                onTap: () => context
+                    .read<SavedBloc>()
+                    .add(const GetAllUserSavedPlaces()),
               ),
+
+              // AppButton(
+              //   label: 'Add Collection',
+              //   labelColor: AppColors.gray97,
+              //   buttonColor: AppColors.imgContainerBlack,
+              //   isCollapsed: true,
+              //   borderRadius: 12,
+              //   padding: REdgeInsets.fromLTRB(40, 16, 40, 16),
+              //   onTap: () => locator<INavigationService>()
+              //       .toNamed(Routes.createCollectionViewRoute),
+              // ),
             ],
           ),
         ),
@@ -249,44 +212,71 @@ class SavedEmptyPage extends StatelessWidget {
 
 class SavedPage extends StatelessWidget {
   final UserSavedPageFilledState state;
-  final Place? place;
-  const SavedPage({Key? key, required this.state, this.place})
-      : super(key: key);
+
+  const SavedPage({
+    Key? key,
+    required this.state,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return RefreshIndicator(
       onRefresh: () async {
-        context.read<SavedBloc>().add(const SavedInitial(showLoader: false));
+        final bloc = context.read<SavedBloc>();
+        bloc.add(const GetAllUserSavedPlaces(showLoader: false));
+        await bloc.stream.first;
       },
-      child: SingleChildScrollView(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            ...state.savedPlaces.map((e) {
-              if (e.id.isNotEmpty) {
-                return HomeSection<Place>(
-                  // label: e.place.name,
-                  //children: e.data.map((e) => e as Place).toList(),
-                  widget: (Place place) {
-                    return HomeCategoriesLargeWidget(
-                      coverImage: place.coverImagePath,
-                      name: place.name,
-                      isBookmarked: false,
-                      rating: place.avgRating,
-                      ratingCount: place.avgReviewCount,
-                      onTap: () => context.read<SavedBloc>().add(
-                            SavedPlaceTapEvent(place: place),
-                          ),
-                    );
-                  },
-                );
-              }
-              return const SizedBox();
-            }),
-          ],
+      child: GridView.builder(
+        itemCount: state.savedPlaces.length,
+        padding: REdgeInsets.fromLTRB(16, 20, 16, 20),
+        gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+          maxCrossAxisExtent: 187,
+          mainAxisExtent: 187.r,
+          mainAxisSpacing: 10.r,
+          crossAxisSpacing: 8.r,
         ),
+        itemBuilder: (context, index) {
+          final place = state.savedPlaces[index];
+          return HomeCategoriesLargeWidget(
+            coverImage: place.place!.coverImagePath,
+            name: place.place!.name,
+            isBookmarked: true,
+            rating: place.place!.avgRating,
+            ratingCount: place.place!.avgReviewCount,
+            size: Size.infinite,
+            onTap: () =>
+                context.read<SavedBloc>().add(SavedPlaceTapEvent(place: place)),
+          );
+        },
       ),
+      // SingleChildScrollView(
+      //   child: Column(
+      //     mainAxisSize: MainAxisSize.min,
+      //     children: [
+      //       ...state.savedPlaces.map((e) {
+      //         if (e.id.isNotEmpty) {
+      //           return HomeSection<PlaceModel>(
+      //             // label: e.place.name,
+      //             children: e.data.map((e) => e as Place).toList(),
+      //             widget: (Place place) {
+      //               return HomeCategoriesLargeWidget(
+      //                 coverImage: place.coverImagePath,
+      //                 name: place.name,
+      //                 isBookmarked: false,
+      //                 rating: place.avgRating,
+      //                 ratingCount: place.avgReviewCount,
+      //                 onTap: () => context.read<SavedBloc>().add(
+      //                       SavedPlaceTapEvent(place: place),
+      //                     ),
+      //               );
+      //             },
+      //           );
+      //         }
+      //         return const SizedBox();
+      //       }),
+      //     ],
+      //   ),
+      // ),
     );
   }
 }

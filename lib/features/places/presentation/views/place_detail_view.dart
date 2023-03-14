@@ -148,8 +148,10 @@ class _InfoSection extends StatelessWidget {
                       style: AppTextStyles.medium24,
                     ),
                   ),
-                  AnimatedContainer(
-                    duration: const Duration(milliseconds: 1),
+                  InkWell(
+                    onTap: () => context
+                        .read<PlaceDetailBloc>()
+                        .add(ShareTapEvent(place)),
                     child: SvgPicture.asset(
                       AppAssets.uploadSvg,
                       color: AppColors.white,
@@ -159,10 +161,19 @@ class _InfoSection extends StatelessWidget {
                   Spacing.horizMedium(),
                   AnimatedContainer(
                     duration: const Duration(milliseconds: 1),
-                    child: SvgPicture.asset(
-                      AppAssets.bookmarkIconSvg,
-                      color: AppColors.white,
-                      height: 20,
+                    child: InkWell(
+                      onTap: () => context
+                          .read<PlaceDetailBloc>()
+                          .add(BookmarkTapEvent()),
+                      child: SvgPicture.asset(
+                        place.isBookmarked
+                            ? AppAssets.savedIconSvg
+                            : AppAssets.bookmarkIconSvg,
+                        color: place.isBookmarked
+                            ? AppColors.primary
+                            : AppColors.white,
+                        height: 20,
+                      ),
                     ),
                   ),
                 ],
@@ -242,12 +253,15 @@ class _InfoSection extends StatelessWidget {
                 AnimatedContainer(
                   duration: const Duration(milliseconds: 1),
                   child: InkWell(
-                    onTap: () => context
-                        .read<PlaceDetailBloc>()
-                        .add(ShareTapEvent(place)),
+                    onTap: () =>
+                        context.read<PlaceDetailBloc>().add(BookmarkTapEvent()),
                     child: SvgPicture.asset(
-                      AppAssets.bookmarkIconSvg,
-                      color: AppColors.white,
+                      state.place.isBookmarked
+                          ? AppAssets.savedIconSvg
+                          : AppAssets.bookmarkIconSvg,
+                      color: state.place.isBookmarked
+                          ? AppColors.primary
+                          : AppColors.white,
                       height: 20,
                     ),
                   ),

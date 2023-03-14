@@ -28,7 +28,7 @@ class SavedBloc extends Bloc<SavedEvent, SavedState> {
     Emitter<SavedState> emit,
   ) async {
     try {
-      emit(SavedLoadingState());
+      if (event.showLoader) emit(SavedLoadingState());
       final savedPlace = await FetchUserSavedPlaces().call(NoParams());
       emit(UserSavedPageFilledState(savedPlacesData: savedPlace));
     } on Failure catch (e) {
@@ -40,7 +40,10 @@ class SavedBloc extends Bloc<SavedEvent, SavedState> {
     SavedPlaceTapEvent event,
     Emitter<SavedState> emit,
   ) {
-    _navigationService.toNamed(Routes.placeDetailRoute, arguments: event.place);
+    _navigationService.toNamed(
+      Routes.placeDetailRoute,
+      arguments: event.place.place,
+    );
   }
 
   UserModel get user => _savedPlaceRepository.user;

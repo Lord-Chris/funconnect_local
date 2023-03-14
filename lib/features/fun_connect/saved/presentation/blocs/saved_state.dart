@@ -1,13 +1,16 @@
 import 'package:equatable/equatable.dart';
 import 'package:funconnect/core/models/_models.dart';
-import 'package:funconnect/features/fun_connect/saved/domain/entities/saved_place_model.dart';
 
 import '../../../../authentication/data/dto/user_model.dart';
+import '../../../../places/domain/entities/saved_place_model.dart';
 
 abstract class SavedState extends Equatable {
   const SavedState();
+
+  List<SavedPlaceModel> get savedPlaces => [];
+
   @override
-  List<Object> get props => [];
+  List<Object> get props => [savedPlaces];
 }
 
 class SavedEmptyState extends SavedState {}
@@ -23,20 +26,11 @@ class UserSavedPageFilledState extends SavedState {
     required this.savedPlacesData,
   });
 
+  @override
   List<SavedPlaceModel> get savedPlaces => savedPlacesData.data;
 
   @override
-  List<Object> get props => [savedPlaces];
-
-  // UserSavedPageFilledState copyWith({
-  //   UserModel? user,
-  //   final List<Place>? savedPlaces,
-  // }) {
-  //   return UserSavedPageFilledState(
-  //     user: user ?? this.user,
-  //     savedPlaces: savedPlaces ?? this.savedPlaces,
-  //   );
-  // }
+  List<Object> get props => [savedPlaces, DateTime.now()];
 }
 
 class SavedFailureState extends SavedState {
