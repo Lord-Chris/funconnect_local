@@ -9,7 +9,7 @@ import '../../domain/entities/saved_place_model.dart';
 class RemoteSavedPlaceDataSource with ApiMixin {
   final _networkService = locator<INetworkService>();
 
-  Future<PaginatedData<SavedPlaceModel>> fetchUserSavedPlaces(String userId) async {
+  Future<PaginatedData<SavedPlaceModel>> fetchUserSavedPlaces() async {
     final res = await _networkService.get(
       ApiConstants.savedPlaces,
       headers: headers,

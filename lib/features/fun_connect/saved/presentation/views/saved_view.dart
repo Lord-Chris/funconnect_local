@@ -110,40 +110,37 @@ class _SavedViewState extends State<SavedView>
                   child: TabBarView(
                     controller: _tabController,
                     children: [
-                      Expanded(
-                        child: BlocBuilder<SavedBloc, SavedState>(
-                            buildWhen: (previous, _) =>
-                                previous is SavedLoadingState,
-                            builder: (context, state) {
-                              if (state is SavedLoadingState) {
-                                return const AppLoader(
-                                  color: AppColors.primary,
-                                );
-                              }
-                              if (state is! SavedEmptyPage) {
-                                return const SizedBox();
-                              }
-                              return Column(
-                                children: [
-                                  BlocBuilder<SavedBloc, SavedState>(
-                                      buildWhen: (_, current) =>
-                                          current is SavedLoadingState,
-                                      builder: (context, state) {
-                                        if (state
-                                            is! UserSavedPageFilledState) {
-                                          return const SizedBox();
-                                        }
-                                        if (state.savedPlaces.isNotEmpty) {
-                                          return SavedPage(state: state);
-                                        } else if (state.savedPlaces.isEmpty) {
-                                          return const SavedEmptyPage();
-                                        }
-                                        return const SizedBox();
-                                      }),
-                                ],
+                      BlocBuilder<SavedBloc, SavedState>(
+                          buildWhen: (previous, _) =>
+                              previous is SavedLoadingState,
+                          builder: (context, state) {
+                            if (state is SavedLoadingState) {
+                              return const AppLoader(
+                                color: AppColors.primary,
                               );
-                            }),
-                      ),
+                            }
+                            if (state is! SavedEmptyPage) {
+                              return const SizedBox();
+                            }
+                            return Column(
+                              children: [
+                                BlocBuilder<SavedBloc, SavedState>(
+                                    buildWhen: (_, current) =>
+                                        current is SavedLoadingState,
+                                    builder: (context, state) {
+                                      if (state is! UserSavedPageFilledState) {
+                                        return const SizedBox();
+                                      }
+                                      if (state.savedPlaces.isNotEmpty) {
+                                        return SavedPage(state: state);
+                                      } else if (state.savedPlaces.isEmpty) {
+                                        return const SavedEmptyPage();
+                                      }
+                                      return const SizedBox();
+                                    }),
+                              ],
+                            );
+                          }),
                       Center(
                         child: Padding(
                           padding: EdgeInsets.symmetric(
@@ -209,42 +206,40 @@ class SavedEmptyPage extends StatelessWidget {
     return Center(
       child: Padding(
         padding: EdgeInsets.symmetric(vertical: 16.h, horizontal: 24.w),
-        child: Expanded(
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(
-                  "No saved items yet",
-                  style: AppTextStyles.regular16
-                      .copyWith(color: AppColors.secondary500),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                "No saved items yet",
+                style: AppTextStyles.regular16
+                    .copyWith(color: AppColors.secondary500),
+              ),
+              Spacing.vertMedium(),
+              Container(
+                width: 189.0.w,
+                height: 48.0.h,
+                decoration: BoxDecoration(
+                  color: AppColors.imgContainerBlack,
+                  borderRadius: BorderRadius.circular(12.0.r),
                 ),
-                Spacing.vertMedium(),
-                Container(
-                  width: 189.0.w,
-                  height: 48.0.h,
-                  decoration: BoxDecoration(
-                    color: AppColors.imgContainerBlack,
-                    borderRadius: BorderRadius.circular(12.0.r),
-                  ),
-                  child: GestureDetector(
-                    onTap: () => locator<INavigationService>()
-                        .toNamed(Routes.createCollectionViewRoute),
-                    child: Center(
-                      child: Padding(
-                        padding: const EdgeInsets.fromLTRB(40, 16, 40, 16),
-                        child: Text(
-                          "Add collection",
-                          style: AppTextStyles.medium20.copyWith(
-                            color: AppColors.gray97,
-                          ),
+                child: GestureDetector(
+                  onTap: () => locator<INavigationService>()
+                      .toNamed(Routes.createCollectionViewRoute),
+                  child: Center(
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(40, 16, 40, 16),
+                      child: Text(
+                        "Add collection",
+                        style: AppTextStyles.medium20.copyWith(
+                          color: AppColors.gray97,
                         ),
                       ),
                     ),
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
@@ -271,7 +266,7 @@ class SavedPage extends StatelessWidget {
             ...state.savedPlaces.map((e) {
               if (e.id.isNotEmpty) {
                 return HomeSection<Place>(
-                  label: e.name,
+                  // label: e.place.name,
                   //children: e.data.map((e) => e as Place).toList(),
                   widget: (Place place) {
                     return HomeCategoriesLargeWidget(
