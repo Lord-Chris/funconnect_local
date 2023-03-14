@@ -2,7 +2,7 @@ import 'package:funconnect/core/app/_app.dart';
 import 'package:funconnect/core/models/paginated_data.dart';
 import 'package:funconnect/core/usecases/usecase.dart';
 
-import '../../../../places/domain/entities/saved_place_model.dart';
+import '../../../places/domain/entities/saved_place_model.dart';
 import '../../data/repository/i_saved_repository.dart';
 
 class FetchUserSavedPlaces

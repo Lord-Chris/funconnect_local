@@ -5,8 +5,8 @@ import 'package:funconnect/features/events/data/data_sources/http_events_data_so
 import 'package:funconnect/features/events/data/data_sources/i_events_data_source.dart';
 import 'package:funconnect/features/events/data/repositories/events_repository.dart';
 import 'package:funconnect/features/events/data/repositories/i_events_repository.dart';
-import 'package:funconnect/features/fun_connect/saved/data/repository/i_saved_repository.dart';
-import 'package:funconnect/features/fun_connect/saved/data/repository/saved_repository.dart';
+import 'package:funconnect/features/saved/data/repository/i_saved_repository.dart';
+import 'package:funconnect/features/saved/data/repository/saved_repository.dart';
 import 'package:funconnect/features/profile/data/repository/i_profile_repository.dart';
 import 'package:funconnect/features/profile/data/repository/profile_repository.dart';
 import 'package:funconnect/services/_services.dart';

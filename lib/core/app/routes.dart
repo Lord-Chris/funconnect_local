@@ -16,9 +16,9 @@ import 'package:funconnect/features/dashboard/presentation/views/notifications_v
 import 'package:funconnect/features/events/domain/entities/event_model.dart';
 import 'package:funconnect/features/events/presentation/views/booking_view.dart';
 import 'package:funconnect/features/events/presentation/views/checkout_view.dart';
-import 'package:funconnect/features/fun_connect/saved/presentation/blocs/saved_bloc.dart';
-import 'package:funconnect/features/fun_connect/saved/presentation/views/collections/create_collection_view.dart';
-import 'package:funconnect/features/fun_connect/saved/presentation/views/saved_view.dart';
+import 'package:funconnect/features/saved/presentation/blocs/saved_bloc.dart';
+import 'package:funconnect/features/saved/presentation/views/collections/create_collection_view.dart';
+import 'package:funconnect/features/saved/presentation/views/saved_view.dart';
 import 'package:funconnect/features/places/domain/entities/category_model.dart';
 import 'package:funconnect/features/places/domain/entities/place_model.dart';
 import 'package:funconnect/features/places/presentation/blocs/category_detail_bloc/category_detail_bloc.dart';

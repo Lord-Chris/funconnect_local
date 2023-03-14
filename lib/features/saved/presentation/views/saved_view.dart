@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:funconnect/features/fun_connect/saved/presentation/blocs/saved_bloc.dart';
-import 'package:funconnect/features/fun_connect/saved/presentation/blocs/saved_event.dart';
-import 'package:funconnect/features/fun_connect/saved/presentation/blocs/saved_state.dart';
+import 'package:funconnect/features/saved/presentation/blocs/saved_bloc.dart';
+import 'package:funconnect/features/saved/presentation/blocs/saved_event.dart';
+import 'package:funconnect/features/saved/presentation/blocs/saved_state.dart';
 import 'package:funconnect/shared/components/custom_button.dart';
 
-import '../../../../../core/app/locator.dart';
-import '../../../../../core/app/routes.dart';
-import '../../../../../services/navigation_service/i_navigation_service.dart';
-import '../../../../../shared/components/app_loader.dart';
-import '../../../../../shared/constants/_constants.dart';
-import '../../../../places/presentation/widgets/home_categories_large_widget.dart';
+import '../../../../core/app/locator.dart';
+import '../../../../core/app/routes.dart';
+import '../../../../services/navigation_service/i_navigation_service.dart';
+import '../../../../shared/components/app_loader.dart';
+import '../../../../shared/constants/_constants.dart';
+import '../../../places/presentation/widgets/home_categories_large_widget.dart';
 
 class SavedView extends StatefulWidget {
   const SavedView({Key? key}) : super(key: key);

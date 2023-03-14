@@ -4,7 +4,7 @@ import 'package:funconnect/core/mixins/_mixins.dart';
 import 'package:funconnect/core/models/_models.dart';
 import 'package:funconnect/services/_services.dart';
 
-import '../../../../places/domain/entities/saved_place_model.dart';
+import '../../../places/domain/entities/saved_place_model.dart';
 
 class RemoteSavedPlaceDataSource with ApiMixin {
   final _networkService = locator<INetworkService>();
