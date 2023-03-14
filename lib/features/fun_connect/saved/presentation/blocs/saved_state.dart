@@ -17,7 +17,7 @@ class SavedLoadingState extends SavedState {}
 
 class UserSavedPageFilledState extends SavedState {
   final UserModel? user;
-  final List<Place> savedPlaces;
+  final PaginatedData<Place> savedPlaces;
 
  const UserSavedPageFilledState({
     this.user,
@@ -29,7 +29,7 @@ class UserSavedPageFilledState extends SavedState {
 
    UserSavedPageFilledState copyWith({
     UserModel? user,
-    final List<Place>? savedPlaces,
+    final PaginatedData<Place>? savedPlaces,
   }) {
     return UserSavedPageFilledState(
       user: user ?? this.user,
