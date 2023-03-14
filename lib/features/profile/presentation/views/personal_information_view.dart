@@ -22,12 +22,18 @@ class PersonalInformationView extends StatelessWidget {
     return BlocBuilder<EditProfileBloc, EditProfileState>(
       builder: (context, state) {
         ProfileModel profile = state.profile;
-        String iFullName = profile.fullName!='null'?profile.fullName:'';
-        String iUserName = profile.userName!='null'?profile.userName:'';
-        String iEmail = profile.email!='null'?profile.email:'';
-        String? selectedGender = profile.gender.isEmpty?null:'${profile.gender[0].toUpperCase()}${profile.gender.substring(1).toLowerCase()}';
-        String iDateOfBirth = profile.dateOfBirth.isEmpty?"":DateFormat('dd/MM/yyyy').format(DateTime.parse(profile.dateOfBirth));
-        String iMobileNumber = profile.mobileNumber=='null'?'':profile.mobileNumber;
+        String iFullName = profile.fullName != 'null' ? profile.fullName : '';
+        String iUserName = profile.userName != 'null' ? profile.userName : '';
+        String iEmail = profile.email != 'null' ? profile.email : '';
+        String? selectedGender = profile.gender.isEmpty
+            ? null
+            : '${profile.gender[0].toUpperCase()}${profile.gender.substring(1).toLowerCase()}';
+        String iDateOfBirth = profile.dateOfBirth.isEmpty
+            ? ""
+            : DateFormat('dd/MM/yyyy')
+                .format(DateTime.parse(profile.dateOfBirth));
+        String iMobileNumber =
+            profile.mobileNumber == 'null' ? '' : profile.mobileNumber;
         return SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Form(
@@ -78,10 +84,13 @@ class PersonalInformationView extends StatelessWidget {
                 ),
                 Spacing.vertLarge(),
                 AppTextField(
-                  onChanged: (val) => context.read<EditProfileBloc>().add(EditProfileFieldsEvent(profile.copyWith(fullName: val))),
+                  onChanged: (val) => context.read<EditProfileBloc>().add(
+                      EditProfileFieldsEvent(profile.copyWith(fullName: val))),
                   validator: context.validateFullName,
                   initialValue: iFullName,
-                  autovalidateMode: state.autoValidateForm?AutovalidateMode.always:AutovalidateMode.disabled,
+                  autovalidateMode: state.autoValidateForm
+                      ? AutovalidateMode.always
+                      : AutovalidateMode.disabled,
                   label: AppText.aTFullName,
                   hint: AppText.aTFullName,
                   prefix: Padding(
@@ -93,16 +102,10 @@ class PersonalInformationView extends StatelessWidget {
                     ),
                   ),
                 ),
-                Align(
-                    alignment: Alignment.centerRight,
-                    child: Text(
-                      AppText.aTChangeThis,
-                      style: AppTextStyles.regular12
-                          .copyWith(color: AppColors.primary),
-                    )),
                 Spacing.vertMedium(),
                 AppTextField(
-                  onChanged: (val) => context.read<EditProfileBloc>().add(EditProfileFieldsEvent(profile.copyWith(userName: val))),
+                  onChanged: (val) => context.read<EditProfileBloc>().add(
+                      EditProfileFieldsEvent(profile.copyWith(userName: val))),
                   inputFormatters: [
                     FilteringTextInputFormatter.deny(" "),
                   ],
@@ -110,7 +113,9 @@ class PersonalInformationView extends StatelessWidget {
                   textCapitalization: TextCapitalization.none,
                   floatingLabelBehavior: FloatingLabelBehavior.auto,
                   validator: context.validateNotEmpty,
-                  autovalidateMode: state.autoValidateForm?AutovalidateMode.always:AutovalidateMode.disabled,
+                  autovalidateMode: state.autoValidateForm
+                      ? AutovalidateMode.always
+                      : AutovalidateMode.disabled,
                   label: AppText.aTUserName,
                   hint: AppText.aTUserName,
                   initialValue: iUserName,
@@ -123,16 +128,10 @@ class PersonalInformationView extends StatelessWidget {
                     ),
                   ),
                 ),
-                Align(
-                    alignment: Alignment.centerRight,
-                    child: Text(
-                      AppText.aTChangeThis,
-                      style: AppTextStyles.regular12
-                          .copyWith(color: AppColors.primary),
-                    )),
                 Spacing.vertMedium(),
                 AppTextField(
-                  onChanged: (val) => context.read<EditProfileBloc>().add(EditProfileFieldsEvent(profile.copyWith(email: val))),
+                  onChanged: (val) => context.read<EditProfileBloc>().add(
+                      EditProfileFieldsEvent(profile.copyWith(email: val))),
                   inputFormatters: [
                     FilteringTextInputFormatter.deny(" "),
                   ],
@@ -140,7 +139,9 @@ class PersonalInformationView extends StatelessWidget {
                   textCapitalization: TextCapitalization.none,
                   floatingLabelBehavior: FloatingLabelBehavior.auto,
                   validator: context.validateEmail,
-                  autovalidateMode: state.autoValidateForm?AutovalidateMode.always:AutovalidateMode.disabled,
+                  autovalidateMode: state.autoValidateForm
+                      ? AutovalidateMode.always
+                      : AutovalidateMode.disabled,
                   initialValue: iEmail,
                   label: AppText.aTEmail,
                   hint: AppText.aTEmail,
@@ -153,13 +154,6 @@ class PersonalInformationView extends StatelessWidget {
                     ),
                   ),
                 ),
-                Align(
-                    alignment: Alignment.centerRight,
-                    child: Text(
-                      AppText.aTChangeThis,
-                      style: AppTextStyles.regular12
-                          .copyWith(color: AppColors.primary),
-                    )),
                 Spacing.vertMedium(),
                 AppDropdownField<String>(
                   label: "Gender",
@@ -178,12 +172,13 @@ class PersonalInformationView extends StatelessWidget {
                       fit: BoxFit.scaleDown,
                     ),
                   ),
-                  onChanged: (val) => context.read<EditProfileBloc>().add(EditProfileFieldsEvent(profile.copyWith(gender: val))),
+                  onChanged: (val) => context.read<EditProfileBloc>().add(
+                      EditProfileFieldsEvent(profile.copyWith(gender: val))),
                   value: selectedGender,
                 ),
                 Spacing.vertMedium(),
                 AppTextField(
-                  controller: TextEditingController(text:iDateOfBirth),
+                  controller: TextEditingController(text: iDateOfBirth),
                   inputFormatters: [
                     FilteringTextInputFormatter.deny(" "),
                   ],
@@ -191,7 +186,9 @@ class PersonalInformationView extends StatelessWidget {
                   textCapitalization: TextCapitalization.none,
                   floatingLabelBehavior: FloatingLabelBehavior.auto,
                   validator: context.validateNotEmpty,
-                  autovalidateMode: state.autoValidateForm?AutovalidateMode.always:AutovalidateMode.disabled,
+                  autovalidateMode: state.autoValidateForm
+                      ? AutovalidateMode.always
+                      : AutovalidateMode.disabled,
                   onTap: () async {
                     FocusScope.of(context).requestFocus(FocusNode());
                     DateTime? dateOfBirth = await showDatePicker(
@@ -201,8 +198,8 @@ class PersonalInformationView extends StatelessWidget {
                         lastDate: DateTime.now());
                     if (dateOfBirth != null) {
                       // ignore: use_build_context_synchronously
-                      context.read<EditProfileBloc>().add(EditProfileFieldsEvent(
-                          profile.copyWith(
+                      context.read<EditProfileBloc>().add(
+                          EditProfileFieldsEvent(profile.copyWith(
                               dateOfBirth: dateOfBirth.toIso8601String())));
                     }
                   },
@@ -224,7 +221,9 @@ class PersonalInformationView extends StatelessWidget {
                 ),
                 Spacing.vertMedium(),
                 AppTextField(
-                  onChanged: (val) => context.read<EditProfileBloc>().add(EditProfileFieldsEvent(profile.copyWith(mobileNumber: val))),
+                  onChanged: (val) => context.read<EditProfileBloc>().add(
+                      EditProfileFieldsEvent(
+                          profile.copyWith(mobileNumber: val))),
                   inputFormatters: [
                     FilteringTextInputFormatter.deny(" "),
                   ],
@@ -233,7 +232,9 @@ class PersonalInformationView extends StatelessWidget {
                   textCapitalization: TextCapitalization.none,
                   floatingLabelBehavior: FloatingLabelBehavior.auto,
                   validator: context.validatePhoneNumber,
-                  autovalidateMode: state.autoValidateForm?AutovalidateMode.always:AutovalidateMode.disabled,
+                  autovalidateMode: state.autoValidateForm
+                      ? AutovalidateMode.always
+                      : AutovalidateMode.disabled,
                   label: AppText.aTMobileNumber,
                   hint: AppText.aTMobileNumberHint,
                   suffix: SvgPicture.asset(
@@ -255,14 +256,15 @@ class PersonalInformationView extends StatelessWidget {
                     alignment: Alignment.centerRight,
                     child: AppButton(
                       onTap: () {
-                        if (!formKey.currentState!.validate()){
-                          context.read<EditProfileBloc>().add(
-                              AutoValidateFormEvent());
-                        }else{
-                          context.read<EditProfileBloc>().add(
-                              ContinueTapEvent());
+                        if (!formKey.currentState!.validate()) {
+                          context
+                              .read<EditProfileBloc>()
+                              .add(AutoValidateFormEvent());
+                        } else {
+                          context
+                              .read<EditProfileBloc>()
+                              .add(ContinueTapEvent());
                         }
-
                       },
                       label: AppText.aTContinue,
                       padding: const EdgeInsets.symmetric(

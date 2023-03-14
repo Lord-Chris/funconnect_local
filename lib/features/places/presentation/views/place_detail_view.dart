@@ -65,17 +65,17 @@ class PlaceDetailView extends HookWidget {
                 ),
               ),
               Positioned(
-                left: 23,
+                left: 23.w,
                 top: 23,
                 child: SafeArea(
                   child: InkWell(
                     onTap: () => Navigator.pop(context),
                     child: CircleAvatar(
-                      radius: 18,
+                      radius: 18.r,
                       backgroundColor: AppColors.black.withOpacity(.6),
                       child: Icon(
                         Icons.arrow_back_ios_rounded,
-                        size: 20.sp,
+                        size: 20.r,
                         color: AppColors.white,
                       ),
                     ),

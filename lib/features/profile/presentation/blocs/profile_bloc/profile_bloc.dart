@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:io';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
@@ -107,13 +106,8 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     Emitter<ProfileState> emit,
   ) async {
     RateMyApp rateMyApp = RateMyApp(
-      preferencesPrefix: 'rateMyApp_',
-      minDays: 7,
-      minLaunches: 10,
-      remindDays: 7,
-      remindLaunches: 10,
-      googlePlayIdentifier: 'com.funconnect.app',
-      appStoreIdentifier: 'com.funconnect.app',
+      minDays: 1,
+      minLaunches: 3,
     );
     rateMyApp.showStarRateDialog(
       event.context,
@@ -133,18 +127,20 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
           ),
         ];
       },
-      ignoreNativeDialog: Platform
-          .isAndroid, // Set to false if you want to show the Apple's native app rating dialog on iOS or Google's native app rating dialog (depends on the current Platform).
-      dialogStyle: const DialogStyle(
-        // Custom dialog styles.
-        titleAlign: TextAlign.center,
-        messageAlign: TextAlign.center,
-        messagePadding: EdgeInsets.only(bottom: 20),
-      ),
-      starRatingOptions:
-          const StarRatingOptions(), // Custom star bar rating options.
-      onDismissed: () => rateMyApp.callEvent(RateMyAppEventType
-          .laterButtonPressed), // Called when the user dismissed the dialog (either by taping outside or by pressing the "back" button).
+      // ignoreNativeDialog: Platform
+      //     .isAndroid, // Set to false if you want to show the Apple's native app rating dialog on iOS or Google's native app rating dialog (depends on the current Platform).
+      // dialogStyle: const DialogStyle(
+      //   // Custom dialog styles.
+      //   titleAlign: TextAlign.center,
+      //   messageAlign: TextAlign.center,
+      //   messagePadding: EdgeInsets.only(bottom: 20),
+      // ),
+      // starRatingOptions:
+      //     const StarRatingOptions(), // Custom star bar rating options.
+      onDismissed: () {
+        print("HERE");
+        rateMyApp.callEvent(RateMyAppEventType.laterButtonPressed);
+      }, // Called when the user dismissed the dialog (either by taping outside or by pressing the "back" button).
     );
   }
 
@@ -160,34 +156,32 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     Emitter<ProfileState> emit,
   ) async {
     _dialogAndSheetService.showAppDialog(AppAlertDialog(
-        isHighPriority: false,
-        title: "Logout",
-        body: "Are you sure you want to logout of this device?",
+      isHighPriority: false,
+      title: "Logout",
+      body: "Are you sure you want to logout of this device?",
       positiveLabel: "Logout",
       negativeLabel: "Cancel",
       negativeCallBack: () {
-          _navigationService.back();
+        _navigationService.back();
       },
-      positiveCallBack: ()async{
-          try {
-            await LogoutUser().call(NoParams());
-            _navigationService.offAllNamed(
-                Routes.welcomeViewRoute, (_) => false);
-            _dialogAndSheetService.showAppDialog(const StatusDialog(
-                isError: false,
-                title: "Logout",
-                body: "User Logged out Successfully"));
-          } on Failure catch (e) {
-            _navigationService.back();
-            _dialogAndSheetService.showAppDialog(StatusDialog(
-                isError: true,
-                title: "Error Logging Out",
-                body: e.message));
-          }
+      positiveCallBack: () async {
+        try {
+          LogoutUser().call(NoParams());
+          _navigationService.offAllNamed(Routes.welcomeViewRoute, (_) => false);
+          _dialogAndSheetService.showAppDialog(
+            const StatusDialog(
+              isError: false,
+              title: "Logout",
+              body: "User Logged out Successfully",
+            ),
+          );
+        } on Failure {
+          // _navigationService.back();
+          // _dialogAndSheetService.showAppDialog(StatusDialog(
+          //     isError: true, title: "Error Logging Out", body: e.message));
+        }
       },
-
     ));
-
   }
 
   FutureOr<void> _onDeleteAccountTapEvent(
@@ -203,25 +197,19 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       negativeCallBack: () {
         _navigationService.back();
       },
-      positiveCallBack: ()async{
+      positiveCallBack: () async {
         try {
           await DeleteUserAccount().call(NoParams());
           _navigationService.offAllNamed(Routes.welcomeViewRoute, (_) => false);
           _dialogAndSheetService.showAppDialog(const StatusDialog(
-              isError: false,
-              title: "Alert",
-              body: "User Account Deleted"));
-        }on Failure catch (e) {
-            _navigationService.back();
+              isError: false, title: "Alert", body: "User Account Deleted"));
+        } on Failure catch (e) {
+          _navigationService.back();
           _dialogAndSheetService.showAppDialog(StatusDialog(
-              isError: true,
-              title: "Error Deleting Account",
-              body: e.message));
+              isError: true, title: "Error Deleting Account", body: e.message));
         }
       },
-
     ));
-
   }
 
   FutureOr<void> _onTermsOfUseTapEvent(
