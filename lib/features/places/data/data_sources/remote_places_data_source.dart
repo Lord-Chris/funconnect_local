@@ -10,6 +10,7 @@ import 'package:funconnect/services/_services.dart';
 
 import '../../domain/entities/place_model.dart';
 import '../../domain/entities/review_model.dart';
+import '../../domain/entities/saved_place_model.dart';
 
 class RemotePlaceDataSource with ApiMixin {
   final _networkService = locator<INetworkService>();
@@ -90,6 +91,10 @@ class RemotePlaceDataSource with ApiMixin {
       ApiConstants.exploreFilter(filter),
       headers: headers,
     );
+    if (filter == ExploreSearchEnum.ratings) {
+      return PaginatedData.fromMap(
+          res.data['data'], (x) => PlaceModel.fromMap(x['place']));
+    }
     return PaginatedData.fromMap(
         res.data['data'], (x) => PlaceModel.fromMap(x));
   }
@@ -101,5 +106,21 @@ class RemotePlaceDataSource with ApiMixin {
     );
     return PaginatedData.fromMap(
         res.data['data'], (x) => CategoryModel.fromMap(x['category']));
+  }
+
+  Future<SavedPlaceModel> bookmarkPlace(FullPlaceModel place) async {
+    final res = await _networkService.post(
+      ApiConstants.bookmarkPlace(place.id),
+      headers: headers,
+    );
+
+    return SavedPlaceModel.fromMap(res.data['data']);
+  }
+
+  Future<void> unBookmarkPlace(FullPlaceModel place) async {
+    await _networkService.post(
+      ApiConstants.unBookmarkPlace(place.id),
+      headers: headers,
+    );
   }
 }

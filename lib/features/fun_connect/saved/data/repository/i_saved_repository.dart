@@ -6,7 +6,7 @@ import '../../../../../core/models/paginated_data.dart';
 import '../../../../authentication/data/dto/user_model.dart';
 
 abstract class ISavedRepository {
-  Future<PaginatedData<SavedPlaceModel>> fetchSavedPlaces(String placeId);
+  Future<PaginatedData<SavedPlaceModel>> fetchUserSavedPlaces(String userId);
 
   UserModel get user;
 }

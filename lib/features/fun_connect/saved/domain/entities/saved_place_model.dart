@@ -1,22 +1,68 @@
 import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
+import 'package:funconnect/features/places/domain/entities/place_model.dart';
 
-class SavedPlaceModel extends Equatable {
+class SavedPlaceModel<T> extends Equatable {
+  final String userId;
+  final String placeId;
   final String id;
-  final String name;
-  final String headline;
-  final String coverImagePath;
-  final String description;
-  final String addedBy;
-  final String opensAt;
-  final String closesAt;
-  final String phoneE164;
-  final double avgRating;
-  final double avgReviewCount;
-  final double distance;
-
+  final Place? place;
+  final List<T> data;
   const SavedPlaceModel({
+    required this.userId,
+    required this.placeId,
+    required this.id,
+    this.place,
+    required this.data
+  });
+
+  factory SavedPlaceModel.fromMap(Map<String, dynamic> map) {
+    return SavedPlaceModel<T>(
+      userId: map['user_id'] ?? '',
+      placeId: map['place_id'] ?? '',
+      id: map['id'] ?? '',
+      place: map['place'] != null ? Place.fromMap(map['place']) : null,
+      data: List<T>.from(map['data']?.map(
+        (e) => map['place'] == 'place'
+            ? Place.fromMap(e)
+            : PlaceModel.fromMap(e),
+      )),
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'user_id': userId,
+      'place_id': placeId,
+      'id': id,
+      'place': place?.toMap(),
+       'data': data
+          .map((e) => place == 'place'
+              ? (e as Place).toMap()
+              : (e as PlaceModel).toMap())
+          .toList(),
+    };
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory SavedPlaceModel.fromJson(String source) =>
+      SavedPlaceModel.fromMap(json.decode(source));
+
+  @override
+  List<Object> get props {
+    return [
+      id,
+      userId,
+      placeId,
+    ];
+  }
+
+}
+
+class Place extends Equatable {
+  const Place({
     required this.id,
     required this.name,
     required this.headline,
@@ -28,9 +74,34 @@ class SavedPlaceModel extends Equatable {
     required this.phoneE164,
     required this.avgRating,
     required this.avgReviewCount,
-    required this.distance,
   });
+  final String id;
+  final String name;
+  final String headline;
+  final String coverImagePath;
+  final String description;
+  final String addedBy;
+  final String opensAt;
+  final String closesAt;
+  final String phoneE164;
+  final double avgRating;
+  final double avgReviewCount;
 
+  factory Place.fromMap(Map<String, dynamic> map) {
+    return Place(
+      id: map['id'] ?? '',
+      name: map['name'] ?? '',
+      headline: map['headline'] ?? '',
+      coverImagePath: map['cover_image_path'] ?? '',
+      description: map['description'] ?? '',
+      addedBy: map['added_by'] ?? '',
+      opensAt: map['opens_at'] ?? '',
+      closesAt: map['closes_at'] ?? '',
+      phoneE164: map['phone_e164'] ?? '',
+      avgRating: map['avg_rating']?.toDouble() ?? 0,
+      avgReviewCount: map['avg_review_count']?.toDouble() ?? 0,
+    );
+  }
   Map<String, dynamic> toMap() {
     return {
       'id': id,
@@ -44,31 +115,10 @@ class SavedPlaceModel extends Equatable {
       'phone_e164': phoneE164,
       'avg_rating': avgRating,
       'avg_review_count': avgReviewCount,
-      'distance': distance,
     };
   }
 
-  factory SavedPlaceModel.fromMap(Map<String, dynamic> map) {
-    return SavedPlaceModel(
-      id: map['id'] ?? '',
-      name: map['name'] ?? '',
-      headline: map['headline'] ?? '',
-      coverImagePath: map['cover_image_path'] ?? '',
-      description: map['description'] ?? '',
-      addedBy: map['added_by'] ?? '',
-      opensAt: map['opens_at'] ?? '',
-      closesAt: map['closes_at'] ?? '',
-      phoneE164: map['phone_e164'] ?? '',
-      avgRating: map['avg_rating']?.toDouble() ?? 0,
-      avgReviewCount: map['avg_review_count']?.toDouble() ?? 0,
-      distance: map['distance']?.toDouble() ?? 0.0,
-    );
-  }
-
-  String toJson() => json.encode(toMap());
-
-  factory SavedPlaceModel.fromJson(String source) =>
-      SavedPlaceModel.fromMap(json.decode(source));
+  bool get isPlace => id == "place";
 
   @override
   List<Object> get props {
@@ -84,23 +134,6 @@ class SavedPlaceModel extends Equatable {
       phoneE164,
       avgRating,
       avgReviewCount,
-      distance,
     ];
   }
 }
-
-final mockPlace = SavedPlaceModel.fromMap(const {
-  "id": "985da381-c4b5-43e5-9944-3865a5e234b3",
-  "name": "Funk-Orn",
-  "headline": "Unde et rerum et.",
-  "cover_image_path":
-      "https://via.placeholder.com/640x480.png/002244?text=fuga",
-  "description": "Qui nam vero itaque sequi voluptatem.",
-  "added_by": "30edad82-8a4f-3b31-93ec-b262826b770b",
-  "opens_at": "05:39:00",
-  "closes_at": "19:20:00",
-  "phone_e164": "08055208019",
-  "avg_rating": 0,
-  "avg_review_count": 0,
-  "distance": 1054.7793920450083
-});

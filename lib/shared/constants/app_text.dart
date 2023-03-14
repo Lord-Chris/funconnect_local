@@ -62,6 +62,12 @@ class AppText {
   static const aTSaved = 'Saved';
   static const aTSavedSubtext = 'Bookmark your favourite places';
   static const aTCreateCollectionAppBarText = 'Create Collection';
+  static const aTCreateCollectionTextFormTitleText = ' Collection name';
+  static const aTCreateCollectionTextFormSubTitleText = 'Name collection';
+  static const aTCreateCollectionCreateCollectionText = 'Create Collection';
+
+
+
 
 
   ///Profile View Texts

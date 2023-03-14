@@ -81,3 +81,7 @@ class ShareTapEvent extends PlaceDetailEvent {
 
   DeepLinkDataModel get data => DeepLinkDataModel.place(place.id);
 }
+
+class BookRideEvent extends PlaceDetailEvent {}
+
+class BookmarkTapEvent extends PlaceDetailEvent {}

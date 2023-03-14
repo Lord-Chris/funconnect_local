@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:funconnect/core/app/_app.dart';
 import 'package:funconnect/services/_services.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
 
 import '../../../../../../shared/components/app_textfield.dart';
 import '../../../../../../shared/components/custom_button.dart';
-import '../../../../../events/presentation/widgets/create_event_add_image_widget.dart';
+import '../../widgets/create_collection_add_image_widget.dart';
 
-class CreateEventView extends StatelessWidget {
-  const CreateEventView({Key? key}) : super(key: key);
+class CreateCollectionView extends StatelessWidget {
+  const CreateCollectionView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -30,115 +31,58 @@ class CreateEventView extends StatelessWidget {
           style: AppTextStyles.medium20,
         ),
         centerTitle: true,
-        
       ),
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Padding(
           padding: EdgeInsets.only(left: 16.w, right: 16.w),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Spacing.vertRegular(),
               const Center(
-                child: CreateEventAddImageWidget(),
+                child: CreateCollectionAddImageWidget(),
               ),
               Spacing.vertRegular(),
-              const AppTextField(
-                label: AppText.aTCreateEventTextFormTitleText,
-                hint: AppText.aTCreateEventTextFormSubTitleText,
+              AppTextField(
+                prefix: Padding(
+                  padding: const EdgeInsets.only(
+                      top: 20.0, left: 22.5, right: 8.0, bottom: 20.0),
+                  child: SvgPicture.asset(
+                    "assets/svgs/add-collection.svg",
+                    width: 15,
+                    height: 15,
+                    fit: BoxFit.contain,
+                  ),
+                ),
+                label: AppText.aTCreateCollectionTextFormTitleText,
+                hint: AppText.aTCreateCollectionTextFormSubTitleText,
                 textCapitalization: TextCapitalization.words,
               ),
-              Spacing.vertRegular(),
-              const AppTextField(
-                label: AppText.aTCreateEventDiscriptionFormText,
-                hint: AppText.aTCreateEventDiscriptionFormSubText,
-                textCapitalization: TextCapitalization.sentences,
-                maxLines: 5,
+              Spacing.vertLarge(),
+              Text(
+                "Categories",
+                style: AppTextStyles.medium16.copyWith(color: AppColors.white),
               ),
               Spacing.vertRegular(),
-              Row(
-                children: [
-                  SizedBox(
-                    width: 190.w,
-                    child: const AppTextField(
-                      label: "Date",
-                      hint: "DD/MM/YYYY",
-                    ),
-                  ),
-                  Spacing.horizRegular(),
-                  SizedBox(
-                    width: 190.w,
-                    child: const AppTextField(
-                      label: "Time",
-                      hint: "10:00 AM",
-                    ),
-                  ),
-                ],
+              Text(
+                "Add places from...",
+                style:
+                    AppTextStyles.regular14.copyWith(color: AppColors.gray333),
               ),
               Spacing.vertRegular(),
-              const AppTextField(
-                label: AppText.aTCreateEventSeatFormText,
-                hint: AppText.aTCreateEventSeatFormSubText,
-                keyboardType: TextInputType.number,
-              ),
-              Spacing.vertRegular(),
-              AppDropdownField<String>(
-                items: const [
-                  "Concerts",
-                  "Games",
-                  "Picnics",
-                  "Sip & Paints",
-                  "Summit",
-                  "Beach/Pool",
-                  "Networking",
-                  "Tour",
-                  "Wine tasting",
-                  "Fashion",
-                  "Food",
-                ],
-                value: null,
-                onChanged: (val) {},
-                label: AppText.aTCreateEventCategoryFormText,
-                hint: AppText.aTCreateEventCategoryFormSubText,
-              ),
-              Spacing.vertRegular(),
-              AppDropdownField<String>(
-                items: const [
-                  "Public",
-                  "Private",
-                ],
-                value: null,
-                onChanged: (val) {},
-                label: AppText.aTCreateEventTypeFormText,
-                hint: AppText.aTCreateEventTypeFormSubText,
-              ),
-              Spacing.vertRegular(),
-              ListTile(
-                onTap: () {},
-                leading: const Icon(
-                  Icons.location_on,
-                  color: AppColors.exploreIconAsh,
+              
+              const Padding(
+                padding: EdgeInsets.fromLTRB(0, 40, 0, 40),
+                child: AppButton(
+                  width: double.infinity,
+                  height: 50.0,
+                  label: AppText.aTCreateCollectionCreateCollectionText,
+                  labelColor: AppColors.primary,
+                  buttonColor: AppColors.primaryDark,
+                  hasBorder: true,
+                  borderColor: AppColors.createCollectionBorder,
                 ),
-                trailing: const Icon(
-                  Icons.arrow_forward_ios_sharp,
-                  color: AppColors.exploreIconAsh,
-                  size: 14,
-                ),
-                title: Text(
-                  AppText.aTCreateEventAddLocationText,
-                  style: AppTextStyles.medium20,
-                ),
-              ),
-              Spacing.vertRegular(),
-              const AppButton(
-                height: 50.0,
-                //width: MediaQuery.of(context).size.width - 50,
-                label: AppText.aTCreateEventCreateEventText,
-                labelColor: Colors.white,
-                buttonColor: AppColors.primary,
-                // function: () => context
-                //     .read<LocationAuthBloc>()
-                //     .add(RequestLocationPermissionEvent(),
               ),
             ],
           ),

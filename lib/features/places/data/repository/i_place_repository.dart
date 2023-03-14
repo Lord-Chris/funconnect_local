@@ -15,6 +15,7 @@ abstract class IPlaceRepository {
   Future<FullPlaceModel> fetchPlaceDetail(String placeId);
   Future<PaginatedData<ReviewModel>> fetchPlaceReviews(String placeId);
   Future<void> reviewPlace(String placeId, ReviewParam review);
+  Future<bool> toggleBookmark(FullPlaceModel place, bool shouldBookmark);
 
   Future<PaginatedData<PlaceModel>> fetchExploreDetails(AppLocation? location);
   Future<PaginatedData<CategoryModel>> fetchExploreCategories();

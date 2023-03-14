@@ -17,6 +17,7 @@ import 'package:funconnect/features/events/domain/entities/event_model.dart';
 import 'package:funconnect/features/events/presentation/views/booking_view.dart';
 import 'package:funconnect/features/events/presentation/views/checkout_view.dart';
 import 'package:funconnect/features/fun_connect/saved/presentation/blocs/saved_bloc.dart';
+import 'package:funconnect/features/fun_connect/saved/presentation/views/collections/create_collection_view.dart';
 import 'package:funconnect/features/fun_connect/saved/presentation/views/saved_view.dart';
 import 'package:funconnect/features/places/domain/entities/category_model.dart';
 import 'package:funconnect/features/places/domain/entities/place_model.dart';
@@ -27,7 +28,6 @@ import 'package:funconnect/features/places/presentation/views/place_detail_view.
 import 'package:funconnect/features/profile/domain/entities/profile_model.dart';
 import 'package:funconnect/features/profile/presentation/blocs/edit_profile_bloc/edit_profile_bloc.dart';
 import 'package:funconnect/features/profile/presentation/blocs/manage_login_options_bloc/manage_login_options_bloc.dart';
-import 'package:funconnect/features/profile/presentation/blocs/profile_bloc/profile_bloc.dart';
 import 'package:funconnect/features/profile/presentation/views/edit_profile_view.dart';
 import 'package:funconnect/features/profile/presentation/views/manage_login_options_view.dart';
 import 'package:funconnect/features/profile/presentation/views/my_events_view.dart';
@@ -39,6 +39,7 @@ import 'package:funconnect/features/startup/presentation/views/onboarding_view.d
 import 'package:funconnect/features/startup/presentation/views/splash_view.dart';
 import 'package:funconnect/features/startup/presentation/views/version_update_view.dart';
 
+import '../../features/dashboard/presentation/blocs/notification_bloc/notification_bloc.dart';
 import '../../features/events/presentation/views/create_event_view.dart';
 import '../../features/events/presentation/views/event_description_view.dart';
 
@@ -72,13 +73,13 @@ class Routes {
 
   // Saved
   static const savedViewRoute = '/saved-view';
+  static const createCollectionViewRoute = '/create-collection-view';
 
   // Profile
   static const editProfileViewRoute = '/edit-profile';
   static const profileSetupViewRoute = '/profile_setup';
   static const manageLoginOptionsRoute = '/manage-login-options';
   static const rateYourExperienceRoute = '/rate-your-experience';
-  static const notificationsRoute = '/notifications';
   static const myTicketRoute = '/my-ticket';
   static const myEventRoute = '/my-event';
 
@@ -149,8 +150,9 @@ class Routes {
       case notificationsViewRoute:
         return _registerBlocView(
           view: const NotificationsView(),
-          bloc: ProfileBloc(),
+          bloc: NotificationBloc(),
         );
+
       // Events
       case createEventRoute:
         return MaterialPageRoute(builder: (_) => const CreateEventView());
@@ -166,11 +168,14 @@ class Routes {
         return MaterialPageRoute(builder: (_) => const CheckoutView());
 
       // Saved
-       case savedViewRoute:
+      case savedViewRoute:
         return _registerBlocView(
           bloc: SavedBloc(),
           view: const SavedView(),
         );
+
+      case createCollectionViewRoute:
+        return MaterialPageRoute(builder: (_) => const CreateCollectionView());
 
       // Profile
       case editProfileViewRoute:
@@ -188,9 +193,6 @@ class Routes {
       case rateYourExperienceRoute:
         return MaterialPageRoute(
             builder: (_) => const RateYourExperienceView());
-
-      case notificationsRoute:
-        return MaterialPageRoute(builder: (_) => const NotificationsView());
 
       case myTicketRoute:
         return MaterialPageRoute(builder: (_) => const MyTicketView());
