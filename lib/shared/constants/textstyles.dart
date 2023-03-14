@@ -79,6 +79,12 @@ class AppTextStyles {
       );
 
   // Medium
+  static TextStyle get medium32 => GoogleFonts.inter(
+        fontSize: 32,
+        fontWeight: FontWeight.w500,
+        height: 1.14,
+      );
+
   static TextStyle get medium28 => GoogleFonts.inter(
         fontSize: 28,
         fontWeight: FontWeight.w500,

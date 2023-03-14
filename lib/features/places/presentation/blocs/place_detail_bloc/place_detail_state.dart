@@ -13,6 +13,7 @@ class PlaceDetailFetchingState extends PlaceDetailState {}
 class PlaceDetailIdleState extends PlaceDetailState {
   final FullPlaceModel place;
   final PaginatedData<ReviewModel>? reviewsData;
+  
 
   PlaceDetailIdleState({
     required this.place,
@@ -20,7 +21,7 @@ class PlaceDetailIdleState extends PlaceDetailState {
   });
 
   @override
-  List<Object> get props => [place, reviews];
+  List<Object> get props => [place, reviews, DateTime.now()];
 
   List<ReviewModel> get reviews => reviewsData?.data ?? [];
 }
