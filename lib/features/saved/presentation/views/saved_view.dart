@@ -230,8 +230,8 @@ class SavedPage extends StatelessWidget {
         itemCount: state.savedPlaces.length,
         padding: REdgeInsets.fromLTRB(16, 20, 16, 20),
         gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-          maxCrossAxisExtent: 187,
-          mainAxisExtent: 187.r,
+          maxCrossAxisExtent: 187.r * 1.3,
+          // mainAxisExtent: 187.r,
           mainAxisSpacing: 10.r,
           crossAxisSpacing: 8.r,
         ),
