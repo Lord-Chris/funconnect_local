@@ -40,5 +40,10 @@ class SavedPlaceModel extends Equatable {
       SavedPlaceModel.fromMap(json.decode(source));
 
   @override
-  List<Object> get props => [id, userId, placeId];
+  List<Object> get props => [
+        id,
+        userId,
+        placeId,
+        if (place != null) place!,
+      ];
 }

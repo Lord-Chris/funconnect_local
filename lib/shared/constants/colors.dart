@@ -8,6 +8,8 @@ class AppColors {
   static const white = Color(0XFFFFFFFF);
   static const notificationWidgetBlack = Color(0XFF0F0F0F);
   static const primary = Color(0XFFFF9100);
+  static const createCollectionBorder = Color(0xFFA35D00);
+  static const primaryDark = Color(0xFF532F00);
   static const green = Color(0XFF35B77A);
   static const notificationGreen = Color(0XFF35B77A);
   static const ash = Color(0XFF333333);

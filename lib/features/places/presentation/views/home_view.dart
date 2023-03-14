@@ -66,7 +66,7 @@ class _HomeViewState extends State<HomeView> {
                 ),
                 Flexible(
                   child: Text(
-                    context.watch<HomeBloc>().location?.address ?? "",
+                    context.watch<HomeBloc>().location?.parsedAddress ?? "",
                     style: AppTextStyles.regular14.copyWith(
                       color: AppColors.secondary400,
                     ),
@@ -92,7 +92,7 @@ class _HomeViewState extends State<HomeView> {
           children: [
             Spacing.vertSmall(),
             const Divider(
-              color: AppColors.secondary500,
+              color: AppColors.secondary800,
               height: 1,
             ),
             Expanded(
@@ -134,7 +134,7 @@ class _HomeViewState extends State<HomeView> {
                         },
                       ),
                       const Divider(
-                        color: AppColors.secondary500,
+                        color: AppColors.secondary800,
                         height: 1,
                       ),
                       Spacing.vertSmall(),
@@ -278,9 +278,9 @@ class _DefaultHomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return RefreshIndicator(
       onRefresh: () async {
-        // final bloc = context.read<HomeBloc>().stream.first;
+        final bloc = context.read<HomeBloc>().stream.first;
         context.read<HomeBloc>().add(const HomeInitEvent(showLoader: false));
-        // await bloc;
+        await bloc;
       },
       child: SingleChildScrollView(
         child: Column(

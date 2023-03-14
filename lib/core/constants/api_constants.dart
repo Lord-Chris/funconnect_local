@@ -18,7 +18,7 @@ class ApiConstants {
   static get logout => "$_auth/logout";
   static get deleteAccount => "$_auth/delete-account";
 
-  //
+  //PROFILE
   static get profileSetup => "$_core/profile";
   static get profileImage => "$profileSetup/image";
   static get profileLocationSetup => "$_core/profile/location";
@@ -53,6 +53,9 @@ class ApiConstants {
 
   // EVENTS
   static get events => "$_baseUrl/events";
+
+  //SAVED
+  static get savedPlaces => "$places/saved-places";
 
   static get imageKey => 'image';
 
