@@ -10,6 +10,6 @@ class BookmarkPlace with UseCases<FullPlaceModel, FullPlaceModel> {
   Future<FullPlaceModel> call(FullPlaceModel params) async {
     bool isBookMarked = params.isBookmarked;
     isBookMarked = await _repo.toggleBookmark(params, !isBookMarked);
-    return params.copyWith();
+    return params.copyWith(savedPlace: isBookMarked);
   }
 }

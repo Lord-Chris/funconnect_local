@@ -130,10 +130,7 @@ class PlaceDetailBloc extends Bloc<PlaceDetailEvent, PlaceDetailState> {
     final prevState = state as PlaceDetailIdleState;
     try {
       final data = await BookmarkPlace().call(prevState.place);
-      emit(PlaceDetailIdleState(
-        place: data,
-        reviewsData: prevState.reviewsData,
-      ));
+      emit(prevState.copyWith(place: data));
     } on Failure catch (e) {
       _logger.e(e);
       emit(prevState);

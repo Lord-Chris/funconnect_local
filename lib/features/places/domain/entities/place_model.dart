@@ -89,7 +89,7 @@ class PlaceModel extends Equatable {
       avgRating: placeModel.avgRating,
       avgReviewCount: placeModel.avgReviewCount,
       distance: 0,
-      savedPlace: placeModel.isBookmarked,
+      savedPlace: placeModel.savedPlace,
     );
   }
 
@@ -108,6 +108,7 @@ class PlaceModel extends Equatable {
       avgRating,
       avgReviewCount,
       distance,
+      savedPlace,
     ];
   }
 
