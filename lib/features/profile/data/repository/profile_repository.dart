@@ -48,11 +48,14 @@ class ProfileRepository extends IProfileRepository {
 
   @override
   Future<void> logout() async {
-    final useRemote = await _connectivityService.checkInternetConnection();
-    if (useRemote) {
-      await _remoteDS.logout();
+    try {
+      final useRemote = await _connectivityService.checkInternetConnection();
+      if (useRemote) {
+        await _remoteDS.logout();
+      }
+    } finally {
+      await _localDS.clearAll();
     }
-    await _localDS.clearAll();
   }
 
   @override
