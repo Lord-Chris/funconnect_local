@@ -139,7 +139,7 @@ class AppNetworkImage extends StatelessWidget {
           width: double.maxFinite,
           height: double.maxFinite,
           decoration: BoxDecoration(
-            color: AppColors.red,
+            color: AppColors.primary,
             borderRadius:
                 isCircular ? null : BorderRadius.circular(borderRadius),
             shape: isCircular ? BoxShape.circle : BoxShape.rectangle,
