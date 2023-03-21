@@ -76,12 +76,10 @@ class SavedPlaceWidget extends HookWidget {
                   color: Colors.black.withOpacity(0.7),
                   borderRadius: BorderRadius.circular(15.r),
                 ),
-                child: Flexible(
-                  child: Text(
-                    name,
-                    style: AppTextStyles.regular14,
-                    overflow: TextOverflow.ellipsis,
-                  ),
+                child: Text(
+                  name,
+                  style: AppTextStyles.regular14,
+                  overflow: TextOverflow.ellipsis,
                 ),
               ),
             ],

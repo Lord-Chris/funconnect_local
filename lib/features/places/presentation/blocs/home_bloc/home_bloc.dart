@@ -84,8 +84,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   FutureOr<void> _onPlaceTapEvent(
     PlaceTapEvent event,
     Emitter<HomeState> emit,
-  ) {
-    _navigationService.toNamed(Routes.placeDetailRoute, arguments: event.place);
+  ) async {
+    await _navigationService.toNamed(Routes.placeDetailRoute,
+        arguments: event.place);
+    add(const HomeInitEvent(showLoader: false));
   }
 
   FutureOr<void> _onCategoryTapEvent(
