@@ -17,6 +17,7 @@ import 'package:funconnect/shared/components/_components.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
 import 'package:funconnect/shared/dialogs/_dialogs.dart';
 import 'package:funconnect/shared/dialogs/coming_soon_dialog.dart';
+import 'package:launch_review/launch_review.dart';
 import 'package:rate_my_app/rate_my_app.dart';
 
 part 'profile_event.dart';
@@ -105,43 +106,42 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     RateYourExperienceTapEvent event,
     Emitter<ProfileState> emit,
   ) async {
-    RateMyApp rateMyApp = RateMyApp(
-      minDays: 1,
-      minLaunches: 3,
-    );
-    rateMyApp.showStarRateDialog(
-      event.context,
-      title: 'Rate this app',
-      message:
-          'You like this app ? Then take a little bit of your time to leave a rating :',
-      actionsBuilder: (context, stars) {
-        return [
-          AppButton(
-            label: 'OK',
-            onTap: () async {
-              await rateMyApp.callEvent(RateMyAppEventType.rateButtonPressed);
-              Navigator.pop<RateMyAppDialogButton>(
-                  context, RateMyAppDialogButton.rate);
-              _navigationService.back();
-            },
-          ),
-        ];
-      },
-      // ignoreNativeDialog: Platform
-      //     .isAndroid, // Set to false if you want to show the Apple's native app rating dialog on iOS or Google's native app rating dialog (depends on the current Platform).
-      // dialogStyle: const DialogStyle(
-      //   // Custom dialog styles.
-      //   titleAlign: TextAlign.center,
-      //   messageAlign: TextAlign.center,
-      //   messagePadding: EdgeInsets.only(bottom: 20),
-      // ),
-      // starRatingOptions:
-      //     const StarRatingOptions(), // Custom star bar rating options.
-      onDismissed: () {
-        print("HERE");
-        rateMyApp.callEvent(RateMyAppEventType.laterButtonPressed);
-      }, // Called when the user dismissed the dialog (either by taping outside or by pressing the "back" button).
-    );
+    await LaunchReview.launch(iOSAppId: '1618585581');
+    // RateMyApp rateMyApp =
+    //     RateMyApp(minDays: 1, minLaunches: 3, appStoreIdentifier: '1618585581');
+    // rateMyApp.showStarRateDialog(
+    //   event.context,
+    //   title: 'Rate this app',
+    //   message:
+    //       'You like this app ? Then take a little bit of your time to leave a rating :',
+    //   actionsBuilder: (context, stars) {
+    //     return [
+    //       AppButton(
+    //         label: 'OK',
+    //         onTap: () async {
+    //           await rateMyApp.callEvent(RateMyAppEventType.rateButtonPressed);
+    //           Navigator.pop<RateMyAppDialogButton>(
+    //               context, RateMyAppDialogButton.rate);
+    //           _navigationService.back();
+    //         },
+    //       ),
+    //     ];
+    //   },
+    //   // ignoreNativeDialog: Platform
+    //   //     .isAndroid, // Set to false if you want to show the Apple's native app rating dialog on iOS or Google's native app rating dialog (depends on the current Platform).
+    //   // dialogStyle: const DialogStyle(
+    //   //   // Custom dialog styles.
+    //   //   titleAlign: TextAlign.center,
+    //   //   messageAlign: TextAlign.center,
+    //   //   messagePadding: EdgeInsets.only(bottom: 20),
+    //   // ),
+    //   // starRatingOptions:
+    //   //     const StarRatingOptions(), // Custom star bar rating options.
+    //   onDismissed: () {
+    //     print("HERE");
+    //     rateMyApp.callEvent(RateMyAppEventType.laterButtonPressed);
+    //   }, // Called when the user dismissed the dialog (either by taping outside or by pressing the "back" button).
+    // );
   }
 
   Future<FutureOr<void>> _onNotificationsTapEvent(
