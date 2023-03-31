@@ -110,7 +110,7 @@ class RemotePlaceDataSource with ApiMixin {
 
   Future<SavedPlaceModel> bookmarkPlace(FullPlaceModel place) async {
     final res = await _networkService.post(
-      ApiConstants.bookmarkPlace(place.id),
+      ApiConstants.togglePlaceBookmark(place.id),
       headers: headers,
     );
 
@@ -118,8 +118,8 @@ class RemotePlaceDataSource with ApiMixin {
   }
 
   Future<void> unBookmarkPlace(FullPlaceModel place) async {
-    await _networkService.post(
-      ApiConstants.unBookmarkPlace(place.id),
+    await _networkService.delete(
+      ApiConstants.togglePlaceBookmark(place.id),
       headers: headers,
     );
   }

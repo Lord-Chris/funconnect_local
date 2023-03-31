@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:equatable/equatable.dart';
 import 'package:funconnect/features/places/domain/entities/category_model.dart';
@@ -57,7 +58,7 @@ class HomeTrendItemModel<T> extends Equatable {
       HomeTrendItemModel.fromMap(json.decode(source));
 
   @override
-  List<Object> get props => [tag, name, data];
+  List<Object> get props => [tag, name, data, Random().nextInt(1000)];
 
   bool get isPlace => tag == "place";
 }

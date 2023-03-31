@@ -71,32 +71,37 @@ class DynamicLinkService extends IDynamicLinkService {
     String? image,
     required DeepLinkDataModel data,
   }) async {
-    Uri deepLink = _getLinkFromShareModel(data);
+    try {
+      Uri deepLink = _getLinkFromShareModel(data);
 
-    final DynamicLinkParameters parameters = DynamicLinkParameters(
-      uriPrefix: firebaseDomain,
-      link: deepLink,
-      androidParameters: AndroidParameters(
-        packageName: appId,
-        fallbackUrl: Uri.parse(funconnectHost),
-      ),
-      iosParameters: IOSParameters(
-        bundleId: appId,
-        fallbackUrl: Uri.parse(funconnectHost),
-        ipadFallbackUrl: Uri.parse(funconnectHost),
-      ),
-      socialMetaTagParameters: SocialMetaTagParameters(
-        title: AppConstants.appName,
-        description: desc,
-        imageUrl: image != null ? Uri.parse(image) : null,
-      ),
-    );
+      final DynamicLinkParameters parameters = DynamicLinkParameters(
+        uriPrefix: firebaseDomain,
+        link: deepLink,
+        androidParameters: AndroidParameters(
+          packageName: appId,
+          fallbackUrl: Uri.parse(funconnectHost),
+        ),
+        iosParameters: IOSParameters(
+          bundleId: appId,
+          fallbackUrl: Uri.parse(funconnectHost),
+          ipadFallbackUrl: Uri.parse(funconnectHost),
+        ),
+        socialMetaTagParameters: SocialMetaTagParameters(
+          title: AppConstants.appName,
+          description: desc,
+          imageUrl: image != null ? Uri.parse(image) : null,
+        ),
+      );
 
-    final dynamicUrl = await FirebaseDynamicLinks.instance.buildShortLink(
-      parameters,
-      shortLinkType: ShortDynamicLinkType.unguessable,
-    );
-    return dynamicUrl.shortUrl.toString();
+      final dynamicUrl = await FirebaseDynamicLinks.instance.buildShortLink(
+        parameters,
+        shortLinkType: ShortDynamicLinkType.unguessable,
+      );
+      return dynamicUrl.shortUrl.toString();
+    } on Exception catch (e) {
+      _log.e(e);
+      throw const Failure("Could not generate Link");
+    }
   }
 
   @override

@@ -36,10 +36,14 @@ class PlaceDetailBloc extends Bloc<PlaceDetailEvent, PlaceDetailState> {
   String? link;
 
   Future<void> _getLink(PlaceModel place) async {
-    link = await _dynamicLinkService.generateLink(
-        desc: place.name,
-        data: DeepLinkDataModel.place(place.id),
-        image: place.coverImagePath);
+    try {
+      link = await _dynamicLinkService.generateLink(
+          desc: place.name,
+          data: DeepLinkDataModel.place(place.id),
+          image: place.coverImagePath);
+    } on Failure catch (e) {
+      _logger.e(e);
+    }
   }
 
   Future<FutureOr<void>> _onPlaceInitEvent(

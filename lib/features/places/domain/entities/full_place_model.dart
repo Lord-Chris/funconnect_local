@@ -135,6 +135,7 @@ class FullPlaceModel extends Equatable {
       features,
       images,
       similarPlaces,
+      savedPlace,
     ];
   }
 
