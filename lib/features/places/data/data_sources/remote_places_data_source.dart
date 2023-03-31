@@ -108,18 +108,18 @@ class RemotePlaceDataSource with ApiMixin {
         res.data['data'], (x) => CategoryModel.fromMap(x['category']));
   }
 
-  Future<SavedPlaceModel> bookmarkPlace(FullPlaceModel place) async {
+  Future<SavedPlaceModel> bookmarkPlace(String placeId) async {
     final res = await _networkService.post(
-      ApiConstants.togglePlaceBookmark(place.id),
+      ApiConstants.togglePlaceBookmark(placeId),
       headers: headers,
     );
 
     return SavedPlaceModel.fromMap(res.data['data']);
   }
 
-  Future<void> unBookmarkPlace(FullPlaceModel place) async {
+  Future<void> unBookmarkPlace(String placeId) async {
     await _networkService.delete(
-      ApiConstants.togglePlaceBookmark(place.id),
+      ApiConstants.togglePlaceBookmark(placeId),
       headers: headers,
     );
   }

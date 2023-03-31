@@ -15,6 +15,7 @@ class HomeCategoriesLargeWidget extends HookWidget {
   final String coverImage;
   final Size? size;
   final VoidCallback? onTap;
+  final VoidCallback? onBookmarkTap;
 
   const HomeCategoriesLargeWidget({
     Key? key,
@@ -25,6 +26,7 @@ class HomeCategoriesLargeWidget extends HookWidget {
     required this.coverImage,
     this.size,
     this.onTap,
+    this.onBookmarkTap,
   }) : super(key: key);
 
   @override
@@ -70,12 +72,16 @@ class HomeCategoriesLargeWidget extends HookWidget {
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
-                    Icon(
-                      isBookmarked
-                          ? CupertinoIcons.bookmark_fill
-                          : CupertinoIcons.bookmark,
-                      color: isBookmarked ? AppColors.primary : AppColors.white,
-                      size: 15,
+                    InkWell(
+                      onTap: onBookmarkTap,
+                      child: Icon(
+                        isBookmarked
+                            ? CupertinoIcons.bookmark_fill
+                            : CupertinoIcons.bookmark,
+                        color:
+                            isBookmarked ? AppColors.primary : AppColors.white,
+                        size: 15,
+                      ),
                     ),
                   ],
                 ),

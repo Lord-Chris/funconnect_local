@@ -41,6 +41,17 @@ class PlaceTapEvent extends HomeEvent {
   List<Object> get props => [place];
 }
 
+class BookmarkTapEvent extends HomeEvent {
+  final PlaceModel place;
+
+  const BookmarkTapEvent({
+    required this.place,
+  });
+
+  @override
+  List<Object> get props => [place];
+}
+
 class CategoryTapEvent extends HomeEvent {
   final CategoryModel category;
 

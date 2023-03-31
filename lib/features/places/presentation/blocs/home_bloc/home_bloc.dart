@@ -11,6 +11,7 @@ import 'package:funconnect/features/places/presentation/blocs/home_bloc/home_sta
 import 'package:funconnect/services/_services.dart';
 import 'package:logger/logger.dart';
 
+import '../../../domain/usecases/bookmark_place.dart';
 import '../../../domain/usecases/fetch_home_trends.dart';
 import '../../../domain/usecases/fetch_places.dart';
 
@@ -19,6 +20,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<HomeInitEvent>(_onHomeInitEvent);
     on<InterestTapEvent>(_onInterestTapEvent);
     on<PlaceTapEvent>(_onPlaceTapEvent);
+    on<BookmarkTapEvent>(_onBookmarkTapEvent);
     on<CategoryTapEvent>(_onCategoryTapEvent);
     on<NotificationTapEvent>(_onNotificationTapEvent);
   }
@@ -107,4 +109,19 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   UserModel get user => _placeRepository.user;
   AppLocation? get location => _locationService.userLocation;
+
+  FutureOr<void> _onBookmarkTapEvent(
+    BookmarkTapEvent event,
+    Emitter<HomeState> emit,
+  ) async {
+    if (state is! HomeIdleState) return null;
+    final prevState = state as HomeIdleState;
+    try {
+      await BookmarkPlace().call2(event.place);
+      add(const HomeInitEvent(showLoader: false));
+    } on Failure catch (e) {
+      _logger.e(e);
+      emit(prevState);
+    }
+  }
 }

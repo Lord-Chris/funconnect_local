@@ -298,6 +298,9 @@ class _DefaultHomeView extends StatelessWidget {
                       isBookmarked: place.isBookmarked,
                       rating: place.avgRating,
                       ratingCount: place.avgReviewCount,
+                      onBookmarkTap: () => context.read<HomeBloc>().add(
+                            BookmarkTapEvent(place: place),
+                          ),
                       onTap: () => context.read<HomeBloc>().add(
                             PlaceTapEvent(place: place),
                           ),

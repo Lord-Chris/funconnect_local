@@ -85,12 +85,12 @@ class PlaceRepository extends IPlaceRepository {
   }
 
   @override
-  Future<bool> toggleBookmark(FullPlaceModel place, bool shouldBookmark) async {
+  Future<bool> toggleBookmark(PlaceModel place, bool shouldBookmark) async {
     if (shouldBookmark) {
-      await _remoteDS.bookmarkPlace(place);
+      await _remoteDS.bookmarkPlace(place.id);
       return true;
     } else {
-      await _remoteDS.unBookmarkPlace(place);
+      await _remoteDS.unBookmarkPlace(place.id);
       return false;
     }
   }

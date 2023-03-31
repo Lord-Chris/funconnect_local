@@ -113,6 +113,38 @@ class PlaceModel extends Equatable {
   }
 
   bool get isBookmarked => savedPlace;
+
+  PlaceModel copyWith({
+    String? id,
+    String? name,
+    String? headline,
+    String? coverImagePath,
+    String? description,
+    String? addedBy,
+    String? opensAt,
+    String? closesAt,
+    String? phoneE164,
+    double? avgRating,
+    double? avgReviewCount,
+    double? distance,
+    bool? savedPlace,
+  }) {
+    return PlaceModel(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      headline: headline ?? this.headline,
+      coverImagePath: coverImagePath ?? this.coverImagePath,
+      description: description ?? this.description,
+      addedBy: addedBy ?? this.addedBy,
+      opensAt: opensAt ?? this.opensAt,
+      closesAt: closesAt ?? this.closesAt,
+      phoneE164: phoneE164 ?? this.phoneE164,
+      avgRating: avgRating ?? this.avgRating,
+      avgReviewCount: avgReviewCount ?? this.avgReviewCount,
+      distance: distance ?? this.distance,
+      savedPlace: savedPlace ?? this.savedPlace,
+    );
+  }
 }
 
 final mockPlace = PlaceModel.fromMap(const {

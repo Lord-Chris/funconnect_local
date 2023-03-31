@@ -115,6 +115,7 @@ class FullPlaceModel extends Equatable {
   factory FullPlaceModel.fromJson(String source) =>
       FullPlaceModel.fromMap(json.decode(source));
 
+
   @override
   List<Object> get props {
     return [
