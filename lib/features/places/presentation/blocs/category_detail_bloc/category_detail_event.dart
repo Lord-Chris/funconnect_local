@@ -31,12 +31,6 @@ class PlaceTapEvent extends CategoryDetailEvent {
   List<Object> get props => [place];
 }
 
-class SearchEvent extends CategoryDetailEvent {
-  final String param;
-
-  const SearchEvent({
-    required this.param,
-  });
-  @override
-  List<Object?> get props => [param];
+class SearchBarTapEvent extends CategoryDetailEvent {
+  const SearchBarTapEvent();
 }

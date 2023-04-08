@@ -16,15 +16,13 @@ import 'package:funconnect/features/dashboard/presentation/views/notifications_v
 import 'package:funconnect/features/events/domain/entities/event_model.dart';
 import 'package:funconnect/features/events/presentation/views/booking_view.dart';
 import 'package:funconnect/features/events/presentation/views/checkout_view.dart';
-import 'package:funconnect/features/saved/presentation/blocs/saved_bloc.dart';
-import 'package:funconnect/features/saved/presentation/views/collections/create_collection_view.dart';
-import 'package:funconnect/features/saved/presentation/views/saved_view.dart';
 import 'package:funconnect/features/places/domain/entities/category_model.dart';
 import 'package:funconnect/features/places/domain/entities/place_model.dart';
 import 'package:funconnect/features/places/presentation/blocs/category_detail_bloc/category_detail_bloc.dart';
 import 'package:funconnect/features/places/presentation/blocs/place_detail_bloc/place_detail_bloc.dart';
 import 'package:funconnect/features/places/presentation/views/category_detail_view.dart';
 import 'package:funconnect/features/places/presentation/views/place_detail_view.dart';
+import 'package:funconnect/features/places/presentation/views/search_result_view.dart';
 import 'package:funconnect/features/profile/domain/entities/profile_model.dart';
 import 'package:funconnect/features/profile/presentation/blocs/edit_profile_bloc/edit_profile_bloc.dart';
 import 'package:funconnect/features/profile/presentation/blocs/manage_login_options_bloc/manage_login_options_bloc.dart';
@@ -33,6 +31,9 @@ import 'package:funconnect/features/profile/presentation/views/manage_login_opti
 import 'package:funconnect/features/profile/presentation/views/my_events_view.dart';
 import 'package:funconnect/features/profile/presentation/views/my_tickets_view.dart';
 import 'package:funconnect/features/profile/presentation/views/rate_your_experience_view.dart';
+import 'package:funconnect/features/saved/presentation/blocs/saved_bloc.dart';
+import 'package:funconnect/features/saved/presentation/views/collections/create_collection_view.dart';
+import 'package:funconnect/features/saved/presentation/views/saved_view.dart';
 import 'package:funconnect/features/startup/presentation/blocs/onboarding_bloc/onboarding_bloc.dart';
 import 'package:funconnect/features/startup/presentation/blocs/splash_bloc/splash_bloc.dart';
 import 'package:funconnect/features/startup/presentation/views/onboarding_view.dart';
@@ -42,6 +43,7 @@ import 'package:funconnect/features/startup/presentation/views/version_update_vi
 import '../../features/dashboard/presentation/blocs/notification_bloc/notification_bloc.dart';
 import '../../features/events/presentation/views/create_event_view.dart';
 import '../../features/events/presentation/views/event_description_view.dart';
+import '../../features/places/presentation/blocs/search_result_bloc/search_result_bloc.dart';
 
 class Routes {
   // Onboarding
@@ -64,6 +66,7 @@ class Routes {
   // Places
   static const placeDetailRoute = '/place-detail';
   static const categoryDetailRoute = '/category-detail';
+  static const searchResultRoute = '/search-result';
 
   // Events
   static const createEventRoute = '/create-event-route';
@@ -132,12 +135,16 @@ class Routes {
           view: PlaceDetailView(place: place),
           bloc: PlaceDetailBloc(),
         );
-
       case categoryDetailRoute:
         final category = settings.arguments as CategoryModel;
         return _registerBlocView(
           view: CategoryDetailView(category: category),
           bloc: CategoryDetailBloc(),
+        );
+      case searchResultRoute:
+        return _registerBlocView(
+          view: const SearchResultView(),
+          bloc: SearchResultBloc(),
         );
 
       // Dashboard

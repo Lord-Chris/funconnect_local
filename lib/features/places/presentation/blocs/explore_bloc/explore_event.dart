@@ -40,3 +40,7 @@ class CategoryTapEvent extends ExploreEvent {
   @override
   List<Object> get props => [category];
 }
+
+class SearchBarTapEvent extends ExploreEvent {
+  const SearchBarTapEvent();
+}

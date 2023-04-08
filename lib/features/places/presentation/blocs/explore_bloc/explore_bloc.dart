@@ -16,6 +16,7 @@ class ExploreBloc extends Bloc<ExploreEvent, ExploreState> {
     on<ExploreInitEvent>(_onExploreInitEvent);
     on<PlaceTapEvent>(_onPlaceTapEvent);
     on<CategoryTapEvent>(_onCategoryTapEvent);
+    on<SearchBarTapEvent>(_onSearchBarTapEvent);
   }
   final _logger = Logger();
   final _navigationService = locator<INavigationService>();
@@ -53,5 +54,12 @@ class ExploreBloc extends Bloc<ExploreEvent, ExploreState> {
   ) {
     _navigationService.toNamed(Routes.categoryDetailRoute,
         arguments: event.category);
+  }
+
+  FutureOr<void> _onSearchBarTapEvent(
+    SearchBarTapEvent event,
+    Emitter<ExploreState> emit,
+  ) {
+    _navigationService.toNamed(Routes.searchResultRoute);
   }
 }

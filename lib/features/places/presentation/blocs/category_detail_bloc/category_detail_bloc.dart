@@ -13,7 +13,7 @@ class CategoryDetailBloc
   CategoryDetailBloc() : super(CategoryDetailLoadingState()) {
     on<CategoryInitEvent>(_onCategoryInitEvent);
     on<PlaceTapEvent>(_onPlaceTapEvent);
-    on<SearchEvent>(_onSearchEvent);
+    on<SearchBarTapEvent>(_onSearchEvent);
   }
   final _navigationService = locator<INavigationService>();
 
@@ -34,7 +34,9 @@ class CategoryDetailBloc
   }
 
   FutureOr<void> _onSearchEvent(
-    SearchEvent event,
+    SearchBarTapEvent event,
     Emitter<CategoryDetailState> emit,
-  ) {}
+  ) {
+    _navigationService.toNamed(Routes.searchResultRoute);
+  }
 }

@@ -70,6 +70,12 @@ class PlaceRepository extends IPlaceRepository {
   }
 
   @override
+  Future<PaginatedData<PlaceModel>> searchPlaces(
+      String query, AppLocation? location) async {
+    return await _remoteDS.searchPlaces(query, location);
+  }
+
+  @override
   Future<FullPlaceModel> fetchPlaceDetail(String placeId) async {
     return await _remoteDS.fetchPlaceDetail(placeId);
   }

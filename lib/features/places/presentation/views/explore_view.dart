@@ -37,24 +37,31 @@ class _ExploreViewState extends State<ExploreView> {
               children: [
                 Spacing.horizRegular(),
                 Expanded(
-                  child: TextField(
-                    textCapitalization: TextCapitalization.sentences,
-                    maxLines: 1,
-                    style: AppTextStyles.regular14,
-                    decoration: InputDecoration(
-                      contentPadding: REdgeInsets.fromLTRB(16, 19, 16, 19),
-                      hintText: "Search places, people",
-                      filled: true,
-                      fillColor: AppColors.exploreIconAsh,
-                      prefixIcon: const Icon(
-                        Icons.search,
-                        size: 20,
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(39),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(39),
+                  child: GestureDetector(
+                    onTap: () => context
+                        .read<ExploreBloc>()
+                        .add(const SearchBarTapEvent()),
+                    child: TextField(
+                      textCapitalization: TextCapitalization.sentences,
+                      maxLines: 1,
+                      style: AppTextStyles.regular14,
+                      readOnly: true,
+                      decoration: InputDecoration(
+                        contentPadding: REdgeInsets.fromLTRB(16, 19, 16, 19),
+                        hintText: "Search places, people",
+                        filled: true,
+                        enabled: false,
+                        fillColor: AppColors.exploreIconAsh,
+                        prefixIcon: const Icon(
+                          Icons.search,
+                          size: 20,
+                        ),
+                        disabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(39),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(39),
+                        ),
                       ),
                     ),
                   ),

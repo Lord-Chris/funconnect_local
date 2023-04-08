@@ -41,6 +41,17 @@ class ApiConstants {
     return "$places/category/$catId?lat=${loc.lat}&long=${loc.long}&city=${loc.city}&state=${loc.state}&country=${loc.country}";
   }
 
+  static String searchPlaces(String query, AppLocation? loc) {
+    String url = "$places/search?";
+    if (query.isNotEmpty) url += "sqr=$query&";
+    if (loc != null) {
+      url +=
+          "lat=${loc.lat}&long=${loc.long}&city=${loc.city}&state=${loc.state}&country=${loc.country}";
+    }
+    if (url.endsWith("&")) url.replaceRange(url.lastIndexOf("&"), null, ""); 
+    return url;
+  }
+
   static String explore(AppLocation? loc) {
     if (loc == null) return "$places/explore";
     return "$places/explore?lat=${loc.lat}&long=${loc.long}&city=${loc.city}&state=${loc.state}&country=${loc.country}";
