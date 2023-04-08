@@ -122,58 +122,78 @@ class SearchResultView extends HookWidget {
                           ),
                         );
                       }
-                      return SingleChildScrollView(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Spacing.vertExtraMedium(),
-                            Padding(
-                              padding: REdgeInsets.symmetric(horizontal: 16),
-                              child: Row(
-                                children: [
-                                  Text(
-                                    'Search results (${state.places.length})',
-                                    style: AppTextStyles.regular14,
+                      return Stack(
+                        children: [
+                          SingleChildScrollView(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Spacing.vertExtraMedium(),
+                                Padding(
+                                  padding:
+                                      REdgeInsets.symmetric(horizontal: 16),
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        'Search results (${state.places.length})',
+                                        style: AppTextStyles.regular14,
+                                      ),
+                                      const Spacer(),
+                                      InkWell(
+                                        onTap: () => context
+                                            .read<SearchResultBloc>()
+                                            .add(ToggleViewSearchResult()),
+                                        child: Text(
+                                          'Search history',
+                                          style:
+                                              AppTextStyles.regular14.copyWith(
+                                            color: AppColors.gray97,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                  const Spacer(),
-                                  Text(
-                                    'Search history',
-                                    style: AppTextStyles.regular14.copyWith(
-                                      color: AppColors.gray97,
-                                    ),
+                                ),
+                                Spacing.vertRegular(),
+                                GridView.builder(
+                                  shrinkWrap: true,
+                                  itemCount: state.places.length,
+                                  padding:
+                                      REdgeInsets.symmetric(horizontal: 16),
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  gridDelegate:
+                                      SliverGridDelegateWithMaxCrossAxisExtent(
+                                    maxCrossAxisExtent: 182.r * 1.3,
+                                    childAspectRatio: 1,
+                                    mainAxisSpacing: 10.r,
+                                    crossAxisSpacing: 8.r,
                                   ),
-                                ],
-                              ),
+                                  itemBuilder: (context, index) {
+                                    final place = state.places[index];
+                                    return HomeCategoriesLargeWidget(
+                                      coverImage: place.coverImagePath,
+                                      name: place.name,
+                                      isBookmarked: place.isBookmarked,
+                                      rating: place.avgRating,
+                                      ratingCount: place.avgReviewCount,
+                                      onTap: () => context
+                                          .read<SearchResultBloc>()
+                                          .add(PlaceTapEvent(place: place)),
+                                    );
+                                  },
+                                ),
+                              ],
                             ),
-                            Spacing.vertRegular(),
-                            GridView.builder(
-                              shrinkWrap: true,
-                              itemCount: state.places.length,
-                              padding: REdgeInsets.symmetric(horizontal: 16),
-                              physics: const NeverScrollableScrollPhysics(),
-                              gridDelegate:
-                                  SliverGridDelegateWithMaxCrossAxisExtent(
-                                maxCrossAxisExtent: 182.r * 1.3,
-                                childAspectRatio: 1,
-                                mainAxisSpacing: 10.r,
-                                crossAxisSpacing: 8.r,
-                              ),
-                              itemBuilder: (context, index) {
-                                final place = state.places[index];
-                                return HomeCategoriesLargeWidget(
-                                  coverImage: place.coverImagePath,
-                                  name: place.name,
-                                  isBookmarked: place.isBookmarked,
-                                  rating: place.avgRating,
-                                  ratingCount: place.avgReviewCount,
-                                  onTap: () => context
-                                      .read<SearchResultBloc>()
-                                      .add(PlaceTapEvent(place: place)),
-                                );
-                              },
-                            ),
-                          ],
-                        ),
+                          ),
+                          RecentSearchBox(
+                            onItemTap: (val) {
+                              controller.text = val;
+                              context
+                                  .read<SearchResultBloc>()
+                                  .add(SearchBarChangedEvent(val));
+                            },
+                          ),
+                        ],
                       );
                     },
                   ),
@@ -183,6 +203,80 @@ class SearchResultView extends HookWidget {
           ),
         );
       },
+    );
+  }
+}
+
+class RecentSearchBox extends StatelessWidget {
+  final void Function(String) onItemTap;
+  const RecentSearchBox({
+    Key? key,
+    required this.onItemTap,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final state = context.watch<SearchResultBloc>().state;
+    if (state is! SearchResultIdleState) return const SizedBox();
+    if (!state.showRecents) return const SizedBox();
+    return Positioned(
+      top: 16.r,
+      left: 16.r,
+      right: 16.r,
+      child: Container(
+        padding: REdgeInsets.all(23),
+        decoration: BoxDecoration(
+          color: AppColors.black.withOpacity(.9),
+          borderRadius: BorderRadius.circular(24),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    'Recent',
+                    style: AppTextStyles.regular16,
+                  ),
+                ),
+                InkWell(
+                  onTap: () => context
+                      .read<SearchResultBloc>()
+                      .add(ToggleViewSearchResult()),
+                  child: Icon(
+                    Icons.exit_to_app,
+                    size: 20.r,
+                    color: AppColors.gray97,
+                  ),
+                )
+              ],
+            ),
+            ...List.filled(3, "true")
+                .map((e) => ListTile(
+                      onTap: () => onItemTap(e),
+                      dense: true,
+                      contentPadding: EdgeInsets.zero,
+                      minLeadingWidth: 20,
+                      leading: Icon(
+                        Icons.watch_later_outlined,
+                        size: 20.r,
+                        color: AppColors.gray97,
+                      ),
+                      title: Text(
+                        'Okay',
+                        style: AppTextStyles.regular14,
+                      ),
+                      trailing: Icon(
+                        Icons.close,
+                        size: 15.r,
+                        color: AppColors.gray97,
+                      ),
+                    ))
+                .toList(),
+          ],
+        ),
+      ),
     );
   }
 }

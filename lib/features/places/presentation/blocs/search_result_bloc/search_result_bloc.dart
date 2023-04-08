@@ -13,6 +13,7 @@ class SearchResultBloc extends Bloc<SearchResultEvent, SearchResultState> {
   SearchResultBloc() : super(SearchResultIdleState()) {
     on<SearchBarChangedEvent>(_onSearchBarChangedEvent);
     on<PlaceTapEvent>(_onPlaceTapEvent);
+    on<ToggleViewSearchResult>(_onToggleViewSearchResult);
   }
   final _navigationService = locator<INavigationService>();
   final _logger = Logger();
@@ -36,5 +37,14 @@ class SearchResultBloc extends Bloc<SearchResultEvent, SearchResultState> {
     Emitter<SearchResultState> emit,
   ) {
     _navigationService.toNamed(Routes.placeDetailRoute, arguments: event.place);
+  }
+
+  FutureOr<void> _onToggleViewSearchResult(
+    ToggleViewSearchResult event,
+    Emitter<SearchResultState> emit,
+  ) {
+    if (this.state is! SearchResultIdleState) return null;
+    final state = this.state as SearchResultIdleState;
+    emit(state.copyWith(showRecents: !state.showRecents));
   }
 }

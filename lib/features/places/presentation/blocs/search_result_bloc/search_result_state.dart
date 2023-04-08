@@ -11,13 +11,25 @@ class SearchResultLoadingState extends SearchResultState {}
 
 class SearchResultIdleState extends SearchResultState {
   final PaginatedData<PlaceModel>? placeData;
+  final bool showRecents;
 
   SearchResultIdleState({
+    this.showRecents = false,
     this.placeData,
   });
 
   List<PlaceModel> get places => placeData?.data ?? [];
 
   @override
-  List<Object?> get props => [places];
+  List<Object?> get props => [places, showRecents];
+
+  SearchResultIdleState copyWith({
+    PaginatedData<PlaceModel>? placeData,
+    bool? showRecents,
+  }) {
+    return SearchResultIdleState(
+      placeData: placeData ?? this.placeData,
+      showRecents: showRecents ?? this.showRecents,
+    );
+  }
 }
