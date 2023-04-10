@@ -125,13 +125,13 @@ class _ProfileViewState extends State<ProfileView> {
                         .add(EditProfileTapEvent(userProfile: userProfile)),
                   ),
                   Spacing.vertLarge(),
-                  _ProfileSubButton(
-                    buttonColor: AppColors.secondary800,
-                    label: "My Tickets",
-                    onTap: () =>
-                        context.read<ProfileBloc>().add(MyTicketTapEvent()),
-                  ),
-                  Spacing.vertRegular(),
+                  // _ProfileSubButton(
+                  //   buttonColor: AppColors.secondary800,
+                  //   label: "My Tickets",
+                  //   onTap: () =>
+                  //       context.read<ProfileBloc>().add(MyTicketTapEvent()),
+                  // ),
+                  // Spacing.vertRegular(),
                   _ProfileSubButton(
                     buttonColor: AppColors.primary.withOpacity(.2),
                     borderColor: AppColors.primary,
@@ -169,13 +169,13 @@ class _ProfileViewState extends State<ProfileView> {
                             onTap: () => context
                                 .read<ProfileBloc>()
                                 .add(NotificationsTapEvent())),
-                        _buildProfileItems(
-                          "Fingerprint/Face ID",
-                          icon: AppSwitcher(
-                            value: false,
-                            onChanged: (val) {},
-                          ),
-                        ),
+                        // _buildProfileItems(
+                        //   "Fingerprint/Face ID",
+                        //   icon: AppSwitcher(
+                        //     value: false,
+                        //     onChanged: (val) {},
+                        //   ),
+                        // ),
                         _buildProfileItems(
                           "Dark mode",
                           icon: AppSwitcher(
@@ -208,9 +208,9 @@ class _ProfileViewState extends State<ProfileView> {
                           onTap: () => context.read<ProfileBloc>().add(
                               RateYourExperienceTapEvent(context: context)),
                         ),
-                        _buildProfileItems(
-                          "Suggestions",
-                        ),
+                        // _buildProfileItems(
+                        //   "Suggestions",
+                        // ),
                       ],
                     ),
                   ),
@@ -264,7 +264,7 @@ class _ProfileViewState extends State<ProfileView> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       InkWell(
-                        onTap: ()=> context
+                        onTap: () => context
                             .read<ProfileBloc>()
                             .add(InstagramTapEvent()),
                         child: CircleAvatar(
@@ -278,9 +278,8 @@ class _ProfileViewState extends State<ProfileView> {
                       ),
                       Spacing.horizRegular(),
                       InkWell(
-                        onTap: ()=> context
-                            .read<ProfileBloc>()
-                            .add(TwitterTapEvent()),
+                        onTap: () =>
+                            context.read<ProfileBloc>().add(TwitterTapEvent()),
                         child: CircleAvatar(
                           radius: 26.5,
                           backgroundColor: AppColors.secondary800,
@@ -288,7 +287,7 @@ class _ProfileViewState extends State<ProfileView> {
                         ),
                       ),
                     ],
-                              ),
+                  ),
                   Spacing.vertLarge(),
                   Spacing.vertMedium(),
                   AppButton(

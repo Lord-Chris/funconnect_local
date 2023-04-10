@@ -8,9 +8,6 @@ import 'package:funconnect/features/saved/presentation/blocs/saved_state.dart';
 import 'package:funconnect/features/saved/presentation/widgets/saved_place_widget.dart';
 import 'package:funconnect/shared/components/custom_button.dart';
 
-import '../../../../core/app/locator.dart';
-import '../../../../core/app/routes.dart';
-import '../../../../services/navigation_service/i_navigation_service.dart';
 import '../../../../shared/components/app_loader.dart';
 import '../../../../shared/constants/_constants.dart';
 
@@ -54,14 +51,14 @@ class _SavedViewState extends State<SavedView>
                       color: AppColors.eventBasedColor,
                     ),
                   ),
-                  trailing: GestureDetector(
-                    onTap: () => locator<INavigationService>()
-                        .toNamed(Routes.createCollectionViewRoute),
-                    child: const Icon(
-                      Icons.more_vert,
-                      color: AppColors.white,
-                    ),
-                  ),
+                  // trailing: GestureDetector(
+                  //   onTap: () => locator<INavigationService>()
+                  //       .toNamed(Routes.createCollectionViewRoute),
+                  //   child: const Icon(
+                  //     Icons.more_vert,
+                  //     color: AppColors.white,
+                  //   ),
+                  // ),
                 ),
                 TabBar(
                   controller: _tabController,
