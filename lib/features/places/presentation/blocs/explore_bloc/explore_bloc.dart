@@ -30,10 +30,10 @@ class ExploreBloc extends Bloc<ExploreEvent, ExploreState> {
       final exploreUsecase = FetchExploreUseCase();
       await exploreUsecase(NoParams());
       emit(ExploreIdleState(
-        exploreDetails: exploreUsecase.exploreDetails?.data ?? [],
-        categories: exploreUsecase.categories?.data ?? [],
-        bestRatings: exploreUsecase.bestRatings?.data ?? [],
-        recentlyAdded: exploreUsecase.recentlyAdded?.data ?? [],
+        exploreDetailsData: exploreUsecase.exploreDetails,
+        categoriesData: exploreUsecase.categories,
+        bestRatingsData: exploreUsecase.bestRatings,
+        recentlyAddedData: exploreUsecase.recentlyAdded,
       ));
     } on Failure catch (e) {
       _logger.e(e);

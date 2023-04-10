@@ -1,5 +1,6 @@
 import 'package:funconnect/core/enums/_enums.dart';
 import 'package:funconnect/core/models/_models.dart';
+import 'package:funconnect/features/places/domain/entities/search_query_param.dart';
 
 class ApiConstants {
   ApiConstants._();
@@ -41,14 +42,17 @@ class ApiConstants {
     return "$places/category/$catId?lat=${loc.lat}&long=${loc.long}&city=${loc.city}&state=${loc.state}&country=${loc.country}";
   }
 
-  static String searchPlaces(String query, AppLocation? loc) {
+  static String searchPlaces(SearchQueryParam query, AppLocation? loc) {
     String url = "$places/search?";
-    if (query.isNotEmpty) url += "sqr=$query&";
-    if (loc != null) {
+    if (query.param.isNotEmpty) url += "sqr=${query.param}&";
+    if (query.toSearchEnumParam.isEmpty && loc != null) {
       url +=
           "lat=${loc.lat}&long=${loc.long}&city=${loc.city}&state=${loc.state}&country=${loc.country}";
     }
-    if (url.endsWith("&")) url.replaceRange(url.lastIndexOf("&"), null, ""); 
+    url += query.toSearchEnumParam;
+    if (url.endsWith("&")) {
+      url.replaceRange(url.lastIndexOf("&"), null, "");
+    }
     return url;
   }
 

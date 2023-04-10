@@ -31,3 +31,5 @@ class PlaceTapEvent extends SearchResultEvent {
 }
 
 class ToggleViewSearchResult extends SearchResultEvent {}
+
+class FilterTapEvent extends SearchResultEvent {}

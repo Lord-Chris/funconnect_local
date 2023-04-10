@@ -3,8 +3,9 @@ import 'package:funconnect/core/models/_models.dart';
 import 'package:funconnect/features/places/domain/entities/place_model.dart';
 
 abstract class SearchResultState extends Equatable {
+  List<PlaceModel> get places => [];
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [places];
 }
 
 class SearchResultLoadingState extends SearchResultState {}
@@ -18,6 +19,7 @@ class SearchResultIdleState extends SearchResultState {
     this.placeData,
   });
 
+  @override
   List<PlaceModel> get places => placeData?.data ?? [];
 
   @override

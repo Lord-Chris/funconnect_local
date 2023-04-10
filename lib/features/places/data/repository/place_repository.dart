@@ -12,6 +12,7 @@ import 'package:funconnect/services/_services.dart';
 
 import '../../../authentication/data/dto/user_model.dart';
 import '../../domain/entities/place_model.dart';
+import '../../domain/entities/search_query_param.dart';
 import '../data_sources/local_data_source.dart';
 import 'i_place_repository.dart';
 
@@ -20,6 +21,10 @@ class PlaceRepository extends IPlaceRepository {
   final _localStorageService = locator<ILocalStorageService>();
   final _remoteDS = RemotePlaceDataSource();
   final _localDS = LocalPlaceDataSource();
+
+  PaginatedData<CategoryModel>? _categories;
+  @override
+  PaginatedData<CategoryModel>? get categories => _categories;
 
   @override
   Future<List<HomeTrendItemModel>> fetchHomeTrends(
@@ -71,7 +76,7 @@ class PlaceRepository extends IPlaceRepository {
 
   @override
   Future<PaginatedData<PlaceModel>> searchPlaces(
-      String query, AppLocation? location) async {
+      SearchQueryParam query, AppLocation? location) async {
     return await _remoteDS.searchPlaces(query, location);
   }
 
@@ -110,7 +115,8 @@ class PlaceRepository extends IPlaceRepository {
 
   @override
   Future<PaginatedData<CategoryModel>> fetchExploreCategories() async {
-    return await _remoteDS.fetchExploreCategories();
+    _categories = await _remoteDS.fetchExploreCategories();
+    return _categories!;
   }
 
   @override

@@ -11,6 +11,7 @@ import 'package:funconnect/services/_services.dart';
 import '../../domain/entities/place_model.dart';
 import '../../domain/entities/review_model.dart';
 import '../../domain/entities/saved_place_model.dart';
+import '../../domain/entities/search_query_param.dart';
 
 class RemotePlaceDataSource with ApiMixin {
   final _networkService = locator<INetworkService>();
@@ -41,7 +42,7 @@ class RemotePlaceDataSource with ApiMixin {
   }
 
   Future<PaginatedData<PlaceModel>> searchPlaces(
-      String query, AppLocation? location) async {
+      SearchQueryParam query, AppLocation? location) async {
     final res = await _networkService.get(
       ApiConstants.searchPlaces(query, location),
       headers: headers,

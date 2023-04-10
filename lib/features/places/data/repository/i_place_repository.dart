@@ -7,13 +7,15 @@ import 'package:funconnect/features/places/domain/entities/home_trend_item_model
 import 'package:funconnect/features/places/domain/entities/place_model.dart';
 import 'package:funconnect/features/places/domain/entities/review_model.dart';
 
+import '../../domain/entities/search_query_param.dart';
+
 abstract class IPlaceRepository {
   Future<List<CategoryModel>> fetchUserInterests();
   Future<List<HomeTrendItemModel>> fetchHomeTrends(AppLocation? location);
   Future<PaginatedData<PlaceModel>> fetchPlacesByCategory(
       String categoryId, AppLocation? location);
   Future<PaginatedData<PlaceModel>> searchPlaces(
-      String query, AppLocation? location);
+      SearchQueryParam query, AppLocation? location);
   Future<FullPlaceModel> fetchPlaceDetail(String placeId);
   Future<PaginatedData<ReviewModel>> fetchPlaceReviews(String placeId);
   Future<void> reviewPlace(String placeId, ReviewParam review);
@@ -25,4 +27,5 @@ abstract class IPlaceRepository {
       ExploreSearchEnum filter);
 
   UserModel get user;
+  PaginatedData<CategoryModel>? get categories;
 }

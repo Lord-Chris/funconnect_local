@@ -71,6 +71,14 @@ class SearchResultView extends HookWidget {
                     ),
                     Spacing.horizSmall(),
                     InkWell(
+                      onTap: () =>
+                          // showModalBottomSheet(
+                          //     context: context,
+                          //     builder: (context) => const SearchFilterSheet()),
+
+                          context
+                              .read<SearchResultBloc>()
+                              .add(FilterTapEvent()),
                       child: CircleAvatar(
                         radius: 27.r,
                         backgroundColor: AppColors.exploreIconAsh,
@@ -106,7 +114,7 @@ class SearchResultView extends HookWidget {
                               Text(
                                 controller.text.isEmpty
                                     ? "Query is empty"
-                                    : "No place found for ${controller.text.capitalize()}",
+                                    : "No place found for '${controller.text.capitalize()}'",
                                 style: AppTextStyles.medium14,
                               ),
                               Spacing.vertRegular(),
