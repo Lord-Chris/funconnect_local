@@ -77,7 +77,18 @@ class PlaceRepository extends IPlaceRepository {
   @override
   Future<PaginatedData<PlaceModel>> searchPlaces(
       SearchQueryParam query, AppLocation? location) async {
-    return await _remoteDS.searchPlaces(query, location);
+    final res = await _remoteDS.searchPlaces(query, location);
+    if (query.param.isNotEmpty) {
+      final history = _getSearchHistory()..add(query.param);
+      if (history.length >= 5) history.removeLast();
+
+      _localStorageService.write(
+        HiveKeys.placesBoxId,
+        key: StorageKeys.searchHistory,
+        data: history.toSet().toList(),
+      );
+    }
+    return res;
   }
 
   @override
@@ -126,9 +137,24 @@ class PlaceRepository extends IPlaceRepository {
   }
 
   @override
+  void removeHistory(String item) {
+    final history = _getSearchHistory();
+    history.remove(item);
+    _localStorageService.write(HiveKeys.placesBoxId,
+        key: StorageKeys.searchHistory, data: history);
+  }
+
+  @override
   UserModel get user {
     final data = _localStorageService
         .read<Map<String, dynamic>?>(HiveKeys.userBoxId, key: StorageKeys.user);
     return UserModel.fromMap(data!);
   }
+
+  List<String> _getSearchHistory() =>
+      _localStorageService.read(HiveKeys.placesBoxId,
+          key: StorageKeys.searchHistory, def: []).cast<String>();
+
+  @override
+  List<String> get searchHistory => _getSearchHistory();
 }

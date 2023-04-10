@@ -10,15 +10,16 @@ import '../../domain/entities/search_query_param.dart';
 
 class SearchFilterSheet extends HookWidget {
   final List<CategoryModel> categories;
+  final SearchQueryParam? searchQueryParam;
   const SearchFilterSheet({
     Key? key,
     required this.categories,
+    this.searchQueryParam,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final selected = useState(const SearchQueryParam());
-    // final sortBy = useState(SearchEnum.date);
+    final selected = useState(searchQueryParam ?? const SearchQueryParam());
     return Container(
       constraints: BoxConstraints(
         maxHeight: .8.sh,
@@ -29,16 +30,25 @@ class SearchFilterSheet extends HookWidget {
           Spacing.vertMedium(),
           Row(
             children: [
+              Spacing.horizRegular(),
               const Spacer(),
               Text(
                 'Filters',
                 style: AppTextStyles.regular16,
               ),
-              const Spacer(),
-              Text(
-                'Clear',
-                style: AppTextStyles.regular16,
+              Expanded(
+                child: Align(
+                  alignment: Alignment.centerRight,
+                  child: InkWell(
+                    onTap: () => selected.value = const SearchQueryParam(),
+                    child: Text(
+                      'Clear',
+                      style: AppTextStyles.regular16,
+                    ),
+                  ),
+                ),
               ),
+              Spacing.horizRegular(),
             ],
           ),
           Expanded(
@@ -71,6 +81,7 @@ class SearchFilterSheet extends HookWidget {
                       contentPadding: REdgeInsets.only(right: 20),
                       visualDensity: VisualDensity.compact,
                       dense: true,
+                      activeColor: AppColors.primary,
                       title: Text(
                         e.name,
                         style: AppTextStyles.medium20,
@@ -127,7 +138,7 @@ class SearchFilterSheet extends HookWidget {
           ),
           AppOrangeBtn(
             label: 'Apply Filter',
-            onTap: () => Navigator.pop(context, selected),
+            onTap: () => Navigator.pop(context, selected.value),
           ),
         ],
       ),

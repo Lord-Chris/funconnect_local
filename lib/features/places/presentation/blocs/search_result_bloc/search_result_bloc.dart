@@ -18,9 +18,11 @@ class SearchResultBloc extends Bloc<SearchResultEvent, SearchResultState> {
     on<PlaceTapEvent>(_onPlaceTapEvent);
     on<ToggleViewSearchResult>(_onToggleViewSearchResult);
     on<FilterTapEvent>(_onFilterTapEvent);
+    on<SearchHistoryRemoveTap>(_onSearchHistoryRemoveTap);
   }
   final _navigationService = locator<INavigationService>();
   final _dialogAndSheetService = locator<IDialogAndSheetService>();
+  final searchPlaceUsecase = SearchPlaces();
   final _logger = Logger();
 
   FutureOr<void> _onSearchBarChangedEvent(
@@ -30,7 +32,7 @@ class SearchResultBloc extends Bloc<SearchResultEvent, SearchResultState> {
     try {
       emit(SearchResultLoadingState());
       final res =
-          await SearchPlaces().call(SearchQueryParam(param: event.query));
+          await searchPlaceUsecase(SearchQueryParam(param: event.query));
       emit(SearchResultIdleState(placeData: res));
     } on Failure catch (e) {
       emit(SearchResultIdleState());
@@ -61,16 +63,33 @@ class SearchResultBloc extends Bloc<SearchResultEvent, SearchResultState> {
     final params = await _dialogAndSheetService.showAppBottomSheet(
       SearchFilterSheet(
         categories: locator<IPlaceRepository>().categories?.data ?? [],
+        searchQueryParam: searchPlaceUsecase.param,
       ),
     );
     if (params == null) return;
     try {
       emit(SearchResultLoadingState());
-      final res = await SearchPlaces().call(params);
+      final res = await searchPlaceUsecase(params as SearchQueryParam);
       emit(SearchResultIdleState(placeData: res));
     } on Failure catch (e) {
       emit(SearchResultIdleState());
       _logger.e(e);
     }
   }
+
+  FutureOr<void> _onSearchHistoryRemoveTap(
+    SearchHistoryRemoveTap event,
+    Emitter<SearchResultState> emit,
+  ) {
+    if (this.state is! SearchResultIdleState) return null;
+    searchPlaceUsecase.removeHistory(event.history);
+    final state = this.state as SearchResultIdleState;
+    emit(state);
+  }
+
+  List<String> getSearchHistory() {
+    return searchPlaceUsecase.searchHistory;
+  }
+
+  // List<String> get searchHistory => _getSearchHistory();
 }

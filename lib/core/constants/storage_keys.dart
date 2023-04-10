@@ -14,6 +14,7 @@ class StorageKeys {
 
   // Places
   static const homeTrends = "home-trends";
+  static const searchHistory = "search-history";
 
   //Saved Places
   static const userSavedPlaces = "user-saved-places";

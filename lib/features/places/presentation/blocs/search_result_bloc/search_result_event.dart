@@ -33,3 +33,12 @@ class PlaceTapEvent extends SearchResultEvent {
 class ToggleViewSearchResult extends SearchResultEvent {}
 
 class FilterTapEvent extends SearchResultEvent {}
+
+class SearchHistoryRemoveTap extends SearchResultEvent with EquatableMixin {
+  final String history;
+
+  SearchHistoryRemoveTap(this.history);
+
+  @override
+  List<Object> get props => [history];
+}

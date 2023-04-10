@@ -147,15 +147,21 @@ class SearchResultView extends HookWidget {
                                         style: AppTextStyles.regular14,
                                       ),
                                       const Spacer(),
-                                      InkWell(
-                                        onTap: () => context
-                                            .read<SearchResultBloc>()
-                                            .add(ToggleViewSearchResult()),
-                                        child: Text(
-                                          'Search history',
-                                          style:
-                                              AppTextStyles.regular14.copyWith(
-                                            color: AppColors.gray97,
+                                      Visibility(
+                                        visible: context
+                                            .watch<SearchResultBloc>()
+                                            .getSearchHistory()
+                                            .isNotEmpty,
+                                        child: InkWell(
+                                          onTap: () => context
+                                              .read<SearchResultBloc>()
+                                              .add(ToggleViewSearchResult()),
+                                          child: Text(
+                                            'Search history',
+                                            style: AppTextStyles.regular14
+                                                .copyWith(
+                                              color: AppColors.gray97,
+                                            ),
                                           ),
                                         ),
                                       ),
@@ -224,67 +230,79 @@ class RecentSearchBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final state = context.watch<SearchResultBloc>().state;
-    if (state is! SearchResultIdleState) return const SizedBox();
-    if (!state.showRecents) return const SizedBox();
-    return Positioned(
-      top: 16.r,
-      left: 16.r,
-      right: 16.r,
-      child: Container(
-        padding: REdgeInsets.all(23),
-        decoration: BoxDecoration(
-          color: AppColors.black.withOpacity(.9),
-          borderRadius: BorderRadius.circular(24),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                Expanded(
-                  child: Text(
-                    'Recent',
-                    style: AppTextStyles.regular16,
-                  ),
-                ),
-                InkWell(
-                  onTap: () => context
-                      .read<SearchResultBloc>()
-                      .add(ToggleViewSearchResult()),
-                  child: Icon(
-                    Icons.exit_to_app,
-                    size: 20.r,
-                    color: AppColors.gray97,
-                  ),
-                )
-              ],
+    return BlocBuilder<SearchResultBloc, SearchResultState>(
+      builder: (context, state) {
+        if (state is! SearchResultIdleState) return const SizedBox();
+        if (!state.showRecents) return const SizedBox();
+        return Positioned(
+          top: 16.r,
+          left: 16.r,
+          right: 16.r,
+          child: Container(
+            padding: REdgeInsets.all(23),
+            decoration: BoxDecoration(
+              color: AppColors.black.withOpacity(.9),
+              borderRadius: BorderRadius.circular(24),
             ),
-            ...List.filled(3, "true")
-                .map((e) => ListTile(
-                      onTap: () => onItemTap(e),
-                      dense: true,
-                      contentPadding: EdgeInsets.zero,
-                      minLeadingWidth: 20,
-                      leading: Icon(
-                        Icons.watch_later_outlined,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        'Recent',
+                        style: AppTextStyles.regular16,
+                      ),
+                    ),
+                    IconButton(
+                      onPressed: () => context
+                          .read<SearchResultBloc>()
+                          .add(ToggleViewSearchResult()),
+                      visualDensity: VisualDensity.compact,
+                      icon: Icon(
+                        Icons.exit_to_app,
                         size: 20.r,
                         color: AppColors.gray97,
                       ),
-                      title: Text(
-                        'Okay',
-                        style: AppTextStyles.regular14,
-                      ),
-                      trailing: Icon(
-                        Icons.close,
-                        size: 15.r,
-                        color: AppColors.gray97,
-                      ),
-                    ))
-                .toList(),
-          ],
-        ),
-      ),
+                    )
+                  ],
+                ),
+                ...context
+                    .watch<SearchResultBloc>()
+                    .getSearchHistory()
+                    .map((e) => ListTile(
+                          onTap: () => onItemTap(e),
+                          dense: true,
+                          contentPadding: EdgeInsets.zero,
+                          minLeadingWidth: 20,
+                          leading: Icon(
+                            Icons.watch_later_outlined,
+                            size: 20.r,
+                            color: AppColors.gray97,
+                          ),
+                          title: Text(
+                            e,
+                            style: AppTextStyles.regular14,
+                          ),
+                          trailing: IconButton(
+                            onPressed: () => context
+                                .read<SearchResultBloc>()
+                                .add(SearchHistoryRemoveTap(e)),
+                            visualDensity: VisualDensity.compact,
+                            icon: Icon(
+                              Icons.close,
+                              size: 15.r,
+                              color: AppColors.gray97,
+                            ),
+                          ),
+                        ))
+                    .toList(),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }

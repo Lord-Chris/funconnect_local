@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:equatable/equatable.dart';
 import 'package:funconnect/core/models/_models.dart';
 import 'package:funconnect/features/places/domain/entities/place_model.dart';
@@ -23,7 +25,7 @@ class SearchResultIdleState extends SearchResultState {
   List<PlaceModel> get places => placeData?.data ?? [];
 
   @override
-  List<Object?> get props => [places, showRecents];
+  List<Object?> get props => [places, showRecents, Random().nextDouble()];
 
   SearchResultIdleState copyWith({
     PaginatedData<PlaceModel>? placeData,
