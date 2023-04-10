@@ -18,8 +18,8 @@ class SearchPlaces with UseCases<PaginatedData<PlaceModel>, SearchQueryParam> {
     return places;
   }
 
-  void removeHistory(String item) {
-    _placeRepository.removeHistory(item);
+  Future<void> removeHistory(String item) async {
+    await _placeRepository.removeHistory(item);
   }
 
   List<String> get searchHistory => _placeRepository.searchHistory;

@@ -148,10 +148,7 @@ class SearchResultView extends HookWidget {
                                       ),
                                       const Spacer(),
                                       Visibility(
-                                        visible: context
-                                            .watch<SearchResultBloc>()
-                                            .getSearchHistory()
-                                            .isNotEmpty,
+                                        visible: state.searchHistory.isNotEmpty,
                                         child: InkWell(
                                           onTap: () => context
                                               .read<SearchResultBloc>()
@@ -268,9 +265,7 @@ class RecentSearchBox extends StatelessWidget {
                     )
                   ],
                 ),
-                ...context
-                    .watch<SearchResultBloc>()
-                    .getSearchHistory()
+                ...state.searchHistory
                     .map((e) => ListTile(
                           onTap: () => onItemTap(e),
                           dense: true,

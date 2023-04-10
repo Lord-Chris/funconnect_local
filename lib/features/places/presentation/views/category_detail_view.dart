@@ -74,17 +74,17 @@ class CategoryDetailView extends HookWidget {
                         ),
                       ),
                     ),
-                    Spacing.horizSmall(),
-                    InkWell(
-                      child: CircleAvatar(
-                        radius: 27.r,
-                        backgroundColor: AppColors.exploreIconAsh,
-                        child: Icon(
-                          Icons.filter_list_rounded,
-                          size: 20.sp,
-                        ),
-                      ),
-                    ),
+                    // Spacing.horizSmall(),
+                    // InkWell(
+                    //   child: CircleAvatar(
+                    //     radius: 27.r,
+                    //     backgroundColor: AppColors.exploreIconAsh,
+                    //     child: Icon(
+                    //       Icons.filter_list_rounded,
+                    //       size: 20.sp,
+                    //     ),
+                    //   ),
+                    // ),
                     Spacing.horizRegular(),
                   ],
                 ),

@@ -137,10 +137,10 @@ class PlaceRepository extends IPlaceRepository {
   }
 
   @override
-  void removeHistory(String item) {
+  Future<void> removeHistory(String item) async {
     final history = _getSearchHistory();
     history.remove(item);
-    _localStorageService.write(HiveKeys.placesBoxId,
+    await _localStorageService.write(HiveKeys.placesBoxId,
         key: StorageKeys.searchHistory, data: history);
   }
 

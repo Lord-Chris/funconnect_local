@@ -33,7 +33,10 @@ class SearchResultBloc extends Bloc<SearchResultEvent, SearchResultState> {
       emit(SearchResultLoadingState());
       final res =
           await searchPlaceUsecase(SearchQueryParam(param: event.query));
-      emit(SearchResultIdleState(placeData: res));
+      emit(SearchResultIdleState(
+        placeData: res,
+        searchHistoryData: searchPlaceUsecase.searchHistory,
+      ));
     } on Failure catch (e) {
       emit(SearchResultIdleState());
       _logger.e(e);
@@ -70,7 +73,10 @@ class SearchResultBloc extends Bloc<SearchResultEvent, SearchResultState> {
     try {
       emit(SearchResultLoadingState());
       final res = await searchPlaceUsecase(params as SearchQueryParam);
-      emit(SearchResultIdleState(placeData: res));
+      emit(SearchResultIdleState(
+        placeData: res,
+        searchHistoryData: searchPlaceUsecase.searchHistory,
+      ));
     } on Failure catch (e) {
       emit(SearchResultIdleState());
       _logger.e(e);
@@ -80,16 +86,13 @@ class SearchResultBloc extends Bloc<SearchResultEvent, SearchResultState> {
   FutureOr<void> _onSearchHistoryRemoveTap(
     SearchHistoryRemoveTap event,
     Emitter<SearchResultState> emit,
-  ) {
+  ) async {
     if (this.state is! SearchResultIdleState) return null;
-    searchPlaceUsecase.removeHistory(event.history);
     final state = this.state as SearchResultIdleState;
-    emit(state);
+    await searchPlaceUsecase.removeHistory(event.history);
+    emit(state.copyWith(
+      searchHistoryData: searchPlaceUsecase.searchHistory,
+      showRecents: searchPlaceUsecase.searchHistory.isNotEmpty,
+    ));
   }
-
-  List<String> getSearchHistory() {
-    return searchPlaceUsecase.searchHistory;
-  }
-
-  // List<String> get searchHistory => _getSearchHistory();
 }
