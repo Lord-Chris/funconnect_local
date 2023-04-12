@@ -94,7 +94,7 @@ class AppButton extends StatelessWidget {
                       style: AppTextStyles.medium14.copyWith(
                         fontSize: labelSize?.sm,
                         fontWeight: fontWeight,
-                        color: labelColor,
+                        color: labelColor ?? AppColors.black,
                       ),
                     ),
                   ),

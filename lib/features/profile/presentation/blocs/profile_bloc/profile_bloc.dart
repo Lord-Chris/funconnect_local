@@ -13,12 +13,11 @@ import 'package:funconnect/features/profile/domain/usecases/delete_user_account.
 import 'package:funconnect/features/profile/domain/usecases/fetch_user_profile.dart';
 import 'package:funconnect/features/profile/domain/usecases/logout_user.dart';
 import 'package:funconnect/services/_services.dart';
-import 'package:funconnect/shared/components/_components.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
 import 'package:funconnect/shared/dialogs/_dialogs.dart';
 import 'package:funconnect/shared/dialogs/coming_soon_dialog.dart';
 import 'package:launch_review/launch_review.dart';
-import 'package:rate_my_app/rate_my_app.dart';
+import 'package:logger/logger.dart';
 
 part 'profile_event.dart';
 part 'profile_state.dart';
@@ -42,10 +41,11 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   }
 
   final _navigationService = locator<INavigationService>();
-  final _localStorageService = locator<ILocalStorageService>();
   final _forceUpdateAppService = locator<IForceUpdateAppService>();
   final _locationService = locator<ILocationService>();
   final _dialogAndSheetService = locator<IDialogAndSheetService>();
+
+  final _logger = Logger();
 
   String? appVersion;
 
@@ -159,7 +159,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       isHighPriority: false,
       title: "Logout",
       body: "Are you sure you want to logout of this device?",
-      positiveLabel: "Logout",
+      positiveLabel: "Log Out",
       negativeLabel: "Cancel",
       negativeCallBack: () {
         _navigationService.back();
@@ -167,18 +167,15 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       positiveCallBack: () async {
         try {
           LogoutUser().call(NoParams());
-          _navigationService.offAllNamed(Routes.welcomeViewRoute, (_) => false);
           _dialogAndSheetService.showAppDialog(
             const StatusDialog(
               isError: false,
-              title: "Logout",
+              title: "Log Out",
               body: "User Logged out Successfully",
             ),
           );
-        } on Failure {
-          // _navigationService.back();
-          // _dialogAndSheetService.showAppDialog(StatusDialog(
-          //     isError: true, title: "Error Logging Out", body: e.message));
+        } on Failure catch (e) {
+          _logger.e(e);
         }
       },
     ));

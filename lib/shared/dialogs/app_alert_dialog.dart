@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:funconnect/shared/components/_components.dart';
+import 'package:funconnect/shared/constants/app_spacer.dart';
 import 'package:funconnect/shared/constants/colors.dart';
 import 'package:funconnect/shared/constants/textstyles.dart';
 
@@ -31,7 +32,7 @@ class AppAlertDialog extends StatelessWidget {
         borderRadius: BorderRadius.circular(36),
       ),
       child: Container(
-        padding: EdgeInsets.all(53.r),
+        padding: EdgeInsets.all(40.r),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(36),
           color: AppColors.interestWidgetAsh,
@@ -39,18 +40,12 @@ class AppAlertDialog extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(
-              isHighPriority?Icons.warning_rounded:Icons.info_outline_rounded,
-              color: isHighPriority?AppColors.deleteTextRed:AppColors.primary ,
-              size: 123.sp,
-            ),
-            SizedBox(height: 31.h),
             Text(
               title,
               textAlign: TextAlign.center,
-              style: AppTextStyles.medium24,
+              style: AppTextStyles.bold24,
             ),
-            SizedBox(height: 16.h),
+            Spacing.vertRegular(),
             Flexible(
               child: Text(
                 body,
@@ -58,11 +53,27 @@ class AppAlertDialog extends StatelessWidget {
                 style: AppTextStyles.light14.copyWith(),
               ),
             ),
+            Spacing.vertRegular(),
             Row(
               children: [
-                TextButton(onPressed: negativeCallBack, child: Text(negativeLabel)),
-                const Spacer(),
-                AppButton(onTap: positiveCallBack, label: positiveLabel, isCollapsed: true, buttonColor: isHighPriority?AppColors.deleteTextRed:AppColors.primary,)
+                Expanded(
+                  child: TextButton(
+                    onPressed: negativeCallBack,
+                    child: Text(negativeLabel),
+                  ),
+                ),
+                Spacing.horizRegular(),
+                Expanded(
+                  child: AppButton(
+                    onTap: positiveCallBack,
+                    label: positiveLabel,
+                    // isCollapsed: true,
+
+                    buttonColor: isHighPriority
+                        ? AppColors.deleteTextRed
+                        : AppColors.primary,
+                  ),
+                )
               ],
             )
           ],
