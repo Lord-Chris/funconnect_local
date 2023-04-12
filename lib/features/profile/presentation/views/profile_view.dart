@@ -91,29 +91,36 @@ class _ProfileViewState extends State<ProfileView> {
                     ),
                   ),
                   Spacing.vertTiny(),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Icon(
-                        Icons.location_on,
-                        color: AppColors.secondary500,
-                        size: 18,
-                      ),
-                      TextButton(
-                        onPressed: () {},
-                        style: TextButton.styleFrom(
-                          padding: EdgeInsets.zero,
+                  Visibility(
+                    visible: context
+                            .watch<ProfileBloc>()
+                            .location
+                            ?.parsedAddress
+                            .isEmpty ??
+                        false,
+                    child: Row(
+                      children: [
+                        const Icon(
+                          Icons.location_on,
+                          color: AppColors.locationIconAsh,
+                          size: 13,
                         ),
-                        child: Text(
-                          context.watch<ProfileBloc>().location?.address ?? "",
-                          textAlign: TextAlign.center,
-                          style: AppTextStyles.regular14.copyWith(
-                            color: AppColors.secondary500,
+                        Flexible(
+                          child: Text(
+                            context
+                                    .watch<ProfileBloc>()
+                                    .location
+                                    ?.parsedAddress ??
+                                "",
+                            style: AppTextStyles.regular14.copyWith(
+                              color: AppColors.secondary400,
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
+
                   Spacing.vertExtraMedium(),
                   AppButton(
                     label: "Edit profile",

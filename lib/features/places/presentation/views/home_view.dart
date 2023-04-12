@@ -50,29 +50,34 @@ class _HomeViewState extends State<HomeView> {
           ),
         ),
         title: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Text(
               "Hi ${context.watch<HomeBloc>().user.name}",
               style: AppTextStyles.medium20,
             ),
             Spacing.vertTiny(),
-            Row(
-              children: [
-                const Icon(
-                  Icons.location_on,
-                  color: AppColors.locationIconAsh,
-                  size: 13,
-                ),
-                Flexible(
-                  child: Text(
-                    context.watch<HomeBloc>().location?.parsedAddress ?? "",
-                    style: AppTextStyles.regular14.copyWith(
-                      color: AppColors.secondary400,
+            Visibility(
+              visible:
+                  context.watch<HomeBloc>().location?.parsedAddress.isEmpty ??
+                      false,
+              child: Row(
+                children: [
+                  const Icon(
+                    Icons.location_on,
+                    color: AppColors.locationIconAsh,
+                    size: 13,
+                  ),
+                  Flexible(
+                    child: Text(
+                      context.watch<HomeBloc>().location?.parsedAddress ?? "",
+                      style: AppTextStyles.regular14.copyWith(
+                        color: AppColors.secondary400,
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ],
         ),
