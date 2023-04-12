@@ -14,23 +14,20 @@ class FailureHandler {
   Future<void> initialize() async {
     final sentry = SentryClient(SentryOptions(dsn: _id));
 
-    if (!kDebugMode) {
-      await SentryFlutter.init(
-        (options) {
-          options.dsn = _id;
-          options.tracesSampleRate = 1.0;
-        },
-      );
+    FlutterError.onError = (details) {
+      if (!kReleaseMode) {
+        return FlutterError.dumpErrorToConsole(details, forceReport: true);
+      }
+      sentry.captureException(details.exception, stackTrace: details.stack);
+    };
+    await SentryFlutter.init(
+      (options) {
+        options.dsn = _id;
+        options.tracesSampleRate = 1.0;
+      },
+    );
 
-      FlutterError.onError = (details, {bool forceReport = false}) {
-        sentry.captureException(
-          details.exception,
-          stackTrace: details.stack,
-        );
-      };
-    }
-
-    _logger.i('Error Catcher initialized');
+    _logger.d('Error Catcher initialized');
   }
 
   /// Sets user data [email] so it can be known from the console
@@ -51,32 +48,35 @@ class FailureHandler {
   /// It takes in the error, the stacktrace and optionally a message.
   Future<void> catchError(error,
       {StackTrace? stackTrace, String? message}) async {
-    if (kReleaseMode) {
-      try {
-        final program = LoggerStackTrace.from(StackTrace.current);
-
-        await Sentry.captureEvent(
-          SentryEvent(
-            eventId: SentryId.newId(),
-            level: SentryLevel.error,
-            throwable: error,
-            message: message != null ? SentryMessage(message) : null,
-            extra: {
-              "Debug Info": {
-                'callerFunctionName': program.callerFunctionName,
-                'fileName': program.fileName,
-                'lineNumber': program.lineNumber,
-              }
-            },
-          ),
-          stackTrace: stackTrace,
-        );
-
-        _logger.i("Error Caught");
-      } catch (e, s) {
-        _logger.e(e);
-        if (kReleaseMode) await Sentry.captureException(e, stackTrace: s);
-      }
+    if (!kReleaseMode) {
+      return FlutterError.dumpErrorToConsole(
+        FlutterErrorDetails(exception: error, stack: stackTrace),
+        forceReport: true,
+      );
+    }
+    try {
+      final program = LoggerStackTrace.from(StackTrace.current);
+      await Sentry.captureEvent(
+        SentryEvent(
+          eventId: SentryId.newId(),
+          level: SentryLevel.error,
+          throwable: error,
+          message: message != null ? SentryMessage(message) : null,
+          extra: {
+            "Debug Info": {
+              'callerFunctionName': program.callerFunctionName,
+              'fileName': program.fileName,
+              'lineNumber': program.lineNumber,
+            }
+          },
+        ),
+        stackTrace: stackTrace,
+      );
+      _logger.d("Error Caught");
+    } catch (e, s) {
+      _logger.e(e);
+      FailureHandler.instance.catchError(e, stackTrace: s);
+      if (kReleaseMode) await Sentry.captureException(e, stackTrace: s);
     }
   }
 
@@ -90,32 +90,30 @@ class FailureHandler {
     Map<String, dynamic> extraData = const {},
     StackTrace? stackTrace,
   }) async {
-    if (kReleaseMode) {
-      try {
-        final program = LoggerStackTrace.from(StackTrace.current);
-
-        await Sentry.captureEvent(
-          SentryEvent(
-            eventId: SentryId.newId(),
-            level: SentryLevel.info,
-            message: SentryMessage(message),
-            extra: {
-              "Debug Info": {
-                'callerFunctionName': program.callerFunctionName,
-                'fileName': program.fileName,
-                'lineNumber': program.lineNumber,
-              },
-              ...extraData,
+    if (!kReleaseMode) return;
+    try {
+      final program = LoggerStackTrace.from(StackTrace.current);
+      await Sentry.captureEvent(
+        SentryEvent(
+          eventId: SentryId.newId(),
+          level: SentryLevel.info,
+          message: SentryMessage(message),
+          extra: {
+            "Debug Info": {
+              'callerFunctionName': program.callerFunctionName,
+              'fileName': program.fileName,
+              'lineNumber': program.lineNumber,
             },
-          ),
-          stackTrace: stackTrace,
-        );
-
-        _logger.i("Message Caught");
-      } catch (e, s) {
-        _logger.e(e);
-        if (kReleaseMode) await Sentry.captureException(e, stackTrace: s);
-      }
+            ...extraData,
+          },
+        ),
+        stackTrace: stackTrace,
+      );
+      _logger.i("Message Caught");
+    } catch (e, s) {
+      _logger.e(e);
+      FailureHandler.instance.catchError(e, stackTrace: s);
+      if (kReleaseMode) await Sentry.captureException(e, stackTrace: s);
     }
   }
 }

@@ -9,7 +9,7 @@ class LocalProfileDataSource {
 
   ProfileModel getUserProfile() {
     final data = _localStorageService.read(
-      HiveKeys.profileBoxId,
+      HiveKeys.userBoxId,
       key: StorageKeys.userProfile,
       def: ProfileModel.empty().toJson(),
     );
@@ -17,12 +17,6 @@ class LocalProfileDataSource {
   }
 
   Future<void> clearAll() async {
-    await _localStorageService.clearBox(
-      HiveKeys.profileBoxId,
-    );
-    await _localStorageService.clearBox(
-      HiveKeys.userBoxId,
-    );
-    await _localStorageService.clearBox(HiveKeys.profileBoxId);
+    await _localStorageService.clearBox(HiveKeys.userBoxId);
   }
 }
