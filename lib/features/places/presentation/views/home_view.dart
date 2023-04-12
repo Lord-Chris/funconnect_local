@@ -293,8 +293,13 @@ class _DefaultHomeView extends StatelessWidget {
           children: [
             ...state.homeTrends.map((e) {
               if (e.isPlace) {
+                if (e.data.isEmpty) return const SizedBox();
                 return HomeSection<PlaceModel>(
                   label: e.name,
+                  showSeeAll:
+                      state.homeTrends.every((item) => item.data.isNotEmpty),
+                  initialShowAll:
+                      !state.homeTrends.every((item) => item.data.isNotEmpty),
                   children: e.data.map((e) => e as PlaceModel).toList(),
                   widget: (PlaceModel place) {
                     return HomeCategoriesLargeWidget(
@@ -316,6 +321,10 @@ class _DefaultHomeView extends StatelessWidget {
               return HomeSection<CategoryModel>(
                 label: e.name,
                 itemHeight: 136.r,
+                showSeeAll:
+                    state.homeTrends.every((item) => item.data.isNotEmpty),
+                initialShowAll:
+                    !state.homeTrends.every((item) => item.data.isNotEmpty),
                 children: e.data.map((e) => e as CategoryModel).toList(),
                 widget: (CategoryModel category) {
                   return HomeViewCategoriesSmallSubWidget(

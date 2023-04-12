@@ -225,19 +225,19 @@ class EventDescriptionView extends StatelessWidget {
                       Spacing.vertRegular(),
                       Spacing.vertRegular(),
                       Spacing.vertRegular(),
-                      HomeViewCategoriesWidget(
-                        label: DumbAppStrings.eventDescriptionMoreLikeText,
-                        child: (index) {
-                          final place = mockPlace;
-                          return HomeCategoriesLargeWidget(
-                            coverImage: place.coverImagePath,
-                            name: place.name,
-                            isBookmarked: place.isBookmarked,
-                            rating: place.avgRating,
-                            ratingCount: place.avgReviewCount,
-                          );
-                        },
-                      ),
+                      // HomeViewCategoriesWidget(
+                      //   label: DumbAppStrings.eventDescriptionMoreLikeText,
+                      //   child: (index) {
+                      //     final place = mockPlace;
+                      //     return HomeCategoriesLargeWidget(
+                      //       coverImage: place.coverImagePath,
+                      //       name: place.name,
+                      //       isBookmarked: place.isBookmarked,
+                      //       rating: place.avgRating,
+                      //       ratingCount: place.avgReviewCount,
+                      //     );
+                      //   },
+                      // ),
                       Spacing.vertRegular(),
                       Spacing.vertRegular(),
                       Spacing.vertRegular(),
