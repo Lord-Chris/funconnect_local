@@ -10,7 +10,9 @@ import 'package:funconnect/features/authentication/domain/usecases/profile_setup
 import 'package:funconnect/features/authentication/presentation/blocs/profile_setup_bloc/profile_setup_event.dart';
 import 'package:funconnect/features/authentication/presentation/blocs/profile_setup_bloc/profile_setup_state.dart';
 import 'package:funconnect/services/_services.dart';
+import 'package:logger/logger.dart';
 
+import '../../../../../core/utils/failure_handler.dart';
 import '../../../../../shared/dialogs/status_dialog.dart';
 import '../../../domain/usecases/pick_image_usecase.dart';
 
@@ -23,23 +25,35 @@ class ProfileSetupBloc extends Bloc<ProfileSetupEvent, ProfileSetupState> {
 
   final _navigationService = locator<INavigationService>();
   final _dialogAndSheetService = locator<IDialogAndSheetService>();
+  final _logger = Logger();
+
   AppLocation? location;
 
   FutureOr<void> _onAddImageEvent(
     AddImageEvent event,
     Emitter<ProfileSetupState> emit,
   ) async {
-    if (state is! ProfileSetupIdleState) return;
-    final image = await PickImageUseCase().call(NoParams());
-    emit(ProfileSetupIdleState(
-        image: image ?? (state as ProfileSetupIdleState).image));
+    try {
+      if (state is! ProfileSetupIdleState) return;
+      final image = await PickImageUseCase().call(NoParams());
+      emit(ProfileSetupIdleState(
+          image: image ?? (state as ProfileSetupIdleState).image));
+    } on Failure catch (e, s) {
+      _logger.e(e);
+      FailureHandler.instance.catchError(e, stackTrace: s);
+    }
   }
 
   FutureOr<void> _onShareLocationEvent(
     ShareLocationEvent event,
     Emitter<ProfileSetupState> emit,
   ) async {
-    location = await GetLocationUseCase().call(NoParams());
+    try {
+      location = await GetLocationUseCase().call(NoParams());
+    } on Failure catch (e, s) {
+      _logger.e(e);
+      FailureHandler.instance.catchError(e, stackTrace: s);
+    }
   }
 
   FutureOr<void> _onSetupProfileEvent(
@@ -58,7 +72,9 @@ class ProfileSetupBloc extends Bloc<ProfileSetupEvent, ProfileSetupState> {
       );
       await ProfileSetupUseCase().call(param);
       _navigationService.toNamed(Routes.interestViewRoute);
-    } on Failure catch (e) {
+    } on Failure catch (e, s) {
+      _logger.e(e);
+      FailureHandler.instance.catchError(e, stackTrace: s);
       emit(ProfileSetupErrorState());
       _dialogAndSheetService.showAppDialog(StatusDialog(
           isError: true, title: "Error Setting up profile", body: e.message));

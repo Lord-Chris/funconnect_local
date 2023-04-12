@@ -15,6 +15,7 @@ import 'package:funconnect/shared/constants/_constants.dart';
 import 'package:funconnect/shared/dialogs/status_dialog.dart';
 import 'package:logger/logger.dart';
 
+import '../../../../../core/utils/failure_handler.dart';
 import '../../../domain/usecases/email_signin_usecase.dart';
 
 class WelcomeBloc extends Bloc<WelcomeEvent, WelcomeState> {
@@ -43,11 +44,15 @@ class WelcomeBloc extends Bloc<WelcomeEvent, WelcomeState> {
         Routes.verifyEmailRoute,
         arguments: res,
       );
-    } on Failure catch (e) {
+    } on Failure catch (e, s) {
       _logger.e(e);
+      FailureHandler.instance.catchError(e, stackTrace: s);
       emit(WelcomeFailureState());
       _dialogAndSheetService.showAppDialog(StatusDialog(
-          isError: true, title: "Error Signing In", body: e.message));
+        isError: true,
+        title: "Error Signing In",
+        body: e.message,
+      ));
     }
   }
 
@@ -60,7 +65,9 @@ class WelcomeBloc extends Bloc<WelcomeEvent, WelcomeState> {
       emit(WelcomeLoadingState());
       await GoogleSignInUsecase().call(NoParams());
       emit(WelcomeSuccessState());
-    } on Failure {
+    } on Failure catch (e, s) {
+      _logger.e(e);
+      FailureHandler.instance.catchError(e, stackTrace: s);
       emit(WelcomeFailureState());
     }
   }
@@ -74,7 +81,9 @@ class WelcomeBloc extends Bloc<WelcomeEvent, WelcomeState> {
       emit(WelcomeLoadingState());
       await AppleSignInUsecase().call(NoParams());
       emit(WelcomeSuccessState());
-    } on Failure {
+    } on Failure catch (e, s) {
+      _logger.e(e);
+      FailureHandler.instance.catchError(e, stackTrace: s);
       emit(WelcomeFailureState());
     }
   }

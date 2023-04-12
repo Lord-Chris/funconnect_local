@@ -2,10 +2,14 @@ import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:funconnect/core/app/_app.dart';
+import 'package:funconnect/core/models/_models.dart';
 import 'package:funconnect/features/authentication/presentation/blocs/location_auth_bloc/location_auth_event.dart';
 import 'package:funconnect/features/authentication/presentation/blocs/location_auth_bloc/location_auth_state.dart';
 import 'package:funconnect/services/_services.dart';
 import 'package:location/location.dart';
+import 'package:logger/logger.dart';
+
+import '../../../../../core/utils/failure_handler.dart';
 
 class LocationAuthBloc extends Bloc<LocationAuthEvent, LocationAuthState> {
   LocationAuthBloc() : super(LocationAuthInitialState()) {
@@ -14,6 +18,7 @@ class LocationAuthBloc extends Bloc<LocationAuthEvent, LocationAuthState> {
   }
 
   final _navigationService = locator<INavigationService>();
+  final _logger = Logger();
 
   Future<FutureOr<void>> _onRequestLocationPermissionEvent(
     RequestLocationPermissionEvent event,
@@ -23,8 +28,9 @@ class LocationAuthBloc extends Bloc<LocationAuthEvent, LocationAuthState> {
       await _getLocation();
       emit(LocationAuthSuccessState());
       _navigationService.toNamed(Routes.dashboardViewRoute);
-    } catch (e) {
-      // TODO: Change to Failure catching
+    } on Failure catch (e, s) {
+      _logger.e(e);
+      FailureHandler.instance.catchError(e, stackTrace: s);
       emit(LocationAuthErrorState());
     }
   }
@@ -35,25 +41,30 @@ class LocationAuthBloc extends Bloc<LocationAuthEvent, LocationAuthState> {
   ) {}
 
   Future<void> _getLocation() async {
-    Location location = Location();
-    bool serviceEnabled;
-    PermissionStatus permissionGranted;
-    // LocationData locationData;
+    try {
+      Location location = Location();
+      bool serviceEnabled;
+      PermissionStatus permissionGranted;
+      // LocationData locationData;
 
-    serviceEnabled = await location.serviceEnabled();
-    if (!serviceEnabled) {
-      serviceEnabled = await location.requestService();
+      serviceEnabled = await location.serviceEnabled();
       if (!serviceEnabled) {
-        return;
+        serviceEnabled = await location.requestService();
+        if (!serviceEnabled) {
+          return;
+        }
       }
-    }
 
-    permissionGranted = await location.hasPermission();
-    if (permissionGranted == PermissionStatus.denied) {
-      permissionGranted = await location.requestPermission();
-      if (permissionGranted != PermissionStatus.granted) {
-        return;
+      permissionGranted = await location.hasPermission();
+      if (permissionGranted == PermissionStatus.denied) {
+        permissionGranted = await location.requestPermission();
+        if (permissionGranted != PermissionStatus.granted) {
+          return;
+        }
       }
+    } on Failure catch (e, s) {
+      _logger.e(e);
+      FailureHandler.instance.catchError(e, stackTrace: s);
     }
 
     // var currentLocation = await location.getLocation();

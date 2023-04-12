@@ -10,7 +10,9 @@ import 'package:funconnect/features/authentication/domain/usecases/verify_otp_us
 import 'package:funconnect/features/authentication/presentation/blocs/verify_email_bloc/verify_email_event.dart';
 import 'package:funconnect/features/authentication/presentation/blocs/verify_email_bloc/verify_email_state.dart';
 import 'package:funconnect/services/_services.dart';
+import 'package:logger/logger.dart';
 
+import '../../../../../core/utils/failure_handler.dart';
 import '../../../../../shared/dialogs/status_dialog.dart';
 import '../../../domain/usecases/email_signin_usecase.dart';
 
@@ -25,6 +27,8 @@ class VerifyEmailBloc extends Bloc<VerifyEmailEvent, VerifyEmailState> {
   static const otpTimer = 90;
   final _authenticationRepo = locator<IAuthenticationRepository>();
   final _dialogAndSheetService = locator<IDialogAndSheetService>();
+  final _logger = Logger();
+
   RequestOtpResponse? newResponse;
 
   FutureOr<void> _onResendCodeEvent(
@@ -34,9 +38,14 @@ class VerifyEmailBloc extends Bloc<VerifyEmailEvent, VerifyEmailState> {
     try {
       newResponse = await EmailSignInUsecase().call(event.email);
       emit(TimerChangedState(time: otpTimer));
-    } on Failure catch (e) {
+    } on Failure catch (e, s) {
+      _logger.e(e);
+      FailureHandler.instance.catchError(e, stackTrace: s);
       _dialogAndSheetService.showAppDialog(StatusDialog(
-          isError: true, title: "Error Signing In", body: e.message));
+        isError: true,
+        title: "Error Signing In",
+        body: e.message,
+      ));
     }
   }
 
@@ -57,10 +66,15 @@ class VerifyEmailBloc extends Bloc<VerifyEmailEvent, VerifyEmailState> {
         otp: event.otp.trim(),
       ));
       emit(VerifyEmailSuccessState());
-    } on Failure catch (e) {
+    } on Failure catch (e, s) {
+      _logger.e(e);
+      FailureHandler.instance.catchError(e, stackTrace: s);
       emit(VerifyEmailErrorState());
       _dialogAndSheetService.showAppDialog(StatusDialog(
-          isError: true, title: "Error Verifying OTP", body: e.message));
+        isError: true,
+        title: "Error Verifying OTP",
+        body: e.message,
+      ));
     } finally {
       emit(TimerFinishedState());
     }
