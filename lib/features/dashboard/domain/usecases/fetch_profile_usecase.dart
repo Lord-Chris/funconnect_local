@@ -3,7 +3,7 @@ import 'package:funconnect/core/usecases/usecase.dart';
 import 'package:funconnect/features/dashboard/data/repository/i_dashboard_repository.dart';
 import 'package:funconnect/services/_services.dart';
 
-import '../../../authentication/data/dto/user_model.dart';
+import '../../../../core/models/_models.dart';
 
 class FetchProfileUsecase with UseCases<UserModel, NoParams> {
   final _repo = locator<IDashboardRepository>();

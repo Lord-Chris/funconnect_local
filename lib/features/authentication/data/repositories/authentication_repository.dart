@@ -4,7 +4,6 @@ import 'package:funconnect/core/constants/storage_keys.dart';
 import 'package:funconnect/core/models/_models.dart';
 import 'package:funconnect/features/authentication/data/data_sources/i_authentication_datasource.dart';
 import 'package:funconnect/features/authentication/data/dto/interest_model.dart';
-import 'package:funconnect/features/authentication/data/dto/user_model.dart';
 import 'package:funconnect/features/authentication/domain/params/email_sign_in.dart';
 import 'package:funconnect/features/authentication/domain/params/profile_setup.dart';
 import 'package:funconnect/features/authentication/domain/params/verify_otp.dart';

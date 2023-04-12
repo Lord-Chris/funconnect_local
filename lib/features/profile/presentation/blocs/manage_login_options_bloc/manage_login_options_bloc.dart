@@ -4,7 +4,6 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:funconnect/core/models/_models.dart';
 import 'package:funconnect/core/usecases/usecase.dart';
-import 'package:funconnect/features/profile/domain/entities/profile_model.dart';
 import 'package:funconnect/features/profile/domain/usecases/delete_user_account.dart';
 import 'package:funconnect/features/profile/domain/usecases/logout_user.dart';
 import 'package:funconnect/services/_services.dart';
@@ -13,12 +12,11 @@ import 'package:funconnect/shared/dialogs/_dialogs.dart';
 import '../../../../../core/app/_app.dart';
 
 part 'manage_login_options_event.dart';
-
 part 'manage_login_options_state.dart';
 
 class ManageLoginOptionsBloc
     extends Bloc<ManageLoginOptionsEvent, ManageLoginOptionsState> {
-  ProfileModel profile;
+  UserModel profile;
 
   ManageLoginOptionsBloc(this.profile)
       : super(ManageLoginOptionsInitialState(
@@ -39,9 +37,9 @@ class ManageLoginOptionsBloc
   }
 
   FutureOr<void> _onLogoutTapEvent(
-      LogoutTapEvent event,
-      Emitter<ManageLoginOptionsState> emit,
-      ) async {
+    LogoutTapEvent event,
+    Emitter<ManageLoginOptionsState> emit,
+  ) async {
     _dialogAndSheetService.showAppDialog(AppAlertDialog(
       isHighPriority: false,
       title: "Logout",
@@ -51,32 +49,31 @@ class ManageLoginOptionsBloc
       negativeCallBack: () {
         _navigationService.back();
       },
-      positiveCallBack: ()async{
+      positiveCallBack: () async {
         try {
           await LogoutUser().call(NoParams());
-          _navigationService.offAllNamed(
-              Routes.welcomeViewRoute, (_) => false);
+          _navigationService.offAllNamed(Routes.welcomeViewRoute, (_) => false);
           _dialogAndSheetService.showAppDialog(const StatusDialog(
-              isError: false,
-              title: "Logout",
-              body: "User Logged out Successfully"));
+            isError: false,
+            title: "Logout",
+            body: "User Logged out Successfully",
+          ));
         } on Failure catch (e) {
           _navigationService.back();
           _dialogAndSheetService.showAppDialog(StatusDialog(
-              isError: true,
-              title: "Error Logging Out",
-              body: e.message));
+            isError: true,
+            title: "Error Logging Out",
+            body: e.message,
+          ));
         }
       },
-
     ));
-
   }
 
   FutureOr<void> _onDeleteAccountTapEvent(
-      DeleteTapAccountEvent event,
-      Emitter<ManageLoginOptionsState> emit,
-      ) async {
+    DeleteTapAccountEvent event,
+    Emitter<ManageLoginOptionsState> emit,
+  ) async {
     _dialogAndSheetService.showAppDialog(AppAlertDialog(
       isHighPriority: true,
       title: "Delete Account",
@@ -86,24 +83,18 @@ class ManageLoginOptionsBloc
       negativeCallBack: () {
         _navigationService.back();
       },
-      positiveCallBack: ()async{
+      positiveCallBack: () async {
         try {
           await DeleteUserAccount().call(NoParams());
           _navigationService.offAllNamed(Routes.welcomeViewRoute, (_) => false);
           _dialogAndSheetService.showAppDialog(const StatusDialog(
-              isError: false,
-              title: "Alert",
-              body: "User Account Deleted"));
-        }on Failure catch (e) {
+              isError: false, title: "Alert", body: "User Account Deleted"));
+        } on Failure catch (e) {
           _navigationService.back();
           _dialogAndSheetService.showAppDialog(StatusDialog(
-              isError: true,
-              title: "Error Deleting Account",
-              body: e.message));
+              isError: true, title: "Error Deleting Account", body: e.message));
         }
       },
-
     ));
-
   }
 }

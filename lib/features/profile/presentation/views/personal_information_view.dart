@@ -7,11 +7,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:funconnect/core/extensions/_extensions.dart';
-import 'package:funconnect/features/profile/domain/entities/profile_model.dart';
 import 'package:funconnect/features/profile/presentation/blocs/edit_profile_bloc/edit_profile_bloc.dart';
 import 'package:funconnect/shared/components/_components.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
 import 'package:intl/intl.dart';
+
+import '../../../../core/models/_models.dart';
 
 class PersonalInformationView extends StatelessWidget {
   const PersonalInformationView({Key? key}) : super(key: key);
@@ -21,19 +22,18 @@ class PersonalInformationView extends StatelessWidget {
     final formKey = GlobalKey<FormState>();
     return BlocBuilder<EditProfileBloc, EditProfileState>(
       builder: (context, state) {
-        ProfileModel profile = state.profile;
-        String iFullName = profile.fullName != 'null' ? profile.fullName : '';
-        String iUserName = profile.userName != 'null' ? profile.userName : '';
+        UserModel profile = state.profile;
+        String iFullName = profile.name != 'null' ? profile.name : '';
+        String iUserName = profile.username != 'null' ? profile.username : '';
         String iEmail = profile.email != 'null' ? profile.email : '';
         String? selectedGender = profile.gender.isEmpty
             ? null
             : '${profile.gender[0].toUpperCase()}${profile.gender.substring(1).toLowerCase()}';
-        String iDateOfBirth = profile.dateOfBirth.isEmpty
+        String iDateOfBirth = profile.dob.isEmpty
             ? ""
-            : DateFormat('dd/MM/yyyy')
-                .format(DateTime.parse(profile.dateOfBirth));
+            : DateFormat('dd/MM/yyyy').format(DateTime.parse(profile.dob));
         String iMobileNumber =
-            profile.mobileNumber == 'null' ? '' : profile.mobileNumber;
+            profile.phoneE164 == 'null' ? '' : profile.phoneE164;
         return SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Form(
@@ -62,21 +62,21 @@ class PersonalInformationView extends StatelessWidget {
                         color: AppColors.lightAsh,
                         shape: BoxShape.circle,
                       ),
-                      child: profile.profileImageUrl == null
+                      child: profile.photoUrl.isEmpty
                           ? Center(
                               child: SvgPicture.asset(
                               AppAssets.addImageCamera,
                               height: 64,
                             ))
-                          : profile.profileImageUrl!.startsWith("http")
+                          : profile.photoUrl.startsWith("http")
                               ? ClipOval(
                                   child: Image.network(
-                                  profile.profileImageUrl!,
+                                  profile.photoUrl,
                                   height: 64,
                                 ))
                               : ClipOval(
                                   child: Image.file(
-                                    File(profile.profileImageUrl!),
+                                    File(profile.photoUrl),
                                   ),
                                 ),
                     ),
@@ -84,8 +84,9 @@ class PersonalInformationView extends StatelessWidget {
                 ),
                 Spacing.vertLarge(),
                 AppTextField(
-                  onChanged: (val) => context.read<EditProfileBloc>().add(
-                      EditProfileFieldsEvent(profile.copyWith(fullName: val))),
+                  onChanged: (val) => context
+                      .read<EditProfileBloc>()
+                      .add(EditProfileFieldsEvent(profile.copyWith(name: val))),
                   validator: context.validateFullName,
                   initialValue: iFullName,
                   autovalidateMode: state.autoValidateForm
@@ -105,7 +106,7 @@ class PersonalInformationView extends StatelessWidget {
                 Spacing.vertMedium(),
                 AppTextField(
                   onChanged: (val) => context.read<EditProfileBloc>().add(
-                      EditProfileFieldsEvent(profile.copyWith(userName: val))),
+                      EditProfileFieldsEvent(profile.copyWith(username: val))),
                   inputFormatters: [
                     FilteringTextInputFormatter.deny(" "),
                   ],
@@ -200,7 +201,7 @@ class PersonalInformationView extends StatelessWidget {
                       // ignore: use_build_context_synchronously
                       context.read<EditProfileBloc>().add(
                           EditProfileFieldsEvent(profile.copyWith(
-                              dateOfBirth: dateOfBirth.toIso8601String())));
+                              dob: dateOfBirth.toIso8601String())));
                     }
                   },
                   label: AppText.aTDateOfBirth,
@@ -222,8 +223,7 @@ class PersonalInformationView extends StatelessWidget {
                 Spacing.vertMedium(),
                 AppTextField(
                   onChanged: (val) => context.read<EditProfileBloc>().add(
-                      EditProfileFieldsEvent(
-                          profile.copyWith(mobileNumber: val))),
+                      EditProfileFieldsEvent(profile.copyWith(phoneE164: val))),
                   inputFormatters: [
                     FilteringTextInputFormatter.deny(" "),
                   ],

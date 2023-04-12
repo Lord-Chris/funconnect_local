@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:funconnect/core/models/_models.dart';
 import 'package:funconnect/features/authentication/data/dto/request_otp_response.dart';
 import 'package:funconnect/features/authentication/presentation/blocs/interest_bloc/interest_bloc.dart';
 import 'package:funconnect/features/authentication/presentation/blocs/profile_setup_bloc/profile_setup_bloc.dart';
@@ -23,7 +24,6 @@ import 'package:funconnect/features/places/presentation/blocs/place_detail_bloc/
 import 'package:funconnect/features/places/presentation/views/category_detail_view.dart';
 import 'package:funconnect/features/places/presentation/views/place_detail_view.dart';
 import 'package:funconnect/features/places/presentation/views/search_result_view.dart';
-import 'package:funconnect/features/profile/domain/entities/profile_model.dart';
 import 'package:funconnect/features/profile/presentation/blocs/edit_profile_bloc/edit_profile_bloc.dart';
 import 'package:funconnect/features/profile/presentation/blocs/manage_login_options_bloc/manage_login_options_bloc.dart';
 import 'package:funconnect/features/profile/presentation/views/edit_profile_view.dart';
@@ -186,13 +186,13 @@ class Routes {
 
       // Profile
       case editProfileViewRoute:
-        final profile = settings.arguments as ProfileModel;
+        final profile = settings.arguments as UserModel;
         return _registerBlocView(
           view: const EditProfileView(),
           bloc: EditProfileBloc(profile),
         );
       case manageLoginOptionsRoute:
-        final profile = settings.arguments as ProfileModel;
+        final profile = settings.arguments as UserModel;
         return _registerBlocView(
           view: const ManageLogInOptionsView(),
           bloc: ManageLoginOptionsBloc(profile),

@@ -1,8 +1,9 @@
 import 'package:funconnect/core/constants/_constants.dart';
-import 'package:funconnect/features/authentication/data/dto/user_model.dart';
 import 'package:funconnect/services/notification_service/i_notification_service.dart';
 import 'package:logger/logger.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
+
+import '../../core/models/_models.dart';
 
 class NotificationService extends INotificationService {
   final _logger = Logger();

@@ -4,7 +4,6 @@ import 'package:funconnect/core/app/_app.dart';
 import 'package:funconnect/core/constants/_constants.dart';
 import 'package:funconnect/core/models/_models.dart';
 import 'package:funconnect/features/profile/data/data_sources/remote_profile_data_source.dart';
-import 'package:funconnect/features/profile/domain/entities/profile_model.dart';
 import 'package:funconnect/services/_services.dart';
 
 import '../data_sources/local_data_source.dart';
@@ -17,7 +16,7 @@ class ProfileRepository extends IProfileRepository {
   final _localDS = LocalProfileDataSource();
 
   @override
-  Future<ProfileModel> fetchUserProfile() async {
+  Future<UserModel> fetchUserProfile() async {
     final useRemote = await _connectivityService.checkInternetConnection();
     if (!useRemote) {
       return _localDS.getUserProfile();
@@ -32,7 +31,7 @@ class ProfileRepository extends IProfileRepository {
   }
 
   @override
-  Future<void> updateUserProfile(ProfileModel profile) async {
+  Future<void> updateUserProfile(UserModel profile) async {
     await _remoteDS.updateUserProfile(profile);
   }
 

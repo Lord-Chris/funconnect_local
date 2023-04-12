@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:funconnect/features/profile/domain/entities/profile_model.dart';
 import 'package:funconnect/features/profile/presentation/blocs/manage_login_options_bloc/manage_login_options_bloc.dart';
 import 'package:funconnect/shared/components/_components.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
+
+import '../../../../core/models/_models.dart';
 
 class ManageLogInOptionsView extends StatelessWidget {
   const ManageLogInOptionsView({Key? key}) : super(key: key);
@@ -25,7 +26,8 @@ class ManageLogInOptionsView extends StatelessWidget {
           automaticallyImplyLeading: false,
           elevation: 0,
           leading: IconButton(
-            onPressed: ()=> context.read<ManageLoginOptionsBloc>().add(BackTapEvent()),
+            onPressed: () =>
+                context.read<ManageLoginOptionsBloc>().add(BackTapEvent()),
             icon: const Icon(
               Icons.arrow_back_ios_new_rounded,
               size: 11,
@@ -44,7 +46,7 @@ class ManageLogInOptionsView extends StatelessWidget {
         ),
         body: BlocBuilder<ManageLoginOptionsBloc, ManageLoginOptionsState>(
           builder: (context, state) {
-            ProfileModel userProfile = state.profile;
+            UserModel userProfile = state.profile;
             return SingleChildScrollView(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Center(
@@ -52,7 +54,7 @@ class ManageLogInOptionsView extends StatelessWidget {
                   children: [
                     Spacing.vertLarge(),
                     AppNetworkImage(
-                      url: userProfile.profileImageUrl,
+                      url: userProfile.photoUrl,
                       placeholderAssetImage: AppAssets.fallbackUserProfileSvg,
                       isCircular: true,
                       size: Size.fromRadius(54.r),
@@ -60,7 +62,7 @@ class ManageLogInOptionsView extends StatelessWidget {
                     ),
                     Spacing.vertMedium(),
                     Text(
-                      userProfile.fullName,
+                      userProfile.name,
                       style: AppTextStyles.medium20,
                     ),
                     Spacing.vertRegular(),
@@ -160,8 +162,9 @@ class ManageLogInOptionsView extends StatelessWidget {
                       isCollapsed: true,
                       padding: const EdgeInsets.symmetric(
                           horizontal: 88, vertical: 16),
-                      onTap: () =>
-                          context.read<ManageLoginOptionsBloc>().add(LogoutTapEvent()),
+                      onTap: () => context
+                          .read<ManageLoginOptionsBloc>()
+                          .add(LogoutTapEvent()),
                       labelColor: AppColors.black,
                     ),
                     Spacing.vertExtraMedium(),

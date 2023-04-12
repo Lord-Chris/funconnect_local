@@ -8,12 +8,12 @@ abstract class ProfileEvent extends Equatable {
 class InitProfileEvent extends ProfileEvent {}
 
 class EditProfileTapEvent extends ProfileEvent {
-  final ProfileModel userProfile;
+  final UserModel userProfile;
   EditProfileTapEvent({required this.userProfile});
 }
 
 class ManageLoginOptionsTapEvent extends ProfileEvent {
-  final ProfileModel userProfile;
+  final UserModel userProfile;
   ManageLoginOptionsTapEvent({required this.userProfile});
 }
 

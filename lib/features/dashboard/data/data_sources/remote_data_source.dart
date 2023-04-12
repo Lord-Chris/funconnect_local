@@ -4,7 +4,6 @@ import 'package:funconnect/core/models/_models.dart';
 import 'package:funconnect/services/_services.dart';
 
 import '../../../../core/constants/api_constants.dart';
-import '../../../authentication/data/dto/user_model.dart';
 import '../../domain/entities/notification_model.dart';
 
 class RemoteDashboardDataSource with ApiMixin {

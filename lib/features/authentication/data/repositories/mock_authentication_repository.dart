@@ -1,11 +1,10 @@
-import 'package:funconnect/core/models/paginated_data.dart';
 import 'package:funconnect/features/authentication/data/dto/interest_model.dart';
 import 'package:funconnect/features/authentication/domain/params/email_sign_in.dart';
 import 'package:funconnect/features/authentication/domain/params/profile_setup.dart';
 import 'package:funconnect/features/authentication/domain/params/verify_otp.dart';
 
+import '../../../../core/models/_models.dart';
 import '../dto/request_otp_response.dart';
-import '../dto/user_model.dart';
 import 'i_authentication_repository.dart';
 
 class MockAuthenticationRepository extends IAuthenticationRepository {
@@ -29,7 +28,7 @@ class MockAuthenticationRepository extends IAuthenticationRepository {
   Future<UserModel> verifyOtp(VerifyOtpParams params) async {
     await Future.delayed(const Duration(seconds: 2));
     return UserModel.fromMap(
-      {
+      const {
         'id': '98194b5c-f488-4a69-972f-179c2b7bff41',
         'email': 'maduekechris65@gmail.com',
         'name': 'Lord Chris',

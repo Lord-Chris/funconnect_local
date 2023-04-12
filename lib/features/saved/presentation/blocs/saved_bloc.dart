@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:funconnect/core/app/_app.dart';
 import 'package:funconnect/core/models/_models.dart';
 import 'package:funconnect/core/usecases/usecase.dart';
-import 'package:funconnect/features/authentication/data/dto/user_model.dart';
 import 'package:funconnect/features/saved/domain/usecases/fetch_user_saved_places.dart';
 import 'package:funconnect/features/saved/presentation/blocs/saved_event.dart';
 import 'package:funconnect/features/saved/presentation/blocs/saved_state.dart';

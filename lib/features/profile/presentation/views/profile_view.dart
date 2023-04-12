@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:funconnect/features/profile/domain/entities/profile_model.dart';
 import 'package:funconnect/features/profile/presentation/blocs/profile_bloc/profile_bloc.dart';
 import 'package:funconnect/shared/components/_components.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
+
+import '../../../../core/models/_models.dart';
 
 class ProfileView extends StatefulWidget {
   const ProfileView({super.key});
@@ -48,12 +49,12 @@ class _ProfileViewState extends State<ProfileView> {
             buildWhen: (_, current) => current is ProfileIdleState,
             builder: (context, state) {
               if (state is! ProfileIdleState) return const SizedBox();
-              ProfileModel userProfile = state.userProfile;
+              UserModel userProfile = state.userProfile;
               return ScrollableColumn(
                 padding: REdgeInsets.all(16),
                 children: [
                   AppNetworkImage(
-                    url: userProfile.profileImageUrl,
+                    url: userProfile.photoUrl,
                     placeholderAssetImage: AppAssets.fallbackUserProfileSvg,
                     isCircular: true,
                     size: Size.fromRadius(54.r),
@@ -61,13 +62,13 @@ class _ProfileViewState extends State<ProfileView> {
                   ),
                   Spacing.vertMedium(),
                   Text(
-                    userProfile.fullName,
+                    userProfile.name,
                     style: AppTextStyles.medium20,
                   ),
                   Spacing.vertTiny(),
                   Spacing.vertSmall(),
                   Text(
-                    userProfile.userName,
+                    userProfile.username,
                     style: AppTextStyles.regular16.copyWith(
                       color: AppColors.secondary500,
                     ),
@@ -83,7 +84,7 @@ class _ProfileViewState extends State<ProfileView> {
                   Spacing.vertTiny(),
                   Spacing.vertSmall(),
                   Text(
-                    userProfile.bio ?? '',
+                    userProfile.bio,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: AppTextStyles.regular16.copyWith(

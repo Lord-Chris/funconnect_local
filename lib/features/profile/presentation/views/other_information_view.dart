@@ -1,30 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:funconnect/features/profile/domain/entities/profile_model.dart';
 import 'package:funconnect/features/profile/presentation/blocs/edit_profile_bloc/edit_profile_bloc.dart';
 import 'package:funconnect/shared/components/_components.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
+
+import '../../../../core/models/_models.dart';
 
 class OtherInformationView extends StatelessWidget {
   const OtherInformationView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    List<String> tags = [
-      "Fine dining",
-      "Arts & Culture",
-      "Malls",
-      "Karaoke",
-      "Cozy spots",
-      "Parks & Inn",
-      "Lounge",
-      "Wine labs",
-      "Beach house"
-    ];
+    // List<String> tags = [
+    //   "Fine dining",
+    //   "Arts & Culture",
+    //   "Malls",
+    //   "Karaoke",
+    //   "Cozy spots",
+    //   "Parks & Inn",
+    //   "Lounge",
+    //   "Wine labs",
+    //   "Beach house"
+    // ];
     return BlocBuilder<EditProfileBloc, EditProfileState>(
       builder: (context, state) {
-        ProfileModel userProfile = state.profile;
+        UserModel userProfile = state.profile;
         return SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Column(
@@ -66,7 +67,7 @@ class OtherInformationView extends StatelessWidget {
                 children: [
                   Expanded(
                       child: Text(
-                    userProfile.appLocation?.address ?? '',
+                    userProfile.location?.address ?? '',
                     style: AppTextStyles.regular14
                         .copyWith(color: AppColors.locationIconAsh),
                   )),

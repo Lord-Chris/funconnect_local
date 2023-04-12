@@ -5,8 +5,7 @@ abstract class EditProfileEvent extends Equatable {
   List<Object?> get props => [];
 }
 
-class BackTapEvent extends EditProfileEvent{
-
+class BackTapEvent extends EditProfileEvent {
   BackTapEvent();
 }
 
@@ -21,7 +20,6 @@ class ImageTapEvent extends EditProfileEvent {
 class ContinueTapEvent extends EditProfileEvent {
   ContinueTapEvent();
 }
-
 
 class AutoValidateFormEvent extends EditProfileEvent {
   AutoValidateFormEvent();
@@ -48,7 +46,7 @@ class UpdateLocationTapEvent extends EditProfileEvent {
 }
 
 class EditProfileFieldsEvent extends EditProfileEvent {
-  final ProfileModel profileModel;
+  final UserModel profileModel;
   EditProfileFieldsEvent(this.profileModel);
 }
 

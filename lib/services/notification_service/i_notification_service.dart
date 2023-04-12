@@ -1,4 +1,4 @@
-import '../../features/authentication/data/dto/user_model.dart';
+import '../../core/models/_models.dart';
 
 abstract class INotificationService {
   void init();

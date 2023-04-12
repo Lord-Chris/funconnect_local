@@ -8,7 +8,6 @@ import 'package:funconnect/core/app/routes.dart';
 import 'package:funconnect/core/models/_models.dart';
 import 'package:funconnect/core/usecases/usecase.dart';
 import 'package:funconnect/core/utils/general_utils.dart';
-import 'package:funconnect/features/profile/domain/entities/profile_model.dart';
 import 'package:funconnect/features/profile/domain/usecases/delete_user_account.dart';
 import 'package:funconnect/features/profile/domain/usecases/fetch_user_profile.dart';
 import 'package:funconnect/features/profile/domain/usecases/logout_user.dart';
@@ -55,7 +54,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   ) async {
     final res = await FetchUserProfile().call(NoParams());
     appVersion = await _forceUpdateAppService.currentVersionRaw;
-    ProfileModel userProfileWithLocation = res.copyWith(appLocation: location);
+    UserModel userProfileWithLocation = res.copyWith(location: location);
     emit(ProfileIdleState(userProfile: userProfileWithLocation));
   }
 
@@ -65,7 +64,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   ) async {
     final userProfile = await _navigationService
         .toNamed(Routes.editProfileViewRoute, arguments: event.userProfile);
-    if (userProfile != null && userProfile is ProfileModel) {
+    if (userProfile != null && userProfile is UserModel) {
       emit(ProfileIdleState(userProfile: userProfile));
     }
   }

@@ -2,13 +2,13 @@ part of 'manage_login_options_bloc.dart';
 
 class ManageLoginOptionsState extends Equatable {
   final bool isUpdatingProfile;
-  final ProfileModel profile;
+  final UserModel profile;
 
   const ManageLoginOptionsState(
       {required this.profile, required this.isUpdatingProfile});
 
   ManageLoginOptionsState copyWith({
-    ProfileModel? profile,
+    UserModel? profile,
     bool? isUpdatingProfile,
   }) {
     return ManageLoginOptionsState(

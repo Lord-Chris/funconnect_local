@@ -1,11 +1,9 @@
-import 'package:funconnect/core/models/paginated_data.dart';
-
+import '../../../../core/models/_models.dart';
 import '../../domain/params/email_sign_in.dart';
 import '../../domain/params/profile_setup.dart';
 import '../../domain/params/verify_otp.dart';
 import '../dto/interest_model.dart';
 import '../dto/request_otp_response.dart';
-import '../dto/user_model.dart';
 
 abstract class IAuthenticationRepository {
   Future<void> signInWithGoogle(String authCode);

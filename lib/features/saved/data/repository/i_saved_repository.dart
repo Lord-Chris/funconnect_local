@@ -1,5 +1,4 @@
-import '../../../../core/models/paginated_data.dart';
-import '../../../authentication/data/dto/user_model.dart';
+import '../../../../core/models/_models.dart';
 import '../../../places/domain/entities/saved_place_model.dart';
 
 abstract class ISavedRepository {

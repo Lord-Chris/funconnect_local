@@ -11,7 +11,7 @@ class ProfileLoadingState extends ProfileState {}
 class ProfileSubLoadingState extends ProfileState {}
 
 class ProfileIdleState extends ProfileState {
-  final ProfileModel userProfile;
+  final UserModel userProfile;
 
   const ProfileIdleState({
     required this.userProfile,

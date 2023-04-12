@@ -11,7 +11,6 @@ import 'package:funconnect/features/authentication/data/data_sources/i_authentic
 import 'package:funconnect/features/authentication/data/dto/check_email_response.dart';
 import 'package:funconnect/features/authentication/data/dto/interest_model.dart';
 import 'package:funconnect/features/authentication/data/dto/request_otp_response.dart';
-import 'package:funconnect/features/authentication/data/dto/user_model.dart';
 import 'package:funconnect/features/authentication/domain/params/profile_setup.dart';
 import 'package:funconnect/features/authentication/domain/params/verify_otp.dart';
 import 'package:funconnect/services/_services.dart';

@@ -4,8 +4,6 @@ import 'package:funconnect/features/places/domain/entities/category_model.dart';
 import 'package:funconnect/features/places/domain/entities/home_trend_item_model.dart';
 import 'package:funconnect/features/places/domain/entities/place_model.dart';
 
-import '../../../../authentication/data/dto/user_model.dart';
-
 abstract class HomeState extends Equatable {
   const HomeState();
   @override

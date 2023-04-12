@@ -1,7 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:funconnect/core/models/_models.dart';
 
-import '../../../authentication/data/dto/user_model.dart';
 import '../../../places/domain/entities/saved_place_model.dart';
 
 abstract class SavedState extends Equatable {

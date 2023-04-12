@@ -1,5 +1,4 @@
 import 'package:funconnect/core/app/_app.dart';
-import 'package:funconnect/features/authentication/data/dto/user_model.dart';
 import 'package:funconnect/features/dashboard/data/data_sources/remote_data_source.dart';
 import 'package:funconnect/features/dashboard/data/repository/i_dashboard_repository.dart';
 
@@ -25,14 +24,14 @@ class DashboardRepository extends IDashboardRepository {
 
   @override
   Future<PaginatedData<NotificationModel>> fetchAllNotifications() async {
-    final res =  await _remoteDS.fetchAllNotifications();
-      await _localStorageService.write(
+    final res = await _remoteDS.fetchAllNotifications();
+    await _localStorageService.write(
       HiveKeys.userBoxId,
       key: StorageKeys.notifications,
-      data: res.toMap((e)=> e.toMap()),
+      data: res.toMap((e) => e.toMap()),
     );
     return res;
-    }
+  }
 
   @override
   Future<void> readAllNotifications() async {

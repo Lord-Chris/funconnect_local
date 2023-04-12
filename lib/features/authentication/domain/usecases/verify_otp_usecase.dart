@@ -13,7 +13,7 @@ class VerifyOtpUsecase with UseCases<void, VerifyOtpParams> {
     final user = await _repo.verifyOtp(params);
     _navigationService.offNamed(
       Routes.emailVerifiedRoute,
-      arguments: (user.username ?? "").isNotEmpty,
+      arguments: (user.username).isNotEmpty,
     );
   }
 }

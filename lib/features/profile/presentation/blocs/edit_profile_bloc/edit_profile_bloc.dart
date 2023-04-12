@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:funconnect/core/app/locator.dart';
 import 'package:funconnect/core/models/_models.dart';
-import 'package:funconnect/features/profile/domain/entities/profile_model.dart';
 import 'package:funconnect/features/profile/domain/usecases/update_profile_image.dart';
 import 'package:funconnect/features/profile/domain/usecases/update_user_location.dart';
 import 'package:funconnect/features/profile/domain/usecases/update_user_profile.dart';
@@ -14,11 +13,10 @@ import 'package:funconnect/services/_services.dart';
 import 'package:funconnect/shared/dialogs/status_dialog.dart';
 
 part 'edit_profile_event.dart';
-
 part 'edit_profile_state.dart';
 
 class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
-  ProfileModel profile;
+  UserModel profile;
 
   EditProfileBloc(this.profile)
       : super(EditProfileInitialState(
@@ -102,8 +100,7 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
 
         final res = await UpdateProfileImage().call(croppedFile!);
         emit(state.copyWith(
-            profile:
-                state.profile.copyWith(profileImageUrl: res.profileImageUrl)));
+            profile: state.profile.copyWith(photoUrl: res.photoUrl)));
         _dialogAndSheetService.showAppDialog(const StatusDialog(
             isError: false,
             title: "Profile Image",
@@ -137,22 +134,19 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
     UpdateLocationTapEvent event,
     Emitter<EditProfileState> emit,
   ) async {
-    emit(
-        state.copyWith(profile: state.profile.copyWith(appLocation: location)));
+    emit(state.copyWith(profile: state.profile.copyWith(location: location)));
     if (location != null) {
       try {
         final res = await UpdateUserLocation().call(location!);
         emit(state.copyWith(
-            profile: state.profile.copyWith(appLocation: res.appLocation)));
+            profile: state.profile.copyWith(location: res.location)));
         _dialogAndSheetService.showAppDialog(const StatusDialog(
             isError: false,
             title: "Location",
             body: "Location Updated Successfully"));
       } on Failure catch (e) {
         _dialogAndSheetService.showAppDialog(StatusDialog(
-            isError: true,
-            title: "Error Updating Location",
-            body: e.message));
+            isError: true, title: "Error Updating Location", body: e.message));
       }
     }
   }

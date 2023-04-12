@@ -1,5 +1,4 @@
 import '../../../../core/models/_models.dart';
-import '../../../authentication/data/dto/user_model.dart';
 import '../../domain/entities/notification_model.dart';
 
 abstract class IDashboardRepository {
