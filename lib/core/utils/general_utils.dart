@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:funconnect/core/models/failure.dart';
+import 'package:funconnect/core/models/_models.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
+import 'package:logger/logger.dart';
+import 'package:mailer/mailer.dart';
+import 'package:mailer/smtp_server.dart' as smtp;
 import 'package:share_plus/share_plus.dart';
 import 'package:store_redirect/store_redirect.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -71,5 +74,30 @@ class GeneralUtils {
     int timeYrs = timeInSeconds ~/ (60 * 60 * 24 * 7 * 30 * 12);
     if (timeYrs < 1) return "$timeMths months";
     return "$timeYrs years";
+  }
+
+  static Future<void> sendMail(String recipientEmail, HelpDeskData data) async {
+    String username = 'support@funconnect.app';
+    String password = 'A7UWis5fNQ9q';
+
+    final smtpServer = smtp.zoho(username, password);
+
+    // Create our message.
+    final message = Message()
+      ..from = Address(username, AppConstants.appName)
+      ..recipients.addAll([username, recipientEmail])
+      ..subject = data.title
+      ..text = data.body;
+
+    try {
+      await send(message, smtpServer);
+    } on MailerException catch (e) {
+      // print('Message not sent.');
+      Logger().e(e);
+      for (var p in e.problems) {
+        Logger().d('Problem: ${p.code}: ${p.msg}');
+      }
+      throw Failure(e.message, extraData: e.problems.toString());
+    }
   }
 }

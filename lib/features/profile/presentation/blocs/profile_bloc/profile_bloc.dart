@@ -14,7 +14,6 @@ import 'package:funconnect/features/profile/domain/usecases/logout_user.dart';
 import 'package:funconnect/services/_services.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
 import 'package:funconnect/shared/dialogs/_dialogs.dart';
-import 'package:funconnect/shared/dialogs/coming_soon_dialog.dart';
 import 'package:launch_review/launch_review.dart';
 import 'package:logger/logger.dart';
 
@@ -37,6 +36,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     on<TelegramTapEvent>(_onTelegramTapEvent);
     on<InstagramTapEvent>(_onInstagramTapEvent);
     on<TwitterTapEvent>(_onTwitterTapEvent);
+    on<HelpDeskTapEvent>(_onHelpDeskTapEvent);
   }
 
   final _navigationService = locator<INavigationService>();
@@ -244,4 +244,35 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   }
 
   AppLocation? get location => _locationService.userLocation;
+
+  FutureOr<void> _onHelpDeskTapEvent(
+    HelpDeskTapEvent event,
+    Emitter<ProfileState> emit,
+  ) async {
+    try {
+      if (this.state is! ProfileIdleState) return;
+      final state = this.state as ProfileIdleState;
+      final res =
+          await _dialogAndSheetService.showAppDialog(const HelpDeskDialog());
+      if (res == null) return;
+      await GeneralUtils.sendMail(state.userProfile.email, res as HelpDeskData);
+      _dialogAndSheetService.showAppDialog(
+        const StatusDialog(
+          isError: false,
+          title: 'Request Sent!',
+          body:
+              'Your support request has been received. We will be in touch with you shortly with a resolution.',
+        ),
+      );
+    } on Failure catch (e) {
+      _logger.e(e);
+      _dialogAndSheetService.showAppDialog(
+        StatusDialog(
+          isError: true,
+          title: 'Request Not Sent',
+          body: e.message,
+        ),
+      );
+    }
+  }
 }

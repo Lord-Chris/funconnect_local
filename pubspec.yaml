@@ -57,6 +57,7 @@ dependencies:
   lazy_load_indexed_stack: ^0.1.4
   location: ^4.4.0
   logger: ^1.1.0
+  mailer: ^6.0.0
   onesignal_flutter: ^3.5.0
   pin_code_fields: ^7.4.0
   rate_my_app: ^1.1.3

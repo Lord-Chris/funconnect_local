@@ -41,3 +41,5 @@ class TelegramTapEvent extends ProfileEvent {}
 class InstagramTapEvent extends ProfileEvent {}
 
 class TwitterTapEvent extends ProfileEvent {}
+
+class HelpDeskTapEvent extends ProfileEvent {}

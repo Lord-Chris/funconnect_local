@@ -161,14 +161,14 @@ class _ProfileViewState extends State<ProfileView> {
                           "Settings",
                           style: AppTextStyles.semiBold20,
                         ),
-                        _buildProfileItems("Manage log-in options",
-                            icon: const Icon(
-                              Icons.arrow_forward_ios,
-                              size: 15,
-                            ),
-                            onTap: () => context.read<ProfileBloc>().add(
-                                ManageLoginOptionsTapEvent(
-                                    userProfile: userProfile))),
+                        // _buildProfileItems("Manage log-in options",
+                        //     icon: const Icon(
+                        //       Icons.arrow_forward_ios,
+                        //       size: 15,
+                        //     ),
+                        //     onTap: () => context.read<ProfileBloc>().add(
+                        //         ManageLoginOptionsTapEvent(
+                        //             userProfile: userProfile))),
                         _buildProfileItems("Notifications",
                             icon: const Icon(
                               Icons.arrow_forward_ios,
@@ -184,13 +184,13 @@ class _ProfileViewState extends State<ProfileView> {
                         //     onChanged: (val) {},
                         //   ),
                         // ),
-                        _buildProfileItems(
-                          "Dark mode",
-                          icon: AppSwitcher(
-                            value: true,
-                            onChanged: (val) {},
-                          ),
-                        ),
+                        // _buildProfileItems(
+                        //   "Dark mode",
+                        //   icon: AppSwitcher(
+                        //     value: true,
+                        //     onChanged: (val) {},
+                        //   ),
+                        // ),
                       ],
                     ),
                   ),
@@ -210,6 +210,9 @@ class _ProfileViewState extends State<ProfileView> {
                         ),
                         _buildProfileItems(
                           "Help desk",
+                          onTap: () => context
+                              .read<ProfileBloc>()
+                              .add(HelpDeskTapEvent()),
                         ),
                         _buildProfileItems(
                           "Rate the app",
