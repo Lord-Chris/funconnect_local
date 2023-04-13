@@ -16,6 +16,7 @@ import 'package:funconnect/shared/constants/_constants.dart';
 import 'package:funconnect/shared/dialogs/coming_soon_dialog.dart';
 import 'package:logger/logger.dart';
 
+import '../../../../../core/utils/failure_handler.dart';
 import '../../../domain/usecases/fetch_place_detail.dart';
 
 class PlaceDetailBloc extends Bloc<PlaceDetailEvent, PlaceDetailState> {
@@ -38,11 +39,13 @@ class PlaceDetailBloc extends Bloc<PlaceDetailEvent, PlaceDetailState> {
   Future<void> _getLink(PlaceModel place) async {
     try {
       link = await _dynamicLinkService.generateLink(
-          desc: place.name,
-          data: DeepLinkDataModel.place(place.id),
-          image: place.coverImagePath);
-    } on Failure catch (e) {
+        desc: place.name,
+        data: DeepLinkDataModel.place(place.id),
+        image: place.coverImagePath,
+      );
+    } on Failure catch (e, s) {
       _logger.e(e);
+      FailureHandler.instance.catchError(e, stackTrace: s);
     }
   }
 
@@ -57,8 +60,9 @@ class PlaceDetailBloc extends Bloc<PlaceDetailEvent, PlaceDetailState> {
         place: data[0] as FullPlaceModel,
         reviewsData: data[1] as PaginatedData<ReviewModel>,
       ));
-    } on Failure catch (e) {
+    } on Failure catch (e, s) {
       _logger.e(e);
+      FailureHandler.instance.catchError(e, stackTrace: s);
       emit(PlaceDetailFailureState(failure: e));
     }
   }
@@ -77,8 +81,9 @@ class PlaceDetailBloc extends Bloc<PlaceDetailEvent, PlaceDetailState> {
         place: prevState.place,
         reviewsData: data,
       ));
-    } on Failure catch (e) {
+    } on Failure catch (e, s) {
       _logger.e(e);
+      FailureHandler.instance.catchError(e, stackTrace: s);
       emit(prevState);
     }
   }
@@ -135,8 +140,9 @@ class PlaceDetailBloc extends Bloc<PlaceDetailEvent, PlaceDetailState> {
     try {
       final data = await BookmarkPlace().call(prevState.place);
       emit(prevState.copyWith(place: data));
-    } on Failure catch (e) {
+    } on Failure catch (e, s) {
       _logger.e(e);
+      FailureHandler.instance.catchError(e, stackTrace: s);
       emit(prevState);
     }
   }

@@ -10,6 +10,7 @@ import 'package:funconnect/features/places/presentation/blocs/home_bloc/home_sta
 import 'package:funconnect/services/_services.dart';
 import 'package:logger/logger.dart';
 
+import '../../../../../core/utils/failure_handler.dart';
 import '../../../domain/usecases/bookmark_place.dart';
 import '../../../domain/usecases/fetch_home_trends.dart';
 import '../../../domain/usecases/fetch_places.dart';
@@ -40,8 +41,9 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         interests: usecase.interests,
         homeTrends: usecase.homeTrends,
       ));
-    } on Failure catch (e) {
+    } on Failure catch (e, s) {
       _logger.e(e);
+      FailureHandler.instance.catchError(e, stackTrace: s);
       emit(const HomeIdleState(interests: []));
     }
   }
@@ -71,7 +73,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         interestPlaces: res.data,
         homeTrends: data.homeTrends,
       ));
-    } on Failure catch (e) {
+    } on Failure catch (e, s) {
+      _logger.e(e);
       emit(HomeFailureState(failure: e));
       emit(HomeIdleState(
         interest: data.interest,
@@ -79,6 +82,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         interestPlaces: data.interestPlaces,
         homeTrends: data.homeTrends,
       ));
+      FailureHandler.instance.catchError(e, stackTrace: s);
     }
   }
 
@@ -118,8 +122,9 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     try {
       await BookmarkPlace().call2(event.place);
       add(const HomeInitEvent(showLoader: false));
-    } on Failure catch (e) {
+    } on Failure catch (e, s) {
       _logger.e(e);
+      FailureHandler.instance.catchError(e, stackTrace: s);
       emit(prevState);
     }
   }

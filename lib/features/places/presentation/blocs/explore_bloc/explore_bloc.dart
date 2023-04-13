@@ -8,6 +8,7 @@ import 'package:funconnect/services/_services.dart';
 import 'package:logger/logger.dart';
 
 import '../../../../../core/models/failure.dart';
+import '../../../../../core/utils/failure_handler.dart';
 import 'explore_event.dart';
 import 'explore_state.dart';
 
@@ -35,8 +36,9 @@ class ExploreBloc extends Bloc<ExploreEvent, ExploreState> {
         bestRatingsData: exploreUsecase.bestRatings,
         recentlyAddedData: exploreUsecase.recentlyAdded,
       ));
-    } on Failure catch (e) {
+    } on Failure catch (e, s) {
       _logger.e(e);
+      FailureHandler.instance.catchError(e, stackTrace: s);
       emit(ExploreFailureState(e));
     }
   }

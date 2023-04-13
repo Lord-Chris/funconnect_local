@@ -12,6 +12,8 @@ import 'package:funconnect/features/places/presentation/widgets/search_filter_sh
 import 'package:funconnect/services/_services.dart';
 import 'package:logger/logger.dart';
 
+import '../../../../../core/utils/failure_handler.dart';
+
 class SearchResultBloc extends Bloc<SearchResultEvent, SearchResultState> {
   SearchResultBloc() : super(SearchResultIdleState()) {
     on<SearchBarChangedEvent>(_onSearchBarChangedEvent);
@@ -37,9 +39,10 @@ class SearchResultBloc extends Bloc<SearchResultEvent, SearchResultState> {
         placeData: res,
         searchHistoryData: searchPlaceUsecase.searchHistory,
       ));
-    } on Failure catch (e) {
+    } on Failure catch (e, s) {
       emit(SearchResultIdleState());
       _logger.e(e);
+      FailureHandler.instance.catchError(e, stackTrace: s);
     }
   }
 
@@ -77,9 +80,10 @@ class SearchResultBloc extends Bloc<SearchResultEvent, SearchResultState> {
         placeData: res,
         searchHistoryData: searchPlaceUsecase.searchHistory,
       ));
-    } on Failure catch (e) {
+    } on Failure catch (e, s) {
       emit(SearchResultIdleState());
       _logger.e(e);
+      FailureHandler.instance.catchError(e, stackTrace: s);
     }
   }
 
@@ -87,12 +91,17 @@ class SearchResultBloc extends Bloc<SearchResultEvent, SearchResultState> {
     SearchHistoryRemoveTap event,
     Emitter<SearchResultState> emit,
   ) async {
-    if (this.state is! SearchResultIdleState) return null;
-    final state = this.state as SearchResultIdleState;
-    await searchPlaceUsecase.removeHistory(event.history);
-    emit(state.copyWith(
-      searchHistoryData: searchPlaceUsecase.searchHistory,
-      showRecents: searchPlaceUsecase.searchHistory.isNotEmpty,
-    ));
+    try {
+      if (this.state is! SearchResultIdleState) return null;
+      final state = this.state as SearchResultIdleState;
+      await searchPlaceUsecase.removeHistory(event.history);
+      emit(state.copyWith(
+        searchHistoryData: searchPlaceUsecase.searchHistory,
+        showRecents: searchPlaceUsecase.searchHistory.isNotEmpty,
+      ));
+    } on Failure catch (e, s) {
+      _logger.e(e);
+      FailureHandler.instance.catchError(e, stackTrace: s);
+    }
   }
 }
