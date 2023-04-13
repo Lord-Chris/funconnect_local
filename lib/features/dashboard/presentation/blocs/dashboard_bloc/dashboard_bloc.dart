@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:funconnect/core/app/_app.dart';
 import 'package:funconnect/core/models/_models.dart';
 import 'package:funconnect/core/usecases/usecase.dart';
+import 'package:funconnect/core/utils/failure_handler.dart';
 import 'package:funconnect/features/dashboard/domain/usecases/fetch_profile_usecase.dart';
 import 'package:funconnect/features/dashboard/presentation/blocs/dashboard_bloc/dashboard_event.dart';
 import 'package:funconnect/features/dashboard/presentation/blocs/dashboard_bloc/dashboard_state.dart';
@@ -28,8 +29,9 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
     try {
       _watchDeepLink();
       await FetchProfileUsecase().call(NoParams());
-    } on Failure catch (e) {
+    } on Failure catch (e, s) {
       _logger.e(e);
+      FailureHandler.instance.catchError(e, stackTrace: s);
     }
   }
 
@@ -70,8 +72,9 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
     try {
       emit(const LinkLoadingState());
       await _handleDeepLink(event.data);
-    } on Failure catch (e) {
+    } on Failure catch (e, s) {
       _logger.e(e);
+      FailureHandler.instance.catchError(e, stackTrace: s);
     } finally {
       emit(prevState);
     }
