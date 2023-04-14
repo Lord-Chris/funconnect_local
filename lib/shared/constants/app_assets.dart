@@ -1,42 +1,38 @@
 class AppAssets {
   AppAssets._();
 
-  static const appIconPng = "assets/images/app_icon.png";
-  static const splashUpSvg = "assets/images/splash_up_curve.svg";
+  // static const appIconPng = "assets/images/app_icon.png";
   static const funconnectFullSvg = "assets/svgs/funconnect_full_logo.svg";
-  static const splashDownSvg = "assets/images/splash_down_curve.svg";
+  static const funconnectIconSvg = "assets/svgs/funconnect_icon.svg";
   static const onboardingOnePng = "assets/images/onboarding_one.png";
   static const onboardingTwoPng = "assets/images/onboarding_two.png";
   static const onboardingThreePng = "assets/images/onboarding_three.png";
   static const authFlowPng = "assets/images/auth_flow_image.png";
-  static const homeIconSvg = "assets/icons/home_icon.svg";
-  static const exploreIconSvg = "assets/icons/explore_icon.svg";
-  static const savedIconSvg = "assets/icons/saved.svg";
-  static const eventIconSvg = "assets/icons/event_icon.svg";
-  static const activeHomeIconSvg = "assets/icons/active_home_icon.svg";
-  static const activeExploreIconSvg = "assets/icons/active_explore_icon.svg";
-  static const activeSavedIconSvg = "assets/icons/active_bookmark.svg";
-  static const activeEventIconSvg = "assets/icons/active_event_icon.svg";
-  static const notIconSvg = "assets/icons/notification_icon.svg";
-  static const appleIconSvg = "assets/icons/apple_icon.svg";
-  static const emailIconSvg = "assets/icons/email_icon.svg";
-  static const favouriteIconSvg = "assets/icons/favourite.svg";
-  static const googleIconSvg = "assets/icons/google_icon.svg";
-  static const profileIconSvg = "assets/icons/profile.svg";
-  static const profIconSvg = "assets/icons/profile_icon.svg";
+  static const homeIconSvg = "assets/svgs/home_icon.svg";
+  static const exploreIconSvg = "assets/svgs/explore_icon.svg";
+  static const savedIconSvg = "assets/svgs/saved.svg";
+  static const eventIconSvg = "assets/svgs/event_icon.svg";
+  static const activeHomeIconSvg = "assets/svgs/active_home_icon.svg";
+  static const activeExploreIconSvg = "assets/svgs/active_explore_icon.svg";
+  static const activeSavedIconSvg = "assets/svgs/active_bookmark.svg";
+  static const activeEventIconSvg = "assets/svgs/active_event_icon.svg";
+  // static const appleIconSvg = "assets/svgs/apple_icon.svg";
+  static const emailIconSvg = "assets/svgs/email_icon.svg";
+  // static const googleIconSvg = "assets/svgs/google_icon.svg";
+  static const profileIconSvg = "assets/svgs/profile.svg";
+  static const profIconSvg = "assets/svgs/profile_icon.svg";
   static const interestPageTopSvg = "assets/svgs/interest_page_top_icon.svg";
-  static const activeProfileIconSvg = "assets/icons/active_profile.svg";
-  static const bookmarkIconSvg = "assets/icons/bookmark.svg";
+  static const activeProfileIconSvg = "assets/svgs/active_profile.svg";
+  static const bookmarkIconSvg = "assets/svgs/bookmark.svg";
   static const fallbackUserProfileSvg = "assets/svgs/fallback_user_profile.svg";
   static const updateSvg = "assets/svgs/recycle.svg";
-
+  static const searchSvg = "assets/svgs/search.svg";
   static const calenderSvg = "assets/svgs/calender.svg";
   static const chatIconSvg = "assets/svgs/chat_icon.svg";
 
   // Profile
   static const twitterLogo = "assets/svgs/twitter_logo.svg";
   static const instagramLogo = "assets/images/instagram_logo.png";
-  static const telegramLogo = "assets/images/telegram_logo.png";
   static const addImageCamera = "assets/svgs/add_image_camera.svg";
   static const userProfile = "assets/svgs/user_profile.svg";
   static const mail = "assets/svgs/mail.svg";
@@ -53,7 +49,6 @@ class AppAssets {
   static const uploadSvg = "assets/svgs/upload_icon.svg";
 
   // Profile
-  static const mailSvg = "assets/svgs/mail.svg";
   static const appleSvg = "assets/svgs/apple.svg";
   static const googleSvg = "assets/svgs/google.svg";
   static const ratingStarSvg = "assets/svgs/rating_star.svg";

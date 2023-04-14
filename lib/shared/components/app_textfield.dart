@@ -26,32 +26,32 @@ class AppTextField extends StatelessWidget {
   final List<TextInputFormatter>? inputFormatters;
   final AutovalidateMode? autovalidateMode;
 
-  const AppTextField({
-    Key? key,
-    this.label,
-    this.hint,
-    this.controller,
-    this.validator,
-    this.keyboardType,
-    this.textCapitalization = TextCapitalization.none,
-    this.suffix,
-    this.obscureText = false,
-    this.prefix,
-    this.initialValue,
-    this.readOnly = false,
-    this.expands = false,
-    this.minLines,
-    this.maxLines,
-    this.maxLength,
-    this.enabled = true,
-    this.onEditingComplete,
-    this.onChanged,
-    this.onTap,
-    this.borderRadius,
-    this.floatingLabelBehavior,
-    this.inputFormatters,
-    this.autovalidateMode
-  })  : assert(initialValue == null || controller == null),
+  const AppTextField(
+      {Key? key,
+      this.label,
+      this.hint,
+      this.controller,
+      this.validator,
+      this.keyboardType,
+      this.textCapitalization = TextCapitalization.none,
+      this.suffix,
+      this.obscureText = false,
+      this.prefix,
+      this.initialValue,
+      this.readOnly = false,
+      this.expands = false,
+      this.minLines,
+      this.maxLines,
+      this.maxLength,
+      this.enabled = true,
+      this.onEditingComplete,
+      this.onChanged,
+      this.onTap,
+      this.borderRadius,
+      this.floatingLabelBehavior,
+      this.inputFormatters,
+      this.autovalidateMode})
+      : assert(initialValue == null || controller == null),
         super(key: key);
 
   @override
@@ -262,7 +262,7 @@ class AppSearchField extends StatelessWidget {
         prefixIcon: Padding(
           padding: const EdgeInsets.all(12),
           child: SvgPicture.asset(
-            "assets/icons/search.svg",
+            AppAssets.searchSvg,
             height: 13,
             width: 12,
           ),

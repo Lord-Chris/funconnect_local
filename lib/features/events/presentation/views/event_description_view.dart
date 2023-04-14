@@ -6,15 +6,11 @@ import 'package:flutter_svg/svg.dart';
 import 'package:funconnect/core/app/_app.dart';
 import 'package:funconnect/core/extensions/_extensions.dart';
 import 'package:funconnect/features/events/domain/entities/event_model.dart';
-import 'package:funconnect/features/places/domain/entities/place_model.dart';
 import 'package:funconnect/services/_services.dart';
 import 'package:funconnect/shared/components/app_network_image.dart';
 import 'package:funconnect/shared/components/custom_button.dart';
 import 'package:funconnect/shared/components/scrollable_column.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
-
-import '../../../places/presentation/widgets/home_categories_large_widget.dart';
-import '../../../places/presentation/widgets/home_categories_widget.dart';
 
 class EventDescriptionView extends StatelessWidget {
   final EventModel event;

@@ -37,11 +37,15 @@ class WelcomeView extends HookWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Padding(
-                        padding: REdgeInsets.fromLTRB(20, 20, 20, 32),
+                        padding: REdgeInsets.fromLTRB(20, 40, 20, 32),
                         child: Column(
                           children: [
-                            Image.asset(AppAssets.appIconPng),
+                            SvgPicture.asset(
+                              AppAssets.funconnectIconSvg,
+                              height: 100.r,
+                            ),
                             Spacing.vertSmall(),
+                            Spacing.vertRegular(),
                             Text(
                               state.isFirstTime ? "Welcome!" : "Hello again!",
                               style: AppTextStyles.medium24.copyWith(

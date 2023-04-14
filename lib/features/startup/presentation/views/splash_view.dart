@@ -16,7 +16,7 @@ class SplashView extends StatelessWidget {
     return BlocListener<SplashBloc, SplashState>(
       listener: (context, state) {
         if (state is SplashFinishedState) {
-          // context.read<SplashBloc>().add(FinishSplashEvent());
+          context.read<SplashBloc>().add(FinishSplashEvent());
         }
       },
       child: Scaffold(
