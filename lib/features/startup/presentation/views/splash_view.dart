@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:funconnect/features/startup/presentation/blocs/splash_bloc/splash_bloc.dart';
 import 'package:funconnect/features/startup/presentation/blocs/splash_bloc/splash_event.dart';
 import 'package:funconnect/features/startup/presentation/blocs/splash_bloc/splash_state.dart';
@@ -15,7 +16,7 @@ class SplashView extends StatelessWidget {
     return BlocListener<SplashBloc, SplashState>(
       listener: (context, state) {
         if (state is SplashFinishedState) {
-          context.read<SplashBloc>().add(FinishSplashEvent());
+          // context.read<SplashBloc>().add(FinishSplashEvent());
         }
       },
       child: Scaffold(
@@ -25,15 +26,11 @@ class SplashView extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Container(
-                height: 500.h,
-                width: 500.w,
-                decoration: const BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage(
-                      "assets/images/funconnect.png",
-                    ),
-                  ),
+              SizedBox(
+                height: 250.r,
+                width: 250.r,
+                child: SvgPicture.asset(
+                  AppAssets.funconnectFullSvg,
                 ),
               ),
             ],

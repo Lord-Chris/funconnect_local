@@ -166,6 +166,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       positiveCallBack: () async {
         try {
           LogoutUser().call(NoParams());
+          _navigationService.offAllNamed(Routes.welcomeViewRoute, (_) => false);
           _dialogAndSheetService.showAppDialog(
             const StatusDialog(
               isError: false,
@@ -243,8 +244,6 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     GeneralUtils.openUrl(Uri.parse(AppConstants.instagramUrl));
   }
 
-  AppLocation? get location => _locationService.userLocation;
-
   FutureOr<void> _onHelpDeskTapEvent(
     HelpDeskTapEvent event,
     Emitter<ProfileState> emit,
@@ -275,4 +274,6 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       );
     }
   }
+
+  AppLocation? get location => _locationService.userLocation;
 }
