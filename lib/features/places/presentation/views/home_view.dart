@@ -58,9 +58,7 @@ class _HomeViewState extends State<HomeView> {
             ),
             Spacing.vertTiny(),
             Visibility(
-              visible:
-                  context.watch<HomeBloc>().location?.parsedAddress.isEmpty ??
-                      false,
+              visible: context.watch<HomeBloc>().location != null,
               child: Row(
                 children: [
                   const Icon(

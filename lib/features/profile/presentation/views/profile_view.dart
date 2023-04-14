@@ -92,14 +92,11 @@ class _ProfileViewState extends State<ProfileView> {
                     ),
                   ),
                   Spacing.vertTiny(),
+                  Spacing.vertSmall(),
                   Visibility(
-                    visible: context
-                            .watch<ProfileBloc>()
-                            .location
-                            ?.parsedAddress
-                            .isEmpty ??
-                        false,
+                    visible: context.watch<ProfileBloc>().location != null,
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         const Icon(
                           Icons.location_on,
@@ -121,7 +118,6 @@ class _ProfileViewState extends State<ProfileView> {
                       ],
                     ),
                   ),
-
                   Spacing.vertExtraMedium(),
                   AppButton(
                     label: "Edit profile",
