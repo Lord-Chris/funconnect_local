@@ -99,6 +99,29 @@ class CategoryDetailView extends HookWidget {
                           ),
                         );
                       }
+                      if (state is CategoryDetailFailureState) {
+                        return Padding(
+                          padding: const EdgeInsets.all(20),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                state.failure.message,
+                                style: AppTextStyles.medium14,
+                              ),
+                              Spacing.vertRegular(),
+                              AppButton(
+                                label: "Retry",
+                                isCollapsed: true,
+                                labelColor: AppColors.black,
+                                onTap: () => context
+                                    .read<CategoryDetailBloc>()
+                                    .add(CategoryInitEvent(category)),
+                              )
+                            ],
+                          ),
+                        );
+                      }
                       if (state is! CategoryDetailIdleState) {
                         return const SizedBox();
                       }

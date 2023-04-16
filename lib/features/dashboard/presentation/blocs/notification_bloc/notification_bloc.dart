@@ -31,6 +31,7 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
     } on Failure catch (e, s) {
       _logger.e(e);
       FailureHandler.instance.catchError(e, stackTrace: s);
+      emit(NotificationFailureState(e));
     }
   }
 
@@ -47,6 +48,7 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
     } on Failure catch (e, s) {
       _logger.e(e);
       FailureHandler.instance.catchError(e, stackTrace: s);
+      emit(NotificationFailureState(e));
     }
   }
 }

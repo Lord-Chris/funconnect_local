@@ -32,6 +32,7 @@ class CategoryDetailBloc
     } on Failure catch (e, s) {
       _logger.e(e);
       FailureHandler.instance.catchError(e, stackTrace: s);
+      emit(CategoryDetailFailureState(e));
     }
   }
 

@@ -144,8 +144,10 @@ class PlaceRepository extends IPlaceRepository {
 
   @override
   UserModel get user {
-    final data = _localStorageService
-        .read<Map<String, dynamic>?>(HiveKeys.userBoxId, key: StorageKeys.user);
+    final data = _localStorageService.read<Map<String, dynamic>?>(
+      HiveKeys.userBoxId,
+      key: StorageKeys.userProfile,
+    );
     return UserModel.fromMap(data!);
   }
 

@@ -102,6 +102,30 @@ class SearchResultView extends HookWidget {
                           ),
                         );
                       }
+                      if (state is SearchResultFailureState) {
+                        return Padding(
+                          padding: const EdgeInsets.all(20),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                state.failure.message,
+                                style: AppTextStyles.medium14,
+                              ),
+                              Spacing.vertRegular(),
+                              AppButton(
+                                label: "Retry",
+                                isCollapsed: true,
+                                labelColor: AppColors.black,
+                                onTap: () => context
+                                    .read<SearchResultBloc>()
+                                    .add(
+                                        SearchBarChangedEvent(controller.text)),
+                              )
+                            ],
+                          ),
+                        );
+                      }
                       if (state is! SearchResultIdleState) {
                         return const SizedBox();
                       }

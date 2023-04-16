@@ -7,7 +7,8 @@ class StorageKeys {
 
   // User
   static const token = "token";
-  static const user = "user";
+  // static const user = "user";
+  static const userProfile = "user-profile";
   static const stayLoggedIn = "stay-logged-in";
   static const userInterests = "user-interest";
   static const notifications = "notifications";
@@ -18,7 +19,4 @@ class StorageKeys {
 
   //Saved Places
   static const userSavedPlaces = "user-saved-places";
-
-  // Profile
-  static const userProfile = "user-profile";
 }

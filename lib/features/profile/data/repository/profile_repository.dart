@@ -25,7 +25,7 @@ class ProfileRepository extends IProfileRepository {
     await _localStorageService.write(
       HiveKeys.userBoxId,
       key: StorageKeys.userProfile,
-      data: userProfile.toJson(),
+      data: userProfile.toMap(),
     );
     return userProfile;
   }

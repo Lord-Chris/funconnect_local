@@ -16,17 +16,17 @@ class SavedEmptyState extends SavedState {}
 
 class SavedLoadingState extends SavedState {}
 
-class UserSavedPageFilledState extends SavedState {
+class SavedPageFilledState extends SavedState {
   final UserModel? user;
-  final PaginatedData<SavedPlaceModel> savedPlacesData;
+  final PaginatedData<SavedPlaceModel>? savedPlacesData;
 
-  const UserSavedPageFilledState({
+  const SavedPageFilledState({
     this.user,
-    required this.savedPlacesData,
+    this.savedPlacesData,
   });
 
   @override
-  List<SavedPlaceModel> get savedPlaces => savedPlacesData.data;
+  List<SavedPlaceModel> get savedPlaces => savedPlacesData?.data ?? [];
 
   @override
   List<Object> get props => [savedPlaces, DateTime.now()];

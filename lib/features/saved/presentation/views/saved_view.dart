@@ -89,7 +89,30 @@ class _SavedViewState extends State<SavedView>
                               color: AppColors.primary,
                             );
                           }
-                          if (state is! UserSavedPageFilledState) {
+                          if (state is SavedFailureState) {
+                            return Padding(
+                              padding: const EdgeInsets.all(20),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    state.failure.message,
+                                    style: AppTextStyles.medium14,
+                                  ),
+                                  Spacing.vertRegular(),
+                                  AppButton(
+                                    label: "Retry",
+                                    isCollapsed: true,
+                                    labelColor: AppColors.black,
+                                    onTap: () => context
+                                        .read<SavedBloc>()
+                                        .add(const GetAllUserSavedPlaces()),
+                                  )
+                                ],
+                              ),
+                            );
+                          }
+                          if (state is! SavedPageFilledState) {
                             return const SizedBox();
                           }
                           if (state.savedPlaces.isEmpty) {
@@ -208,7 +231,7 @@ class SavedEmptyPage extends StatelessWidget {
 }
 
 class SavedPage extends StatelessWidget {
-  final UserSavedPageFilledState state;
+  final SavedPageFilledState state;
 
   const SavedPage({
     Key? key,

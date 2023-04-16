@@ -29,9 +29,11 @@ class SavedBloc extends Bloc<SavedEvent, SavedState> {
     try {
       if (event.showLoader) emit(SavedLoadingState());
       final savedPlace = await FetchUserSavedPlaces().call(NoParams());
-      emit(UserSavedPageFilledState(savedPlacesData: savedPlace));
+      emit(SavedPageFilledState(savedPlacesData: savedPlace));
     } on Failure catch (e) {
       _logger.e(e);
+
+      emit(SavedFailureState(failure: e));
     }
   }
 

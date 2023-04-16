@@ -37,7 +37,7 @@ class AuthenticationRepository extends IAuthenticationRepository {
     final res = await _httpDS.verifyOtp(params);
     await _localStorageService.write(
       HiveKeys.userBoxId,
-      key: StorageKeys.user,
+      key: StorageKeys.userProfile,
       data: res.data.toMap(),
     );
     await _localStorageService.write(
@@ -58,7 +58,7 @@ class AuthenticationRepository extends IAuthenticationRepository {
 
     await _localStorageService.write(
       HiveKeys.userBoxId,
-      key: StorageKeys.user,
+      key: StorageKeys.userProfile,
       data: (res2 ?? res).data.toMap(),
     );
   }

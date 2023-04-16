@@ -13,7 +13,7 @@ class LocalStorageService extends ILocalStorageService {
   @override
   Future<void> init() async {
     await Hive.initFlutter();
-    // await clearAll();
+    await clearAll();
     await _openBoxes();
   }
 
@@ -21,6 +21,7 @@ class LocalStorageService extends ILocalStorageService {
     try {
       await Hive.openBox(HiveKeys.appBoxId);
       await Hive.openBox(HiveKeys.userBoxId);
+      await Hive.openBox(HiveKeys.placesBoxId);
     } on Exception catch (e) {
       throw Failure(e.toString());
     }
@@ -64,7 +65,8 @@ class LocalStorageService extends ILocalStorageService {
   @override
   Future<void> clearAll() async {
     try {
-      return await Hive.deleteFromDisk();
+      await Hive.deleteFromDisk();
+      _log.d("Cleared All Local Data");
     } on Exception catch (e) {
       _log.e(e.toString());
       throw const Failure("Something went wrong");

@@ -124,8 +124,10 @@ class HttpAuthenticationDataSource extends IAuthenticationDataSource
   }
 
   UserModel? get user {
-    final data = _localStorageService
-        .read<Map<String, dynamic>?>(HiveKeys.userBoxId, key: StorageKeys.user);
+    final data = _localStorageService.read<Map<String, dynamic>?>(
+      HiveKeys.userBoxId,
+      key: StorageKeys.userProfile,
+    );
 
     if (data == null) return null;
     return UserModel.fromMap(data);

@@ -11,9 +11,9 @@ class LocalProfileDataSource {
     final data = _localStorageService.read(
       HiveKeys.userBoxId,
       key: StorageKeys.userProfile,
-      def: UserModel.empty().toJson(),
+      def: UserModel.empty().toMap(),
     );
-    return UserModel.fromMap(data as Map<String, dynamic>);
+    return UserModel.fromMap(data);
   }
 
   Future<void> clearAll() async {

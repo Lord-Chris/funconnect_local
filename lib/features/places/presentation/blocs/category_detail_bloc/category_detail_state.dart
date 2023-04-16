@@ -19,3 +19,12 @@ class CategoryDetailIdleState extends CategoryDetailState {
   @override
   List<Object?> get props => [places];
 }
+
+class CategoryDetailFailureState extends CategoryDetailState {
+  final Failure failure;
+
+  CategoryDetailFailureState(this.failure);
+
+  @override
+  List<Object> get props => [failure];
+}

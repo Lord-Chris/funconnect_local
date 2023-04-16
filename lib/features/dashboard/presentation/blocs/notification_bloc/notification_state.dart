@@ -24,3 +24,12 @@ class NotificationIdleState extends NotificationState {
   @override
   List<Object?> get props => [notifications, DateTime.now()];
 }
+
+class NotificationFailureState extends NotificationState with EquatableMixin {
+  final Failure failure;
+
+  NotificationFailureState(this.failure);
+
+  @override
+  List<Object> get props => [failure];
+}

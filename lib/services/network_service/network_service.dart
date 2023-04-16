@@ -37,7 +37,6 @@ class NetworkService extends INetworkService {
       }
       throw Failure(res.statusMessage!);
     } on DioError catch (e) {
-      _logger.e(e.toString());
       throw convertException(e);
     } catch (e) {
       _logger.e(e.toString());
@@ -61,7 +60,6 @@ class NetworkService extends INetworkService {
       }
       throw Failure(res.statusMessage!);
     } on DioError catch (e) {
-      _logger.e(e.toString());
       throw convertException(e);
     } catch (e) {
       _logger.e(e.toString());
@@ -86,7 +84,6 @@ class NetworkService extends INetworkService {
       }
       throw Failure(res.statusMessage!);
     } on DioError catch (e) {
-      _logger.e(e.toString());
       throw convertException(e);
     } catch (e) {
       _logger.e(e.toString());
@@ -111,7 +108,6 @@ class NetworkService extends INetworkService {
       }
       throw Failure(res.statusMessage!);
     } on DioError catch (e) {
-      _logger.e(e.toString());
       throw convertException(e);
     } catch (e) {
       _logger.e(e.toString());
@@ -120,14 +116,16 @@ class NetworkService extends INetworkService {
   }
 
   @override
-  Future<ApiResponse<Map<String, dynamic>>> postFile(String url, String key,File file,
+  Future<ApiResponse<Map<String, dynamic>>> postFile(
+      String url, String key, File file,
       {Map<String, String>? headers}) async {
     try {
       if (headers != null) {
         _headers.addAll(headers);
       }
       String fileName = file.path.split('/').last;
-      FormData formData = FormData.fromMap({key: await MultipartFile.fromFile(file.path, filename: fileName)});
+      FormData formData = FormData.fromMap(
+          {key: await MultipartFile.fromFile(file.path, filename: fileName)});
 
       final res = await _dio.post(
         url,
@@ -139,7 +137,6 @@ class NetworkService extends INetworkService {
       }
       throw Failure(res.statusMessage!);
     } on DioError catch (e) {
-      _logger.e(e.toString());
       throw convertException(e);
     } catch (e) {
       _logger.e(e.toString());

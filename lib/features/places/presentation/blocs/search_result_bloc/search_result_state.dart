@@ -46,3 +46,12 @@ class SearchResultIdleState extends SearchResultState {
     );
   }
 }
+
+class SearchResultFailureState extends SearchResultState {
+  final Failure failure;
+
+  SearchResultFailureState(this.failure);
+
+  @override
+  List<Object> get props => [failure];
+}

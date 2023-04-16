@@ -40,7 +40,7 @@ class SearchResultBloc extends Bloc<SearchResultEvent, SearchResultState> {
         searchHistoryData: searchPlaceUsecase.searchHistory,
       ));
     } on Failure catch (e, s) {
-      emit(SearchResultIdleState());
+      emit(SearchResultFailureState(e));
       _logger.e(e);
       FailureHandler.instance.catchError(e, stackTrace: s);
     }

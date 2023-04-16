@@ -16,7 +16,7 @@ class DashboardRepository extends IDashboardRepository {
     final res = await _remoteDS.fetchUserProfile();
     await _localStorageService.write(
       HiveKeys.userBoxId,
-      key: StorageKeys.user,
+      key: StorageKeys.userProfile,
       data: res.data.toMap(),
     );
     return res.data;
