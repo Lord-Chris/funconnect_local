@@ -23,7 +23,7 @@ class StatusDialog extends StatelessWidget {
         borderRadius: BorderRadius.circular(36),
       ),
       child: Container(
-        padding: EdgeInsets.all(53.r),
+        padding: REdgeInsets.symmetric(horizontal: 40, vertical: 60),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(36),
           color: AppColors.interestWidgetAsh,
@@ -34,20 +34,20 @@ class StatusDialog extends StatelessWidget {
             Icon(
               isError ? Icons.error : CupertinoIcons.check_mark_circled_solid,
               color: isError ? AppColors.primary : AppColors.notificationGreen,
-              size: 123.sp,
+              size: 100.sp,
             ),
             SizedBox(height: 31.h),
             Text(
               title,
               textAlign: TextAlign.center,
-              style: AppTextStyles.medium24,
+              style: AppTextStyles.medium20,
             ),
             SizedBox(height: 16.h),
             Flexible(
               child: Text(
                 body,
                 textAlign: TextAlign.center,
-                style: AppTextStyles.light14.copyWith(),
+                style: AppTextStyles.light14,
               ),
             ),
           ],

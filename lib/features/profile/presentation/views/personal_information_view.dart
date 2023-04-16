@@ -70,10 +70,13 @@ class PersonalInformationView extends StatelessWidget {
                             ))
                           : profile.photoUrl.startsWith("http")
                               ? ClipOval(
-                                  child: Image.network(
-                                  profile.photoUrl,
-                                  height: 64,
-                                ))
+                                  child: AppNetworkImage(
+                                    url: profile.photoUrl,
+                                    size: const Size.fromRadius(32),
+                                    isCircular: true,
+                                    fit: BoxFit.cover,
+                                  ),
+                                )
                               : ClipOval(
                                   child: Image.file(
                                     File(profile.photoUrl),
