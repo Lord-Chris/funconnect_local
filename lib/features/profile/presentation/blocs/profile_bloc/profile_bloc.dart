@@ -105,7 +105,10 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     RateYourExperienceTapEvent event,
     Emitter<ProfileState> emit,
   ) async {
-    await LaunchReview.launch(iOSAppId: '1618585581');
+    await LaunchReview.launch(
+      iOSAppId: '1618585581',
+      androidAppId: 'com.funconnect.app',
+    );
     // RateMyApp rateMyApp =
     //     RateMyApp(minDays: 1, minLaunches: 3, appStoreIdentifier: '1618585581');
     // rateMyApp.showStarRateDialog(

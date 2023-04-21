@@ -286,6 +286,7 @@ class _DefaultHomeView extends StatelessWidget {
         await bloc;
       },
       child: SingleChildScrollView(
+        physics: const AlwaysScrollableScrollPhysics(),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
