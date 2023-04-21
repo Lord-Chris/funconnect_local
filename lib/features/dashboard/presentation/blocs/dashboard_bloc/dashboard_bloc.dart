@@ -12,6 +12,7 @@ import 'package:funconnect/features/dashboard/presentation/blocs/dashboard_bloc/
 import 'package:logger/logger.dart';
 
 import '../../../../../services/_services.dart';
+import '../../../../places/domain/usecases/fetch_explore.dart';
 import '../../../domain/usecases/fetch_place_detail.dart';
 
 class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
@@ -28,7 +29,10 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
   void _fetchProfile() async {
     try {
       _watchDeepLink();
-      await FetchProfileUsecase().call(NoParams());
+      await Future.wait([
+        FetchProfileUsecase().call(NoParams()),
+        FetchExploreUseCase().fetchCategories(),
+      ]);
     } on Failure catch (e, s) {
       _logger.e(e);
       FailureHandler.instance.catchError(e, stackTrace: s);

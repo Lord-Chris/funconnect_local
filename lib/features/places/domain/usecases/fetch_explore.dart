@@ -48,4 +48,8 @@ class FetchExploreUseCase with UseCases<void, NoParams> {
       return null;
     }
   }
+
+  Future<void> fetchCategories() async {
+    await _placeRepository.fetchExploreCategories();
+  }
 }
