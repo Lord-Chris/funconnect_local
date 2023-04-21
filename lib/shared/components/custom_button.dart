@@ -71,7 +71,7 @@ class AppButton extends StatelessWidget {
                 child: FittedBox(
                   child: AppLoader(
                     padding: 15,
-                    color: labelColor,
+                    color: labelColor ?? AppColors.black,
                   ),
                 ),
               );

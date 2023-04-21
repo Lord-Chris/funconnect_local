@@ -1,14 +1,21 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:funconnect/core/extensions/_extensions.dart';
 import 'package:funconnect/core/models/_models.dart';
 
+import '../../core/utils/general_utils.dart';
 import '../components/_components.dart';
 import '../constants/_constants.dart';
 
 class HelpDeskDialog extends HookWidget {
-  const HelpDeskDialog({super.key});
+  final UserModel user;
+
+  const HelpDeskDialog({
+    required this.user,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -72,18 +79,31 @@ class HelpDeskDialog extends HookWidget {
                       ),
                       Spacing.horizRegular(),
                       Expanded(
-                        child: AppButton(
-                          onTap: () {
-                            if (!key.currentState!.validate()) return;
-                            Navigator.pop(
-                                context,
-                                HelpDeskData(
-                                  title: title.text,
-                                  body: body.text,
-                                ));
+                        child: HookBuilder(
+                          builder: (context) {
+                            final isBusy = useState(false);
+                            return AppButton(
+                              onTap: () async {
+                                if (!key.currentState!.validate()) return;
+                                try {
+                                  isBusy.value = true;
+                                  await GeneralUtils.sendMail(
+                                    user.email,
+                                    HelpDeskData(
+                                      title: title.text,
+                                      body: body.text,
+                                    ),
+                                  );
+                                  Navigator.pop(context, true);
+                                } on Failure catch (e) {
+                                  Navigator.pop(context, e);
+                                }
+                              },
+                              label: "Send",
+                              isBusy: isBusy.value,
+                              buttonColor: AppColors.primary,
+                            );
                           },
-                          label: "Send",
-                          buttonColor: AppColors.primary,
                         ),
                       )
                     ],

@@ -251,18 +251,32 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     try {
       if (this.state is! ProfileIdleState) return;
       final state = this.state as ProfileIdleState;
-      final res =
-          await _dialogAndSheetService.showAppDialog(const HelpDeskDialog());
-      if (res == null) return;
-      await GeneralUtils.sendMail(state.userProfile.email, res as HelpDeskData);
-      _dialogAndSheetService.showAppDialog(
-        const StatusDialog(
-          isError: false,
-          title: 'Request Sent!',
-          body:
-              'Your support request has been received. We will be in touch with you shortly with a resolution.',
-        ),
+      final res = await _dialogAndSheetService.showAppDialog(
+        HelpDeskDialog(user: state.userProfile),
       );
+
+      if (res == null) return;
+
+      ///
+      if (res == true) {
+        _dialogAndSheetService.showAppDialog(
+          const StatusDialog(
+            isError: false,
+            title: 'Request Sent!',
+            body:
+                'Your support request has been received. We will be in touch with you shortly with a resolution.',
+          ),
+        );
+      } else if (res is Failure) {
+        _logger.e(res);
+        _dialogAndSheetService.showAppDialog(
+          StatusDialog(
+            isError: true,
+            title: 'Request Not Sent',
+            body: res.message,
+          ),
+        );
+      }
     } on Failure catch (e) {
       _logger.e(e);
       _dialogAndSheetService.showAppDialog(
