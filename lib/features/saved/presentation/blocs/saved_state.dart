@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:equatable/equatable.dart';
 import 'package:funconnect/core/models/_models.dart';
 
@@ -29,7 +31,7 @@ class SavedPageFilledState extends SavedState {
   List<SavedPlaceModel> get savedPlaces => savedPlacesData?.data ?? [];
 
   @override
-  List<Object> get props => [savedPlaces, DateTime.now()];
+  List<Object> get props => [savedPlaces, Random().nextInt(2000)];
 }
 
 class SavedFailureState extends SavedState {

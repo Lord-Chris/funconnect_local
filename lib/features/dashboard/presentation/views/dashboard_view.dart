@@ -5,13 +5,13 @@ import 'package:funconnect/features/dashboard/presentation/blocs/dashboard_bloc/
 import 'package:funconnect/features/dashboard/presentation/blocs/dashboard_bloc/dashboard_event.dart';
 import 'package:funconnect/features/dashboard/presentation/blocs/dashboard_bloc/dashboard_state.dart';
 import 'package:funconnect/features/events/presentation/blocs/events_bloc/events_bloc.dart';
-import 'package:funconnect/features/saved/presentation/blocs/saved_bloc.dart';
-import 'package:funconnect/features/saved/presentation/views/saved_view.dart';
 import 'package:funconnect/features/places/presentation/blocs/explore_bloc/explore_bloc.dart';
 import 'package:funconnect/features/places/presentation/blocs/home_bloc/home_bloc.dart';
 import 'package:funconnect/features/places/presentation/views/home_view.dart';
 import 'package:funconnect/features/profile/presentation/blocs/profile_bloc/profile_bloc.dart';
 import 'package:funconnect/features/profile/presentation/views/profile_view.dart';
+import 'package:funconnect/features/saved/presentation/blocs/saved_bloc.dart';
+import 'package:funconnect/features/saved/presentation/views/saved_view.dart';
 import 'package:funconnect/shared/components/app_loader.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
 import 'package:lazy_load_indexed_stack/lazy_load_indexed_stack.dart';
@@ -73,20 +73,8 @@ class DashboardView extends StatelessWidget {
               type: BottomNavigationBarType.fixed,
               unselectedItemColor: AppColors.secondary400,
               selectedItemColor: AppColors.primary,
-              selectedLabelStyle: const TextStyle(
-                height: 1.3,
-                fontSize: 12,
-                fontFamily: AppFonts.gtWalshPro,
-                fontWeight: FontWeight.w400,
-                color: AppColors.primary,
-              ),
-              unselectedLabelStyle: const TextStyle(
-                fontSize: 12,
-                height: 1.3,
-                fontFamily: AppFonts.gtWalshPro,
-                fontWeight: FontWeight.w400,
-                color: AppColors.secondary400,
-              ),
+              selectedLabelStyle: AppTextStyles.regular12,
+              unselectedLabelStyle: AppTextStyles.regular12,
               showUnselectedLabels: true,
               iconSize: 16,
               items: [

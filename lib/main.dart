@@ -52,7 +52,6 @@ class MyApp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, _) {
-        // ScreenUtil.init(context);
         return MaterialApp(
           theme: AppTheme.theme,
           title: AppConstants.appName,

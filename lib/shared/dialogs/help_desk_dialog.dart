@@ -14,6 +14,7 @@ class HelpDeskDialog extends HookWidget {
   final UserModel user;
 
   const HelpDeskDialog({
+    super.key,
     required this.user,
   });
 
