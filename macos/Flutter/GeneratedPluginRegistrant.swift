@@ -11,7 +11,7 @@ import firebase_remote_config
 import geolocator_apple
 import location
 import package_info_plus
-import path_provider_macos
+import path_provider_foundation
 import sentry_flutter
 import share_plus
 import shared_preferences_foundation
