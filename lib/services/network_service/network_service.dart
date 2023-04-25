@@ -15,8 +15,8 @@ class NetworkService extends INetworkService {
 
   NetworkService() {
     _dio = Dio();
-    _dio.options.receiveTimeout = 60 * 1000;
-    _dio.options.sendTimeout = 60 * 1000;
+    _dio.options.receiveTimeout = const Duration(seconds: 60);
+    _dio.options.sendTimeout = const Duration(seconds: 60);
     _dio.interceptors.add(NetworkLoggerInterceptor());
   }
 
@@ -146,19 +146,21 @@ class NetworkService extends INetworkService {
 
   Failure convertException(DioError e) {
     switch (e.type) {
-      case DioErrorType.connectTimeout:
+      case DioErrorType.connectionTimeout:
         return const Failure("Connection Timed Out");
       case DioErrorType.sendTimeout:
         return const Failure("Connection Timed Out");
       case DioErrorType.receiveTimeout:
         return const Failure("Connection Timed Out");
-      case DioErrorType.response:
+      case DioErrorType.badResponse:
         return Failure(
             e.response?.data['message'] ?? e.response?.data['errors']);
       case DioErrorType.cancel:
         return Failure(
             e.response?.data['message'] ?? e.response?.data['errors']);
-      case DioErrorType.other:
+      case DioErrorType.unknown:
+        return const Failure("No Internet Connection");
+      default:
         return const Failure("No Internet Connection");
     }
   }
