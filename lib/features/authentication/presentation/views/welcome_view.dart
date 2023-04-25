@@ -64,75 +64,75 @@ class WelcomeView extends HookWidget {
                               ),
                             ),
                             Spacing.vertExtraMedium(),
-                            // Row(
-                            //   mainAxisAlignment: MainAxisAlignment.center,
-                            //   children: [
-                            //     GestureDetector(
-                            //       onTap: () => context
-                            //           .read<WelcomeBloc>()
-                            //           .add(GoogleSignInEvent()),
-                            //       child: CircleAvatar(
-                            //         backgroundColor: Colors.white,
-                            //         radius: 30,
-                            //         child: SvgPicture.asset(
-                            //             AppAssets.googleIconSvg),
-                            //       ),
-                            //     ),
-                            //     const SizedBox(width: 16.0),
-                            //     GestureDetector(
-                            //       onTap: () => context
-                            //           .read<WelcomeBloc>()
-                            //           .add(AppleSignInEvent()),
-                            //       child: CircleAvatar(
-                            //         radius: 30,
-                            //         backgroundColor: Colors.white,
-                            //         child: SvgPicture.asset(
-                            //             AppAssets.appleIconSvg),
-                            //       ),
-                            //     ),
-                            //   ],
-                            // ),
-                            // Spacing.vertExtraMedium(),
-                            // Padding(
-                            //   padding: REdgeInsets.symmetric(horizontal: 30),
-                            //   child: Row(
-                            //     mainAxisAlignment: MainAxisAlignment.center,
-                            //     children: [
-                            //       Expanded(
-                            //         child: Container(
-                            //           height: 0.5,
-                            //           color: Colors.white,
-                            //         ),
-                            //       ),
-                            //       const SizedBox(width: 11),
-                            //       Padding(
-                            //         padding: const EdgeInsets.symmetric(
-                            //             horizontal: 8.0),
-                            //         child: Text(
-                            //           state.isFirstTime
-                            //               ? "Or with email ID"
-                            //               : "Or signin with e-mail",
-                            //           style: AppTextStyles.regular14.copyWith(
-                            //             color: Colors.white,
-                            //           ),
-                            //         ),
-                            //       ),
-                            //       const SizedBox(width: 11),
-                            //       Expanded(
-                            //         child: Container(
-                            //           height: 0.5,
-                            //           color: Colors.white,
-                            //         ),
-                            //       ),
-                            //       const Divider(
-                            //         height: 5.0,
-                            //         thickness: 5.0,
-                            //         color: Colors.white,
-                            //       ),
-                            //     ],
-                            //   ),
-                            // ),
-                            // Spacing.vertExtraMedium(),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                GestureDetector(
+                                  onTap: () => context
+                                      .read<WelcomeBloc>()
+                                      .add(GoogleSignInEvent()),
+                                  child: CircleAvatar(
+                                    backgroundColor: Colors.white,
+                                    radius: 30,
+                                    child: SvgPicture.asset(
+                                        AppAssets.googleIconSvg),
+                                  ),
+                                ),
+                                const SizedBox(width: 16.0),
+                                GestureDetector(
+                                  onTap: () => context
+                                      .read<WelcomeBloc>()
+                                      .add(AppleSignInEvent()),
+                                  child: CircleAvatar(
+                                    radius: 30,
+                                    backgroundColor: Colors.white,
+                                    child: SvgPicture.asset(
+                                        AppAssets.appleIconSvg),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Spacing.vertExtraMedium(),
+                            Padding(
+                              padding: REdgeInsets.symmetric(horizontal: 30),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Expanded(
+                                    child: Container(
+                                      height: 0.5,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  const SizedBox(width: 11),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 8.0),
+                                    child: Text(
+                                      state.isFirstTime
+                                          ? "Or with email ID"
+                                          : "Or signin with e-mail",
+                                      style: AppTextStyles.regular14.copyWith(
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(width: 11),
+                                  Expanded(
+                                    child: Container(
+                                      height: 0.5,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  const Divider(
+                                    height: 5.0,
+                                    thickness: 5.0,
+                                    color: Colors.white,
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Spacing.vertExtraMedium(),
                             AppTextField(
                               label: AppText.aTAuthEmailText,
                               hint: 'johndoe@gmail.com',

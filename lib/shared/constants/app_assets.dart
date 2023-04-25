@@ -16,9 +16,9 @@ class AppAssets {
   static const activeExploreIconSvg = "assets/svgs/active_explore_icon.svg";
   static const activeSavedIconSvg = "assets/svgs/active_bookmark.svg";
   static const activeEventIconSvg = "assets/svgs/active_event_icon.svg";
-  // static const appleIconSvg = "assets/svgs/apple_icon.svg";
+  static const appleIconSvg = "assets/svgs/apple_icon.svg";
   static const emailIconSvg = "assets/svgs/email_icon.svg";
-  // static const googleIconSvg = "assets/svgs/google_icon.svg";
+  static const googleIconSvg = "assets/svgs/google_icon.svg";
   static const profileIconSvg = "assets/svgs/profile.svg";
   static const profIconSvg = "assets/svgs/profile_icon.svg";
   static const interestPageTopSvg = "assets/svgs/interest_page_top_icon.svg";
