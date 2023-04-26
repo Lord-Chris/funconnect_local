@@ -28,8 +28,20 @@ class AuthenticationRepository extends IAuthenticationRepository {
   }
 
   @override
-  Future<void> signInWithGoogle(String authCode) async {
-    await _httpDS.loginWithGoogle(authCode);
+  Future<UserModel> signInWithGoogle(String authCode) async {
+    final res = await _httpDS.loginWithGoogle(authCode);
+
+    await _localStorageService.write(
+      HiveKeys.userBoxId,
+      key: StorageKeys.userProfile,
+      data: res.data.toMap(),
+    );
+    await _localStorageService.write(
+      HiveKeys.appBoxId,
+      key: StorageKeys.isFirstTime,
+      data: false,
+    );
+    return res.data;
   }
 
   @override
