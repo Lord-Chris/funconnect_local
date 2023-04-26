@@ -62,13 +62,13 @@ class HttpAuthenticationDataSource extends IAuthenticationDataSource
   }
 
   @override
-  Future<ApiResponse<VerifyOtpResponse>> loginWithGoogle(String token) async {
+  Future<ApiResponse<UserModel>> loginWithGoogle(String token) async {
     final body = {"code": token};
     final res = await _networkService.post(
       ApiConstants.loginWithGoogle,
       body: body,
     );
-    return ApiResponse(data: VerifyOtpResponse.fromMap(res.data));
+    return ApiResponse(data: UserModel.fromMap(res.data));
   }
 
   @override
