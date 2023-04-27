@@ -6,7 +6,7 @@ import '../dto/interest_model.dart';
 import '../dto/request_otp_response.dart';
 
 abstract class IAuthenticationRepository {
-  Future<void> signInWithGoogle(String authCode);
+  Future<UserModel?> signInWithGoogle(String authCode);
   Future<void> signInWithApple(String code, String idToken);
   Future<RequestOtpResponse> signInWithEmail(EmailSignInParams params);
   Future<UserModel> verifyOtp(VerifyOtpParams params);

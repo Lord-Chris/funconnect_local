@@ -68,6 +68,11 @@ class HttpAuthenticationDataSource extends IAuthenticationDataSource
       ApiConstants.loginWithGoogle,
       body: body,
     );
+    await _localStorageService.write(
+      HiveKeys.userBoxId,
+      key: StorageKeys.token,
+      data: res.data['data']['api_token'],
+    );
     return ApiResponse(data: UserModel.fromMap(res.data));
   }
 

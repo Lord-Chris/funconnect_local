@@ -20,8 +20,9 @@ class MockAuthenticationRepository extends IAuthenticationRepository {
   }
 
   @override
-  Future<void> signInWithGoogle(String authCode) async {
+  Future<UserModel?> signInWithGoogle(String authCode) async {
     await Future.delayed(const Duration(seconds: 2));
+    return null;
   }
 
   @override
