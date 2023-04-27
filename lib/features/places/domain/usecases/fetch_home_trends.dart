@@ -26,6 +26,7 @@ class FetchHomeTrends with UseCases<void, NoParams> {
         _placeRepository
             .fetchUserInterests()
             .then((value) => interests = value),
+        _getLocation()
       ],
     );
   }
