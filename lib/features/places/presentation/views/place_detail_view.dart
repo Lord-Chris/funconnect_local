@@ -369,6 +369,9 @@ class _InfoSection extends StatelessWidget {
                 () => context
                     .read<PlaceDetailBloc>()
                     .add(PhoneTapEvent(phone: state.place.phoneE164))),
+            state.place.email_address.isNotEmpty
+                ? _buildTile(CupertinoIcons.mail, state.place.email_address)
+                : const SizedBox(),
             Spacing.vertSmall(),
             Spacing.vertRegular(),
             InkWell(

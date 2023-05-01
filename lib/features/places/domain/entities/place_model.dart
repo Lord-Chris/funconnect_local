@@ -17,6 +17,7 @@ class PlaceModel extends Equatable {
   final double avgReviewCount;
   final double distance;
   final bool savedPlace;
+  final String email_address;
 
   const PlaceModel({
     required this.id,
@@ -32,6 +33,7 @@ class PlaceModel extends Equatable {
     required this.avgReviewCount,
     required this.distance,
     required this.savedPlace,
+    required this.email_address,
   });
 
   Map<String, dynamic> toMap() {
@@ -49,25 +51,26 @@ class PlaceModel extends Equatable {
       'avg_review_count': avgReviewCount,
       'distance': distance,
       'saved_place': savedPlace,
+      'email_address': email_address
     };
   }
 
   factory PlaceModel.fromMap(Map<String, dynamic> map) {
     return PlaceModel(
-      id: map['id'] ?? '',
-      name: map['name'] ?? '',
-      headline: map['headline'] ?? '',
-      coverImagePath: map['cover_image_path'] ?? '',
-      description: map['description'] ?? '',
-      addedBy: map['added_by'] ?? '',
-      opensAt: map['opens_at'] ?? '',
-      closesAt: map['closes_at'] ?? '',
-      phoneE164: map['phone_e164'] ?? '',
-      avgRating: map['avg_rating']?.toDouble() ?? 0.0,
-      avgReviewCount: map['avg_review_count']?.toDouble() ?? 0.0,
-      distance: map['distance']?.toDouble() ?? 0.0,
-      savedPlace: map['saved_place'] ?? false,
-    );
+        id: map['id'] ?? '',
+        name: map['name'] ?? '',
+        headline: map['headline'] ?? '',
+        coverImagePath: map['cover_image_path'] ?? '',
+        description: map['description'] ?? '',
+        addedBy: map['added_by'] ?? '',
+        opensAt: map['opens_at'] ?? '',
+        closesAt: map['closes_at'] ?? '',
+        phoneE164: map['phone_e164'] ?? '',
+        avgRating: map['avg_rating']?.toDouble() ?? 0.0,
+        avgReviewCount: map['avg_review_count']?.toDouble() ?? 0.0,
+        distance: map['distance']?.toDouble() ?? 0.0,
+        savedPlace: map['saved_place'] ?? false,
+        email_address: map['email_address'] ?? "");
   }
 
   String toJson() => json.encode(toMap());
@@ -77,20 +80,20 @@ class PlaceModel extends Equatable {
 
   factory PlaceModel.fromFullPlaceModel(FullPlaceModel placeModel) {
     return PlaceModel(
-      id: placeModel.id,
-      name: placeModel.name,
-      headline: placeModel.headline,
-      coverImagePath: placeModel.coverImagePath,
-      description: placeModel.description,
-      addedBy: placeModel.addedBy,
-      opensAt: placeModel.opensAt,
-      closesAt: placeModel.closesAt,
-      phoneE164: placeModel.phoneE164,
-      avgRating: placeModel.avgRating,
-      avgReviewCount: placeModel.avgReviewCount,
-      distance: 0,
-      savedPlace: placeModel.savedPlace,
-    );
+        id: placeModel.id,
+        name: placeModel.name,
+        headline: placeModel.headline,
+        coverImagePath: placeModel.coverImagePath,
+        description: placeModel.description,
+        addedBy: placeModel.addedBy,
+        opensAt: placeModel.opensAt,
+        closesAt: placeModel.closesAt,
+        phoneE164: placeModel.phoneE164,
+        avgRating: placeModel.avgRating,
+        avgReviewCount: placeModel.avgReviewCount,
+        distance: 0,
+        savedPlace: placeModel.savedPlace,
+        email_address: placeModel.email_address);
   }
 
   @override
@@ -109,41 +112,42 @@ class PlaceModel extends Equatable {
       avgReviewCount,
       distance,
       savedPlace,
+      email_address,
     ];
   }
 
   bool get isBookmarked => savedPlace;
 
-  PlaceModel copyWith({
-    String? id,
-    String? name,
-    String? headline,
-    String? coverImagePath,
-    String? description,
-    String? addedBy,
-    String? opensAt,
-    String? closesAt,
-    String? phoneE164,
-    double? avgRating,
-    double? avgReviewCount,
-    double? distance,
-    bool? savedPlace,
-  }) {
+  PlaceModel copyWith(
+      {String? id,
+      String? name,
+      String? headline,
+      String? coverImagePath,
+      String? description,
+      String? addedBy,
+      String? opensAt,
+      String? closesAt,
+      String? phoneE164,
+      double? avgRating,
+      double? avgReviewCount,
+      double? distance,
+      bool? savedPlace,
+      String? email_address}) {
     return PlaceModel(
-      id: id ?? this.id,
-      name: name ?? this.name,
-      headline: headline ?? this.headline,
-      coverImagePath: coverImagePath ?? this.coverImagePath,
-      description: description ?? this.description,
-      addedBy: addedBy ?? this.addedBy,
-      opensAt: opensAt ?? this.opensAt,
-      closesAt: closesAt ?? this.closesAt,
-      phoneE164: phoneE164 ?? this.phoneE164,
-      avgRating: avgRating ?? this.avgRating,
-      avgReviewCount: avgReviewCount ?? this.avgReviewCount,
-      distance: distance ?? this.distance,
-      savedPlace: savedPlace ?? this.savedPlace,
-    );
+        id: id ?? this.id,
+        name: name ?? this.name,
+        headline: headline ?? this.headline,
+        coverImagePath: coverImagePath ?? this.coverImagePath,
+        description: description ?? this.description,
+        addedBy: addedBy ?? this.addedBy,
+        opensAt: opensAt ?? this.opensAt,
+        closesAt: closesAt ?? this.closesAt,
+        phoneE164: phoneE164 ?? this.phoneE164,
+        avgRating: avgRating ?? this.avgRating,
+        avgReviewCount: avgReviewCount ?? this.avgReviewCount,
+        distance: distance ?? this.distance,
+        savedPlace: savedPlace ?? this.savedPlace,
+        email_address: email_address ?? this.email_address);
   }
 }
 

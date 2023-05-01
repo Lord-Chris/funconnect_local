@@ -33,7 +33,7 @@ class HomeViewCategoriesSmallSubWidget extends HookWidget {
           padding: EdgeInsets.all(4.r),
           alignment: Alignment.bottomLeft,
           decoration: BoxDecoration(
-            color: AppColors.primary,
+            //color: AppColors.primary,
             borderRadius: BorderRadius.circular(18),
             image: DecorationImage(
               fit: BoxFit.cover,
