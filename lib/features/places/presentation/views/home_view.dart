@@ -4,6 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:funconnect/features/dashboard/presentation/blocs/dashboard_bloc/dashboard_bloc.dart';
 import 'package:funconnect/features/dashboard/presentation/blocs/dashboard_bloc/dashboard_event.dart';
+import 'package:funconnect/features/dashboard/presentation/blocs/notification_bloc/notification_bloc.dart';
+import 'package:funconnect/features/dashboard/presentation/blocs/notification_bloc/notification_event.dart';
 import 'package:funconnect/features/places/domain/entities/category_model.dart';
 import 'package:funconnect/features/places/domain/entities/place_model.dart';
 import 'package:funconnect/features/places/presentation/blocs/home_bloc/home_bloc.dart';
@@ -29,6 +31,7 @@ class _HomeViewState extends State<HomeView> {
   void initState() {
     super.initState();
     context.read<HomeBloc>().add(const HomeInitEvent());
+    context.read<NotificationBloc>().add(NotificationInitEvent());
   }
 
   @override
@@ -83,9 +86,22 @@ class _HomeViewState extends State<HomeView> {
           IconButton(
             onPressed: () =>
                 context.read<HomeBloc>().add(NotificationTapEvent()),
-            icon: const Icon(
-              CupertinoIcons.bell_fill,
-              color: AppColors.white,
+            icon: Badge(
+              isLabelVisible: context
+                  .watch<NotificationBloc>()
+                  .state
+                  .unreadNotifications
+                  .isNotEmpty,
+              label: Text(context
+                  .watch<NotificationBloc>()
+                  .state
+                  .unreadNotifications
+                  .length
+                  .toString()),
+              child: const Icon(
+                CupertinoIcons.bell_fill,
+                color: AppColors.white,
+              ),
             ),
           ),
         ],
