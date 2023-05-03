@@ -364,14 +364,17 @@ class _InfoSection extends StatelessWidget {
               "${state.place.opensAtParsed.format(context)} - ${state.place.closesAtParsed.format(context)}",
             ),
             _buildTile(
-                CupertinoIcons.phone_fill,
-                state.place.phoneE164,
-                () => context
-                    .read<PlaceDetailBloc>()
-                    .add(PhoneTapEvent(phone: state.place.phoneE164))),
-            state.place.email_address.isNotEmpty
-                ? _buildTile(CupertinoIcons.mail, state.place.email_address)
-                : const SizedBox(),
+              CupertinoIcons.phone_fill,
+              state.place.phoneE164,
+              () => context
+                  .read<PlaceDetailBloc>()
+                  .add(PhoneTapEvent(phone: state.place.phoneE164)),
+            ),
+            if (state.place.emailAddress.isNotEmpty)
+              _buildTile(
+                CupertinoIcons.mail,
+                state.place.emailAddress,
+              ),
             Spacing.vertSmall(),
             Spacing.vertRegular(),
             InkWell(

@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:funconnect/core/app/_app.dart';
 import 'package:funconnect/core/constants/app_keys.dart';
 import 'package:funconnect/core/models/_models.dart';
@@ -14,8 +12,8 @@ class GoogleSignInUsecase with UseCases<UserModel?, NoParams> {
       "72010274266-vosimccjbt4dj700ots582hg6i5br0ft.apps.googleusercontent.com";
 
   final repo = locator<IAuthenticationRepository>();
-  final GoogleSignIn _googleSignIn =
-      GoogleSignIn(clientId: Platform.isAndroid ? androidId : iosId);
+  // final GoogleSignIn _googleSignIn =
+  //     GoogleSignIn(clientId: Platform.isAndroid ? androidId : iosId);
 
   @override
   Future<UserModel?> call(NoParams params) async {

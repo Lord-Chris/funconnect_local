@@ -92,7 +92,7 @@ class AppButton extends StatelessWidget {
                       label,
                       textAlign: TextAlign.center,
                       style: AppTextStyles.medium14.copyWith(
-                        fontSize: labelSize?.sm,
+                        fontSize: labelSize?.spMin,
                         fontWeight: fontWeight,
                         color: labelColor ?? AppColors.black,
                       ),

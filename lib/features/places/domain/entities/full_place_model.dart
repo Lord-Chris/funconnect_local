@@ -31,30 +31,31 @@ class FullPlaceModel extends Equatable {
   final List<ImageModel> images;
   final List<PlaceModel> similarPlaces;
   final bool savedPlace;
-  final String email_address;
+  final String emailAddress;
 
-  const FullPlaceModel(
-      {required this.id,
-      required this.name,
-      required this.headline,
-      required this.coverImagePath,
-      required this.description,
-      required this.addedBy,
-      required this.opensAt,
-      required this.closesAt,
-      required this.phoneE164,
-      required this.address,
-      required this.avgRating,
-      required this.avgReviewCount,
-      this.reviewsAvgRating,
-      required this.reviewsCount,
-      required this.categories,
-      required this.features,
-      this.location,
-      required this.images,
-      required this.similarPlaces,
-      required this.savedPlace,
-      required this.email_address});
+  const FullPlaceModel({
+    required this.id,
+    required this.name,
+    required this.headline,
+    required this.coverImagePath,
+    required this.description,
+    required this.addedBy,
+    required this.opensAt,
+    required this.closesAt,
+    required this.phoneE164,
+    required this.address,
+    required this.avgRating,
+    required this.avgReviewCount,
+    this.reviewsAvgRating,
+    required this.reviewsCount,
+    required this.categories,
+    required this.features,
+    this.location,
+    required this.images,
+    required this.similarPlaces,
+    required this.savedPlace,
+    required this.emailAddress,
+  });
 
   Map<String, dynamic> toMap() {
     return {
@@ -78,7 +79,7 @@ class FullPlaceModel extends Equatable {
       'images': images.map((x) => x.toMap()).toList(),
       'similarPlaces': similarPlaces.map((x) => x.toMap()).toList(),
       'saved_place': savedPlace,
-      'email_address': email_address
+      'email_address': emailAddress
     };
   }
 
@@ -110,7 +111,7 @@ class FullPlaceModel extends Equatable {
         similarPlaces: List<PlaceModel>.from(
             map['similarPlaces']?.map((x) => PlaceModel.fromMap(x))),
         savedPlace: map['saved_place'] ?? false,
-        email_address: map["email_address"] ?? "");
+        emailAddress: map["email_address"] ?? "");
   }
   String toJson() => json.encode(toMap());
 
@@ -138,7 +139,7 @@ class FullPlaceModel extends Equatable {
       images,
       similarPlaces,
       savedPlace,
-      email_address,
+      emailAddress,
     ];
   }
 
@@ -167,30 +168,31 @@ class FullPlaceModel extends Equatable {
     List<ImageModel>? images,
     List<PlaceModel>? similarPlaces,
     bool? savedPlace,
-    String? email_address,
+    String? emailAddress,
   }) {
     return FullPlaceModel(
-        id: id ?? this.id,
-        name: name ?? this.name,
-        headline: headline ?? this.headline,
-        coverImagePath: coverImagePath ?? this.coverImagePath,
-        description: description ?? this.description,
-        addedBy: addedBy ?? this.addedBy,
-        opensAt: opensAt ?? this.opensAt,
-        closesAt: closesAt ?? this.closesAt,
-        phoneE164: phoneE164 ?? this.phoneE164,
-        address: address ?? this.address,
-        avgRating: avgRating ?? this.avgRating,
-        avgReviewCount: avgReviewCount ?? this.avgReviewCount,
-        reviewsAvgRating: reviewsAvgRating ?? this.reviewsAvgRating,
-        reviewsCount: reviewsCount ?? this.reviewsCount,
-        categories: categories ?? this.categories,
-        features: features ?? this.features,
-        location: location ?? this.location,
-        images: images ?? this.images,
-        similarPlaces: similarPlaces ?? this.similarPlaces,
-        savedPlace: savedPlace ?? this.savedPlace,
-        email_address: email_address ?? this.email_address);
+      id: id ?? this.id,
+      name: name ?? this.name,
+      headline: headline ?? this.headline,
+      coverImagePath: coverImagePath ?? this.coverImagePath,
+      description: description ?? this.description,
+      addedBy: addedBy ?? this.addedBy,
+      opensAt: opensAt ?? this.opensAt,
+      closesAt: closesAt ?? this.closesAt,
+      phoneE164: phoneE164 ?? this.phoneE164,
+      address: address ?? this.address,
+      avgRating: avgRating ?? this.avgRating,
+      avgReviewCount: avgReviewCount ?? this.avgReviewCount,
+      reviewsAvgRating: reviewsAvgRating ?? this.reviewsAvgRating,
+      reviewsCount: reviewsCount ?? this.reviewsCount,
+      categories: categories ?? this.categories,
+      features: features ?? this.features,
+      location: location ?? this.location,
+      images: images ?? this.images,
+      similarPlaces: similarPlaces ?? this.similarPlaces,
+      savedPlace: savedPlace ?? this.savedPlace,
+      emailAddress: emailAddress ?? this.emailAddress,
+    );
   }
 }
 
