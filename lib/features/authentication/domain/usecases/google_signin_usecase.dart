@@ -7,7 +7,7 @@ import 'package:funconnect/core/usecases/usecase.dart';
 import 'package:funconnect/features/authentication/data/repositories/_authentication_repo.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-class GoogleSignInUsecase with UseCases<bool, NoParams> {
+class GoogleSignInUsecase with UseCases<UserModel?, NoParams> {
   static const androidId =
       "72010274266-6drs994dl4a00k83jfbf6njtf6phtq4e.apps.googleusercontent.com";
   static const iosId =
@@ -18,15 +18,15 @@ class GoogleSignInUsecase with UseCases<bool, NoParams> {
       GoogleSignIn(clientId: Platform.isAndroid ? androidId : iosId);
 
   @override
-  Future<bool> call(NoParams params) async {
+  Future<UserModel?> call(NoParams params) async {
     try {
       final acct =
           await GoogleSignIn(clientId: AppKeys.googleSignClientId).signIn();
-      if (acct == null) return false;
+      if (acct == null) return null;
       //GoogleSignInAuthentication? auth = await acct.authentication;
       //if (auth.idToken == null) null;
-      await repo.signInWithGoogle(acct.serverAuthCode ?? "");
-      return true;
+      final res = await repo.signInWithGoogle(acct.serverAuthCode ?? "");
+      return res;
     } on Failure {
       rethrow;
     } catch (e) {
