@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:funconnect/features/dashboard/presentation/blocs/dashboard_bloc/dashboard_bloc.dart';
 import 'package:funconnect/features/dashboard/presentation/blocs/dashboard_bloc/dashboard_event.dart';
 import 'package:funconnect/features/dashboard/presentation/blocs/dashboard_bloc/dashboard_state.dart';
+import 'package:funconnect/features/dashboard/presentation/blocs/notification_bloc/notification_bloc.dart';
 import 'package:funconnect/features/events/presentation/blocs/events_bloc/events_bloc.dart';
 import 'package:funconnect/features/places/presentation/blocs/explore_bloc/explore_bloc.dart';
 import 'package:funconnect/features/places/presentation/blocs/home_bloc/home_bloc.dart';
@@ -32,6 +33,7 @@ class DashboardView extends StatelessWidget {
         BlocProvider(create: (context) => EventsBloc()),
         BlocProvider(create: (context) => ProfileBloc()),
         BlocProvider(create: (context) => SavedBloc()),
+        BlocProvider(create: (context) => NotificationBloc()),
       ],
       child: BlocBuilder<DashboardBloc, DashboardState>(
         buildWhen: (previous, current) => current is DashboardIdleState,

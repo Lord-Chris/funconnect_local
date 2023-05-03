@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:funconnect/core/utils/general_utils.dart';
 import 'package:funconnect/features/dashboard/presentation/blocs/notification_bloc/notification_bloc.dart';
 import 'package:funconnect/shared/components/app_loader.dart';
-import 'package:funconnect/shared/components/app_network_image.dart';
 import 'package:funconnect/shared/components/custom_button.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
 
@@ -130,12 +129,12 @@ class _NotificationsViewState extends State<NotificationsView> {
                               : AppColors.red,
                         ),
                         Spacing.horizSmall(),
-                        const AppNetworkImage(
-                          url: AppConstants.mockImage,
-                          isCircular: true,
-                          fit: BoxFit.cover,
-                          size: Size.fromRadius(18),
-                        ),
+                        //const AppNetworkImage(
+                        //url: AppConstants.mockImage,
+                        //isCircular: true,
+                        //fit: BoxFit.cover,
+                        //size: Size.fromRadius(18),
+                        //),
                         Spacing.horizRegular(),
                         Expanded(
                           child: Column(

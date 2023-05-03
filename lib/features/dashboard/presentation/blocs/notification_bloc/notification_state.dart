@@ -5,6 +5,8 @@ import 'package:funconnect/features/dashboard/domain/entities/notification_model
 abstract class NotificationState extends Equatable {
   List<NotificationModel> get notifications => [];
 
+  List<NotificationModel> get unreadNotifications => [];
+
   @override
   List<Object?> get props => [notifications];
 }
@@ -20,6 +22,17 @@ class NotificationIdleState extends NotificationState {
 
   @override
   List<NotificationModel> get notifications => notificationData?.data ?? [];
+
+  @override
+  List<NotificationModel> get unreadNotifications {
+    List<NotificationModel> unread = [];
+    for (var element in notificationData?.data ?? []) {
+      if (element.readAt == null) {
+        unread.add(element);
+      }
+    }
+    return unread;
+  }
 
   @override
   List<Object?> get props => [notifications, DateTime.now()];
