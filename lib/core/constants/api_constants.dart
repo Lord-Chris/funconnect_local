@@ -44,7 +44,7 @@ class ApiConstants {
 
   static String searchPlaces(SearchQueryParam query, AppLocation? loc) {
     String url = "$places/search?";
-    if (query.param.isNotEmpty) url += "sqr=${query.param}&";
+    if (query.param.isNotEmpty) url += "sqr=${query.param.toLowerCase()}&";
     if (query.toSearchEnumParam.isEmpty && loc != null) {
       url +=
           "lat=${loc.lat}&long=${loc.long}&city=${loc.city}&state=${loc.state}&country=${loc.country}";

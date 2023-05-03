@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
@@ -375,28 +376,31 @@ class _InfoSection extends StatelessWidget {
                 CupertinoIcons.mail,
                 state.place.emailAddress,
               ),
-            Spacing.vertSmall(),
-            Spacing.vertRegular(),
-            InkWell(
-              onTap: () => context.read<PlaceDetailBloc>().add(BookRideEvent()),
-              child: Container(
-                padding: REdgeInsets.fromLTRB(20, 10, 20, 10),
-                color: AppColors.secondary800,
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    SvgPicture.asset(
-                      AppAssets.bookRideSvg,
-                    ),
-                    Spacing.horizSmall(),
-                    Text(
-                      "Book a ride",
-                      style: AppTextStyles.regular16,
-                    ),
-                  ],
+            if (!Platform.isIOS) ...[
+              Spacing.vertSmall(),
+              Spacing.vertRegular(),
+              InkWell(
+                onTap: () =>
+                    context.read<PlaceDetailBloc>().add(BookRideEvent()),
+                child: Container(
+                  padding: REdgeInsets.fromLTRB(20, 10, 20, 10),
+                  color: AppColors.secondary800,
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      SvgPicture.asset(
+                        AppAssets.bookRideSvg,
+                      ),
+                      Spacing.horizSmall(),
+                      Text(
+                        "Book a ride",
+                        style: AppTextStyles.regular16,
+                      ),
+                    ],
+                  ),
                 ),
               ),
-            ),
+            ],
             Spacing.vertMedium(),
           ],
         );

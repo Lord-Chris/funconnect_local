@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -136,14 +138,16 @@ class _ProfileViewState extends State<ProfileView> {
                   //       context.read<ProfileBloc>().add(MyTicketTapEvent()),
                   // ),
                   // Spacing.vertRegular(),
-                  _ProfileSubButton(
-                    buttonColor: AppColors.primary.withOpacity(.2),
-                    borderColor: AppColors.primary,
-                    label: "My Events",
-                    onTap: () =>
-                        context.read<ProfileBloc>().add(MyEventTapEvent()),
-                  ),
-                  Spacing.vertRegular(),
+                  if (!Platform.isIOS) ...[
+                    _ProfileSubButton(
+                      buttonColor: AppColors.primary.withOpacity(.2),
+                      borderColor: AppColors.primary,
+                      label: "My Events",
+                      onTap: () =>
+                          context.read<ProfileBloc>().add(MyEventTapEvent()),
+                    ),
+                    Spacing.vertRegular(),
+                  ],
                   Container(
                     padding: REdgeInsets.fromLTRB(18, 22, 18, 20),
                     decoration: BoxDecoration(

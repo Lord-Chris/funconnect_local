@@ -85,33 +85,34 @@ class FullPlaceModel extends Equatable {
 
   factory FullPlaceModel.fromMap(Map<String, dynamic> map) {
     return FullPlaceModel(
-        id: map['id'] ?? '',
-        name: map['name'] ?? '',
-        headline: map['headline'] ?? '',
-        coverImagePath: map['cover_image_path'] ?? '',
-        description: map['description'] ?? '',
-        addedBy: map['added_by'] ?? '',
-        opensAt: map['opens_at'] ?? '',
-        closesAt: map['closes_at'] ?? '',
-        phoneE164: map['phone_e164'] ?? '',
-        address: map['address'] ?? '',
-        avgRating: map['avg_rating']?.toDouble() ?? 0.0,
-        avgReviewCount: map['avg_review_count']?.toDouble() ?? 0.0,
-        reviewsAvgRating: double.tryParse(map['reviews_avg_rating'] ?? ""),
-        reviewsCount: map['reviews_count']?.toDouble() ?? 0.0,
-        categories: List<CategoryModel>.from(
-            map['categories']?.map((x) => CategoryModel.fromMap(x))),
-        features: List<FeatureModel>.from(
-            map['features']?.map((x) => FeatureModel.fromMap(x))),
-        location: map['location'] != null
-            ? PlaceLocationModel.fromMap(map['location'])
-            : null,
-        images: List<ImageModel>.from(
-            map['images']?.map((x) => ImageModel.fromMap(x))),
-        similarPlaces: List<PlaceModel>.from(
-            map['similarPlaces']?.map((x) => PlaceModel.fromMap(x))),
-        savedPlace: map['saved_place'] ?? false,
-        emailAddress: map["email_address"] ?? "");
+      id: map['id'] ?? '',
+      name: map['name'] ?? '',
+      headline: map['headline'] ?? '',
+      coverImagePath: map['cover_image_path'] ?? '',
+      description: map['description'] ?? '',
+      addedBy: map['added_by'] ?? '',
+      opensAt: map['opens_at'] ?? '',
+      closesAt: map['closes_at'] ?? '',
+      phoneE164: map['phone_e164'] ?? '',
+      address: map['address'] ?? '',
+      avgRating: map['avg_rating']?.toDouble() ?? 0.0,
+      avgReviewCount: map['avg_review_count']?.toDouble() ?? 0.0,
+      reviewsAvgRating: double.tryParse(map['reviews_avg_rating'] ?? ""),
+      reviewsCount: map['reviews_count']?.toDouble() ?? 0.0,
+      categories: List<CategoryModel>.from(
+          map['categories']?.map((x) => CategoryModel.fromMap(x))),
+      features: List<FeatureModel>.from(
+          map['features']?.map((x) => FeatureModel.fromMap(x))),
+      location: map['location'] != null
+          ? PlaceLocationModel.fromMap(map['location'])
+          : null,
+      images: List<ImageModel>.from(
+          map['images']?.map((x) => ImageModel.fromMap(x))),
+      similarPlaces: List<PlaceModel>.from(
+          map['similarPlaces']?.map((x) => PlaceModel.fromMap(x))),
+      savedPlace: map['saved_place'] ?? false,
+      emailAddress: map["email_address"] ?? "",
+    );
   }
   String toJson() => json.encode(toMap());
 

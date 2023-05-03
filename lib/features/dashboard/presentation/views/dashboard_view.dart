@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -30,7 +32,7 @@ class DashboardView extends StatelessWidget {
         BlocProvider(create: (context) => DashboardBloc()),
         BlocProvider(create: (context) => HomeBloc()),
         BlocProvider(create: (context) => ExploreBloc()),
-        BlocProvider(create: (context) => EventsBloc()),
+        if (!Platform.isIOS) BlocProvider(create: (context) => EventsBloc()),
         BlocProvider(create: (context) => ProfileBloc()),
         BlocProvider(create: (context) => SavedBloc()),
         BlocProvider(create: (context) => NotificationBloc()),
@@ -44,12 +46,12 @@ class DashboardView extends StatelessWidget {
               children: [
                 LazyLoadIndexedStack(
                   index: state.navBarIndex,
-                  children: const [
-                    HomeView(),
-                    ExploreView(),
-                    EventsView(),
-                    SavedView(),
-                    ProfileView(),
+                  children: [
+                    const HomeView(),
+                    const ExploreView(),
+                    if (!Platform.isIOS) const EventsView(),
+                    const SavedView(),
+                    const ProfileView(),
                   ],
                 ),
                 BlocBuilder<DashboardBloc, DashboardState>(
@@ -110,20 +112,21 @@ class DashboardView extends StatelessWidget {
                   label: "Explore",
                   backgroundColor: Colors.white,
                 ),
-                BottomNavigationBarItem(
-                  icon: Padding(
-                    padding: const EdgeInsets.all(15.0),
-                    child: SvgPicture.asset(AppAssets.eventIconSvg),
-                  ),
-                  activeIcon: Padding(
-                    padding: const EdgeInsets.all(15.0),
-                    child: SvgPicture.asset(
-                      AppAssets.activeEventIconSvg,
+                if (!Platform.isIOS)
+                  BottomNavigationBarItem(
+                    icon: Padding(
+                      padding: const EdgeInsets.all(15.0),
+                      child: SvgPicture.asset(AppAssets.eventIconSvg),
                     ),
+                    activeIcon: Padding(
+                      padding: const EdgeInsets.all(15.0),
+                      child: SvgPicture.asset(
+                        AppAssets.activeEventIconSvg,
+                      ),
+                    ),
+                    label: "Events",
+                    backgroundColor: Colors.white,
                   ),
-                  label: "Events",
-                  backgroundColor: Colors.white,
-                ),
                 BottomNavigationBarItem(
                   icon: Padding(
                     padding: const EdgeInsets.all(15.0),
