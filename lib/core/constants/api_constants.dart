@@ -49,7 +49,7 @@ class ApiConstants {
       url +=
           "lat=${loc.lat}&long=${loc.long}&city=${loc.city}&state=${loc.state}&country=${loc.country}";
     }
-    url += query.toSearchEnumParam;
+    url += query.toParam;
     if (url.endsWith("&")) {
       url.replaceRange(url.lastIndexOf("&"), null, "");
     }

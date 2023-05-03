@@ -79,14 +79,23 @@ class SearchResultView extends HookWidget {
                           context
                               .read<SearchResultBloc>()
                               .add(FilterTapEvent()),
-                      child: CircleAvatar(
-                        radius: 27.r,
-                        backgroundColor: AppColors.exploreIconAsh,
-                        child: Icon(
-                          Icons.filter_list_rounded,
-                          size: 20.sp,
-                        ),
-                      ),
+                      child: BlocBuilder<SearchResultBloc, SearchResultState>(
+                          buildWhen: (_, cur) => cur is SearchResultIdleState,
+                          builder: (context, state) {
+                            return CircleAvatar(
+                              radius: 27.r,
+                              backgroundColor: state.filter.isEmpty
+                                  ? AppColors.exploreIconAsh
+                                  : AppColors.primary,
+                              child: Icon(
+                                Icons.filter_list_rounded,
+                                size: 20.sp,
+                                color: state.filter.isEmpty
+                                    ? null
+                                    : AppColors.black,
+                              ),
+                            );
+                          }),
                     ),
                     Spacing.horizRegular(),
                   ],

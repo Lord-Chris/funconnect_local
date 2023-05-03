@@ -66,19 +66,29 @@ class SearchResultBloc extends Bloc<SearchResultEvent, SearchResultState> {
     FilterTapEvent event,
     Emitter<SearchResultState> emit,
   ) async {
+    // Open Filter Sheet
     final params = await _dialogAndSheetService.showAppBottomSheet(
       SearchFilterSheet(
         categories: locator<IPlaceRepository>().categories?.data ?? [],
         searchQueryParam: searchPlaceUsecase.param,
       ),
     );
+
+    // Update the UI with the status of filter
+    emit((state as SearchResultIdleState).copyWith(
+      searchFilter: params ?? state.filter ?? const SearchQueryParam(),
+    ));
+
+    // End if the params did not change
     if (params == null) return;
+
     try {
       emit(SearchResultLoadingState());
       final res = await searchPlaceUsecase(params as SearchQueryParam);
       emit(SearchResultIdleState(
         placeData: res,
         searchHistoryData: searchPlaceUsecase.searchHistory,
+        searchFilter: params,
       ));
     } on Failure catch (e, s) {
       emit(SearchResultIdleState());

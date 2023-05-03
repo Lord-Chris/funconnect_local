@@ -28,8 +28,9 @@ class SearchQueryParam extends Equatable {
     );
   }
 
-  String get toCategoryParam =>
-      categories.isEmpty ? '' : '&categories=${categories.join(',')}';
+  String get toCategoryParam => categories.isEmpty
+      ? ''
+      : '&categories=${categories.map((e) => e.id).join(',')}';
 
   String get toSearchEnumParam {
     if (searchEnum == SearchEnum.location) return '';
@@ -41,4 +42,6 @@ class SearchQueryParam extends Equatable {
   }
 
   String get toParam => toCategoryParam + toSearchEnumParam;
+
+  bool get isEmpty => this == const SearchQueryParam();
 }

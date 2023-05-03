@@ -27,7 +27,11 @@ class _SavedViewState extends State<SavedView>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 2, vsync: this);
+    if (!Platform.isIOS) {
+      _tabController = TabController(length: 2, vsync: this);
+    } else {
+      _tabController = TabController(length: 1, vsync: this);
+    }
     context.read<SavedBloc>().add(const GetAllUserSavedPlaces());
   }
 
