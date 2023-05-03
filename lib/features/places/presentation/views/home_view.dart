@@ -1,4 +1,3 @@
-import 'package:badges/badges.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -88,12 +87,12 @@ class _HomeViewState extends State<HomeView> {
             onPressed: () =>
                 context.read<HomeBloc>().add(NotificationTapEvent()),
             icon: Badge(
-              showBadge: context
+              isLabelVisible: context
                   .watch<NotificationBloc>()
                   .state
                   .unreadNotifications
                   .isNotEmpty,
-              badgeContent: Text(context
+              label: Text(context
                   .watch<NotificationBloc>()
                   .state
                   .unreadNotifications
