@@ -32,30 +32,31 @@ class FullPlaceModel extends Equatable {
   final List<PlaceModel> similarPlaces;
   final bool savedPlace;
   final String emailAddress;
+  final int showRatings;
 
-  const FullPlaceModel({
-    required this.id,
-    required this.name,
-    required this.headline,
-    required this.coverImagePath,
-    required this.description,
-    required this.addedBy,
-    required this.opensAt,
-    required this.closesAt,
-    required this.phoneE164,
-    required this.address,
-    required this.avgRating,
-    required this.avgReviewCount,
-    this.reviewsAvgRating,
-    required this.reviewsCount,
-    required this.categories,
-    required this.features,
-    this.location,
-    required this.images,
-    required this.similarPlaces,
-    required this.savedPlace,
-    required this.emailAddress,
-  });
+  const FullPlaceModel(
+      {required this.id,
+      required this.name,
+      required this.headline,
+      required this.coverImagePath,
+      required this.description,
+      required this.addedBy,
+      required this.opensAt,
+      required this.closesAt,
+      required this.phoneE164,
+      required this.address,
+      required this.avgRating,
+      required this.avgReviewCount,
+      this.reviewsAvgRating,
+      required this.reviewsCount,
+      required this.categories,
+      required this.features,
+      this.location,
+      required this.images,
+      required this.similarPlaces,
+      required this.savedPlace,
+      required this.emailAddress,
+      required this.showRatings});
 
   Map<String, dynamic> toMap() {
     return {
@@ -79,40 +80,41 @@ class FullPlaceModel extends Equatable {
       'images': images.map((x) => x.toMap()).toList(),
       'similarPlaces': similarPlaces.map((x) => x.toMap()).toList(),
       'saved_place': savedPlace,
-      'email_address': emailAddress
+      'email_address': emailAddress,
+      'show_ratings': showRatings,
     };
   }
 
   factory FullPlaceModel.fromMap(Map<String, dynamic> map) {
     return FullPlaceModel(
-      id: map['id'] ?? '',
-      name: map['name'] ?? '',
-      headline: map['headline'] ?? '',
-      coverImagePath: map['cover_image_path'] ?? '',
-      description: map['description'] ?? '',
-      addedBy: map['added_by'] ?? '',
-      opensAt: map['opens_at'] ?? '',
-      closesAt: map['closes_at'] ?? '',
-      phoneE164: map['phone_e164'] ?? '',
-      address: map['address'] ?? '',
-      avgRating: map['avg_rating']?.toDouble() ?? 0.0,
-      avgReviewCount: map['avg_review_count']?.toDouble() ?? 0.0,
-      reviewsAvgRating: double.tryParse(map['reviews_avg_rating'] ?? ""),
-      reviewsCount: map['reviews_count']?.toDouble() ?? 0.0,
-      categories: List<CategoryModel>.from(
-          map['categories']?.map((x) => CategoryModel.fromMap(x))),
-      features: List<FeatureModel>.from(
-          map['features']?.map((x) => FeatureModel.fromMap(x))),
-      location: map['location'] != null
-          ? PlaceLocationModel.fromMap(map['location'])
-          : null,
-      images: List<ImageModel>.from(
-          map['images']?.map((x) => ImageModel.fromMap(x))),
-      similarPlaces: List<PlaceModel>.from(
-          map['similarPlaces']?.map((x) => PlaceModel.fromMap(x))),
-      savedPlace: map['saved_place'] ?? false,
-      emailAddress: map["email_address"] ?? "",
-    );
+        id: map['id'] ?? '',
+        name: map['name'] ?? '',
+        headline: map['headline'] ?? '',
+        coverImagePath: map['cover_image_path'] ?? '',
+        description: map['description'] ?? '',
+        addedBy: map['added_by'] ?? '',
+        opensAt: map['opens_at'] ?? '',
+        closesAt: map['closes_at'] ?? '',
+        phoneE164: map['phone_e164'] ?? '',
+        address: map['address'] ?? '',
+        avgRating: map['avg_rating']?.toDouble() ?? 0.0,
+        avgReviewCount: map['avg_review_count']?.toDouble() ?? 0.0,
+        reviewsAvgRating: double.tryParse(map['reviews_avg_rating'] ?? ""),
+        reviewsCount: map['reviews_count']?.toDouble() ?? 0.0,
+        categories: List<CategoryModel>.from(
+            map['categories']?.map((x) => CategoryModel.fromMap(x))),
+        features: List<FeatureModel>.from(
+            map['features']?.map((x) => FeatureModel.fromMap(x))),
+        location: map['location'] != null
+            ? PlaceLocationModel.fromMap(map['location'])
+            : null,
+        images: List<ImageModel>.from(
+            map['images']?.map((x) => ImageModel.fromMap(x))),
+        similarPlaces: List<PlaceModel>.from(
+            map['similarPlaces']?.map((x) => PlaceModel.fromMap(x))),
+        savedPlace: map['saved_place'] ?? false,
+        emailAddress: map["email_address"] ?? "",
+        showRatings: map['show_ratings'] ?? 0);
   }
   String toJson() => json.encode(toMap());
 
@@ -141,6 +143,7 @@ class FullPlaceModel extends Equatable {
       similarPlaces,
       savedPlace,
       emailAddress,
+      showRatings
     ];
   }
 
@@ -148,52 +151,52 @@ class FullPlaceModel extends Equatable {
   TimeOfDay get closesAtParsed => GeneralUtils.stringToTimeOfDay(closesAt);
   bool get isBookmarked => savedPlace;
 
-  FullPlaceModel copyWith({
-    String? id,
-    String? name,
-    String? headline,
-    String? coverImagePath,
-    String? description,
-    String? addedBy,
-    String? opensAt,
-    String? closesAt,
-    String? phoneE164,
-    String? address,
-    double? avgRating,
-    double? avgReviewCount,
-    double? reviewsAvgRating,
-    double? reviewsCount,
-    List<CategoryModel>? categories,
-    List<FeatureModel>? features,
-    PlaceLocationModel? location,
-    List<ImageModel>? images,
-    List<PlaceModel>? similarPlaces,
-    bool? savedPlace,
-    String? emailAddress,
-  }) {
+  FullPlaceModel copyWith(
+      {String? id,
+      String? name,
+      String? headline,
+      String? coverImagePath,
+      String? description,
+      String? addedBy,
+      String? opensAt,
+      String? closesAt,
+      String? phoneE164,
+      String? address,
+      double? avgRating,
+      double? avgReviewCount,
+      double? reviewsAvgRating,
+      double? reviewsCount,
+      List<CategoryModel>? categories,
+      List<FeatureModel>? features,
+      PlaceLocationModel? location,
+      List<ImageModel>? images,
+      List<PlaceModel>? similarPlaces,
+      bool? savedPlace,
+      String? emailAddress,
+      int? showRatings}) {
     return FullPlaceModel(
-      id: id ?? this.id,
-      name: name ?? this.name,
-      headline: headline ?? this.headline,
-      coverImagePath: coverImagePath ?? this.coverImagePath,
-      description: description ?? this.description,
-      addedBy: addedBy ?? this.addedBy,
-      opensAt: opensAt ?? this.opensAt,
-      closesAt: closesAt ?? this.closesAt,
-      phoneE164: phoneE164 ?? this.phoneE164,
-      address: address ?? this.address,
-      avgRating: avgRating ?? this.avgRating,
-      avgReviewCount: avgReviewCount ?? this.avgReviewCount,
-      reviewsAvgRating: reviewsAvgRating ?? this.reviewsAvgRating,
-      reviewsCount: reviewsCount ?? this.reviewsCount,
-      categories: categories ?? this.categories,
-      features: features ?? this.features,
-      location: location ?? this.location,
-      images: images ?? this.images,
-      similarPlaces: similarPlaces ?? this.similarPlaces,
-      savedPlace: savedPlace ?? this.savedPlace,
-      emailAddress: emailAddress ?? this.emailAddress,
-    );
+        id: id ?? this.id,
+        name: name ?? this.name,
+        headline: headline ?? this.headline,
+        coverImagePath: coverImagePath ?? this.coverImagePath,
+        description: description ?? this.description,
+        addedBy: addedBy ?? this.addedBy,
+        opensAt: opensAt ?? this.opensAt,
+        closesAt: closesAt ?? this.closesAt,
+        phoneE164: phoneE164 ?? this.phoneE164,
+        address: address ?? this.address,
+        avgRating: avgRating ?? this.avgRating,
+        avgReviewCount: avgReviewCount ?? this.avgReviewCount,
+        reviewsAvgRating: reviewsAvgRating ?? this.reviewsAvgRating,
+        reviewsCount: reviewsCount ?? this.reviewsCount,
+        categories: categories ?? this.categories,
+        features: features ?? this.features,
+        location: location ?? this.location,
+        images: images ?? this.images,
+        similarPlaces: similarPlaces ?? this.similarPlaces,
+        savedPlace: savedPlace ?? this.savedPlace,
+        emailAddress: emailAddress ?? this.emailAddress,
+        showRatings: showRatings ?? this.showRatings);
   }
 }
 
@@ -294,5 +297,6 @@ final mockFullPlace = {
   ],
   "similarPlaces": [],
   "saved_place": false,
-  "email_address": "test@test.com"
+  "email_address": "test@test.com",
+  "show_ratings": 1
 };

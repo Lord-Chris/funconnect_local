@@ -272,6 +272,7 @@ class _InterestSelectedSection extends StatelessWidget {
             itemBuilder: (context, index) {
               final place = state.interestPlaces[index];
               return HomeCategoriesLargeWidget(
+                showRatings: place.showRatings,
                 coverImage: place.coverImagePath,
                 name: place.name,
                 isBookmarked: place.isBookmarked,
@@ -318,6 +319,7 @@ class _DefaultHomeView extends StatelessWidget {
                   children: e.data.map((e) => e as PlaceModel).toList(),
                   widget: (PlaceModel place) {
                     return HomeCategoriesLargeWidget(
+                      showRatings: place.showRatings,
                       coverImage: place.coverImagePath,
                       name: place.name,
                       isBookmarked: place.isBookmarked,
