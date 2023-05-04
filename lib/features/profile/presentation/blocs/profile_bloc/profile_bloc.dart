@@ -237,14 +237,14 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     TwitterTapEvent event,
     Emitter<ProfileState> emit,
   ) {
-    GeneralUtils.openUrl(Uri.parse(AppConstants.twitterUrl));
+    GeneralUtils.openAppRelatedUrl(Uri.parse(AppConstants.twitterUrl));
   }
 
   FutureOr<void> _onInstagramTapEvent(
     InstagramTapEvent event,
     Emitter<ProfileState> emit,
   ) {
-    GeneralUtils.openUrl(Uri.parse(AppConstants.instagramUrl));
+    GeneralUtils.openAppRelatedUrl(Uri.parse(AppConstants.instagramUrl));
   }
 
   FutureOr<void> _onHelpDeskTapEvent(

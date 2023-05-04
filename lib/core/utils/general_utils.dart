@@ -48,6 +48,14 @@ class GeneralUtils {
     }
   }
 
+  static Future<void> openAppRelatedUrl(Uri url) async {
+    if (await canLaunchUrl(url)) {
+      await launchUrl(url, mode: LaunchMode.externalApplication);
+    } else {
+      throw Failure('Could not launch $url');
+    }
+  }
+
   static Future<void> updateApp() async {
     await StoreRedirect.redirect();
   }
