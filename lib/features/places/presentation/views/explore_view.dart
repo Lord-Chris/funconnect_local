@@ -175,6 +175,7 @@ class _ExploreViewState extends State<ExploreView> {
                                 state.recentlyAdded.map((e) => e).toList(),
                             widget: (PlaceModel place) {
                               return HomeCategoriesLargeWidget(
+                                showRatings: place.showRatings,
                                 coverImage: place.coverImagePath,
                                 name: place.name,
                                 isBookmarked: place.isBookmarked,
@@ -194,6 +195,7 @@ class _ExploreViewState extends State<ExploreView> {
                             children: state.bestRatings.map((e) => e).toList(),
                             widget: (PlaceModel place) {
                               return HomeCategoriesLargeWidget(
+                                showRatings: place.showRatings,
                                 coverImage: place.coverImagePath,
                                 name: place.name,
                                 isBookmarked: place.isBookmarked,
@@ -252,6 +254,7 @@ class FeaturedSection extends StatelessWidget {
               Expanded(
                 flex: 5,
                 child: HomeCategoriesLargeWidget(
+                  showRatings: place1.showRatings,
                   size: Size.infinite,
                   coverImage: place1.coverImagePath,
                   name: place1.name,

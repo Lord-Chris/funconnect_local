@@ -215,6 +215,7 @@ class SearchResultView extends HookWidget {
                                   itemBuilder: (context, index) {
                                     final place = state.places[index];
                                     return HomeCategoriesLargeWidget(
+                                      showRatings: place.showRatings,
                                       coverImage: place.coverImagePath,
                                       name: place.name,
                                       isBookmarked: place.isBookmarked,

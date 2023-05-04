@@ -16,6 +16,7 @@ class HomeCategoriesLargeWidget extends HookWidget {
   final Size? size;
   final VoidCallback? onTap;
   final VoidCallback? onBookmarkTap;
+  final int showRatings;
 
   const HomeCategoriesLargeWidget({
     Key? key,
@@ -24,6 +25,7 @@ class HomeCategoriesLargeWidget extends HookWidget {
     required this.rating,
     required this.ratingCount,
     required this.coverImage,
+    required this.showRatings,
     this.size,
     this.onTap,
     this.onBookmarkTap,
@@ -86,48 +88,51 @@ class HomeCategoriesLargeWidget extends HookWidget {
                   ],
                 ),
                 Spacing.vertTiny(),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text(
-                      rating.toString(),
-                      style: AppTextStyles.dynamic(
-                        10,
-                        weight: FontWeight.w300,
-                      ),
-                    ),
-                    Spacing.horizExtraTiny(),
-                    Flexible(
-                      child: FittedBox(
-                        child: RatingStars(
-                          value: rating,
-                          onValueChanged: (v) {},
-                          starBuilder: (index, color) => Icon(
-                            Icons.star,
-                            color: color,
-                            size: 10.0,
+                showRatings > 0
+                    ? Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text(
+                            rating.toString(),
+                            style: AppTextStyles.dynamic(
+                              10,
+                              weight: FontWeight.w300,
+                            ),
                           ),
-                          starSize: 10,
-                          starCount: 5,
-                          maxValue: 5,
-                          maxValueVisibility: false,
-                          valueLabelVisibility: false,
-                          animationDuration: const Duration(milliseconds: 1000),
-                          starOffColor: AppColors.white,
-                          starColor: AppColors.primary,
-                        ),
-                      ),
-                    ),
-                    Spacing.horizTiny(),
-                    Text(
-                      ratingCount.toString(),
-                      style: AppTextStyles.dynamic(
-                        10,
-                        weight: FontWeight.w300,
-                      ),
-                    ),
-                  ],
-                ),
+                          Spacing.horizExtraTiny(),
+                          Flexible(
+                            child: FittedBox(
+                              child: RatingStars(
+                                value: rating,
+                                onValueChanged: (v) {},
+                                starBuilder: (index, color) => Icon(
+                                  Icons.star,
+                                  color: color,
+                                  size: 10.0,
+                                ),
+                                starSize: 10,
+                                starCount: 5,
+                                maxValue: 5,
+                                maxValueVisibility: false,
+                                valueLabelVisibility: false,
+                                animationDuration:
+                                    const Duration(milliseconds: 1000),
+                                starOffColor: AppColors.white,
+                                starColor: AppColors.primary,
+                              ),
+                            ),
+                          ),
+                          Spacing.horizTiny(),
+                          Text(
+                            ratingCount.toString(),
+                            style: AppTextStyles.dynamic(
+                              10,
+                              weight: FontWeight.w300,
+                            ),
+                          ),
+                        ],
+                      )
+                    : const SizedBox(),
               ],
             ),
           ),

@@ -184,6 +184,7 @@ class CategoryDetailView extends HookWidget {
                               itemBuilder: (context, index) {
                                 final place = state.places.data[index];
                                 return HomeCategoriesLargeWidget(
+                                  showRatings: place.showRatings,
                                   coverImage: place.coverImagePath,
                                   name: place.name,
                                   isBookmarked: place.isBookmarked,
