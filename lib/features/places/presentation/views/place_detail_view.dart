@@ -108,6 +108,7 @@ class _MorePlacesSection extends StatelessWidget {
           children: state.place.similarPlaces.map((e) => e).toList(),
           widget: (PlaceModel place) {
             return HomeCategoriesLargeWidget(
+              showRatings: place.showRatings,
               coverImage: place.coverImagePath,
               name: place.name,
               isBookmarked: place.isBookmarked,
@@ -270,45 +271,48 @@ class _InfoSection extends StatelessWidget {
               ],
             ),
             Spacing.vertTiny(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Text(
-                  state.place.reviewsAvgRating?.toStringAsFixed(1) ??
-                      state.place.avgRating.toString(),
-                  style: AppTextStyles.regular16,
-                ),
-                Spacing.horizExtraTiny(),
-                Flexible(
-                  child: FittedBox(
-                    child: RatingStars(
-                      value:
-                          state.place.reviewsAvgRating ?? state.place.avgRating,
-                      onValueChanged: (v) {},
-                      starBuilder: (index, color) => Icon(
-                        Icons.star,
-                        color: color,
-                        size: 14,
+            place.showRatings > 0
+                ? Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text(
+                        state.place.reviewsAvgRating?.toStringAsFixed(1) ??
+                            state.place.avgRating.toString(),
+                        style: AppTextStyles.regular16,
                       ),
-                      starSize: 14,
-                      starCount: 5,
-                      starSpacing: 0,
-                      maxValue: 5,
-                      maxValueVisibility: false,
-                      valueLabelVisibility: false,
-                      animationDuration: const Duration(milliseconds: 1000),
-                      starOffColor: AppColors.white,
-                      starColor: AppColors.primary,
-                    ),
-                  ),
-                ),
-                Spacing.horizTiny(),
-                Text(
-                  "(${state.place.reviewsCount.toInt()})",
-                  style: AppTextStyles.regular16,
-                ),
-              ],
-            ),
+                      Spacing.horizExtraTiny(),
+                      Flexible(
+                        child: FittedBox(
+                          child: RatingStars(
+                            value: state.place.reviewsAvgRating ??
+                                state.place.avgRating,
+                            onValueChanged: (v) {},
+                            starBuilder: (index, color) => Icon(
+                              Icons.star,
+                              color: color,
+                              size: 14,
+                            ),
+                            starSize: 14,
+                            starCount: 5,
+                            starSpacing: 0,
+                            maxValue: 5,
+                            maxValueVisibility: false,
+                            valueLabelVisibility: false,
+                            animationDuration:
+                                const Duration(milliseconds: 1000),
+                            starOffColor: AppColors.white,
+                            starColor: AppColors.primary,
+                          ),
+                        ),
+                      ),
+                      Spacing.horizTiny(),
+                      Text(
+                        "(${state.place.reviewsCount.toInt()})",
+                        style: AppTextStyles.regular16,
+                      ),
+                    ],
+                  )
+                : const SizedBox(),
             Spacing.vertMedium(),
             Text(
               "About",
