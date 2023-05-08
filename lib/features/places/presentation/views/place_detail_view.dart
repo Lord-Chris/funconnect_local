@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_rating_stars/flutter_rating_stars.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -319,6 +320,8 @@ class _InfoSection extends StatelessWidget {
               style: AppTextStyles.medium16,
             ),
             Spacing.vertSmall(),
+
+            /** 
             ReadMoreText(
               state.place.description,
               trimLines: 4,
@@ -330,6 +333,10 @@ class _InfoSection extends StatelessWidget {
               moreStyle: AppTextStyles.regular14.copyWith(
                 color: AppColors.primary,
               ),
+            ),
+            */
+            Html(
+              data: state.place.description,
             ),
             if (state.place.features.isNotEmpty) Spacing.vertRegular(),
             if (state.place.features.isNotEmpty)
