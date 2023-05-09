@@ -337,6 +337,17 @@ class _InfoSection extends StatelessWidget {
             */
             Html(
               data: state.place.description,
+              style: {
+                "body": Style(
+                  padding: EdgeInsets.zero,
+                  margin: Margins(
+                    bottom: Margin.zero(),
+                    left: Margin.zero(),
+                    top: Margin.zero(),
+                    right: Margin.zero(),
+                  ),
+                )
+              },
             ),
             if (state.place.features.isNotEmpty) Spacing.vertRegular(),
             if (state.place.features.isNotEmpty)
