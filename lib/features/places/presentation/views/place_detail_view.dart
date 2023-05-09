@@ -348,6 +348,9 @@ class _InfoSection extends StatelessWidget {
                   ),
                 )
               },
+              onLinkTap: (url, context, attributes, element) {
+                GeneralUtils.openUrl(Uri.parse(url ?? ""));
+              },
             ),
             if (state.place.features.isNotEmpty) Spacing.vertRegular(),
             if (state.place.features.isNotEmpty)
