@@ -102,17 +102,19 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
         emit(state.copyWith(
             profile: state.profile.copyWith(photoUrl: res.photoUrl)));
         _dialogAndSheetService.showAppDialog(const StatusDialog(
-            isError: false,
-            title: "Profile Image",
-            body: "Profile Image Uploaded Successfully"));
+          isError: false,
+          title: "Profile Image",
+          body: "Profile Image Uploaded Successfully",
+        ));
         // add(EditProfileFieldsEvent(
         //     state.profile.copyWith(profileImageUrl: croppedFile!.path)));
       }
     } on Failure catch (e) {
       _dialogAndSheetService.showAppDialog(StatusDialog(
-          isError: true,
-          title: "Error Updating Profile Image",
-          body: e.message));
+        isError: true,
+        title: "Error Updating Profile Image",
+        body: e.message,
+      ));
     }
   }
 

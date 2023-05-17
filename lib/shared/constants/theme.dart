@@ -7,17 +7,20 @@ class AppTheme {
   AppTheme._();
 
   static final theme = ThemeData(
-    primarySwatch: Colors.orange,
     primaryColor: AppColors.primary,
     fontFamily: GoogleFonts.inter().fontFamily,
     scaffoldBackgroundColor: AppColors.black,
     useMaterial3: true,
-    backgroundColor: AppColors.black,
     brightness: Brightness.dark,
     appBarTheme: const AppBarTheme(
       backgroundColor: AppColors.black,
       actionsIconTheme: IconThemeData(size: 25),
       iconTheme: IconThemeData(size: 15),
+    ),
+    colorScheme: ColorScheme.fromSwatch(
+      brightness: Brightness.dark,
+      primarySwatch: Colors.orange,
+      backgroundColor: AppColors.black,
     ),
   );
 }

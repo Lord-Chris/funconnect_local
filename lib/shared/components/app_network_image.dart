@@ -61,6 +61,8 @@ class AppNetworkImage extends StatelessWidget {
     return CachedNetworkImage(
       imageUrl: imageUrl,
       fit: fit,
+      useOldImageOnUrlChange: true,
+      cacheKey: imageUrl,
       fadeInDuration: const Duration(milliseconds: 200),
       fadeOutDuration: const Duration(milliseconds: 200),
       height: size?.height,
@@ -76,7 +78,7 @@ class AppNetworkImage extends StatelessWidget {
             borderRadius:
                 isCircular ? null : BorderRadius.circular(borderRadius),
             image: DecorationImage(
-              image: imageProvider,
+              image: NetworkImage(imageUrl),
               fit: fit,
             ),
           ),

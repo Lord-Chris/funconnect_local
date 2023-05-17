@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -42,7 +44,9 @@ class _HomeViewState extends State<HomeView> {
         titleSpacing: 10,
         leading: Center(
           child: InkWell(
-            onTap: () => context.read<DashboardBloc>().add(TabTapEvent(4)),
+            onTap: () => context
+                .read<DashboardBloc>()
+                .add(TabTapEvent(!Platform.isIOS ? 4 : 3)),
             child: AppNetworkImage(
               size: Size.fromRadius(25.r),
               isCircular: true,

@@ -18,7 +18,7 @@ class ProfileIdleState extends ProfileState {
   });
 
   @override
-  List<Object> get props => [userProfile];
+  List<Object> get props => [userProfile, Random().nextInt(1000)];
 }
 
 class ProfileFailureState extends ProfileState {

@@ -124,8 +124,9 @@ class NetworkService extends INetworkService {
         _headers.addAll(headers);
       }
       String fileName = file.path.split('/').last;
-      FormData formData = FormData.fromMap(
-          {key: await MultipartFile.fromFile(file.path, filename: fileName)});
+      FormData formData = FormData.fromMap({
+        key: await MultipartFile.fromFile(file.path, filename: fileName),
+      });
 
       final res = await _dio.post(
         url,
