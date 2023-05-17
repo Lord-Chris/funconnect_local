@@ -29,7 +29,7 @@ class DashboardView extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => DashboardBloc()),
+        // BlocProvider(create: (context) => DashboardBloc()),
         BlocProvider(create: (context) => HomeBloc()),
         BlocProvider(create: (context) => ExploreBloc()),
         if (!Platform.isIOS) BlocProvider(create: (context) => EventsBloc()),

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:funconnect/core/app/_app.dart';
 import 'package:funconnect/core/constants/app_keys.dart';
 import 'package:funconnect/core/models/_models.dart';
@@ -18,11 +20,17 @@ class GoogleSignInUsecase with UseCases<UserModel?, NoParams> {
   @override
   Future<UserModel?> call(NoParams params) async {
     try {
-      final acct =
-          await GoogleSignIn(clientId: AppKeys.googleSignClientId).signIn();
+      final acct = await GoogleSignIn(
+        clientId: Platform.isAndroid
+            ? AppKeys.googleSignClientIdAndroid
+            : AppKeys.googleSignClientIdIos,
+      ).signIn();
       if (acct == null) return null;
-      //GoogleSignInAuthentication? auth = await acct.authentication;
-      //if (auth.idToken == null) null;
+      if (acct.serverAuthCode == null) {
+        throw const Failure('Google Sign in Failed');
+      }
+      // GoogleSignInAuthentication? auth = await acct.authentication;
+      // if (auth.idToken == null) null;
       final res = await repo.signInWithGoogle(acct.serverAuthCode ?? "");
       return res;
     } on Failure {
