@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:funconnect/core/app/_app.dart';
 import 'package:funconnect/core/constants/hive_keys.dart';
 import 'package:funconnect/core/constants/storage_keys.dart';
@@ -21,12 +22,12 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
     InitializeSplashEvent event,
     Emitter<SplashState> emit,
   ) async {
-    await Future.delayed(const Duration(seconds: 2));
     emit(SplashFinishedState());
   }
 
   Future<void> _onSplashFinished(
       FinishSplashEvent event, Emitter<SplashState> emit) async {
+    FlutterNativeSplash.remove();
     if (await _forceUpdateAppService.needsUpdate) {
       _navigationService.offNamed(Routes.versionUpdateRoute);
       return;
