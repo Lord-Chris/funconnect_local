@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:funconnect/core/constants/hive_keys.dart';
 import 'package:funconnect/core/models/_models.dart';
+
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:logger/logger.dart';
 
@@ -14,6 +15,8 @@ class LocalStorageService extends ILocalStorageService {
   Future<void> init() async {
     await Hive.initFlutter();
     await clearAll();
+
+    // await clearAll();
     await _openBoxes();
   }
 
