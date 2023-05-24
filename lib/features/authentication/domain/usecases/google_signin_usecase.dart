@@ -8,14 +8,12 @@ import 'package:funconnect/features/authentication/data/repositories/_authentica
 import 'package:google_sign_in/google_sign_in.dart';
 
 class GoogleSignInUsecase with UseCases<UserModel?, NoParams> {
-  static const androidId =
-      "72010274266-6drs994dl4a00k83jfbf6njtf6phtq4e.apps.googleusercontent.com";
-  static const iosId =
-      "72010274266-vosimccjbt4dj700ots582hg6i5br0ft.apps.googleusercontent.com";
+  // static const androidId =
+  //     "72010274266-6drs994dl4a00k83jfbf6njtf6phtq4e.apps.googleusercontent.com";
+  // static const iosId =
+  //     "72010274266-vosimccjbt4dj700ots582hg6i5br0ft.apps.googleusercontent.com";
 
   final repo = locator<IAuthenticationRepository>();
-  // final GoogleSignIn _googleSignIn =
-  //     GoogleSignIn(clientId: Platform.isAndroid ? androidId : iosId);
 
   @override
   Future<UserModel?> call(NoParams params) async {
@@ -26,12 +24,17 @@ class GoogleSignInUsecase with UseCases<UserModel?, NoParams> {
             : AppKeys.googleSignClientIdIos,
       ).signIn();
       if (acct == null) return null;
-      if (acct.serverAuthCode == null) {
-        throw const Failure('Google Sign in Failed');
+
+      UserModel? res;
+      if (Platform.isAndroid) {
+        res = await repo.signInWithGoogle(acct.serverAuthCode ?? "");
+      } else {
+        GoogleSignInAuthentication auth = await acct.authentication;
+        if (auth.idToken == null) {
+          throw const Failure('Google Sign in Failed');
+        }
+        res = await repo.signInWithGoogleIos(auth.idToken ?? "");
       }
-      // GoogleSignInAuthentication? auth = await acct.authentication;
-      // if (auth.idToken == null) null;
-      final res = await repo.signInWithGoogle(acct.serverAuthCode ?? "");
       return res;
     } on Failure {
       rethrow;

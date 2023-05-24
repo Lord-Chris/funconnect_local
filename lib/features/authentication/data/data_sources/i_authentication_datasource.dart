@@ -27,6 +27,10 @@ abstract class IAuthenticationDataSource {
     String token,
   );
 
+  Future<ApiResponse<UserModel>> loginWithGoogleIos(
+    String token,
+  );
+
   Future<ApiResponse<VerifyOtpResponse>> loginWithApple(
     String token,
   );

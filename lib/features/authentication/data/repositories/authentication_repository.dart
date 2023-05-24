@@ -45,6 +45,22 @@ class AuthenticationRepository extends IAuthenticationRepository {
   }
 
   @override
+  Future<UserModel> signInWithGoogleIos(String idToken) async {
+    final res = await _httpDS.loginWithGoogleIos(idToken);
+    await _localStorageService.write(
+      HiveKeys.userBoxId,
+      key: StorageKeys.userProfile,
+      data: res.data.toMap(),
+    );
+    await _localStorageService.write(
+      HiveKeys.appBoxId,
+      key: StorageKeys.isFirstTime,
+      data: false,
+    );
+    return res.data;
+  }
+
+  @override
   Future<UserModel> verifyOtp(VerifyOtpParams params) async {
     final res = await _httpDS.verifyOtp(params);
     await _localStorageService.write(
