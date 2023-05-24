@@ -12,22 +12,23 @@ class ApiConstants {
   static const places = "$_baseUrl/places";
 
   // AUTH
-  static get checkEmail => "$_auth/check-email";
-  static get requestOtp => "$_auth/login/send-otp";
-  static get loginWithOtp => "$_auth/login/otp";
-  static get loginWithGoogle => "$_auth/login/google";
-  static get logout => "$_auth/logout";
-  static get deleteAccount => "$_auth/delete-account";
+  static String get checkEmail => "$_auth/check-email";
+  static String get requestOtp => "$_auth/login/send-otp";
+  static String get loginWithOtp => "$_auth/login/otp";
+  static String get loginWithGoogle => "$_auth/login/google";
+  static String get loginWithGoogleIos => "$_auth/login/google-ios";
+  static String get logout => "$_auth/logout";
+  static String get deleteAccount => "$_auth/delete-account";
 
   //PROFILE
-  static get profileSetup => "$_core/profile";
-  static get profileImage => "$profileSetup/image";
-  static get profileLocationSetup => "$_core/profile/location";
-  static get profileImageSetup => "$_core/profile/image";
+  static String get profileSetup => "$_core/profile";
+  static String get profileImage => "$profileSetup/image";
+  static String get profileLocationSetup => "$_core/profile/location";
+  static String get profileImageSetup => "$_core/profile/image";
 
   // PLACES
-  static get categories => "$places/categories";
-  static get userInterests => "$places/user/interests";
+  static String get categories => "$places/categories";
+  static String get userInterests => "$places/user/interests";
   static String singlePlace(String placeId) => "$places/$placeId";
   static String placeReview(String placeId) => "$places/reviews/$placeId";
   static String exploreFilter(ExploreSearchEnum filter) =>
@@ -65,14 +66,14 @@ class ApiConstants {
       '$places/saved-places/$placeId';
 
   // EVENTS
-  static get events => "$_baseUrl/events";
+  static String get events => "$_baseUrl/events";
 
   //SAVED
-  static get savedPlaces => "$places/saved-places";
+  static String get savedPlaces => "$places/saved-places";
 
-  static get imageKey => 'image';
+  static String get imageKey => 'image';
 
   // GENERAL
-  static get notifications => "$_core/notifications";
-  static get readAllNotification => "$notifications/mark-all-as-read";
+  static String get notifications => "$_core/notifications";
+  static String get readAllNotification => "$notifications/mark-all-as-read";
 }

@@ -26,6 +26,12 @@ class MockAuthenticationRepository extends IAuthenticationRepository {
   }
 
   @override
+  Future<UserModel?> signInWithGoogleIos(String idToken) async {
+    await Future.delayed(const Duration(seconds: 2));
+    return null;
+  }
+
+  @override
   Future<UserModel> verifyOtp(VerifyOtpParams params) async {
     await Future.delayed(const Duration(seconds: 2));
     return UserModel.fromMap(

@@ -22,6 +22,10 @@
 	<string>$(FLUTTER_BUILD_NAME)</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>GIDClientID</key>
+	<string>72010274266-vosimccjbt4dj700ots582hg6i5br0ft.apps.googleusercontent.com</string>
+	<key>GIDServerClientID</key>
+	<string>72010274266-225qhg4k94324lkij506rjmq6ip178na.apps.googleusercontent.com</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -74,6 +78,10 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
+	<key>UIApplicationSupportsIndirectInputEvents</key>
+	<true/>
+	<key>UIStatusBarHidden</key>
 	<false/>
 </dict>
 </plist>

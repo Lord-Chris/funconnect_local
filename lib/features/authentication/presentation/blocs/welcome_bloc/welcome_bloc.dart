@@ -71,6 +71,11 @@ class WelcomeBloc extends Bloc<WelcomeEvent, WelcomeState> {
       _logger.e(e);
       FailureHandler.instance.catchError(e, stackTrace: s);
       emit(WelcomeFailureState());
+      _dialogAndSheetService.showAppDialog(StatusDialog(
+        isError: true,
+        title: "Error Signing In",
+        body: e.message,
+      ));
     }
   }
 
@@ -87,6 +92,11 @@ class WelcomeBloc extends Bloc<WelcomeEvent, WelcomeState> {
       _logger.e(e);
       FailureHandler.instance.catchError(e, stackTrace: s);
       emit(WelcomeFailureState());
+      _dialogAndSheetService.showAppDialog(StatusDialog(
+        isError: true,
+        title: "Error Signing In",
+        body: e.message,
+      ));
     }
   }
 

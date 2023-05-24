@@ -57,9 +57,9 @@ class LocationService extends ILocationService {
         _logger.i("res Getting saved location is $res");
       }
       if (res == null) return null;
+      _logger.d(res);
       _logger.i("Getting place details");
       final place = await placemarkFromCoordinates(res.latitude, res.longitude);
-      _logger.i(res);
       if (place.isEmpty) {
         _location = AppLocation(lat: res.latitude, long: res.longitude);
       } else {
@@ -77,6 +77,8 @@ class LocationService extends ILocationService {
       throw Failure("Unable to get location", extraData: e.toString());
     }
   }
+
+  //@
 
   @override
   Future<bool> requestPermission() async {

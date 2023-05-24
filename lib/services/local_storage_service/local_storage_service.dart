@@ -17,6 +17,7 @@ class LocalStorageService extends ILocalStorageService {
     await clearAll();
 
     // await clearAll();
+    // await clearAll();
     await _openBoxes();
   }
 

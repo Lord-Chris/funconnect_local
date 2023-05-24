@@ -77,6 +77,21 @@ class HttpAuthenticationDataSource extends IAuthenticationDataSource
   }
 
   @override
+  Future<ApiResponse<UserModel>> loginWithGoogleIos(String token) async {
+    final body = {"id_token": token};
+    final res = await _networkService.post(
+      ApiConstants.loginWithGoogleIos,
+      body: body,
+    );
+    await _localStorageService.write(
+      HiveKeys.userBoxId,
+      key: StorageKeys.token,
+      data: res.data['data']['api_token'],
+    );
+    return ApiResponse(data: UserModel.fromMap(res.data));
+  }
+
+  @override
   Future<ApiResponse<VerifyOtpResponse>> loginWithApple(String token) async {
     await Future.delayed(const Duration(seconds: 2));
     return const ApiResponse(data: VerifyOtpResponse(email: true, message: ""));
