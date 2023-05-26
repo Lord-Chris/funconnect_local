@@ -19,4 +19,7 @@ class StorageKeys {
 
   //Saved Places
   static const userSavedPlaces = "user-saved-places";
+
+  //Saved Location
+  static const userSavedLocation = "user-saved-location";
 }
