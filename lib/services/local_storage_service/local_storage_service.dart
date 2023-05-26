@@ -14,9 +14,6 @@ class LocalStorageService extends ILocalStorageService {
   @override
   Future<void> init() async {
     await Hive.initFlutter();
-    await clearAll();
-
-    // await clearAll();
     // await clearAll();
     await _openBoxes();
   }
