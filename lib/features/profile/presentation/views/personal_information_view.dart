@@ -11,6 +11,8 @@ import 'package:funconnect/features/profile/presentation/blocs/edit_profile_bloc
 import 'package:funconnect/shared/components/_components.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
 import 'package:intl/intl.dart';
+import 'package:intl_phone_number_input/intl_phone_number_input.dart';
+import 'package:logger/logger.dart';
 
 import '../../../../core/models/_models.dart';
 
@@ -33,7 +35,7 @@ class PersonalInformationView extends StatelessWidget {
             ? ""
             : DateFormat('dd/MM/yyyy').format(DateTime.parse(profile.dob));
         String iMobileNumber =
-            profile.phoneE164 == 'null' ? '' : profile.phoneE164;
+            profile.phoneE164 == 'null' ? '' : "+${profile.phoneE164}";
         return SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Form(
@@ -224,9 +226,77 @@ class PersonalInformationView extends StatelessWidget {
                   ),
                 ),
                 Spacing.vertMedium(),
+                FutureBuilder(
+                  future:
+                      PhoneNumber.getRegionInfoFromPhoneNumber(iMobileNumber),
+                  builder: (context, snapshot) {
+                    return InternationalPhoneNumberInput(
+                        onInputChanged: (val) {
+                          Logger().d("International Phone $val");
+                          context.read<EditProfileBloc>().add(
+                              EditProfileFieldsEvent(profile.copyWith(
+                                  phoneE164: val.phoneNumber)));
+                        },
+                        initialValue: snapshot.data,
+                        inputDecoration: InputDecoration(
+                          labelText: AppText.aTMobileNumber,
+                          suffixIcon: SvgPicture.asset(
+                            AppAssets.arrowDown,
+                            width: 20,
+                            fit: BoxFit.scaleDown,
+                          ),
+                          prefixIcon: Padding(
+                            padding: const EdgeInsets.only(right: 8.0),
+                            child: SvgPicture.asset(
+                              AppAssets.phone,
+                              height: 17.h,
+                              fit: BoxFit.scaleDown,
+                            ),
+                          ),
+                          floatingLabelAlignment: FloatingLabelAlignment.start,
+                          floatingLabelBehavior: FloatingLabelBehavior.auto,
+                          floatingLabelStyle: AppTextStyles.regular14.copyWith(
+                            color: AppColors.white,
+                          ),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(14),
+                            borderSide: const BorderSide(
+                              color: AppColors.gray333,
+                              width: 1,
+                            ),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(14),
+                            borderSide: const BorderSide(
+                              color: AppColors.gray333,
+                              width: 1,
+                            ),
+                          ),
+                          labelStyle: AppTextStyles.regular14.copyWith(
+                            color: AppColors.white,
+                          ),
+                          hintStyle: AppTextStyles.regular14.copyWith(
+                            color: AppColors.gray333,
+                            fontWeight: FontWeight.w300,
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(14),
+                            borderSide: const BorderSide(
+                              color: AppColors.gray333,
+                              width: 1,
+                            ),
+                          ),
+                        ),
+                        autoValidateMode: AutovalidateMode.onUserInteraction);
+                  },
+                ),
+                Spacing.vertMedium(),
                 AppTextField(
-                  onChanged: (val) => context.read<EditProfileBloc>().add(
-                      EditProfileFieldsEvent(profile.copyWith(phoneE164: val))),
+                  onChanged: (val) {
+                    Logger().d("Normal Phone $val");
+                    context.read<EditProfileBloc>().add(EditProfileFieldsEvent(
+                        profile.copyWith(phoneE164: val)));
+                  },
                   inputFormatters: [
                     FilteringTextInputFormatter.deny(" "),
                   ],
