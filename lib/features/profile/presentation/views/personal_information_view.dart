@@ -8,7 +8,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:funconnect/core/extensions/_extensions.dart';
 import 'package:funconnect/features/profile/presentation/blocs/edit_profile_bloc/edit_profile_bloc.dart';
-import 'package:funconnect/features/profile/presentation/blocs/profile_bloc/profile_bloc.dart';
 import 'package:funconnect/shared/components/_components.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
 import 'package:intl/intl.dart';
@@ -36,7 +35,9 @@ class PersonalInformationView extends StatelessWidget {
             ? ""
             : DateFormat('dd/MM/yyyy').format(DateTime.parse(profile.dob));
         String iMobileNumber =
-            profile.phoneE164 == 'null' ? '' : "+${profile.phoneE164}";
+            profile.phoneE164.isEmpty || profile.phoneE164 == 'null'
+                ? ""
+                : "+${profile.phoneE164}";
         return SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Form(
@@ -229,18 +230,23 @@ class PersonalInformationView extends StatelessWidget {
                 Spacing.vertMedium(),
                 FutureBuilder(
                   future:
-                      PhoneNumber.getRegionInfoFromPhoneNumber(iMobileNumber),
+                      PhoneNumber.getRegionInfoFromPhoneNumber(iMobileNumber)
+                          .catchError((error) {
+                    return PhoneNumber(isoCode: 'NG', dialCode: '+253');
+                  }),
                   builder: (context, snapshot) {
+                    if (snapshot.hasError) {
+                      return Text(snapshot.error.toString());
+                    }
                     return InternationalPhoneNumberInput(
                         onInputChanged: (val) {
-                          Logger().d("International Phone $val");
                           context.read<EditProfileBloc>().add(
                               EditProfileFieldsEvent(profile.copyWith(
                                   phoneE164: val.phoneNumber)));
                         },
                         onInputValidated: (value) {
                           context
-                              .read<ProfileBloc>()
+                              .read<EditProfileBloc>()
                               .add(NumberValidationEvent(value));
                         },
                         initialValue: snapshot.data,
@@ -340,7 +346,7 @@ class PersonalInformationView extends StatelessWidget {
                               .read<EditProfileBloc>()
                               .add(AutoValidateFormEvent());
                         } else {
-                          if (context.watch<ProfileBloc>().isNumberValid) {
+                          if (context.read<EditProfileBloc>().isNumberValid) {
                             context
                                 .read<EditProfileBloc>()
                                 .add(ContinueTapEvent());
