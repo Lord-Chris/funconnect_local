@@ -8,6 +8,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:funconnect/core/extensions/_extensions.dart';
 import 'package:funconnect/features/profile/presentation/blocs/edit_profile_bloc/edit_profile_bloc.dart';
+import 'package:funconnect/features/profile/presentation/blocs/profile_bloc/profile_bloc.dart';
 import 'package:funconnect/shared/components/_components.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
 import 'package:intl/intl.dart';
@@ -237,6 +238,11 @@ class PersonalInformationView extends StatelessWidget {
                               EditProfileFieldsEvent(profile.copyWith(
                                   phoneE164: val.phoneNumber)));
                         },
+                        onInputValidated: (value) {
+                          context
+                              .read<ProfileBloc>()
+                              .add(NumberValidationEvent(value));
+                        },
                         initialValue: snapshot.data,
                         inputDecoration: InputDecoration(
                           labelText: AppText.aTMobileNumber,
@@ -334,9 +340,13 @@ class PersonalInformationView extends StatelessWidget {
                               .read<EditProfileBloc>()
                               .add(AutoValidateFormEvent());
                         } else {
-                          context
-                              .read<EditProfileBloc>()
-                              .add(ContinueTapEvent());
+                          if (context.watch<ProfileBloc>().isNumberValid) {
+                            context
+                                .read<EditProfileBloc>()
+                                .add(ContinueTapEvent());
+                          } else {
+                            Logger().d("Number not valid");
+                          }
                         }
                       },
                       label: AppText.aTContinue,
