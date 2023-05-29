@@ -43,9 +43,3 @@ class InstagramTapEvent extends ProfileEvent {}
 class TwitterTapEvent extends ProfileEvent {}
 
 class HelpDeskTapEvent extends ProfileEvent {}
-
-class NumberValidationEvent extends ProfileEvent {
-  final bool isVerified;
-
-  NumberValidationEvent(this.isVerified);
-}

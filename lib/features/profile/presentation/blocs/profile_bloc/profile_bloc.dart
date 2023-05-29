@@ -38,7 +38,6 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     on<InstagramTapEvent>(_onInstagramTapEvent);
     on<TwitterTapEvent>(_onTwitterTapEvent);
     on<HelpDeskTapEvent>(_onHelpDeskTapEvent);
-    on<NumberValidationEvent>(_onNumberValidation);
   }
 
   final _navigationService = locator<INavigationService>();
@@ -49,14 +48,6 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   final _logger = Logger();
 
   String? appVersion;
-  bool isNumberValid = false;
-
-  void _onNumberValidation(
-    NumberValidationEvent event,
-    Emitter<ProfileState> emit,
-  ) {
-    isNumberValid = event.isVerified;
-  }
 
   Future<FutureOr<void>> _onInitProfileEvent(
     InitProfileEvent event,

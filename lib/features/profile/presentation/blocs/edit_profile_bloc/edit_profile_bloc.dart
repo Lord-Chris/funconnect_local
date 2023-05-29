@@ -33,12 +33,22 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
     on<EditProfileFieldsEvent>(_onEditProfileFieldsEvent);
     on<AutoValidateFormEvent>(_onAutoValidateFormEvent);
     on<UpdateLocationTapEvent>(_onUpdateLocationTapEvent);
+    on<NumberValidationEvent>(_onNumberValidation);
   }
 
   final _navigationService = locator<INavigationService>();
   final _mediaService = locator<IMediaService>();
   final _dialogAndSheetService = locator<IDialogAndSheetService>();
   final _locationService = locator<ILocationService>();
+
+  bool isNumberValid = false;
+
+  void _onNumberValidation(
+    NumberValidationEvent event,
+    Emitter<EditProfileState> emit,
+  ) {
+    isNumberValid = event.isVerified;
+  }
 
   Future<FutureOr<void>> _onBackTapEvent(
     BackTapEvent event,
