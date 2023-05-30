@@ -53,3 +53,9 @@ class EditProfileInitialState extends EditProfileState {
   @override
   List<Object> get props => [];
 }
+
+class NumberValidationEvent extends EditProfileEvent {
+  final bool isVerified;
+
+  NumberValidationEvent(this.isVerified);
+}
