@@ -303,9 +303,10 @@ class PersonalInformationView extends StatelessWidget {
                   },
                 ),
                 Spacing.vertMedium(),
+                /*
                 AppTextField(
                   onChanged: (val) {
-                    Logger().d("Normal Phone $val");
+
                     context.read<EditProfileBloc>().add(EditProfileFieldsEvent(
                         profile.copyWith(phoneE164: val)));
                   },
@@ -336,6 +337,8 @@ class PersonalInformationView extends StatelessWidget {
                     ),
                   ),
                 ),
+                */
+
                 Spacing.vertLarge(),
                 Align(
                     alignment: Alignment.centerRight,
