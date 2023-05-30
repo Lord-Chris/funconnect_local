@@ -71,21 +71,24 @@ class RateYourExperienceView extends StatelessWidget {
                     AppAssets.ratingStarSvg,
                     height: 48,
                     width: 48,
-                    color: AppColors.primary,
+                    colorFilter: const ColorFilter.mode(
+                        AppColors.primary, BlendMode.srcIn),
                     fit: BoxFit.scaleDown,
                   ),
                   half: SvgPicture.asset(
                     AppAssets.ratingStarSvg,
                     height: 48,
                     width: 48,
-                    color: AppColors.primary,
+                    colorFilter: const ColorFilter.mode(
+                        AppColors.primary, BlendMode.srcIn),
                     fit: BoxFit.scaleDown,
                   ),
                   empty: SvgPicture.asset(
                     AppAssets.ratingStarSvg,
                     height: 48,
                     width: 48,
-                    color: AppColors.wGreyE1,
+                    colorFilter: const ColorFilter.mode(
+                        AppColors.wGreyE1, BlendMode.srcIn),
                     fit: BoxFit.scaleDown,
                   ),
                 ),

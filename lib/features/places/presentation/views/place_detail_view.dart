@@ -157,7 +157,8 @@ class _InfoSection extends StatelessWidget {
                         .add(ShareTapEvent(place)),
                     child: SvgPicture.asset(
                       AppAssets.uploadSvg,
-                      color: AppColors.white,
+                      colorFilter: const ColorFilter.mode(
+                          AppColors.white, BlendMode.srcIn),
                       height: 20,
                     ),
                   ),
@@ -172,9 +173,12 @@ class _InfoSection extends StatelessWidget {
                         place.isBookmarked
                             ? AppAssets.savedIconSvg
                             : AppAssets.bookmarkIconSvg,
-                        color: place.isBookmarked
-                            ? AppColors.primary
-                            : AppColors.white,
+                        colorFilter: ColorFilter.mode(
+                          place.isBookmarked
+                              ? AppColors.primary
+                              : AppColors.white,
+                          BlendMode.srcIn,
+                        ),
                         height: 20,
                       ),
                     ),
@@ -248,7 +252,8 @@ class _InfoSection extends StatelessWidget {
                       context.read<PlaceDetailBloc>().add(ShareTapEvent(place)),
                   child: SvgPicture.asset(
                     AppAssets.uploadSvg,
-                    color: AppColors.white,
+                    colorFilter: const ColorFilter.mode(
+                        AppColors.white, BlendMode.srcIn),
                     height: 20,
                   ),
                 ),
@@ -262,9 +267,12 @@ class _InfoSection extends StatelessWidget {
                       state.place.isBookmarked
                           ? AppAssets.savedIconSvg
                           : AppAssets.bookmarkIconSvg,
-                      color: state.place.isBookmarked
-                          ? AppColors.primary
-                          : AppColors.white,
+                      colorFilter: ColorFilter.mode(
+                        state.place.isBookmarked
+                            ? AppColors.primary
+                            : AppColors.white,
+                        BlendMode.srcIn,
+                      ),
                       height: 20,
                     ),
                   ),

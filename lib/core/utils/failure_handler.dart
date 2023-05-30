@@ -62,13 +62,13 @@ class FailureHandler {
           level: SentryLevel.error,
           throwable: error,
           message: message != null ? SentryMessage(message) : null,
-          extra: {
+          contexts: Contexts.fromJson({
             "Debug Info": {
               'callerFunctionName': program.callerFunctionName,
               'fileName': program.fileName,
               'lineNumber': program.lineNumber,
             }
-          },
+          }),
         ),
         stackTrace: stackTrace,
       );
@@ -98,14 +98,14 @@ class FailureHandler {
           eventId: SentryId.newId(),
           level: SentryLevel.info,
           message: SentryMessage(message),
-          extra: {
+          contexts: Contexts.fromJson({
             "Debug Info": {
               'callerFunctionName': program.callerFunctionName,
               'fileName': program.fileName,
               'lineNumber': program.lineNumber,
             },
             ...extraData,
-          },
+          }),
         ),
         stackTrace: stackTrace,
       );

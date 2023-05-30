@@ -35,7 +35,8 @@ class ProfileSetUpView extends HookWidget {
               modalHeight: MediaQuery.of(context).size.height,
               topIcon: SvgPicture.asset(
                 AppAssets.profIconSvg,
-                color: AppColors.white,
+                colorFilter:
+                    const ColorFilter.mode(AppColors.white, BlendMode.srcIn),
               ),
               children: [
                 Padding(
