@@ -63,7 +63,11 @@ class WelcomeBloc extends Bloc<WelcomeEvent, WelcomeState> {
     try {
       FocusManager.instance.primaryFocus?.unfocus();
       emit(WelcomeLoadingState());
-      await GoogleSignInUsecase().call(NoParams());
+      final res = await GoogleSignInUsecase().call(NoParams());
+      if (res == null) {
+        emit(WelcomeInitialState());
+        return;
+      }
       emit(WelcomeSuccessState());
       locator<INavigationService>()
           .offAllNamed(Routes.dashboardViewRoute, (_) => false);

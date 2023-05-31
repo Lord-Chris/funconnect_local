@@ -68,7 +68,8 @@ class CheckoutView extends StatelessWidget {
               heightFactor: 1.0,
               child: SvgPicture.asset(
                 AppAssets.profileIconSvg,
-                color: AppColors.gray97,
+                colorFilter:
+                    const ColorFilter.mode(AppColors.gray97, BlendMode.srcIn),
               ),
             ),
           ),
@@ -81,7 +82,8 @@ class CheckoutView extends StatelessWidget {
               heightFactor: 1.0,
               child: SvgPicture.asset(
                 AppAssets.emailIconSvg,
-                color: AppColors.gray97,
+                colorFilter:
+                    const ColorFilter.mode(AppColors.gray97, BlendMode.srcIn),
               ),
             ),
           ),
@@ -108,7 +110,8 @@ class CheckoutView extends StatelessWidget {
               heightFactor: 1.0,
               child: SvgPicture.asset(
                 AppAssets.profileIconSvg,
-                color: AppColors.gray97,
+                colorFilter:
+                    const ColorFilter.mode(AppColors.gray97, BlendMode.srcIn),
               ),
             ),
           ),
@@ -121,7 +124,8 @@ class CheckoutView extends StatelessWidget {
               heightFactor: 1.0,
               child: SvgPicture.asset(
                 AppAssets.profileIconSvg,
-                color: AppColors.gray97,
+                colorFilter:
+                    const ColorFilter.mode(AppColors.gray97, BlendMode.srcIn),
               ),
             ),
           ),
@@ -134,7 +138,8 @@ class CheckoutView extends StatelessWidget {
               heightFactor: 1.0,
               child: SvgPicture.asset(
                 AppAssets.profileIconSvg,
-                color: AppColors.gray97,
+                colorFilter:
+                    const ColorFilter.mode(AppColors.gray97, BlendMode.srcIn),
               ),
             ),
           ),
@@ -147,7 +152,8 @@ class CheckoutView extends StatelessWidget {
               heightFactor: 1.0,
               child: SvgPicture.asset(
                 AppAssets.profileIconSvg,
-                color: AppColors.gray97,
+                colorFilter:
+                    const ColorFilter.mode(AppColors.gray97, BlendMode.srcIn),
               ),
             ),
           ),
@@ -160,7 +166,8 @@ class CheckoutView extends StatelessWidget {
               heightFactor: 1.0,
               child: SvgPicture.asset(
                 AppAssets.profileIconSvg,
-                color: AppColors.gray97,
+                colorFilter:
+                    const ColorFilter.mode(AppColors.gray97, BlendMode.srcIn),
               ),
             ),
           ),
@@ -169,7 +176,8 @@ class CheckoutView extends StatelessWidget {
             children: [
               SvgPicture.asset(
                 AppAssets.chatIconSvg,
-                color: AppColors.gray97,
+                colorFilter:
+                    const ColorFilter.mode(AppColors.gray97, BlendMode.srcIn),
               ),
               Spacing.horizSmall(),
               Expanded(
@@ -234,7 +242,8 @@ class CheckoutView extends StatelessWidget {
       children: [
         SvgPicture.asset(
           AppAssets.chatIconSvg,
-          color: AppColors.gray97,
+          colorFilter:
+              const ColorFilter.mode(AppColors.gray97, BlendMode.srcIn),
           width: 15,
         ),
         Spacing.horizSmall(),

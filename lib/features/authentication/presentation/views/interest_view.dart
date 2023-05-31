@@ -37,7 +37,8 @@ class _InterestViewState extends State<InterestView> {
               showBackButton: true,
               topIcon: SvgPicture.asset(
                 AppAssets.interestPageTopSvg,
-                color: AppColors.white,
+                colorFilter:
+                    const ColorFilter.mode(AppColors.white, BlendMode.srcIn),
               ),
               children: [
                 Flexible(

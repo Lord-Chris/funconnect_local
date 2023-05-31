@@ -8,11 +8,6 @@ import 'package:funconnect/features/authentication/data/repositories/_authentica
 import 'package:google_sign_in/google_sign_in.dart';
 
 class GoogleSignInUsecase with UseCases<UserModel?, NoParams> {
-  // static const androidId =
-  //     "72010274266-6drs994dl4a00k83jfbf6njtf6phtq4e.apps.googleusercontent.com";
-  // static const iosId =
-  //     "72010274266-vosimccjbt4dj700ots582hg6i5br0ft.apps.googleusercontent.com";
-
   final repo = locator<IAuthenticationRepository>();
 
   @override
@@ -24,6 +19,7 @@ class GoogleSignInUsecase with UseCases<UserModel?, NoParams> {
             : AppKeys.googleSignClientIdIos,
       ).signIn();
       if (acct == null) return null;
+      if (acct.email.isEmpty) return null;
 
       UserModel? res;
       if (Platform.isAndroid) {

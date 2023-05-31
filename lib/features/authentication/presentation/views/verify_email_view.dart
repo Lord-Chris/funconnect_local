@@ -61,7 +61,8 @@ class _VerifyEmailViewState extends State<VerifyEmailView> {
                 showBackButton: true,
                 topIcon: SvgPicture.asset(
                   AppAssets.emailIconSvg,
-                  color: AppColors.white,
+                  colorFilter:
+                      const ColorFilter.mode(AppColors.white, BlendMode.srcIn),
                 ),
                 children: [
                   Form(
