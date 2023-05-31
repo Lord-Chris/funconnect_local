@@ -7,15 +7,15 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:funconnect/core/app/_app.dart';
-import 'package:funconnect/core/constants/hive_keys.dart';
-import 'package:funconnect/core/constants/storage_keys.dart';
 import 'package:funconnect/core/utils/failure_handler.dart';
 import 'package:funconnect/features/authentication/presentation/blocs/welcome_bloc/welcome_bloc.dart';
 import 'package:funconnect/features/authentication/presentation/views/welcome_view.dart';
 import 'package:funconnect/features/dashboard/presentation/blocs/dashboard_bloc/dashboard_bloc.dart';
 import 'package:funconnect/features/dashboard/presentation/views/dashboard_view.dart';
 import 'package:funconnect/features/startup/presentation/blocs/onboarding_bloc/onboarding_bloc.dart';
+import 'package:funconnect/features/startup/presentation/blocs/splash_bloc/splash_bloc.dart';
 import 'package:funconnect/features/startup/presentation/views/onboarding_view.dart';
 import 'package:funconnect/features/startup/presentation/views/version_update_view.dart';
 import 'package:funconnect/services/_services.dart';
@@ -57,8 +57,7 @@ Future<void> _setupServices() async {
 class MyApp extends StatelessWidget {
   MyApp({Key? key}) : super(key: key);
 
-  final _localStorageService = locator<ILocalStorageService>();
-  final _forceUpdateAppService = locator<IForceUpdateAppService>();
+  final _splashBloc = SplashBloc();
 
   @override
   Widget build(BuildContext context) {
@@ -73,49 +72,60 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           navigatorKey: NavigationService.navigatorKey,
           onGenerateRoute: Routes.generateRoute,
+          // initialRoute: Routes.initialRoute,
           home: FutureBuilder(
-              future: _forceUpdateAppService.needsUpdate,
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.done) {
-                  FlutterNativeSplash.remove();
-                  if (snapshot.hasData) {
-                    if (snapshot.data == true) {
-                      return const VersionUpdateView();
-                    }
-                    if (isAuthenticated) {
+            future: _splashBloc.needsUpdate,
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.done) {
+                FlutterNativeSplash.remove();
+                if (snapshot.hasData) {
+                  if (snapshot.data == true) {
+                    return const VersionUpdateView();
+                  }
+                  if (_splashBloc.isAuthenticated) {
+                    return BlocProvider(
+                      create: (context) => DashboardBloc(),
+                      child: const DashboardView(),
+                    );
+                  } else {
+                    if (_splashBloc.showOnboarding) {
                       return BlocProvider(
-                        create: (context) => DashboardBloc(),
-                        child: const DashboardView(),
+                        create: (context) => OnboardingBloc(),
+                        child: const OnboardingView(),
                       );
                     } else {
-                      if (showOnboarding) {
-                        return BlocProvider(
-                          create: (context) => OnboardingBloc(),
-                          child: const OnboardingView(),
-                        );
-                      } else {
-                        return BlocProvider(
-                            create: (context) => WelcomeBloc(),
-                            child: const WelcomeView());
-                      }
+                      return BlocProvider(
+                        create: (context) => WelcomeBloc(),
+                        child: const WelcomeView(),
+                      );
                     }
                   }
                 }
-                return const Center(
-                  child: Text(" No Page Defined"),
-                );
-              }),
+              }
+              return Scaffold(
+                body: Container(
+                  width: double.maxFinite,
+                  color: AppColors.mediumBlack,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        height: 250.r,
+                        width: 250.r,
+                        child: SvgPicture.asset(
+                          AppAssets.funconnectFullSvg,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
+          ),
         );
       },
     );
   }
-
-  bool get showOnboarding => _localStorageService.read(HiveKeys.appBoxId,
-      key: StorageKeys.showOnboarding, def: true);
-
-  bool get isAuthenticated => _localStorageService
-      .read(HiveKeys.userBoxId, key: StorageKeys.token, def: "")
-      .isNotEmpty;
 }
 
 // Button on the dialog

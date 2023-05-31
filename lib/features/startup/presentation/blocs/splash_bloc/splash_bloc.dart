@@ -28,7 +28,7 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
   Future<void> _onSplashFinished(
       FinishSplashEvent event, Emitter<SplashState> emit) async {
     FlutterNativeSplash.remove();
-    if (await _forceUpdateAppService.needsUpdate) {
+    if (await needsUpdate) {
       _navigationService.offNamed(Routes.versionUpdateRoute);
       return;
     }
@@ -42,6 +42,8 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
       }
     }
   }
+
+  Future<bool> get needsUpdate => _forceUpdateAppService.needsUpdate;
 
   bool get showOnboarding => _localStorageService.read(HiveKeys.appBoxId,
       key: StorageKeys.showOnboarding, def: true);
