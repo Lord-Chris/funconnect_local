@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:funconnect/features/startup/presentation/domain/entities/onboarding_item_model.dart';
+import 'package:funconnect/shared/constants/colors.dart';
 
 class OnboardingItemWidget extends StatelessWidget {
   final OnboardingItem onboardingItem;
@@ -14,32 +15,47 @@ class OnboardingItemWidget extends StatelessWidget {
           onboardingItem.assetPath,
           fit: BoxFit.cover,
         ),
-        Positioned(
-          bottom: 100,
-          left: 0,
-          right: 0,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: onboardingItem.title,
-          ),
-        ),
-        Positioned(
-          bottom: 50,
-          left: 0,
-          right: 0,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Text(
-              onboardingItem.subtitle,
-              textAlign: TextAlign.center,
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 16,
-                fontWeight: FontWeight.w400,
+        Positioned.fill(
+          child: Container(
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  AppColors.black,
+                  AppColors.transparent,
+                  AppColors.transparent,
+                  AppColors.black,
+                ],
+                stops: [0.1, 0.3, 0.6, 1],
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                tileMode: TileMode.clamp,
               ),
             ),
           ),
         ),
+        Positioned.fill(
+            child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 40.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 300),
+                  transitionBuilder: (child, animation) {
+                    return ScaleTransition(scale: animation, child: child);
+                  },
+                  child: onboardingItem.title),
+              const SizedBox(
+                height: 16,
+              ),
+              Text(
+                onboardingItem.subtitle,
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ),
+        )),
       ],
     );
   }
