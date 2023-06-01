@@ -6,9 +6,9 @@ import 'package:funconnect/features/authentication/presentation/blocs/interest_b
 import 'package:funconnect/features/authentication/presentation/blocs/profile_setup_bloc/profile_setup_bloc.dart';
 import 'package:funconnect/features/authentication/presentation/blocs/verify_email_bloc/verify_email_bloc.dart';
 import 'package:funconnect/features/authentication/presentation/blocs/welcome_bloc/welcome_bloc.dart';
-import 'package:funconnect/features/authentication/presentation/views/Profile_setup_view.dart';
 import 'package:funconnect/features/authentication/presentation/views/email_verified_view.dart';
 import 'package:funconnect/features/authentication/presentation/views/interest_view.dart';
+import 'package:funconnect/features/authentication/presentation/views/profile_setup_view.dart';
 import 'package:funconnect/features/authentication/presentation/views/verify_email_view.dart';
 import 'package:funconnect/features/authentication/presentation/views/welcome_view.dart';
 import 'package:funconnect/features/dashboard/presentation/blocs/dashboard_bloc/dashboard_bloc.dart';
