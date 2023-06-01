@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -78,20 +80,22 @@ class WelcomeView extends HookWidget {
                                         AppAssets.googleIconSvg),
                                   ),
                                 ),
-                                const SizedBox(width: 16.0),
-                                GestureDetector(
-                                  /*
+                                if (Platform.isIOS) ...[
+                                  const SizedBox(width: 16.0),
+                                  GestureDetector(
+                                    /*
                                   onTap: () => context
                                       .read<WelcomeBloc>()
                                       .add(AppleSignInEvent()),
                                       */
-                                  child: CircleAvatar(
-                                    radius: 30,
-                                    backgroundColor: Colors.white,
-                                    child: SvgPicture.asset(
-                                        AppAssets.appleIconSvg),
+                                    child: CircleAvatar(
+                                      radius: 30,
+                                      backgroundColor: Colors.white,
+                                      child: SvgPicture.asset(
+                                          AppAssets.appleIconSvg),
+                                    ),
                                   ),
-                                ),
+                                ]
                               ],
                             ),
                             Spacing.vertExtraMedium(),
