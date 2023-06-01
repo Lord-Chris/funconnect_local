@@ -8,7 +8,6 @@ import 'package:funconnect/features/authentication/domain/params/verify_otp.dart
 
 import '../dto/check_email_response.dart';
 import '../dto/request_otp_response.dart';
-import '../dto/verify_otp_response.dart';
 
 abstract class IAuthenticationDataSource {
   Future<ApiResponse<CheckEmailResponse>> checkEmail(
@@ -31,7 +30,7 @@ abstract class IAuthenticationDataSource {
     String token,
   );
 
-  Future<ApiResponse<VerifyOtpResponse>> loginWithApple(
+  Future<ApiResponse<UserModel>> loginWithApple(
     String token,
   );
 

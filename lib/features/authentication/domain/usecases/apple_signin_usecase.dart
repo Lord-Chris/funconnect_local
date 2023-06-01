@@ -13,7 +13,8 @@ class AppleSignInUsecase with UseCases<bool, NoParams> {
   Future<bool> call(NoParams params) async {
     try {
       _logger.i(">>> Starting Apple Login");
-      final credential = await SignInWithApple.getAppleIDCredential(
+      final credential = await SignInWithApple.
+      getAppleIDCredential(
         scopes: [
           AppleIDAuthorizationScopes.email,
           AppleIDAuthorizationScopes.fullName,

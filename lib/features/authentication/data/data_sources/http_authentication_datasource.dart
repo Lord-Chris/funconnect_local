@@ -16,7 +16,6 @@ import 'package:funconnect/features/authentication/domain/params/verify_otp.dart
 import 'package:funconnect/services/_services.dart';
 
 import '../../domain/params/email_sign_in.dart';
-import '../dto/verify_otp_response.dart';
 
 class HttpAuthenticationDataSource extends IAuthenticationDataSource
     with ApiMixin {
@@ -92,9 +91,19 @@ class HttpAuthenticationDataSource extends IAuthenticationDataSource
   }
 
   @override
-  Future<ApiResponse<VerifyOtpResponse>> loginWithApple(String token) async {
+  Future<ApiResponse<UserModel>> loginWithApple(String token) async {
     await Future.delayed(const Duration(seconds: 2));
-    return const ApiResponse(data: VerifyOtpResponse(email: true, message: ""));
+    final body = {"id_token": token};
+    final res = await _networkService.post(
+      ApiConstants.loginWithApple,
+      body: body,
+    );
+    await _localStorageService.write(
+      HiveKeys.userBoxId,
+      key: StorageKeys.token,
+      data: res.data['data']['api_token'],
+    );
+    return ApiResponse(data: UserModel.fromMap(res.data));
   }
 
   @override

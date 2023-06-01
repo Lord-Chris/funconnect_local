@@ -83,11 +83,9 @@ class WelcomeView extends HookWidget {
                                 if (Platform.isIOS) ...[
                                   const SizedBox(width: 16.0),
                                   GestureDetector(
-                                    /*
-                                  onTap: () => context
-                                      .read<WelcomeBloc>()
-                                      .add(AppleSignInEvent()),
-                                      */
+                                    onTap: () => context
+                                        .read<WelcomeBloc>()
+                                        .add(AppleSignInEvent()),
                                     child: CircleAvatar(
                                       radius: 30,
                                       backgroundColor: Colors.white,

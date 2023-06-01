@@ -239,67 +239,69 @@ class PersonalInformationView extends StatelessWidget {
                       return Text(snapshot.error.toString());
                     }
                     return InternationalPhoneNumberInput(
-                        onInputChanged: (val) {
-                          context.read<EditProfileBloc>().add(
-                              EditProfileFieldsEvent(profile.copyWith(
-                                  phoneE164: val.phoneNumber)));
-                        },
-                        onInputValidated: (value) {
-                          context
-                              .read<EditProfileBloc>()
-                              .add(NumberValidationEvent(value));
-                        },
-                        initialValue: snapshot.data,
-                        inputDecoration: InputDecoration(
-                          labelText: AppText.aTMobileNumber,
-                          suffixIcon: SvgPicture.asset(
-                            AppAssets.arrowDown,
-                            width: 20,
+                      onInputChanged: (val) {
+                        context.read<EditProfileBloc>().add(
+                            EditProfileFieldsEvent(
+                                profile.copyWith(phoneE164: val.phoneNumber)));
+                      },
+                      selectorConfig: const SelectorConfig(
+                        showFlags: true,
+                        trailingSpace: false,
+                        useEmoji: true,
+                        setSelectorButtonAsPrefixIcon: true,
+                      ),
+                      onInputValidated: (value) {
+                        context
+                            .read<EditProfileBloc>()
+                            .add(NumberValidationEvent(value));
+                      },
+                      initialValue: snapshot.data,
+                      inputDecoration: InputDecoration(
+                        labelText: AppText.aTMobileNumber,
+                        prefixIcon: Padding(
+                          padding: const EdgeInsets.only(right: 8.0),
+                          child: SvgPicture.asset(
+                            AppAssets.phone,
+                            height: 17.h,
                             fit: BoxFit.scaleDown,
                           ),
-                          prefixIcon: Padding(
-                            padding: const EdgeInsets.only(right: 8.0),
-                            child: SvgPicture.asset(
-                              AppAssets.phone,
-                              height: 17.h,
-                              fit: BoxFit.scaleDown,
-                            ),
-                          ),
-                          floatingLabelAlignment: FloatingLabelAlignment.start,
-                          floatingLabelBehavior: FloatingLabelBehavior.auto,
-                          floatingLabelStyle: AppTextStyles.regular14.copyWith(
-                            color: AppColors.white,
-                          ),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(14),
-                            borderSide: const BorderSide(
-                              color: AppColors.gray333,
-                              width: 1,
-                            ),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(14),
-                            borderSide: const BorderSide(
-                              color: AppColors.gray333,
-                              width: 1,
-                            ),
-                          ),
-                          labelStyle: AppTextStyles.regular14.copyWith(
-                            color: AppColors.white,
-                          ),
-                          hintStyle: AppTextStyles.regular14.copyWith(
+                        ),
+                        floatingLabelAlignment: FloatingLabelAlignment.start,
+                        floatingLabelBehavior: FloatingLabelBehavior.auto,
+                        floatingLabelStyle: AppTextStyles.regular14.copyWith(
+                          color: AppColors.white,
+                        ),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(14),
+                          borderSide: const BorderSide(
                             color: AppColors.gray333,
-                            fontWeight: FontWeight.w300,
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(14),
-                            borderSide: const BorderSide(
-                              color: AppColors.gray333,
-                              width: 1,
-                            ),
+                            width: 1,
                           ),
                         ),
-                        autoValidateMode: AutovalidateMode.onUserInteraction);
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(14),
+                          borderSide: const BorderSide(
+                            color: AppColors.gray333,
+                            width: 1,
+                          ),
+                        ),
+                        labelStyle: AppTextStyles.regular14.copyWith(
+                          color: AppColors.white,
+                        ),
+                        hintStyle: AppTextStyles.regular14.copyWith(
+                          color: AppColors.gray333,
+                          fontWeight: FontWeight.w300,
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(14),
+                          borderSide: const BorderSide(
+                            color: AppColors.gray333,
+                            width: 1,
+                          ),
+                        ),
+                      ),
+                      autoValidateMode: AutovalidateMode.onUserInteraction,
+                    );
                   },
                 ),
                 Spacing.vertMedium(),
