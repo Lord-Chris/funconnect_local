@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:funconnect/core/models/_models.dart';
+import 'package:funconnect/core/utils/failure_handler.dart';
 import 'package:funconnect/core/utils/general_utils.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
 import 'package:logger/logger.dart';
@@ -33,20 +34,25 @@ class DynamicLinkService extends IDynamicLinkService {
 
   @override
   Future<void> init() async {
-    final dynamicLink = await FirebaseDynamicLinks.instance.getInitialLink();
+    try {
+      final dynamicLink = await FirebaseDynamicLinks.instance.getInitialLink();
 
-    if (dynamicLink != null) {
-      final Uri deepLink = dynamicLink.link;
-      _log.i('DEEPLINK IS $deepLink');
-      _handleData(deepLink.toString());
+      if (dynamicLink != null) {
+        final Uri deepLink = dynamicLink.link;
+        _log.i('DEEPLINK IS $deepLink');
+        _handleData(deepLink.toString());
+      }
+
+      FirebaseDynamicLinks.instance.onLink.listen((dynamicLink) {
+        final Uri deepLink = dynamicLink.link;
+        _handleData(deepLink.toString());
+      }).onError((error) {
+        _log.e(error.toString());
+      });
+    } on Exception catch (e, s) {
+      _log.e(e);
+      FailureHandler.instance.catchError(e, stackTrace: s);
     }
-
-    FirebaseDynamicLinks.instance.onLink.listen((dynamicLink) {
-      final Uri deepLink = dynamicLink.link;
-      _handleData(deepLink.toString());
-    }).onError((error) {
-      _log.e(error.toString());
-    });
   }
 
   void _handleData(String query) {
@@ -98,8 +104,9 @@ class DynamicLinkService extends IDynamicLinkService {
         shortLinkType: ShortDynamicLinkType.unguessable,
       );
       return dynamicUrl.shortUrl.toString();
-    } on Exception catch (e) {
+    } on Exception catch (e, s) {
       _log.e(e);
+      FailureHandler.instance.catchError(e, stackTrace: s);
       throw const Failure("Could not generate Link");
     }
   }
