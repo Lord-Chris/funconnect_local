@@ -13,8 +13,7 @@ class AppleSignInUsecase with UseCases<bool, NoParams> {
   Future<bool> call(NoParams params) async {
     try {
       _logger.i(">>> Starting Apple Login");
-      final credential = await SignInWithApple.
-      getAppleIDCredential(
+      final credential = await SignInWithApple.getAppleIDCredential(
         scopes: [
           AppleIDAuthorizationScopes.email,
           AppleIDAuthorizationScopes.fullName,
@@ -22,6 +21,8 @@ class AppleSignInUsecase with UseCases<bool, NoParams> {
       );
       _logger.i(">>> Apple Login Credentials Gotten");
       if ((credential.identityToken ?? "").isEmpty) return false;
+      // _logger.d(credential.authorizationCode);
+      // _logger.d(credential.identityToken);
       await repo.signInWithApple(
           credential.authorizationCode, credential.identityToken!);
       _logger.i(">>> Apple Login Credentials Verified");
