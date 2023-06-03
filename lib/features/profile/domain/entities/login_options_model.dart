@@ -45,21 +45,25 @@ class LoginOptionsModel extends Equatable {
 }
 
 class LoginOptionsData extends Equatable {
+  final bool authWithEmail;
   final bool authWithGoogle;
   final bool authWithApple;
 
   const LoginOptionsData({
+    required this.authWithEmail,
     required this.authWithGoogle,
     required this.authWithApple,
   });
 
   const LoginOptionsData.initial({
-    this.authWithApple = false,
+    this.authWithEmail = false,
     this.authWithGoogle = false,
+    this.authWithApple = false,
   });
 
   Map<String, dynamic> toMap() {
     return {
+      'auth_with_email': authWithEmail,
       'auth_with_google': authWithGoogle,
       'auth_with_apple': authWithApple,
     };
@@ -67,6 +71,7 @@ class LoginOptionsData extends Equatable {
 
   factory LoginOptionsData.fromMap(Map<String, dynamic> map) {
     return LoginOptionsData(
+      authWithEmail: map['auth_with_email'] ?? false,
       authWithGoogle: map['auth_with_google'] ?? false,
       authWithApple: map['auth_with_apple'] ?? false,
     );
@@ -78,21 +83,27 @@ class LoginOptionsData extends Equatable {
       LoginOptionsData.fromMap(json.decode(source));
 
   LoginOptionsData copyWith({
+    bool? authWithEmail,
     bool? authWithGoogle,
     bool? authWithApple,
   }) {
     return LoginOptionsData(
+      authWithEmail: authWithEmail ?? this.authWithEmail,
       authWithGoogle: authWithGoogle ?? this.authWithGoogle,
       authWithApple: authWithApple ?? this.authWithApple,
     );
   }
 
   @override
-  List<Object> get props => [authWithGoogle, authWithApple];
+  List<Object> get props => [authWithEmail, authWithGoogle, authWithApple];
 }
 
 final mockLoginOptionsModel = LoginOptionsModel.fromMap(const {
   "id": "99522a22-723c-4cec-887d-58c72dcb783b",
   "user_id": "98194b5c-f488-4a69-972f-179c2b7bff41",
-  "data": {"auth_with_google": true, "auth_with_apple": true}
+  "data": {
+    "auth_with_google": true,
+    "auth_with_apple": true,
+    "auth_with_email": true
+  }
 });

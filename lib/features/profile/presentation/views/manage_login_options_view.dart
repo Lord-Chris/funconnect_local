@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:funconnect/features/profile/presentation/blocs/manage_login_options_bloc/manage_login_options_bloc.dart';
@@ -8,11 +9,15 @@ import 'package:funconnect/shared/constants/_constants.dart';
 
 import '../../../../core/models/_models.dart';
 
-class ManageLogInOptionsView extends StatelessWidget {
+class ManageLogInOptionsView extends HookWidget {
   const ManageLogInOptionsView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    useEffect(() {
+      context.read<ManageLoginOptionsBloc>().add(ManageLoginInitEvent());
+      return null;
+    }, []);
     return WillPopScope(
       onWillPop: () async {
         context.read<ManageLoginOptionsBloc>().add(BackTapEvent());
@@ -73,88 +78,31 @@ class ManageLogInOptionsView extends StatelessWidget {
                       ),
                     ),
                     Spacing.vertExtraExtraLarge(),
-                    Row(
-                      children: [
-                        Container(
-                          height: 48,
-                          width: 48,
-                          decoration: const BoxDecoration(
-                            color: AppColors.imgContainerBlack,
-                            shape: BoxShape.circle,
-                          ),
-                          child: SvgPicture.asset(
-                            AppAssets.mail,
-                            height: 10,
-                            fit: BoxFit.scaleDown,
-                          ),
-                        ),
-                        Spacing.horizMedium(),
-                        Text(
-                          AppText.aTLoginWithEmail,
-                          style: AppTextStyles.regular16,
-                        ),
-                        const Spacer(),
-                        AppSwitcher(
-                          value: true,
-                          onChanged: (val) {},
-                        ),
-                      ],
+                    _buildOption(
+                      AppAssets.mail,
+                      AppText.aTLoginWithEmail,
+                      state.loginOptionsData.authWithEmail,
+                      (val) => context
+                          .read<ManageLoginOptionsBloc>()
+                          .add(ToggleEmailLogInEvent(val)),
                     ),
                     Spacing.vertExtraMedium(),
-                    Row(
-                      children: [
-                        Container(
-                          height: 48,
-                          width: 48,
-                          decoration: const BoxDecoration(
-                            color: AppColors.imgContainerBlack,
-                            shape: BoxShape.circle,
-                          ),
-                          child: SvgPicture.asset(
-                            AppAssets.appleSvg,
-                            height: 10,
-                            fit: BoxFit.scaleDown,
-                          ),
-                        ),
-                        Spacing.horizMedium(),
-                        Text(
-                          AppText.aTLoginWithApple,
-                          style: AppTextStyles.regular16,
-                        ),
-                        const Spacer(),
-                        AppSwitcher(
-                          value: false,
-                          onChanged: (val) {},
-                        ),
-                      ],
+                    _buildOption(
+                      AppAssets.appleSvg,
+                      AppText.aTLoginWithApple,
+                      state.loginOptionsData.authWithApple,
+                      (val) => context
+                          .read<ManageLoginOptionsBloc>()
+                          .add(ToggleAppleLogInEvent(val)),
                     ),
                     Spacing.vertExtraMedium(),
-                    Row(
-                      children: [
-                        Container(
-                          height: 48,
-                          width: 48,
-                          decoration: const BoxDecoration(
-                            color: AppColors.imgContainerBlack,
-                            shape: BoxShape.circle,
-                          ),
-                          child: SvgPicture.asset(
-                            AppAssets.googleSvg,
-                            height: 10,
-                            fit: BoxFit.scaleDown,
-                          ),
-                        ),
-                        Spacing.horizMedium(),
-                        Text(
-                          AppText.aTLoginWithGoogle,
-                          style: AppTextStyles.regular16,
-                        ),
-                        const Spacer(),
-                        AppSwitcher(
-                          value: false,
-                          onChanged: (val) {},
-                        ),
-                      ],
+                    _buildOption(
+                      AppAssets.googleSvg,
+                      AppText.aTLoginWithGoogle,
+                      state.loginOptionsData.authWithGoogle,
+                      (val) => context
+                          .read<ManageLoginOptionsBloc>()
+                          .add(ToggleGoogleLogInEvent(val)),
                     ),
                     Spacing.vertExtraMedium(),
                     AppButton(
@@ -186,6 +134,41 @@ class ManageLogInOptionsView extends StatelessWidget {
           },
         ),
       ),
+    );
+  }
+
+  Row _buildOption(
+    String icon,
+    String label,
+    bool value,
+    void Function(bool) onChanged,
+  ) {
+    return Row(
+      children: [
+        Container(
+          height: 48,
+          width: 48,
+          decoration: const BoxDecoration(
+            color: AppColors.imgContainerBlack,
+            shape: BoxShape.circle,
+          ),
+          child: SvgPicture.asset(
+            icon,
+            height: 10,
+            fit: BoxFit.scaleDown,
+          ),
+        ),
+        Spacing.horizMedium(),
+        Text(
+          label,
+          style: AppTextStyles.regular16,
+        ),
+        const Spacer(),
+        AppSwitcher(
+          value: value,
+          onChanged: onChanged,
+        ),
+      ],
     );
   }
 }

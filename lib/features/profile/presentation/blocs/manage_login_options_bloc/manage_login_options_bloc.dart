@@ -4,12 +4,16 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:funconnect/core/models/_models.dart';
 import 'package:funconnect/core/usecases/usecase.dart';
+import 'package:funconnect/features/profile/domain/entities/login_options_model.dart';
 import 'package:funconnect/features/profile/domain/usecases/delete_user_account.dart';
 import 'package:funconnect/features/profile/domain/usecases/logout_user.dart';
 import 'package:funconnect/services/_services.dart';
 import 'package:funconnect/shared/dialogs/_dialogs.dart';
+import 'package:logger/logger.dart';
 
 import '../../../../../core/app/_app.dart';
+import '../../../domain/usecases/fetch_login_options.dart';
+import '../../../domain/usecases/update_login_options.dart';
 
 part 'manage_login_options_event.dart';
 part 'manage_login_options_state.dart';
@@ -19,8 +23,14 @@ class ManageLoginOptionsBloc
   UserModel profile;
 
   ManageLoginOptionsBloc(this.profile)
-      : super(ManageLoginOptionsInitialState(
-            profile: profile, isUpdatingProfile: false)) {
+      : super(ManageLoginOptionsState(
+          profile: profile,
+          loginOptions: FetchLoginOptions().loginOptions.data,
+        )) {
+    on<ManageLoginInitEvent>(_onManageLoginInitEvent);
+    on<ToggleEmailLogInEvent>(_onToggleEmailLogInEvent);
+    on<ToggleAppleLogInEvent>(_onToggleAppleLogInEvent);
+    on<ToggleGoogleLogInEvent>(_onToggleGoogleLogInEvent);
     on<BackTapEvent>(_onBackTapEvent);
     on<LogoutTapEvent>(_onLogoutTapEvent);
     on<DeleteTapAccountEvent>(_onDeleteAccountTapEvent);
@@ -28,11 +38,24 @@ class ManageLoginOptionsBloc
 
   final _navigationService = locator<INavigationService>();
   final _dialogAndSheetService = locator<IDialogAndSheetService>();
+  final _fetchLoginOptionsUsecase = FetchLoginOptions();
+  final _updateLoginOptionsUsecase = UpdateLoginOptions();
+  final _logger = Logger();
 
-  Future<FutureOr<void>> _onBackTapEvent(
-    BackTapEvent event,
+  FutureOr<void> _onManageLoginInitEvent(
+    ManageLoginInitEvent event,
     Emitter<ManageLoginOptionsState> emit,
   ) async {
+    await _fetchLoginOptionsUsecase(NoParams());
+    emit(
+      state.copyWith(loginOptions: _fetchLoginOptionsUsecase.loginOptions.data),
+    );
+  }
+
+  FutureOr<void> _onBackTapEvent(
+    BackTapEvent event,
+    Emitter<ManageLoginOptionsState> emit,
+  ) {
     _navigationService.back();
   }
 
@@ -96,5 +119,50 @@ class ManageLoginOptionsBloc
         }
       },
     ));
+  }
+
+  FutureOr<void> _onToggleEmailLogInEvent(
+    ToggleEmailLogInEvent event,
+    Emitter<ManageLoginOptionsState> emit,
+  ) async {
+    final oldData = state.loginOptionsData;
+    try {
+      final newData = oldData.copyWith(authWithEmail: event.value);
+      emit(state.copyWith(loginOptions: newData));
+      await _updateLoginOptionsUsecase(newData);
+    } on Failure catch (e) {
+      _logger.e(e);
+      emit(state.copyWith(loginOptions: oldData));
+    }
+  }
+
+  FutureOr<void> _onToggleAppleLogInEvent(
+    ToggleAppleLogInEvent event,
+    Emitter<ManageLoginOptionsState> emit,
+  ) async {
+    final oldData = state.loginOptionsData;
+    try {
+      final newData = oldData.copyWith(authWithApple: event.value);
+      emit(state.copyWith(loginOptions: newData));
+      await _updateLoginOptionsUsecase(newData);
+    } on Failure catch (e) {
+      _logger.e(e);
+      emit(state.copyWith(loginOptions: oldData));
+    }
+  }
+
+  FutureOr<void> _onToggleGoogleLogInEvent(
+    ToggleGoogleLogInEvent event,
+    Emitter<ManageLoginOptionsState> emit,
+  ) async {
+    final oldData = state.loginOptionsData;
+    try {
+      final newData = oldData.copyWith(authWithGoogle: event.value);
+      emit(state.copyWith(loginOptions: newData));
+      await _updateLoginOptionsUsecase(newData);
+    } on Failure catch (e) {
+      _logger.e(e);
+      emit(state.copyWith(loginOptions: oldData));
+    }
   }
 }

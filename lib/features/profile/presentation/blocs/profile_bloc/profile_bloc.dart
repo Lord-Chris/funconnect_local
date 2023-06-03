@@ -10,6 +10,7 @@ import 'package:funconnect/core/models/_models.dart';
 import 'package:funconnect/core/usecases/usecase.dart';
 import 'package:funconnect/core/utils/general_utils.dart';
 import 'package:funconnect/features/profile/domain/usecases/delete_user_account.dart';
+import 'package:funconnect/features/profile/domain/usecases/fetch_login_options.dart';
 import 'package:funconnect/features/profile/domain/usecases/fetch_user_profile.dart';
 import 'package:funconnect/features/profile/domain/usecases/logout_user.dart';
 import 'package:funconnect/services/_services.dart';
@@ -54,6 +55,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     Emitter<ProfileState> emit,
   ) async {
     final res = await FetchUserProfile().call(NoParams());
+    await FetchLoginOptions().call(NoParams());
     appVersion = await _forceUpdateAppService.currentVersionRaw;
     UserModel userProfileWithLocation = res.copyWith(location: location);
     emit(ProfileIdleState(userProfile: userProfileWithLocation));

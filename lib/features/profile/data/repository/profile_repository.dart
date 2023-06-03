@@ -88,4 +88,7 @@ class ProfileRepository extends IProfileRepository {
       throw const Failure("No Internet Connection");
     }
   }
+
+  @override
+  LoginOptionsModel get loginOptions => _localDS.fetchLogInOptions();
 }
