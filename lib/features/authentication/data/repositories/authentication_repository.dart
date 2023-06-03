@@ -17,8 +17,19 @@ class AuthenticationRepository extends IAuthenticationRepository {
   final _localStorageService = locator<ILocalStorageService>();
 
   @override
-  Future<void> signInWithApple(String code, String idToken) async {
-    await _httpDS.loginWithApple(code);
+  Future<UserModel> signInWithApple(String code) async {
+    final res = await _httpDS.loginWithApple(code);
+    await _localStorageService.write(
+      HiveKeys.userBoxId,
+      key: StorageKeys.userProfile,
+      data: res.data.toMap(),
+    );
+    await _localStorageService.write(
+      HiveKeys.appBoxId,
+      key: StorageKeys.isFirstTime,
+      data: false,
+    );
+    return res.data;
   }
 
   @override

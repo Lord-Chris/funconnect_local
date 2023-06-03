@@ -93,7 +93,7 @@ class HttpAuthenticationDataSource extends IAuthenticationDataSource
   @override
   Future<ApiResponse<UserModel>> loginWithApple(String token) async {
     await Future.delayed(const Duration(seconds: 2));
-    final body = {"id_token": token};
+    final body = {"code": token};
     final res = await _networkService.post(
       ApiConstants.loginWithApple,
       body: body,

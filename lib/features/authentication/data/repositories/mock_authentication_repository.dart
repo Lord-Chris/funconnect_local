@@ -9,8 +9,9 @@ import 'i_authentication_repository.dart';
 
 class MockAuthenticationRepository extends IAuthenticationRepository {
   @override
-  Future<void> signInWithApple(String code, String idToken) async {
+  Future<UserModel?> signInWithApple(String code) async {
     await Future.delayed(const Duration(seconds: 2));
+    return null;
   }
 
   @override

@@ -90,8 +90,14 @@ class WelcomeBloc extends Bloc<WelcomeEvent, WelcomeState> {
     try {
       FocusManager.instance.primaryFocus?.unfocus();
       emit(WelcomeLoadingState());
-      await AppleSignInUsecase().call(NoParams());
+      final res = await AppleSignInUsecase().call(NoParams());
+      if (res == null) {
+        emit(WelcomeInitialState());
+        return;
+      }
       emit(WelcomeSuccessState());
+      locator<INavigationService>()
+          .offAllNamed(Routes.dashboardViewRoute, (_) => false);
     } on Failure catch (e, s) {
       _logger.e(e);
       FailureHandler.instance.catchError(e, stackTrace: s);

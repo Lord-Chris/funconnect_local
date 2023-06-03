@@ -5,28 +5,28 @@ import 'package:funconnect/features/authentication/data/repositories/_authentica
 import 'package:logger/logger.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
-class AppleSignInUsecase with UseCases<bool, NoParams> {
+class AppleSignInUsecase with UseCases<UserModel?, NoParams> {
   final repo = locator<IAuthenticationRepository>();
   final _logger = Logger();
 
   @override
-  Future<bool> call(NoParams params) async {
+  Future<UserModel?> call(NoParams params) async {
     try {
       _logger.i(">>> Starting Apple Login");
       final credential = await SignInWithApple.getAppleIDCredential(
-        scopes: [
-          AppleIDAuthorizationScopes.email,
-          AppleIDAuthorizationScopes.fullName,
-        ],
-      );
+          scopes: [
+            AppleIDAuthorizationScopes.email,
+            AppleIDAuthorizationScopes.fullName,
+          ],
+          webAuthenticationOptions: WebAuthenticationOptions(
+            clientId: 'app.funconnect.auth.',
+            redirectUri: Uri.parse('https://website.com/apple/callback'),
+          ));
       _logger.i(">>> Apple Login Credentials Gotten");
-      if ((credential.identityToken ?? "").isEmpty) return false;
-      // _logger.d(credential.authorizationCode);
-      // _logger.d(credential.identityToken);
-      await repo.signInWithApple(
-          credential.authorizationCode, credential.identityToken!);
+      if ((credential.authorizationCode).isEmpty) return null;
+      final user = await repo.signInWithApple(credential.authorizationCode);
       _logger.i(">>> Apple Login Credentials Verified");
-      return true;
+      return user;
     } on SignInWithAppleException catch (e) {
       throw Failure("Apple Sign in failed", extraData: e.toString());
     }
