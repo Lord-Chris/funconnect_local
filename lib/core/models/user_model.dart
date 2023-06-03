@@ -184,3 +184,32 @@ class UserModel extends Equatable {
     ];
   }
 }
+
+final mockUser = UserModel.fromMap(
+  const {
+    'id': '98194b5c-f488-4a69-972f-179c2b7bff41',
+    'email': 'maduekechris65@gmail.com',
+    'name': 'Chris Topher',
+    'username': 'Chris',
+    'gender': 'male',
+    'dob': '2023-05-17',
+    'phone_e164': '+2345678995643',
+    'location': {
+      'id': '9826e5b4-98bd-41bf-b3e0-77b6e94f34d6',
+      'user_id': '98194b5c-f488-4a69-972f-179c2b7bff41',
+      'address': '1 Stockton St Stockton St',
+      'city': 'San Francisco',
+      'state': 'CA',
+      'country': 'United States',
+      'lat': 37.785834,
+      'long': -122.406417
+    },
+    'bio': null,
+    'twitter_handle': null,
+    'facebook_handle': null,
+    'instagram_handle': null,
+    'linkedIn_handle': null,
+    'deleted_at': null,
+    'api_token': '382|EgtZY47L6ZzgrJ46j6oOkGIpXJdKDqyZLtXrnBXj',
+  },
+);

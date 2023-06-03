@@ -26,6 +26,7 @@ class ApiConstants {
   static String get profileImage => "$profileSetup/image";
   static String get profileLocationSetup => "$_core/profile/location";
   static String get profileImageSetup => "$_core/profile/image";
+  static String get settings => "$_core/settings";
 
   // PLACES
   static String get categories => "$places/categories";

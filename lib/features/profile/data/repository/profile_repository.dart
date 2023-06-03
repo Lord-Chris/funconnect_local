@@ -4,6 +4,7 @@ import 'package:funconnect/core/app/_app.dart';
 import 'package:funconnect/core/constants/_constants.dart';
 import 'package:funconnect/core/models/_models.dart';
 import 'package:funconnect/features/profile/data/data_sources/remote_profile_data_source.dart';
+import 'package:funconnect/features/profile/domain/entities/login_options_model.dart';
 import 'package:funconnect/services/_services.dart';
 
 import '../data_sources/local_data_source.dart';
@@ -43,6 +44,26 @@ class ProfileRepository extends IProfileRepository {
   @override
   Future<void> updateProfileImage(File image) async {
     await _remoteDS.updateUserProfileImage(image);
+  }
+
+  @override
+  Future<LoginOptionsModel> fetchLogInOptions() async {
+    final useRemote = await _connectivityService.checkInternetConnection();
+    if (!useRemote) {
+      return _localDS.fetchLogInOptions();
+    }
+    final options = await _remoteDS.fetchLogInOptions();
+    await _localStorageService.write(
+      HiveKeys.userBoxId,
+      key: StorageKeys.loginOptions,
+      data: options.toMap(),
+    );
+    return options;
+  }
+
+  @override
+  Future<LoginOptionsModel> updateLogInOptions(LoginOptionsData data) async {
+    return await _remoteDS.updateLogInOptions(data);
   }
 
   @override

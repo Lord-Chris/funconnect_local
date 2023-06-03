@@ -24,6 +24,8 @@ class AppleSignInUsecase with UseCases<UserModel?, NoParams> {
           ));
       _logger.i(">>> Apple Login Credentials Gotten");
       if ((credential.authorizationCode).isEmpty) return null;
+      // _logger.d(credential.authorizationCode);
+      // return null;
       final user = await repo.signInWithApple(credential.authorizationCode);
       _logger.i(">>> Apple Login Credentials Verified");
       return user;

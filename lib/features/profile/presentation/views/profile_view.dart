@@ -167,22 +167,28 @@ class _ProfileViewState extends State<ProfileView> {
                             "Settings",
                             style: AppTextStyles.semiBold20,
                           ),
-                          // _buildProfileItems("Manage log-in options",
-                          //     icon: const Icon(
-                          //       Icons.arrow_forward_ios,
-                          //       size: 15,
-                          //     ),
-                          //     onTap: () => context.read<ProfileBloc>().add(
-                          //         ManageLoginOptionsTapEvent(
-                          //             userProfile: userProfile))),
-                          _buildProfileItems("Notifications",
-                              icon: const Icon(
-                                Icons.arrow_forward_ios,
-                                size: 15,
-                              ),
-                              onTap: () => context
-                                  .read<ProfileBloc>()
-                                  .add(NotificationsTapEvent())),
+                          _buildProfileItems(
+                            "Manage log-in options",
+                            icon: const Icon(
+                              Icons.arrow_forward_ios,
+                              size: 15,
+                            ),
+                            onTap: () => context
+                                .read<ProfileBloc>()
+                                .add(ManageLoginOptionsTapEvent(
+                                  userProfile: userProfile,
+                                )),
+                          ),
+                          _buildProfileItems(
+                            "Notifications",
+                            icon: const Icon(
+                              Icons.arrow_forward_ios,
+                              size: 15,
+                            ),
+                            onTap: () => context
+                                .read<ProfileBloc>()
+                                .add(NotificationsTapEvent()),
+                          ),
                           // _buildProfileItems(
                           //   "Fingerprint/Face ID",
                           //   icon: AppSwitcher(

@@ -6,6 +6,8 @@ import 'package:funconnect/core/mixins/_mixins.dart';
 import 'package:funconnect/core/models/_models.dart';
 import 'package:funconnect/services/_services.dart';
 
+import '../../domain/entities/login_options_model.dart';
+
 class RemoteProfileDataSource with ApiMixin {
   final _networkService = locator<INetworkService>();
 
@@ -42,6 +44,23 @@ class RemoteProfileDataSource with ApiMixin {
       imageFile,
       headers: headers,
     );
+  }
+
+  Future<LoginOptionsModel> fetchLogInOptions() async {
+    final res = await _networkService.get(
+      ApiConstants.settings,
+      headers: headers,
+    );
+    return LoginOptionsModel.fromMap(res.data['data']);
+  }
+
+  Future<LoginOptionsModel> updateLogInOptions(LoginOptionsData data) async {
+    final res = await _networkService.put(
+      ApiConstants.settings,
+      headers: headers,
+      body: {'settings': data.toMap()},
+    );
+    return LoginOptionsModel.fromMap(res.data['data']);
   }
 
   Future<void> deleteAccount() async {
