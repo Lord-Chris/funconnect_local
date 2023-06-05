@@ -9,15 +9,16 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 class GoogleSignInUsecase with UseCases<UserModel?, NoParams> {
   final repo = locator<IAuthenticationRepository>();
-
+  final googleSignIn = GoogleSignIn(
+    clientId: Platform.isAndroid
+        ? AppKeys.googleSignClientIdAndroid
+        : AppKeys.googleSignClientIdIos,
+  );
   @override
   Future<UserModel?> call(NoParams params) async {
     try {
-      final acct = await GoogleSignIn(
-        clientId: Platform.isAndroid
-            ? AppKeys.googleSignClientIdAndroid
-            : AppKeys.googleSignClientIdIos,
-      ).signIn();
+      // await googleSignIn.disconnect();
+      final acct = await googleSignIn.signIn();
       if (acct == null) return null;
       if (acct.email.isEmpty) return null;
 

@@ -51,6 +51,7 @@ class _HomeViewState extends State<HomeView> {
               size: Size.fromRadius(25.r),
               isCircular: true,
               url: context.watch<HomeBloc>().user.photoUrl,
+              cacheImage: false,
               fit: BoxFit.cover,
               placeholderAssetImage: AppAssets.fallbackUserProfileSvg,
             ),

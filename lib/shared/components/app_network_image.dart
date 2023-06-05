@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -9,6 +11,7 @@ class AppNetworkImage extends StatelessWidget {
   final String imageUrl;
   final BoxFit? fit;
   final bool isCircular;
+  final bool cacheImage;
   final Size? size;
   final double borderRadius;
   final Widget? placeholderWidget;
@@ -21,6 +24,7 @@ class AppNetworkImage extends StatelessWidget {
     String? url,
     this.fit,
     this.isCircular = false,
+    this.cacheImage = true,
     this.size = const Size.square(40),
     this.borderRadius = 0,
     this.placeholderWidget,
@@ -62,7 +66,7 @@ class AppNetworkImage extends StatelessWidget {
       imageUrl: imageUrl,
       fit: fit,
       useOldImageOnUrlChange: true,
-      cacheKey: imageUrl,
+      cacheKey: cacheImage ? null : '$imageUrl ${Random().nextInt(5000)}',
       fadeInDuration: const Duration(milliseconds: 200),
       fadeOutDuration: const Duration(milliseconds: 200),
       height: size?.height,
@@ -78,7 +82,7 @@ class AppNetworkImage extends StatelessWidget {
             borderRadius:
                 isCircular ? null : BorderRadius.circular(borderRadius),
             image: DecorationImage(
-              image: NetworkImage(imageUrl),
+              image: imageProvider,
               fit: fit,
             ),
           ),
@@ -118,7 +122,8 @@ class AppNetworkImage extends StatelessWidget {
         if (errorWidget != null) {
           return errorWidget!;
         }
-        if (errorAssetImage != null && errorAssetImage!.isNotEmpty) {
+        final errorImage = errorAssetImage ?? placeholderAssetImage ?? '';
+        if (errorImage.isNotEmpty) {
           return Container(
             clipBehavior: Clip.hardEdge,
             decoration: BoxDecoration(
@@ -126,13 +131,13 @@ class AppNetworkImage extends StatelessWidget {
                   isCircular ? null : BorderRadius.circular(borderRadius),
               shape: isCircular ? BoxShape.circle : BoxShape.rectangle,
             ),
-            child: errorAssetImage!.endsWith(".svg")
+            child: errorImage.endsWith(".svg")
                 ? SvgPicture.asset(
-                    errorAssetImage!,
+                    errorImage,
                     fit: fit ?? BoxFit.contain,
                   )
                 : Image.asset(
-                    errorAssetImage!,
+                    errorImage,
                     fit: fit,
                   ),
           );

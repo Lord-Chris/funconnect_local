@@ -76,9 +76,12 @@ class PersonalInformationView extends StatelessWidget {
                               ? ClipOval(
                                   child: AppNetworkImage(
                                     url: profile.photoUrl,
+                                    errorAssetImage:
+                                        AppAssets.fallbackUserProfileSvg,
                                     size: const Size.fromRadius(32),
                                     isCircular: true,
                                     fit: BoxFit.cover,
+                                    cacheImage: false,
                                   ),
                                 )
                               : ClipOval(

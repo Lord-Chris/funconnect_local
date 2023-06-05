@@ -14,14 +14,15 @@ class AppleSignInUsecase with UseCases<UserModel?, NoParams> {
     try {
       _logger.i(">>> Starting Apple Login");
       final credential = await SignInWithApple.getAppleIDCredential(
-          scopes: [
-            AppleIDAuthorizationScopes.email,
-            AppleIDAuthorizationScopes.fullName,
-          ],
-          webAuthenticationOptions: WebAuthenticationOptions(
-            clientId: 'app.funconnect.auth.',
-            redirectUri: Uri.parse('https://website.com/apple/callback'),
-          ));
+        scopes: [
+          AppleIDAuthorizationScopes.email,
+          AppleIDAuthorizationScopes.fullName,
+        ],
+        webAuthenticationOptions: WebAuthenticationOptions(
+          clientId: 'app.funconnect.auth.',
+          redirectUri: Uri.parse('https://website.com/apple/callback'),
+        ),
+      );
       _logger.i(">>> Apple Login Credentials Gotten");
       if ((credential.authorizationCode).isEmpty) return null;
       // _logger.d(credential.authorizationCode);
