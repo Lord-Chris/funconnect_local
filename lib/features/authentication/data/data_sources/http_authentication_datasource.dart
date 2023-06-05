@@ -72,7 +72,7 @@ class HttpAuthenticationDataSource extends IAuthenticationDataSource
       key: StorageKeys.token,
       data: res.data['data']['api_token'],
     );
-    return ApiResponse(data: UserModel.fromMap(res.data));
+    return ApiResponse(data: UserModel.fromMap(res.data['data']));
   }
 
   @override
@@ -87,7 +87,7 @@ class HttpAuthenticationDataSource extends IAuthenticationDataSource
       key: StorageKeys.token,
       data: res.data['data']['api_token'],
     );
-    return ApiResponse(data: UserModel.fromMap(res.data));
+    return ApiResponse(data: UserModel.fromMap(res.data['data']));
   }
 
   @override
@@ -103,7 +103,7 @@ class HttpAuthenticationDataSource extends IAuthenticationDataSource
       key: StorageKeys.token,
       data: res.data['data']['api_token'],
     );
-    return ApiResponse(data: UserModel.fromMap(res.data));
+    return ApiResponse(data: UserModel.fromMap(res.data['data']));
   }
 
   @override

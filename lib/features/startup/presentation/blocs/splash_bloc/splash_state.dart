@@ -11,6 +11,15 @@ class SplashInitialState extends SplashState {
 }
 
 class SplashFinishedState extends SplashState {
+  final bool needsUpdate;
+  final bool isAuthenticated;
+  final bool showOnboarding;
+
+  SplashFinishedState({
+    required this.needsUpdate,
+    required this.isAuthenticated,
+    required this.showOnboarding,
+  });
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [needsUpdate, isAuthenticated, showOnboarding];
 }

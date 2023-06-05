@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/services.dart';
 import 'package:funconnect/core/app/_app.dart';
 import 'package:funconnect/core/constants/app_keys.dart';
 import 'package:funconnect/core/models/_models.dart';
@@ -41,10 +42,11 @@ class GoogleSignInUsecase with UseCases<UserModel?, NoParams> {
         _navigationService.toNamed(Routes.profileSetupViewRoute);
       }
       return res;
-    } on Failure {
-      rethrow;
-    } catch (e) {
-      throw Failure(e.toString());
+    } on PlatformException catch (e) {
+      throw Failure(
+        e.message ?? 'Something went wrong',
+        extraData: e.toString(),
+      );
     }
   }
 }

@@ -21,14 +21,18 @@ import 'package:funconnect/features/startup/presentation/views/version_update_vi
 import 'package:funconnect/services/_services.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
 
+import 'features/startup/presentation/blocs/splash_bloc/splash_event.dart';
+import 'features/startup/presentation/blocs/splash_bloc/splash_state.dart';
 import 'firebase_options.dart';
 
 void main() async {
   runZonedGuarded(() async {
     WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
     FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
-    SystemChrome.setPreferredOrientations(
-        [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
 
     FlutterError.onError = (details) async {
       if (kDebugMode) {
@@ -39,7 +43,7 @@ void main() async {
     };
 
     await _setupServices();
-    runApp(MyApp());
+    runApp(const MyApp());
   }, (error, stackTrace) async {
     FailureHandler.instance.catchError(error, stackTrace: stackTrace);
   });
@@ -55,40 +59,39 @@ Future<void> _setupServices() async {
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({Key? key}) : super(key: key);
-
-  final _splashBloc = SplashBloc();
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return ScreenUtilInit(
-      designSize: const Size(428, 926),
-      minTextAdapt: true,
-      splitScreenMode: true,
-      builder: (context, _) {
-        return MaterialApp(
-          theme: AppTheme.theme,
-          title: AppConstants.appName,
-          debugShowCheckedModeBanner: false,
-          navigatorKey: NavigationService.navigatorKey,
-          onGenerateRoute: Routes.generateRoute,
-          // initialRoute: Routes.initialRoute,
-          home: FutureBuilder(
-            future: _splashBloc.needsUpdate,
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.done) {
-                FlutterNativeSplash.remove();
-                if (snapshot.hasData) {
-                  if (snapshot.data == true) {
+    return BlocProvider<SplashBloc>(
+      create: (context) => SplashBloc(),
+      child: ScreenUtilInit(
+        designSize: const Size(428, 926),
+        minTextAdapt: true,
+        splitScreenMode: true,
+        builder: (context, _) {
+          context.read<SplashBloc>().add(InitializeSplashEvent());
+          return MaterialApp(
+            theme: AppTheme.theme,
+            title: AppConstants.appName,
+            debugShowCheckedModeBanner: false,
+            navigatorKey: NavigationService.navigatorKey,
+            onGenerateRoute: Routes.generateRoute,
+            home: BlocBuilder<SplashBloc, SplashState>(
+              buildWhen: (previous, current) => previous is SplashInitialState,
+              builder: (context, state) {
+                if (state is SplashFinishedState) {
+                  FlutterNativeSplash.remove();
+                  if (state.needsUpdate == true) {
                     return const VersionUpdateView();
                   }
-                  if (_splashBloc.isAuthenticated) {
+                  if (state.isAuthenticated) {
                     return BlocProvider(
                       create: (context) => DashboardBloc(),
                       child: const DashboardView(),
                     );
                   } else {
-                    if (_splashBloc.showOnboarding) {
+                    if (state.showOnboarding) {
                       return BlocProvider(
                         create: (context) => OnboardingBloc(),
                         child: const OnboardingView(),
@@ -101,29 +104,29 @@ class MyApp extends StatelessWidget {
                     }
                   }
                 }
-              }
-              return Scaffold(
-                body: Container(
-                  width: double.maxFinite,
-                  color: AppColors.mediumBlack,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        height: 250.r,
-                        width: 250.r,
-                        child: SvgPicture.asset(
-                          AppAssets.funconnectFullSvg,
+                return Scaffold(
+                  body: Container(
+                    width: double.maxFinite,
+                    color: AppColors.mediumBlack,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          height: 250.r,
+                          width: 250.r,
+                          child: SvgPicture.asset(
+                            AppAssets.funconnectFullSvg,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-              );
-            },
-          ),
-        );
-      },
+                );
+              },
+            ),
+          );
+        },
+      ),
     );
   }
 }
