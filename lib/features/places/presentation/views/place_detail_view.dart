@@ -21,6 +21,7 @@ import 'package:funconnect/features/places/presentation/widgets/home_categories_
 import 'package:funconnect/shared/components/_components.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
 import 'package:readmore/readmore.dart';
+import 'package:story_view/story_view.dart';
 
 class PlaceDetailView extends HookWidget {
   final PlaceModel place;
@@ -31,9 +32,10 @@ class PlaceDetailView extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = StoryController();
     useEffect(() {
       context.read<PlaceDetailBloc>().add(PlaceInitEvent(place));
-      return null;
+      return () => controller.dispose();
     }, []);
     return Scaffold(
       body: RefreshIndicator(
@@ -52,11 +54,44 @@ class PlaceDetailView extends HookWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    AppNetworkImage(
+                    SizedBox.fromSize(
                       size: Size.fromHeight(409.h),
-                      url: place.coverImagePath,
-                      borderRadius: 20,
-                      fit: BoxFit.cover,
+                      child: Builder(
+                        builder: (context) {
+                          final state = context.watch<PlaceDetailBloc>().state;
+                          if (state is PlaceDetailIdleState) {
+                            if (state.place.images.isNotEmpty) {
+                              return ClipRRect(
+                                borderRadius: BorderRadius.circular(20),
+                                child: StoryView(
+                                  controller: controller,
+                                  indicatorColor: AppColors.primary,
+                                  repeat: true,
+                                  inline: true,
+                                  storyItems: [
+                                    ...state.place.images.map(
+                                      (e) => StoryItem(
+                                        AppNetworkImage(
+                                          size: Size.fromHeight(409.h),
+                                          url: e.path,
+                                          borderRadius: 20,
+                                          fit: BoxFit.cover,
+                                        ),
+                                        duration: const Duration(seconds: 5),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              );
+                            }
+                          }
+                          return AppNetworkImage(
+                            url: place.coverImagePath,
+                            borderRadius: 20,
+                            fit: BoxFit.cover,
+                          );
+                        },
+                      ),
                     ),
                     Spacing.vertRegular(),
                     _InfoSection(place: place),

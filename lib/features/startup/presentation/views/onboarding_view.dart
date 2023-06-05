@@ -22,32 +22,22 @@ class OnboardingView extends StatelessWidget {
             child: StoryView(
               controller: storyViewController,
               indicatorColor: AppColors.primary,
-              storyItems: [
-                StoryItem(
-                    OnboardingItemWidget(
-                      onboardingItem: onboardingItems[0],
-                    ),
-                    duration: const Duration(seconds: 5)),
-                StoryItem(
-                    OnboardingItemWidget(
-                      onboardingItem: onboardingItems[1],
-                    ),
-                    duration: const Duration(seconds: 5)),
-                StoryItem(
-                    OnboardingItemWidget(
-                      onboardingItem: onboardingItems[2],
-                    ),
-                    duration: const Duration(seconds: 5)),
-              ],
+              storyItems: onboardingItems
+                  .map((e) => StoryItem(
+                        OnboardingItemWidget(onboardingItem: e),
+                        duration: const Duration(seconds: 5),
+                      ))
+                  .toList(),
             ),
           ),
           const SizedBox(height: 32),
           BlocBuilder<OnboardingBloc, OnboardingState>(
             builder: (context, state) {
               return AppOrangeBtn(
-                  onTap: () =>
-                      context.read<OnboardingBloc>().add(GetStartedEvent()),
-                  label: "Get Started");
+                onTap: () =>
+                    context.read<OnboardingBloc>().add(GetStartedEvent()),
+                label: "Get Started",
+              );
             },
           )
         ],

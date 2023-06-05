@@ -41,11 +41,12 @@ class OnboardingItemWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               AnimatedSwitcher(
-                  duration: const Duration(milliseconds: 300),
-                  transitionBuilder: (child, animation) {
-                    return ScaleTransition(scale: animation, child: child);
-                  },
-                  child: onboardingItem.title),
+                duration: const Duration(milliseconds: 300),
+                transitionBuilder: (child, animation) {
+                  return ScaleTransition(scale: animation, child: child);
+                },
+                child: onboardingItem.title,
+              ),
               const SizedBox(
                 height: 16,
               ),
