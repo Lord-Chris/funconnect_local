@@ -5,8 +5,11 @@ import 'package:funconnect/features/authentication/data/repositories/_authentica
 import 'package:logger/logger.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
+import '../../../../services/_services.dart';
+
 class AppleSignInUsecase with UseCases<UserModel?, NoParams> {
   final repo = locator<IAuthenticationRepository>();
+  final _navigationService = locator<INavigationService>();
   final _logger = Logger();
 
   @override
@@ -29,6 +32,11 @@ class AppleSignInUsecase with UseCases<UserModel?, NoParams> {
       // return null;
       final user = await repo.signInWithApple(credential.authorizationCode);
       _logger.i(">>> Apple Login Credentials Verified");
+      if ((user?.username ?? '').isNotEmpty) {
+        _navigationService.offAllNamed(Routes.dashboardViewRoute, (_) => false);
+      } else {
+        _navigationService.toNamed(Routes.profileSetupViewRoute);
+      }
       return user;
     } on SignInWithAppleException catch (e) {
       throw Failure("Apple Sign in failed", extraData: e.toString());

@@ -7,8 +7,11 @@ import 'package:funconnect/core/usecases/usecase.dart';
 import 'package:funconnect/features/authentication/data/repositories/_authentication_repo.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
+import '../../../../services/_services.dart';
+
 class GoogleSignInUsecase with UseCases<UserModel?, NoParams> {
   final repo = locator<IAuthenticationRepository>();
+  final _navigationService = locator<INavigationService>();
   final googleSignIn = GoogleSignIn(
     clientId: Platform.isAndroid
         ? AppKeys.googleSignClientIdAndroid
@@ -31,6 +34,11 @@ class GoogleSignInUsecase with UseCases<UserModel?, NoParams> {
           throw const Failure('Google Sign in Failed');
         }
         res = await repo.signInWithGoogleIos(auth.idToken ?? "");
+      }
+      if ((res?.username ?? '').isNotEmpty) {
+        _navigationService.offAllNamed(Routes.dashboardViewRoute, (_) => false);
+      } else {
+        _navigationService.toNamed(Routes.profileSetupViewRoute);
       }
       return res;
     } on Failure {

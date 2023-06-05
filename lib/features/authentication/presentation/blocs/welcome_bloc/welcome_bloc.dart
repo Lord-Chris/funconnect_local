@@ -69,8 +69,6 @@ class WelcomeBloc extends Bloc<WelcomeEvent, WelcomeState> {
         return;
       }
       emit(WelcomeSuccessState());
-      locator<INavigationService>()
-          .offAllNamed(Routes.dashboardViewRoute, (_) => false);
     } on Failure catch (e, s) {
       _logger.e(e);
       FailureHandler.instance.catchError(e, stackTrace: s);
@@ -96,8 +94,6 @@ class WelcomeBloc extends Bloc<WelcomeEvent, WelcomeState> {
         return;
       }
       emit(WelcomeSuccessState());
-      locator<INavigationService>()
-          .offAllNamed(Routes.dashboardViewRoute, (_) => false);
     } on Failure catch (e, s) {
       _logger.e(e);
       FailureHandler.instance.catchError(e, stackTrace: s);
