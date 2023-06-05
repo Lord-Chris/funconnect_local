@@ -6,7 +6,6 @@ import 'package:funconnect/core/models/_models.dart';
 import 'package:funconnect/services/local_storage_service/i_local_storage_service.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:logger/logger.dart';
 
 import 'i_location_service.dart';
@@ -39,22 +38,23 @@ class LocationService extends ILocationService {
           desiredAccuracy: LocationAccuracy.best,
           timeLimit: const Duration(seconds: 5),
         );
-        await _localStorageService.write(HiveKeys.locationBoxId,
-            key: StorageKeys.userSavedLocation, data: res.toJson());
-      } on LocationServiceDisabledException {
-        _logger.i("Getting Last  location from Hive");
-        await Hive.openBox(HiveKeys.locationBoxId);
-        res = Position.fromMap(_localStorageService.read(HiveKeys.locationBoxId,
-            key: StorageKeys.userSavedLocation));
-
-        _logger.i("Received  location from Hive is ${_localStorageService.read(
-          HiveKeys.locationBoxId,
+        await _localStorageService.write(
+          HiveKeys.appBoxId,
           key: StorageKeys.userSavedLocation,
-        )}");
+          data: res.toJson(),
+        );
+      } on LocationServiceDisabledException {
+        _logger.i("Getting Last location from Hive");
+        res = Position.fromMap(_localStorageService.read(
+          HiveKeys.appBoxId,
+          key: StorageKeys.userSavedLocation,
+        ));
+
+        _logger.i("Received location from Hive is ${res.toJson()}");
       } on TimeoutException {
         _logger.i("Getting Last known location");
         res = await Geolocator.getLastKnownPosition();
-        _logger.i("res Getting saved location is $res");
+        _logger.i("Last known location is $res");
       }
       if (res == null) return null;
       _logger.d(res);
@@ -74,11 +74,10 @@ class LocationService extends ILocationService {
       }
       return _location;
     } on Exception catch (e) {
+      _logger.e(e);
       throw Failure("Unable to get location", extraData: e.toString());
     }
   }
-
-  //@
 
   @override
   Future<bool> requestPermission() async {
@@ -88,7 +87,7 @@ class LocationService extends ILocationService {
       final res = await Geolocator.requestPermission();
       return res == LocationPermission.always ||
           res == LocationPermission.whileInUse;
-    } on PermissionRequestInProgressException catch (e) {
+    } on Exception catch (e) {
       _logger.e(e);
       return false;
     }
