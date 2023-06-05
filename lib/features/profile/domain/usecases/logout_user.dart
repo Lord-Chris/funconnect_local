@@ -11,10 +11,5 @@ class LogoutUser with UseCases<void, NoParams> {
   Future<void> call(NoParams params) async {
     await _profileRepository.logout();
     await _notificationService.clearUser();
-    // await GoogleSignIn(
-    //   clientId: Platform.isAndroid
-    //       ? AppKeys.googleSignClientIdAndroid
-    //       : AppKeys.googleSignClientIdIos,
-    // ).signOut();
   }
 }

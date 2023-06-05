@@ -17,7 +17,7 @@ class GoogleSignInUsecase with UseCases<UserModel?, NoParams> {
   @override
   Future<UserModel?> call(NoParams params) async {
     try {
-      // await googleSignIn.disconnect();
+      if (await googleSignIn.isSignedIn()) await googleSignIn.signOut();
       final acct = await googleSignIn.signIn();
       if (acct == null) return null;
       if (acct.email.isEmpty) return null;
