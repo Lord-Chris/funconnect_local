@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:funconnect/core/constants/_constants.dart';
+import 'package:funconnect/features/dashboard/domain/entities/notification_model.dart';
 import 'package:funconnect/services/notification_service/i_notification_service.dart';
 import 'package:logger/logger.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
@@ -7,6 +10,7 @@ import '../../core/models/_models.dart';
 
 class NotificationService extends INotificationService {
   final _logger = Logger();
+  final _controller = StreamController<NotificationData?>.broadcast();
   @override
   void init() {
     //Remove this method to stop OneSignal Debugging
@@ -18,7 +22,7 @@ class NotificationService extends INotificationService {
     OneSignal.shared
         .promptUserForPushNotificationPermission(fallbackToSettings: true)
         .then((accepted) {
-      _logger.i("Accepted permission: $accepted");
+      _logger.i("Notification permission accepted: $accepted");
     });
 
     _setObservers();
@@ -29,6 +33,16 @@ class NotificationService extends INotificationService {
         (OSNotificationReceivedEvent event) {
       // Will be called whenever a notification is received in foreground
       // Display Notification, pass null param for not displaying the notification
+      if (event.notification.body != null) {
+        _controller.add(
+          NotificationData(
+            remoteNotificationId: event.notification.notificationId,
+            title: event.notification.title ?? 'Funconnect',
+            message: event.notification.body ?? '',
+          ),
+        );
+      }
+      _logger.d("Notification Entered", event.notification.body);
       event.complete(event.notification);
     });
 
@@ -74,4 +88,12 @@ class NotificationService extends INotificationService {
       _logger.e(e);
     }
   }
+
+  @override
+  void clearNotificationStream() {
+    _controller.add(null);
+  }
+
+  @override
+  Stream<NotificationData?> get notificationStream => _controller.stream;
 }
