@@ -71,14 +71,9 @@ class SearchResultView extends HookWidget {
                     ),
                     Spacing.horizSmall(),
                     InkWell(
-                      onTap: () =>
-                          // showModalBottomSheet(
-                          //     context: context,
-                          //     builder: (context) => const SearchFilterSheet()),
-
-                          context
-                              .read<SearchResultBloc>()
-                              .add(FilterTapEvent()),
+                      onTap: () => context
+                          .read<SearchResultBloc>()
+                          .add(FilterTapEvent()),
                       child: BlocBuilder<SearchResultBloc, SearchResultState>(
                           buildWhen: (_, cur) => cur is SearchResultIdleState,
                           builder: (context, state) {
@@ -91,7 +86,7 @@ class SearchResultView extends HookWidget {
                                 Icons.filter_list_rounded,
                                 size: 20.sp,
                                 color: state.filter.isEmpty
-                                    ? null
+                                    ? AppColors.white
                                     : AppColors.black,
                               ),
                             );

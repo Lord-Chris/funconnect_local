@@ -22,6 +22,7 @@ class OnboardingView extends StatelessWidget {
             child: StoryView(
               controller: storyViewController,
               indicatorColor: AppColors.primary,
+              repeat: true,
               storyItems: onboardingItems
                   .map((e) => StoryItem(
                         OnboardingItemWidget(onboardingItem: e),

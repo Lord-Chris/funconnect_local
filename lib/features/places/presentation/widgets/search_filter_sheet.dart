@@ -52,88 +52,86 @@ class SearchFilterSheet extends HookWidget {
             ],
           ),
           Expanded(
-            child: Padding(
+            child: ListView(
               padding: REdgeInsets.all(16),
-              child: ScrollableColumn(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Spacing.vertRegular(),
-                  Text(
-                    'You’re in the mood for?',
-                    style: AppTextStyles.regular14,
-                  ),
-                  ...categories.map(
-                    (e) => CheckboxListTile(
-                      value: selected.value.categories.contains(e),
-                      onChanged: (val) {
-                        final list =
-                            List<CategoryModel>.from(selected.value.categories);
-                        if (list.contains(e)) {
-                          list.remove(e);
-                        } else {
-                          if (list.length > 4) return;
-                          list.add(e);
-                        }
-                        // ignore: invalid_use_of_protected_member, invalid_use_of_visible_for_testing_member
-                        selected.value =
-                            selected.value.copyWith(categories: list);
-                      },
-                      contentPadding: REdgeInsets.only(right: 20),
-                      visualDensity: VisualDensity.compact,
-                      dense: true,
-                      activeColor: AppColors.primary,
-                      title: Text(
-                        e.name,
-                        style: AppTextStyles.medium20,
-                      ),
+              children: [
+                Spacing.vertRegular(),
+                Text(
+                  'You’re in the mood for?',
+                  style: AppTextStyles.regular14,
+                ),
+                ...categories.map(
+                  (e) => CheckboxListTile(
+                    value: selected.value.categories.contains(e),
+                    onChanged: (val) {
+                      final list =
+                          List<CategoryModel>.from(selected.value.categories);
+                      if (list.contains(e)) {
+                        list.remove(e);
+                      } else {
+                        if (list.length > 4) return;
+                        list.add(e);
+                      }
+                      // ignore: invalid_use_of_protected_member, invalid_use_of_visible_for_testing_member
+                      selected.value =
+                          selected.value.copyWith(categories: list);
+                    },
+                    contentPadding: REdgeInsets.only(right: 20),
+                    visualDensity: VisualDensity.compact,
+                    dense: true,
+                    activeColor: AppColors.primary,
+                    title: Text(
+                      e.name,
+                      style: AppTextStyles.medium20,
                     ),
                   ),
-                  Spacing.vertMedium(),
-                  Spacing.vertMedium(),
-                  Text(
-                    'Sort by',
-                    style: AppTextStyles.regular14,
+                ),
+                Spacing.vertMedium(),
+                Spacing.vertMedium(),
+                Text(
+                  'Sort by',
+                  style: AppTextStyles.regular14,
+                ),
+                Spacing.vertRegular(),
+                Container(
+                  decoration: BoxDecoration(
+                    color: AppColors.gray333,
+                    borderRadius: BorderRadius.circular(41),
                   ),
-                  Spacing.vertRegular(),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: AppColors.gray333,
-                      borderRadius: BorderRadius.circular(41),
-                    ),
-                    child: Row(
-                      children: SearchEnum.values
-                          .map(
-                            (e) => Expanded(
-                              child: InkWell(
-                                onTap: () => selected.value =
-                                    selected.value.copyWith(searchEnum: e),
-                                child: Container(
-                                  padding: REdgeInsets.symmetric(vertical: 8),
-                                  decoration: BoxDecoration(
-                                    color: selected.value.searchEnum == e
-                                        ? AppColors.primary
-                                        : null,
-                                    borderRadius: BorderRadius.circular(41),
-                                  ),
-                                  child: Center(
-                                    child: Text(
-                                      e.parsed,
-                                      style: AppTextStyles.regular14.copyWith(
-                                        color: selected.value.searchEnum == e
-                                            ? AppColors.black
-                                            : null,
-                                      ),
+                  child: Row(
+                    children: SearchEnum.values
+                        .map(
+                          (e) => Expanded(
+                            child: InkWell(
+                              onTap: () => selected.value =
+                                  selected.value.copyWith(searchEnum: e),
+                              child: Container(
+                                padding: REdgeInsets.symmetric(vertical: 8),
+                                decoration: BoxDecoration(
+                                  color: selected.value.searchEnum == e
+                                      ? AppColors.primary
+                                      : null,
+                                  borderRadius: BorderRadius.circular(41),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    e.parsed,
+                                    style: AppTextStyles.regular14.copyWith(
+                                      color: selected.value.searchEnum == e
+                                          ? AppColors.black
+                                          : null,
                                     ),
                                   ),
                                 ),
                               ),
                             ),
-                          )
-                          .toList(),
-                    ),
+                          ),
+                        )
+                        .toList(),
                   ),
-                ],
-              ),
+                ),
+                Spacing.vertSmall(),
+              ],
             ),
           ),
           AppOrangeBtn(
