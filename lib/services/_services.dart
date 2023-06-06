@@ -19,6 +19,7 @@ export 'local_storage_service/local_storage_service.dart';
 
 ///
 export 'location_service/i_location_service.dart';
+export 'location_service/ios_location_service.dart';
 export 'location_service/location_service.dart';
 
 ///

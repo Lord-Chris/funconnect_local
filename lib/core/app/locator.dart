@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:funconnect/features/authentication/data/data_sources/http_authentication_datasource.dart';
 import 'package:funconnect/features/authentication/data/data_sources/i_authentication_datasource.dart';
 import 'package:funconnect/features/dashboard/data/repository/i_dashboard_repository.dart';
@@ -5,10 +7,10 @@ import 'package:funconnect/features/events/data/data_sources/http_events_data_so
 import 'package:funconnect/features/events/data/data_sources/i_events_data_source.dart';
 import 'package:funconnect/features/events/data/repositories/events_repository.dart';
 import 'package:funconnect/features/events/data/repositories/i_events_repository.dart';
-import 'package:funconnect/features/saved/data/repository/i_saved_repository.dart';
-import 'package:funconnect/features/saved/data/repository/saved_repository.dart';
 import 'package:funconnect/features/profile/data/repository/i_profile_repository.dart';
 import 'package:funconnect/features/profile/data/repository/profile_repository.dart';
+import 'package:funconnect/features/saved/data/repository/i_saved_repository.dart';
+import 'package:funconnect/features/saved/data/repository/saved_repository.dart';
 import 'package:funconnect/services/_services.dart';
 import 'package:get_it/get_it.dart';
 
@@ -26,7 +28,9 @@ Future<void> setUpLocator() async {
   locator.registerLazySingleton<IDialogAndSheetService>(
       () => DialogAndSheetService());
   locator.registerLazySingleton<INetworkService>(() => NetworkService());
-  locator.registerLazySingleton<ILocationService>(() => LocationService());
+  locator.registerLazySingleton<ILocationService>(
+    () => Platform.isIOS ? IosLocationService() : LocationService(),
+  );
   locator.registerLazySingleton<IMediaService>(() => MediaService());
   locator
       .registerLazySingleton<IConnectivityService>(() => ConnectivityService());

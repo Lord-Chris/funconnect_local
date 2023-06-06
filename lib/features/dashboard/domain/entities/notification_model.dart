@@ -68,7 +68,7 @@ class NotificationModel extends Equatable {
   }
 
   int get timeDifference =>
-      DateTime.now().difference(DateTime.parse(updatedAt)).inSeconds;
+      DateTime.now().difference(DateTime.parse(updatedAt)).inSeconds.abs();
 }
 
 class NotificationData extends Equatable {

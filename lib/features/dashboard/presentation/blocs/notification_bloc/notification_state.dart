@@ -7,17 +7,27 @@ abstract class NotificationState extends Equatable {
 
   List<NotificationModel> get unreadNotifications => [];
 
+  bool get showNotificationBadge => false;
+
+  
+
   @override
-  List<Object?> get props => [notifications];
+  List<Object?> get props => [
+        notifications,
+        unreadNotifications,
+        showNotificationBadge,
+      ];
 }
 
 class NotificationLoadingState extends NotificationState {}
 
 class NotificationIdleState extends NotificationState {
   final PaginatedData<NotificationModel>? notificationData;
+  final bool showBadge;
 
   NotificationIdleState({
     this.notificationData,
+    this.showBadge = false,
   });
 
   @override
@@ -35,7 +45,25 @@ class NotificationIdleState extends NotificationState {
   }
 
   @override
-  List<Object?> get props => [notifications, DateTime.now()];
+  bool get showNotificationBadge => showBadge || unreadNotifications.isNotEmpty;
+
+  NotificationIdleState copyWith({
+    PaginatedData<NotificationModel>? notificationData,
+    bool? showBadge,
+  }) {
+    return NotificationIdleState(
+      notificationData: notificationData ?? this.notificationData,
+      showBadge: showBadge ?? this.showBadge,
+    );
+  }
+
+  @override
+  List<Object?> get props => [
+        notifications,
+        unreadNotifications,
+        showBadge,
+        DateTime.now(),
+      ];
 }
 
 class NotificationFailureState extends NotificationState with EquatableMixin {

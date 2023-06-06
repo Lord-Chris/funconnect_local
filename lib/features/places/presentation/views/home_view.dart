@@ -35,7 +35,7 @@ class _HomeViewState extends State<HomeView> {
   void initState() {
     super.initState();
     context.read<HomeBloc>().add(const HomeInitEvent());
-    context.read<NotificationBloc>().add(NotificationInitEvent());
+    context.read<NotificationBloc>().add(NotificationInitEvent(false));
   }
 
   @override
@@ -94,17 +94,10 @@ class _HomeViewState extends State<HomeView> {
             onPressed: () =>
                 context.read<HomeBloc>().add(NotificationTapEvent()),
             icon: Badge(
-              isLabelVisible: context
-                  .watch<NotificationBloc>()
-                  .state
-                  .unreadNotifications
-                  .isNotEmpty,
-              label: Text(context
-                  .watch<NotificationBloc>()
-                  .state
-                  .unreadNotifications
-                  .length
-                  .toString()),
+              isLabelVisible:
+                  context.watch<NotificationBloc>().state.showNotificationBadge,
+              smallSize: 10,
+              textColor: AppColors.white,
               child: const Icon(
                 CupertinoIcons.bell_fill,
                 color: AppColors.white,

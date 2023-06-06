@@ -35,7 +35,8 @@ class LocationService extends ILocationService {
 
       LocationData? res;
       _logger.i("Getting current location");
-      res = await location.getLocation().timeout(const Duration(seconds: 5));
+      res = await location.getLocation();
+      // .timeout(Duration(seconds: Platform.isAndroid ? 5 : 10));
       if (res.latitude == null || res.longitude == null) {
         _logger.i("Getting Last location from Hive");
         _location = AppLocation.fromMap(_localStorageService.read(
