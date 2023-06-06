@@ -382,7 +382,6 @@ class _InfoSection extends StatelessWidget {
               data: state.place.description,
               style: {
                 "body": Style(
-                  padding: EdgeInsets.zero,
                   margin: Margins(
                     bottom: Margin.zero(),
                     left: Margin.zero(),

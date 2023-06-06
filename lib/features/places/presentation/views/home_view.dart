@@ -13,6 +13,7 @@ import 'package:funconnect/features/places/domain/entities/place_model.dart';
 import 'package:funconnect/features/places/presentation/blocs/home_bloc/home_bloc.dart';
 import 'package:funconnect/features/places/presentation/blocs/home_bloc/home_event.dart';
 import 'package:funconnect/features/places/presentation/blocs/home_bloc/home_state.dart';
+import 'package:funconnect/features/places/presentation/widgets/home_skeleton.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
 import 'package:skeletons/skeletons.dart';
 
@@ -125,39 +126,7 @@ class _HomeViewState extends State<HomeView> {
                 buildWhen: (previous, _) => previous is HomeLoadingState,
                 builder: (context, state) {
                   if (state is HomeLoadingState) {
-                    return Column(
-                      children: [
-                        const SkeletonLine(),
-                        SizedBox(height: 10.h),
-                        Row(
-                          children: [
-                            SkeletonAvatar(
-                              style: SkeletonAvatarStyle(
-                                width: 120.w,
-                                height: 120.h,
-                                shape: BoxShape.rectangle,
-                              ),
-                            ),
-                            SizedBox(width: 10.w),
-                            SkeletonAvatar(
-                              style: SkeletonAvatarStyle(
-                                width: 120.w,
-                                height: 120.h,
-                                shape: BoxShape.rectangle,
-                              ),
-                            ),
-                            SizedBox(width: 10.w),
-                            SkeletonAvatar(
-                              style: SkeletonAvatarStyle(
-                                width: 120.w,
-                                height: 120.h,
-                                shape: BoxShape.rectangle,
-                              ),
-                            ),
-                          ],
-                        )
-                      ],
-                    );
+                    return const HomeSkeleton();
                   }
                   if (state is! HomeIdleState) return const SizedBox();
                   return Column(
