@@ -12,7 +12,6 @@ import 'package:funconnect/shared/components/_components.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
 import 'package:intl/intl.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
-import 'package:logger/logger.dart';
 
 import '../../../../core/models/_models.dart';
 
@@ -196,7 +195,7 @@ class PersonalInformationView extends StatelessWidget {
                   keyboardType: TextInputType.text,
                   textCapitalization: TextCapitalization.none,
                   floatingLabelBehavior: FloatingLabelBehavior.auto,
-                  validator: context.validateNotEmpty,
+                  // validator: context.validateNotEmpty,
                   autovalidateMode: state.autoValidateForm
                       ? AutovalidateMode.always
                       : AutovalidateMode.disabled,
@@ -234,9 +233,9 @@ class PersonalInformationView extends StatelessWidget {
                 FutureBuilder(
                   future:
                       PhoneNumber.getRegionInfoFromPhoneNumber(iMobileNumber)
-                          .catchError((error) {
-                    return PhoneNumber(isoCode: 'NG', dialCode: '+253');
-                  }),
+                          .catchError(
+                    (error) => PhoneNumber(isoCode: 'NG', dialCode: '+234'),
+                  ),
                   builder: (context, snapshot) {
                     if (snapshot.hasError) {
                       return Text(snapshot.error.toString());
@@ -253,6 +252,7 @@ class PersonalInformationView extends StatelessWidget {
                         useEmoji: true,
                         setSelectorButtonAsPrefixIcon: true,
                       ),
+                      validator: context.validatePhoneNumber,
                       onInputValidated: (value) {
                         context
                             .read<EditProfileBloc>()
@@ -308,72 +308,31 @@ class PersonalInformationView extends StatelessWidget {
                   },
                 ),
                 Spacing.vertMedium(),
-                /*
-                AppTextField(
-                  onChanged: (val) {
-
-                    context.read<EditProfileBloc>().add(EditProfileFieldsEvent(
-                        profile.copyWith(phoneE164: val)));
-                  },
-                  inputFormatters: [
-                    FilteringTextInputFormatter.deny(" "),
-                  ],
-                  initialValue: iMobileNumber,
-                  keyboardType: TextInputType.phone,
-                  textCapitalization: TextCapitalization.none,
-                  floatingLabelBehavior: FloatingLabelBehavior.auto,
-                  validator: context.validatePhoneNumber,
-                  autovalidateMode: state.autoValidateForm
-                      ? AutovalidateMode.always
-                      : AutovalidateMode.disabled,
-                  label: AppText.aTMobileNumber,
-                  hint: AppText.aTMobileNumberHint,
-                  suffix: SvgPicture.asset(
-                    AppAssets.arrowDown,
-                    width: 20,
-                    fit: BoxFit.scaleDown,
-                  ),
-                  prefix: Padding(
-                    padding: const EdgeInsets.only(right: 8.0),
-                    child: SvgPicture.asset(
-                      AppAssets.phone,
-                      height: 17.h,
-                      fit: BoxFit.scaleDown,
-                    ),
-                  ),
-                ),
-                */
-
                 Spacing.vertLarge(),
                 Align(
-                    alignment: Alignment.centerRight,
-                    child: AppButton(
-                      onTap: () {
-                        if (!formKey.currentState!.validate()) {
-                          context
-                              .read<EditProfileBloc>()
-                              .add(AutoValidateFormEvent());
-                        } else {
-                          if (context.read<EditProfileBloc>().isNumberValid) {
-                            context
-                                .read<EditProfileBloc>()
-                                .add(ContinueTapEvent());
-                          } else {
-                            Logger().d("Number not valid");
-                          }
-                        }
-                      },
-                      label: AppText.aTContinue,
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 32, vertical: 16),
-                      suffixWidget: SvgPicture.asset(
-                        AppAssets.arrowRight,
-                        width: 17,
-                        fit: BoxFit.scaleDown,
-                      ),
-                      isCollapsed: true,
-                      labelColor: AppColors.black,
-                    )),
+                  alignment: Alignment.centerRight,
+                  child: AppButton(
+                    onTap: () {
+                      if (!formKey.currentState!.validate()) {
+                        context
+                            .read<EditProfileBloc>()
+                            .add(AutoValidateFormEvent());
+                        return;
+                      }
+                      context.read<EditProfileBloc>().add(ContinueTapEvent());
+                    },
+                    label: AppText.aTContinue,
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 32, vertical: 16),
+                    suffixWidget: SvgPicture.asset(
+                      AppAssets.arrowRight,
+                      width: 17,
+                      fit: BoxFit.scaleDown,
+                    ),
+                    isCollapsed: true,
+                    labelColor: AppColors.black,
+                  ),
+                ),
                 Spacing.vertRegular(),
                 Spacing.vertLarge(),
               ],

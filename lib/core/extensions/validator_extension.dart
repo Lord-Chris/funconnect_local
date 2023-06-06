@@ -47,8 +47,12 @@ extension ValidatorExtension on BuildContext {
             : null;
   }
 
-  String? validatePhoneNumber(String? value) =>
-      value != null && value.length < 10 ? 'Enter a Valid Phone Number' : null;
+  String? validatePhoneNumber(String? value) {
+    if ((value ?? '').isEmpty) return null;
+    return value != null && value.length < 10
+        ? 'Enter a Valid Phone Number'
+        : null;
+  }
 
   String? validatePassword(String? value) => value == null || value.length < 6
       ? 'Password should be more than 5 Characters'
