@@ -13,7 +13,9 @@ import 'package:funconnect/features/places/domain/entities/place_model.dart';
 import 'package:funconnect/features/places/presentation/blocs/home_bloc/home_bloc.dart';
 import 'package:funconnect/features/places/presentation/blocs/home_bloc/home_event.dart';
 import 'package:funconnect/features/places/presentation/blocs/home_bloc/home_state.dart';
+import 'package:funconnect/features/places/presentation/widgets/home_skeleton.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
+import 'package:skeletons/skeletons.dart';
 
 import '../../../../shared/components/_components.dart';
 import '../widgets/home_categories_large_widget.dart';
@@ -117,9 +119,7 @@ class _HomeViewState extends State<HomeView> {
                 buildWhen: (previous, _) => previous is HomeLoadingState,
                 builder: (context, state) {
                   if (state is HomeLoadingState) {
-                    return const AppLoader(
-                      color: AppColors.primary,
-                    );
+                    return const HomeSkeleton();
                   }
                   if (state is! HomeIdleState) return const SizedBox();
                   return Column(
@@ -127,7 +127,9 @@ class _HomeViewState extends State<HomeView> {
                       BlocBuilder<HomeBloc, HomeState>(
                         buildWhen: (_, current) => current is HomeIdleState,
                         builder: (context, state) {
-                          if (state is! HomeIdleState) return const SizedBox();
+                          if (state is! HomeIdleState) {
+                            return const SizedBox();
+                          }
                           if (state.interests.isEmpty) return const SizedBox();
                           return SizedBox(
                             height: 50.h,

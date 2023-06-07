@@ -1,9 +1,10 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:funconnect/features/places/domain/entities/category_model.dart';
 import 'package:funconnect/features/places/presentation/blocs/home_bloc/home_bloc.dart';
 import 'package:funconnect/features/places/presentation/blocs/home_bloc/home_event.dart';
-import 'package:funconnect/shared/components/app_network_image.dart';
 
 import '../../../../shared/constants/_constants.dart';
 
@@ -30,11 +31,11 @@ class HomeInterestWidget extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            AppNetworkImage(
-              size: const Size.fromRadius(10),
-              url: interest.coverPhoto,
+            CachedNetworkImage(
+              imageUrl: interest.coverPhoto,
+              placeholder: (context, url) =>
+                  SvgPicture.asset(AppAssets.placesPlaceHolder),
               fit: BoxFit.cover,
-              isCircular: true,
             ),
             Spacing.horizSmall(),
             Text(

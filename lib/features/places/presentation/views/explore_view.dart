@@ -5,6 +5,7 @@ import 'package:funconnect/features/places/presentation/blocs/explore_bloc/explo
 import 'package:funconnect/features/places/presentation/blocs/explore_bloc/explore_event.dart';
 import 'package:funconnect/features/places/presentation/blocs/explore_bloc/explore_state.dart';
 import 'package:funconnect/features/places/presentation/widgets/home_categories_large_widget.dart';
+import 'package:funconnect/features/places/presentation/widgets/home_skeleton.dart';
 import 'package:funconnect/shared/components/_components.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
 
@@ -84,11 +85,7 @@ class _ExploreViewState extends State<ExploreView> {
               child: BlocBuilder<ExploreBloc, ExploreState>(
                 builder: (context, state) {
                   if (state is ExploreLoadingState) {
-                    return const Center(
-                      child: AppLoader(
-                        color: AppColors.primary,
-                      ),
-                    );
+                    return const HomeSkeleton();
                   }
                   if (state is ExploreFailureState) {
                     return Padding(
