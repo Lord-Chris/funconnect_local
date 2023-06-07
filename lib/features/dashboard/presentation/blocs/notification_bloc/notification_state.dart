@@ -9,8 +9,6 @@ abstract class NotificationState extends Equatable {
 
   bool get showNotificationBadge => false;
 
-  
-
   @override
   List<Object?> get props => [
         notifications,
@@ -36,7 +34,7 @@ class NotificationIdleState extends NotificationState {
   @override
   List<NotificationModel> get unreadNotifications {
     List<NotificationModel> unread = [];
-    for (var element in notificationData?.data ?? []) {
+    for (var element in notifications) {
       if (element.readAt == null) {
         unread.add(element);
       }

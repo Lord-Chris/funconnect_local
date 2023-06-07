@@ -33,10 +33,7 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
       if (!event.readNotifications) return;
       await Future.delayed(const Duration(seconds: 2));
       final updatedRes = await ReadAllNotifications().call(NoParams());
-      emit(NotificationIdleState(
-        notificationData: updatedRes,
-        showBadge: false,
-      ));
+      emit(NotificationIdleState(notificationData: updatedRes));
       _notificationService.clearNotificationStream();
     } on Failure catch (e, s) {
       _logger.e(e);

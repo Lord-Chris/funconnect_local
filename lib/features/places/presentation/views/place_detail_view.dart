@@ -60,7 +60,7 @@ class PlaceDetailView extends HookWidget {
                         builder: (context) {
                           final state = context.watch<PlaceDetailBloc>().state;
                           if (state is PlaceDetailIdleState) {
-                            if (state.place.images.isNotEmpty) {
+                            if (state.place.images.length > 1) {
                               return ClipRRect(
                                 borderRadius: BorderRadius.circular(20),
                                 child: StoryView(
@@ -77,11 +77,23 @@ class PlaceDetailView extends HookWidget {
                                           borderRadius: 20,
                                           fit: BoxFit.cover,
                                         ),
-                                        duration: const Duration(seconds: 5),
+                                        duration: const Duration(seconds: 7),
                                       ),
                                     )
                                   ],
                                 ),
+                              );
+                            }
+                            if (state.place.images.isNotEmpty) {
+                              return AppNetworkImage(
+                                url: state.place.images[0].path,
+                                errorWidget: AppNetworkImage(
+                                  url: place.coverImagePath,
+                                  borderRadius: 20,
+                                  fit: BoxFit.cover,
+                                ),
+                                borderRadius: 20,
+                                fit: BoxFit.cover,
                               );
                             }
                           }
