@@ -36,7 +36,7 @@ class NetworkService extends INetworkService {
         return ApiResponse(data: res.data);
       }
       throw Failure(res.statusMessage!);
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       throw convertException(e);
     } catch (e) {
       _logger.e(e.toString());
@@ -59,7 +59,7 @@ class NetworkService extends INetworkService {
         return ApiResponse(data: res.data);
       }
       throw Failure(res.statusMessage!);
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       throw convertException(e);
     } catch (e) {
       _logger.e(e.toString());
@@ -83,7 +83,7 @@ class NetworkService extends INetworkService {
         return ApiResponse(data: res.data);
       }
       throw Failure(res.statusMessage!);
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       throw convertException(e);
     } catch (e) {
       _logger.e(e.toString());
@@ -107,7 +107,7 @@ class NetworkService extends INetworkService {
         return ApiResponse(data: res.data);
       }
       throw Failure(res.statusMessage!);
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       throw convertException(e);
     } catch (e) {
       _logger.e(e.toString());
@@ -137,7 +137,7 @@ class NetworkService extends INetworkService {
         return ApiResponse(data: res.data);
       }
       throw Failure(res.statusMessage!);
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       throw convertException(e);
     } catch (e) {
       _logger.e(e.toString());
@@ -145,21 +145,21 @@ class NetworkService extends INetworkService {
     }
   }
 
-  Failure convertException(DioError e) {
+  Failure convertException(DioException e) {
     switch (e.type) {
-      case DioErrorType.connectionTimeout:
+      case DioExceptionType.connectionTimeout:
         return const Failure("Connection Timed Out");
-      case DioErrorType.sendTimeout:
+      case DioExceptionType.sendTimeout:
         return const Failure("Connection Timed Out");
-      case DioErrorType.receiveTimeout:
+      case DioExceptionType.receiveTimeout:
         return const Failure("Connection Timed Out");
-      case DioErrorType.badResponse:
+      case DioExceptionType.badResponse:
         return Failure(
             e.response?.data['message'] ?? e.response?.data['errors']);
-      case DioErrorType.cancel:
+      case DioExceptionType.cancel:
         return Failure(
             e.response?.data['message'] ?? e.response?.data['errors']);
-      case DioErrorType.unknown:
+      case DioExceptionType.unknown:
         return const Failure("No Internet Connection");
       default:
         return const Failure("No Internet Connection");

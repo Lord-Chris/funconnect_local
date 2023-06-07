@@ -47,7 +47,7 @@ class AppAssets {
   static const bookRideSvg = "assets/svgs/book_ride_icon.svg";
   static const reviewSvg = "assets/svgs/review_icon.svg";
   static const uploadSvg = "assets/svgs/upload_icon.svg";
-  static const placesPlaceHolder = "assets/svgs/places_placeholder.svg";
+  static const placesPlaceHolder = "assets/svgs/place_placeholder.svg";
 
   // Profile
   static const appleSvg = "assets/svgs/apple.svg";

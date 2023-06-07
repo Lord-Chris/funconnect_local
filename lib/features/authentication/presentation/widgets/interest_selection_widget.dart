@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../shared/components/_components.dart';
-import '../../../../shared/constants/colors.dart';
-import '../../../../shared/constants/textstyles.dart';
+import '../../../../shared/constants/_constants.dart';
 
 class InterestSelectionWidget extends StatelessWidget {
   final bool isSelected;
@@ -32,6 +31,7 @@ class InterestSelectionWidget extends StatelessWidget {
             url: image,
             isCircular: true,
             fit: BoxFit.cover,
+            placeholderAssetImage: AppAssets.placesPlaceHolder,
           ),
           const SizedBox(width: 8),
           Expanded(

@@ -4,7 +4,7 @@ import 'package:logger/logger.dart';
 class NetworkLoggerInterceptor implements Interceptor {
   final _logger = Logger();
   @override
-  void onError(DioError err, ErrorInterceptorHandler handler) {
+  void onError(DioException err, ErrorInterceptorHandler handler) {
     _logger.e(
       '---ENDPOINT: ${err.requestOptions.uri}\n'
       '---STATUSCODE: ${err.error}\n'

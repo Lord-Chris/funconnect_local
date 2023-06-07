@@ -15,7 +15,6 @@ import 'package:funconnect/features/places/presentation/blocs/home_bloc/home_eve
 import 'package:funconnect/features/places/presentation/blocs/home_bloc/home_state.dart';
 import 'package:funconnect/features/places/presentation/widgets/home_skeleton.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
-import 'package:skeletons/skeletons.dart';
 
 import '../../../../shared/components/_components.dart';
 import '../widgets/home_categories_large_widget.dart';
