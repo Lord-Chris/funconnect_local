@@ -47,11 +47,15 @@ class RemoteProfileDataSource with ApiMixin {
   }
 
   Future<LoginOptionsModel> fetchLogInOptions() async {
-    final res = await _networkService.get(
-      ApiConstants.settings,
-      headers: headers,
-    );
-    return LoginOptionsModel.fromMap(res.data['data']);
+    try {
+      final res = await _networkService.get(
+        ApiConstants.settings,
+        headers: headers,
+      );
+      return LoginOptionsModel.fromMap(res.data['data']);
+    } on Failure {
+      return const LoginOptionsModel.initial();
+    }
   }
 
   Future<LoginOptionsModel> updateLogInOptions(LoginOptionsData data) async {

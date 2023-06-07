@@ -72,9 +72,12 @@ class PlaceDetailView extends HookWidget {
                                     ...state.place.images.map(
                                       (e) => StoryItem(
                                         AppNetworkImage(
+                                          cacheImage: false,
                                           size: Size.fromHeight(409.h),
                                           url: e.path,
                                           borderRadius: 20,
+                                          errorAssetImage:
+                                              AppAssets.placesPlaceHolderSvg,
                                           fit: BoxFit.cover,
                                         ),
                                         duration: const Duration(seconds: 7),

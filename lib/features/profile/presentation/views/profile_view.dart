@@ -46,6 +46,30 @@ class _ProfileViewState extends State<ProfileView> {
               color: AppColors.primary,
             );
           }
+          if (state is ProfileFailureState) {
+            return Padding(
+              padding: const EdgeInsets.all(20),
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      state.failure.message,
+                      style: AppTextStyles.medium14,
+                    ),
+                    Spacing.vertRegular(),
+                    AppButton(
+                      label: "Retry",
+                      isCollapsed: true,
+                      labelColor: AppColors.black,
+                      onTap: () =>
+                          context.read<ProfileBloc>().add(InitProfileEvent()),
+                    )
+                  ],
+                ),
+              ),
+            );
+          }
           if (state is! ProfileIdleState) return const SizedBox();
           return BlocBuilder<ProfileBloc, ProfileState>(
             buildWhen: (_, current) => current is ProfileIdleState,
@@ -168,18 +192,18 @@ class _ProfileViewState extends State<ProfileView> {
                             "Settings",
                             style: AppTextStyles.semiBold20,
                           ),
-                          // _buildProfileItems(
-                          //   "Manage log-in options",
-                          //   icon: const Icon(
-                          //     Icons.arrow_forward_ios,
-                          //     size: 15,
-                          //   ),
-                          //   onTap: () => context
-                          //       .read<ProfileBloc>()
-                          //       .add(ManageLoginOptionsTapEvent(
-                          //         userProfile: userProfile,
-                          //       )),
-                          // ),
+                          _buildProfileItems(
+                            "Manage log-in options",
+                            icon: const Icon(
+                              Icons.arrow_forward_ios,
+                              size: 15,
+                            ),
+                            onTap: () => context
+                                .read<ProfileBloc>()
+                                .add(ManageLoginOptionsTapEvent(
+                                  userProfile: userProfile,
+                                )),
+                          ),
                           _buildProfileItems(
                             "Notifications",
                             icon: const Icon(

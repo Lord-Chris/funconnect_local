@@ -31,7 +31,7 @@ class InterestSelectionWidget extends StatelessWidget {
             url: image,
             isCircular: true,
             fit: BoxFit.cover,
-            placeholderAssetImage: AppAssets.placesPlaceHolder,
+            placeholderAssetImage: AppAssets.placesPlaceHolderSvg,
           ),
           const SizedBox(width: 8),
           Expanded(

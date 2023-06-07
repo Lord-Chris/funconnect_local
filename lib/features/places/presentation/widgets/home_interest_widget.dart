@@ -33,7 +33,7 @@ class HomeInterestWidget extends StatelessWidget {
             AppNetworkImage(
               size: const Size.fromRadius(10),
               url: interest.coverPhoto,
-              placeholderAssetImage: AppAssets.placesPlaceHolder,
+              placeholderAssetImage: AppAssets.placesPlaceHolderSvg,
               fit: BoxFit.cover,
               isCircular: true,
             ),
