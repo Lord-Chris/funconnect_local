@@ -652,33 +652,54 @@ class _ReviewSection extends HookWidget {
                   ],
                 ),
                 Spacing.vertSmall(),
-                Row(
-                  children: [
-                    SvgPicture.asset(
-                      AppAssets.reviewSvg,
-                      height: 17.sp,
-                    ),
-                    Spacing.horizSmall(),
-                    Text(
-                      "Write a review",
-                      style: AppTextStyles.medium12,
-                    ),
-                  ],
+                HookBuilder(
+                  builder: (context) {
+                    useListenable(newRating);
+                    useListenable(controller);
+                    if (newRating.value > 0) {
+                      return Row(
+                        children: [
+                          SvgPicture.asset(
+                            AppAssets.reviewSvg,
+                            height: 17.sp,
+                          ),
+                          Spacing.horizSmall(),
+                          Text(
+                            "Write a review",
+                            style: AppTextStyles.medium12,
+                          ),
+                        ],
+                      );
+                    } else {
+                      return const SizedBox();
+                    }
+                  },
                 ),
                 Spacing.vertRegular(),
-                AppTextField(
-                  maxLines: 4,
-                  hint: "Would you like to write anything about us?",
-                  textCapitalization: TextCapitalization.sentences,
-                  keyboardType: TextInputType.multiline,
-                  controller: controller,
-                  onEditingComplete: () {},
+                HookBuilder(
+                  builder: (context) {
+                    useListenable(newRating);
+                    useListenable(controller);
+                    if (newRating.value > 0) {
+                      return AppTextField(
+                        maxLines: 4,
+                        hint:
+                            "Would you like to write anything about us? (optional)",
+                        textCapitalization: TextCapitalization.sentences,
+                        keyboardType: TextInputType.multiline,
+                        controller: controller,
+                        onEditingComplete: () {},
+                      );
+                    } else {
+                      return const SizedBox();
+                    }
+                  },
                 ),
                 HookBuilder(
                   builder: (context) {
                     useListenable(newRating);
                     useListenable(controller);
-                    if (newRating.value > 0 && controller.text.isNotEmpty) {
+                    if (newRating.value > 0) {
                       return Container(
                         padding: REdgeInsets.symmetric(vertical: 8),
                         alignment: Alignment.topRight,
