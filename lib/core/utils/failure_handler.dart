@@ -24,6 +24,9 @@ class FailureHandler {
       (options) {
         options.dsn = _id;
         options.tracesSampleRate = 1.0;
+        options.enablePrintBreadcrumbs = true;
+        options.attachScreenshot = true;
+        options.enableAutoPerformanceTracing = true;
       },
     );
 

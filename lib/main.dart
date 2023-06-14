@@ -20,6 +20,7 @@ import 'package:funconnect/features/startup/presentation/views/onboarding_view.d
 import 'package:funconnect/features/startup/presentation/views/version_update_view.dart';
 import 'package:funconnect/services/_services.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 
 import 'features/startup/presentation/blocs/splash_bloc/splash_event.dart';
 import 'features/startup/presentation/blocs/splash_bloc/splash_state.dart';
@@ -43,7 +44,7 @@ void main() async {
     };
 
     await _setupServices();
-    runApp(const MyApp());
+    runApp(const SentryScreenshotWidget(child: MyApp()));
   }, (error, stackTrace) async {
     FailureHandler.instance.catchError(error, stackTrace: stackTrace);
   });
