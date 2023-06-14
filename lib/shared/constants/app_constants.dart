@@ -2,8 +2,8 @@ class AppConstants {
   AppConstants._();
 
   static const appName = "Funconnect";
-  static const tandC = "https://funconnect.app";
-  static const privacyPolicy = "https://funconnect.app";
+  static const tandC = "https://funconnect.app/terms-and-conditions";
+  static const privacyPolicy = "https://funconnect.app/privacy-policies";
   static const telegramUrl = "https://t.me/+iuacF94tyVE5ZTY0";
   static const twitterUrl = "https://twitter.com/Funconnect_app?s=20";
   static const instagramUrl = "https://www.instagram.com/funconnect_app/";
