@@ -68,9 +68,10 @@ class PersonalInformationView extends StatelessWidget {
                       child: profile.photoUrl.isEmpty
                           ? Center(
                               child: SvgPicture.asset(
-                              AppAssets.addImageCamera,
-                              height: 64,
-                            ))
+                                AppAssets.addImageCamera,
+                                height: 64,
+                              ),
+                            )
                           : profile.photoUrl.startsWith("http")
                               ? ClipOval(
                                   child: AppNetworkImage(
