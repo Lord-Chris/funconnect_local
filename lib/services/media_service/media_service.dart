@@ -59,6 +59,8 @@ class MediaService extends IMediaService {
       ],
     );
 
-    return File(croppedFile!.path);
+    if (croppedFile == null) return null;
+
+    return File(croppedFile.path);
   }
 }

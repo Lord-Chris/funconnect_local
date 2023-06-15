@@ -6,11 +6,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:funconnect/core/app/locator.dart';
 import 'package:funconnect/core/models/_models.dart';
-import 'package:funconnect/features/profile/domain/usecases/update_profile_image.dart';
 import 'package:funconnect/features/profile/domain/usecases/update_user_location.dart';
 import 'package:funconnect/features/profile/domain/usecases/update_user_profile.dart';
 import 'package:funconnect/services/_services.dart';
 import 'package:funconnect/shared/dialogs/status_dialog.dart';
+
+import '../../../domain/usecases/update_profile_image.dart';
 
 part 'edit_profile_event.dart';
 part 'edit_profile_state.dart';
@@ -87,41 +88,38 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
   ) async {
     emit(state.copyWith(isUpdatingProfile: true));
     try {
+      if (state.profile.photoUrl.isNotEmpty) {
+        await UpdateProfileImage().call(File(state.profile.photoUrl));
+      }
       final res = await UpdateUserProfile().call(state.profile);
       emit(state.copyWith(isUpdatingProfile: false));
       _navigationService.back(res);
     } on Failure catch (e) {
       emit(state.copyWith(isUpdatingProfile: false));
       _dialogAndSheetService.showAppDialog(StatusDialog(
-          isError: true, title: "Error Updating Profile", body: e.message));
+        isError: true,
+        title: "Error Updating Profile",
+        body: e.message,
+      ));
     }
   }
 
-  Future<FutureOr<void>> _onImageTapEvent(
+  FutureOr<void> _onImageTapEvent(
     ImageTapEvent event,
     Emitter<EditProfileState> emit,
   ) async {
     try {
-      final File? imageFile =
-          (await _mediaService.pickImage(fromGallery: true));
-      if (imageFile != null) {
-        File? croppedFile =
-            await _mediaService.getImageCropped(file: imageFile);
-
-        final res = await UpdateProfileImage().call(croppedFile!);
-        emit(state.copyWith(
-          profile: state.profile.copyWith(photoUrl: res.photoUrl),
-        ));
-        _dialogAndSheetService.showAppDialog(const StatusDialog(
-          isError: false,
-          title: "Profile Image",
-          body: "Profile Image Uploaded Successfully",
-        ));
-      }
+      File? imageFile = await _mediaService.pickImage(fromGallery: true);
+      if (imageFile == null) return;
+      imageFile = await _mediaService.getImageCropped(file: imageFile);
+      if (imageFile == null) return;
+      emit(state.copyWith(
+        profile: state.profile.copyWith(photoUrl: imageFile.path),
+      ));
     } on Failure catch (e) {
       _dialogAndSheetService.showAppDialog(StatusDialog(
         isError: true,
-        title: "Error Updating Profile Image",
+        title: "Error Selecting Profile Image",
         body: e.message,
       ));
     }
