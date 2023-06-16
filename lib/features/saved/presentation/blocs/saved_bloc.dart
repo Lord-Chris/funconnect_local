@@ -43,7 +43,7 @@ class SavedBloc extends Bloc<SavedEvent, SavedState> {
   ) async {
     await _navigationService.toNamed(
       Routes.placeDetailRoute,
-      arguments: event.place.place,
+      arguments: event.place.place?.copyWith(savedPlace: true),
     );
     add(const GetAllUserSavedPlaces(showLoader: false));
   }
