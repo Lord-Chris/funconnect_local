@@ -20,7 +20,15 @@ class SavedRepository extends ISavedRepository {
     if (!useRemote) {
       return _localDS.getUserSavedPlaces();
     }
-    return await _remoteDS.fetchUserSavedPlaces();
+    final places = await _remoteDS.fetchUserSavedPlaces();
+
+    await _localStorageService.write(
+      HiveKeys.placesBoxId,
+      key: StorageKeys.userSavedPlaces,
+      data: places.toMap((e) => e.toMap()),
+    );
+
+    return places;
   }
 
   @override

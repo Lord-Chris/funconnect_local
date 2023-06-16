@@ -20,7 +20,9 @@ import 'package:funconnect/shared/constants/_constants.dart';
 import 'package:lazy_load_indexed_stack/lazy_load_indexed_stack.dart';
 
 import '../../../events/presentation/views/events_view.dart';
+import '../../../places/presentation/blocs/home_bloc/home_event.dart';
 import '../../../places/presentation/views/explore_view.dart';
+import '../../../saved/presentation/blocs/saved_event.dart';
 
 class DashboardView extends StatelessWidget {
   const DashboardView({Key? key}) : super(key: key);
@@ -29,7 +31,6 @@ class DashboardView extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        // BlocProvider(create: (context) => DashboardBloc()),
         BlocProvider(create: (context) => HomeBloc()),
         BlocProvider(create: (context) => ExploreBloc()),
         if (!Platform.isIOS) BlocProvider(create: (context) => EventsBloc()),
@@ -70,8 +71,19 @@ class DashboardView extends StatelessWidget {
             bottomNavigationBar: BottomNavigationBar(
               backgroundColor: AppColors.black,
               currentIndex: state.navBarIndex,
-              onTap: (index) =>
-                  context.read<DashboardBloc>().add(TabTapEvent(index)),
+              onTap: (index) {
+                if (index == (Platform.isIOS ? 2 : 3)) {
+                  context
+                      .read<SavedBloc>()
+                      .add(const GetAllUserSavedPlaces(showLoader: false));
+                }
+                if (index == 0) {
+                  context
+                      .read<HomeBloc>()
+                      .add(const HomeInitEvent(showLoader: false));
+                }
+                context.read<DashboardBloc>().add(TabTapEvent(index));
+              },
               selectedFontSize: 20,
               unselectedFontSize: 14,
               type: BottomNavigationBarType.fixed,

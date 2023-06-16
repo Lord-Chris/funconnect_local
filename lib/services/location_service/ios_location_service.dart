@@ -14,6 +14,7 @@ class IosLocationService extends ILocationService {
   final _logger = Logger();
   AppLocation? _location;
   final _localStorageService = locator<ILocalStorageService>();
+  DateTime? _locationTimeStamp;
 
   @override
   Future<bool> canGetLocation() async {
@@ -25,6 +26,17 @@ class IosLocationService extends ILocationService {
   @override
   Future<AppLocation?> getCurrentLocation() async {
     try {
+      /// Check if the location was fetched more than 30 mins ago. If it was
+      /// return the saved location, else fetch the location afresh.
+      if (_locationTimeStamp != null && _location != null) {
+        if (DateTime.now().difference(_locationTimeStamp!).inMinutes < 30) {
+          return AppLocation.fromMap(_localStorageService.read(
+            HiveKeys.appBoxId,
+            key: StorageKeys.userSavedLocation,
+          ));
+        }
+      }
+
       final hasPermission = await requestPermission();
 
       if (!hasPermission) {
@@ -38,19 +50,15 @@ class IosLocationService extends ILocationService {
           desiredAccuracy: LocationAccuracy.best,
           timeLimit: const Duration(seconds: 5),
         );
-        await _localStorageService.write(
-          HiveKeys.appBoxId,
-          key: StorageKeys.userSavedLocation,
-          data: res.toJson(),
-        );
       } on LocationServiceDisabledException {
         _logger.i("Getting Last location from Hive");
-        res = Position.fromMap(_localStorageService.read(
+        _location = AppLocation.fromMap(_localStorageService.read(
           HiveKeys.appBoxId,
           key: StorageKeys.userSavedLocation,
         ));
 
-        _logger.i("Received location from Hive is ${res.toJson()}");
+        _logger.i("Received location from Hive is $_location");
+        return _location;
       } on TimeoutException {
         _logger.i("Getting Last known location");
         res = await Geolocator.getLastKnownPosition();
@@ -72,6 +80,12 @@ class IosLocationService extends ILocationService {
           country: place.first.country,
         );
       }
+      await _localStorageService.write(
+        HiveKeys.appBoxId,
+        key: StorageKeys.userSavedLocation,
+        data: _location!.toMap(),
+      );
+      _locationTimeStamp = DateTime.now();
       return _location;
     } on Exception catch (e) {
       _logger.e(e);
@@ -95,4 +109,7 @@ class IosLocationService extends ILocationService {
 
   @override
   AppLocation? get userLocation => _location;
+
+  @override
+  DateTime? get locationTimeStamp => _locationTimeStamp;
 }

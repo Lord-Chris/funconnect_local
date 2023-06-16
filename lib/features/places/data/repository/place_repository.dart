@@ -36,17 +36,6 @@ class PlaceRepository extends IPlaceRepository {
       HiveKeys.placesBoxId,
       key: StorageKeys.homeTrends,
       data: homeTrend.map((e) => e.toMap()).toList(),
-      // data: [
-      //   (homeTrend[0] as HomeTrendItemModel<CategoryModel>).toMap(
-      //     (e) => e.toMap(),
-      //   ),
-      //   (homeTrend[1] as HomeTrendItemModel<PlaceModel>).toMap(
-      //     (e) => e.toMap(),
-      //   ),
-      //   (homeTrend[2] as HomeTrendItemModel<PlaceModel>).toMap(
-      //     (e) => e.toMap(),
-      //   ),
-      // ],
     );
     return homeTrend;
   }

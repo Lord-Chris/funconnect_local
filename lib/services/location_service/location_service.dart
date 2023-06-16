@@ -16,6 +16,7 @@ class LocationService extends ILocationService {
   AppLocation? _location;
   final _localStorageService = locator<ILocalStorageService>();
   Location location = Location();
+  DateTime? _locationTimeStamp;
 
   @override
   Future<bool> canGetLocation() async {
@@ -27,6 +28,15 @@ class LocationService extends ILocationService {
   @override
   Future<AppLocation?> getCurrentLocation() async {
     try {
+      if (_locationTimeStamp != null && _location != null) {
+        if (DateTime.now().difference(_locationTimeStamp!).inMinutes < 30) {
+          return AppLocation.fromMap(_localStorageService.read(
+            HiveKeys.appBoxId,
+            key: StorageKeys.userSavedLocation,
+          ));
+        }
+      }
+
       final hasPermission = await requestPermission();
 
       if (!hasPermission) {
@@ -67,6 +77,7 @@ class LocationService extends ILocationService {
           key: StorageKeys.userSavedLocation,
           data: _location!.toMap(),
         );
+        _locationTimeStamp = DateTime.now();
         return _location;
       }
     } on Exception catch (e) {
@@ -91,4 +102,7 @@ class LocationService extends ILocationService {
 
   @override
   AppLocation? get userLocation => _location;
+
+  @override
+  DateTime? get locationTimeStamp => _locationTimeStamp;
 }

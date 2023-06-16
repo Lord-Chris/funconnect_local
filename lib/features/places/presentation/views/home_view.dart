@@ -17,8 +17,6 @@ import 'package:funconnect/features/places/presentation/widgets/home_skeleton.da
 import 'package:funconnect/shared/constants/_constants.dart';
 
 import '../../../../shared/components/_components.dart';
-import '../../../saved/presentation/blocs/saved_bloc.dart';
-import '../../../saved/presentation/blocs/saved_event.dart';
 import '../widgets/home_categories_large_widget.dart';
 import '../widgets/home_categories_small_widget.dart';
 import '../widgets/home_categories_widget.dart';
@@ -326,14 +324,17 @@ class _DefaultHomeView extends StatelessWidget {
                       isBookmarked: place.isBookmarked,
                       rating: place.avgRating,
                       ratingCount: place.avgReviewCount,
-                      onBookmarkTap: () {
+                      onBookmarkTap: () async {
+                        final bloc = context.read<HomeBloc>().stream.first;
                         context.read<HomeBloc>().add(BookmarkTapEvent(place));
-                        context.read<SavedBloc>().add(
-                            const GetAllUserSavedPlaces(showLoader: false));
+                        await bloc;
+
+                        // // ignore: use_build_context_synchronously
+                        // context.read<SavedBloc>().add(
+                        //     const GetAllUserSavedPlaces(showLoader: false));
                       },
-                      onTap: () => context.read<HomeBloc>().add(
-                            PlaceTapEvent(place: place),
-                          ),
+                      onTap: () =>
+                          context.read<HomeBloc>().add(PlaceTapEvent(place)),
                     );
                   },
                 );

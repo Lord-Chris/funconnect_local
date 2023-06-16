@@ -23,6 +23,9 @@ import 'package:funconnect/shared/constants/_constants.dart';
 import 'package:readmore/readmore.dart';
 import 'package:story_view/story_view.dart';
 
+import '../../../saved/presentation/blocs/saved_bloc.dart';
+import '../../../saved/presentation/blocs/saved_event.dart';
+
 class PlaceDetailView extends HookWidget {
   final PlaceModel place;
   const PlaceDetailView({
@@ -216,9 +219,16 @@ class _InfoSection extends StatelessWidget {
                   AnimatedContainer(
                     duration: const Duration(milliseconds: 1),
                     child: InkWell(
-                      onTap: () => context
-                          .read<PlaceDetailBloc>()
-                          .add(BookmarkTapEvent()),
+                      onTap: () async {
+                        final bloc =
+                            context.read<PlaceDetailBloc>().stream.first;
+                        context.read<PlaceDetailBloc>().add(BookmarkTapEvent());
+                        await bloc;
+
+                        // ignore: use_build_context_synchronously
+                        context.read<SavedBloc>().add(
+                            const GetAllUserSavedPlaces(showLoader: false));
+                      },
                       child: SvgPicture.asset(
                         place.isBookmarked
                             ? AppAssets.savedIconSvg
@@ -308,25 +318,35 @@ class _InfoSection extends StatelessWidget {
                   ),
                 ),
                 Spacing.horizMedium(),
-                AnimatedContainer(
-                  duration: const Duration(milliseconds: 1),
-                  child: InkWell(
-                    onTap: () =>
-                        context.read<PlaceDetailBloc>().add(BookmarkTapEvent()),
-                    child: SvgPicture.asset(
-                      state.place.isBookmarked
-                          ? AppAssets.savedIconSvg
-                          : AppAssets.bookmarkIconSvg,
-                      colorFilter: ColorFilter.mode(
+                Builder(builder: (context) {
+                  return AnimatedContainer(
+                    duration: const Duration(milliseconds: 1),
+                    child: InkWell(
+                      onTap: () async {
+                        final bloc =
+                            context.read<PlaceDetailBloc>().stream.first;
+                        context.read<PlaceDetailBloc>().add(BookmarkTapEvent());
+                        await bloc;
+
+                        // ignore: use_build_context_synchronously
+                        // context.read<SavedBloc>().add(
+                        //     const GetAllUserSavedPlaces(showLoader: false));
+                      },
+                      child: SvgPicture.asset(
                         state.place.isBookmarked
-                            ? AppColors.primary
-                            : AppColors.white,
-                        BlendMode.srcIn,
+                            ? AppAssets.savedIconSvg
+                            : AppAssets.bookmarkIconSvg,
+                        colorFilter: ColorFilter.mode(
+                          state.place.isBookmarked
+                              ? AppColors.primary
+                              : AppColors.white,
+                          BlendMode.srcIn,
+                        ),
+                        height: 20,
                       ),
-                      height: 20,
                     ),
-                  ),
-                ),
+                  );
+                }),
               ],
             ),
             Spacing.vertTiny(),

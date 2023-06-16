@@ -40,11 +40,12 @@ class SavedBloc extends Bloc<SavedEvent, SavedState> {
   FutureOr<void> _onSavedPlaceTapEvent(
     SavedPlaceTapEvent event,
     Emitter<SavedState> emit,
-  ) {
-    _navigationService.toNamed(
+  ) async {
+    await _navigationService.toNamed(
       Routes.placeDetailRoute,
       arguments: event.place.place,
     );
+    add(const GetAllUserSavedPlaces(showLoader: false));
   }
 
   UserModel get user => _savedPlaceRepository.user;

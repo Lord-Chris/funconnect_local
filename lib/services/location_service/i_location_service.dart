@@ -6,4 +6,5 @@ abstract class ILocationService {
   Future<AppLocation?> getCurrentLocation();
 
   AppLocation? get userLocation;
+  DateTime? get locationTimeStamp;
 }

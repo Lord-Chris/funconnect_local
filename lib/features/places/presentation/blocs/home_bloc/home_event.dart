@@ -33,9 +33,7 @@ class InterestTapEvent extends HomeEvent {
 class PlaceTapEvent extends HomeEvent {
   final PlaceModel place;
 
-  const PlaceTapEvent({
-    required this.place,
-  });
+  const PlaceTapEvent(this.place);
 
   @override
   List<Object> get props => [place];
