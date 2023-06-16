@@ -3,11 +3,13 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:funconnect/features/places/domain/entities/saved_place_model.dart';
 import 'package:funconnect/features/saved/presentation/blocs/saved_bloc.dart';
 import 'package:funconnect/features/saved/presentation/blocs/saved_event.dart';
 import 'package:funconnect/features/saved/presentation/blocs/saved_state.dart';
 import 'package:funconnect/features/saved/presentation/widgets/saved_place_widget.dart';
 import 'package:funconnect/shared/components/custom_button.dart';
+import 'package:logger/logger.dart';
 
 import '../../../../shared/components/app_loader.dart';
 import '../../../../shared/constants/_constants.dart';
@@ -125,7 +127,8 @@ class _SavedViewState extends State<SavedView>
                           if (state.savedPlaces.isEmpty) {
                             return const SavedEmptyPage();
                           }
-                          return SavedPage(state: state);
+                          Logger().i(state.savedPlaces.length);
+                          return SavedPage(savedPlaces: state.savedPlaces);
                         },
                       ),
                       if (!Platform.isIOS)
@@ -189,11 +192,11 @@ class SavedEmptyPage extends StatelessWidget {
 }
 
 class SavedPage extends StatelessWidget {
-  final SavedPageFilledState state;
+  final List<SavedPlaceModel> savedPlaces;
 
   const SavedPage({
     Key? key,
-    required this.state,
+    required this.savedPlaces,
   }) : super(key: key);
 
   @override
@@ -205,7 +208,7 @@ class SavedPage extends StatelessWidget {
         await bloc.stream.first;
       },
       child: GridView.builder(
-        itemCount: state.savedPlaces.length,
+        itemCount: savedPlaces.length,
         padding: REdgeInsets.fromLTRB(16, 20, 16, 20),
         gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
           maxCrossAxisExtent: 187.r * 1.3,
@@ -214,7 +217,7 @@ class SavedPage extends StatelessWidget {
           crossAxisSpacing: 8.r,
         ),
         itemBuilder: (context, index) {
-          final place = state.savedPlaces[index];
+          final place = savedPlaces[index];
           return SavedPlaceWidget(
             coverImage: place.place!.coverImagePath,
             name: place.place!.name,
