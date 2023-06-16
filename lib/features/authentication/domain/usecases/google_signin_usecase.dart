@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/services.dart';
@@ -21,7 +22,6 @@ class GoogleSignInUsecase with UseCases<UserModel?, NoParams> {
   @override
   Future<UserModel?> call(NoParams params) async {
     try {
-      if (await googleSignIn.isSignedIn()) await googleSignIn.signOut();
       final acct = await googleSignIn.signIn();
       if (acct == null) return null;
       if (acct.email.isEmpty) return null;
@@ -44,9 +44,20 @@ class GoogleSignInUsecase with UseCases<UserModel?, NoParams> {
       return res;
     } on PlatformException catch (e) {
       throw Failure(
-        e.message ?? 'Something went wrong',
+        'Something went wrong',
         extraData: e.toString(),
       );
+    } on TimeoutException catch (e) {
+      throw Failure(
+        'Connection Timed out',
+        extraData: e.toString(),
+      );
+    }
+  }
+
+  Future<void> signOut() async {
+    if (await googleSignIn.isSignedIn()) {
+      await googleSignIn.signOut().timeout(const Duration(seconds: 30));
     }
   }
 }
