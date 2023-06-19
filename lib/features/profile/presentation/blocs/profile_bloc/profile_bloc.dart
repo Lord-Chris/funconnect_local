@@ -216,7 +216,8 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     TermsOfUseTapEvent event,
     Emitter<ProfileState> emit,
   ) {
-    GeneralUtils.openUrl(Uri.parse(AppConstants.tandC));
+    NavigationService()
+        .toNamed(Routes.webViewRoute, arguments: AppConstants.tandC);
   }
 
   FutureOr<void> _onPrivacyPolicyTapEvent(
