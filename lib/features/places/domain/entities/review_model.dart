@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
@@ -14,6 +15,7 @@ class ReviewModel extends Equatable {
   final String? reviewedBy;
   final String status;
   final DateTime? deletedAt;
+  final UserPublicModel? user;
 
   const ReviewModel({
     required this.id,
@@ -27,6 +29,7 @@ class ReviewModel extends Equatable {
     this.reviewedBy,
     required this.status,
     this.deletedAt,
+    this.user,
   });
 
   Map<String, dynamic> toMap() {
@@ -42,6 +45,7 @@ class ReviewModel extends Equatable {
       'reviewed_by': reviewedBy,
       'status': status,
       'deleted_at': deletedAt?.toIso8601String(),
+      'user': user?.toMap() ?? ''
     };
   }
 
@@ -61,6 +65,7 @@ class ReviewModel extends Equatable {
       status: map['status'] ?? '',
       deletedAt:
           map['deleted_at'] != null ? DateTime.parse(map['deleted_at']) : null,
+      user: map['user'] != null ? UserPublicModel.fromMap(map['user']) : null,
     );
   }
 
@@ -82,6 +87,56 @@ class ReviewModel extends Equatable {
       status,
     ];
   }
+}
+
+class UserPublicModel extends Equatable {
+  final String name;
+  final String username;
+  final String photoUrl;
+  const UserPublicModel({
+    required this.name,
+    required this.username,
+    required this.photoUrl,
+  });
+
+  UserPublicModel copyWith({
+    String? name,
+    String? username,
+    String? photoUrl,
+  }) {
+    return UserPublicModel(
+      name: name ?? this.name,
+      username: username ?? this.username,
+      photoUrl: photoUrl ?? this.photoUrl,
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'name': name,
+      'username': username,
+      'photo_url': photoUrl,
+    };
+  }
+
+  factory UserPublicModel.fromMap(Map<String, dynamic> map) {
+    return UserPublicModel(
+      name: map['name'] as String,
+      username: map['username'] as String,
+      photoUrl: map['photo_url'] as String,
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory UserPublicModel.fromJson(String source) =>
+      UserPublicModel.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  @override
+  bool get stringify => true;
+
+  @override
+  List<Object> get props => [name, username, photoUrl];
 }
 
 final mockReview = ReviewModel.fromMap(const {
