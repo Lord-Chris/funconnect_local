@@ -94,6 +94,11 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
       final res = await UpdateUserProfile().call(state.profile);
       emit(state.copyWith(isUpdatingProfile: false));
       _navigationService.back(res);
+      _dialogAndSheetService.showAppDialog(const StatusDialog(
+        isError: false,
+        title: "Profile Updated",
+        body: "You have successfully updated your profile!",
+      ));
     } on Failure catch (e) {
       emit(state.copyWith(isUpdatingProfile: false));
       _dialogAndSheetService.showAppDialog(StatusDialog(
@@ -155,7 +160,10 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
             body: "Location Updated Successfully"));
       } on Failure catch (e) {
         _dialogAndSheetService.showAppDialog(StatusDialog(
-            isError: true, title: "Error Updating Location", body: e.message));
+          isError: true,
+          title: "Error Updating Location",
+          body: e.message,
+        ));
       }
     }
   }
