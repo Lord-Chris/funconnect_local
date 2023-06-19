@@ -15,3 +15,17 @@ class WebviewLoaded extends WebviewState {
   @override
   List<Object> get props => [controller];
 }
+
+class PageLoaded extends WebviewState {
+  final String url;
+  const PageLoaded(this.url);
+  @override
+  List<Object> get props => [url];
+}
+
+class PageLoading extends WebviewState {
+  final int progress;
+  const PageLoading(this.progress);
+  @override
+  List<Object> get props => [progress];
+}

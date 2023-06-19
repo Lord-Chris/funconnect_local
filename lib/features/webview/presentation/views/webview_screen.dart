@@ -28,6 +28,10 @@ class _WebViewScreenState extends State<WebViewScreen> {
           );
         }
 
+        if (state is PageLoading) {
+          return LinearProgressIndicator(value: state.progress / 100);
+        }
+
         return const Center(child: CircularProgressIndicator());
       },
     ));
