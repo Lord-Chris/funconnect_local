@@ -39,6 +39,8 @@ import 'package:funconnect/features/startup/presentation/blocs/splash_bloc/splas
 import 'package:funconnect/features/startup/presentation/views/onboarding_view.dart';
 import 'package:funconnect/features/startup/presentation/views/splash_view.dart';
 import 'package:funconnect/features/startup/presentation/views/version_update_view.dart';
+import 'package:funconnect/features/webview/presentation/blocs/webview_bloc/webview_bloc.dart';
+import 'package:funconnect/features/webview/presentation/views/webview_screen.dart';
 
 import '../../features/dashboard/presentation/blocs/notification_bloc/notification_bloc.dart';
 import '../../features/events/presentation/views/create_event_view.dart';
@@ -85,6 +87,9 @@ class Routes {
   static const rateYourExperienceRoute = '/rate-your-experience';
   static const myTicketRoute = '/my-ticket';
   static const myEventRoute = '/my-event';
+
+  // webview
+  static const webViewRoute = '/web-view';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -206,6 +211,14 @@ class Routes {
 
       case myEventRoute:
         return MaterialPageRoute(builder: (_) => const MyEventsView());
+      case webViewRoute:
+        String link = settings.arguments as String;
+        return _registerBlocView(
+            view: WebViewScreen(
+              link: link,
+            ),
+            bloc: WebviewBloc());
+
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(

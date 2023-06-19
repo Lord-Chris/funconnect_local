@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -789,7 +788,7 @@ class _ReviewItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "User${(Random().nextInt(200) * Random().nextInt(200))}",
+                      review.user?.name ?? "",
                       style: AppTextStyles.dynamic(
                         10,
                         weight: FontWeight.w500,
