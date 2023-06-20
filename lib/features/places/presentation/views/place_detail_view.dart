@@ -22,9 +22,6 @@ import 'package:funconnect/shared/constants/_constants.dart';
 import 'package:readmore/readmore.dart';
 import 'package:story_view/story_view.dart';
 
-import '../../../saved/presentation/blocs/saved_bloc.dart';
-import '../../../saved/presentation/blocs/saved_event.dart';
-
 class PlaceDetailView extends HookWidget {
   final PlaceModel place;
   const PlaceDetailView({
@@ -223,10 +220,6 @@ class _InfoSection extends StatelessWidget {
                             context.read<PlaceDetailBloc>().stream.first;
                         context.read<PlaceDetailBloc>().add(BookmarkTapEvent());
                         await bloc;
-
-                        // ignore: use_build_context_synchronously
-                        context.read<SavedBloc>().add(
-                            const GetAllUserSavedPlaces(showLoader: false));
                       },
                       child: SvgPicture.asset(
                         place.isBookmarked
