@@ -754,11 +754,11 @@ class _ReviewItem extends StatelessWidget {
         children: [
           Row(
             children: [
-              const AppNetworkImage(
-                url: "",
+              AppNetworkImage(
+                url: review.user?.photoUrl ?? "",
                 isCircular: true,
                 fit: BoxFit.cover,
-                size: Size.fromRadius(19),
+                size: const Size.fromRadius(19),
                 placeholderAssetImage: AppAssets.fallbackUserProfileSvg,
               ),
               Spacing.horizTiny(),
