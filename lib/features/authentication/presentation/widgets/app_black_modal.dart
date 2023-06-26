@@ -34,7 +34,7 @@ class AppBlackModalWidget extends StatelessWidget {
           ),
         ),
         Positioned(
-          bottom: -20.0,
+          bottom: 12.0,
           left: 0,
           right: 0,
           child: Stack(
