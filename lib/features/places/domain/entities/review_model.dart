@@ -121,9 +121,9 @@ class UserPublicModel extends Equatable {
 
   factory UserPublicModel.fromMap(Map<String, dynamic> map) {
     return UserPublicModel(
-      name: map['name'] as String,
-      username: map['username'] as String,
-      photoUrl: map['photo_url'] as String,
+      name: map['name'] ?? "",
+      username: map['username'] ?? "",
+      photoUrl: map['photo_url'] ?? "",
     );
   }
 
