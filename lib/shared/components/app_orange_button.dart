@@ -27,10 +27,7 @@ class AppOrangeBtn extends StatelessWidget {
       disabledColor: AppColors.primary.withOpacity(0.5),
       color: AppColors.primary,
       shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(36),
-          topRight: Radius.circular(36),
-        ),
+        borderRadius: BorderRadius.all(Radius.circular(8)),
       ),
       child: Container(
         height: height,
