@@ -21,36 +21,36 @@ class AppOrangeBtn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialButton(
-      onPressed: onTap,
-      minWidth: MediaQuery.of(context).size.width,
-      disabledColor: AppColors.primary.withOpacity(0.5),
-      color: AppColors.primary,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(36),
-          topRight: Radius.circular(36),
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: MaterialButton(
+        onPressed: onTap,
+        minWidth: MediaQuery.of(context).size.width,
+        disabledColor: AppColors.primary.withOpacity(0.5),
+        color: AppColors.primary,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(8)),
         ),
-      ),
-      child: Container(
-        height: height,
-        padding: EdgeInsets.only(top: 20.r),
-        alignment: Alignment.topCenter,
-        child: Visibility(
-          visible: !isBusy,
-          replacement: const SizedBox.square(
-            child: FittedBox(
-              child: AppLoader(
-                padding: 0,
-                size: 25,
-                color: AppColors.black,
+        child: Container(
+          height: height,
+          padding: EdgeInsets.only(top: 20.r),
+          alignment: Alignment.topCenter,
+          child: Visibility(
+            visible: !isBusy,
+            replacement: const SizedBox.square(
+              child: FittedBox(
+                child: AppLoader(
+                  padding: 0,
+                  size: 25,
+                  color: AppColors.black,
+                ),
               ),
             ),
-          ),
-          child: Text(
-            label,
-            style: AppTextStyles.medium20.copyWith(
-              color: AppColors.black,
+            child: Text(
+              label,
+              style: AppTextStyles.medium20.copyWith(
+                color: AppColors.black,
+              ),
             ),
           ),
         ),
