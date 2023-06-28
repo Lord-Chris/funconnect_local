@@ -10,3 +10,19 @@ abstract class HomeV2State extends Equatable {
 class HomeV2InitialState extends HomeV2State {}
 
 class HomeV2LoadingState extends HomeV2State {}
+
+class HomeV2ErrorState extends HomeV2State {
+  final String message;
+
+  const HomeV2ErrorState({this.message = "An error occured"});
+
+  @override
+  List<Object> get props => [message];
+}
+
+class HomeV2LoadedState extends HomeV2State {
+  final List<HomeCategory> categories;
+  final List<HomePlaces> places;
+
+  const HomeV2LoadedState({required this.categories, required this.places});
+}

@@ -5,6 +5,7 @@ import 'package:funconnect/features/places/data/data_sources/remote_places_data_
 import 'package:funconnect/features/places/domain/entities/category_model.dart';
 import 'package:funconnect/features/places/domain/entities/full_place_model.dart';
 import 'package:funconnect/features/places/domain/entities/home_trend_item_model.dart';
+import 'package:funconnect/features/places/domain/entities/home_trends_reponse.dart';
 import 'package:funconnect/features/places/domain/entities/review_model.dart';
 import 'package:funconnect/services/_services.dart';
 
@@ -38,6 +39,19 @@ class PlaceRepository extends IPlaceRepository {
       data: homeTrend.map((e) => e.toMap()).toList(),
     );
     return homeTrend;
+  }
+
+  @override
+  Future<HomeTrendsReponse> fetchHomeTrendsNew(AppLocation? location) async {
+    final useRemote = await _connectivityService.checkInternetConnection();
+    if (!useRemote) {
+      return _localDS.getHomeTrendsNew();
+    }
+
+    final homeTrendsnew = await _remoteDS.getHomeTrendsNew(location);
+    await _localStorageService.write(HiveKeys.placesBoxId,
+        key: StorageKeys.homeTrends, data: homeTrendsnew.toMap());
+    return homeTrendsnew;
   }
 
   @override

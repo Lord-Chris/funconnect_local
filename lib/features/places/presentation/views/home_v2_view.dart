@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:funconnect/features/dashboard/presentation/blocs/notification_bloc/notification_bloc.dart';
 import 'package:funconnect/features/places/presentation/blocs/home_v2_bloc/home_v2_bloc.dart';
+import 'package:funconnect/features/places/presentation/widgets/home_categories_comtainer.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
 
 class HomeV2View extends StatelessWidget {
@@ -79,10 +80,21 @@ class HomeV2View extends StatelessWidget {
             color: AppColors.secondary800,
             height: 1,
           ),
-          BlocBuilder<HomeV2Bloc, HomeV2State>(
-            builder: (context, state) {
-              return Container();
-            },
+          Expanded(
+            child: BlocBuilder<HomeV2Bloc, HomeV2State>(
+              builder: (context, state) {
+                if (state is HomeV2LoadedState) {
+                  return ListView.builder(
+                      itemCount: state.categories.length,
+                      itemBuilder: (context, index) {
+                        return HomeCategoryContainer(
+                          category: state.categories[index],
+                        );
+                      });
+                }
+                return Center(child: Text(state.toString()));
+              },
+            ),
           ),
           Text(context.watch<HomeV2Bloc>().userModel?.name ?? "Name"),
           Text(context.watch<HomeV2Bloc>().appLocation?.parsedAddress ??

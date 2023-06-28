@@ -66,10 +66,6 @@ class AppText {
   static const aTCreateCollectionTextFormSubTitleText = 'Name collection';
   static const aTCreateCollectionCreateCollectionText = 'Create Collection';
 
-
-
-
-
   ///Profile View Texts
   static const aTEditProfile = 'Edit Profile';
   static const aTPersonalInformation = 'Personal Information';

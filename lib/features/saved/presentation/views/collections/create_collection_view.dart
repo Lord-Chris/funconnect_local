@@ -71,7 +71,6 @@ class CreateCollectionView extends StatelessWidget {
                     AppTextStyles.regular14.copyWith(color: AppColors.gray333),
               ),
               Spacing.vertRegular(),
-              
               const Padding(
                 padding: EdgeInsets.fromLTRB(0, 40, 0, 40),
                 child: AppButton(
