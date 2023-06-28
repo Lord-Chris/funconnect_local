@@ -44,6 +44,7 @@ void main() async {
     };
 
     await _setupServices();
+
     runApp(const SentryScreenshotWidget(child: MyApp()));
   }, (error, stackTrace) async {
     FailureHandler.instance.catchError(error, stackTrace: stackTrace);

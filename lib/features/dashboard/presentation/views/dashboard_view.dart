@@ -9,8 +9,8 @@ import 'package:funconnect/features/dashboard/presentation/blocs/dashboard_bloc/
 import 'package:funconnect/features/dashboard/presentation/blocs/notification_bloc/notification_bloc.dart';
 import 'package:funconnect/features/events/presentation/blocs/events_bloc/events_bloc.dart';
 import 'package:funconnect/features/places/presentation/blocs/explore_bloc/explore_bloc.dart';
-import 'package:funconnect/features/places/presentation/blocs/home_bloc/home_bloc.dart';
-import 'package:funconnect/features/places/presentation/views/home_view.dart';
+import 'package:funconnect/features/places/presentation/blocs/home_v2_bloc/home_v2_bloc.dart';
+import 'package:funconnect/features/places/presentation/views/home_v2_view.dart';
 import 'package:funconnect/features/profile/presentation/blocs/profile_bloc/profile_bloc.dart';
 import 'package:funconnect/features/profile/presentation/views/profile_view.dart';
 import 'package:funconnect/features/saved/presentation/blocs/saved_bloc.dart';
@@ -20,7 +20,6 @@ import 'package:funconnect/shared/constants/_constants.dart';
 import 'package:lazy_load_indexed_stack/lazy_load_indexed_stack.dart';
 
 import '../../../events/presentation/views/events_view.dart';
-import '../../../places/presentation/blocs/home_bloc/home_event.dart';
 import '../../../places/presentation/views/explore_view.dart';
 import '../../../saved/presentation/blocs/saved_event.dart';
 
@@ -31,7 +30,7 @@ class DashboardView extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => HomeBloc()),
+        BlocProvider(create: (context) => HomeV2Bloc()..add(HomeV2InitEvent())),
         BlocProvider(create: (context) => ExploreBloc()),
         if (!Platform.isIOS) BlocProvider(create: (context) => EventsBloc()),
         BlocProvider(create: (context) => ProfileBloc()),
@@ -48,7 +47,7 @@ class DashboardView extends StatelessWidget {
                 LazyLoadIndexedStack(
                   index: state.navBarIndex,
                   children: [
-                    const HomeView(),
+                    const HomeV2View(),
                     const ExploreView(),
                     if (!Platform.isIOS) const EventsView(),
                     const SavedView(),
@@ -78,9 +77,12 @@ class DashboardView extends StatelessWidget {
                       .add(const GetAllUserSavedPlaces(showLoader: false));
                 }
                 if (index == 0) {
+                  /*
                   context
                       .read<HomeBloc>()
                       .add(const HomeInitEvent(showLoader: false));
+
+                      */
                 }
                 context.read<DashboardBloc>().add(TabTapEvent(index));
               },
