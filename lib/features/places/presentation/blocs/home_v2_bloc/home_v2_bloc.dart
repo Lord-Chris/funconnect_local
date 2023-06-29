@@ -11,6 +11,7 @@ import 'package:funconnect/features/places/domain/entities/home_category_new.dar
 import 'package:funconnect/features/places/domain/entities/home_place.dart';
 import 'package:funconnect/features/places/domain/entities/home_trends_reponse.dart';
 import 'package:funconnect/services/_services.dart';
+import 'package:logger/logger.dart';
 
 part 'home_v2_event.dart';
 part 'home_v2_state.dart';
@@ -35,21 +36,20 @@ class HomeV2Bloc extends Bloc<HomeV2Event, HomeV2State> {
   FutureOr<void> _onHomeV2Init(
       HomeV2InitEvent event, Emitter<HomeV2State> emit) async {
     emit(HomeV2LoadingState());
-
-    await getCurrentUser();
-    await _locationService.canGetLocation().then((canGetLocation) async {
-      if (canGetLocation) {
-        await _locationService.requestPermission();
-        var currentLocation = await _locationService.getCurrentLocation();
-        _appLocation = currentLocation;
-      }
+    try {
+      await getCurrentUser();
+      await _locationService.requestPermission();
+      var appLocation = await _locationService.getCurrentLocation();
+      Logger().i(appLocation?.parsedAddress ?? "Didnt manage to get address");
+      _appLocation = appLocation;
       HomeTrendsReponse response =
-          await _placeRepository.fetchHomeTrendsNew(_appLocation);
+          await _placeRepository.fetchHomeTrendsNew(appLocation);
       List<HomeCategory> categories = response.data.categories;
       List<HomePlaces> places = response.data.places;
-
       emit(HomeV2LoadedState(categories: categories, places: places));
-    });
+    } catch (e) {
+      emit(HomeV2ErrorState(message: e.toString()));
+    }
   }
 
   Future getCurrentUser() async {

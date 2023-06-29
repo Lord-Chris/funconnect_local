@@ -21,7 +21,7 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
     Emitter<SplashState> emit,
   ) async {
     final needsUpdate = await Future.wait([
-      Future.delayed(const Duration(seconds: 2)),
+      Future.delayed(const Duration(milliseconds: 100)),
       _forceUpdateAppService.needsUpdate,
     ]);
     emit(SplashFinishedState(

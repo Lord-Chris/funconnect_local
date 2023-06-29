@@ -1,17 +1,16 @@
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:funconnect/features/places/domain/entities/home_category_data.dart';
+import 'package:funconnect/features/places/domain/entities/home_places_data.dart';
 
-class HomeCategoryContainer extends StatelessWidget {
-  final HomeCategoryData category;
-  const HomeCategoryContainer({super.key, required this.category});
+class HomePlaceContainer extends StatelessWidget {
+  final HomePlacesData place;
+  const HomePlaceContainer({super.key, required this.place});
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 136.w,
-      height: 136,
+      width: 187.w,
       child: ClipRRect(
         borderRadius: BorderRadius.circular(20.r),
         child: Stack(
@@ -23,12 +22,12 @@ class HomeCategoryContainer extends StatelessWidget {
               right: 0,
               left: 0,
               child: FancyShimmerImage(
-                imageUrl: category.coverPhoto,
+                imageUrl: place.coverImagePath,
                 boxFit: BoxFit.fill,
               ),
             ),
             Positioned(
-                bottom: 8,
+                bottom: 0,
                 left: 0,
                 right: 0,
                 child: Align(
@@ -40,7 +39,7 @@ class HomeCategoryContainer extends StatelessWidget {
                         child: Padding(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 12.0, vertical: 8),
-                          child: Text(category.name),
+                          child: Text(place.name),
                         ))))
           ],
         ),

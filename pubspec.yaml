@@ -32,6 +32,7 @@ dependencies:
   dio: ^5.1.1
   dotted_border: ^2.0.0+3
   equatable: ^2.0.5
+  fancy_shimmer_image: ^2.0.3
   firebase_analytics: ^10.1.4
   firebase_core: ^2.7.0
   firebase_dynamic_links: ^5.0.15
@@ -68,7 +69,9 @@ dependencies:
   readmore: ^2.2.0
   sentry_flutter: ^7.4.2
   share_plus: ^6.3.1
+  shimmer: ^3.0.0
   sign_in_with_apple: ^4.3.0
+  skeletonizer: ^0.1.1
   skeletons: ^0.0.3
   store_redirect: ^2.0.1
   story_view: ^0.14.0
