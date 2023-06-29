@@ -80,22 +80,34 @@ class HomeV2View extends StatelessWidget {
             color: AppColors.secondary800,
             height: 1,
           ),
-          Expanded(
-            child: BlocBuilder<HomeV2Bloc, HomeV2State>(
-              builder: (context, state) {
-                if (state is HomeV2LoadedState) {
-                  return ListView.builder(
-                      itemCount: state.categories.length,
-                      itemBuilder: (context, index) {
-                        return HomeCategoryContainer(
-                          category: state.categories[index],
-                        );
-                      });
-                }
-                return Center(child: Text(state.toString()));
-              },
-            ),
-          ),
+          BlocBuilder<HomeV2Bloc, HomeV2State>(builder: (context, state) {
+            if (state is HomeV2LoadedState) {
+              return ListView.builder(
+                itemCount: state.categories.length,
+                itemBuilder: (context, index1) {
+                  return SizedBox(
+                    height: 150.h,
+                    width: double.infinity,
+                    child: Column(
+                      children: [
+                        Text(state.categories[index1].name),
+                        ListView.builder(
+                            padding: EdgeInsets.symmetric(vertical: 8.h),
+                            scrollDirection: Axis.horizontal,
+                            itemCount: state.categories[index1].data.length,
+                            itemBuilder: (context, index) {
+                              return HomeCategoryContainer(
+                                category: state.categories[index1].data[index],
+                              );
+                            }),
+                      ],
+                    ),
+                  );
+                },
+              );
+            }
+            return Center(child: Text(state.toString()));
+          }),
           Text(context.watch<HomeV2Bloc>().userModel?.name ?? "Name"),
           Text(context.watch<HomeV2Bloc>().appLocation?.parsedAddress ??
               "Location")
