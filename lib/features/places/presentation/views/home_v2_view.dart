@@ -1,9 +1,13 @@
+import 'dart:io';
+
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:funconnect/features/dashboard/presentation/blocs/dashboard_bloc/dashboard_bloc.dart';
+import 'package:funconnect/features/dashboard/presentation/blocs/dashboard_bloc/dashboard_event.dart';
 import 'package:funconnect/features/dashboard/presentation/blocs/notification_bloc/notification_bloc.dart';
 import 'package:funconnect/features/places/presentation/blocs/home_v2_bloc/home_v2_bloc.dart';
 import 'package:funconnect/features/places/presentation/widgets/home_categories_comtainer.dart';
@@ -19,8 +23,22 @@ class HomeV2View extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         titleSpacing: 10,
-        leading: Center(
-            child: FancyShimmerImage(
+        leading: InkWell(
+          onTap: () => context
+              .read<DashboardBloc>()
+              .add(TabTapEvent(!Platform.isIOS ? 4 : 3)),
+          child: Padding(
+            padding: const EdgeInsets.only(left: 16.0),
+            child: Center(
+              child: FancyShimmerImage(
+                height: 50.r,
+                width: 50.r,
+                boxFit: BoxFit.cover,
+                shimmerBaseColor: AppColors.primary,
+                shimmerHighlightColor: AppColors.white,
+                boxDecoration: const BoxDecoration(
+                  shape: BoxShape.circle,
+                ),
                 imageUrl: context.watch<HomeV2Bloc>().userModel?.photoUrl ?? "",
                 imageBuilder: (context, imageProvider) {
                   return CircleAvatar(
@@ -32,12 +50,16 @@ class HomeV2View extends StatelessWidget {
                   width: 25.r,
                   colorFilter:
                       const ColorFilter.mode(Colors.white, BlendMode.srcIn),
-                ))),
+                ),
+              ),
+            ),
+          ),
+        ),
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Text(
-              "Hi ${context.watch<HomeV2Bloc>().userModel?.name}",
+              "Hi ${context.watch<HomeV2Bloc>().userModel?.name ?? ""}",
               style: AppTextStyles.medium20,
             ),
             Spacing.vertTiny(),
@@ -63,7 +85,9 @@ class HomeV2View extends StatelessWidget {
         ),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              context.read<HomeV2Bloc>().add(NotificationTapEvent());
+            },
             icon: Badge(
               isLabelVisible:
                   context.watch<NotificationBloc>().state.showNotificationBadge,

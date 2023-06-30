@@ -9,6 +9,7 @@ import 'package:funconnect/core/models/_models.dart';
 import 'package:funconnect/features/places/data/repository/i_place_repository.dart';
 import 'package:funconnect/features/places/domain/entities/home_category_new.dart';
 import 'package:funconnect/features/places/domain/entities/home_place.dart';
+import 'package:funconnect/features/places/domain/entities/home_places_data.dart';
 import 'package:funconnect/features/places/domain/entities/home_trends_reponse.dart';
 import 'package:funconnect/services/_services.dart';
 import 'package:logger/logger.dart';
@@ -20,11 +21,14 @@ class HomeV2Bloc extends Bloc<HomeV2Event, HomeV2State> {
   HomeV2Bloc() : super(HomeV2InitialState()) {
     on<HomeV2Event>((event, emit) {});
     on<HomeV2InitEvent>(_onHomeV2Init);
+    on<NotificationTapEvent>(_onNotificationTapEvent);
+    on<PlaceTapEvent>(_onPlaceTapEvent);
   }
 
   final _localStorageService = locator<ILocalStorageService>();
   final _locationService = locator<ILocationService>();
   final _placeRepository = locator<IPlaceRepository>();
+  final _navigationService = locator<INavigationService>();
   UserModel? _userModel;
 
   UserModel? get userModel => _userModel;
@@ -57,5 +61,16 @@ class HomeV2Bloc extends Bloc<HomeV2Event, HomeV2State> {
         key: StorageKeys.userProfile);
     UserModel? currentUser = UserModel.fromMap(userMap);
     _userModel = currentUser;
+  }
+
+  FutureOr<void> _onNotificationTapEvent(
+      NotificationTapEvent event, Emitter<HomeV2State> emit) {
+    _navigationService.toNamed(Routes.notificationsViewRoute);
+  }
+
+  FutureOr<void> _onPlaceTapEvent(
+      PlaceTapEvent event, Emitter<HomeV2State> emit) async {
+    await _navigationService.toNamed(Routes.placeDetailCopyRoute,
+        arguments: event.place);
   }
 }

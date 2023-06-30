@@ -9,40 +9,43 @@ class HomeCategoryContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: 136.w,
-      height: 136,
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(20.r),
-        child: Stack(
-          fit: StackFit.expand,
-          children: [
-            Positioned(
-              top: 0,
-              bottom: 0,
-              right: 0,
-              left: 0,
-              child: FancyShimmerImage(
-                imageUrl: category.coverPhoto,
-                boxFit: BoxFit.fill,
-              ),
-            ),
-            Positioned(
-                bottom: 8,
-                left: 0,
+    return InkWell(
+      onTap: () {},
+      child: SizedBox(
+        width: 136.w,
+        height: 136,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(10.r),
+          child: Stack(
+            fit: StackFit.expand,
+            children: [
+              Positioned(
+                top: 0,
+                bottom: 0,
                 right: 0,
-                child: Align(
-                    alignment: Alignment.center,
-                    child: Container(
-                        decoration: BoxDecoration(
-                            color: Colors.black.withOpacity(0.5),
-                            borderRadius: BorderRadius.circular(20.r)),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 12.0, vertical: 8),
-                          child: Text(category.name),
-                        ))))
-          ],
+                left: 0,
+                child: FancyShimmerImage(
+                  imageUrl: category.coverPhoto,
+                  boxFit: BoxFit.fill,
+                ),
+              ),
+              Positioned(
+                  bottom: 8,
+                  left: 0,
+                  right: 0,
+                  child: Align(
+                      alignment: Alignment.center,
+                      child: Container(
+                          decoration: BoxDecoration(
+                              color: Colors.black.withOpacity(0.5),
+                              borderRadius: BorderRadius.circular(20.r)),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 12.0, vertical: 8),
+                            child: Text(category.name),
+                          ))))
+            ],
+          ),
         ),
       ),
     );
