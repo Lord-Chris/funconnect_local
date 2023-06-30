@@ -22,6 +22,7 @@ import 'package:funconnect/features/places/domain/entities/place_model.dart';
 import 'package:funconnect/features/places/presentation/blocs/category_detail_bloc/category_detail_bloc.dart';
 import 'package:funconnect/features/places/presentation/blocs/place_detail_bloc/place_detail_bloc.dart';
 import 'package:funconnect/features/places/presentation/views/category_detail_view.dart';
+import 'package:funconnect/features/places/presentation/views/place_detail_view%20copy.dart';
 import 'package:funconnect/features/places/presentation/views/place_detail_view.dart';
 import 'package:funconnect/features/places/presentation/views/search_result_view.dart';
 import 'package:funconnect/features/profile/presentation/blocs/edit_profile_bloc/edit_profile_bloc.dart';
@@ -45,6 +46,7 @@ import 'package:funconnect/features/webview/presentation/views/webview_screen.da
 import '../../features/dashboard/presentation/blocs/notification_bloc/notification_bloc.dart';
 import '../../features/events/presentation/views/create_event_view.dart';
 import '../../features/events/presentation/views/event_description_view.dart';
+import '../../features/places/domain/entities/home_places_data.dart';
 import '../../features/places/presentation/blocs/search_result_bloc/search_result_bloc.dart';
 
 class Routes {
@@ -67,6 +69,7 @@ class Routes {
 
   // Places
   static const placeDetailRoute = '/place-detail';
+  static const placeDetailCopyRoute = '/place-detail=copy';
   static const categoryDetailRoute = '/category-detail';
   static const searchResultRoute = '/search-result';
 
@@ -138,6 +141,12 @@ class Routes {
         final place = settings.arguments as PlaceModel;
         return _registerBlocView(
           view: PlaceDetailView(place: place),
+          bloc: PlaceDetailBloc(),
+        );
+      case placeDetailCopyRoute:
+        final place = settings.arguments as HomePlacesData;
+        return _registerBlocView(
+          view: PlaceDetailViewCopy(place: place),
           bloc: PlaceDetailBloc(),
         );
       case categoryDetailRoute:
