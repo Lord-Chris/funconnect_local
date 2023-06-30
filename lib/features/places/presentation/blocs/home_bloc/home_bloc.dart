@@ -66,7 +66,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     try {
       emit(HomeIdleState(interests: data.interests, interest: event.interest));
       emit(HomeSubLoadingState());
-      final res = await FetchPlacesByCategory().call(event.interest);
+      final res = await FetchPlacesByCategory().call(event.interest.id);
       emit(HomeIdleState(
         interest: event.interest,
         interests: data.interests,
@@ -99,8 +99,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     CategoryTapEvent event,
     Emitter<HomeState> emit,
   ) {
-    _navigationService.toNamed(Routes.categoryDetailRoute,
-        arguments: event.category);
+    _navigationService.toNamed(Routes.categoryDetailRoute, arguments: {
+      'categoryId': event.category.id,
+      'categoryName': event.category.name
+    });
   }
 
   FutureOr<void> _onNotificationTapEvent(

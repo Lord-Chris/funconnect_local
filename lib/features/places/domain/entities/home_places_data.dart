@@ -2,6 +2,7 @@
 import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
+import 'package:funconnect/features/places/domain/entities/image_model.dart';
 
 class HomePlacesData extends Equatable {
   final String id;
@@ -20,6 +21,7 @@ class HomePlacesData extends Equatable {
   final int showRatings;
   final double distance;
   final bool savedPlace;
+
   const HomePlacesData({
     required this.id,
     required this.name,
@@ -56,6 +58,7 @@ class HomePlacesData extends Equatable {
     int? showRatings,
     double? distance,
     bool? savedPlace,
+    List<ImageModel>? images,
   }) {
     return HomePlacesData(
       id: id ?? this.id,

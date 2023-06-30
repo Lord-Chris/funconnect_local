@@ -10,8 +10,9 @@ import 'package:funconnect/features/dashboard/presentation/blocs/dashboard_bloc/
 import 'package:funconnect/features/dashboard/presentation/blocs/dashboard_bloc/dashboard_event.dart';
 import 'package:funconnect/features/dashboard/presentation/blocs/notification_bloc/notification_bloc.dart';
 import 'package:funconnect/features/places/presentation/blocs/home_v2_bloc/home_v2_bloc.dart';
-import 'package:funconnect/features/places/presentation/widgets/home_categories_comtainer.dart';
-import 'package:funconnect/features/places/presentation/widgets/home_places_comtainer.dart';
+import 'package:funconnect/features/places/presentation/widgets/home_all_categories_list.dart';
+import 'package:funconnect/features/places/presentation/widgets/home_all_places_list.dart';
+
 import 'package:funconnect/shared/constants/_constants.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -114,61 +115,7 @@ class HomeV2View extends StatelessWidget {
             BlocBuilder<HomeV2Bloc, HomeV2State>(
               builder: (context, state) {
                 if (state is HomeV2LoadedState) {
-                  return ListView.separated(
-                    separatorBuilder: (context, index) {
-                      return SizedBox(
-                        height: 32.h,
-                      );
-                    },
-                    shrinkWrap: true,
-                    itemCount: state.categories.length,
-                    itemBuilder: (context, index1) {
-                      return SizedBox(
-                        height: 200.h,
-                        child: Column(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(right: 16.0),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    state.categories[index1].name,
-                                    style: AppTextStyles.medium20,
-                                  ),
-                                  Text(
-                                    "See All",
-                                    style: AppTextStyles.medium20,
-                                  ),
-                                ],
-                              ),
-                            ),
-                            SizedBox(
-                              height: 16.h,
-                            ),
-                            Expanded(
-                              child: ListView.separated(
-                                  separatorBuilder: (context, index) {
-                                    return SizedBox(
-                                      width: 8.w,
-                                    );
-                                  },
-                                  shrinkWrap: true,
-                                  scrollDirection: Axis.horizontal,
-                                  itemCount:
-                                      state.categories[index1].data.length,
-                                  itemBuilder: (context, index) {
-                                    return HomeCategoryContainer(
-                                        category: state
-                                            .categories[index1].data[index]);
-                                  }),
-                            ),
-                          ],
-                        ),
-                      );
-                    },
-                  );
+                  return HomeAllCategoriesList(state: state);
                 }
                 if (state is HomeV2LoadingState) {
                   return SizedBox(
@@ -192,58 +139,7 @@ class HomeV2View extends StatelessWidget {
             BlocBuilder<HomeV2Bloc, HomeV2State>(
               builder: (context, state) {
                 if (state is HomeV2LoadedState) {
-                  return ListView.separated(
-                    separatorBuilder: (context, index) {
-                      return SizedBox(
-                        height: 32.h,
-                      );
-                    },
-                    shrinkWrap: true,
-                    itemCount: state.places.length,
-                    itemBuilder: (context, index1) {
-                      return SizedBox(
-                        height: 200.h,
-                        child: Column(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(right: 16.0),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(state.places[index1].name,
-                                      style: AppTextStyles.medium20),
-                                  Text(
-                                    "See All",
-                                    style: AppTextStyles.medium20,
-                                  ),
-                                ],
-                              ),
-                            ),
-                            SizedBox(
-                              height: 16.h,
-                            ),
-                            Expanded(
-                              child: ListView.separated(
-                                  separatorBuilder: (context, index) {
-                                    return SizedBox(
-                                      width: 8.w,
-                                    );
-                                  },
-                                  shrinkWrap: true,
-                                  scrollDirection: Axis.horizontal,
-                                  itemCount: state.places[index1].data.length,
-                                  itemBuilder: (context, index) {
-                                    return HomePlaceContainer(
-                                        place:
-                                            state.places[index1].data[index]);
-                                  }),
-                            ),
-                          ],
-                        ),
-                      );
-                    },
-                  );
+                  return HomeAllPlacesList(state: state);
                 }
                 if (state is HomeV2LoadingState) {
                   return const Center(

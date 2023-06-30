@@ -27,7 +27,7 @@ class CategoryDetailBloc
   ) async {
     try {
       emit(CategoryDetailLoadingState());
-      final res = await FetchPlacesByCategory().call(event.category);
+      final res = await FetchPlacesByCategory().call(event.categoryId);
       emit(CategoryDetailIdleState(places: res));
     } on Failure catch (e, s) {
       _logger.e(e);

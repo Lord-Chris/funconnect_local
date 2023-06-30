@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:funconnect/core/app/_app.dart';
-import 'package:funconnect/features/places/domain/entities/category_model.dart';
 import 'package:funconnect/features/places/presentation/blocs/category_detail_bloc/category_detail_bloc.dart';
 import 'package:funconnect/features/places/presentation/blocs/category_detail_bloc/category_detail_state.dart';
 import 'package:funconnect/features/places/presentation/widgets/home_categories_large_widget.dart';
@@ -14,16 +13,18 @@ import 'package:funconnect/shared/constants/_constants.dart';
 import '../blocs/category_detail_bloc/category_detail_event.dart';
 
 class CategoryDetailView extends HookWidget {
-  final CategoryModel category;
+  final String categoryId;
+  final String categoryName;
   const CategoryDetailView({
     Key? key,
-    required this.category,
+    required this.categoryId,
+    required this.categoryName,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     useEffect(() {
-      context.read<CategoryDetailBloc>().add(CategoryInitEvent(category));
+      context.read<CategoryDetailBloc>().add(CategoryInitEvent(categoryId));
       return null;
     }, []);
     return BlocBuilder<CategoryDetailBloc, CategoryDetailState>(
@@ -116,7 +117,7 @@ class CategoryDetailView extends HookWidget {
                                 labelColor: AppColors.black,
                                 onTap: () => context
                                     .read<CategoryDetailBloc>()
-                                    .add(CategoryInitEvent(category)),
+                                    .add(CategoryInitEvent(categoryId)),
                               )
                             ],
                           ),
@@ -142,7 +143,7 @@ class CategoryDetailView extends HookWidget {
                                 labelColor: AppColors.black,
                                 onTap: () => context
                                     .read<CategoryDetailBloc>()
-                                    .add(CategoryInitEvent(category)),
+                                    .add(CategoryInitEvent(categoryId)),
                               )
                             ],
                           ),
@@ -156,7 +157,7 @@ class CategoryDetailView extends HookWidget {
                             Padding(
                               padding: REdgeInsets.symmetric(horizontal: 16),
                               child: Text(
-                                category.name,
+                                categoryName,
                                 style: AppTextStyles.medium28,
                               ),
                             ),
@@ -164,7 +165,7 @@ class CategoryDetailView extends HookWidget {
                             Padding(
                               padding: REdgeInsets.symmetric(horizontal: 16),
                               child: Text(
-                                "Explore the ${category.name.toLowerCase()}",
+                                "Explore the ${categoryName.toLowerCase()}",
                                 style: AppTextStyles.regular16,
                               ),
                             ),

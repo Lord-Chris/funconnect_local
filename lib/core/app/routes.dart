@@ -17,10 +17,10 @@ import 'package:funconnect/features/dashboard/presentation/views/notifications_v
 import 'package:funconnect/features/events/domain/entities/event_model.dart';
 import 'package:funconnect/features/events/presentation/views/booking_view.dart';
 import 'package:funconnect/features/events/presentation/views/checkout_view.dart';
-import 'package:funconnect/features/places/domain/entities/category_model.dart';
 import 'package:funconnect/features/places/domain/entities/place_model.dart';
 import 'package:funconnect/features/places/presentation/blocs/category_detail_bloc/category_detail_bloc.dart';
 import 'package:funconnect/features/places/presentation/blocs/place_detail_bloc/place_detail_bloc.dart';
+import 'package:funconnect/features/places/presentation/blocs/place_detail_v2_bloc/place_detail_v2_bloc.dart';
 import 'package:funconnect/features/places/presentation/views/category_detail_view.dart';
 import 'package:funconnect/features/places/presentation/views/place_detail_view%20copy.dart';
 import 'package:funconnect/features/places/presentation/views/place_detail_view.dart';
@@ -69,8 +69,9 @@ class Routes {
 
   // Places
   static const placeDetailRoute = '/place-detail';
-  static const placeDetailCopyRoute = '/place-detail=copy';
+  static const placeDetailCopyRoute = '/place-detail-copy';
   static const categoryDetailRoute = '/category-detail';
+  static const categoryDetailCopyRoute = '/category-detail-copy';
   static const searchResultRoute = '/search-result';
 
   // Events
@@ -145,16 +146,24 @@ class Routes {
         );
       case placeDetailCopyRoute:
         final place = settings.arguments as HomePlacesData;
-        return _registerBlocView(
-          view: PlaceDetailViewCopy(place: place),
-          bloc: PlaceDetailBloc(),
-        );
+        return MaterialPageRoute(builder: (_) {
+          return BlocProvider(
+            create: (context) =>
+                PlaceDetailV2Bloc()..add(PlaceDetailV2InitEvent(place: place)),
+            child: PlaceDetailViewCopy(place: place),
+          );
+        });
+
       case categoryDetailRoute:
-        final category = settings.arguments as CategoryModel;
+        final arguments = settings.arguments as Map<String, dynamic>;
         return _registerBlocView(
-          view: CategoryDetailView(category: category),
+          view: CategoryDetailView(
+            categoryId: arguments['categoryId'],
+            categoryName: arguments["categoryName"],
+          ),
           bloc: CategoryDetailBloc(),
         );
+
       case searchResultRoute:
         return _registerBlocView(
           view: const SearchResultView(),

@@ -6,3 +6,9 @@ abstract class PlaceDetailV2Event extends Equatable {
   @override
   List<Object> get props => [];
 }
+
+class PlaceDetailV2InitEvent extends PlaceDetailV2Event {
+  final HomePlacesData place;
+
+  const PlaceDetailV2InitEvent({required this.place});
+}

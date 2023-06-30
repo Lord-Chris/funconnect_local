@@ -55,7 +55,7 @@ class PlaceDetailBloc extends Bloc<PlaceDetailEvent, PlaceDetailState> {
   ) async {
     try {
       _getLink(event.place);
-      final data = await FetchPlaceDetail().call(event.place);
+      final data = await FetchPlaceDetail().call(event.place.id);
       emit(PlaceDetailIdleState(
         place: data[0] as FullPlaceModel,
         reviewsData: data[1] as PaginatedData<ReviewModel>,

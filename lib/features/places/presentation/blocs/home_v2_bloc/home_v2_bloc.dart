@@ -7,6 +7,7 @@ import 'package:funconnect/core/constants/hive_keys.dart';
 import 'package:funconnect/core/constants/storage_keys.dart';
 import 'package:funconnect/core/models/_models.dart';
 import 'package:funconnect/features/places/data/repository/i_place_repository.dart';
+import 'package:funconnect/features/places/domain/entities/home_category_data.dart';
 import 'package:funconnect/features/places/domain/entities/home_category_new.dart';
 import 'package:funconnect/features/places/domain/entities/home_place.dart';
 import 'package:funconnect/features/places/domain/entities/home_places_data.dart';
@@ -23,6 +24,7 @@ class HomeV2Bloc extends Bloc<HomeV2Event, HomeV2State> {
     on<HomeV2InitEvent>(_onHomeV2Init);
     on<NotificationTapEvent>(_onNotificationTapEvent);
     on<PlaceTapEvent>(_onPlaceTapEvent);
+    on<CategoryTapEvent>(_onCategoryTapEvent);
   }
 
   final _localStorageService = locator<ILocalStorageService>();
@@ -72,5 +74,13 @@ class HomeV2Bloc extends Bloc<HomeV2Event, HomeV2State> {
       PlaceTapEvent event, Emitter<HomeV2State> emit) async {
     await _navigationService.toNamed(Routes.placeDetailCopyRoute,
         arguments: event.place);
+  }
+
+  FutureOr<void> _onCategoryTapEvent(
+      CategoryTapEvent event, Emitter<HomeV2State> emit) {
+    _navigationService.toNamed(Routes.categoryDetailRoute, arguments: {
+      'categoryId': event.category.id,
+      'categoryName': event.category.name
+    });
   }
 }

@@ -1,7 +1,9 @@
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:funconnect/features/places/domain/entities/home_category_data.dart';
+import 'package:funconnect/features/places/presentation/blocs/home_v2_bloc/home_v2_bloc.dart';
 
 class HomeCategoryContainer extends StatelessWidget {
   final HomeCategoryData category;
@@ -10,7 +12,9 @@ class HomeCategoryContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        context.read<HomeV2Bloc>().add(CategoryTapEvent(category: category));
+      },
       child: SizedBox(
         width: 136.w,
         height: 136,
