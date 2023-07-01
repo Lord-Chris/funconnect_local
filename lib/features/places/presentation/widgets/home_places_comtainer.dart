@@ -52,7 +52,7 @@ class HomePlaceContainer extends StatelessWidget {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text(place.name),
+                                  Flexible(child: Text(place.name)),
                                   place.savedPlace
                                       ? const Icon(Icons.bookmark,
                                           color: AppColors.primary)

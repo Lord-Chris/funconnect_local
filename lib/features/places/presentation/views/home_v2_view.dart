@@ -40,7 +40,7 @@ class HomeV2View extends StatelessWidget {
                 boxDecoration: const BoxDecoration(
                   shape: BoxShape.circle,
                 ),
-                imageUrl: context.watch<HomeV2Bloc>().userModel?.photoUrl ?? "",
+                imageUrl: context.watch<HomeV2Bloc>().userModel!.photoUrl,
                 imageBuilder: (context, imageProvider) {
                   return CircleAvatar(
                       radius: 25.r, backgroundImage: imageProvider);
