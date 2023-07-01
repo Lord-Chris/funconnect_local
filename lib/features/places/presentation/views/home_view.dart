@@ -62,7 +62,7 @@ class _HomeViewState extends State<HomeView> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Text(
-              "Hi ${context.watch<HomeBloc>().user.name}",
+              "Hi ${context.watch<HomeBloc>().user.username}",
               style: AppTextStyles.medium20,
             ),
             Spacing.vertTiny(),
