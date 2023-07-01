@@ -13,6 +13,8 @@ import 'package:funconnect/features/places/domain/entities/home_place.dart';
 import 'package:funconnect/features/places/domain/entities/home_places_data.dart';
 import 'package:funconnect/features/places/domain/entities/home_trends_reponse.dart';
 import 'package:funconnect/services/_services.dart';
+import 'package:funconnect/services/location_service/location_service_new.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:logger/logger.dart';
 
 part 'home_v2_event.dart';
@@ -31,6 +33,8 @@ class HomeV2Bloc extends Bloc<HomeV2Event, HomeV2State> {
   final _locationService = locator<ILocationService>();
   final _placeRepository = locator<IPlaceRepository>();
   final _navigationService = locator<INavigationService>();
+
+  final _locationServiceNew = LocationServiceNew();
   UserModel? _userModel;
 
   UserModel? get userModel => _userModel;
@@ -44,12 +48,23 @@ class HomeV2Bloc extends Bloc<HomeV2Event, HomeV2State> {
     emit(HomeV2LoadingState());
     try {
       await getCurrentUser();
-      await _locationService.requestPermission();
-      var appLocation = await _locationService.getCurrentLocation();
-      Logger().i("Received location is ${appLocation?.parsedAddress}");
-      _appLocation = appLocation;
+      var newLocation = await _locationServiceNew.determinePosition();
+
+      final place = await placemarkFromCoordinates(
+          newLocation.latitude, newLocation.longitude);
+
+      AppLocation? newAppLocation = AppLocation(
+          address: place.first.name,
+          city: place.first.locality,
+          state: place.first.administrativeArea,
+          country: place.first.country,
+          lat: newLocation.latitude,
+          long: newLocation.longitude);
+
+      _appLocation = newAppLocation;
+
       HomeTrendsReponse response =
-          await _placeRepository.fetchHomeTrendsNew(appLocation);
+          await _placeRepository.fetchHomeTrendsNew(_appLocation);
       List<HomeCategory> categories = response.data.categories;
       List<HomePlaces> places = response.data.places;
       emit(HomeV2LoadedState(categories: categories, places: places));

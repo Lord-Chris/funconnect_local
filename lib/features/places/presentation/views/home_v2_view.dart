@@ -40,7 +40,7 @@ class HomeV2View extends StatelessWidget {
                 boxDecoration: const BoxDecoration(
                   shape: BoxShape.circle,
                 ),
-                imageUrl: context.watch<HomeV2Bloc>().userModel!.photoUrl,
+                imageUrl: context.watch<HomeV2Bloc>().userModel?.photoUrl ?? "",
                 imageBuilder: (context, imageProvider) {
                   return CircleAvatar(
                       radius: 25.r, backgroundImage: imageProvider);
@@ -105,52 +105,61 @@ class HomeV2View extends StatelessWidget {
       body: SafeArea(
           child: Padding(
         padding: const EdgeInsets.only(left: 16.0),
-        child: Column(
-          children: [
-            Spacing.vertSmall(),
-            const Divider(
-              color: AppColors.secondary800,
-              height: 1,
+        child: RefreshIndicator(
+          onRefresh: () async {
+            context.read<HomeV2Bloc>().add(HomeV2InitEvent());
+            return;
+          },
+          child: SingleChildScrollView(
+            physics: const AlwaysScrollableScrollPhysics(),
+            child: Column(
+              children: [
+                Spacing.vertSmall(),
+                const Divider(
+                  color: AppColors.secondary800,
+                  height: 1,
+                ),
+                BlocBuilder<HomeV2Bloc, HomeV2State>(
+                  builder: (context, state) {
+                    if (state is HomeV2LoadedState) {
+                      return HomeAllCategoriesList(state: state);
+                    }
+                    if (state is HomeV2LoadingState) {
+                      return SizedBox(
+                        width: 200.0,
+                        height: 100.0,
+                        child: Shimmer.fromColors(
+                            baseColor: AppColors.primary,
+                            highlightColor: Colors.white,
+                            child: Text(
+                              "Fun Connecting....",
+                              style: AppTextStyles.medium20,
+                            )),
+                      );
+                    }
+                    return Container();
+                  },
+                ),
+                SizedBox(
+                  height: 32.h,
+                ),
+                BlocBuilder<HomeV2Bloc, HomeV2State>(
+                  builder: (context, state) {
+                    if (state is HomeV2LoadedState) {
+                      return HomeAllPlacesList(state: state);
+                    }
+                    if (state is HomeV2LoadingState) {
+                      return const Center(
+                          child: CircularProgressIndicator(
+                        color: AppColors.primary,
+                      ));
+                    }
+                    return Container();
+                  },
+                ),
+              ],
             ),
-            BlocBuilder<HomeV2Bloc, HomeV2State>(
-              builder: (context, state) {
-                if (state is HomeV2LoadedState) {
-                  return HomeAllCategoriesList(state: state);
-                }
-                if (state is HomeV2LoadingState) {
-                  return SizedBox(
-                    width: 200.0,
-                    height: 100.0,
-                    child: Shimmer.fromColors(
-                        baseColor: AppColors.primary,
-                        highlightColor: Colors.white,
-                        child: Text(
-                          "Fun Connecting....",
-                          style: AppTextStyles.medium20,
-                        )),
-                  );
-                }
-                return Container();
-              },
-            ),
-            SizedBox(
-              height: 32.h,
-            ),
-            BlocBuilder<HomeV2Bloc, HomeV2State>(
-              builder: (context, state) {
-                if (state is HomeV2LoadedState) {
-                  return HomeAllPlacesList(state: state);
-                }
-                if (state is HomeV2LoadingState) {
-                  return const Center(
-                      child: CircularProgressIndicator(
-                    color: AppColors.primary,
-                  ));
-                }
-                return Container();
-              },
-            ),
-          ],
+          ),
         ),
       )),
     );
