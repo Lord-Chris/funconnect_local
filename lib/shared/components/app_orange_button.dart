@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:funconnect/shared/components/_components.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
 
@@ -13,7 +12,7 @@ class AppOrangeBtn extends StatelessWidget {
   const AppOrangeBtn({
     Key? key,
     required this.label,
-    this.height = 72,
+    this.height = 65,
     this.weight,
     this.onTap,
     this.isBusy = false,
@@ -33,8 +32,7 @@ class AppOrangeBtn extends StatelessWidget {
         ),
         child: Container(
           height: height,
-          padding: EdgeInsets.only(top: 20.r),
-          alignment: Alignment.topCenter,
+          alignment: Alignment.center,
           child: Visibility(
             visible: !isBusy,
             replacement: const SizedBox.square(
