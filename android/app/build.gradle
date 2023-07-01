@@ -87,7 +87,7 @@ android {
                 signingConfig signingConfigs.debug
                 println "Signing with debug keys"
               }
-            signingConfig signingConfigs.release
+            //signingConfig signingConfigs.release
         }
     }
 
