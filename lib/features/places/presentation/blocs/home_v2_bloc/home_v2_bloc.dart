@@ -46,7 +46,7 @@ class HomeV2Bloc extends Bloc<HomeV2Event, HomeV2State> {
       await getCurrentUser();
       await _locationService.requestPermission();
       var appLocation = await _locationService.getCurrentLocation();
-      Logger().i(appLocation?.parsedAddress ?? "Didnt manage to get address");
+      Logger().i("Received location is ${appLocation?.parsedAddress}");
       _appLocation = appLocation;
       HomeTrendsReponse response =
           await _placeRepository.fetchHomeTrendsNew(appLocation);
@@ -54,15 +54,21 @@ class HomeV2Bloc extends Bloc<HomeV2Event, HomeV2State> {
       List<HomePlaces> places = response.data.places;
       emit(HomeV2LoadedState(categories: categories, places: places));
     } catch (e) {
+      Logger().e(e.toString());
       emit(HomeV2ErrorState(message: e.toString()));
     }
   }
 
-  Future getCurrentUser() async {
-    var userMap = _localStorageService.read(HiveKeys.userBoxId,
-        key: StorageKeys.userProfile);
-    UserModel? currentUser = UserModel.fromMap(userMap);
-    _userModel = currentUser;
+  Future<UserModel?> getCurrentUser() async {
+    try {
+      var userMap = _localStorageService.read(HiveKeys.userBoxId,
+          key: StorageKeys.userProfile);
+      UserModel? currentUser = UserModel.fromMap(userMap);
+      _userModel = currentUser;
+      return currentUser;
+    } catch (e) {
+      rethrow;
+    }
   }
 
   FutureOr<void> _onNotificationTapEvent(
