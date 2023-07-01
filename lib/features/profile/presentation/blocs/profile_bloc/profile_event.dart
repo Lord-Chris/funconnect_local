@@ -5,7 +5,10 @@ abstract class ProfileEvent extends Equatable {
   List<Object?> get props => [];
 }
 
-class InitProfileEvent extends ProfileEvent {}
+class InitProfileEvent extends ProfileEvent {
+  final bool showLoader;
+  InitProfileEvent([this.showLoader = true]);
+}
 
 class EditProfileTapEvent extends ProfileEvent {
   final UserModel userProfile;
