@@ -16,54 +16,57 @@ class HomePlaceContainer extends StatelessWidget {
       onTap: () {
         context.read<HomeV2Bloc>().add(PlaceTapEvent(place: place));
       },
-      child: SizedBox(
-        width: 187.w,
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(20.r),
-          child: Stack(
-            fit: StackFit.expand,
-            children: [
-              Positioned(
-                top: 0,
-                bottom: 0,
-                right: 0,
-                left: 0,
-                child: FancyShimmerImage(
-                  imageUrl: place.coverImagePath,
-                  boxFit: BoxFit.fill,
-                ),
-              ),
-              Positioned(
-                  bottom: 8,
-                  left: 0,
+      child: Hero(
+        tag: "placeImage",
+        child: SizedBox(
+          width: 187.w,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(20.r),
+            child: Stack(
+              fit: StackFit.expand,
+              children: [
+                Positioned(
+                  top: 0,
+                  bottom: 0,
                   right: 0,
-                  child: Align(
-                      alignment: Alignment.center,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8),
-                        child: Container(
-                            decoration: BoxDecoration(
-                                color: Colors.black.withOpacity(0.5),
-                                borderRadius: BorderRadius.circular(10.r)),
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 12.0, vertical: 8),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Flexible(child: Text(place.name)),
-                                  place.savedPlace
-                                      ? const Icon(Icons.bookmark,
-                                          color: AppColors.primary)
-                                      : const Icon(
-                                          Icons.bookmark_border_rounded,
-                                          color: AppColors.white)
-                                ],
-                              ),
-                            )),
-                      )))
-            ],
+                  left: 0,
+                  child: FancyShimmerImage(
+                    imageUrl: place.coverImagePath,
+                    boxFit: BoxFit.fill,
+                  ),
+                ),
+                Positioned(
+                    bottom: 8,
+                    left: 0,
+                    right: 0,
+                    child: Align(
+                        alignment: Alignment.center,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8),
+                          child: Container(
+                              decoration: BoxDecoration(
+                                  color: Colors.black.withOpacity(0.5),
+                                  borderRadius: BorderRadius.circular(10.r)),
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 12.0, vertical: 8),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Flexible(child: Text(place.name)),
+                                    place.savedPlace
+                                        ? const Icon(Icons.bookmark,
+                                            color: AppColors.primary)
+                                        : const Icon(
+                                            Icons.bookmark_border_rounded,
+                                            color: AppColors.white)
+                                  ],
+                                ),
+                              )),
+                        )))
+              ],
+            ),
           ),
         ),
       ),

@@ -61,6 +61,11 @@ class PlaceDetailViewCopy extends StatelessWidget {
                                   return FancyShimmerImage(
                                     imageUrl: state.place.images[index].path,
                                     boxFit: BoxFit.contain,
+                                    shimmerBaseColor: AppColors.primary,
+                                    shimmerHighlightColor: Colors.white,
+                                    shimmerBackColor: Colors.white,
+                                    errorWidget:
+                                        Image.network(place.coverImagePath),
                                   );
                                 },
                               ),
@@ -112,14 +117,59 @@ class PlaceDetailViewCopy extends StatelessWidget {
                 );
               }
               if (state is PlaceDetailLoadingState) {
-                return Center(
-                  child: Shimmer.fromColors(
-                      baseColor: AppColors.primary,
-                      highlightColor: Colors.white,
-                      child: Text(
-                        "Loading ${place.name} Details...",
-                        style: AppTextStyles.medium20,
-                      )),
+                return Stack(
+                  children: [
+                    Column(
+                      children: [
+                        Hero(
+                          transitionOnUserGestures: true,
+                          tag: "placeImage",
+                          child: Container(
+                            height: 409.h,
+                            width: double.infinity,
+                            clipBehavior: Clip.hardEdge,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(20.r),
+                            ),
+                            child: FancyShimmerImage(
+                              imageUrl: place.coverImagePath,
+                              boxFit: BoxFit.contain,
+                              shimmerBaseColor: AppColors.primary,
+                              shimmerHighlightColor: Colors.white,
+                              shimmerBackColor: Colors.white,
+                            ),
+                          ),
+                        ),
+                        Spacing.vertRegular(),
+                        Shimmer.fromColors(
+                            baseColor: AppColors.primary,
+                            highlightColor: Colors.white,
+                            child: Text(
+                              "Loading ${place.name} Details...",
+                              style: AppTextStyles.medium20,
+                            )),
+                      ],
+                    ),
+                    Positioned(
+                      left: 23.w,
+                      top: 23,
+                      child: SafeArea(
+                        child: InkWell(
+                          onTap: () => Navigator.pop(context),
+                          child: CircleAvatar(
+                            radius: 18.r,
+                            backgroundColor: AppColors.black.withOpacity(.6),
+                            child: Icon(
+                              Icons.arrow_back_ios_rounded,
+                              size: 20.r,
+                              color: AppColors.white,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 );
               }
               return Container();
