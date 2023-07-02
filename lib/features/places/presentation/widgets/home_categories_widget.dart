@@ -31,7 +31,7 @@ class HomeSection<T> extends HookWidget {
       children: [
         if (label.isNotEmpty)
           Padding(
-            padding: EdgeInsets.symmetric(vertical: 16.0.h, horizontal: 16.0.h),
+            padding: EdgeInsets.symmetric(vertical: 16.0.h),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [

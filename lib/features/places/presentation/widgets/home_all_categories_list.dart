@@ -16,6 +16,7 @@ class HomeAllCategoriesList extends StatelessWidget {
           height: 32.h,
         );
       },
+      physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       itemCount: state.categories.length,
       itemBuilder: (context, index1) {

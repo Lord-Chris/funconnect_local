@@ -1,7 +1,7 @@
 import 'package:geolocator/geolocator.dart';
 
 class LocationServiceNew {
-  Future<Position> determinePosition() async {
+  Future<Position?> determinePosition() async {
     //bool serviceEnabled;
     LocationPermission permission;
 
@@ -14,13 +14,13 @@ class LocationServiceNew {
         // Android's shouldShowRequestPermissionRationale
         // returned true. According to Android guidelines
         // your App should show an explanatory UI now.
-        return Future.error("Permissions denied");
+        return null;
       }
     }
 
     if (permission == LocationPermission.deniedForever) {
       // Permissions are denied forever, handle appropriately.
-      return Future.error("Permissions denied forever");
+      return null;
     }
 
     // When we reach here, permissions are granted and we can

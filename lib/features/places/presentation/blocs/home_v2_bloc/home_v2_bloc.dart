@@ -48,20 +48,22 @@ class HomeV2Bloc extends Bloc<HomeV2Event, HomeV2State> {
     emit(HomeV2LoadingState());
     try {
       await getCurrentUser();
-      var newLocation = await _locationServiceNew.determinePosition();
+      await _locationServiceNew.determinePosition().then((value) async {
+        if (value != null) {
+          final place =
+              await placemarkFromCoordinates(value.latitude, value.longitude);
 
-      final place = await placemarkFromCoordinates(
-          newLocation.latitude, newLocation.longitude);
+          AppLocation? newAppLocation = AppLocation(
+              address: place.first.name,
+              city: place.first.locality,
+              state: place.first.administrativeArea,
+              country: place.first.country,
+              lat: value.latitude,
+              long: value.longitude);
 
-      AppLocation? newAppLocation = AppLocation(
-          address: place.first.name,
-          city: place.first.locality,
-          state: place.first.administrativeArea,
-          country: place.first.country,
-          lat: newLocation.latitude,
-          long: newLocation.longitude);
-
-      _appLocation = newAppLocation;
+          _appLocation = newAppLocation;
+        }
+      });
 
       HomeTrendsReponse response =
           await _placeRepository.fetchHomeTrendsNew(_appLocation);

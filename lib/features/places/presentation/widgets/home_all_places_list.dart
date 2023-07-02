@@ -17,6 +17,7 @@ class HomeAllPlacesList extends StatelessWidget {
         );
       },
       shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
       itemCount: state.places.length,
       itemBuilder: (context, index1) {
         return SizedBox(

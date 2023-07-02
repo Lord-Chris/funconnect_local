@@ -146,13 +146,15 @@ class Routes {
         );
       case placeDetailCopyRoute:
         final place = settings.arguments as HomePlacesData;
-        return MaterialPageRoute(builder: (_) {
-          return BlocProvider(
-            create: (context) =>
-                PlaceDetailV2Bloc()..add(PlaceDetailV2InitEvent(place: place)),
-            child: PlaceDetailViewCopy(place: place),
-          );
-        });
+        return PageRouteBuilder(
+            transitionDuration: const Duration(milliseconds: 500),
+            pageBuilder: (_, __, ___) {
+              return BlocProvider(
+                create: (context) => PlaceDetailV2Bloc()
+                  ..add(PlaceDetailV2InitEvent(place: place)),
+                child: PlaceDetailViewCopy(place: place),
+              );
+            });
 
       case categoryDetailRoute:
         final arguments = settings.arguments as Map<String, dynamic>;

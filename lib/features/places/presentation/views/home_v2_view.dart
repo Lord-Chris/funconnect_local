@@ -31,28 +31,37 @@ class HomeV2View extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.only(left: 16.0),
             child: Center(
-              child: FancyShimmerImage(
-                height: 50.r,
-                width: 50.r,
-                boxFit: BoxFit.cover,
-                shimmerBaseColor: AppColors.primary,
-                shimmerHighlightColor: AppColors.white,
-                boxDecoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                ),
-                imageUrl: context.watch<HomeV2Bloc>().userModel?.photoUrl ?? "",
-                imageBuilder: (context, imageProvider) {
-                  return CircleAvatar(
-                      radius: 25.r, backgroundImage: imageProvider);
-                },
-                errorWidget: SvgPicture.asset(
-                  AppAssets.profileIconSvg,
-                  height: 25.r,
-                  width: 25.r,
-                  colorFilter:
-                      const ColorFilter.mode(Colors.white, BlendMode.srcIn),
-                ),
-              ),
+              child: context.watch<HomeV2Bloc>().userModel?.photoUrl == null
+                  ? SvgPicture.asset(
+                      AppAssets.profileIconSvg,
+                      height: 25.r,
+                      width: 25.r,
+                      colorFilter:
+                          const ColorFilter.mode(Colors.white, BlendMode.srcIn),
+                    )
+                  : FancyShimmerImage(
+                      height: 50.r,
+                      width: 50.r,
+                      boxFit: BoxFit.cover,
+                      shimmerBaseColor: AppColors.primary,
+                      shimmerHighlightColor: AppColors.white,
+                      boxDecoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                      ),
+                      imageUrl:
+                          context.watch<HomeV2Bloc>().userModel?.photoUrl ?? "",
+                      imageBuilder: (context, imageProvider) {
+                        return CircleAvatar(
+                            radius: 25.r, backgroundImage: imageProvider);
+                      },
+                      errorWidget: SvgPicture.asset(
+                        AppAssets.profileIconSvg,
+                        height: 25.r,
+                        width: 25.r,
+                        colorFilter: const ColorFilter.mode(
+                            Colors.white, BlendMode.srcIn),
+                      ),
+                    ),
             ),
           ),
         ),
@@ -104,8 +113,9 @@ class HomeV2View extends StatelessWidget {
       ),
       body: SafeArea(
           child: Padding(
-        padding: const EdgeInsets.only(left: 16.0),
+        padding: const EdgeInsets.only(left: 16.0, top: 16.0),
         child: RefreshIndicator(
+          triggerMode: RefreshIndicatorTriggerMode.anywhere,
           onRefresh: () async {
             context.read<HomeV2Bloc>().add(HomeV2InitEvent());
             return;
