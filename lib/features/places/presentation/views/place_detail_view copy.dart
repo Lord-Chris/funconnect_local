@@ -190,6 +190,8 @@ class _InfoSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isBookmarked = place.isBookmarked;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
@@ -204,13 +206,17 @@ class _InfoSection extends StatelessWidget {
               ),
             ),
             InkWell(
-              /*onTap: () =>
-                      context.read<PlaceDetailBloc>().add(ShareTapEvent(place)),*/
-              child: SvgPicture.asset(
-                AppAssets.uploadSvg,
-                colorFilter:
-                    const ColorFilter.mode(AppColors.white, BlendMode.srcIn),
-                height: 20,
+              onTap: () => context
+                  .read<PlaceDetailV2Bloc>()
+                  .add(const PlaceDetailShareTapEvent()),
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: SvgPicture.asset(
+                  AppAssets.uploadSvg,
+                  colorFilter:
+                      const ColorFilter.mode(AppColors.white, BlendMode.srcIn),
+                  height: 20,
+                ),
               ),
             ),
             Spacing.horizMedium(),
@@ -219,27 +225,28 @@ class _InfoSection extends StatelessWidget {
                 duration: const Duration(milliseconds: 1),
                 child: InkWell(
                   onTap: () async {
-                    /*
-                        final bloc =
-                            context.read<PlaceDetailBloc>().stream.first;
-                        context.read<PlaceDetailBloc>().add(BookmarkTapEvent());
-
-                        await bloc;
-                        */
+                    context
+                        .read<PlaceDetailV2Bloc>()
+                        .add(PlaceDetailBookmarkTapEvent(place));
 
                     // ignore: use_build_context_synchronously
                     // context.read<SavedBloc>().add(
                     //     const GetAllUserSavedPlaces(showLoader: false));
                   },
-                  child: SvgPicture.asset(
-                    place.isBookmarked
-                        ? AppAssets.savedIconSvg
-                        : AppAssets.bookmarkIconSvg,
-                    colorFilter: ColorFilter.mode(
-                      place.isBookmarked ? AppColors.primary : AppColors.white,
-                      BlendMode.srcIn,
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: SvgPicture.asset(
+                      place.isBookmarked
+                          ? AppAssets.savedIconSvg
+                          : AppAssets.bookmarkIconSvg,
+                      colorFilter: ColorFilter.mode(
+                        place.isBookmarked
+                            ? AppColors.primary
+                            : AppColors.white,
+                        BlendMode.srcIn,
+                      ),
+                      height: 20,
                     ),
-                    height: 20,
                   ),
                 ),
               );

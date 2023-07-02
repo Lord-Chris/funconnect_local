@@ -30,17 +30,14 @@ class HomeV2Bloc extends Bloc<HomeV2Event, HomeV2State> {
   }
 
   final _localStorageService = locator<ILocalStorageService>();
-  final _locationService = locator<ILocationService>();
   final _placeRepository = locator<IPlaceRepository>();
   final _navigationService = locator<INavigationService>();
-
   final _locationServiceNew = LocationServiceNew();
-  UserModel? _userModel;
 
+  UserModel? _userModel;
   UserModel? get userModel => _userModel;
 
   AppLocation? _appLocation;
-
   AppLocation? get appLocation => _appLocation;
 
   FutureOr<void> _onHomeV2Init(
