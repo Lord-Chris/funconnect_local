@@ -123,7 +123,7 @@ class PlaceDetailViewCopy extends StatelessWidget {
                       children: [
                         Hero(
                           transitionOnUserGestures: true,
-                          tag: "placeImage",
+                          tag: place.id,
                           child: Container(
                             height: 409.h,
                             width: double.infinity,
@@ -134,7 +134,7 @@ class PlaceDetailViewCopy extends StatelessWidget {
                             ),
                             child: FancyShimmerImage(
                               imageUrl: place.coverImagePath,
-                              boxFit: BoxFit.contain,
+                              boxFit: BoxFit.cover,
                               shimmerBaseColor: AppColors.primary,
                               shimmerHighlightColor: Colors.white,
                               shimmerBackColor: Colors.white,

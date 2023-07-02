@@ -17,7 +17,7 @@ class HomePlaceContainer extends StatelessWidget {
         context.read<HomeV2Bloc>().add(PlaceTapEvent(place: place));
       },
       child: Hero(
-        tag: "placeImage",
+        tag: place.id,
         child: SizedBox(
           width: 187.w,
           child: ClipRRect(
