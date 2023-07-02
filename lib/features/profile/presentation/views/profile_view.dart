@@ -35,11 +35,11 @@ class _ProfileViewState extends State<ProfileView> {
         elevation: 0,
         title: Text(
           "Profile",
-          style: AppTextStyles.medium28,
+          style: AppTextStyles.medium24,
         ),
       ),
       body: BlocBuilder<ProfileBloc, ProfileState>(
-        buildWhen: (previous, _) => previous is ProfileLoadingState,
+        // buildWhen: (previous, _) => previous is ProfileLoadingState,
         builder: (context, state) {
           if (state is ProfileLoadingState) {
             return const AppLoader(
@@ -62,8 +62,9 @@ class _ProfileViewState extends State<ProfileView> {
                       label: "Retry",
                       isCollapsed: true,
                       labelColor: AppColors.black,
-                      onTap: () =>
-                          context.read<ProfileBloc>().add(InitProfileEvent()),
+                      onTap: () => context
+                          .read<ProfileBloc>()
+                          .add(InitProfileEvent(false)),
                     )
                   ],
                 ),
@@ -72,96 +73,131 @@ class _ProfileViewState extends State<ProfileView> {
           }
           if (state is! ProfileIdleState) return const SizedBox();
           return BlocBuilder<ProfileBloc, ProfileState>(
-            buildWhen: (_, current) => current is ProfileIdleState,
+            // buildWhen: (_, current) => current is ProfileIdleState,
             builder: (context, state) {
               if (state is! ProfileIdleState) return const SizedBox();
               UserModel userProfile = state.userProfile;
               return RefreshIndicator(
                 onRefresh: () async {
                   final bloc = context.read<ProfileBloc>().stream.first;
-                  context.read<ProfileBloc>().add(InitProfileEvent());
+                  context.read<ProfileBloc>().add(InitProfileEvent(false));
                   await bloc;
                 },
                 child: ScrollableColumn(
                   padding: REdgeInsets.all(16),
                   children: [
-                    AppNetworkImage(
-                      url: userProfile.photoUrl,
-                      placeholderAssetImage: AppAssets.fallbackUserProfileSvg,
-                      isCircular: true,
-                      cacheImage: false,
-                      size: Size.fromRadius(54.r),
-                      fit: BoxFit.cover,
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        AppNetworkImage(
+                          url: userProfile.photoUrl,
+                          placeholderAssetImage:
+                              AppAssets.fallbackUserProfileSvg,
+                          isCircular: true,
+                          cacheImage: false,
+                          size: Size.fromRadius(37.r),
+                          fit: BoxFit.cover,
+                        ),
+                        Spacing.horizRegular(),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      userProfile.name,
+                                      style: AppTextStyles.medium20,
+                                    ),
+                                  ),
+                                  Visibility(
+                                    visible:
+                                        context.watch<ProfileBloc>().location !=
+                                            null,
+                                    child: Container(
+                                      padding: REdgeInsets.fromLTRB(7, 5, 7, 5),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(4),
+                                        border: Border.all(
+                                          color: AppColors.secondary700,
+                                        ),
+                                      ),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          const Icon(
+                                            Icons.location_on,
+                                            color: AppColors.white,
+                                            size: 13,
+                                          ),
+                                          Spacing.horizExtraTiny(),
+                                          Flexible(
+                                            child: Text(
+                                              context
+                                                      .watch<ProfileBloc>()
+                                                      .location
+                                                      ?.city ??
+                                                  '',
+                                              style: AppTextStyles.regular10
+                                                  .copyWith(
+                                                color: AppColors.secondary400,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Spacing.vertTiny(),
+                              Text(
+                                '@${userProfile.username}',
+                                style: AppTextStyles.regular14.copyWith(
+                                  color: AppColors.secondary500,
+                                ),
+                              ),
+                              Spacing.vertTiny(),
+                              Text(
+                                userProfile.email,
+                                style: AppTextStyles.regular14.copyWith(
+                                  color: AppColors.secondary500,
+                                ),
+                              ),
+                              Spacing.vertSmall(),
+                              Text(
+                                userProfile.bio,
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                                style: AppTextStyles.regular14.copyWith(
+                                  color: AppColors.secondary200,
+                                ),
+                              ),
+                              Spacing.vertRegular(),
+                              AppButton(
+                                label: "Edit profile",
+                                isCollapsed: true,
+                                hasBorder: true,
+                                borderRadius: 8,
+                                padding: REdgeInsets.fromLTRB(32, 5, 32, 5),
+                                labelColor: AppColors.white,
+                                borderColor: AppColors.info700,
+                                buttonColor: AppColors.transparent,
+                                onTap: () => context.read<ProfileBloc>().add(
+                                    EditProfileTapEvent(
+                                        userProfile: userProfile)),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
                     Spacing.vertMedium(),
-                    Text(
-                      userProfile.name,
-                      style: AppTextStyles.medium20,
-                    ),
-                    Spacing.vertTiny(),
-                    Spacing.vertSmall(),
-                    Text(
-                      userProfile.username,
-                      style: AppTextStyles.regular16.copyWith(
-                        color: AppColors.secondary500,
-                      ),
-                    ),
-                    Spacing.vertTiny(),
-                    Spacing.vertSmall(),
-                    Text(
-                      userProfile.email,
-                      style: AppTextStyles.regular16.copyWith(
-                        color: AppColors.secondary500,
-                      ),
-                    ),
-                    Spacing.vertTiny(),
-                    Spacing.vertSmall(),
-                    Text(
-                      userProfile.bio,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: AppTextStyles.regular16.copyWith(
-                        color: AppColors.secondary200,
-                      ),
-                    ),
-                    Spacing.vertTiny(),
-                    Spacing.vertSmall(),
-                    Visibility(
-                      visible: context.watch<ProfileBloc>().location != null,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Icon(
-                            Icons.location_on,
-                            color: AppColors.locationIconAsh,
-                            size: 13,
-                          ),
-                          Flexible(
-                            child: Text(
-                              context
-                                      .watch<ProfileBloc>()
-                                      .location
-                                      ?.parsedAddress ??
-                                  "",
-                              style: AppTextStyles.regular14.copyWith(
-                                color: AppColors.secondary400,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Spacing.vertExtraMedium(),
-                    AppButton(
-                      label: "Edit profile",
-                      isCollapsed: true,
-                      padding: REdgeInsets.fromLTRB(88, 19, 88, 19),
-                      labelColor: AppColors.black,
-                      onTap: () => context
-                          .read<ProfileBloc>()
-                          .add(EditProfileTapEvent(userProfile: userProfile)),
-                    ),
-                    Spacing.vertLarge(),
+                    const Divider(color: AppColors.ash),
+                    Spacing.vertMedium(),
                     // _ProfileSubButton(
                     //   buttonColor: AppColors.secondary800,
                     //   label: "My Tickets",

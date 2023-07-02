@@ -55,6 +55,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     Emitter<ProfileState> emit,
   ) async {
     try {
+      if (event.showLoader) emit(ProfileLoadingState());
       final res = await Future.wait([
         FetchUserProfile().call(NoParams()),
         // FetchLoginOptions().call(NoParams()),
@@ -214,11 +215,17 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
           await DeleteUserAccount().call(NoParams());
           _navigationService.offAllNamed(Routes.welcomeViewRoute, (_) => false);
           _dialogAndSheetService.showAppDialog(const StatusDialog(
-              isError: false, title: "Alert", body: "User Account Deleted"));
+            isError: false,
+            title: "Alert",
+            body: "User Account Deleted",
+          ));
         } on Failure catch (e) {
           _navigationService.back();
           _dialogAndSheetService.showAppDialog(StatusDialog(
-              isError: true, title: "Error Deleting Account", body: e.message));
+            isError: true,
+            title: "Error Deleting Account",
+            body: e.message,
+          ));
         }
       },
     ));

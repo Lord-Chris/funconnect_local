@@ -88,7 +88,8 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
   ) async {
     emit(state.copyWith(isUpdatingProfile: true));
     try {
-      if (state.profile.photoUrl.isNotEmpty) {
+      if (state.profile.photoUrl.isNotEmpty &&
+          !state.profile.photoUrl.startsWith('http')) {
         await UpdateProfileImage().call(File(state.profile.photoUrl));
       }
       final res = await UpdateUserProfile().call(state.profile);
