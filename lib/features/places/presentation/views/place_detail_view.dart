@@ -106,14 +106,14 @@ class _ImageSection extends HookWidget {
             if (state.place.images.length > 1) {
               return HookBuilder(builder: (context) {
                 final controller = usePageController();
+                Timer? timer;
                 useEffect(() {
-                  Timer? timer;
-                  Timer.periodic(const Duration(seconds: 4), (timerr) {
+                  Timer.periodic(const Duration(seconds: 5), (timerr) {
                     timer = timerr;
                     if (!controller.hasClients) return;
                     if (controller.page != state.place.images.length - 1) {
                       controller.nextPage(
-                        duration: const Duration(milliseconds: 500),
+                        duration: const Duration(milliseconds: 1000),
                         curve: Curves.ease,
                       );
                     } else {
@@ -122,8 +122,10 @@ class _ImageSection extends HookWidget {
                   });
                   return () => timer?.cancel();
                 }, []);
-                useListenableSelector(controller,
-                    () => controller.hasClients ? controller.page : 0);
+                useListenableSelector(
+                  controller,
+                  () => controller.hasClients ? controller.page : 0,
+                );
                 return Stack(
                   children: [
                     Positioned.fill(
@@ -156,9 +158,9 @@ class _ImageSection extends HookWidget {
                           ),
                           child: CircleAvatar(
                             radius: 18.r,
-                            backgroundColor: AppColors.black.withOpacity(.3),
+                            backgroundColor: AppColors.black.withOpacity(.5),
                             child: Icon(
-                              Icons.arrow_back_ios_rounded,
+                              Icons.arrow_back,
                               size: 20.r,
                               color: AppColors.white,
                             ),
@@ -178,9 +180,9 @@ class _ImageSection extends HookWidget {
                           ),
                           child: CircleAvatar(
                             radius: 18.r,
-                            backgroundColor: AppColors.black.withOpacity(.3),
+                            backgroundColor: AppColors.black.withOpacity(.5),
                             child: Icon(
-                              Icons.arrow_forward_ios_rounded,
+                              Icons.arrow_forward,
                               size: 20.r,
                               color: AppColors.white,
                             ),
