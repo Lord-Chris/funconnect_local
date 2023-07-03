@@ -23,6 +23,11 @@ class SearchPlaces with UseCases<PaginatedData<PlaceModel>, SearchQueryParam> {
     return places;
   }
 
+  Future<void> storeSearchHistory(String placeName) async {
+    if ((param?.param ?? '').isEmpty) return;
+    await _placeRepository.addToSearchHistory(placeName);
+  }
+
   Future<void> removeHistory(String item) async {
     await _placeRepository.removeHistory(item);
   }
