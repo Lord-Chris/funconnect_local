@@ -36,10 +36,14 @@ class GoogleSignInUsecase with UseCases<UserModel?, NoParams> {
         }
         res = await repo.signInWithGoogleIos(auth.idToken ?? "");
       }
-      if ((res?.username ?? '').isNotEmpty) {
-        _navigationService.offAllNamed(Routes.dashboardViewRoute, (_) => false);
+      if (res == null) return null;
+      if (res.name.isEmpty || res.username.isEmpty || res.gender.isEmpty) {
+        _navigationService.toNamed(
+          Routes.profileSetupViewRoute,
+          arguments: res,
+        );
       } else {
-        _navigationService.toNamed(Routes.profileSetupViewRoute);
+        _navigationService.offAllNamed(Routes.dashboardViewRoute, (_) => false);
       }
       return res;
     } on PlatformException catch (e) {

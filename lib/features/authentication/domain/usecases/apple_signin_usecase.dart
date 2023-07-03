@@ -32,10 +32,14 @@ class AppleSignInUsecase with UseCases<UserModel?, NoParams> {
       // return null;
       final user = await repo.signInWithApple(credential.authorizationCode);
       _logger.i(">>> Apple Login Credentials Verified");
-      if ((user?.username ?? '').isNotEmpty) {
-        _navigationService.offAllNamed(Routes.dashboardViewRoute, (_) => false);
+      if (user == null) return null;
+      if (user.name.isEmpty || user.username.isEmpty || user.gender.isEmpty) {
+        _navigationService.toNamed(
+          Routes.profileSetupViewRoute,
+          arguments: user,
+        );
       } else {
-        _navigationService.toNamed(Routes.profileSetupViewRoute);
+        _navigationService.offAllNamed(Routes.dashboardViewRoute, (_) => false);
       }
       return user;
     } on SignInWithAppleException catch (e) {
