@@ -69,7 +69,7 @@ class HomeV2View extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Text(
-              "Hi ${context.watch<HomeV2Bloc>().userModel?.name ?? ""}",
+              "Hi ${context.watch<HomeV2Bloc>().userModel?.username ?? ""}",
               style: AppTextStyles.medium20,
             ),
             Spacing.vertTiny(),
