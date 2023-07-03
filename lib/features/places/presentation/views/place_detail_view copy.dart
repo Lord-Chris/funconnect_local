@@ -252,46 +252,6 @@ class _InfoSection extends StatelessWidget {
           ],
         ),
         Spacing.vertTiny(),
-        place.showRatings > 0
-            ? Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Text(
-                    place.reviewsAvgRating?.toStringAsFixed(1) ??
-                        place.avgRating.toString(),
-                    style: AppTextStyles.regular16,
-                  ),
-                  Spacing.horizExtraTiny(),
-                  Flexible(
-                    child: FittedBox(
-                      child: RatingStars(
-                        value: place.reviewsAvgRating ?? place.avgRating,
-                        onValueChanged: (v) {},
-                        starBuilder: (index, color) => Icon(
-                          Icons.star,
-                          color: color,
-                          size: 14,
-                        ),
-                        starSize: 14,
-                        starCount: 5,
-                        starSpacing: 0,
-                        maxValue: 5,
-                        maxValueVisibility: false,
-                        valueLabelVisibility: false,
-                        animationDuration: const Duration(milliseconds: 1000),
-                        starOffColor: AppColors.white,
-                        starColor: AppColors.primary,
-                      ),
-                    ),
-                  ),
-                  Spacing.horizTiny(),
-                  Text(
-                    "(${place.reviewsCount.toInt()})",
-                    style: AppTextStyles.regular16,
-                  ),
-                ],
-              )
-            : const SizedBox(),
         Spacing.vertMedium(),
         Text(
           "About",
@@ -463,60 +423,67 @@ class _ReviewSection extends HookWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         Spacing.vertSmall(),
-        Text(
-          "Ratings & Reviews",
-          style: AppTextStyles.regular14,
-        ),
-        Spacing.vertSmall(),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              "${reviewModel.from} of ${reviewModel.currentPage}",
-              style: AppTextStyles.regular12.copyWith(
-                color: AppColors.gray97,
+        Visibility(
+          visible: place.reviewsCount > 0,
+          child: Column(
+            children: [
+              Spacing.vertSmall(),
+              Text(
+                "Ratings & Reviews",
+                style: AppTextStyles.regular14,
               ),
-            ),
-            DropdownButton<String>(
-              value: "Sorted by most helpful",
-              alignment: Alignment.center,
-              items: ["Sorted by most helpful"]
-                  .map((e) => DropdownMenuItem<String>(
-                        value: e,
-                        child: Text(
-                          e,
-                          style: AppTextStyles.regular12.copyWith(
-                            color: AppColors.gray97,
-                          ),
-                        ),
-                      ))
-                  .toList(),
-              onChanged: (val) {},
-              underline: Container(),
-              isDense: true,
-              icon: Icon(
-                Icons.keyboard_arrow_down,
-                color: AppColors.gray97,
-                size: 15.sp,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "${reviewModel.from} of ${reviewModel.currentPage}",
+                    style: AppTextStyles.regular12.copyWith(
+                      color: AppColors.gray97,
+                    ),
+                  ),
+                  DropdownButton<String>(
+                    value: "Sorted by most helpful",
+                    alignment: Alignment.center,
+                    items: ["Sorted by most helpful"]
+                        .map((e) => DropdownMenuItem<String>(
+                              value: e,
+                              child: Text(
+                                e,
+                                style: AppTextStyles.regular12.copyWith(
+                                  color: AppColors.gray97,
+                                ),
+                              ),
+                            ))
+                        .toList(),
+                    onChanged: (val) {},
+                    underline: Container(),
+                    isDense: true,
+                    icon: Icon(
+                      Icons.keyboard_arrow_down,
+                      color: AppColors.gray97,
+                      size: 15.sp,
+                    ),
+                    style: AppTextStyles.regular12.copyWith(
+                      color: AppColors.gray97,
+                    ),
+                  ),
+                ],
               ),
-              style: AppTextStyles.regular12.copyWith(
-                color: AppColors.gray97,
+              ListView.builder(
+                shrinkWrap: true,
+                itemCount: place.reviewsCount.toInt(),
+                padding: EdgeInsets.zero,
+                physics: const NeverScrollableScrollPhysics(),
+                itemBuilder: (context, index) {
+                  return _ReviewItem(
+                    review: reviewModel.data[index],
+                  );
+                },
               ),
-            ),
-          ],
+              Spacing.vertRegular(),
+            ],
+          ),
         ),
-        ListView.builder(
-          shrinkWrap: true,
-          itemCount: place.reviewsCount.toInt(),
-          padding: EdgeInsets.zero,
-          physics: const NeverScrollableScrollPhysics(),
-          itemBuilder: (context, index) {
-            return _ReviewItem(
-              review: reviewModel.data[index],
-            );
-          },
-        ),
-        Spacing.vertRegular(),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
