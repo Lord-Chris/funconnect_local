@@ -132,6 +132,27 @@ class HomeV2View extends StatelessWidget {
                 BlocBuilder<HomeV2Bloc, HomeV2State>(
                   builder: (context, state) {
                     if (state is HomeV2LoadedState) {
+                      return SizedBox(
+                        height: 60,
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: state.interests.length,
+                          itemBuilder: (context, index) {
+                            SizedBox(
+                              height: 50,
+                              child: Text(state.interests[index].name),
+                            );
+                            return null;
+                          },
+                        ),
+                      );
+                    }
+                    return const SizedBox();
+                  },
+                ),
+                BlocBuilder<HomeV2Bloc, HomeV2State>(
+                  builder: (context, state) {
+                    if (state is HomeV2LoadedState) {
                       return HomeAllCategoriesList(state: state);
                     }
                     if (state is HomeV2LoadingState) {

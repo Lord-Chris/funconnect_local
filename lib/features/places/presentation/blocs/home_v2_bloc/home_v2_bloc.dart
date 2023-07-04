@@ -7,6 +7,7 @@ import 'package:funconnect/core/constants/hive_keys.dart';
 import 'package:funconnect/core/constants/storage_keys.dart';
 import 'package:funconnect/core/models/_models.dart';
 import 'package:funconnect/features/places/data/repository/i_place_repository.dart';
+import 'package:funconnect/features/places/domain/entities/category_model.dart';
 import 'package:funconnect/features/places/domain/entities/home_category_data.dart';
 import 'package:funconnect/features/places/domain/entities/home_category_new.dart';
 import 'package:funconnect/features/places/domain/entities/home_place.dart';
@@ -64,9 +65,12 @@ class HomeV2Bloc extends Bloc<HomeV2Event, HomeV2State> {
 
       HomeTrendsReponse response =
           await _placeRepository.fetchHomeTrendsNew(_appLocation);
+      List<CategoryModel> interests =
+          await _placeRepository.fetchUserInterests();
       List<HomeCategory> categories = response.data.categories;
       List<HomePlaces> places = response.data.places;
-      emit(HomeV2LoadedState(categories: categories, places: places));
+      emit(HomeV2LoadedState(
+          categories: categories, places: places, interests: interests));
     } catch (e) {
       Logger().e(e.toString());
       emit(HomeV2ErrorState(message: e.toString()));

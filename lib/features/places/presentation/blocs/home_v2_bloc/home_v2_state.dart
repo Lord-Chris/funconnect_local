@@ -23,6 +23,10 @@ class HomeV2ErrorState extends HomeV2State {
 class HomeV2LoadedState extends HomeV2State {
   final List<HomeCategory> categories;
   final List<HomePlaces> places;
+  final List<CategoryModel> interests;
 
-  const HomeV2LoadedState({required this.categories, required this.places});
+  const HomeV2LoadedState(
+      {required this.categories,
+      required this.places,
+      required this.interests});
 }
