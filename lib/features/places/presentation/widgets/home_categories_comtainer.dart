@@ -19,7 +19,7 @@ class HomeCategoryContainer extends StatelessWidget {
         width: 136.w,
         height: 136,
         child: ClipRRect(
-          borderRadius: BorderRadius.circular(10.r),
+          borderRadius: BorderRadius.circular(18.r),
           child: Stack(
             fit: StackFit.expand,
             children: [
@@ -41,7 +41,7 @@ class HomeCategoryContainer extends StatelessWidget {
                       child: Container(
                           decoration: BoxDecoration(
                               color: Colors.black.withOpacity(0.5),
-                              borderRadius: BorderRadius.circular(20.r)),
+                              borderRadius: BorderRadius.circular(56.r)),
                           child: Padding(
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 12.0, vertical: 8),
