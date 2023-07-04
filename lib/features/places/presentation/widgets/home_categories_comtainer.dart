@@ -35,8 +35,7 @@ class HomeCategoryContainer extends StatelessWidget {
               ),
               Positioned(
                   bottom: 8,
-                  left: 0,
-                  right: 0,
+                  left: 8,
                   child: Align(
                       alignment: Alignment.center,
                       child: Container(
