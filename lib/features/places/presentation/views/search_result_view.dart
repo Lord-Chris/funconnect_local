@@ -60,6 +60,19 @@ class SearchResultView extends HookWidget {
                             Icons.search,
                             size: 20,
                           ),
+                          suffixIcon: HookBuilder(builder: (context) {
+                            useListenable(controller);
+                            if (controller.text.isEmpty) {
+                              return const SizedBox();
+                            }
+                            return InkWell(
+                              onTap: () => controller.clear(),
+                              child: const Icon(
+                                Icons.close,
+                                size: 20,
+                              ),
+                            );
+                          }),
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(39),
                           ),

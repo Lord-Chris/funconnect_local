@@ -42,9 +42,12 @@ class HomeSection<T> extends HookWidget {
                 if (showSeeAll)
                   InkWell(
                     onTap: () => showAll.value = !showAll.value,
-                    child: Text(
-                      "See all",
-                      style: AppTextStyles.medium14,
+                    child: Padding(
+                      padding: const EdgeInsets.all(5),
+                      child: Text(
+                        "See all",
+                        style: AppTextStyles.medium14,
+                      ),
                     ),
                   ),
               ],

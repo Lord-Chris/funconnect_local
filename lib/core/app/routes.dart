@@ -122,13 +122,13 @@ class Routes {
           bloc: VerifyEmailBloc(),
         );
       case emailVerifiedRoute:
-        final res = settings.arguments as bool;
+        final res = settings.arguments as UserModel;
         return MaterialPageRoute(
-          builder: (_) => EmailVerifiedScreen(goToDashboard: res),
+          builder: (_) => EmailVerifiedScreen(user: res),
         );
       case profileSetupViewRoute:
         return _registerBlocView(
-          view: ProfileSetUpView(),
+          view: ProfileSetUpView(user: settings.arguments as UserModel),
           bloc: ProfileSetupBloc(),
         );
       case interestViewRoute:

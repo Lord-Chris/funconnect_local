@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:funconnect/core/app/_app.dart';
+import 'package:funconnect/core/models/user_model.dart';
 import 'package:funconnect/services/_services.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
 
@@ -9,10 +10,10 @@ import '../../../../shared/components/app_orange_button.dart';
 import '../widgets/app_black_modal.dart';
 
 class EmailVerifiedScreen extends StatelessWidget {
-  final bool goToDashboard;
+  final UserModel user;
   const EmailVerifiedScreen({
     Key? key,
-    required this.goToDashboard,
+    required this.user,
   }) : super(key: key);
 
   @override
@@ -58,12 +59,18 @@ class EmailVerifiedScreen extends StatelessWidget {
                 AppOrangeBtn(
                   label: AppText.aTAuthContinueText,
                   onTap: () {
-                    if (goToDashboard) {
-                      locator<INavigationService>()
-                          .offAllNamed(Routes.dashboardViewRoute, (_) => false);
+                    if (user.name.isEmpty ||
+                        user.username.isEmpty ||
+                        user.gender.isEmpty) {
+                      locator<INavigationService>().offNamed(
+                        Routes.profileSetupViewRoute,
+                        arguments: user,
+                      );
                     } else {
-                      locator<INavigationService>()
-                          .offNamed(Routes.profileSetupViewRoute);
+                      locator<INavigationService>().offAllNamed(
+                        Routes.dashboardViewRoute,
+                        (_) => false,
+                      );
                     }
                   },
                 ),

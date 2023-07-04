@@ -43,7 +43,7 @@ class VerifyEmailBloc extends Bloc<VerifyEmailEvent, VerifyEmailState> {
       FailureHandler.instance.catchError(e, stackTrace: s);
       _dialogAndSheetService.showAppDialog(StatusDialog(
         isError: true,
-        title: "Error Signing In",
+        title: "Could not resend code, Try again.",
         body: e.message,
       ));
     }
@@ -65,7 +65,7 @@ class VerifyEmailBloc extends Bloc<VerifyEmailEvent, VerifyEmailState> {
         requestId: (newResponse ?? event.response).requestId.trim(),
         otp: event.otp.trim(),
       ));
-      emit(VerifyEmailSuccessState());
+      // emit(VerifyEmailSuccessState());
     } on Failure catch (e, s) {
       _logger.e(e);
       FailureHandler.instance.catchError(e, stackTrace: s);

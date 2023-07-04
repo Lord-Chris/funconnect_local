@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:funconnect/core/extensions/_extensions.dart';
+import 'package:funconnect/core/models/user_model.dart';
 import 'package:funconnect/features/authentication/presentation/blocs/profile_setup_bloc/profile_setup_bloc.dart';
 import 'package:funconnect/features/authentication/presentation/blocs/profile_setup_bloc/profile_setup_event.dart';
 import 'package:funconnect/features/authentication/presentation/blocs/profile_setup_bloc/profile_setup_state.dart';
@@ -14,14 +15,20 @@ import '../../../../shared/components/_components.dart';
 import '../widgets/app_black_modal.dart';
 
 class ProfileSetUpView extends HookWidget {
-  ProfileSetUpView({super.key});
+  final UserModel user;
+  ProfileSetUpView({
+    super.key,
+    required this.user,
+  });
   final formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    final nameController = useTextEditingController();
-    final usernameController = useTextEditingController();
-    final gender = useState<String?>(null);
+    final nameController = useTextEditingController(text: user.name);
+    final usernameController = useTextEditingController(text: user.username);
+    final gender = useState<String?>(
+      user.gender.isEmpty ? null : user.gender.capitalize(),
+    );
     return Scaffold(
       backgroundColor: AppColors.primary,
       body: SafeArea(

@@ -35,7 +35,7 @@ class _ProfileViewState extends State<ProfileView> {
         elevation: 0,
         title: Text(
           "Profile",
-          style: AppTextStyles.medium24,
+          style: AppTextStyles.medium28,
         ),
       ),
       body: BlocBuilder<ProfileBloc, ProfileState>(

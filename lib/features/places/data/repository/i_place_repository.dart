@@ -26,6 +26,7 @@ abstract class IPlaceRepository {
   Future<PaginatedData<CategoryModel>> fetchExploreCategories();
   Future<PaginatedData<PlaceModel>> fetchExploreByFilter(
       ExploreSearchEnum filter);
+  Future<void> addToSearchHistory(String item);
   Future<void> removeHistory(String item);
 
   UserModel get user;

@@ -38,8 +38,13 @@ class SearchResultIdleState extends SearchResultState {
   SearchQueryParam get filter => searchFilter ?? const SearchQueryParam();
 
   @override
-  List<Object?> get props =>
-      [places, showRecents, searchHistory, searchFilter, Random().nextDouble()];
+  List<Object?> get props => [
+        places,
+        showRecents,
+        searchHistory,
+        searchFilter,
+        Random().nextDouble(),
+      ];
 
   SearchResultIdleState copyWith({
     PaginatedData<PlaceModel>? placeData,

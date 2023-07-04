@@ -46,11 +46,16 @@ class SearchResultBloc extends Bloc<SearchResultEvent, SearchResultState> {
     }
   }
 
-  FutureOr<void> _onPlaceTapEvent(
+  Future<FutureOr<void>> _onPlaceTapEvent(
     PlaceTapEvent event,
     Emitter<SearchResultState> emit,
-  ) {
+  ) async {
     _navigationService.toNamed(Routes.placeDetailRoute, arguments: event.place);
+    await searchPlaceUsecase.storeSearchHistory(event.place.name);
+    if (state is! SearchResultIdleState) return null;
+    emit((state as SearchResultIdleState).copyWith(
+      searchHistoryData: searchPlaceUsecase.searchHistory,
+    ));
   }
 
   FutureOr<void> _onToggleViewSearchResult(
