@@ -35,10 +35,9 @@ class FetchHomeTrends with UseCases<void, NoParams> {
     try {
       if (!(await _locationService.canGetLocation())) {
         final isGranted = await _locationService.requestPermission();
-        if (!isGranted) {
-          return null;
-        }
+        if (!isGranted) return null;
       }
+      if (!await _locationService.requestService()) return null;
       return await _locationService.getCurrentLocation();
     } on Failure {
       return null;

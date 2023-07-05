@@ -167,15 +167,17 @@ class _ProfileViewState extends State<ProfileView> {
                                   color: AppColors.secondary500,
                                 ),
                               ),
-                              Spacing.vertSmall(),
-                              Text(
-                                userProfile.bio,
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                                style: AppTextStyles.regular14.copyWith(
-                                  color: AppColors.secondary200,
+                              if (userProfile.bio.isNotEmpty) ...[
+                                Spacing.vertSmall(),
+                                Text(
+                                  userProfile.bio,
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: AppTextStyles.regular14.copyWith(
+                                    color: AppColors.secondary200,
+                                  ),
                                 ),
-                              ),
+                              ],
                               Spacing.vertRegular(),
                               AppButton(
                                 label: "Edit profile",

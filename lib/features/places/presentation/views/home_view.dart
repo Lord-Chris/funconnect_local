@@ -65,27 +65,30 @@ class _HomeViewState extends State<HomeView> {
               "Hi ${context.watch<HomeBloc>().user.username}",
               style: AppTextStyles.medium20,
             ),
-            Spacing.vertTiny(),
-            Visibility(
-              visible: context.watch<HomeBloc>().location != null,
-              child: Row(
-                children: [
-                  const Icon(
-                    Icons.location_on,
-                    color: AppColors.locationIconAsh,
-                    size: 13,
-                  ),
-                  Flexible(
-                    child: Text(
-                      context.watch<HomeBloc>().location?.parsedAddress ?? "",
-                      style: AppTextStyles.regular14.copyWith(
-                        color: AppColors.secondary400,
+            if ((context.watch<HomeBloc>().location?.parsedAddress ?? "")
+                .isNotEmpty) ...[
+              Spacing.vertTiny(),
+              Visibility(
+                visible: context.watch<HomeBloc>().location != null,
+                child: Row(
+                  children: [
+                    const Icon(
+                      Icons.location_on,
+                      color: AppColors.locationIconAsh,
+                      size: 13,
+                    ),
+                    Flexible(
+                      child: Text(
+                        context.watch<HomeBloc>().location?.parsedAddress ?? "",
+                        style: AppTextStyles.regular14.copyWith(
+                          color: AppColors.secondary400,
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
+            ]
           ],
         ),
         actions: [
