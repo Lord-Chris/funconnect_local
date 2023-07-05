@@ -124,16 +124,55 @@ class HomeV2View extends StatelessWidget {
                   builder: (context, state) {
                     if (state is HomeV2LoadedState) {
                       return SizedBox(
-                        height: 60,
-                        child: ListView.builder(
+                        height: 50,
+                        child: ListView.separated(
+                          separatorBuilder: (context, index) {
+                            return Spacing.horizTiny();
+                          },
                           scrollDirection: Axis.horizontal,
                           itemCount: state.interests.length,
                           itemBuilder: (context, index) {
-                            SizedBox(
-                              height: 50,
-                              child: Text(state.interests[index].name),
+                            return Container(
+                              padding: const EdgeInsets.all(8),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(50.0),
+                                color: AppColors.interestWidgetAsh,
+                              ),
+                              child: Row(
+                                children: [
+                                  FancyShimmerImage(
+                                    height: 20.r,
+                                    width: 20.r,
+                                    boxFit: BoxFit.cover,
+                                    shimmerBaseColor: AppColors.primary,
+                                    shimmerHighlightColor: AppColors.white,
+                                    boxDecoration: const BoxDecoration(
+                                      shape: BoxShape.circle,
+                                    ),
+                                    imageUrl: state.interests[index].coverPhoto,
+                                    imageBuilder: (context, imageProvider) {
+                                      return CircleAvatar(
+                                          radius: 20.r,
+                                          backgroundImage: imageProvider);
+                                    },
+                                    errorWidget: SvgPicture.asset(
+                                      AppAssets.profileIconSvg,
+                                      height: 25.r,
+                                      width: 25.r,
+                                      colorFilter: const ColorFilter.mode(
+                                          Colors.white, BlendMode.srcIn),
+                                    ),
+                                  ),
+                                  Spacing.horizSmall(),
+                                  Text(
+                                    state.interests[index].name,
+                                    maxLines: 1,
+                                    style: AppTextStyles.regular12,
+                                  ),
+                                  Spacing.horizTiny(),
+                                ],
+                              ),
                             );
-                            return null;
                           },
                         ),
                       );
@@ -141,6 +180,11 @@ class HomeV2View extends StatelessWidget {
                     return const SizedBox();
                   },
                 ),
+                const Divider(
+                  color: AppColors.secondary800,
+                  height: 1,
+                ),
+                Spacing.vertSmall(),
                 BlocBuilder<HomeV2Bloc, HomeV2State>(
                   builder: (context, state) {
                     if (state is HomeV2LoadedState) {
