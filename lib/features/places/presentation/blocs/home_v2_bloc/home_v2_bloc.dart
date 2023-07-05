@@ -28,6 +28,7 @@ class HomeV2Bloc extends Bloc<HomeV2Event, HomeV2State> {
     on<NotificationTapEvent>(_onNotificationTapEvent);
     on<PlaceTapEvent>(_onPlaceTapEvent);
     on<CategoryTapEvent>(_onCategoryTapEvent);
+    on<HomeV2InterestClickedEvent>(_onInterestClicked);
   }
 
   final _localStorageService = locator<ILocalStorageService>();
@@ -107,4 +108,7 @@ class HomeV2Bloc extends Bloc<HomeV2Event, HomeV2State> {
       'categoryName': event.category.name
     });
   }
+
+  FutureOr<void> _onInterestClicked(
+      HomeV2InterestClickedEvent event, Emitter<HomeV2State> emit) {}
 }

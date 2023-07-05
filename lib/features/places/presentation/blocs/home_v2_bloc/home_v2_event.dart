@@ -26,3 +26,9 @@ class CategoryTapEvent extends HomeV2Event {
     required this.category,
   });
 }
+
+class HomeV2InterestClickedEvent extends HomeV2Event {
+  final CategoryModel interestClicked;
+
+  const HomeV2InterestClickedEvent({required this.interestClicked});
+}

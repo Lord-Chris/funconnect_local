@@ -30,3 +30,9 @@ class HomeV2LoadedState extends HomeV2State {
       required this.places,
       required this.interests});
 }
+
+class HomeV2InterestClicked extends HomeV2State {
+  final CategoryModel interestClicked;
+
+  const HomeV2InterestClicked({required this.interestClicked});
+}
