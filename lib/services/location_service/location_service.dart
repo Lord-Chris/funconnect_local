@@ -28,11 +28,13 @@ class LocationService extends ILocationService {
   Future<AppLocation?> getCurrentLocation() async {
     try {
       if (_locationTimeStamp != null && _location != null) {
-        if (DateTime.now().difference(_locationTimeStamp!).inMinutes < 30) {
-          return AppLocation.fromMap(_localStorageService.read(
-            HiveKeys.appBoxId,
-            key: StorageKeys.userSavedLocation,
-          ));
+        if (_location!.parsedAddress.isNotEmpty) {
+          if (DateTime.now().difference(_locationTimeStamp!).inMinutes < 30) {
+            return AppLocation.fromMap(_localStorageService.read(
+              HiveKeys.appBoxId,
+              key: StorageKeys.userSavedLocation,
+            ));
+          }
         }
       }
 
@@ -44,8 +46,7 @@ class LocationService extends ILocationService {
 
       LocationData? res;
       _logger.i("Getting current location");
-      res = await location.getLocation();
-      // .timeout(Duration(seconds: Platform.isAndroid ? 5 : 10));
+      res = await location.getLocation().timeout(const Duration(seconds: 5));
       if (res.latitude == null || res.longitude == null) {
         _logger.i("Getting Last location from Hive");
         _location = AppLocation.fromMap(_localStorageService.read(
@@ -60,7 +61,7 @@ class LocationService extends ILocationService {
         final place = await placemarkFromCoordinates(
           res.latitude!,
           res.longitude!,
-        ).timeout(const Duration(seconds: 3), onTimeout: () => []);
+        ).timeout(const Duration(seconds: 5), onTimeout: () => []);
         if (place.isEmpty) {
           _location = AppLocation(lat: res.latitude!, long: res.longitude!);
         } else {
