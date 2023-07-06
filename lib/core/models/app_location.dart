@@ -73,5 +73,5 @@ class AppLocation extends Equatable {
   factory AppLocation.fromJson(String source) =>
       AppLocation.fromMap(json.decode(source));
 
-  String get parsedAddress => '$city $state';
+  String get parsedAddress => '${city ?? ''} ${state ?? ''}'.trim();
 }

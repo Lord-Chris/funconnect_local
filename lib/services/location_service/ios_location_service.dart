@@ -108,6 +108,19 @@ class IosLocationService extends ILocationService {
   }
 
   @override
+  Future<bool> requestService() async {
+    try {
+      final isEnabled = await Geolocator.isLocationServiceEnabled();
+      if (isEnabled) return true;
+      await Geolocator.openLocationSettings();
+      return false;
+    } on Exception catch (e) {
+      _logger.e(e);
+      return false;
+    }
+  }
+
+  @override
   AppLocation? get userLocation => _location;
 
   @override

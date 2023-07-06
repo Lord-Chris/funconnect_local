@@ -5,7 +5,6 @@ import 'package:funconnect/core/models/_models.dart';
 import 'package:funconnect/services/local_storage_service/i_local_storage_service.dart';
 import 'package:geocoding/geocoding.dart' hide Location;
 import 'package:location/location.dart';
-// import 'package:geolocator/geolocator.dart';
 import 'package:logger/logger.dart';
 
 import '../../core/constants/_constants.dart';
@@ -29,11 +28,13 @@ class LocationService extends ILocationService {
   Future<AppLocation?> getCurrentLocation() async {
     try {
       if (_locationTimeStamp != null && _location != null) {
-        if (DateTime.now().difference(_locationTimeStamp!).inMinutes < 30) {
-          return AppLocation.fromMap(_localStorageService.read(
-            HiveKeys.appBoxId,
-            key: StorageKeys.userSavedLocation,
-          ));
+        if (_location!.parsedAddress.isNotEmpty) {
+          if (DateTime.now().difference(_locationTimeStamp!).inMinutes < 30) {
+            return AppLocation.fromMap(_localStorageService.read(
+              HiveKeys.appBoxId,
+              key: StorageKeys.userSavedLocation,
+            ));
+          }
         }
       }
 
@@ -45,8 +46,7 @@ class LocationService extends ILocationService {
 
       LocationData? res;
       _logger.i("Getting current location");
-      res = await location.getLocation();
-      // .timeout(Duration(seconds: Platform.isAndroid ? 5 : 10));
+      res = await location.getLocation().timeout(const Duration(seconds: 5));
       if (res.latitude == null || res.longitude == null) {
         _logger.i("Getting Last location from Hive");
         _location = AppLocation.fromMap(_localStorageService.read(
@@ -58,8 +58,10 @@ class LocationService extends ILocationService {
       } else {
         _logger.d(res);
         _logger.i("Getting place details");
-        final place =
-            await placemarkFromCoordinates(res.latitude!, res.longitude!);
+        final place = await placemarkFromCoordinates(
+          res.latitude!,
+          res.longitude!,
+        ).timeout(const Duration(seconds: 5), onTimeout: () => []);
         if (place.isEmpty) {
           _location = AppLocation(lat: res.latitude!, long: res.longitude!);
         } else {
@@ -94,6 +96,18 @@ class LocationService extends ILocationService {
       final res = await location.requestPermission();
       return res == PermissionStatus.granted ||
           res == PermissionStatus.grantedLimited;
+    } on Exception catch (e) {
+      _logger.e(e);
+      return false;
+    }
+  }
+
+  @override
+  Future<bool> requestService() async {
+    try {
+      final isEnabled = await location.serviceEnabled();
+      if (isEnabled) return true;
+      return await location.requestService();
     } on Exception catch (e) {
       _logger.e(e);
       return false;

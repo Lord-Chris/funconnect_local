@@ -4,6 +4,7 @@ abstract class ILocationService {
   Future<bool> canGetLocation();
   Future<bool> requestPermission();
   Future<AppLocation?> getCurrentLocation();
+  Future<bool> requestService();
 
   AppLocation? get userLocation;
   DateTime? get locationTimeStamp;

@@ -5,7 +5,6 @@ import 'package:funconnect/core/constants/api_constants.dart';
 import 'package:funconnect/core/mixins/_mixins.dart';
 import 'package:funconnect/core/models/_models.dart';
 import 'package:funconnect/services/_services.dart';
-import 'package:logger/logger.dart';
 
 import '../../domain/entities/login_options_model.dart';
 
@@ -69,7 +68,6 @@ class RemoteProfileDataSource with ApiMixin {
   }
 
   Future<void> deleteAccount() async {
-    Logger().wtf(token);
     await _networkService.delete(
       ApiConstants.deleteAccount,
       headers: headers,

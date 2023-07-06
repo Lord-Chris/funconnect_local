@@ -14,6 +14,7 @@ class GetLocationUseCase with UseCases<AppLocation?, NoParams> {
         return null;
       }
     }
+    if (!await _locationService.requestService()) return null;
     return await _locationService.getCurrentLocation();
   }
 }
