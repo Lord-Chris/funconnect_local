@@ -5,16 +5,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:funconnect/features/dashboard/presentation/blocs/dashboard_bloc/dashboard_bloc.dart';
 import 'package:funconnect/features/dashboard/presentation/blocs/dashboard_bloc/dashboard_event.dart';
 import 'package:funconnect/features/dashboard/presentation/blocs/notification_bloc/notification_bloc.dart';
 import 'package:funconnect/features/places/presentation/blocs/home_v2_bloc/home_v2_bloc.dart';
 import 'package:funconnect/features/places/presentation/widgets/home_all_categories_list.dart';
+import 'package:funconnect/features/places/presentation/widgets/home_all_interests_container.dart';
 import 'package:funconnect/features/places/presentation/widgets/home_all_places_list.dart';
 
 import 'package:funconnect/shared/constants/_constants.dart';
-import 'package:shimmer/shimmer.dart';
 
 class HomeV2View extends StatelessWidget {
   const HomeV2View({super.key});
@@ -31,28 +32,38 @@ class HomeV2View extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.only(left: 16.0),
             child: Center(
-              child: FancyShimmerImage(
-                height: 50.r,
-                width: 50.r,
-                boxFit: BoxFit.cover,
-                shimmerBaseColor: AppColors.primary,
-                shimmerHighlightColor: AppColors.white,
-                boxDecoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                ),
-                imageUrl: context.watch<HomeV2Bloc>().userModel?.photoUrl ?? "",
-                imageBuilder: (context, imageProvider) {
-                  return CircleAvatar(
-                      radius: 25.r, backgroundImage: imageProvider);
-                },
-                errorWidget: SvgPicture.asset(
-                  AppAssets.profileIconSvg,
-                  height: 25.r,
-                  width: 25.r,
-                  colorFilter:
-                      const ColorFilter.mode(Colors.white, BlendMode.srcIn),
-                ),
-              ),
+              child: context.watch<HomeV2Bloc>().userModel?.photoUrl == "" ||
+                      context.watch<HomeV2Bloc>().userModel == null
+                  ? SvgPicture.asset(
+                      AppAssets.profileIconSvg,
+                      height: 25.r,
+                      width: 25.r,
+                      colorFilter:
+                          const ColorFilter.mode(Colors.white, BlendMode.srcIn),
+                    )
+                  : FancyShimmerImage(
+                      height: 50.r,
+                      width: 50.r,
+                      boxFit: BoxFit.cover,
+                      shimmerBaseColor: AppColors.primary,
+                      shimmerHighlightColor: AppColors.white,
+                      boxDecoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                      ),
+                      imageUrl:
+                          context.watch<HomeV2Bloc>().userModel?.photoUrl ?? "",
+                      imageBuilder: (context, imageProvider) {
+                        return CircleAvatar(
+                            radius: 25.r, backgroundImage: imageProvider);
+                      },
+                      errorWidget: SvgPicture.asset(
+                        AppAssets.profileIconSvg,
+                        height: 25.r,
+                        width: 25.r,
+                        colorFilter: const ColorFilter.mode(
+                            Colors.white, BlendMode.srcIn),
+                      ),
+                    ),
             ),
           ),
         ),
@@ -123,115 +134,35 @@ class HomeV2View extends StatelessWidget {
                 BlocBuilder<HomeV2Bloc, HomeV2State>(
                   builder: (context, state) {
                     if (state is HomeV2LoadedState) {
-                      if (state.interests.isNotEmpty) {
-                        return SizedBox(
-                          height: 50,
-                          child: ListView.separated(
-                            separatorBuilder: (context, index) {
-                              return Spacing.horizTiny();
-                            },
-                            scrollDirection: Axis.horizontal,
-                            itemCount: state.interests.length,
-                            itemBuilder: (context, index) {
-                              return InkWell(
-                                onTap: () {
-                                  context.read<HomeV2Bloc>().add(
-                                      HomeV2InterestClickedEvent(
-                                          interestClicked:
-                                              state.interests[index]));
-                                },
-                                child: Container(
-                                  padding: const EdgeInsets.all(8),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(50.0),
-                                    color: AppColors.interestWidgetAsh,
-                                  ),
-                                  child: Row(
-                                    children: [
-                                      FancyShimmerImage(
-                                        height: 20.r,
-                                        width: 20.r,
-                                        boxFit: BoxFit.cover,
-                                        shimmerBaseColor: AppColors.primary,
-                                        shimmerHighlightColor: AppColors.white,
-                                        boxDecoration: const BoxDecoration(
-                                          shape: BoxShape.circle,
-                                        ),
-                                        imageUrl:
-                                            state.interests[index].coverPhoto,
-                                        imageBuilder: (context, imageProvider) {
-                                          return CircleAvatar(
-                                              radius: 20.r,
-                                              backgroundImage: imageProvider);
-                                        },
-                                        errorWidget: SvgPicture.asset(
-                                          AppAssets.profileIconSvg,
-                                          height: 25.r,
-                                          width: 25.r,
-                                          colorFilter: const ColorFilter.mode(
-                                              Colors.white, BlendMode.srcIn),
-                                        ),
-                                      ),
-                                      Spacing.horizSmall(),
-                                      Text(
-                                        state.interests[index].name,
-                                        maxLines: 1,
-                                        style: AppTextStyles.regular12,
-                                      ),
-                                      Spacing.horizTiny(),
-                                    ],
-                                  ),
-                                ),
-                              );
-                            },
+                      return Column(
+                        children: [
+                          state.interests.isNotEmpty
+                              ? HomeAllInterestsContainer(
+                                  interests: state.interests,
+                                )
+                              : const SizedBox(),
+                          const Divider(
+                            color: AppColors.secondary800,
+                            height: 1,
                           ),
-                        );
-                      }
-                    }
-                    return const SizedBox();
-                  },
-                ),
-                const Divider(
-                  color: AppColors.secondary800,
-                  height: 1,
-                ),
-                Spacing.vertSmall(),
-                BlocBuilder<HomeV2Bloc, HomeV2State>(
-                  builder: (context, state) {
-                    if (state is HomeV2LoadedState) {
-                      return HomeAllCategoriesList(state: state);
-                    }
-                    if (state is HomeV2LoadingState) {
-                      return SizedBox(
-                        width: 200.0,
-                        height: 100.0,
-                        child: Shimmer.fromColors(
-                            baseColor: AppColors.primary,
-                            highlightColor: Colors.white,
-                            child: Text(
-                              "Fun Connecting....",
-                              style: AppTextStyles.medium20,
-                            )),
+                          Spacing.vertSmall(),
+                          HomeAllCategoriesList(state: state),
+                          SizedBox(
+                            height: 32.h,
+                          ),
+                          HomeAllPlacesList(state: state)
+                        ],
                       );
                     }
-                    return Container();
-                  },
-                ),
-                SizedBox(
-                  height: 32.h,
-                ),
-                BlocBuilder<HomeV2Bloc, HomeV2State>(
-                  builder: (context, state) {
-                    if (state is HomeV2LoadedState) {
-                      return HomeAllPlacesList(state: state);
-                    }
                     if (state is HomeV2LoadingState) {
-                      return const Center(
-                          child: CircularProgressIndicator(
-                        color: AppColors.primary,
-                      ));
+                      return Center(
+                        child: SpinKitFadingCube(
+                          color: AppColors.primary,
+                          size: 50.r,
+                        ),
+                      );
                     }
-                    return Container();
+                    return const SizedBox();
                   },
                 ),
               ],
