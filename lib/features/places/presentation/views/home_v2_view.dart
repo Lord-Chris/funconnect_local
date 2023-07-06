@@ -123,59 +123,70 @@ class HomeV2View extends StatelessWidget {
                 BlocBuilder<HomeV2Bloc, HomeV2State>(
                   builder: (context, state) {
                     if (state is HomeV2LoadedState) {
-                      return SizedBox(
-                        height: 50,
-                        child: ListView.separated(
-                          separatorBuilder: (context, index) {
-                            return Spacing.horizTiny();
-                          },
-                          scrollDirection: Axis.horizontal,
-                          itemCount: state.interests.length,
-                          itemBuilder: (context, index) {
-                            return Container(
-                              padding: const EdgeInsets.all(8),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(50.0),
-                                color: AppColors.interestWidgetAsh,
-                              ),
-                              child: Row(
-                                children: [
-                                  FancyShimmerImage(
-                                    height: 20.r,
-                                    width: 20.r,
-                                    boxFit: BoxFit.cover,
-                                    shimmerBaseColor: AppColors.primary,
-                                    shimmerHighlightColor: AppColors.white,
-                                    boxDecoration: const BoxDecoration(
-                                      shape: BoxShape.circle,
-                                    ),
-                                    imageUrl: state.interests[index].coverPhoto,
-                                    imageBuilder: (context, imageProvider) {
-                                      return CircleAvatar(
-                                          radius: 20.r,
-                                          backgroundImage: imageProvider);
-                                    },
-                                    errorWidget: SvgPicture.asset(
-                                      AppAssets.profileIconSvg,
-                                      height: 25.r,
-                                      width: 25.r,
-                                      colorFilter: const ColorFilter.mode(
-                                          Colors.white, BlendMode.srcIn),
-                                    ),
+                      if (state.interests.isNotEmpty) {
+                        return SizedBox(
+                          height: 50,
+                          child: ListView.separated(
+                            separatorBuilder: (context, index) {
+                              return Spacing.horizTiny();
+                            },
+                            scrollDirection: Axis.horizontal,
+                            itemCount: state.interests.length,
+                            itemBuilder: (context, index) {
+                              return InkWell(
+                                onTap: () {
+                                  context.read<HomeV2Bloc>().add(
+                                      HomeV2InterestClickedEvent(
+                                          interestClicked:
+                                              state.interests[index]));
+                                },
+                                child: Container(
+                                  padding: const EdgeInsets.all(8),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(50.0),
+                                    color: AppColors.interestWidgetAsh,
                                   ),
-                                  Spacing.horizSmall(),
-                                  Text(
-                                    state.interests[index].name,
-                                    maxLines: 1,
-                                    style: AppTextStyles.regular12,
+                                  child: Row(
+                                    children: [
+                                      FancyShimmerImage(
+                                        height: 20.r,
+                                        width: 20.r,
+                                        boxFit: BoxFit.cover,
+                                        shimmerBaseColor: AppColors.primary,
+                                        shimmerHighlightColor: AppColors.white,
+                                        boxDecoration: const BoxDecoration(
+                                          shape: BoxShape.circle,
+                                        ),
+                                        imageUrl:
+                                            state.interests[index].coverPhoto,
+                                        imageBuilder: (context, imageProvider) {
+                                          return CircleAvatar(
+                                              radius: 20.r,
+                                              backgroundImage: imageProvider);
+                                        },
+                                        errorWidget: SvgPicture.asset(
+                                          AppAssets.profileIconSvg,
+                                          height: 25.r,
+                                          width: 25.r,
+                                          colorFilter: const ColorFilter.mode(
+                                              Colors.white, BlendMode.srcIn),
+                                        ),
+                                      ),
+                                      Spacing.horizSmall(),
+                                      Text(
+                                        state.interests[index].name,
+                                        maxLines: 1,
+                                        style: AppTextStyles.regular12,
+                                      ),
+                                      Spacing.horizTiny(),
+                                    ],
                                   ),
-                                  Spacing.horizTiny(),
-                                ],
-                              ),
-                            );
-                          },
-                        ),
-                      );
+                                ),
+                              );
+                            },
+                          ),
+                        );
+                      }
                     }
                     return const SizedBox();
                   },

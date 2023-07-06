@@ -110,5 +110,7 @@ class HomeV2Bloc extends Bloc<HomeV2Event, HomeV2State> {
   }
 
   FutureOr<void> _onInterestClicked(
-      HomeV2InterestClickedEvent event, Emitter<HomeV2State> emit) {}
+      HomeV2InterestClickedEvent event, Emitter<HomeV2State> emit) {
+    emit(HomeV2InterestView(interestClicked: event.interestClicked));
+  }
 }

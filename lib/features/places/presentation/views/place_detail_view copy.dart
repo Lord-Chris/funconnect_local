@@ -51,7 +51,6 @@ class PlaceDetailViewCopy extends StatelessWidget {
                               width: double.infinity,
                               clipBehavior: Clip.hardEdge,
                               decoration: BoxDecoration(
-                                color: Colors.white,
                                 borderRadius: BorderRadius.circular(20.r),
                               ),
                               child: PageView.builder(
@@ -60,7 +59,7 @@ class PlaceDetailViewCopy extends StatelessWidget {
                                 itemBuilder: (context, index) {
                                   return FancyShimmerImage(
                                     imageUrl: state.place.images[index].path,
-                                    boxFit: BoxFit.contain,
+                                    boxFit: BoxFit.cover,
                                     shimmerBaseColor: AppColors.primary,
                                     shimmerHighlightColor: Colors.white,
                                     shimmerBackColor: Colors.white,
