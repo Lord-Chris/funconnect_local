@@ -22,6 +22,7 @@ class MorePlacesSection extends StatelessWidget {
         if (state.place.similarPlaces.isEmpty) return const SizedBox();
         return HomeSection<PlaceModel>(
           label: "More like this",
+          showSeeAll: false,
           children: state.place.similarPlaces.map((e) => e).toList(),
           widget: (PlaceModel place) {
             return HomeCategoriesLargeWidget(

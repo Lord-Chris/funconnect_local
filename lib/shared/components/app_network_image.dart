@@ -1,8 +1,9 @@
 import 'dart:math';
 
-import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../constants/_constants.dart';
 
@@ -61,17 +62,12 @@ class AppNetworkImage extends StatelessWidget {
         ),
       );
     }
-    return FancyShimmerImage(
+    return CachedNetworkImage(
       imageUrl: imageUrl,
-      boxFit: fit ?? BoxFit.cover,
-      boxDecoration: BoxDecoration(
-        shape: isCircular ? BoxShape.circle : BoxShape.rectangle,
-        borderRadius: isCircular ? null : BorderRadius.circular(borderRadius),
-      ),
-      // useOldImageOnUrlChange: true,
+      useOldImageOnUrlChange: true,
       cacheKey: cacheImage ? null : '$imageUrl ${Random().nextInt(5000)}',
-      // fadeInDuration: const Duration(milliseconds: 2000),
-      // fadeOutDuration: const Duration(milliseconds: 2000),
+      fadeInDuration: const Duration(milliseconds: 2000),
+      fadeOutDuration: const Duration(milliseconds: 2000),
       height: size!.height,
       width: size!.width,
       imageBuilder: (context, imageProvider) {
@@ -91,73 +87,80 @@ class AppNetworkImage extends StatelessWidget {
           ),
         );
       },
-      // placeholder: (context, value) {
-      //   if (placeholderWidget != null) {
-      //     return placeholderWidget!;
-      //   }
-      //   if (placeholderAssetImage != null &&
-      //       placeholderAssetImage!.isNotEmpty) {
-      //     return Container(
-      //       clipBehavior: Clip.hardEdge,
-      //       decoration: BoxDecoration(
-      //         borderRadius:
-      //             isCircular ? null : BorderRadius.circular(borderRadius),
-      //         shape: isCircular ? BoxShape.circle : BoxShape.rectangle,
-      //       ),
-      //       child: placeholderAssetImage!.endsWith(".svg")
-      //           ? SvgPicture.asset(
-      //               placeholderAssetImage!,
-      //               fit: fit ?? BoxFit.contain,
-      //             )
-      //           : Image.asset(
-      //               placeholderAssetImage!,
-      //               fit: fit,
-      //             ),
-      //     );
-      //   }
-      //   return const Center(
-      //     child: AppLoader(
-      //       color: AppColors.primary,
-      //     ),
-      //   );
-      // },
-      errorWidget: Builder(
-        builder: (context) {
-          if (errorWidget != null) {
-            return errorWidget!;
-          }
-          final errorImage = errorAssetImage ?? placeholderAssetImage ?? '';
-          if (errorImage.isNotEmpty) {
-            return Container(
-              clipBehavior: Clip.hardEdge,
-              decoration: BoxDecoration(
-                borderRadius:
-                    isCircular ? null : BorderRadius.circular(borderRadius),
-                shape: isCircular ? BoxShape.circle : BoxShape.rectangle,
-              ),
-              child: errorImage.endsWith(".svg")
-                  ? SvgPicture.asset(
-                      errorImage,
-                      fit: fit ?? BoxFit.contain,
-                    )
-                  : Image.asset(
-                      errorImage,
-                      fit: fit,
-                    ),
-            );
-          }
+      placeholder: (context, value) {
+        if (placeholderWidget != null) {
+          return placeholderWidget!;
+        }
+        if (placeholderAssetImage != null &&
+            placeholderAssetImage!.isNotEmpty) {
           return Container(
-            width: double.maxFinite,
-            height: double.maxFinite,
+            clipBehavior: Clip.hardEdge,
             decoration: BoxDecoration(
-              color: AppColors.primary,
               borderRadius:
                   isCircular ? null : BorderRadius.circular(borderRadius),
               shape: isCircular ? BoxShape.circle : BoxShape.rectangle,
             ),
+            child: placeholderAssetImage!.endsWith(".svg")
+                ? SvgPicture.asset(
+                    placeholderAssetImage!,
+                    fit: fit ?? BoxFit.contain,
+                  )
+                : Image.asset(
+                    placeholderAssetImage!,
+                    fit: fit,
+                  ),
           );
-        },
-      ),
+        }
+        return Shimmer.fromColors(
+          baseColor: AppColors.black,
+          highlightColor: AppColors.primary,
+          child: Container(
+            height: size?.height,
+            width: size?.width,
+            decoration: BoxDecoration(
+              color: AppColors.black,
+              shape: isCircular ? BoxShape.circle : BoxShape.rectangle,
+              borderRadius:
+                  isCircular ? null : BorderRadius.circular(borderRadius),
+            ),
+          ),
+        );
+      },
+      errorWidget: (context, _, __) {
+        if (errorWidget != null) {
+          return errorWidget!;
+        }
+        final errorImage = errorAssetImage ?? placeholderAssetImage ?? '';
+        if (errorImage.isNotEmpty) {
+          return Container(
+            clipBehavior: Clip.hardEdge,
+            decoration: BoxDecoration(
+              borderRadius:
+                  isCircular ? null : BorderRadius.circular(borderRadius),
+              shape: isCircular ? BoxShape.circle : BoxShape.rectangle,
+            ),
+            child: errorImage.endsWith(".svg")
+                ? SvgPicture.asset(
+                    errorImage,
+                    fit: fit ?? BoxFit.contain,
+                  )
+                : Image.asset(
+                    errorImage,
+                    fit: fit,
+                  ),
+          );
+        }
+        return Container(
+          width: double.maxFinite,
+          height: double.maxFinite,
+          decoration: BoxDecoration(
+            color: AppColors.primary,
+            borderRadius:
+                isCircular ? null : BorderRadius.circular(borderRadius),
+            shape: isCircular ? BoxShape.circle : BoxShape.rectangle,
+          ),
+        );
+      },
     );
   }
 }

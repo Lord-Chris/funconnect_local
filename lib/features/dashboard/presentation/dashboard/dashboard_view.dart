@@ -19,6 +19,7 @@ import 'package:lazy_load_indexed_stack/lazy_load_indexed_stack.dart';
 import '../../../events/presentation/views/events_view.dart';
 import '../../../places/presentation/explore/explore_view.dart';
 import '../../../places/presentation/home/bloc/home_bloc.dart';
+import '../../../places/presentation/home/bloc/home_event.dart';
 import '../../../places/presentation/home/home_view.dart';
 import '../../../profile/presentation/profile/bloc/profile_bloc.dart';
 import '../../../saved/presentation/saved/bloc/saved_event.dart';
@@ -77,12 +78,9 @@ class DashboardView extends StatelessWidget {
                       .add(const GetAllUserSavedPlaces(showLoader: false));
                 }
                 if (index == 0) {
-                  /*
                   context
                       .read<HomeBloc>()
                       .add(const HomeInitEvent(showLoader: false));
-
-                      */
                 }
                 context.read<DashboardBloc>().add(TabTapEvent(index));
               },

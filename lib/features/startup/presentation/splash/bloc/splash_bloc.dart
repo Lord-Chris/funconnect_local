@@ -54,7 +54,11 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
   bool get showOnboarding => _localStorageService.read(HiveKeys.appBoxId,
       key: StorageKeys.showOnboarding, def: true);
 
-  bool get isAuthenticated => _localStorageService
-      .read(HiveKeys.userBoxId, key: StorageKeys.token, def: "")
-      .isNotEmpty;
+  bool get isAuthenticated =>
+      (_localStorageService
+          .read(HiveKeys.userBoxId, key: StorageKeys.token, def: "")
+          .isNotEmpty) &&
+      (_localStorageService.read(HiveKeys.userBoxId,
+              key: StorageKeys.userProfile) !=
+          null);
 }

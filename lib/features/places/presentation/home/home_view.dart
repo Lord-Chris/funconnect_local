@@ -118,7 +118,6 @@ class _HomeViewState extends State<HomeView> {
             ),
             Expanded(
               child: BlocBuilder<HomeBloc, HomeState>(
-                buildWhen: (previous, _) => previous is HomeLoadingState,
                 builder: (context, state) {
                   if (state is HomeLoadingState) {
                     return const HomeSkeleton();
