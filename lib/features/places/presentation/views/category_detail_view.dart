@@ -10,21 +10,20 @@ import 'package:funconnect/services/_services.dart';
 import 'package:funconnect/shared/components/_components.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
 
+import '../../domain/entities/category_model.dart';
 import '../blocs/category_detail_bloc/category_detail_event.dart';
 
 class CategoryDetailView extends HookWidget {
-  final String categoryId;
-  final String categoryName;
+  final CategoryModel category;
   const CategoryDetailView({
     Key? key,
-    required this.categoryId,
-    required this.categoryName,
+    required this.category,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     useEffect(() {
-      context.read<CategoryDetailBloc>().add(CategoryInitEvent(categoryId));
+      context.read<CategoryDetailBloc>().add(CategoryInitEvent(category.id));
       return null;
     }, []);
     return BlocBuilder<CategoryDetailBloc, CategoryDetailState>(
@@ -117,7 +116,7 @@ class CategoryDetailView extends HookWidget {
                                 labelColor: AppColors.black,
                                 onTap: () => context
                                     .read<CategoryDetailBloc>()
-                                    .add(CategoryInitEvent(categoryId)),
+                                    .add(CategoryInitEvent(category.id)),
                               )
                             ],
                           ),
@@ -143,7 +142,7 @@ class CategoryDetailView extends HookWidget {
                                 labelColor: AppColors.black,
                                 onTap: () => context
                                     .read<CategoryDetailBloc>()
-                                    .add(CategoryInitEvent(categoryId)),
+                                    .add(CategoryInitEvent(category.id)),
                               )
                             ],
                           ),
@@ -157,7 +156,7 @@ class CategoryDetailView extends HookWidget {
                             Padding(
                               padding: REdgeInsets.symmetric(horizontal: 16),
                               child: Text(
-                                categoryName,
+                                category.name,
                                 style: AppTextStyles.medium28,
                               ),
                             ),
@@ -165,7 +164,7 @@ class CategoryDetailView extends HookWidget {
                             Padding(
                               padding: REdgeInsets.symmetric(horizontal: 16),
                               child: Text(
-                                "Explore the ${categoryName.toLowerCase()}",
+                                "Explore the ${category.name.toLowerCase()}",
                                 style: AppTextStyles.regular16,
                               ),
                             ),
