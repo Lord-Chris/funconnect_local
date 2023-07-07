@@ -5,8 +5,8 @@ import 'package:funconnect/core/models/failure.dart';
 import 'package:funconnect/core/usecases/usecase.dart';
 import 'package:funconnect/features/dashboard/domain/entities/notification_model.dart';
 import 'package:funconnect/features/dashboard/domain/usecases/fetch_notifications.dart';
-import 'package:funconnect/features/dashboard/presentation/blocs/notification_bloc/notification_event.dart';
-import 'package:funconnect/features/dashboard/presentation/blocs/notification_bloc/notification_state.dart';
+import 'package:funconnect/features/dashboard/presentation/notifications/bloc/notification_event.dart';
+import 'package:funconnect/features/dashboard/presentation/notifications/bloc/notification_state.dart';
 import 'package:funconnect/services/_services.dart';
 import 'package:logger/logger.dart';
 

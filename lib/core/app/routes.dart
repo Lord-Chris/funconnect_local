@@ -9,9 +9,9 @@ import 'package:funconnect/features/authentication/presentation/profile_setup/pr
 import 'package:funconnect/features/authentication/presentation/verify_email/bloc/verify_email_bloc.dart';
 import 'package:funconnect/features/authentication/presentation/welcome/bloc/welcome_bloc.dart';
 import 'package:funconnect/features/authentication/presentation/welcome/welcome_view.dart';
-import 'package:funconnect/features/dashboard/presentation/blocs/dashboard_bloc/dashboard_bloc.dart';
-import 'package:funconnect/features/dashboard/presentation/views/dashboard_view.dart';
-import 'package:funconnect/features/dashboard/presentation/views/notifications_view.dart';
+import 'package:funconnect/features/dashboard/presentation/dashboard/bloc/dashboard_bloc.dart';
+import 'package:funconnect/features/dashboard/presentation/dashboard/dashboard_view.dart';
+import 'package:funconnect/features/dashboard/presentation/notifications/notifications_view.dart';
 import 'package:funconnect/features/events/domain/entities/event_model.dart';
 import 'package:funconnect/features/events/presentation/views/booking_view.dart';
 import 'package:funconnect/features/events/presentation/views/checkout_view.dart';
@@ -43,7 +43,7 @@ import 'package:funconnect/features/webview/presentation/views/webview_screen.da
 
 import '../../features/authentication/presentation/verify_email/email_verified_view.dart';
 import '../../features/authentication/presentation/verify_email/verify_email_view.dart';
-import '../../features/dashboard/presentation/blocs/notification_bloc/notification_bloc.dart';
+import '../../features/dashboard/presentation/notifications/bloc/notification_bloc.dart';
 import '../../features/events/presentation/views/create_event_view.dart';
 import '../../features/events/presentation/views/event_description_view.dart';
 import '../../features/places/domain/entities/category_model.dart';

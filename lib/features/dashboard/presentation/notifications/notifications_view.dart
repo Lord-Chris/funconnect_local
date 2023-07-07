@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:funconnect/core/utils/general_utils.dart';
-import 'package:funconnect/features/dashboard/presentation/blocs/notification_bloc/notification_bloc.dart';
+import 'package:funconnect/features/dashboard/presentation/notifications/bloc/notification_bloc.dart';
 import 'package:funconnect/shared/components/app_loader.dart';
 import 'package:funconnect/shared/components/custom_button.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
 
-import '../blocs/notification_bloc/notification_event.dart';
-import '../blocs/notification_bloc/notification_state.dart';
+import 'bloc/notification_event.dart';
+import 'bloc/notification_state.dart';
 
 class NotificationsView extends StatefulWidget {
   const NotificationsView({super.key});

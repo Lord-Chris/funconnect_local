@@ -7,8 +7,8 @@ import 'package:funconnect/core/models/_models.dart';
 import 'package:funconnect/core/usecases/usecase.dart';
 import 'package:funconnect/core/utils/failure_handler.dart';
 import 'package:funconnect/features/dashboard/domain/usecases/fetch_profile_usecase.dart';
-import 'package:funconnect/features/dashboard/presentation/blocs/dashboard_bloc/dashboard_event.dart';
-import 'package:funconnect/features/dashboard/presentation/blocs/dashboard_bloc/dashboard_state.dart';
+import 'package:funconnect/features/dashboard/presentation/dashboard/bloc/dashboard_event.dart';
+import 'package:funconnect/features/dashboard/presentation/dashboard/bloc/dashboard_state.dart';
 import 'package:logger/logger.dart';
 
 import '../../../../../services/_services.dart';
