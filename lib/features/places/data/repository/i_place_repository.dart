@@ -2,7 +2,7 @@ import 'package:funconnect/core/enums/_enums.dart';
 import 'package:funconnect/core/models/_models.dart';
 import 'package:funconnect/features/places/domain/entities/category_model.dart';
 import 'package:funconnect/features/places/domain/entities/full_place_model.dart';
-import 'package:funconnect/features/places/domain/entities/home_trend_item_model.dart';
+import 'package:funconnect/features/places/domain/entities/home_trends_reponse.dart';
 import 'package:funconnect/features/places/domain/entities/place_model.dart';
 import 'package:funconnect/features/places/domain/entities/review_model.dart';
 
@@ -10,7 +10,8 @@ import '../../domain/entities/search_query_param.dart';
 
 abstract class IPlaceRepository {
   Future<List<CategoryModel>> fetchUserInterests();
-  Future<List<HomeTrendItemModel>> fetchHomeTrends(AppLocation? location);
+  // Future<List<HomeTrendItemModel>> fetchHomeTrends(AppLocation? location);
+  Future<HomeTrendsReponse?> fetchHomeTrendsNew(AppLocation? location);
   Future<PaginatedData<PlaceModel>> fetchPlacesByCategory(
       String categoryId, AppLocation? location);
   Future<PaginatedData<PlaceModel>> searchPlaces(

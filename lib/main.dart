@@ -10,20 +10,20 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:funconnect/core/app/_app.dart';
 import 'package:funconnect/core/utils/failure_handler.dart';
-import 'package:funconnect/features/authentication/presentation/blocs/welcome_bloc/welcome_bloc.dart';
-import 'package:funconnect/features/authentication/presentation/views/welcome_view.dart';
-import 'package:funconnect/features/dashboard/presentation/blocs/dashboard_bloc/dashboard_bloc.dart';
-import 'package:funconnect/features/dashboard/presentation/views/dashboard_view.dart';
-import 'package:funconnect/features/startup/presentation/blocs/onboarding_bloc/onboarding_bloc.dart';
-import 'package:funconnect/features/startup/presentation/blocs/splash_bloc/splash_bloc.dart';
-import 'package:funconnect/features/startup/presentation/views/onboarding_view.dart';
-import 'package:funconnect/features/startup/presentation/views/version_update_view.dart';
+import 'package:funconnect/features/authentication/presentation/welcome/bloc/welcome_bloc.dart';
+import 'package:funconnect/features/authentication/presentation/welcome/welcome_view.dart';
+import 'package:funconnect/features/dashboard/presentation/dashboard/bloc/dashboard_bloc.dart';
+import 'package:funconnect/features/dashboard/presentation/dashboard/dashboard_view.dart';
+import 'package:funconnect/features/startup/presentation/onboarding/bloc/onboarding_bloc.dart';
+import 'package:funconnect/features/startup/presentation/splash/bloc/splash_bloc.dart';
+import 'package:funconnect/features/startup/presentation/onboarding/onboarding_view.dart';
+import 'package:funconnect/features/startup/presentation/version_update/version_update_view.dart';
 import 'package:funconnect/services/_services.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
-import 'features/startup/presentation/blocs/splash_bloc/splash_event.dart';
-import 'features/startup/presentation/blocs/splash_bloc/splash_state.dart';
+import 'features/startup/presentation/splash/bloc/splash_event.dart';
+import 'features/startup/presentation/splash/bloc/splash_state.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -44,6 +44,7 @@ void main() async {
     };
 
     await _setupServices();
+
     runApp(const SentryScreenshotWidget(child: MyApp()));
   }, (error, stackTrace) async {
     FailureHandler.instance.catchError(error, stackTrace: stackTrace);

@@ -98,22 +98,22 @@
 //     };
 //   }
 
-  // Map<String, dynamic> toBody() {
-  //   return {
-  //     'email': email,
-  //     'name': fullName,
-  //     'username': userName,
-  //     'gender': gender.toLowerCase(),
-  //     'dob': dateOfBirth,
-  //     'phone_e164': mobileNumber.isEmpty ? 'null' : mobileNumber,
-  //     'bio': bio,
-  //     'facebook_handle': facebookHandle,
-  //     'instagram_handle': instagramHandle,
-  //     'twitter_handle': twitterHandle,
-  //     'linkedIn_handle': linkedInHandle,
-  //     'profile_photo': profileImageUrl
-  //   };
-  // }
+// Map<String, dynamic> toBody() {
+//   return {
+//     'email': email,
+//     'name': fullName,
+//     'username': userName,
+//     'gender': gender.toLowerCase(),
+//     'dob': dateOfBirth,
+//     'phone_e164': mobileNumber.isEmpty ? 'null' : mobileNumber,
+//     'bio': bio,
+//     'facebook_handle': facebookHandle,
+//     'instagram_handle': instagramHandle,
+//     'twitter_handle': twitterHandle,
+//     'linkedIn_handle': linkedInHandle,
+//     'profile_photo': profileImageUrl
+//   };
+// }
 
 //   factory ProfileModel.fromMap(Map<String, dynamic> map) {
 //     return ProfileModel(

@@ -5,14 +5,14 @@ import 'package:funconnect/features/places/data/repository/i_place_repository.da
 import 'package:funconnect/services/_services.dart';
 
 import '../entities/category_model.dart';
-import '../entities/home_trend_item_model.dart';
+import '../entities/home_response_data.dart';
 
 class FetchHomeTrends with UseCases<void, NoParams> {
   final _locationService = locator<ILocationService>();
   final _placeRepository = locator<IPlaceRepository>();
 
   List<CategoryModel> interests = [];
-  List<HomeTrendItemModel> homeTrends = [];
+  HomeResponseData? homeTrends;
 
   /// Switch to Records later
   @override
@@ -21,8 +21,8 @@ class FetchHomeTrends with UseCases<void, NoParams> {
     await Future.wait(
       [
         _placeRepository
-            .fetchHomeTrends(location)
-            .then((value) => homeTrends = value),
+            .fetchHomeTrendsNew(location)
+            .then((value) => homeTrends = value?.data),
         _placeRepository
             .fetchUserInterests()
             .then((value) => interests = value),

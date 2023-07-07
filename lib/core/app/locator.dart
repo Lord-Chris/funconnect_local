@@ -36,6 +36,7 @@ Future<void> setUpLocator() async {
       .registerLazySingleton<IConnectivityService>(() => ConnectivityService());
   locator.registerLazySingleton<IForceUpdateAppService>(
       () => ForceUpdateAppService());
+
   await _setUpLocalStorage();
   await _setUpDynamicLinkService();
   _setUpNotificationService();

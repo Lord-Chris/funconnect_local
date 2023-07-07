@@ -2,6 +2,7 @@ import 'package:funconnect/core/app/_app.dart';
 import 'package:funconnect/core/constants/hive_keys.dart';
 import 'package:funconnect/core/constants/storage_keys.dart';
 import 'package:funconnect/features/places/domain/entities/home_trend_item_model.dart';
+import 'package:funconnect/features/places/domain/entities/home_trends_reponse.dart';
 import 'package:funconnect/services/_services.dart';
 
 import '../../domain/entities/category_model.dart';
@@ -18,6 +19,23 @@ class LocalPlaceDataSource {
 
     assert(data.length == 3);
     return data.map((e) => HomeTrendItemModel.fromMap(e)).toList();
+
+    // return [
+    //   HomeTrendItemModel.fromMap(data[0], (e) => CategoryModel.fromMap(e)),
+    //   HomeTrendItemModel.fromMap(data[1], (e) => PlaceModel.fromMap(e)),
+    //   HomeTrendItemModel.fromMap(data[2], (e) => PlaceModel.fromMap(e)),
+    // ];
+  }
+
+  HomeTrendsReponse? getHomeTrendsNew() {
+    final data = _localStorageService.read(
+      HiveKeys.placesBoxId,
+      key: StorageKeys.homeTrendsNew,
+      def: null,
+    );
+    if (data == null) return null;
+
+    return HomeTrendsReponse.fromMap(data);
 
     // return [
     //   HomeTrendItemModel.fromMap(data[0], (e) => CategoryModel.fromMap(e)),

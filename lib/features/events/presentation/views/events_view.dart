@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:funconnect/features/dashboard/presentation/blocs/dashboard_bloc/dashboard_bloc.dart';
+import 'package:funconnect/features/dashboard/presentation/dashboard/bloc/dashboard_bloc.dart';
 import 'package:funconnect/shared/components/custom_button.dart';
 
 import '../../../../shared/constants/_constants.dart';
-import '../../../dashboard/presentation/blocs/dashboard_bloc/dashboard_event.dart';
+import '../../../dashboard/presentation/dashboard/bloc/dashboard_event.dart';
 
 class EventsView extends StatefulWidget {
   const EventsView({Key? key}) : super(key: key);
@@ -88,8 +88,6 @@ class _EventsViewState extends State<EventsView> {
     );
   }
 }
-
-
 
 /*
 import 'package:flutter/material.dart';

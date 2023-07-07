@@ -3,9 +3,9 @@ import 'dart:math';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../constants/_constants.dart';
-import '_components.dart';
 
 class AppNetworkImage extends StatelessWidget {
   final String imageUrl;
@@ -64,13 +64,12 @@ class AppNetworkImage extends StatelessWidget {
     }
     return CachedNetworkImage(
       imageUrl: imageUrl,
-      fit: fit,
       useOldImageOnUrlChange: true,
       cacheKey: cacheImage ? null : '$imageUrl ${Random().nextInt(5000)}',
-      fadeInDuration: const Duration(milliseconds: 200),
-      fadeOutDuration: const Duration(milliseconds: 200),
-      height: size?.height,
-      width: size?.width,
+      fadeInDuration: const Duration(milliseconds: 2000),
+      fadeOutDuration: const Duration(milliseconds: 2000),
+      height: size!.height,
+      width: size!.width,
       imageBuilder: (context, imageProvider) {
         return Container(
           height: size?.height,
@@ -112,13 +111,22 @@ class AppNetworkImage extends StatelessWidget {
                   ),
           );
         }
-        return const Center(
-          child: AppLoader(
-            color: AppColors.primary,
+        return Shimmer.fromColors(
+          baseColor: AppColors.black,
+          highlightColor: AppColors.primary,
+          child: Container(
+            height: size?.height,
+            width: size?.width,
+            decoration: BoxDecoration(
+              color: AppColors.black,
+              shape: isCircular ? BoxShape.circle : BoxShape.rectangle,
+              borderRadius:
+                  isCircular ? null : BorderRadius.circular(borderRadius),
+            ),
           ),
         );
       },
-      errorWidget: (context, error, stackTrace) {
+      errorWidget: (context, _, __) {
         if (errorWidget != null) {
           return errorWidget!;
         }

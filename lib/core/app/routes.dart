@@ -2,50 +2,50 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:funconnect/core/models/_models.dart';
 import 'package:funconnect/features/authentication/data/dto/request_otp_response.dart';
-import 'package:funconnect/features/authentication/presentation/blocs/interest_bloc/interest_bloc.dart';
-import 'package:funconnect/features/authentication/presentation/blocs/profile_setup_bloc/profile_setup_bloc.dart';
-import 'package:funconnect/features/authentication/presentation/blocs/verify_email_bloc/verify_email_bloc.dart';
-import 'package:funconnect/features/authentication/presentation/blocs/welcome_bloc/welcome_bloc.dart';
-import 'package:funconnect/features/authentication/presentation/views/email_verified_view.dart';
-import 'package:funconnect/features/authentication/presentation/views/interest_view.dart';
-import 'package:funconnect/features/authentication/presentation/views/profile_setup_view.dart';
-import 'package:funconnect/features/authentication/presentation/views/verify_email_view.dart';
-import 'package:funconnect/features/authentication/presentation/views/welcome_view.dart';
-import 'package:funconnect/features/dashboard/presentation/blocs/dashboard_bloc/dashboard_bloc.dart';
-import 'package:funconnect/features/dashboard/presentation/views/dashboard_view.dart';
-import 'package:funconnect/features/dashboard/presentation/views/notifications_view.dart';
+import 'package:funconnect/features/authentication/presentation/interest/bloc/interest_bloc.dart';
+import 'package:funconnect/features/authentication/presentation/interest/interest_view.dart';
+import 'package:funconnect/features/authentication/presentation/profile_setup/bloc/profile_setup_bloc.dart';
+import 'package:funconnect/features/authentication/presentation/profile_setup/profile_setup_view.dart';
+import 'package:funconnect/features/authentication/presentation/verify_email/bloc/verify_email_bloc.dart';
+import 'package:funconnect/features/authentication/presentation/welcome/bloc/welcome_bloc.dart';
+import 'package:funconnect/features/authentication/presentation/welcome/welcome_view.dart';
+import 'package:funconnect/features/dashboard/presentation/dashboard/bloc/dashboard_bloc.dart';
+import 'package:funconnect/features/dashboard/presentation/dashboard/dashboard_view.dart';
+import 'package:funconnect/features/dashboard/presentation/notifications/notifications_view.dart';
 import 'package:funconnect/features/events/domain/entities/event_model.dart';
 import 'package:funconnect/features/events/presentation/views/booking_view.dart';
 import 'package:funconnect/features/events/presentation/views/checkout_view.dart';
-import 'package:funconnect/features/places/domain/entities/category_model.dart';
 import 'package:funconnect/features/places/domain/entities/place_model.dart';
-import 'package:funconnect/features/places/presentation/blocs/category_detail_bloc/category_detail_bloc.dart';
-import 'package:funconnect/features/places/presentation/blocs/place_detail_bloc/place_detail_bloc.dart';
-import 'package:funconnect/features/places/presentation/views/category_detail_view.dart';
-import 'package:funconnect/features/places/presentation/views/place_detail_view.dart';
-import 'package:funconnect/features/places/presentation/views/search_result_view.dart';
-import 'package:funconnect/features/profile/presentation/blocs/edit_profile_bloc/edit_profile_bloc.dart';
-import 'package:funconnect/features/profile/presentation/blocs/manage_login_options_bloc/manage_login_options_bloc.dart';
-import 'package:funconnect/features/profile/presentation/views/edit_profile_view.dart';
-import 'package:funconnect/features/profile/presentation/views/manage_login_options_view.dart';
+import 'package:funconnect/features/places/presentation/category_detail/bloc/category_detail_bloc.dart';
+import 'package:funconnect/features/places/presentation/category_detail/category_detail_view.dart';
+import 'package:funconnect/features/places/presentation/place_detail/bloc/place_detail_bloc.dart';
+import 'package:funconnect/features/places/presentation/place_detail/place_detail_view.dart';
+import 'package:funconnect/features/places/presentation/search_result/search_result_view.dart';
+import 'package:funconnect/features/profile/presentation/edit_profile/edit_profile_view.dart';
+import 'package:funconnect/features/profile/presentation/manage_login_options/manage_login_options_view.dart';
 import 'package:funconnect/features/profile/presentation/views/my_events_view.dart';
 import 'package:funconnect/features/profile/presentation/views/my_tickets_view.dart';
-import 'package:funconnect/features/profile/presentation/views/rate_your_experience_view.dart';
-import 'package:funconnect/features/saved/presentation/blocs/saved_bloc.dart';
-import 'package:funconnect/features/saved/presentation/views/collections/create_collection_view.dart';
-import 'package:funconnect/features/saved/presentation/views/saved_view.dart';
-import 'package:funconnect/features/startup/presentation/blocs/onboarding_bloc/onboarding_bloc.dart';
-import 'package:funconnect/features/startup/presentation/blocs/splash_bloc/splash_bloc.dart';
-import 'package:funconnect/features/startup/presentation/views/onboarding_view.dart';
-import 'package:funconnect/features/startup/presentation/views/splash_view.dart';
-import 'package:funconnect/features/startup/presentation/views/version_update_view.dart';
+import 'package:funconnect/features/saved/presentation/collections/create_collection_view.dart';
+import 'package:funconnect/features/saved/presentation/saved/bloc/saved_bloc.dart';
+import 'package:funconnect/features/saved/presentation/saved/saved_view.dart';
+import 'package:funconnect/features/startup/presentation/onboarding/bloc/onboarding_bloc.dart';
+import 'package:funconnect/features/startup/presentation/onboarding/onboarding_view.dart';
+import 'package:funconnect/features/startup/presentation/splash/bloc/splash_bloc.dart';
+import 'package:funconnect/features/startup/presentation/splash/splash_view.dart';
+import 'package:funconnect/features/startup/presentation/version_update/version_update_view.dart';
 import 'package:funconnect/features/webview/presentation/blocs/webview_bloc/webview_bloc.dart';
 import 'package:funconnect/features/webview/presentation/views/webview_screen.dart';
 
-import '../../features/dashboard/presentation/blocs/notification_bloc/notification_bloc.dart';
+import '../../features/authentication/presentation/verify_email/email_verified_view.dart';
+import '../../features/authentication/presentation/verify_email/verify_email_view.dart';
+import '../../features/dashboard/presentation/notifications/bloc/notification_bloc.dart';
 import '../../features/events/presentation/views/create_event_view.dart';
 import '../../features/events/presentation/views/event_description_view.dart';
-import '../../features/places/presentation/blocs/search_result_bloc/search_result_bloc.dart';
+import '../../features/places/domain/entities/category_model.dart';
+import '../../features/places/presentation/search_result/bloc/search_result_bloc.dart';
+import '../../features/profile/presentation/edit_profile/bloc/edit_profile_bloc.dart';
+import '../../features/profile/presentation/manage_login_options/bloc/manage_login_options_bloc.dart';
+import '../../features/profile/presentation/views/rate_your_experience_view.dart';
 
 class Routes {
   // Onboarding
@@ -140,12 +140,14 @@ class Routes {
           view: PlaceDetailView(place: place),
           bloc: PlaceDetailBloc(),
         );
+
       case categoryDetailRoute:
         final category = settings.arguments as CategoryModel;
         return _registerBlocView(
           view: CategoryDetailView(category: category),
           bloc: CategoryDetailBloc(),
         );
+
       case searchResultRoute:
         return _registerBlocView(
           view: const SearchResultView(),
@@ -204,7 +206,8 @@ class Routes {
         );
       case rateYourExperienceRoute:
         return MaterialPageRoute(
-            builder: (_) => const RateYourExperienceView());
+          builder: (_) => const RateYourExperienceView(),
+        );
 
       case myTicketRoute:
         return MaterialPageRoute(builder: (_) => const MyTicketView());

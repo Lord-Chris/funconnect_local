@@ -63,8 +63,10 @@ class DefaultFirebaseOptions {
     messagingSenderId: '72010274266',
     projectId: 'funconnect-cd02c',
     storageBucket: 'funconnect-cd02c.appspot.com',
-    androidClientId: '72010274266-6drs994dl4a00k83jfbf6njtf6phtq4e.apps.googleusercontent.com',
-    iosClientId: '72010274266-vosimccjbt4dj700ots582hg6i5br0ft.apps.googleusercontent.com',
+    androidClientId:
+        '72010274266-6drs994dl4a00k83jfbf6njtf6phtq4e.apps.googleusercontent.com',
+    iosClientId:
+        '72010274266-vosimccjbt4dj700ots582hg6i5br0ft.apps.googleusercontent.com',
     iosBundleId: 'com.funconnect.app',
   );
 }

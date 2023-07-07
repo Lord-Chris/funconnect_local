@@ -19,23 +19,26 @@ class PlaceModel extends Equatable {
   final bool savedPlace;
   final String emailAddress;
   final int showRatings;
+  final String websiteUrl;
 
-  const PlaceModel(
-      {required this.id,
-      required this.name,
-      required this.headline,
-      required this.coverImagePath,
-      required this.description,
-      required this.addedBy,
-      required this.opensAt,
-      required this.closesAt,
-      required this.phoneE164,
-      required this.avgRating,
-      required this.avgReviewCount,
-      required this.distance,
-      required this.savedPlace,
-      required this.emailAddress,
-      required this.showRatings});
+  const PlaceModel({
+    required this.id,
+    required this.name,
+    required this.headline,
+    required this.coverImagePath,
+    required this.description,
+    required this.addedBy,
+    required this.opensAt,
+    required this.closesAt,
+    required this.phoneE164,
+    required this.avgRating,
+    required this.avgReviewCount,
+    required this.distance,
+    required this.savedPlace,
+    required this.emailAddress,
+    required this.showRatings,
+    required this.websiteUrl,
+  });
 
   Map<String, dynamic> toMap() {
     return {
@@ -53,27 +56,30 @@ class PlaceModel extends Equatable {
       'distance': distance,
       'saved_place': savedPlace,
       'email_address': emailAddress,
-      'show_ratings': showRatings
+      'show_ratings': showRatings,
+      'website_url': websiteUrl,
     };
   }
 
   factory PlaceModel.fromMap(Map<String, dynamic> map) {
     return PlaceModel(
-        id: map['id'] ?? '',
-        name: map['name'] ?? '',
-        headline: map['headline'] ?? '',
-        coverImagePath: map['cover_image_path'] ?? '',
-        description: map['description'] ?? '',
-        addedBy: map['added_by'] ?? '',
-        opensAt: map['opens_at'] ?? '',
-        closesAt: map['closes_at'] ?? '',
-        phoneE164: map['phone_e164'] ?? '',
-        avgRating: map['avg_rating']?.toDouble() ?? 0.0,
-        avgReviewCount: map['avg_review_count']?.toDouble() ?? 0.0,
-        distance: map['distance']?.toDouble() ?? 0.0,
-        savedPlace: map['saved_place'] ?? false,
-        emailAddress: map['email_address'] ?? "",
-        showRatings: map['show_ratings'] ?? 0);
+      id: map['id'] ?? '',
+      name: map['name'] ?? '',
+      headline: map['headline'] ?? '',
+      coverImagePath: map['cover_image_path'] ?? '',
+      description: map['description'] ?? '',
+      addedBy: map['added_by'] ?? '',
+      opensAt: map['opens_at'] ?? '',
+      closesAt: map['closes_at'] ?? '',
+      phoneE164: map['phone_e164'] ?? '',
+      avgRating: map['avg_rating']?.toDouble() ?? 0.0,
+      avgReviewCount: map['avg_review_count']?.toDouble() ?? 0.0,
+      distance: map['distance']?.toDouble() ?? 0.0,
+      savedPlace: map['saved_place'] ?? false,
+      emailAddress: map['email_address'] ?? "",
+      showRatings: map['show_ratings'] ?? 0,
+      websiteUrl: map['website_url'] ?? "",
+    );
   }
 
   String toJson() => json.encode(toMap());
@@ -83,21 +89,23 @@ class PlaceModel extends Equatable {
 
   factory PlaceModel.fromFullPlaceModel(FullPlaceModel placeModel) {
     return PlaceModel(
-        id: placeModel.id,
-        name: placeModel.name,
-        headline: placeModel.headline,
-        coverImagePath: placeModel.coverImagePath,
-        description: placeModel.description,
-        addedBy: placeModel.addedBy,
-        opensAt: placeModel.opensAt,
-        closesAt: placeModel.closesAt,
-        phoneE164: placeModel.phoneE164,
-        avgRating: placeModel.avgRating,
-        avgReviewCount: placeModel.avgReviewCount,
-        distance: 0,
-        savedPlace: placeModel.savedPlace,
-        emailAddress: placeModel.emailAddress,
-        showRatings: placeModel.showRatings);
+      id: placeModel.id,
+      name: placeModel.name,
+      headline: placeModel.headline,
+      coverImagePath: placeModel.coverImagePath,
+      description: placeModel.description,
+      addedBy: placeModel.addedBy,
+      opensAt: placeModel.opensAt,
+      closesAt: placeModel.closesAt,
+      phoneE164: placeModel.phoneE164,
+      avgRating: placeModel.avgRating,
+      avgReviewCount: placeModel.avgReviewCount,
+      distance: 0,
+      savedPlace: placeModel.savedPlace,
+      emailAddress: placeModel.emailAddress,
+      showRatings: placeModel.showRatings,
+      websiteUrl: placeModel.websiteUrl,
+    );
   }
 
   @override
@@ -117,44 +125,49 @@ class PlaceModel extends Equatable {
       distance,
       savedPlace,
       emailAddress,
-      showRatings
+      showRatings,
+      websiteUrl,
     ];
   }
 
   bool get isBookmarked => savedPlace;
 
-  PlaceModel copyWith(
-      {String? id,
-      String? name,
-      String? headline,
-      String? coverImagePath,
-      String? description,
-      String? addedBy,
-      String? opensAt,
-      String? closesAt,
-      String? phoneE164,
-      double? avgRating,
-      double? avgReviewCount,
-      double? distance,
-      bool? savedPlace,
-      String? emailAddress,
-      int? showRatings}) {
+  PlaceModel copyWith({
+    String? id,
+    String? name,
+    String? headline,
+    String? coverImagePath,
+    String? description,
+    String? addedBy,
+    String? opensAt,
+    String? closesAt,
+    String? phoneE164,
+    double? avgRating,
+    double? avgReviewCount,
+    double? distance,
+    bool? savedPlace,
+    String? emailAddress,
+    int? showRatings,
+    String? websiteUrl,
+  }) {
     return PlaceModel(
-        id: id ?? this.id,
-        name: name ?? this.name,
-        headline: headline ?? this.headline,
-        coverImagePath: coverImagePath ?? this.coverImagePath,
-        description: description ?? this.description,
-        addedBy: addedBy ?? this.addedBy,
-        opensAt: opensAt ?? this.opensAt,
-        closesAt: closesAt ?? this.closesAt,
-        phoneE164: phoneE164 ?? this.phoneE164,
-        avgRating: avgRating ?? this.avgRating,
-        avgReviewCount: avgReviewCount ?? this.avgReviewCount,
-        distance: distance ?? this.distance,
-        savedPlace: savedPlace ?? this.savedPlace,
-        emailAddress: emailAddress ?? this.emailAddress,
-        showRatings: showRatings ?? this.showRatings);
+      id: id ?? this.id,
+      name: name ?? this.name,
+      headline: headline ?? this.headline,
+      coverImagePath: coverImagePath ?? this.coverImagePath,
+      description: description ?? this.description,
+      addedBy: addedBy ?? this.addedBy,
+      opensAt: opensAt ?? this.opensAt,
+      closesAt: closesAt ?? this.closesAt,
+      phoneE164: phoneE164 ?? this.phoneE164,
+      avgRating: avgRating ?? this.avgRating,
+      avgReviewCount: avgReviewCount ?? this.avgReviewCount,
+      distance: distance ?? this.distance,
+      savedPlace: savedPlace ?? this.savedPlace,
+      emailAddress: emailAddress ?? this.emailAddress,
+      showRatings: showRatings ?? this.showRatings,
+      websiteUrl: websiteUrl ?? this.websiteUrl,
+    );
   }
 }
 
@@ -171,5 +184,6 @@ final mockPlace = PlaceModel.fromMap(const {
   "phone_e164": "08055208019",
   "avg_rating": 0,
   "avg_review_count": 0,
-  "distance": 1054.7793920450083
+  "distance": 1054.7793920450083,
+  "website_url": null,
 });
