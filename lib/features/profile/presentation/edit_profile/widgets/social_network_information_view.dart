@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:funconnect/features/profile/presentation/blocs/edit_profile_bloc/edit_profile_bloc.dart';
 import 'package:funconnect/shared/components/_components.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
 
-import '../../../../core/models/_models.dart';
+import '../../../../../core/models/_models.dart';
+import '../bloc/edit_profile_bloc.dart';
 
 class SocialNetworkInformationView extends StatelessWidget {
   const SocialNetworkInformationView({Key? key}) : super(key: key);

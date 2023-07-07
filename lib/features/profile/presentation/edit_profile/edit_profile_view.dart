@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:funconnect/features/profile/presentation/blocs/edit_profile_bloc/edit_profile_bloc.dart';
-import 'package:funconnect/features/profile/presentation/views/other_information_view.dart';
-import 'package:funconnect/features/profile/presentation/views/personal_information_view.dart';
-import 'package:funconnect/features/profile/presentation/views/social_network_information_view.dart';
+import 'package:funconnect/features/profile/presentation/edit_profile/widgets/other_information_view.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
+
+import 'bloc/edit_profile_bloc.dart';
+import 'widgets/personal_information_view.dart';
+import 'widgets/social_network_information_view.dart';
 
 class EditProfileView extends StatelessWidget {
   const EditProfileView({Key? key}) : super(key: key);
