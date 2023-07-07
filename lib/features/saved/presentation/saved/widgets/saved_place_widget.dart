@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../shared/constants/_constants.dart';
+import '../../../../../shared/constants/_constants.dart';
 
 class SavedPlaceWidget extends HookWidget {
   final String name;

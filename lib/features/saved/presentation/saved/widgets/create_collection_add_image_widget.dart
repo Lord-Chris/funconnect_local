@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../shared/constants/colors.dart';
-import '../../../../shared/constants/textstyles.dart';
+import '../../../../../shared/constants/colors.dart';
+import '../../../../../shared/constants/textstyles.dart';
 
 class CreateCollectionAddImageWidget extends StatelessWidget {
   const CreateCollectionAddImageWidget({

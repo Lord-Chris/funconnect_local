@@ -4,16 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:funconnect/features/places/domain/entities/saved_place_model.dart';
-import 'package:funconnect/features/saved/presentation/blocs/saved_bloc.dart';
-import 'package:funconnect/features/saved/presentation/blocs/saved_event.dart';
-import 'package:funconnect/features/saved/presentation/blocs/saved_state.dart';
-import 'package:funconnect/features/saved/presentation/widgets/saved_place_widget.dart';
+import 'package:funconnect/features/saved/presentation/saved/bloc/saved_bloc.dart';
+import 'package:funconnect/features/saved/presentation/saved/bloc/saved_event.dart';
+import 'package:funconnect/features/saved/presentation/saved/bloc/saved_state.dart';
+import 'package:funconnect/features/saved/presentation/saved/widgets/saved_place_widget.dart';
 import 'package:funconnect/shared/components/custom_button.dart';
 import 'package:logger/logger.dart';
 
 import '../../../../shared/components/app_loader.dart';
 import '../../../../shared/constants/_constants.dart';
-import '../widgets/saved_events_tab.dart';
+import 'widgets/saved_events_tab.dart';
 
 class SavedView extends StatefulWidget {
   const SavedView({Key? key}) : super(key: key);

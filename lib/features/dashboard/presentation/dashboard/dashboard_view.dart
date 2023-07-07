@@ -10,8 +10,8 @@ import 'package:funconnect/features/dashboard/presentation/notifications/bloc/no
 import 'package:funconnect/features/events/presentation/blocs/events_bloc/events_bloc.dart';
 import 'package:funconnect/features/places/presentation/explore/bloc/explore_bloc.dart';
 import 'package:funconnect/features/profile/presentation/profile/profile_view.dart';
-import 'package:funconnect/features/saved/presentation/blocs/saved_bloc.dart';
-import 'package:funconnect/features/saved/presentation/views/saved_view.dart';
+import 'package:funconnect/features/saved/presentation/saved/bloc/saved_bloc.dart';
+import 'package:funconnect/features/saved/presentation/saved/saved_view.dart';
 import 'package:funconnect/shared/components/app_loader.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
 import 'package:lazy_load_indexed_stack/lazy_load_indexed_stack.dart';
@@ -21,7 +21,7 @@ import '../../../places/presentation/explore/explore_view.dart';
 import '../../../places/presentation/home/bloc/home_bloc.dart';
 import '../../../places/presentation/home/home_view.dart';
 import '../../../profile/presentation/profile/bloc/profile_bloc.dart';
-import '../../../saved/presentation/blocs/saved_event.dart';
+import '../../../saved/presentation/saved/bloc/saved_event.dart';
 
 class DashboardView extends StatelessWidget {
   const DashboardView({Key? key}) : super(key: key);

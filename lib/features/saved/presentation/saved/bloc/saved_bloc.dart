@@ -5,12 +5,12 @@ import 'package:funconnect/core/app/_app.dart';
 import 'package:funconnect/core/models/_models.dart';
 import 'package:funconnect/core/usecases/usecase.dart';
 import 'package:funconnect/features/saved/domain/usecases/fetch_user_saved_places.dart';
-import 'package:funconnect/features/saved/presentation/blocs/saved_event.dart';
-import 'package:funconnect/features/saved/presentation/blocs/saved_state.dart';
+import 'package:funconnect/features/saved/presentation/saved/bloc/saved_event.dart';
+import 'package:funconnect/features/saved/presentation/saved/bloc/saved_state.dart';
 import 'package:funconnect/services/_services.dart';
 import 'package:logger/logger.dart';
 
-import '../../data/repository/i_saved_repository.dart';
+import '../../../data/repository/i_saved_repository.dart';
 
 class SavedBloc extends Bloc<SavedEvent, SavedState> {
   SavedBloc() : super(SavedLoadingState()) {

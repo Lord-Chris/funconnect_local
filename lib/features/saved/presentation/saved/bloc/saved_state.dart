@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:equatable/equatable.dart';
 import 'package:funconnect/core/models/_models.dart';
 
-import '../../../places/domain/entities/saved_place_model.dart';
+import '../../../../places/domain/entities/saved_place_model.dart';
 
 abstract class SavedState extends Equatable {
   const SavedState();

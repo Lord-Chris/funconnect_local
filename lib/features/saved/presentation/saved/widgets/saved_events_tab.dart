@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../../../shared/components/_components.dart';
-import '../../../../shared/constants/_constants.dart';
+import '../../../../../shared/components/_components.dart';
+import '../../../../../shared/constants/_constants.dart';
 
 class SavedEventsTab extends StatelessWidget {
   const SavedEventsTab({

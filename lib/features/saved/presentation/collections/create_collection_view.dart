@@ -5,9 +5,9 @@ import 'package:funconnect/core/app/_app.dart';
 import 'package:funconnect/services/_services.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
 
-import '../../../../../shared/components/app_textfield.dart';
-import '../../../../../shared/components/custom_button.dart';
-import '../../widgets/create_collection_add_image_widget.dart';
+import '../../../../shared/components/app_textfield.dart';
+import '../../../../shared/components/custom_button.dart';
+import '../saved/widgets/create_collection_add_image_widget.dart';
 
 class CreateCollectionView extends StatelessWidget {
   const CreateCollectionView({Key? key}) : super(key: key);

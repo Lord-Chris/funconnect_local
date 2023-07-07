@@ -27,9 +27,9 @@ import 'package:funconnect/features/profile/presentation/edit_profile/edit_profi
 import 'package:funconnect/features/profile/presentation/manage_login_options/manage_login_options_view.dart';
 import 'package:funconnect/features/profile/presentation/views/my_events_view.dart';
 import 'package:funconnect/features/profile/presentation/views/my_tickets_view.dart';
-import 'package:funconnect/features/saved/presentation/blocs/saved_bloc.dart';
-import 'package:funconnect/features/saved/presentation/views/collections/create_collection_view.dart';
-import 'package:funconnect/features/saved/presentation/views/saved_view.dart';
+import 'package:funconnect/features/saved/presentation/saved/bloc/saved_bloc.dart';
+import 'package:funconnect/features/saved/presentation/collections/create_collection_view.dart';
+import 'package:funconnect/features/saved/presentation/saved/saved_view.dart';
 import 'package:funconnect/features/startup/presentation/blocs/onboarding_bloc/onboarding_bloc.dart';
 import 'package:funconnect/features/startup/presentation/blocs/splash_bloc/splash_bloc.dart';
 import 'package:funconnect/features/startup/presentation/views/onboarding_view.dart';
