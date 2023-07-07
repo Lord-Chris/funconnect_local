@@ -7,8 +7,8 @@ import 'package:funconnect/core/usecases/usecase.dart';
 import 'package:funconnect/features/authentication/domain/params/profile_setup.dart';
 import 'package:funconnect/features/authentication/domain/usecases/get_location_usecase.dart';
 import 'package:funconnect/features/authentication/domain/usecases/profile_setup_usecase.dart';
-import 'package:funconnect/features/authentication/presentation/blocs/profile_setup_bloc/profile_setup_event.dart';
-import 'package:funconnect/features/authentication/presentation/blocs/profile_setup_bloc/profile_setup_state.dart';
+import 'package:funconnect/features/authentication/presentation/profile_setup/bloc/profile_setup_event.dart';
+import 'package:funconnect/features/authentication/presentation/profile_setup/bloc/profile_setup_state.dart';
 import 'package:funconnect/services/_services.dart';
 import 'package:logger/logger.dart';
 

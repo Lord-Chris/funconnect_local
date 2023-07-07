@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:funconnect/features/authentication/presentation/blocs/interest_bloc/interest_bloc.dart';
-import 'package:funconnect/features/authentication/presentation/blocs/interest_bloc/interest_event.dart';
-import 'package:funconnect/features/authentication/presentation/blocs/interest_bloc/interest_state.dart';
+import 'package:funconnect/features/authentication/presentation/interest/bloc/interest_bloc.dart';
+import 'package:funconnect/features/authentication/presentation/interest/bloc/interest_event.dart';
+import 'package:funconnect/features/authentication/presentation/interest/bloc/interest_state.dart';
 import 'package:funconnect/shared/components/app_loader.dart';
 
 import '../../../../shared/components/app_orange_button.dart';
 import '../../../../shared/constants/_constants.dart';
-import '../widgets/app_black_modal.dart';
-import '../widgets/interest_selection_widget.dart';
+import '../../../../shared/components/app_black_modal.dart';
+import 'widgets/interest_selection_widget.dart';
 
 class InterestView extends StatefulWidget {
   const InterestView({Key? key}) : super(key: key);

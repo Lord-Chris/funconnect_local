@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../../shared/components/_components.dart';
-import '../../../../shared/constants/_constants.dart';
+import '../../../../../shared/components/_components.dart';
+import '../../../../../shared/constants/_constants.dart';
 
 class InterestSelectionWidget extends StatelessWidget {
   final bool isSelected;

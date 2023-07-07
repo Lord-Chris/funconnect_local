@@ -6,15 +6,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:funconnect/core/extensions/_extensions.dart';
 import 'package:funconnect/core/utils/general_utils.dart';
-import 'package:funconnect/features/authentication/presentation/blocs/verify_email_bloc/verify_email_bloc.dart';
-import 'package:funconnect/features/authentication/presentation/blocs/verify_email_bloc/verify_email_event.dart';
-import 'package:funconnect/features/authentication/presentation/blocs/verify_email_bloc/verify_email_state.dart';
+import 'package:funconnect/features/authentication/presentation/verify_email/bloc/verify_email_bloc.dart';
+import 'package:funconnect/features/authentication/presentation/verify_email/bloc/verify_email_event.dart';
+import 'package:funconnect/features/authentication/presentation/verify_email/bloc/verify_email_state.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 import '../../../../shared/components/app_orange_button.dart';
 import '../../data/dto/request_otp_response.dart';
-import '../widgets/app_black_modal.dart';
+import '../../../../shared/components/app_black_modal.dart';
 
 class VerifyEmailView extends StatefulHookWidget {
   final RequestOtpResponse response;

@@ -7,8 +7,8 @@ import 'package:funconnect/features/authentication/data/dto/request_otp_response
 import 'package:funconnect/features/authentication/data/repositories/_authentication_repo.dart';
 import 'package:funconnect/features/authentication/domain/params/verify_otp.dart';
 import 'package:funconnect/features/authentication/domain/usecases/verify_otp_usecase.dart';
-import 'package:funconnect/features/authentication/presentation/blocs/verify_email_bloc/verify_email_event.dart';
-import 'package:funconnect/features/authentication/presentation/blocs/verify_email_bloc/verify_email_state.dart';
+import 'package:funconnect/features/authentication/presentation/verify_email/bloc/verify_email_event.dart';
+import 'package:funconnect/features/authentication/presentation/verify_email/bloc/verify_email_state.dart';
 import 'package:funconnect/services/_services.dart';
 import 'package:logger/logger.dart';
 

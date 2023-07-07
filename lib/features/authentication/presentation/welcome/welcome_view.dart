@@ -7,13 +7,13 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:funconnect/core/extensions/_extensions.dart';
-import 'package:funconnect/features/authentication/presentation/blocs/welcome_bloc/welcome_bloc.dart';
-import 'package:funconnect/features/authentication/presentation/blocs/welcome_bloc/welcome_event.dart';
-import 'package:funconnect/features/authentication/presentation/blocs/welcome_bloc/welcome_state.dart';
+import 'package:funconnect/features/authentication/presentation/welcome/bloc/welcome_bloc.dart';
+import 'package:funconnect/features/authentication/presentation/welcome/bloc/welcome_event.dart';
+import 'package:funconnect/features/authentication/presentation/welcome/bloc/welcome_state.dart';
 import 'package:funconnect/shared/components/_components.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
 
-import '../widgets/app_black_modal.dart';
+import '../../../../shared/components/app_black_modal.dart';
 
 class WelcomeView extends HookWidget {
   const WelcomeView({Key? key}) : super(key: key);

@@ -6,13 +6,13 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:funconnect/core/extensions/_extensions.dart';
 import 'package:funconnect/core/models/user_model.dart';
-import 'package:funconnect/features/authentication/presentation/blocs/profile_setup_bloc/profile_setup_bloc.dart';
-import 'package:funconnect/features/authentication/presentation/blocs/profile_setup_bloc/profile_setup_event.dart';
-import 'package:funconnect/features/authentication/presentation/blocs/profile_setup_bloc/profile_setup_state.dart';
+import 'package:funconnect/features/authentication/presentation/profile_setup/bloc/profile_setup_bloc.dart';
+import 'package:funconnect/features/authentication/presentation/profile_setup/bloc/profile_setup_event.dart';
+import 'package:funconnect/features/authentication/presentation/profile_setup/bloc/profile_setup_state.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
 
 import '../../../../shared/components/_components.dart';
-import '../widgets/app_black_modal.dart';
+import '../../../../shared/components/app_black_modal.dart';
 
 class ProfileSetUpView extends HookWidget {
   final UserModel user;
