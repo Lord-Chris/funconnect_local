@@ -2,11 +2,12 @@
 import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
-import 'package:funconnect/features/places/domain/entities/home_places_data.dart';
+
+import 'place_model.dart';
 
 class HomePlaces extends Equatable {
   final String name;
-  final List<HomePlacesData> data;
+  final List<PlaceModel> data;
   const HomePlaces({
     required this.name,
     required this.data,
@@ -14,7 +15,7 @@ class HomePlaces extends Equatable {
 
   HomePlaces copyWith({
     String? name,
-    List<HomePlacesData>? data,
+    List<PlaceModel>? data,
   }) {
     return HomePlaces(
       name: name ?? this.name,
@@ -32,9 +33,9 @@ class HomePlaces extends Equatable {
   factory HomePlaces.fromMap(Map<String, dynamic> map) {
     return HomePlaces(
       name: map['name'] as String,
-      data: List<HomePlacesData>.from(
-        (map['data'] as List<dynamic>).map<HomePlacesData>(
-          (x) => HomePlacesData.fromMap(x as Map<String, dynamic>),
+      data: List<PlaceModel>.from(
+        (map['data'] as List<dynamic>).map<PlaceModel>(
+          (x) => PlaceModel.fromMap(x as Map<String, dynamic>),
         ),
       ),
     );

@@ -2,11 +2,11 @@
 import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
-import 'package:funconnect/features/places/domain/entities/home_category_data.dart';
+import 'package:funconnect/features/places/domain/entities/category_model.dart';
 
 class HomeCategory extends Equatable {
   final String name;
-  final List<HomeCategoryData> data;
+  final List<CategoryModel> data;
   const HomeCategory({
     required this.name,
     required this.data,
@@ -14,7 +14,7 @@ class HomeCategory extends Equatable {
 
   HomeCategory copyWith({
     String? name,
-    List<HomeCategoryData>? data,
+    List<CategoryModel>? data,
   }) {
     return HomeCategory(
       name: name ?? this.name,
@@ -32,9 +32,9 @@ class HomeCategory extends Equatable {
   factory HomeCategory.fromMap(Map<String, dynamic> map) {
     return HomeCategory(
       name: map['name'] as String,
-      data: List<HomeCategoryData>.from(
-        (map['data'] as List<dynamic>).map<HomeCategoryData>(
-          (x) => HomeCategoryData.fromMap(x as Map<String, dynamic>),
+      data: List<CategoryModel>.from(
+        (map['data'] as List<dynamic>).map<CategoryModel>(
+          (x) => CategoryModel.fromMap(x as Map<String, dynamic>),
         ),
       ),
     );

@@ -6,11 +6,12 @@ import 'package:funconnect/core/app/locator.dart';
 import 'package:funconnect/core/models/_models.dart';
 import 'package:funconnect/core/utils/failure_handler.dart';
 import 'package:funconnect/features/places/domain/entities/full_place_model.dart';
-import 'package:funconnect/features/places/domain/entities/home_places_data.dart';
 import 'package:funconnect/features/places/domain/entities/review_model.dart';
 import 'package:funconnect/features/places/domain/usecases/bookmark_place.dart';
 import 'package:funconnect/features/places/domain/usecases/fetch_place_detail.dart';
 import 'package:funconnect/services/dynamic_link_service/i_dynamic_link_service.dart';
+
+import '../../../domain/entities/place_model.dart';
 
 part 'place_detail_v2_event.dart';
 part 'place_detail_v2_state.dart';
@@ -27,7 +28,7 @@ class PlaceDetailV2Bloc extends Bloc<PlaceDetailV2Event, PlaceDetailV2State> {
 
   String? _link;
 
-  Future<void> _getLink(HomePlacesData place) async {
+  Future<void> _getLink(PlaceModel place) async {
     try {
       _link = await _dynamicLinkService.generateLink(
         desc: place.name,

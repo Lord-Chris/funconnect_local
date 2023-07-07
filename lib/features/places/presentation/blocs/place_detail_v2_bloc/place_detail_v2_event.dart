@@ -8,7 +8,7 @@ abstract class PlaceDetailV2Event extends Equatable {
 }
 
 class PlaceDetailV2InitEvent extends PlaceDetailV2Event {
-  final HomePlacesData place;
+  final PlaceModel place;
 
   const PlaceDetailV2InitEvent({required this.place});
 }

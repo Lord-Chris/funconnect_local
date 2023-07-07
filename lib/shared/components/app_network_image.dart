@@ -1,11 +1,10 @@
 import 'dart:math';
 
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../constants/_constants.dart';
-import '_components.dart';
 
 class AppNetworkImage extends StatelessWidget {
   final String imageUrl;
@@ -62,15 +61,19 @@ class AppNetworkImage extends StatelessWidget {
         ),
       );
     }
-    return CachedNetworkImage(
+    return FancyShimmerImage(
       imageUrl: imageUrl,
-      fit: fit,
-      useOldImageOnUrlChange: true,
+      boxFit: fit ?? BoxFit.cover,
+      boxDecoration: BoxDecoration(
+        shape: isCircular ? BoxShape.circle : BoxShape.rectangle,
+        borderRadius: isCircular ? null : BorderRadius.circular(borderRadius),
+      ),
+      // useOldImageOnUrlChange: true,
       cacheKey: cacheImage ? null : '$imageUrl ${Random().nextInt(5000)}',
-      fadeInDuration: const Duration(milliseconds: 200),
-      fadeOutDuration: const Duration(milliseconds: 200),
-      height: size?.height,
-      width: size?.width,
+      // fadeInDuration: const Duration(milliseconds: 2000),
+      // fadeOutDuration: const Duration(milliseconds: 2000),
+      height: size!.height,
+      width: size!.width,
       imageBuilder: (context, imageProvider) {
         return Container(
           height: size?.height,
@@ -88,71 +91,73 @@ class AppNetworkImage extends StatelessWidget {
           ),
         );
       },
-      placeholder: (context, value) {
-        if (placeholderWidget != null) {
-          return placeholderWidget!;
-        }
-        if (placeholderAssetImage != null &&
-            placeholderAssetImage!.isNotEmpty) {
+      // placeholder: (context, value) {
+      //   if (placeholderWidget != null) {
+      //     return placeholderWidget!;
+      //   }
+      //   if (placeholderAssetImage != null &&
+      //       placeholderAssetImage!.isNotEmpty) {
+      //     return Container(
+      //       clipBehavior: Clip.hardEdge,
+      //       decoration: BoxDecoration(
+      //         borderRadius:
+      //             isCircular ? null : BorderRadius.circular(borderRadius),
+      //         shape: isCircular ? BoxShape.circle : BoxShape.rectangle,
+      //       ),
+      //       child: placeholderAssetImage!.endsWith(".svg")
+      //           ? SvgPicture.asset(
+      //               placeholderAssetImage!,
+      //               fit: fit ?? BoxFit.contain,
+      //             )
+      //           : Image.asset(
+      //               placeholderAssetImage!,
+      //               fit: fit,
+      //             ),
+      //     );
+      //   }
+      //   return const Center(
+      //     child: AppLoader(
+      //       color: AppColors.primary,
+      //     ),
+      //   );
+      // },
+      errorWidget: Builder(
+        builder: (context) {
+          if (errorWidget != null) {
+            return errorWidget!;
+          }
+          final errorImage = errorAssetImage ?? placeholderAssetImage ?? '';
+          if (errorImage.isNotEmpty) {
+            return Container(
+              clipBehavior: Clip.hardEdge,
+              decoration: BoxDecoration(
+                borderRadius:
+                    isCircular ? null : BorderRadius.circular(borderRadius),
+                shape: isCircular ? BoxShape.circle : BoxShape.rectangle,
+              ),
+              child: errorImage.endsWith(".svg")
+                  ? SvgPicture.asset(
+                      errorImage,
+                      fit: fit ?? BoxFit.contain,
+                    )
+                  : Image.asset(
+                      errorImage,
+                      fit: fit,
+                    ),
+            );
+          }
           return Container(
-            clipBehavior: Clip.hardEdge,
+            width: double.maxFinite,
+            height: double.maxFinite,
             decoration: BoxDecoration(
+              color: AppColors.primary,
               borderRadius:
                   isCircular ? null : BorderRadius.circular(borderRadius),
               shape: isCircular ? BoxShape.circle : BoxShape.rectangle,
             ),
-            child: placeholderAssetImage!.endsWith(".svg")
-                ? SvgPicture.asset(
-                    placeholderAssetImage!,
-                    fit: fit ?? BoxFit.contain,
-                  )
-                : Image.asset(
-                    placeholderAssetImage!,
-                    fit: fit,
-                  ),
           );
-        }
-        return const Center(
-          child: AppLoader(
-            color: AppColors.primary,
-          ),
-        );
-      },
-      errorWidget: (context, error, stackTrace) {
-        if (errorWidget != null) {
-          return errorWidget!;
-        }
-        final errorImage = errorAssetImage ?? placeholderAssetImage ?? '';
-        if (errorImage.isNotEmpty) {
-          return Container(
-            clipBehavior: Clip.hardEdge,
-            decoration: BoxDecoration(
-              borderRadius:
-                  isCircular ? null : BorderRadius.circular(borderRadius),
-              shape: isCircular ? BoxShape.circle : BoxShape.rectangle,
-            ),
-            child: errorImage.endsWith(".svg")
-                ? SvgPicture.asset(
-                    errorImage,
-                    fit: fit ?? BoxFit.contain,
-                  )
-                : Image.asset(
-                    errorImage,
-                    fit: fit,
-                  ),
-          );
-        }
-        return Container(
-          width: double.maxFinite,
-          height: double.maxFinite,
-          decoration: BoxDecoration(
-            color: AppColors.primary,
-            borderRadius:
-                isCircular ? null : BorderRadius.circular(borderRadius),
-            shape: isCircular ? BoxShape.circle : BoxShape.rectangle,
-          ),
-        );
-      },
+        },
+      ),
     );
   }
 }

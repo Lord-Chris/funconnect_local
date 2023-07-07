@@ -12,7 +12,7 @@ class HomeV2InitEvent extends HomeV2Event {}
 class NotificationTapEvent extends HomeV2Event {}
 
 class PlaceTapEvent extends HomeV2Event {
-  final HomePlacesData place;
+  final PlaceModel place;
 
   const PlaceTapEvent({required this.place});
 }
@@ -20,7 +20,7 @@ class PlaceTapEvent extends HomeV2Event {
 class HomeV2RefreshEvent extends HomeV2Event {}
 
 class CategoryTapEvent extends HomeV2Event {
-  final HomeCategoryData category;
+  final CategoryModel category;
 
   const CategoryTapEvent({
     required this.category,

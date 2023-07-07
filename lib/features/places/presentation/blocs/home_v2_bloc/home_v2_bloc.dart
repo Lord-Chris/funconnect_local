@@ -1,22 +1,22 @@
 import 'dart:async';
 
-import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:funconnect/core/app/_app.dart';
 import 'package:funconnect/core/constants/hive_keys.dart';
 import 'package:funconnect/core/constants/storage_keys.dart';
 import 'package:funconnect/core/models/_models.dart';
 import 'package:funconnect/features/places/data/repository/i_place_repository.dart';
 import 'package:funconnect/features/places/domain/entities/category_model.dart';
-import 'package:funconnect/features/places/domain/entities/home_category_data.dart';
 import 'package:funconnect/features/places/domain/entities/home_category_new.dart';
 import 'package:funconnect/features/places/domain/entities/home_place.dart';
-import 'package:funconnect/features/places/domain/entities/home_places_data.dart';
 import 'package:funconnect/features/places/domain/entities/home_trends_reponse.dart';
 import 'package:funconnect/services/_services.dart';
 import 'package:funconnect/services/location_service/location_service_new.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:logger/logger.dart';
+
+import '../../../domain/entities/place_model.dart';
 
 part 'home_v2_event.dart';
 part 'home_v2_state.dart';

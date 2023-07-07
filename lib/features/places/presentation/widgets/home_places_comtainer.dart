@@ -2,12 +2,12 @@ import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:funconnect/features/places/domain/entities/home_places_data.dart';
+import 'package:funconnect/features/places/domain/entities/place_model.dart';
 import 'package:funconnect/features/places/presentation/blocs/home_v2_bloc/home_v2_bloc.dart';
 import 'package:funconnect/shared/constants/colors.dart';
 
 class HomePlaceContainer extends StatelessWidget {
-  final HomePlacesData place;
+  final PlaceModel place;
   const HomePlaceContainer({super.key, required this.place});
 
   @override

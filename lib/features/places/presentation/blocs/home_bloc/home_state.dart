@@ -1,8 +1,11 @@
 import 'package:equatable/equatable.dart';
 import 'package:funconnect/core/models/_models.dart';
 import 'package:funconnect/features/places/domain/entities/category_model.dart';
-import 'package:funconnect/features/places/domain/entities/home_trend_item_model.dart';
+import 'package:funconnect/features/places/domain/entities/home_category_new.dart';
 import 'package:funconnect/features/places/domain/entities/place_model.dart';
+
+import '../../../domain/entities/home_place.dart';
+import '../../../domain/entities/home_response_data.dart';
 
 abstract class HomeState extends Equatable {
   const HomeState();
@@ -21,7 +24,7 @@ class HomeIdleState extends HomeState {
   final List<CategoryModel> interests;
   final CategoryModel? interest;
   final List<PlaceModel> interestPlaces;
-  final List<HomeTrendItemModel> homeTrends;
+  final HomeResponseData? homeTrends;
 
   const HomeIdleState({
     this.user,
@@ -29,12 +32,21 @@ class HomeIdleState extends HomeState {
     required this.interests,
     this.interest,
     this.interestPlaces = const [],
-    this.homeTrends = const [],
+    this.homeTrends,
   });
 
+  List<HomePlaces> get homePlaces => homeTrends?.places ?? [];
+  List<HomeCategory> get homeCategory => homeTrends?.categories ?? [];
+
   @override
-  List<Object> get props =>
-      [interests, interest ?? "", interestPlaces, homeTrends, DateTime.now()];
+  List<Object> get props => [
+        interests,
+        interest ?? "",
+        interestPlaces,
+        homePlaces,
+        homeCategory,
+        DateTime.now(),
+      ];
 
   HomeIdleState copyWith({
     UserModel? user,
@@ -42,7 +54,7 @@ class HomeIdleState extends HomeState {
     List<CategoryModel>? interests,
     CategoryModel? interest,
     List<PlaceModel>? interestPlaces,
-    List<HomeTrendItemModel>? homeTrends,
+    HomeResponseData? homeTrends,
   }) {
     return HomeIdleState(
       user: user ?? this.user,

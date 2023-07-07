@@ -14,7 +14,6 @@ import 'package:funconnect/features/places/presentation/blocs/home_v2_bloc/home_
 import 'package:funconnect/features/places/presentation/widgets/home_all_categories_list.dart';
 import 'package:funconnect/features/places/presentation/widgets/home_all_interests_container.dart';
 import 'package:funconnect/features/places/presentation/widgets/home_all_places_list.dart';
-
 import 'package:funconnect/shared/constants/_constants.dart';
 
 class HomeV2View extends StatelessWidget {

@@ -13,7 +13,6 @@ import 'package:funconnect/core/extensions/string_extension.dart';
 import 'package:funconnect/core/models/paginated_data.dart';
 import 'package:funconnect/core/utils/general_utils.dart';
 import 'package:funconnect/features/places/domain/entities/full_place_model.dart';
-import 'package:funconnect/features/places/domain/entities/home_places_data.dart';
 import 'package:funconnect/features/places/domain/entities/review_model.dart';
 import 'package:funconnect/features/places/presentation/blocs/place_detail_v2_bloc/place_detail_v2_bloc.dart';
 import 'package:funconnect/features/places/presentation/widgets/home_categories_large_widget.dart';
@@ -27,7 +26,7 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../domain/entities/place_model.dart';
 
 class PlaceDetailViewCopy extends StatelessWidget {
-  final HomePlacesData place;
+  final PlaceModel place;
   const PlaceDetailViewCopy({super.key, required this.place});
 
   @override

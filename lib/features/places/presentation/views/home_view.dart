@@ -168,7 +168,8 @@ class _HomeViewState extends State<HomeView> {
                               );
                             }
                             if (state is HomeIdleState) {
-                              if (state.homeTrends.isEmpty) {
+                              if (state.homeCategory.isEmpty ||
+                                  state.homeCategory.isEmpty) {
                                 return Padding(
                                   padding: const EdgeInsets.all(20),
                                   child: Column(
@@ -309,56 +310,54 @@ class _DefaultHomeView extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            ...state.homeTrends.map((e) {
-              if (e.isPlace) {
-                if (e.data.isEmpty) return const SizedBox();
-                return HomeSection<PlaceModel>(
-                  label: e.name,
-                  showSeeAll:
-                      state.homeTrends.every((item) => item.data.isNotEmpty),
-                  initialShowAll:
-                      !state.homeTrends.every((item) => item.data.isNotEmpty),
-                  children: e.data.map((e) => e as PlaceModel).toList(),
-                  widget: (PlaceModel place) {
-                    return HomeCategoriesLargeWidget(
-                      showRatings: place.showRatings,
-                      coverImage: place.coverImagePath,
-                      name: place.name,
-                      isBookmarked: place.isBookmarked,
-                      rating: place.avgRating,
-                      ratingCount: place.avgReviewCount,
-                      onBookmarkTap: () async {
-                        final bloc = context.read<HomeBloc>().stream.first;
-                        context.read<HomeBloc>().add(BookmarkTapEvent(place));
-                        await bloc;
-
-                        // // ignore: use_build_context_synchronously
-                        // context.read<SavedBloc>().add(
-                        //     const GetAllUserSavedPlaces(showLoader: false));
-                      },
-                      onTap: () =>
-                          context.read<HomeBloc>().add(PlaceTapEvent(place)),
-                    );
-                  },
+            HomeSection<CategoryModel>(
+              label: state.homeCategory.first.name,
+              itemHeight: 136.r,
+              showSeeAll: false,
+              // state.homeCategory.first.data.every((item) => item.data.isNotEmpty),
+              // initialShowAll:
+              //     !state.homeTrends.every((item) => item.data.isNotEmpty),
+              children: state.homeCategory.first.data.map((e) => e).toList(),
+              widget: (CategoryModel category) {
+                return HomeViewCategoriesSmallSubWidget(
+                  coverImage: category.coverPhoto.isEmpty
+                      ? AppConstants.mockImage
+                      : category.coverPhoto,
+                  name: category.name,
+                  onTap: () => context.read<HomeBloc>().add(
+                        CategoryTapEvent(category: category),
+                      ),
                 );
-              }
-              return HomeSection<CategoryModel>(
+              },
+            ),
+            ...state.homePlaces.map((e) {
+              if (e.data.isEmpty) return const SizedBox();
+              return HomeSection<PlaceModel>(
                 label: e.name,
-                itemHeight: 136.r,
-                showSeeAll:
-                    state.homeTrends.every((item) => item.data.isNotEmpty),
-                initialShowAll:
-                    !state.homeTrends.every((item) => item.data.isNotEmpty),
-                children: e.data.map((e) => e as CategoryModel).toList(),
-                widget: (CategoryModel category) {
-                  return HomeViewCategoriesSmallSubWidget(
-                    coverImage: category.coverPhoto.isEmpty
-                        ? AppConstants.mockImage
-                        : category.coverPhoto,
-                    name: category.name,
-                    onTap: () => context.read<HomeBloc>().add(
-                          CategoryTapEvent(category: category),
-                        ),
+                showSeeAll: false,
+                // state.homeTrends.every((item) => item.data.isNotEmpty),
+                // initialShowAll:
+                //     !state.homeTrends.every((item) => item.data.isNotEmpty),
+                children: e.data.map((e) => e).toList(),
+                widget: (PlaceModel place) {
+                  return HomeCategoriesLargeWidget(
+                    showRatings: place.showRatings,
+                    coverImage: place.coverImagePath,
+                    name: place.name,
+                    isBookmarked: place.isBookmarked,
+                    rating: place.avgRating,
+                    ratingCount: place.avgReviewCount,
+                    onBookmarkTap: () async {
+                      final bloc = context.read<HomeBloc>().stream.first;
+                      context.read<HomeBloc>().add(BookmarkTapEvent(place));
+                      await bloc;
+
+                      // // ignore: use_build_context_synchronously
+                      // context.read<SavedBloc>().add(
+                      //     const GetAllUserSavedPlaces(showLoader: false));
+                    },
+                    onTap: () =>
+                        context.read<HomeBloc>().add(PlaceTapEvent(place)),
                   );
                 },
               );
