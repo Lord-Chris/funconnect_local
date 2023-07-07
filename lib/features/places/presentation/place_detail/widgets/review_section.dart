@@ -5,13 +5,13 @@ import 'package:flutter_rating_stars/flutter_rating_stars.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../../../core/utils/general_utils.dart';
-import '../../../../shared/components/_components.dart';
-import '../../../../shared/constants/_constants.dart';
-import '../../domain/entities/review_model.dart';
-import '../blocs/place_detail_bloc/place_detail_bloc.dart';
-import '../blocs/place_detail_bloc/place_detail_event.dart';
-import '../blocs/place_detail_bloc/place_detail_state.dart';
+import '../../../../../core/utils/general_utils.dart';
+import '../../../../../shared/components/_components.dart';
+import '../../../../../shared/constants/_constants.dart';
+import '../../../domain/entities/review_model.dart';
+import '../bloc/place_detail_bloc.dart';
+import '../bloc/place_detail_event.dart';
+import '../bloc/place_detail_state.dart';
 
 class ReviewSection extends HookWidget {
   const ReviewSection({

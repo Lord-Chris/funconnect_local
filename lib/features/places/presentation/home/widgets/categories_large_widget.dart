@@ -5,7 +5,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_rating_stars/flutter_rating_stars.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../shared/constants/_constants.dart';
+import '../../../../../shared/constants/_constants.dart';
 
 class HomeCategoriesLargeWidget extends HookWidget {
   final String name;

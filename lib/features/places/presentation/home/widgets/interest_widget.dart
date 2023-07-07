@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:funconnect/features/places/domain/entities/category_model.dart';
-import 'package:funconnect/features/places/presentation/blocs/home_bloc/home_bloc.dart';
-import 'package:funconnect/features/places/presentation/blocs/home_bloc/home_event.dart';
+import 'package:funconnect/features/places/presentation/home/bloc/home_bloc.dart';
+import 'package:funconnect/features/places/presentation/home/bloc/home_event.dart';
 
-import '../../../../shared/components/_components.dart';
-import '../../../../shared/constants/_constants.dart';
+import '../../../../../shared/components/_components.dart';
+import '../../../../../shared/constants/_constants.dart';
 
 class HomeInterestWidget extends StatelessWidget {
   final CategoryModel interest;

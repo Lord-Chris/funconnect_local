@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:funconnect/features/places/presentation/blocs/home_v2_bloc/home_v2_bloc.dart';
-import 'package:funconnect/features/places/presentation/widgets/home_places_comtainer.dart';
 import 'package:funconnect/shared/constants/textstyles.dart';
+
+import 'places_container.dart';
 
 class HomeAllPlacesList extends StatelessWidget {
   final HomeV2LoadedState state;
@@ -39,18 +40,20 @@ class HomeAllPlacesList extends StatelessWidget {
               ),
               Expanded(
                 child: ListView.separated(
-                    separatorBuilder: (context, index) {
-                      return SizedBox(
-                        width: 8.w,
-                      );
-                    },
-                    shrinkWrap: true,
-                    scrollDirection: Axis.horizontal,
-                    itemCount: state.places[index1].data.length,
-                    itemBuilder: (context, index) {
-                      return HomePlaceContainer(
-                          place: state.places[index1].data[index]);
-                    }),
+                  separatorBuilder: (context, index) {
+                    return SizedBox(
+                      width: 8.w,
+                    );
+                  },
+                  shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
+                  itemCount: state.places[index1].data.length,
+                  itemBuilder: (context, index) {
+                    return HomePlaceContainer(
+                      place: state.places[index1].data[index],
+                    );
+                  },
+                ),
               ),
             ],
           ),

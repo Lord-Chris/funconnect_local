@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:funconnect/features/places/presentation/blocs/explore_bloc/explore_bloc.dart';
-import 'package:funconnect/features/places/presentation/blocs/explore_bloc/explore_event.dart';
-import 'package:funconnect/features/places/presentation/blocs/explore_bloc/explore_state.dart';
-import 'package:funconnect/features/places/presentation/widgets/home_categories_large_widget.dart';
-import 'package:funconnect/features/places/presentation/widgets/home_skeleton.dart';
+import 'package:funconnect/features/places/presentation/explore/bloc/explore_bloc.dart';
+import 'package:funconnect/features/places/presentation/explore/bloc/explore_event.dart';
+import 'package:funconnect/features/places/presentation/explore/bloc/explore_state.dart';
 import 'package:funconnect/shared/components/_components.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
 
 import '../../domain/entities/category_model.dart';
 import '../../domain/entities/place_model.dart';
-import '../widgets/home_categories_small_widget.dart';
-import '../widgets/home_categories_widget.dart';
+import '../home/widgets/categories_large_widget.dart';
+import '../home/widgets/categories_small_widget.dart';
+import '../home/widgets/categories_widget.dart';
+import '../home/widgets/home_skeleton.dart';
 
 class ExploreView extends StatefulWidget {
   const ExploreView({Key? key}) : super(key: key);

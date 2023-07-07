@@ -11,10 +11,11 @@ import 'package:funconnect/features/dashboard/presentation/dashboard/bloc/dashbo
 import 'package:funconnect/features/dashboard/presentation/dashboard/bloc/dashboard_event.dart';
 import 'package:funconnect/features/dashboard/presentation/notifications/bloc/notification_bloc.dart';
 import 'package:funconnect/features/places/presentation/blocs/home_v2_bloc/home_v2_bloc.dart';
-import 'package:funconnect/features/places/presentation/widgets/home_all_categories_list.dart';
-import 'package:funconnect/features/places/presentation/widgets/home_all_interests_container.dart';
-import 'package:funconnect/features/places/presentation/widgets/home_all_places_list.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
+
+import '../home/widgets/all_categories_list.dart';
+import '../home/widgets/all_interests_container.dart';
+import '../home/widgets/all_places_list.dart';
 
 class HomeV2View extends StatelessWidget {
   const HomeV2View({super.key});

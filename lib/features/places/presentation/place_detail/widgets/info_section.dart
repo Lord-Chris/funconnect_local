@@ -1,259 +1,26 @@
-import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_rating_stars/flutter_rating_stars.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:funconnect/core/extensions/_extensions.dart';
-import 'package:funconnect/core/utils/general_utils.dart';
-import 'package:funconnect/features/places/domain/entities/place_model.dart';
-import 'package:funconnect/features/places/presentation/blocs/place_detail_bloc/place_detail_bloc.dart';
-import 'package:funconnect/features/places/presentation/blocs/place_detail_bloc/place_detail_event.dart';
-import 'package:funconnect/features/places/presentation/blocs/place_detail_bloc/place_detail_state.dart';
-import 'package:funconnect/features/places/presentation/widgets/home_categories_large_widget.dart';
-import 'package:funconnect/features/places/presentation/widgets/home_categories_widget.dart';
-import 'package:funconnect/shared/components/_components.dart';
-import 'package:funconnect/shared/constants/_constants.dart';
 import 'package:readmore/readmore.dart';
 
-import '../widgets/place_detail_review_section.dart';
+import '../../../../../core/utils/general_utils.dart';
+import '../../../../../shared/components/_components.dart';
+import '../../../../../shared/constants/_constants.dart';
+import '../../../domain/entities/place_model.dart';
+import '../bloc/place_detail_bloc.dart';
+import '../bloc/place_detail_event.dart';
+import '../bloc/place_detail_state.dart';
 
-class PlaceDetailView extends HookWidget {
+class InfoSection extends StatelessWidget {
   final PlaceModel place;
-  const PlaceDetailView({
-    Key? key,
-    required this.place,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    useEffect(() {
-      context.read<PlaceDetailBloc>().add(PlaceInitEvent(place));
-      return null;
-    }, []);
-    return Scaffold(
-      body: RefreshIndicator(
-        onRefresh: () async {
-          final bloc = context.read<PlaceDetailBloc>();
-          bloc.add(PlaceInitEvent(place));
-          await bloc.stream.first;
-        },
-        child: SafeArea(
-          child: Stack(
-            children: [
-              SingleChildScrollView(
-                padding: EdgeInsets.symmetric(horizontal: 16.w),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    _ImageSection(place: place),
-                    Spacing.vertRegular(),
-                    _InfoSection(place: place),
-                    const ReviewSection(),
-                    Spacing.vertMedium(),
-                    const _MorePlacesSection(),
-                  ],
-                ),
-              ),
-              Positioned(
-                left: 23.w,
-                top: 23,
-                child: SafeArea(
-                  child: InkWell(
-                    onTap: () => Navigator.pop(context),
-                    child: CircleAvatar(
-                      radius: 18.r,
-                      backgroundColor: AppColors.black.withOpacity(.6),
-                      child: Icon(
-                        Icons.arrow_back_ios_rounded,
-                        size: 20.r,
-                        color: AppColors.white,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _ImageSection extends HookWidget {
-  const _ImageSection({
-    required this.place,
-  });
-
-  final PlaceModel place;
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox.fromSize(
-      size: Size.fromHeight(409.h),
-      child: Builder(
-        builder: (context) {
-          final state = context.watch<PlaceDetailBloc>().state;
-          if (state is PlaceDetailIdleState) {
-            if (state.place.images.length > 1) {
-              return HookBuilder(builder: (context) {
-                final controller = usePageController();
-                Timer? timer;
-                useEffect(() {
-                  Timer.periodic(const Duration(seconds: 5), (timerr) {
-                    timer = timerr;
-                    if (!controller.hasClients) return;
-                    if (controller.page != state.place.images.length - 1) {
-                      controller.nextPage(
-                        duration: const Duration(milliseconds: 1000),
-                        curve: Curves.ease,
-                      );
-                    } else {
-                      controller.jumpToPage(0);
-                    }
-                  });
-                  return () => timer?.cancel();
-                }, []);
-                useListenableSelector(
-                  controller,
-                  () => controller.hasClients ? controller.page : 0,
-                );
-                return Stack(
-                  children: [
-                    Positioned.fill(
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(20),
-                        child: PageView(
-                          controller: controller,
-                          children: [
-                            ...state.place.images.map(
-                              (e) => AppNetworkImage(
-                                size: Size.fromHeight(409.h),
-                                url: e.path,
-                                borderRadius: 20,
-                                fit: BoxFit.cover,
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                    if (controller.hasClients && controller.page != 0)
-                      Positioned(
-                        left: 10,
-                        top: 0,
-                        bottom: 0,
-                        child: InkWell(
-                          onTap: () => controller.previousPage(
-                            duration: const Duration(milliseconds: 500),
-                            curve: Curves.ease,
-                          ),
-                          child: CircleAvatar(
-                            radius: 18.r,
-                            backgroundColor: AppColors.black.withOpacity(.5),
-                            child: Icon(
-                              Icons.arrow_back,
-                              size: 20.r,
-                              color: AppColors.white,
-                            ),
-                          ),
-                        ),
-                      ),
-                    if (controller.hasClients &&
-                        controller.page != state.place.images.length - 1)
-                      Positioned(
-                        right: 10,
-                        top: 0,
-                        bottom: 0,
-                        child: InkWell(
-                          onTap: () => controller.nextPage(
-                            duration: const Duration(milliseconds: 500),
-                            curve: Curves.ease,
-                          ),
-                          child: CircleAvatar(
-                            radius: 18.r,
-                            backgroundColor: AppColors.black.withOpacity(.5),
-                            child: Icon(
-                              Icons.arrow_forward,
-                              size: 20.r,
-                              color: AppColors.white,
-                            ),
-                          ),
-                        ),
-                      )
-                  ],
-                );
-              });
-            }
-            if (state.place.images.isNotEmpty) {
-              return AppNetworkImage(
-                url: state.place.images[0].path,
-                errorWidget: AppNetworkImage(
-                  url: place.coverImagePath,
-                  borderRadius: 20,
-                  fit: BoxFit.cover,
-                ),
-                borderRadius: 20,
-                fit: BoxFit.cover,
-              );
-            }
-          }
-          return AppNetworkImage(
-            url: place.coverImagePath,
-            borderRadius: 20,
-            fit: BoxFit.cover,
-          );
-        },
-      ),
-    );
-  }
-}
-
-class _MorePlacesSection extends StatelessWidget {
-  const _MorePlacesSection({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<PlaceDetailBloc, PlaceDetailState>(
-      buildWhen: (_, current) => current is PlaceDetailIdleState,
-      builder: (context, state) {
-        if (state is! PlaceDetailIdleState) return const SizedBox();
-        if (state.place.similarPlaces.isEmpty) return const SizedBox();
-        return HomeSection<PlaceModel>(
-          label: "More like this",
-          children: state.place.similarPlaces.map((e) => e).toList(),
-          widget: (PlaceModel place) {
-            return HomeCategoriesLargeWidget(
-              showRatings: place.showRatings,
-              coverImage: place.coverImagePath,
-              name: place.name,
-              isBookmarked: place.isBookmarked,
-              rating: place.avgRating,
-              ratingCount: place.avgReviewCount,
-              onTap: () => context.read<PlaceDetailBloc>().add(
-                    PlaceTapEvent(place: place),
-                  ),
-            );
-          },
-        );
-      },
-    );
-  }
-}
-
-class _InfoSection extends StatelessWidget {
-  final PlaceModel place;
-  const _InfoSection({
+  const InfoSection({
     Key? key,
     required this.place,
   }) : super(key: key);
@@ -586,7 +353,7 @@ class _InfoSection extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Padding(
-        padding: REdgeInsets.symmetric(vertical: 4.r),
+        padding: REdgeInsets.symmetric(vertical: 4),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [

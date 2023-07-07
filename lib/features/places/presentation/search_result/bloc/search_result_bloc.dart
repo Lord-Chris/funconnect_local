@@ -6,9 +6,9 @@ import 'package:funconnect/core/models/_models.dart';
 import 'package:funconnect/features/places/data/repository/i_place_repository.dart';
 import 'package:funconnect/features/places/domain/entities/search_query_param.dart';
 import 'package:funconnect/features/places/domain/usecases/search_place.dart';
-import 'package:funconnect/features/places/presentation/blocs/search_result_bloc/search_result_event.dart';
-import 'package:funconnect/features/places/presentation/blocs/search_result_bloc/search_result_state.dart';
-import 'package:funconnect/features/places/presentation/widgets/search_filter_sheet.dart';
+import 'package:funconnect/features/places/presentation/search_result/bloc/search_result_event.dart';
+import 'package:funconnect/features/places/presentation/search_result/bloc/search_result_state.dart';
+import 'package:funconnect/features/places/presentation/search_result/widgets/search_filter_sheet.dart';
 import 'package:funconnect/services/_services.dart';
 import 'package:logger/logger.dart';
 

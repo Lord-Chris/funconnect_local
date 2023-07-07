@@ -4,13 +4,14 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:funconnect/core/app/_app.dart';
 import 'package:funconnect/core/extensions/_extensions.dart';
-import 'package:funconnect/features/places/presentation/blocs/search_result_bloc/search_result_bloc.dart';
-import 'package:funconnect/features/places/presentation/blocs/search_result_bloc/search_result_event.dart';
-import 'package:funconnect/features/places/presentation/blocs/search_result_bloc/search_result_state.dart';
-import 'package:funconnect/features/places/presentation/widgets/home_categories_large_widget.dart';
+import 'package:funconnect/features/places/presentation/search_result/bloc/search_result_bloc.dart';
+import 'package:funconnect/features/places/presentation/search_result/bloc/search_result_event.dart';
+import 'package:funconnect/features/places/presentation/search_result/bloc/search_result_state.dart';
 import 'package:funconnect/services/_services.dart';
 import 'package:funconnect/shared/components/_components.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
+
+import '../home/widgets/categories_large_widget.dart';
 
 class SearchResultView extends HookWidget {
   const SearchResultView({

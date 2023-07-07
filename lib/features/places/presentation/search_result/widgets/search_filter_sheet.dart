@@ -5,7 +5,7 @@ import 'package:funconnect/features/places/domain/entities/category_model.dart';
 import 'package:funconnect/shared/components/_components.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
 
-import '../../domain/entities/search_query_param.dart';
+import '../../../domain/entities/search_query_param.dart';
 
 class SearchFilterSheet extends HookWidget {
   final List<CategoryModel> categories;

@@ -10,17 +10,17 @@ import 'package:funconnect/features/dashboard/presentation/notifications/bloc/no
 import 'package:funconnect/features/dashboard/presentation/notifications/bloc/notification_event.dart';
 import 'package:funconnect/features/places/domain/entities/category_model.dart';
 import 'package:funconnect/features/places/domain/entities/place_model.dart';
-import 'package:funconnect/features/places/presentation/blocs/home_bloc/home_bloc.dart';
-import 'package:funconnect/features/places/presentation/blocs/home_bloc/home_event.dart';
-import 'package:funconnect/features/places/presentation/blocs/home_bloc/home_state.dart';
-import 'package:funconnect/features/places/presentation/widgets/home_skeleton.dart';
+import 'package:funconnect/features/places/presentation/home/bloc/home_bloc.dart';
+import 'package:funconnect/features/places/presentation/home/bloc/home_event.dart';
+import 'package:funconnect/features/places/presentation/home/bloc/home_state.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
 
 import '../../../../shared/components/_components.dart';
-import '../widgets/home_categories_large_widget.dart';
-import '../widgets/home_categories_small_widget.dart';
-import '../widgets/home_categories_widget.dart';
-import '../widgets/home_interest_widget.dart';
+import 'widgets/categories_large_widget.dart';
+import 'widgets/categories_small_widget.dart';
+import 'widgets/categories_widget.dart';
+import 'widgets/home_skeleton.dart';
+import 'widgets/interest_widget.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({Key? key}) : super(key: key);
@@ -305,65 +305,53 @@ class _DefaultHomeView extends StatelessWidget {
         context.read<HomeBloc>().add(const HomeInitEvent(showLoader: false));
         await bloc;
       },
-      child: SingleChildScrollView(
+      child: ScrollableColumn(
         physics: const AlwaysScrollableScrollPhysics(),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            HomeSection<CategoryModel>(
-              label: state.homeCategory.first.name,
-              itemHeight: 136.r,
+        // mainAxisSize: MainAxisSize.min,
+        children: [
+          HomeSection<CategoryModel>(
+            label: state.homeCategory.first.name,
+            itemHeight: 136.r,
+            showSeeAll: false,
+            children: state.homeCategory.first.data.map((e) => e).toList(),
+            widget: (CategoryModel category) {
+              return HomeViewCategoriesSmallSubWidget(
+                coverImage: category.coverPhoto.isEmpty
+                    ? AppConstants.mockImage
+                    : category.coverPhoto,
+                name: category.name,
+                onTap: () => context.read<HomeBloc>().add(
+                      CategoryTapEvent(category: category),
+                    ),
+              );
+            },
+          ),
+          ...state.homePlaces.map((e) {
+            if (e.data.isEmpty) return const SizedBox();
+            return HomeSection<PlaceModel>(
+              label: e.name,
               showSeeAll: false,
-              // state.homeCategory.first.data.every((item) => item.data.isNotEmpty),
-              // initialShowAll:
-              //     !state.homeTrends.every((item) => item.data.isNotEmpty),
-              children: state.homeCategory.first.data.map((e) => e).toList(),
-              widget: (CategoryModel category) {
-                return HomeViewCategoriesSmallSubWidget(
-                  coverImage: category.coverPhoto.isEmpty
-                      ? AppConstants.mockImage
-                      : category.coverPhoto,
-                  name: category.name,
-                  onTap: () => context.read<HomeBloc>().add(
-                        CategoryTapEvent(category: category),
-                      ),
+              children: e.data.map((e) => e).toList(),
+              widget: (PlaceModel place) {
+                return HomeCategoriesLargeWidget(
+                  showRatings: place.showRatings,
+                  coverImage: place.coverImagePath,
+                  name: place.name,
+                  isBookmarked: place.isBookmarked,
+                  rating: place.avgRating,
+                  ratingCount: place.avgReviewCount,
+                  onBookmarkTap: () async {
+                    final bloc = context.read<HomeBloc>().stream.first;
+                    context.read<HomeBloc>().add(BookmarkTapEvent(place));
+                    await bloc;
+                  },
+                  onTap: () =>
+                      context.read<HomeBloc>().add(PlaceTapEvent(place)),
                 );
               },
-            ),
-            ...state.homePlaces.map((e) {
-              if (e.data.isEmpty) return const SizedBox();
-              return HomeSection<PlaceModel>(
-                label: e.name,
-                showSeeAll: false,
-                // state.homeTrends.every((item) => item.data.isNotEmpty),
-                // initialShowAll:
-                //     !state.homeTrends.every((item) => item.data.isNotEmpty),
-                children: e.data.map((e) => e).toList(),
-                widget: (PlaceModel place) {
-                  return HomeCategoriesLargeWidget(
-                    showRatings: place.showRatings,
-                    coverImage: place.coverImagePath,
-                    name: place.name,
-                    isBookmarked: place.isBookmarked,
-                    rating: place.avgRating,
-                    ratingCount: place.avgReviewCount,
-                    onBookmarkTap: () async {
-                      final bloc = context.read<HomeBloc>().stream.first;
-                      context.read<HomeBloc>().add(BookmarkTapEvent(place));
-                      await bloc;
-
-                      // // ignore: use_build_context_synchronously
-                      // context.read<SavedBloc>().add(
-                      //     const GetAllUserSavedPlaces(showLoader: false));
-                    },
-                    onTap: () =>
-                        context.read<HomeBloc>().add(PlaceTapEvent(place)),
-                  );
-                },
-              );
-            }),
-          ],
-        ),
+            );
+          }),
+        ],
       ),
     );
   }

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:funconnect/features/places/presentation/blocs/home_v2_bloc/home_v2_bloc.dart';
-import 'package:funconnect/features/places/presentation/widgets/home_categories_comtainer.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
+
+import 'categories_container.dart';
 
 class HomeAllCategoriesList extends StatelessWidget {
   final HomeV2LoadedState state;
@@ -41,18 +42,20 @@ class HomeAllCategoriesList extends StatelessWidget {
               ),
               Expanded(
                 child: ListView.separated(
-                    separatorBuilder: (context, index) {
-                      return SizedBox(
-                        width: 8.w,
-                      );
-                    },
-                    shrinkWrap: true,
-                    scrollDirection: Axis.horizontal,
-                    itemCount: state.categories[index1].data.length,
-                    itemBuilder: (context, index) {
-                      return HomeCategoryContainer(
-                          category: state.categories[index1].data[index]);
-                    }),
+                  separatorBuilder: (context, index) {
+                    return SizedBox(
+                      width: 8.w,
+                    );
+                  },
+                  shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
+                  itemCount: state.categories[index1].data.length,
+                  itemBuilder: (context, index) {
+                    return HomeCategoryContainer(
+                      category: state.categories[index1].data[index],
+                    );
+                  },
+                ),
               ),
             ],
           ),

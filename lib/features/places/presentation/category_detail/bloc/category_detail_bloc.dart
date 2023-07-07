@@ -3,8 +3,8 @@ import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:funconnect/core/app/_app.dart';
 import 'package:funconnect/core/models/failure.dart';
-import 'package:funconnect/features/places/presentation/blocs/category_detail_bloc/category_detail_event.dart';
-import 'package:funconnect/features/places/presentation/blocs/category_detail_bloc/category_detail_state.dart';
+import 'package:funconnect/features/places/presentation/category_detail/bloc/category_detail_event.dart';
+import 'package:funconnect/features/places/presentation/category_detail/bloc/category_detail_state.dart';
 import 'package:funconnect/services/_services.dart';
 import 'package:logger/logger.dart';
 

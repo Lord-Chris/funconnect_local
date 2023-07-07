@@ -8,7 +8,7 @@ import 'package:funconnect/features/dashboard/presentation/dashboard/bloc/dashbo
 import 'package:funconnect/features/dashboard/presentation/dashboard/bloc/dashboard_state.dart';
 import 'package:funconnect/features/dashboard/presentation/notifications/bloc/notification_bloc.dart';
 import 'package:funconnect/features/events/presentation/blocs/events_bloc/events_bloc.dart';
-import 'package:funconnect/features/places/presentation/blocs/explore_bloc/explore_bloc.dart';
+import 'package:funconnect/features/places/presentation/explore/bloc/explore_bloc.dart';
 import 'package:funconnect/features/profile/presentation/blocs/profile_bloc/profile_bloc.dart';
 import 'package:funconnect/features/profile/presentation/views/profile_view.dart';
 import 'package:funconnect/features/saved/presentation/blocs/saved_bloc.dart';
@@ -18,9 +18,9 @@ import 'package:funconnect/shared/constants/_constants.dart';
 import 'package:lazy_load_indexed_stack/lazy_load_indexed_stack.dart';
 
 import '../../../events/presentation/views/events_view.dart';
-import '../../../places/presentation/blocs/home_bloc/home_bloc.dart';
-import '../../../places/presentation/views/explore_view.dart';
-import '../../../places/presentation/views/home_view.dart';
+import '../../../places/presentation/home/bloc/home_bloc.dart';
+import '../../../places/presentation/explore/explore_view.dart';
+import '../../../places/presentation/home/home_view.dart';
 import '../../../saved/presentation/blocs/saved_event.dart';
 
 class DashboardView extends StatelessWidget {
