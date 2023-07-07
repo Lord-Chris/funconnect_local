@@ -63,6 +63,7 @@ class AppNetworkImage extends StatelessWidget {
       );
     }
     return CachedNetworkImage(
+      key: ValueKey(imageUrl),
       imageUrl: imageUrl,
       useOldImageOnUrlChange: true,
       cacheKey: cacheImage ? null : '$imageUrl ${Random().nextInt(5000)}',
