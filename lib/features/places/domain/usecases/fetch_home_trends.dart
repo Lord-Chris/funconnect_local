@@ -22,7 +22,7 @@ class FetchHomeTrends with UseCases<void, NoParams> {
       [
         _placeRepository
             .fetchHomeTrendsNew(location)
-            .then((value) => homeTrends = value.data),
+            .then((value) => homeTrends = value?.data),
         _placeRepository
             .fetchUserInterests()
             .then((value) => interests = value),

@@ -64,12 +64,12 @@ class HomeV2Bloc extends Bloc<HomeV2Event, HomeV2State> {
         }
       });
 
-      HomeTrendsReponse response =
+      HomeTrendsReponse? response =
           await _placeRepository.fetchHomeTrendsNew(_appLocation);
       List<CategoryModel> interests =
           await _placeRepository.fetchUserInterests();
-      List<HomeCategory> categories = response.data.categories;
-      List<HomePlaces> places = response.data.places;
+      List<HomeCategory> categories = response?.data.categories ?? [];
+      List<HomePlaces> places = response?.data.places ?? [];
       emit(HomeV2LoadedState(
           categories: categories, places: places, interests: interests));
     } catch (e) {

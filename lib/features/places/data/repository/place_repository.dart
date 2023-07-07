@@ -41,7 +41,7 @@ class PlaceRepository extends IPlaceRepository {
   // }
 
   @override
-  Future<HomeTrendsReponse> fetchHomeTrendsNew(AppLocation? location) async {
+  Future<HomeTrendsReponse?> fetchHomeTrendsNew(AppLocation? location) async {
     final useRemote = await _connectivityService.checkInternetConnection();
     if (!useRemote) {
       return _localDS.getHomeTrendsNew();

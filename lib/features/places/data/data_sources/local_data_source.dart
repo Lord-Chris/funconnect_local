@@ -27,12 +27,13 @@ class LocalPlaceDataSource {
     // ];
   }
 
-  HomeTrendsReponse getHomeTrendsNew() {
+  HomeTrendsReponse? getHomeTrendsNew() {
     final data = _localStorageService.read(
       HiveKeys.placesBoxId,
       key: StorageKeys.homeTrendsNew,
       def: null,
     );
+    if (data == null) return null;
 
     return HomeTrendsReponse.fromMap(data);
 
