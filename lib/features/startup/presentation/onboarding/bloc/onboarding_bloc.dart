@@ -4,8 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:funconnect/core/app/_app.dart';
 import 'package:funconnect/core/usecases/usecase.dart';
 import 'package:funconnect/features/startup/domain/usecases/get_started_usecase.dart';
-import 'package:funconnect/features/startup/presentation/blocs/onboarding_bloc/onboarding_event.dart';
-import 'package:funconnect/features/startup/presentation/blocs/onboarding_bloc/onboarding_state.dart';
+import 'package:funconnect/features/startup/presentation/onboarding/bloc/onboarding_event.dart';
+import 'package:funconnect/features/startup/presentation/onboarding/bloc/onboarding_state.dart';
 import 'package:funconnect/services/_services.dart';
 
 class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {

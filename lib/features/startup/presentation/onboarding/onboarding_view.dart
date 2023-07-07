@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:funconnect/features/startup/presentation/blocs/onboarding_bloc/onboarding_bloc.dart';
-import 'package:funconnect/features/startup/presentation/blocs/onboarding_bloc/onboarding_event.dart';
-import 'package:funconnect/features/startup/presentation/blocs/onboarding_bloc/onboarding_state.dart';
-import 'package:funconnect/features/startup/presentation/components/onboarding_item_widget.dart';
-import 'package:funconnect/features/startup/presentation/domain/entities/onboarding_item_model.dart';
+import 'package:funconnect/features/startup/presentation/onboarding/bloc/onboarding_bloc.dart';
+import 'package:funconnect/features/startup/presentation/onboarding/bloc/onboarding_event.dart';
+import 'package:funconnect/features/startup/presentation/onboarding/bloc/onboarding_state.dart';
+import 'package:funconnect/features/startup/presentation/onboarding/widgets/onboarding_item_widget.dart';
+import 'package:funconnect/features/startup/presentation/onboarding/widgets/onboarding_item_model.dart';
 import 'package:funconnect/shared/components/_components.dart';
 import 'package:funconnect/shared/constants/colors.dart';
 import 'package:story_view/story_view.dart';

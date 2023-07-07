@@ -4,8 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:funconnect/core/app/_app.dart';
 import 'package:funconnect/core/constants/hive_keys.dart';
 import 'package:funconnect/core/constants/storage_keys.dart';
-import 'package:funconnect/features/startup/presentation/blocs/splash_bloc/splash_event.dart';
-import 'package:funconnect/features/startup/presentation/blocs/splash_bloc/splash_state.dart';
+import 'package:funconnect/features/startup/presentation/splash/bloc/splash_event.dart';
+import 'package:funconnect/features/startup/presentation/splash/bloc/splash_state.dart';
 import 'package:funconnect/services/_services.dart';
 
 class SplashBloc extends Bloc<SplashEvent, SplashState> {

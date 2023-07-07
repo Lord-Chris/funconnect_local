@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:funconnect/features/startup/presentation/domain/entities/onboarding_item_model.dart';
+import 'package:funconnect/features/startup/presentation/onboarding/widgets/onboarding_item_model.dart';
 import 'package:funconnect/shared/constants/colors.dart';
 
 class OnboardingItemWidget extends StatelessWidget {

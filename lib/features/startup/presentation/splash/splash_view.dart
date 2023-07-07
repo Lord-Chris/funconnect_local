@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:funconnect/features/startup/presentation/blocs/splash_bloc/splash_bloc.dart';
-import 'package:funconnect/features/startup/presentation/blocs/splash_bloc/splash_event.dart';
-import 'package:funconnect/features/startup/presentation/blocs/splash_bloc/splash_state.dart';
+import 'package:funconnect/features/startup/presentation/splash/bloc/splash_bloc.dart';
+import 'package:funconnect/features/startup/presentation/splash/bloc/splash_event.dart';
+import 'package:funconnect/features/startup/presentation/splash/bloc/splash_state.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
 
 class SplashView extends StatelessWidget {

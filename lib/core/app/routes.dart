@@ -30,11 +30,11 @@ import 'package:funconnect/features/profile/presentation/views/my_tickets_view.d
 import 'package:funconnect/features/saved/presentation/saved/bloc/saved_bloc.dart';
 import 'package:funconnect/features/saved/presentation/collections/create_collection_view.dart';
 import 'package:funconnect/features/saved/presentation/saved/saved_view.dart';
-import 'package:funconnect/features/startup/presentation/blocs/onboarding_bloc/onboarding_bloc.dart';
-import 'package:funconnect/features/startup/presentation/blocs/splash_bloc/splash_bloc.dart';
-import 'package:funconnect/features/startup/presentation/views/onboarding_view.dart';
-import 'package:funconnect/features/startup/presentation/views/splash_view.dart';
-import 'package:funconnect/features/startup/presentation/views/version_update_view.dart';
+import 'package:funconnect/features/startup/presentation/onboarding/bloc/onboarding_bloc.dart';
+import 'package:funconnect/features/startup/presentation/splash/bloc/splash_bloc.dart';
+import 'package:funconnect/features/startup/presentation/onboarding/onboarding_view.dart';
+import 'package:funconnect/features/startup/presentation/splash/splash_view.dart';
+import 'package:funconnect/features/startup/presentation/version_update/version_update_view.dart';
 import 'package:funconnect/features/webview/presentation/blocs/webview_bloc/webview_bloc.dart';
 import 'package:funconnect/features/webview/presentation/views/webview_screen.dart';
 
