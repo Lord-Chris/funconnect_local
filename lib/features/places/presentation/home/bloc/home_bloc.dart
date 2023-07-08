@@ -99,10 +99,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     CategoryTapEvent event,
     Emitter<HomeState> emit,
   ) {
-    _navigationService.toNamed(Routes.categoryDetailRoute, arguments: {
-      'categoryId': event.category.id,
-      'categoryName': event.category.name
-    });
+    _navigationService.toNamed(
+      Routes.categoryDetailRoute,
+      arguments: event.category,
+    );
   }
 
   FutureOr<void> _onNotificationTapEvent(

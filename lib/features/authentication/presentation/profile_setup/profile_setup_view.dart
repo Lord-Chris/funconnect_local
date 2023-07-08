@@ -24,11 +24,9 @@ class ProfileSetUpView extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final nameController = useTextEditingController(text: user.name);
-    final usernameController = useTextEditingController(text: user.username);
-    final gender = useState<String?>(
-      user.gender.isEmpty ? null : user.gender.capitalize(),
-    );
+    final nameController = useTextEditingController();
+    final usernameController = useTextEditingController();
+    final gender = useState<String?>(null);
     return Scaffold(
       backgroundColor: AppColors.primary,
       body: SafeArea(

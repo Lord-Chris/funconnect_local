@@ -306,7 +306,6 @@ class _DefaultHomeView extends StatelessWidget {
       },
       child: ScrollableColumn(
         physics: const AlwaysScrollableScrollPhysics(),
-        // mainAxisSize: MainAxisSize.min,
         children: [
           HomeSection<CategoryModel>(
             label: state.homeCategory.first.name,
@@ -339,6 +338,7 @@ class _DefaultHomeView extends StatelessWidget {
                   isBookmarked: place.isBookmarked,
                   rating: place.avgRating,
                   ratingCount: place.avgReviewCount,
+                  cacheImage: false,
                   onBookmarkTap: () async {
                     final bloc = context.read<HomeBloc>().stream.first;
                     context.read<HomeBloc>().add(BookmarkTapEvent(place));

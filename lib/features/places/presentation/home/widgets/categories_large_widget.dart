@@ -17,6 +17,7 @@ class HomeCategoriesLargeWidget extends HookWidget {
   final VoidCallback? onTap;
   final VoidCallback? onBookmarkTap;
   final int showRatings;
+  final bool cacheImage;
 
   const HomeCategoriesLargeWidget({
     Key? key,
@@ -29,6 +30,7 @@ class HomeCategoriesLargeWidget extends HookWidget {
     this.size,
     this.onTap,
     this.onBookmarkTap,
+    this.cacheImage = true,
   }) : super(key: key);
 
   @override
@@ -50,7 +52,7 @@ class HomeCategoriesLargeWidget extends HookWidget {
                   url: coverImage,
                   borderRadius: 18,
                   fit: BoxFit.cover,
-                  cacheImage: false,
+                  cacheImage: cacheImage,
                 ),
               ),
               Positioned.fill(

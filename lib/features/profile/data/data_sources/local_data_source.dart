@@ -29,5 +29,6 @@ class LocalProfileDataSource {
 
   Future<void> clearAll() async {
     await _localStorageService.clearBox(HiveKeys.userBoxId);
+    await _localStorageService.clearBox(HiveKeys.placesBoxId);
   }
 }
