@@ -22,6 +22,7 @@ class UserModel extends Equatable {
   final String? createdAt;
   final String? updatedAt;
   final String? deletedAt;
+  final UserStatus? status;
 
   const UserModel({
     required this.id,
@@ -41,6 +42,7 @@ class UserModel extends Equatable {
     this.createdAt,
     this.updatedAt,
     this.deletedAt,
+    this.status,
   });
 
   factory UserModel.empty() => const UserModel(
@@ -52,7 +54,8 @@ class UserModel extends Equatable {
       dob: "",
       phoneE164: "",
       bio: '',
-      photoUrl: '');
+      photoUrl: '',
+      status: UserStatus.NEW_USER);
 
   UserModel copyWith({
     String? id,
@@ -72,6 +75,7 @@ class UserModel extends Equatable {
     String? createdAt,
     String? updatedAt,
     String? deletedAt,
+    UserStatus? status,
   }) {
     return UserModel(
       id: id ?? this.id,
@@ -91,6 +95,7 @@ class UserModel extends Equatable {
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
       deletedAt: deletedAt ?? this.deletedAt,
+      status: status ?? this.status,
     );
   }
 
@@ -108,6 +113,7 @@ class UserModel extends Equatable {
       'twitter_handle': twitterHandle,
       'linkedIn_handle': linkedInHandle,
       'profile_photo': photoUrl,
+      'status': status,
     };
   }
 
@@ -130,6 +136,7 @@ class UserModel extends Equatable {
       'created_at': createdAt,
       'updated_at': updatedAt,
       'deleted_at': deletedAt,
+      'status': status
     };
   }
 
@@ -153,6 +160,7 @@ class UserModel extends Equatable {
       createdAt: map['created_at'],
       updatedAt: map['updated_at'],
       deletedAt: map['deleted_at'],
+      status: map['status'],
     );
   }
 
@@ -181,6 +189,7 @@ class UserModel extends Equatable {
       createdAt ?? '',
       updatedAt ?? '',
       deletedAt ?? '',
+      status ?? '',
     ];
   }
 }
@@ -211,5 +220,8 @@ final mockUser = UserModel.fromMap(
     'linkedIn_handle': null,
     'deleted_at': null,
     'api_token': '382|EgtZY47L6ZzgrJ46j6oOkGIpXJdKDqyZLtXrnBXj',
+    'status': 'EXISTING_USER'
   },
 );
+
+enum UserStatus { EXISTING_USER, NEW_USER }

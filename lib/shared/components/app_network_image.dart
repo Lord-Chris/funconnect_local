@@ -24,7 +24,7 @@ class AppNetworkImage extends StatelessWidget {
     String? url,
     this.fit,
     this.isCircular = false,
-    this.cacheImage = true,
+    this.cacheImage = false,
     this.size = const Size.square(40),
     this.borderRadius = 0,
     this.placeholderWidget,

@@ -59,9 +59,7 @@ class EmailVerifiedScreen extends StatelessWidget {
                 AppOrangeBtn(
                   label: AppText.aTAuthContinueText,
                   onTap: () {
-                    if (user.name.isEmpty ||
-                        user.username.isEmpty ||
-                        user.gender.isEmpty) {
+                    if (user.status == UserStatus.NEW_USER) {
                       locator<INavigationService>().offNamed(
                         Routes.profileSetupViewRoute,
                         arguments: user,
