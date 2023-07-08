@@ -50,6 +50,7 @@ class HomeCategoriesLargeWidget extends HookWidget {
                   url: coverImage,
                   borderRadius: 18,
                   fit: BoxFit.cover,
+                  cacheImage: false,
                 ),
               ),
               Positioned.fill(

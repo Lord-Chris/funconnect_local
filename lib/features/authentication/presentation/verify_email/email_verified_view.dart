@@ -6,8 +6,9 @@ import 'package:funconnect/core/models/user_model.dart';
 import 'package:funconnect/services/_services.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
 
-import '../../../../shared/components/app_orange_button.dart';
+import '../../../../core/enums/_enums.dart';
 import '../../../../shared/components/app_black_modal.dart';
+import '../../../../shared/components/app_orange_button.dart';
 
 class EmailVerifiedScreen extends StatelessWidget {
   final UserModel user;

@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
 
+import '../enums/_enums.dart';
 import '_models.dart';
 
 class UserModel extends Equatable {
@@ -46,16 +47,17 @@ class UserModel extends Equatable {
   });
 
   factory UserModel.empty() => const UserModel(
-      id: "",
-      name: "",
-      username: "",
-      email: "",
-      gender: "",
-      dob: "",
-      phoneE164: "",
-      bio: '',
-      photoUrl: '',
-      status: UserStatus.NEW_USER);
+        id: "",
+        name: "",
+        username: "",
+        email: "",
+        gender: "",
+        dob: "",
+        phoneE164: "",
+        bio: '',
+        photoUrl: '',
+        status: UserStatus.NEW_USER,
+      );
 
   UserModel copyWith({
     String? id,
@@ -136,7 +138,7 @@ class UserModel extends Equatable {
       'created_at': createdAt,
       'updated_at': updatedAt,
       'deleted_at': deletedAt,
-      'status': status
+      'status': status,
     };
   }
 
@@ -223,5 +225,3 @@ final mockUser = UserModel.fromMap(
     'status': 'EXISTING_USER'
   },
 );
-
-enum UserStatus { EXISTING_USER, NEW_USER }
