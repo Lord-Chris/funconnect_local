@@ -4,6 +4,7 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:funconnect/core/extensions/_extensions.dart';
@@ -231,22 +232,30 @@ class PersonalInformationView extends StatelessWidget {
                   ),
                 ),
                 Spacing.vertMedium(),
-                FutureBuilder(
-                  future:
-                      PhoneNumber.getRegionInfoFromPhoneNumber(iMobileNumber)
-                          .catchError(
-                    (error) => PhoneNumber(isoCode: 'NG', dialCode: '+234'),
-                  ),
-                  builder: (context, snapshot) {
+                HookBuilder(
+                  builder: (context) {
+                    final snapshot = useFuture(useMemoized(() async {
+                      final number = iMobileNumber.isEmpty
+                          ? PhoneNumber(isoCode: 'NG', dialCode: '+234')
+                          : await PhoneNumber.getRegionInfoFromPhoneNumber(
+                              iMobileNumber,
+                              iMobileNumber.isEmpty ? '+234' : '',
+                            ).catchError(
+                              (_) =>
+                                  PhoneNumber(isoCode: 'NG', dialCode: '+234'),
+                            );
+                      return number;
+                    }, []));
+
                     if (snapshot.hasError) {
                       return Text(snapshot.error.toString());
                     }
                     return InternationalPhoneNumberInput(
-                      onInputChanged: (val) {
-                        context.read<EditProfileBloc>().add(
-                            EditProfileFieldsEvent(
-                                profile.copyWith(phoneE164: val.phoneNumber)));
-                      },
+                      onInputChanged: (val) => context
+                          .read<EditProfileBloc>()
+                          .add(EditProfileFieldsEvent(
+                            profile.copyWith(phoneE164: val.phoneNumber),
+                          )),
                       selectorConfig: const SelectorConfig(
                         showFlags: true,
                         trailingSpace: false,
@@ -254,12 +263,11 @@ class PersonalInformationView extends StatelessWidget {
                         setSelectorButtonAsPrefixIcon: true,
                       ),
                       validator: context.validatePhoneNumber,
-                      onInputValidated: (value) {
-                        context
-                            .read<EditProfileBloc>()
-                            .add(NumberValidationEvent(value));
-                      },
+                      onInputValidated: (value) => context
+                          .read<EditProfileBloc>()
+                          .add(NumberValidationEvent(value)),
                       initialValue: snapshot.data,
+                      autoValidateMode: AutovalidateMode.onUserInteraction,
                       inputDecoration: InputDecoration(
                         labelText: AppText.aTMobileNumber,
                         prefixIcon: Padding(
@@ -304,7 +312,6 @@ class PersonalInformationView extends StatelessWidget {
                           ),
                         ),
                       ),
-                      autoValidateMode: AutovalidateMode.onUserInteraction,
                     );
                   },
                 ),
