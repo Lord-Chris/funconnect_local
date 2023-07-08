@@ -118,93 +118,104 @@ class _ExploreViewState extends State<ExploreView> {
                           .add(const ExploreInitEvent(showLoader: false));
                       await context.read<ExploreBloc>().stream.first;
                     },
-                    child: ScrollableColumn(
-                      physics: const AlwaysScrollableScrollPhysics(),
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      padding: REdgeInsets.symmetric(horizontal: 16),
-                      children: [
-                        Spacing.vertSmall(),
-                        const FeaturedSection(),
-                        // SizedBox(
-                        //   height: 45.h,
-                        //   width: MediaQuery.of(context).size.width,
-                        //   child: ListView.builder(
-                        //     scrollDirection: Axis.horizontal,
-                        //     padding: EdgeInsets.symmetric(vertical: 8.h),
-                        //     itemCount: 10,
-                        //     itemBuilder: (context, index) {
-                        //       // final interest = state.interests[index];
-                        //       return Padding(
-                        //         padding: EdgeInsets.only(left: 5.r),
-                        //         child: const ExploreSection(
-                        //           section: "Categories",
-                        //           isSelected: false,
-                        //         ),
-                        //       );
-                        //     },
-                        //   ),
-                        // ),
-                        // Spacing.vertRegular(),
-                        if (state.categories.isNotEmpty)
-                          HomeSection<CategoryModel>(
-                            label: "Categories",
-                            itemHeight: 136.r,
-                            showSeeAll: false,
-                            children: state.categories.map((e) => e).toList(),
-                            widget: (CategoryModel category) {
-                              return HomeViewCategoriesSmallSubWidget(
-                                coverImage: category.coverPhoto.isEmpty
-                                    ? AppConstants.mockImage
-                                    : category.coverPhoto,
-                                name: category.name,
-                                onTap: () => context.read<ExploreBloc>().add(
-                                      CategoryTapEvent(category: category),
-                                    ),
-                              );
-                            },
-                          ),
-                        Spacing.vertRegular(),
-                        if (state.recentlyAdded.isNotEmpty)
-                          HomeSection<PlaceModel>(
-                            label: "Recently Added",
-                            showSeeAll: false,
-                            children:
-                                state.recentlyAdded.map((e) => e).toList(),
-                            widget: (PlaceModel place) {
-                              return HomeCategoriesLargeWidget(
-                                showRatings: place.showRatings,
-                                coverImage: place.coverImagePath,
-                                name: place.name,
-                                isBookmarked: place.isBookmarked,
-                                rating: place.avgRating,
-                                ratingCount: place.avgReviewCount,
-                                onTap: () => context.read<ExploreBloc>().add(
-                                      PlaceTapEvent(place: place),
-                                    ),
-                              );
-                            },
-                          ),
-                        Spacing.vertRegular(),
-                        if (state.bestRatings.isNotEmpty)
-                          HomeSection<PlaceModel>(
-                            label: "Best Rating",
-                            showSeeAll: false,
-                            children: state.bestRatings.map((e) => e).toList(),
-                            widget: (PlaceModel place) {
-                              return HomeCategoriesLargeWidget(
-                                showRatings: place.showRatings,
-                                coverImage: place.coverImagePath,
-                                name: place.name,
-                                isBookmarked: place.isBookmarked,
-                                rating: place.avgRating,
-                                ratingCount: place.avgReviewCount,
-                                onTap: () => context.read<ExploreBloc>().add(
-                                      PlaceTapEvent(place: place),
-                                    ),
-                              );
-                            },
-                          ),
-                      ],
+                    child: SingleChildScrollView(
+                      child: Padding(
+                        padding: REdgeInsets.symmetric(horizontal: 16),
+                        child: Column(
+                          //physics: const AlwaysScrollableScrollPhysics(),
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          //padding: REdgeInsets.symmetric(horizontal: 16),
+                          children: [
+                            Spacing.vertSmall(),
+                            const FeaturedSection(),
+                            // SizedBox(
+                            //   height: 45.h,
+                            //   width: MediaQuery.of(context).size.width,
+                            //   child: ListView.builder(
+                            //     scrollDirection: Axis.horizontal,
+                            //     padding: EdgeInsets.symmetric(vertical: 8.h),
+                            //     itemCount: 10,
+                            //     itemBuilder: (context, index) {
+                            //       // final interest = state.interests[index];
+                            //       return Padding(
+                            //         padding: EdgeInsets.only(left: 5.r),
+                            //         child: const ExploreSection(
+                            //           section: "Categories",
+                            //           isSelected: false,
+                            //         ),
+                            //       );
+                            //     },
+                            //   ),
+                            // ),
+                            // Spacing.vertRegular(),
+                            if (state.categories.isNotEmpty)
+                              HomeSection<CategoryModel>(
+                                label: "Categories",
+                                itemHeight: 136.r,
+                                showSeeAll: true,
+                                children:
+                                    state.categories.map((e) => e).toList(),
+                                widget: (CategoryModel category) {
+                                  return HomeViewCategoriesSmallSubWidget(
+                                    coverImage: category.coverPhoto.isEmpty
+                                        ? AppConstants.mockImage
+                                        : category.coverPhoto,
+                                    name: category.name,
+                                    onTap: () => context
+                                        .read<ExploreBloc>()
+                                        .add(
+                                          CategoryTapEvent(category: category),
+                                        ),
+                                  );
+                                },
+                              ),
+                            Spacing.vertRegular(),
+                            if (state.recentlyAdded.isNotEmpty)
+                              HomeSection<PlaceModel>(
+                                label: "Recently Added",
+                                showSeeAll: true,
+                                children:
+                                    state.recentlyAdded.map((e) => e).toList(),
+                                widget: (PlaceModel place) {
+                                  return HomeCategoriesLargeWidget(
+                                    showRatings: place.showRatings,
+                                    coverImage: place.coverImagePath,
+                                    name: place.name,
+                                    isBookmarked: place.isBookmarked,
+                                    rating: place.avgRating,
+                                    ratingCount: place.avgReviewCount,
+                                    onTap: () =>
+                                        context.read<ExploreBloc>().add(
+                                              PlaceTapEvent(place: place),
+                                            ),
+                                  );
+                                },
+                              ),
+                            Spacing.vertRegular(),
+                            if (state.bestRatings.isNotEmpty)
+                              HomeSection<PlaceModel>(
+                                label: "Best Rating",
+                                showSeeAll: true,
+                                children:
+                                    state.bestRatings.map((e) => e).toList(),
+                                widget: (PlaceModel place) {
+                                  return HomeCategoriesLargeWidget(
+                                    showRatings: place.showRatings,
+                                    coverImage: place.coverImagePath,
+                                    name: place.name,
+                                    isBookmarked: place.isBookmarked,
+                                    rating: place.avgRating,
+                                    ratingCount: place.avgReviewCount,
+                                    onTap: () =>
+                                        context.read<ExploreBloc>().add(
+                                              PlaceTapEvent(place: place),
+                                            ),
+                                  );
+                                },
+                              ),
+                          ],
+                        ),
+                      ),
                     ),
                   );
                 },
