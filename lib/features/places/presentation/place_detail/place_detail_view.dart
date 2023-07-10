@@ -88,13 +88,13 @@ class _ImageSection extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = usePageController();
     return SizedBox.fromSize(
       size: Size.fromHeight(434.h),
       child: Builder(
         builder: (context) {
           final state = context.watch<PlaceDetailBloc>().state;
           if (state is PlaceDetailIdleState) {
-            final controller = PageController();
             return Column(
               children: [
                 Container(
