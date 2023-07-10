@@ -6,7 +6,6 @@ import 'package:funconnect/core/models/user_model.dart';
 import 'package:funconnect/services/_services.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
 
-import '../../../../core/enums/_enums.dart';
 import '../../../../shared/components/app_black_modal.dart';
 import '../../../../shared/components/app_orange_button.dart';
 
@@ -60,7 +59,7 @@ class EmailVerifiedScreen extends StatelessWidget {
                 AppOrangeBtn(
                   label: AppText.aTAuthContinueText,
                   onTap: () {
-                    if (user.status == UserStatus.NEW_USER) {
+                    if (user.status == "NEW_USER") {
                       locator<INavigationService>().offNamed(
                         Routes.profileSetupViewRoute,
                         arguments: user,
