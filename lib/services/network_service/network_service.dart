@@ -15,6 +15,7 @@ class NetworkService extends INetworkService {
 
   NetworkService() {
     _dio = Dio();
+    _dio.options.connectTimeout = const Duration(seconds: 10);
     _dio.options.receiveTimeout = const Duration(seconds: 30);
     _dio.options.sendTimeout = const Duration(seconds: 30);
     _dio.interceptors.add(NetworkLoggerInterceptor());

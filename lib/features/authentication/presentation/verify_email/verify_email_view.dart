@@ -12,9 +12,9 @@ import 'package:funconnect/features/authentication/presentation/verify_email/blo
 import 'package:funconnect/shared/constants/_constants.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
+import '../../../../shared/components/app_black_modal.dart';
 import '../../../../shared/components/app_orange_button.dart';
 import '../../data/dto/request_otp_response.dart';
-import '../../../../shared/components/app_black_modal.dart';
 
 class VerifyEmailView extends StatefulHookWidget {
   final RequestOtpResponse response;

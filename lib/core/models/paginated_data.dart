@@ -5,7 +5,7 @@ class PaginatedData<T> {
   final String? nextPageUrl;
   final String path;
   final int perPage;
-  final int? prevPageUrl;
+  final String? prevPageUrl;
   final int to;
   final List<T> data;
 
@@ -44,7 +44,7 @@ class PaginatedData<T> {
       nextPageUrl: map['next_page_url'],
       path: map['path'] ?? '',
       perPage: map['per_page']?.toInt() ?? 0,
-      prevPageUrl: map['prev_page_url']?.toInt(),
+      prevPageUrl: map['prev_page_url'],
       to: map['to']?.toInt() ?? 0,
       data: (map['data'] as List).map(fromMap).toList(),
     );
