@@ -13,7 +13,7 @@ abstract class IPlaceRepository {
   // Future<List<HomeTrendItemModel>> fetchHomeTrends(AppLocation? location);
   Future<HomeTrendsReponse?> fetchHomeTrendsNew(AppLocation? location);
   Future<PaginatedData<PlaceModel>> fetchPlacesByCategory(
-      String categoryId, AppLocation? location);
+      String categoryId, int? page, AppLocation? location);
   Future<PaginatedData<PlaceModel>> searchPlaces(
       SearchQueryParam query, AppLocation? location);
   Future<FullPlaceModel> fetchPlaceDetail(String placeId);

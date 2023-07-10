@@ -45,9 +45,9 @@ class ApiConstants {
     return "$places/v2/home-trends?lat=${loc.lat}&long=${loc.long}&city=${loc.city}&state=${loc.state}&country=${loc.country}";
   }
 
-  static String categoryPlaces(String catId, AppLocation? loc) {
-    if (loc == null) return "$places/category/$catId";
-    return "$places/category/$catId?lat=${loc.lat}&long=${loc.long}&city=${loc.city}&state=${loc.state}&country=${loc.country}";
+  static String categoryPlaces(String catId, int page, AppLocation? loc) {
+    if (loc == null) return "$places/category/$catId?page=$page";
+    return "$places/category/$catId?lat=${loc.lat}&long=${loc.long}&city=${loc.city}&state=${loc.state}&country=${loc.country}&page=$page";
   }
 
   static String searchPlaces(SearchQueryParam query, AppLocation? loc) {

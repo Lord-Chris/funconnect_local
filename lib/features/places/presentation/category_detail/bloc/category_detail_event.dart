@@ -33,3 +33,16 @@ class PlaceTapEvent extends CategoryDetailEvent {
 class SearchBarTapEvent extends CategoryDetailEvent {
   const SearchBarTapEvent();
 }
+
+class LoadMorePlaceEvent extends CategoryDetailEvent {
+  final String categoryId;
+  final int nextPageId;
+
+  const LoadMorePlaceEvent(
+    this.categoryId,
+    this.nextPageId,
+  );
+
+  @override
+  List<Object?> get props => [categoryId];
+}
