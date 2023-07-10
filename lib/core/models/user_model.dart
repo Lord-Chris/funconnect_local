@@ -23,7 +23,7 @@ class UserModel extends Equatable {
   final String? createdAt;
   final String? updatedAt;
   final String? deletedAt;
-  final String? status;
+  final UserStatus? status;
 
   const UserModel({
     required this.id,
@@ -47,16 +47,17 @@ class UserModel extends Equatable {
   });
 
   factory UserModel.empty() => const UserModel(
-      id: "",
-      name: "",
-      username: "",
-      email: "",
-      gender: "",
-      dob: "",
-      phoneE164: "",
-      bio: '',
-      photoUrl: '',
-      status: "NEW_USER");
+        id: "",
+        name: "",
+        username: "",
+        email: "",
+        gender: "",
+        dob: "",
+        phoneE164: "",
+        bio: '',
+        photoUrl: '',
+        status: UserStatus.newUser,
+      );
 
   UserModel copyWith({
     String? id,
@@ -76,7 +77,7 @@ class UserModel extends Equatable {
     String? createdAt,
     String? updatedAt,
     String? deletedAt,
-    String? status,
+    UserStatus? status,
   }) {
     return UserModel(
       id: id ?? this.id,
@@ -114,7 +115,7 @@ class UserModel extends Equatable {
       'twitter_handle': twitterHandle,
       'linkedIn_handle': linkedInHandle,
       'profile_photo': photoUrl,
-      'status': status,
+      'status': status?.value,
     };
   }
 
@@ -137,32 +138,33 @@ class UserModel extends Equatable {
       'created_at': createdAt,
       'updated_at': updatedAt,
       'deleted_at': deletedAt,
-      'status': status,
+      'status': status?.value,
     };
   }
 
   factory UserModel.fromMap(Map<String, dynamic> map) {
     return UserModel(
-        id: map['id'] ?? '',
-        email: map['email'] ?? '',
-        name: map['name'] ?? '',
-        username: map['username'] ?? '',
-        gender: map['gender'] ?? '',
-        dob: map['dob'] ?? '',
-        phoneE164: map['phone_e164'] ?? '',
-        bio: map['bio'] ?? '',
-        photoUrl: map['photo_url'] ?? '',
-        twitterHandle: map['twitter_handle'],
-        facebookHandle: map['facebook_handle'],
-        instagramHandle: map['instagram_handle'],
-        linkedInHandle: map['linked_in_handle'],
-        location: map['location'] != null
-            ? AppLocation.fromMap(map['location'])
-            : null,
-        createdAt: map['created_at'],
-        updatedAt: map['updated_at'],
-        deletedAt: map['deleted_at'],
-        status: map['status']);
+      id: map['id'] ?? '',
+      email: map['email'] ?? '',
+      name: map['name'] ?? '',
+      username: map['username'] ?? '',
+      gender: map['gender'] ?? '',
+      dob: map['dob'] ?? '',
+      phoneE164: map['phone_e164'] ?? '',
+      bio: map['bio'] ?? '',
+      photoUrl: map['photo_url'] ?? '',
+      twitterHandle: map['twitter_handle'],
+      facebookHandle: map['facebook_handle'],
+      instagramHandle: map['instagram_handle'],
+      linkedInHandle: map['linked_in_handle'],
+      location:
+          map['location'] != null ? AppLocation.fromMap(map['location']) : null,
+      createdAt: map['created_at'],
+      updatedAt: map['updated_at'],
+      deletedAt: map['deleted_at'],
+      status:
+          map['status'] == null ? null : UserStatus.fromValue(map['status']),
+    );
   }
 
   String toJson() => json.encode(toMap());
@@ -190,7 +192,7 @@ class UserModel extends Equatable {
       createdAt ?? '',
       updatedAt ?? '',
       deletedAt ?? '',
-      status ?? UserStatus.NEW_USER,
+      status ?? UserStatus.newUser,
     ];
   }
 }

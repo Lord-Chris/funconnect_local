@@ -2,10 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:funconnect/core/app/_app.dart';
-import 'package:funconnect/core/models/user_model.dart';
+import 'package:funconnect/core/enums/_enums.dart';
 import 'package:funconnect/services/_services.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
 
+import '../../../../core/models/_models.dart';
 import '../../../../shared/components/app_black_modal.dart';
 import '../../../../shared/components/app_orange_button.dart';
 
@@ -59,7 +60,7 @@ class EmailVerifiedScreen extends StatelessWidget {
                 AppOrangeBtn(
                   label: AppText.aTAuthContinueText,
                   onTap: () {
-                    if (user.status == "NEW_USER") {
+                    if (user.status == UserStatus.newUser) {
                       locator<INavigationService>().offNamed(
                         Routes.profileSetupViewRoute,
                         arguments: user,
