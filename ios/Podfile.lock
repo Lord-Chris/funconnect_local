@@ -174,7 +174,7 @@ PODS:
   - PhoneNumberKit/UIKit (3.3.4):
     - PhoneNumberKit/PhoneNumberKitCore
   - PromisesObjC (2.2.0)
-  - rate_my_app (1.1.4):
+  - rate_my_app (2.0.0):
     - Flutter
   - Sentry/HybridSDK (8.8.0):
     - SentryPrivate (= 8.8.0)
@@ -347,11 +347,11 @@ SPEC CHECKSUMS:
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
   onesignal_flutter: b8ac01bc3ebe47e798d7d775455c3a9b5b84f1c5
   OneSignalXCFramework: 087934ab0d4d7445fcf1c015c7c782359e26c020
-  package_info_plus: 6c92f08e1f853dc01228d6f553146438dafcd14e
+  package_info_plus: fd030dabf36271f146f1f3beacd48f564b0f17f7
   path_provider_foundation: eaf5b3e458fc0e5fbb9940fb09980e853fe058b8
   PhoneNumberKit: 441e8b26ec88d598e3591de9061eff18f5dd12e8
   PromisesObjC: 09985d6d70fbe7878040aa746d78236e6946d2ef
-  rate_my_app: e249ec0751c276811746ff89558c23dc0da39f0c
+  rate_my_app: 80fba94c4885cd31738231b7b1f51c1ad726f5c7
   Sentry: 927dfb29d18a14d924229a59cc2ad149f43349f2
   sentry_flutter: cf7da03b65520b631330ecb498deb592aa7640be
   SentryPrivate: 4350d865f898224ab9fa02b37d6ee7fbb623f47e
@@ -367,4 +367,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: c853a10335efb4b04c942752f368d599da0d2384
 
-COCOAPODS: 1.11.3
+COCOAPODS: 1.12.1
