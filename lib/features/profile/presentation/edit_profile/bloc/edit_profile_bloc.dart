@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:funconnect/core/app/locator.dart';
 import 'package:funconnect/core/models/_models.dart';
+import 'package:funconnect/core/utils/failure_handler.dart';
 import 'package:funconnect/features/profile/domain/usecases/update_user_location.dart';
 import 'package:funconnect/features/profile/domain/usecases/update_user_profile.dart';
 import 'package:funconnect/services/_services.dart';
@@ -100,8 +101,9 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
         title: "Profile Updated",
         body: "You have successfully updated your profile!",
       ));
-    } on Failure catch (e) {
+    } on Failure catch (e, s) {
       emit(state.copyWith(isUpdatingProfile: false));
+      FailureHandler.instance.catchError(e, stackTrace: s);
       _dialogAndSheetService.showAppDialog(StatusDialog(
         isError: true,
         title: "Error Updating Profile",
@@ -122,7 +124,8 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
       emit(state.copyWith(
         profile: state.profile.copyWith(photoUrl: imageFile.path),
       ));
-    } on Failure catch (e) {
+    } on Failure catch (e, s) {
+      FailureHandler.instance.catchError(e, stackTrace: s);
       _dialogAndSheetService.showAppDialog(StatusDialog(
         isError: true,
         title: "Error Selecting Profile Image",
@@ -159,7 +162,8 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
             isError: false,
             title: "Location",
             body: "Location Updated Successfully"));
-      } on Failure catch (e) {
+      } on Failure catch (e, s) {
+        FailureHandler.instance.catchError(e, stackTrace: s);
         _dialogAndSheetService.showAppDialog(StatusDialog(
           isError: true,
           title: "Error Updating Location",

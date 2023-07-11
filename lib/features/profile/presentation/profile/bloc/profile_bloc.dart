@@ -190,7 +190,8 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
               body: "User Logged out Successfully",
             ),
           );
-        } on Failure catch (e) {
+        } on Failure catch (e, s) {
+          FailureHandler.instance.catchError(e, stackTrace: s);
           _logger.e(e);
         }
       },
@@ -219,8 +220,9 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
             title: "Alert",
             body: "User Account Deleted",
           ));
-        } on Failure catch (e) {
+        } on Failure catch (e, s) {
           _navigationService.back();
+          FailureHandler.instance.catchError(e, stackTrace: s);
           _dialogAndSheetService.showAppDialog(StatusDialog(
             isError: true,
             title: "Error Deleting Account",
@@ -301,8 +303,9 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
           ),
         );
       }
-    } on Failure catch (e) {
+    } on Failure catch (e, s) {
       _logger.e(e);
+      FailureHandler.instance.catchError(e, stackTrace: s);
       _dialogAndSheetService.showAppDialog(
         StatusDialog(
           isError: true,

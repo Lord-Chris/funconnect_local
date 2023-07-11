@@ -28,6 +28,7 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
     Emitter<NotificationState> emit,
   ) async {
     try {
+      emit(NotificationLoadingState());
       final res = await FetchNotifications().call(NoParams());
       emit(NotificationIdleState(notificationData: res));
       if (!event.readNotifications) return;
@@ -47,6 +48,7 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
     Emitter<NotificationState> emit,
   ) async {
     try {
+      emit(NotificationLoadingState());
       final res = await FetchNotifications().call(NoParams());
       emit(NotificationIdleState(notificationData: res));
       await Future.delayed(const Duration(seconds: 2));
