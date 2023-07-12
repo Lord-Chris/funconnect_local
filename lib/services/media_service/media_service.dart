@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:flutter/services.dart';
+import 'package:funconnect/core/models/failure.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -12,22 +14,46 @@ class MediaService extends IMediaService {
 
   @override
   Future<File?> pickImage({required bool fromGallery}) async {
-    final XFile? image = await _picker.pickImage(
-        source: fromGallery ? ImageSource.gallery : ImageSource.camera);
-    if (image == null) return null;
+    try {
+      final XFile? image = await _picker.pickImage(
+          source: fromGallery ? ImageSource.gallery : ImageSource.camera);
+      if (image == null) return null;
 
-    final file = File(image.path);
-    return file;
+      final file = File(image.path);
+      return file;
+    } on PlatformException catch (e) {
+      if (e.code == 'photo_access_denied') {
+        throw const Failure(
+          'Media permission penied permanently.\nAllow permissions in your settings and try again.',
+        );
+      }
+      throw Failure(
+        'Error picking image',
+        extraData: e.toString(),
+      );
+    }
   }
 
   @override
   Future<File?> pickVideo({required bool fromGallery}) async {
-    final XFile? image = await _picker.pickVideo(
-        source: fromGallery ? ImageSource.gallery : ImageSource.camera);
-    if (image == null) return null;
+    try {
+      final XFile? image = await _picker.pickVideo(
+          source: fromGallery ? ImageSource.gallery : ImageSource.camera);
+      if (image == null) return null;
 
-    final file = File(image.path);
-    return file;
+      final file = File(image.path);
+      return file;
+    } on PlatformException catch (e) {
+      if (e.code == 'photo_access_denied') {
+        throw const Failure(
+          'Media permission penied permanently.\nAllow permissions in your settings and try again.',
+        );
+      }
+      throw Failure(
+        'Error picking image',
+        extraData: e.toString(),
+      );
+    }
   }
 
   @override

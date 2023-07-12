@@ -8,9 +8,9 @@ enum UserStatus {
   factory UserStatus.fromValue(String value) {
     switch (value) {
       case 'EXISTING_USER':
-        return UserStatus.newUser;
-      default:
         return UserStatus.existingUser;
+      default:
+        return UserStatus.newUser;
     }
   }
 }
