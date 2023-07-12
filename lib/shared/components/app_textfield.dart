@@ -181,6 +181,7 @@ class AppDropdownField<T extends Object> extends StatelessWidget {
       ).toList(),
       isExpanded: true,
       onChanged: onChanged,
+      dropdownColor: AppColors.gray333,
       value: value,
       focusNode: focusNode,
       validator: validator,

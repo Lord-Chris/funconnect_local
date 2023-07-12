@@ -133,9 +133,15 @@ class SearchFilterSheet extends HookWidget {
               ],
             ),
           ),
-          AppOrangeBtn(
-            label: 'Apply Filter',
-            onTap: () => Navigator.pop(context, selected.value),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: AppButton(
+              label: 'Apply Filter',
+              borderRadius: 8,
+              height: 65,
+              labelSize: 20,
+              onTap: () => Navigator.pop(context, selected.value),
+            ),
           ),
         ],
       ),

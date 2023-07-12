@@ -4,11 +4,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:funconnect/features/authentication/presentation/interest/bloc/interest_bloc.dart';
 import 'package:funconnect/features/authentication/presentation/interest/bloc/interest_event.dart';
 import 'package:funconnect/features/authentication/presentation/interest/bloc/interest_state.dart';
-import 'package:funconnect/shared/components/app_loader.dart';
 
-import '../../../../shared/components/app_orange_button.dart';
-import '../../../../shared/constants/_constants.dart';
+import '../../../../shared/components/_components.dart';
 import '../../../../shared/components/app_black_modal.dart';
+import '../../../../shared/constants/_constants.dart';
 import 'widgets/interest_selection_widget.dart';
 
 class InterestView extends StatefulWidget {
@@ -131,15 +130,20 @@ class _InterestViewState extends State<InterestView> {
                     ),
                   ),
                 ),
-                AppOrangeBtn(
-                  label: AppText.aTAuthContinueText,
-                  isBusy: state is InterestsLoadingState &&
-                      state.selectedInterest.isNotEmpty,
-                  onTap: state.selectedInterest.isEmpty
-                      ? null
-                      : () => context.read<InterestsBloc>().add(
-                            ContinueTapEvent(interests: state.selectedInterest),
-                          ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: AppButton(
+                    label: AppText.aTAuthVerifyEmailText,
+                    borderRadius: 8,
+                    height: 65,
+                    labelSize: 20,
+                    isBusy: state is InterestsLoadingState &&
+                        state.selectedInterest.isNotEmpty,
+                    isDisabled: state.selectedInterest.isEmpty,
+                    onTap: () => context.read<InterestsBloc>().add(
+                          ContinueTapEvent(interests: state.selectedInterest),
+                        ),
+                  ),
                 ),
               ],
             );

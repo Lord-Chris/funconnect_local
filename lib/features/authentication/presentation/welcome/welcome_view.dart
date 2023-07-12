@@ -25,7 +25,6 @@ class WelcomeView extends HookWidget {
     return BlocBuilder<WelcomeBloc, WelcomeState>(
       builder: (context, state) {
         return Scaffold(
-          backgroundColor: AppColors.primary,
           body: SafeArea(
             top: false,
             child: AppBlackModalWidget(
@@ -189,15 +188,21 @@ class WelcomeView extends HookWidget {
                           ],
                         ),
                       ),
-                      AppOrangeBtn(
-                        label: "Proceed",
-                        isBusy: state is WelcomeLoadingState,
-                        onTap: () {
-                          if (!formKey.currentState!.validate()) return;
-                          context
-                              .read<WelcomeBloc>()
-                              .add(EmailSignInEvent(email: controller.text));
-                        },
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        child: AppButton(
+                          label: "Proceed",
+                          isBusy: state is WelcomeLoadingState,
+                          borderRadius: 8,
+                          height: 65,
+                          labelSize: 20,
+                          onTap: () {
+                            if (!formKey.currentState!.validate()) return;
+                            context
+                                .read<WelcomeBloc>()
+                                .add(EmailSignInEvent(email: controller.text));
+                          },
+                        ),
                       ),
                     ],
                   ),
