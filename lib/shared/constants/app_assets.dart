@@ -56,4 +56,5 @@ class AppAssets {
 
   //Planner
   static const plannerSvg = "assets/svgs/planner_icon.svg";
+  static const plannerActiveSvg = "assets/svgs/planner_active_icon.svg";
 }

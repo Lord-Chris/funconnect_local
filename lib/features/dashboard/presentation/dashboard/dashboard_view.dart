@@ -10,6 +10,7 @@ import 'package:funconnect/features/dashboard/presentation/notifications/bloc/no
 import 'package:funconnect/features/events/presentation/blocs/events_bloc/events_bloc.dart';
 import 'package:funconnect/features/places/presentation/explore/bloc/explore_bloc.dart';
 import 'package:funconnect/features/plans/presentation/bloc/planner_bloc/planner_bloc.dart';
+import 'package:funconnect/features/plans/presentation/plans_list_view.dart';
 import 'package:funconnect/features/profile/presentation/profile/profile_view.dart';
 import 'package:funconnect/features/saved/presentation/saved/bloc/saved_bloc.dart';
 import 'package:funconnect/features/saved/presentation/saved/saved_view.dart';
@@ -55,6 +56,7 @@ class DashboardView extends StatelessWidget {
                     const HomeView(),
                     const ExploreView(),
                     if (!Platform.isIOS) const EventsView(),
+                    const PlansListView(),
                     const SavedView(),
                     const ProfileView(),
                   ],
@@ -151,7 +153,7 @@ class DashboardView extends StatelessWidget {
                   activeIcon: Padding(
                     padding: const EdgeInsets.all(15.0),
                     child: SvgPicture.asset(
-                      AppAssets.activeEventIconSvg,
+                      AppAssets.plannerActiveSvg,
                     ),
                   ),
                   label: "Planner",
