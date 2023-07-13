@@ -22,7 +22,7 @@ import 'package:funconnect/features/places/presentation/place_detail/bloc/place_
 import 'package:funconnect/features/places/presentation/place_detail/place_detail_view.dart';
 import 'package:funconnect/features/places/presentation/search_result/search_result_view.dart';
 import 'package:funconnect/features/plans/presentation/create_plan/bloc/create_plan_bloc.dart';
-import 'package:funconnect/features/plans/presentation/create_plan/create_list_view.dart';
+import 'package:funconnect/features/plans/presentation/create_plan/create_plan_view.dart';
 import 'package:funconnect/features/plans/presentation/plans_list/bloc/plan_list_bloc.dart';
 import 'package:funconnect/features/plans/presentation/plans_list_view.dart';
 import 'package:funconnect/features/profile/presentation/edit_profile/edit_profile_view.dart';
