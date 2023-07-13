@@ -9,6 +9,7 @@ import 'package:funconnect/features/dashboard/presentation/dashboard/bloc/dashbo
 import 'package:funconnect/features/dashboard/presentation/notifications/bloc/notification_bloc.dart';
 import 'package:funconnect/features/events/presentation/blocs/events_bloc/events_bloc.dart';
 import 'package:funconnect/features/places/presentation/explore/bloc/explore_bloc.dart';
+import 'package:funconnect/features/plans/presentation/bloc/planner_bloc/planner_bloc.dart';
 import 'package:funconnect/features/profile/presentation/profile/profile_view.dart';
 import 'package:funconnect/features/saved/presentation/saved/bloc/saved_bloc.dart';
 import 'package:funconnect/features/saved/presentation/saved/saved_view.dart';
@@ -37,6 +38,9 @@ class DashboardView extends StatelessWidget {
         BlocProvider(create: (context) => ProfileBloc()),
         BlocProvider(create: (context) => SavedBloc()),
         BlocProvider(create: (context) => NotificationBloc()),
+        BlocProvider(
+          create: (context) => PlannerBloc(),
+        )
       ],
       child: BlocBuilder<DashboardBloc, DashboardState>(
         buildWhen: (previous, current) => current is DashboardIdleState,
@@ -139,6 +143,20 @@ class DashboardView extends StatelessWidget {
                     label: "Events",
                     backgroundColor: Colors.white,
                   ),
+                BottomNavigationBarItem(
+                  icon: Padding(
+                    padding: const EdgeInsets.all(15.0),
+                    child: SvgPicture.asset(AppAssets.plannerSvg),
+                  ),
+                  activeIcon: Padding(
+                    padding: const EdgeInsets.all(15.0),
+                    child: SvgPicture.asset(
+                      AppAssets.activeEventIconSvg,
+                    ),
+                  ),
+                  label: "Planner",
+                  backgroundColor: Colors.white,
+                ),
                 BottomNavigationBarItem(
                   icon: Padding(
                     padding: const EdgeInsets.all(15.0),
