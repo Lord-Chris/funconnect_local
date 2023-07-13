@@ -9,7 +9,7 @@ import 'package:funconnect/features/dashboard/presentation/dashboard/bloc/dashbo
 import 'package:funconnect/features/dashboard/presentation/notifications/bloc/notification_bloc.dart';
 import 'package:funconnect/features/events/presentation/blocs/events_bloc/events_bloc.dart';
 import 'package:funconnect/features/places/presentation/explore/bloc/explore_bloc.dart';
-import 'package:funconnect/features/plans/presentation/bloc/planner_bloc/planner_bloc.dart';
+import 'package:funconnect/features/plans/presentation/plans_list/bloc/plan_list_bloc.dart';
 import 'package:funconnect/features/plans/presentation/plans_list_view.dart';
 import 'package:funconnect/features/profile/presentation/profile/profile_view.dart';
 import 'package:funconnect/features/saved/presentation/saved/bloc/saved_bloc.dart';
@@ -40,7 +40,7 @@ class DashboardView extends StatelessWidget {
         BlocProvider(create: (context) => SavedBloc()),
         BlocProvider(create: (context) => NotificationBloc()),
         BlocProvider(
-          create: (context) => PlannerBloc(),
+          create: (context) => PlanListBloc(),
         )
       ],
       child: BlocBuilder<DashboardBloc, DashboardState>(

@@ -21,6 +21,10 @@ import 'package:funconnect/features/places/presentation/category_detail/category
 import 'package:funconnect/features/places/presentation/place_detail/bloc/place_detail_bloc.dart';
 import 'package:funconnect/features/places/presentation/place_detail/place_detail_view.dart';
 import 'package:funconnect/features/places/presentation/search_result/search_result_view.dart';
+import 'package:funconnect/features/plans/presentation/create_plan/bloc/create_plan_bloc.dart';
+import 'package:funconnect/features/plans/presentation/create_plan/create_list_view.dart';
+import 'package:funconnect/features/plans/presentation/plans_list/bloc/plan_list_bloc.dart';
+import 'package:funconnect/features/plans/presentation/plans_list_view.dart';
 import 'package:funconnect/features/profile/presentation/edit_profile/edit_profile_view.dart';
 import 'package:funconnect/features/profile/presentation/manage_login_options/manage_login_options_view.dart';
 import 'package:funconnect/features/profile/presentation/views/my_events_view.dart';
@@ -79,6 +83,11 @@ class Routes {
   // Saved
   static const savedViewRoute = '/saved-view';
   static const createCollectionViewRoute = '/create-collection-view';
+
+  //Planner
+
+  static const plannerListViewRoute = '/planner-list-view';
+  static const createPlanViewRoute = '/create-plan-view';
 
   // Profile
   static const editProfileViewRoute = '/edit-profile';
@@ -190,6 +199,19 @@ class Routes {
 
       case createCollectionViewRoute:
         return MaterialPageRoute(builder: (_) => const CreateCollectionView());
+
+      // Planner
+      case plannerListViewRoute:
+        return _registerBlocView(
+          bloc: PlanListBloc(),
+          view: const PlansListView(),
+        );
+
+      case createPlanViewRoute:
+        return _registerBlocView(
+          bloc: CreatePlanBloc(),
+          view: const CreatePlanView(),
+        );
 
       // Profile
       case editProfileViewRoute:
