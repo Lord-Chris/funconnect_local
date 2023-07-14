@@ -89,58 +89,64 @@ class _ImageSection extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final controller = usePageController();
-    return SizedBox.fromSize(
-      size: Size.fromHeight(434.h),
-      child: Builder(
-        builder: (context) {
-          final state = context.watch<PlaceDetailBloc>().state;
-          if (state is PlaceDetailIdleState) {
-            return Column(
-              children: [
-                Container(
-                  height: 409.h,
-                  width: double.infinity,
-                  clipBehavior: Clip.hardEdge,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20.r),
-                  ),
-                  child: PageView.builder(
-                    controller: controller,
-                    itemCount: state.place.images.length,
-                    itemBuilder: (context, index) {
-                      return AppNetworkImage(
-                        size: Size.fromHeight(409.h),
-                        url: state.place.images[index].path,
+    return Builder(
+      builder: (context) {
+        final state = context.watch<PlaceDetailBloc>().state;
+        if (state is PlaceDetailIdleState) {
+          return Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                height: 409.h,
+                width: double.infinity,
+                clipBehavior: Clip.hardEdge,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20.r),
+                ),
+                child: PageView.builder(
+                  controller: controller,
+                  itemCount: state.place.images.length,
+                  itemBuilder: (context, index) {
+                    return AppNetworkImage(
+                      size: Size.fromHeight(409.h),
+                      url: state.place.images[index].path,
+                      placeholderWidget: AppNetworkImage(
+                        url: place.coverImagePath,
                         borderRadius: 20,
                         fit: BoxFit.cover,
-                      );
-                    },
+                        size: Size.fromHeight(409.h),
+                      ),
+                      borderRadius: 20,
+                      fit: BoxFit.cover,
+                    );
+                  },
+                ),
+              ),
+              if (state.place.images.length > 1) ...[
+                Spacing.vertRegular(),
+                SmoothPageIndicator(
+                  controller: controller,
+                  count: state.place.images.length,
+                  effect: ExpandingDotsEffect(
+                    dotColor: AppColors.wGrey84,
+                    activeDotColor: AppColors.primary,
+                    dotHeight: 8.h,
+                    dotWidth: 8.w,
+                    expansionFactor: 2,
+                    spacing: 4,
                   ),
                 ),
-                Spacing.vertRegular(),
-                state.place.images.length > 1
-                    ? SmoothPageIndicator(
-                        controller: controller,
-                        count: state.place.images.length,
-                        effect: ExpandingDotsEffect(
-                            dotColor: AppColors.wGrey84,
-                            activeDotColor: AppColors.primary,
-                            dotHeight: 8.h,
-                            dotWidth: 8.w,
-                            expansionFactor: 2,
-                            spacing: 4),
-                      )
-                    : const SizedBox(),
               ],
-            );
-          }
-          return AppNetworkImage(
-            url: place.coverImagePath,
-            borderRadius: 20,
-            fit: BoxFit.cover,
+            ],
           );
-        },
-      ),
+        }
+        return AppNetworkImage(
+          url: place.coverImagePath,
+          borderRadius: 20,
+          fit: BoxFit.cover,
+          size: Size.fromHeight(409.h),
+        );
+      },
     );
   }
 }

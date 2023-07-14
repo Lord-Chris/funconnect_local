@@ -66,6 +66,7 @@ class AppNetworkImage extends StatelessWidget {
       width: size?.width,
       clipBehavior: Clip.hardEdge,
       fit: BoxFit.fill,
+      retries: 3,
       shape: isCircular ? BoxShape.circle : BoxShape.rectangle,
       borderRadius: isCircular ? null : BorderRadius.circular(borderRadius),
       loadStateChanged: (state) {
