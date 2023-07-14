@@ -1,11 +1,8 @@
-import 'dart:math';
-
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:extended_image/extended_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:funconnect/shared/constants/colors.dart';
 import 'package:shimmer/shimmer.dart';
-
-import '../constants/_constants.dart';
 
 class AppNetworkImage extends StatelessWidget {
   final String imageUrl;
@@ -62,7 +59,60 @@ class AppNetworkImage extends StatelessWidget {
         ),
       );
     }
-    return CachedNetworkImage(
+    return ExtendedImage.network(
+      imageUrl,
+      cache: true,
+      height: size?.height,
+      width: size?.width,
+      clipBehavior: Clip.hardEdge,
+      fit: BoxFit.fill,
+      shape: isCircular ? BoxShape.circle : BoxShape.rectangle,
+      borderRadius: isCircular ? null : BorderRadius.circular(borderRadius),
+      loadStateChanged: (state) {
+        switch (state.extendedImageLoadState) {
+          case LoadState.loading:
+            return Shimmer.fromColors(
+              baseColor: AppColors.black,
+              highlightColor: AppColors.primary,
+              child: Container(
+                height: size?.height,
+                width: size?.width,
+                decoration: BoxDecoration(
+                  color: AppColors.black,
+                  shape: isCircular ? BoxShape.circle : BoxShape.rectangle,
+                  borderRadius:
+                      isCircular ? null : BorderRadius.circular(borderRadius),
+                ),
+              ),
+            );
+          case LoadState.completed:
+            return ExtendedRawImage(
+              image: state.extendedImageInfo?.image,
+              height: size?.height,
+              width: size?.width,
+              fit: fit,
+            );
+          case LoadState.failed:
+            return errorWidget ??
+                SizedBox(
+                  height: size?.height,
+                  width: size?.width,
+                  child: errorAssetImage!.endsWith(".svg")
+                      ? SvgPicture.asset(
+                          errorAssetImage!,
+                          fit: fit ?? BoxFit.contain,
+                        )
+                      : Image.asset(
+                          errorAssetImage!,
+                          fit: fit,
+                        ),
+                );
+        }
+      },
+    );
+
+    /*
+    CachedNetworkImage(
       key: ValueKey(imageUrl),
       imageUrl: imageUrl,
       useOldImageOnUrlChange: true,
@@ -163,5 +213,7 @@ class AppNetworkImage extends StatelessWidget {
         );
       },
     );
+  }
+  */
   }
 }
