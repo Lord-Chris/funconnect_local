@@ -6,3 +6,19 @@ abstract class CreatePlanEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
+
+class DateSelectTapEvent extends CreatePlanEvent {
+  final DateTime? selectedDate;
+
+  const DateSelectTapEvent({required this.selectedDate});
+}
+
+class TimeSelectTapEvent extends CreatePlanEvent {
+  final TimeOfDay? selectedTime;
+
+  const TimeSelectTapEvent({required this.selectedTime});
+}
+
+class SearchOnMapTapEvent extends CreatePlanEvent {
+  const SearchOnMapTapEvent();
+}

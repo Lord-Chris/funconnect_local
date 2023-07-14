@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:funconnect/core/models/_models.dart';
@@ -25,6 +27,7 @@ import 'package:funconnect/features/plans/presentation/choose_plan_type/bloc/cho
 import 'package:funconnect/features/plans/presentation/choose_plan_type/choose_plan_type_view.dart';
 import 'package:funconnect/features/plans/presentation/create_plan/bloc/create_plan_bloc.dart';
 import 'package:funconnect/features/plans/presentation/create_plan/create_plan_view.dart';
+import 'package:funconnect/features/plans/presentation/map/map_view.dart';
 import 'package:funconnect/features/plans/presentation/plans_list/bloc/plan_list_bloc.dart';
 import 'package:funconnect/features/plans/presentation/plans_list/plans_list_view.dart';
 import 'package:funconnect/features/profile/presentation/edit_profile/edit_profile_view.dart';
@@ -91,6 +94,7 @@ class Routes {
   static const plannerListViewRoute = '/planner-list-view';
   static const choosePlanTypeViewRoute = '/choose-plan-type-view';
   static const createPlanViewRoute = '/create-plan-view';
+  static const plannerMapRoute = '/planner-map';
 
   // Profile
   static const editProfileViewRoute = '/edit-profile';
@@ -220,6 +224,11 @@ class Routes {
         return _registerBlocView(
           bloc: ChoosePlanTypeBloc(),
           view: const ChoosePlanTypeView(),
+        );
+
+      case plannerMapRoute:
+        return MaterialPageRoute(
+          builder: (_) => const PlannerMapView(),
         );
 
       // Profile
