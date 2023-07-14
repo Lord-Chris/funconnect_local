@@ -61,7 +61,7 @@ class AppNetworkImage extends StatelessWidget {
     }
     return ExtendedImage.network(
       imageUrl,
-      cache: true,
+      cache: cacheImage,
       height: size?.height,
       width: size?.width,
       clipBehavior: Clip.hardEdge,
@@ -71,6 +71,29 @@ class AppNetworkImage extends StatelessWidget {
       loadStateChanged: (state) {
         switch (state.extendedImageLoadState) {
           case LoadState.loading:
+            if (placeholderWidget != null) {
+              return placeholderWidget!;
+            }
+            if (placeholderAssetImage != null &&
+                placeholderAssetImage!.isNotEmpty) {
+              return Container(
+                clipBehavior: Clip.hardEdge,
+                decoration: BoxDecoration(
+                  borderRadius:
+                      isCircular ? null : BorderRadius.circular(borderRadius),
+                  shape: isCircular ? BoxShape.circle : BoxShape.rectangle,
+                ),
+                child: placeholderAssetImage!.endsWith(".svg")
+                    ? SvgPicture.asset(
+                        placeholderAssetImage!,
+                        fit: fit ?? BoxFit.contain,
+                      )
+                    : Image.asset(
+                        placeholderAssetImage!,
+                        fit: fit,
+                      ),
+              );
+            }
             return Shimmer.fromColors(
               baseColor: AppColors.black,
               highlightColor: AppColors.primary,
@@ -93,20 +116,39 @@ class AppNetworkImage extends StatelessWidget {
               fit: fit,
             );
           case LoadState.failed:
-            return errorWidget ??
-                SizedBox(
-                  height: size?.height,
-                  width: size?.width,
-                  child: errorAssetImage!.endsWith(".svg")
-                      ? SvgPicture.asset(
-                          errorAssetImage!,
-                          fit: fit ?? BoxFit.contain,
-                        )
-                      : Image.asset(
-                          errorAssetImage!,
-                          fit: fit,
-                        ),
-                );
+            if (errorWidget != null) {
+              return errorWidget!;
+            }
+            final errorImage = errorAssetImage ?? placeholderAssetImage ?? '';
+            if (errorImage.isNotEmpty) {
+              return Container(
+                clipBehavior: Clip.hardEdge,
+                decoration: BoxDecoration(
+                  borderRadius:
+                      isCircular ? null : BorderRadius.circular(borderRadius),
+                  shape: isCircular ? BoxShape.circle : BoxShape.rectangle,
+                ),
+                child: errorImage.endsWith(".svg")
+                    ? SvgPicture.asset(
+                        errorImage,
+                        fit: fit ?? BoxFit.contain,
+                      )
+                    : Image.asset(
+                        errorImage,
+                        fit: fit,
+                      ),
+              );
+            }
+            return Container(
+              width: double.maxFinite,
+              height: double.maxFinite,
+              decoration: BoxDecoration(
+                color: AppColors.primary,
+                borderRadius:
+                    isCircular ? null : BorderRadius.circular(borderRadius),
+                shape: isCircular ? BoxShape.circle : BoxShape.rectangle,
+              ),
+            );
         }
       },
     );
