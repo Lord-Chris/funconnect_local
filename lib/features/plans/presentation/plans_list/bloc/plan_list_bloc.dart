@@ -18,6 +18,6 @@ class PlanListBloc extends Bloc<PlanListEvent, PlanListState> {
 
   FutureOr<void> _createPlanClickedEvent(
       CreatePlanClickedEvent event, Emitter<PlanListState> emit) {
-    _navigation.toNamed(Routes.createPlanViewRoute);
+    _navigation.toNamed(Routes.choosePlanTypeViewRoute);
   }
 }
