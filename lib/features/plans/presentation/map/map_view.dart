@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:funconnect/shared/constants/colors.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class PlannerMapView extends StatelessWidget {
@@ -31,19 +33,56 @@ class PlannerMapView extends StatelessWidget {
             // _controller.complete(controller);
           },
         ),
-        Row(
-          children: [
-            Container(
-              width: 48,
-              height: 48,
-              color: Colors.white,
-              child: const Icon(
-                Icons.arrow_back_ios,
-                color: Colors.black,
+        Padding(
+          padding: const EdgeInsets.only(top: 50.0, left: 16.0, right: 16.0),
+          child: Row(
+            children: [
+              CircleAvatar(
+                radius: 32.r,
+                backgroundColor: Colors.white,
+                child: const Icon(
+                  Icons.arrow_back_ios,
+                  color: Colors.black,
+                  size: 24,
+                ),
               ),
-            ),
-            Expanded(child: Container())
-          ],
+              SizedBox(width: 8.w),
+              Expanded(
+                  child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(40.r),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 16.0, horizontal: 16.0),
+                        child: Row(
+                          children: [
+                            const Icon(
+                              Icons.search,
+                              color: Colors.black,
+                              size: 24,
+                            ),
+                            SizedBox(width: 9.w),
+                            const Expanded(
+                              child: TextField(
+                                decoration: InputDecoration(
+                                    hintText: "Search",
+                                    hintStyle:
+                                        TextStyle(color: AppColors.gray333),
+                                    border: InputBorder.none),
+                              ),
+                            ),
+                            const Icon(
+                              Icons.cancel,
+                              color: Colors.black,
+                              size: 24,
+                            ),
+                          ],
+                        ),
+                      )))
+            ],
+          ),
         ),
       ],
     ));
