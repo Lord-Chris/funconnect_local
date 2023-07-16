@@ -25,6 +25,7 @@ import 'package:funconnect/features/plans/presentation/choose_plan_type/bloc/cho
 import 'package:funconnect/features/plans/presentation/choose_plan_type/choose_plan_type_view.dart';
 import 'package:funconnect/features/plans/presentation/create_plan/bloc/create_plan_bloc.dart';
 import 'package:funconnect/features/plans/presentation/create_plan/create_plan_view.dart';
+import 'package:funconnect/features/plans/presentation/map/blocs/map_bloc.dart';
 import 'package:funconnect/features/plans/presentation/map/map_view.dart';
 import 'package:funconnect/features/plans/presentation/plans_list/bloc/plan_list_bloc.dart';
 import 'package:funconnect/features/plans/presentation/plans_list/plans_list_view.dart';
@@ -225,9 +226,7 @@ class Routes {
         );
 
       case plannerMapRoute:
-        return MaterialPageRoute(
-          builder: (_) => const PlannerMapView(),
-        );
+        return _registerBlocView(view: const PlannerMapView(), bloc: MapBloc());
 
       // Profile
       case editProfileViewRoute:

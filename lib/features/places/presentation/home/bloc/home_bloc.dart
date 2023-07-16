@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:funconnect/core/app/_app.dart';
 import 'package:funconnect/core/models/_models.dart';
 import 'package:funconnect/core/usecases/usecase.dart';
-import 'package:funconnect/features/places/data/repository/i_place_repository.dart';
 import 'package:funconnect/features/places/presentation/home/bloc/home_event.dart';
 import 'package:funconnect/features/places/presentation/home/bloc/home_state.dart';
 import 'package:funconnect/services/_services.dart';
@@ -26,8 +25,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   }
   final _logger = Logger();
   final _navigationService = locator<INavigationService>();
-  final _locationService = locator<ILocationService>();
-  final _placeRepository = locator<IPlaceRepository>();
 
   FutureOr<void> _onHomeInitEvent(
     HomeInitEvent event,
@@ -36,7 +33,9 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     try {
       if (event.showLoader) emit(HomeLoadingState());
       final usecase = FetchHomeTrends();
+
       await usecase(NoParams());
+
       emit(HomeIdleState(
         interests: usecase.interests,
         homeTrends: usecase.homeTrends,
@@ -111,9 +110,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   ) {
     _navigationService.toNamed(Routes.notificationsViewRoute);
   }
-
-  UserModel get user => _placeRepository.user;
-  AppLocation? get location => _locationService.userLocation;
 
   FutureOr<void> _onBookmarkTapEvent(
     BookmarkTapEvent event,

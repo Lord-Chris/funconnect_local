@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:funconnect/core/blocs/main_app_bloc.dart';
 import 'package:funconnect/features/dashboard/presentation/dashboard/bloc/dashboard_bloc.dart';
 import 'package:funconnect/features/dashboard/presentation/dashboard/bloc/dashboard_event.dart';
 import 'package:funconnect/features/dashboard/presentation/notifications/bloc/notification_bloc.dart';
@@ -51,7 +52,7 @@ class _HomeViewState extends State<HomeView> {
             child: AppNetworkImage(
               size: Size.fromRadius(25.r),
               isCircular: true,
-              url: context.watch<HomeBloc>().user.photoUrl,
+              url: context.watch<MainAppBloc>().user.photoUrl,
               cacheImage: false,
               fit: BoxFit.cover,
               placeholderAssetImage: AppAssets.fallbackUserProfileSvg,
@@ -62,14 +63,14 @@ class _HomeViewState extends State<HomeView> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Text(
-              "Hi ${context.watch<HomeBloc>().user.username}",
+              "Hi ${context.watch<MainAppBloc>().user.username}",
               style: AppTextStyles.medium20,
             ),
-            if ((context.watch<HomeBloc>().location?.parsedAddress ?? "")
+            if ((context.watch<MainAppBloc>().location?.parsedAddress ?? "")
                 .isNotEmpty) ...[
               Spacing.vertTiny(),
               Visibility(
-                visible: context.watch<HomeBloc>().location != null,
+                visible: context.watch<MainAppBloc>().location != null,
                 child: Row(
                   children: [
                     const Icon(
@@ -79,7 +80,8 @@ class _HomeViewState extends State<HomeView> {
                     ),
                     Flexible(
                       child: Text(
-                        context.watch<HomeBloc>().location?.parsedAddress ?? "",
+                        context.watch<MainAppBloc>().location?.parsedAddress ??
+                            "",
                         style: AppTextStyles.regular14.copyWith(
                           color: AppColors.secondary400,
                         ),
@@ -123,6 +125,9 @@ class _HomeViewState extends State<HomeView> {
                     return const HomeSkeleton();
                   }
                   if (state is! HomeIdleState) return const SizedBox();
+                  context
+                      .read<MainAppBloc>()
+                      .add(PlacesLoaded(state.homeTrends!));
                   return Column(
                     children: [
                       BlocBuilder<HomeBloc, HomeState>(
