@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:funconnect/core/models/_models.dart';
+import 'package:funconnect/services/network_service/auth_interceptor.dart';
 import 'package:logger/logger.dart';
 
 import 'i_network_service.dart';
@@ -18,7 +19,7 @@ class NetworkService extends INetworkService {
     _dio.options.connectTimeout = const Duration(seconds: 10);
     _dio.options.receiveTimeout = const Duration(seconds: 30);
     _dio.options.sendTimeout = const Duration(seconds: 30);
-    _dio.interceptors.add(NetworkLoggerInterceptor());
+    _dio.interceptors.addAll([AuthInterceptor(), NetworkLoggerInterceptor()]);
   }
 
   @override

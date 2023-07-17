@@ -10,8 +10,7 @@ import '../../domain/entities/search_query_param.dart';
 
 abstract class IPlaceRepository {
   Future<List<CategoryModel>> fetchUserInterests();
-  // Future<List<HomeTrendItemModel>> fetchHomeTrends(AppLocation? location);
-  Future<HomeTrendsReponse?> fetchHomeTrendsNew(AppLocation? location);
+  Future<HomeTrendsReponse?> fetchHomeTrends(AppLocation? location);
   Future<PaginatedData<PlaceModel>> fetchPlacesByCategory(
       String categoryId, int? page, AppLocation? location);
   Future<PaginatedData<PlaceModel>> searchPlaces(

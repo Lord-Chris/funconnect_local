@@ -29,10 +29,8 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
   void _fetchProfile() async {
     try {
       _watchDeepLink();
-      await Future.wait([
-        FetchProfileUsecase().call(NoParams()),
-        FetchExploreUseCase().fetchCategories(),
-      ]);
+      await FetchProfileUsecase().call(NoParams());
+      FetchExploreUseCase().fetchCategories();
     } on Failure catch (e, s) {
       _logger.e(e);
       FailureHandler.instance.catchError(e, stackTrace: s);

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:funconnect/core/constants/_constants.dart';
 import 'package:logger/logger.dart';
@@ -10,7 +12,7 @@ class ForceUpdateAppService implements IForceUpdateAppService {
   final _logger = Logger();
 
   @override
-  Future<String?> get enforcedVersionRaw async {
+  Future<String> get enforcedVersionRaw async {
     final FirebaseRemoteConfig remoteConfig = FirebaseRemoteConfig.instance;
     try {
       remoteConfig.setDefaults(
@@ -39,25 +41,26 @@ class ForceUpdateAppService implements IForceUpdateAppService {
 
   @override
   Future<bool> get needsUpdate async {
-    final List<int>? currentVersion = await currentVersionRaw.then((value) {
+    final List<int?> currentVersion = await currentVersionRaw.then((value) {
       _logger.i('Current Version - $value');
       return value
           .split('.')
-          .map((String number) => int.parse(number))
+          .map((String number) => int.tryParse(number))
           .toList();
     });
 
-    final List<int>? enforcedVersion = await enforcedVersionRaw.then((value) {
+    final List<int?> enforcedVersion = await enforcedVersionRaw.then((value) {
       _logger.i('Enforced Version - $value');
       return value
-          ?.split('.')
-          .map((String number) => int.parse(number))
+          .split('.')
+          .map((String number) => int.tryParse(number))
           .toList();
     });
-
-    for (int i = 0; i < 3; i++) {
-      if ((enforcedVersion?[i] ?? 0) < (currentVersion?[i] ?? 0)) return false;
-      if ((enforcedVersion?[i] ?? 0) > (currentVersion?[i] ?? 0)) return true;
+    for (int i = 0;
+        i < min(enforcedVersion.length, currentVersion.length);
+        i++) {
+      if ((enforcedVersion[i] ?? 0) < (currentVersion[i] ?? 0)) return false;
+      if ((enforcedVersion[i] ?? 0) > (currentVersion[i] ?? 0)) return true;
     }
     return false;
   }

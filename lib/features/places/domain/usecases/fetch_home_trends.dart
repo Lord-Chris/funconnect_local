@@ -21,12 +21,13 @@ class FetchHomeTrends with UseCases<void, NoParams> {
     await Future.wait(
       [
         _placeRepository
-            .fetchHomeTrendsNew(location)
+            .fetchHomeTrends(location)
             .then((value) => homeTrends = value?.data),
         _placeRepository
             .fetchUserInterests()
             .then((value) => interests = value),
       ],
+      eagerError: true,
     );
   }
 

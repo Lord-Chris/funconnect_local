@@ -24,30 +24,14 @@ class PlaceRepository extends IPlaceRepository {
   @override
   PaginatedData<CategoryModel>? get categories => _categories;
 
-  // @override
-  // Future<List<HomeTrendItemModel>> fetchHomeTrends(
-  //     AppLocation? location) async {
-  //   final useRemote = await _connectivityService.checkInternetConnection();
-  //   if (!useRemote) {
-  //     return _localDS.getHomeTrends();
-  //   }
-  //   final homeTrend = await _remoteDS.getHomeTrends(location);
-  //   await _localStorageService.write(
-  //     HiveKeys.placesBoxId,
-  //     key: StorageKeys.homeTrends,
-  //     data: homeTrend.map((e) => e.toMap()).toList(),
-  //   );
-  //   return homeTrend;
-  // }
-
   @override
-  Future<HomeTrendsReponse?> fetchHomeTrendsNew(AppLocation? location) async {
+  Future<HomeTrendsReponse?> fetchHomeTrends(AppLocation? location) async {
     final useRemote = await _connectivityService.checkInternetConnection();
     if (!useRemote) {
       return _localDS.getHomeTrendsNew();
     }
 
-    final homeTrendsnew = await _remoteDS.getHomeTrendsNew(location);
+    final homeTrendsnew = await _remoteDS.getHomeTrends(location);
     await _localStorageService.write(
       HiveKeys.placesBoxId,
       key: StorageKeys.homeTrends,
