@@ -340,19 +340,33 @@ class _CreatePlanViewState extends State<CreatePlanView> {
                       const SizedBox(
                         width: 8,
                       ),
-                      Text(
-                        "Add a place",
-                        style: TextStyle(
-                            color: const Color(0xff999999),
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w400),
+                      BlocBuilder<CreatePlanBloc, CreatePlanState>(
+                        builder: (context, state) {
+                          if (state is PlaceChangedState) {
+                            return Text(state.selectedPlace.name,
+                                style: TextStyle(
+                                    color: const Color(0xff999999),
+                                    fontSize: 14.sp,
+                                    fontWeight: FontWeight.w400));
+                          }
+                          return Text(
+                              context
+                                      .watch<CreatePlanBloc>()
+                                      .selectedPlace
+                                      ?.name ??
+                                  "Add a place",
+                              style: TextStyle(
+                                  color: const Color(0xff999999),
+                                  fontSize: 14.sp,
+                                  fontWeight: FontWeight.w400));
+                        },
                       ),
                       const Expanded(child: SizedBox()),
                       InkWell(
                         onTap: () {
                           context
                               .read<CreatePlanBloc>()
-                              .add(const SearchOnMapTapEvent());
+                              .add(SearchOnMapTapEvent(context));
                         },
                         child: Container(
                           decoration: BoxDecoration(

@@ -72,22 +72,28 @@ class MapBloc extends Bloc<MapEvent, MapState> {
                                   ],
                                 ),
                                 const Expanded(child: SizedBox()),
-                                Container(
-                                  decoration: const BoxDecoration(
-                                    borderRadius: BorderRadius.all(
-                                      Radius.circular(8),
+                                InkWell(
+                                  onTap: () {
+                                    Navigator.pop(context);
+                                    Navigator.pop(context, fullPlace);
+                                  },
+                                  child: Container(
+                                    decoration: const BoxDecoration(
+                                      borderRadius: BorderRadius.all(
+                                        Radius.circular(8),
+                                      ),
+                                      color: AppColors.primary,
                                     ),
-                                    color: AppColors.primary,
-                                  ),
-                                  child: const Padding(
-                                    padding: EdgeInsets.symmetric(
-                                        vertical: 8.0, horizontal: 16),
-                                    child: Text(
-                                      "Add to plan",
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.w500,
+                                    child: const Padding(
+                                      padding: EdgeInsets.symmetric(
+                                          vertical: 8.0, horizontal: 16),
+                                      child: Text(
+                                        "Add to plan",
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.w500,
+                                        ),
                                       ),
                                     ),
                                   ),

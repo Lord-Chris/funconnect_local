@@ -20,3 +20,9 @@ class TimeChangedState extends CreatePlanState {
 
   const TimeChangedState({required this.selectedTime});
 }
+
+class PlaceChangedState extends CreatePlanState {
+  final FullPlaceModel selectedPlace;
+
+  const PlaceChangedState({required this.selectedPlace});
+}

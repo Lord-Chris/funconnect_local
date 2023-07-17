@@ -20,5 +20,15 @@ class TimeSelectTapEvent extends CreatePlanEvent {
 }
 
 class SearchOnMapTapEvent extends CreatePlanEvent {
-  const SearchOnMapTapEvent();
+  final BuildContext context;
+  const SearchOnMapTapEvent(this.context);
+}
+
+class PlaceSelectedEvent extends CreatePlanEvent {
+  final FullPlaceModel place;
+
+  const PlaceSelectedEvent({required this.place});
+
+  @override
+  List<Object> get props => [place];
 }

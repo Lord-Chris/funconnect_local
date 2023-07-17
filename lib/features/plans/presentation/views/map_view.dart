@@ -26,6 +26,11 @@ class PlannerMapView extends StatelessWidget {
                     .read<MapBloc>()
                     .generateMarkers(state.homeTrends, context),
                 builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
                   return GoogleMap(
                     initialCameraPosition: CameraPosition(
                       target: LatLng(currentLocation?.lat ?? 37.42796133580664,

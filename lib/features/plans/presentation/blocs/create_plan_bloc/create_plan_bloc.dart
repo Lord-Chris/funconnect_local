@@ -4,7 +4,9 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:funconnect/core/app/locator.dart';
-import 'package:funconnect/core/app/routes.dart';
+import 'package:funconnect/features/places/domain/entities/full_place_model.dart';
+import 'package:funconnect/features/plans/presentation/blocs/map_bloc/map_bloc.dart';
+import 'package:funconnect/features/plans/presentation/views/map_view.dart';
 import 'package:funconnect/services/navigation_service/i_navigation_service.dart';
 
 part 'create_plan_event.dart';
@@ -16,10 +18,12 @@ class CreatePlanBloc extends Bloc<CreatePlanEvent, CreatePlanState> {
     on<DateSelectTapEvent>(_dateSelectTapEvent);
     on<TimeSelectTapEvent>(_timeSelectTapEvent);
     on<SearchOnMapTapEvent>(_searchOnMapTapEvent);
+    on<PlaceSelectedEvent>(_placeSelectedEvent);
   }
 
   DateTime selectedDate = DateTime.now();
   TimeOfDay selectedTime = TimeOfDay.now();
+  FullPlaceModel? selectedPlace;
   final _navigation = locator<INavigationService>();
 
   FutureOr<void> _dateSelectTapEvent(
@@ -37,7 +41,22 @@ class CreatePlanBloc extends Bloc<CreatePlanEvent, CreatePlanState> {
   }
 
   FutureOr<void> _searchOnMapTapEvent(
-      SearchOnMapTapEvent event, Emitter<CreatePlanState> emit) {
-    _navigation.toNamed(Routes.plannerMapRoute);
+      SearchOnMapTapEvent event, Emitter<CreatePlanState> emit) async {
+    var result = await Navigator.push(
+        event.context,
+        MaterialPageRoute(
+            builder: (context) => BlocProvider(
+                create: (context) => MapBloc(), child: const PlannerMapView()),
+            fullscreenDialog: true));
+    if (result != null) {
+      selectedPlace = result as FullPlaceModel;
+      emit(PlaceChangedState(selectedPlace: result));
+    }
+  }
+
+  FutureOr<void> _placeSelectedEvent(
+      PlaceSelectedEvent event, Emitter<CreatePlanState> emit) {
+    selectedPlace = event.place;
+    _navigation.back();
   }
 }
