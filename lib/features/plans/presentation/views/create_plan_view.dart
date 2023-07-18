@@ -343,22 +343,25 @@ class _CreatePlanViewState extends State<CreatePlanView> {
                       BlocBuilder<CreatePlanBloc, CreatePlanState>(
                         builder: (context, state) {
                           if (state is PlaceChangedState) {
-                            return Text(state.selectedPlace.name,
-                                style: TextStyle(
-                                    color: const Color(0xff999999),
-                                    fontSize: 14.sp,
-                                    fontWeight: FontWeight.w400));
-                          }
-                          return Text(
-                              context
-                                      .watch<CreatePlanBloc>()
-                                      .selectedPlace
-                                      ?.name ??
-                                  "Add a place",
+                            return Text(
+                              state.selectedPlace.name,
                               style: TextStyle(
                                   color: const Color(0xff999999),
                                   fontSize: 14.sp,
-                                  fontWeight: FontWeight.w400));
+                                  fontWeight: FontWeight.w400),
+                            );
+                          }
+                          return Text(
+                            context
+                                    .watch<CreatePlanBloc>()
+                                    .selectedPlace
+                                    ?.name ??
+                                "Add a place",
+                            style: TextStyle(
+                                color: const Color(0xff999999),
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.w400),
+                          );
                         },
                       ),
                       const Expanded(child: SizedBox()),
