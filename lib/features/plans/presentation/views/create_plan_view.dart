@@ -391,6 +391,19 @@ class _CreatePlanViewState extends State<CreatePlanView> {
                   ),
                 ),
               ),
+              SizedBox(
+                height: 16.h,
+              ),
+              Text(
+                "Add friends",
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.w400),
+              ),
+              SizedBox(
+                height: 8.h,
+              ),
             ]),
           ),
         ),
