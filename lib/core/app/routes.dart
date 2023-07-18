@@ -227,22 +227,29 @@ class Routes {
         return _registerBlocView(
           bloc: PlanListBloc(),
           view: const PlansListView(),
+          settings: settings,
         );
 
       case createPlanViewRoute:
         return _registerBlocView(
           bloc: CreatePlanBloc(),
           view: const CreatePlanView(),
+          settings: settings,
         );
 
       case choosePlanTypeViewRoute:
         return _registerBlocView(
           bloc: ChoosePlanTypeBloc(),
           view: const ChoosePlanTypeView(),
+          settings: settings,
         );
 
       case plannerMapRoute:
-        return _registerBlocView(view: const PlannerMapView(), bloc: MapBloc());
+        return _registerBlocView(
+          view: const PlannerMapView(),
+          bloc: MapBloc(),
+          settings: settings,
+        );
 
       // Profile
       case editProfileViewRoute:

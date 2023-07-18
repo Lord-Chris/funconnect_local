@@ -407,6 +407,56 @@ class _CreatePlanViewState extends State<CreatePlanView> {
               SizedBox(
                 height: 8.h,
               ),
+              Container(
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: const Color(0xff202020),
+                  borderRadius: BorderRadius.circular(8.r),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Row(
+                    children: [
+                      const SizedBox(
+                        width: 8,
+                      ),
+                      Text(
+                        "E-mail address",
+                        style: TextStyle(
+                            color: const Color(0xff999999),
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w400),
+                      ),
+                      const Expanded(child: SizedBox()),
+                      InkWell(
+                        onTap: () {
+                          context
+                              .read<CreatePlanBloc>()
+                              .add(SearchOnMapTapEvent(context));
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: AppColors.gray333,
+                            borderRadius: BorderRadius.circular(4.r),
+                          ),
+                          child: const Padding(
+                            padding: EdgeInsets.symmetric(
+                                vertical: 8.0, horizontal: 12),
+                            child: Text(
+                              "Add Email",
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
             ]),
           ),
         ),
