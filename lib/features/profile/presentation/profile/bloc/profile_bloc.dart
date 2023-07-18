@@ -179,7 +179,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       negativeCallBack: () {
         _navigationService.back();
       },
-      positiveCallBack: () async {
+      positiveCallBack: (_) async {
         try {
           LogoutUser().call(NoParams());
           _navigationService.offAllNamed(Routes.welcomeViewRoute, (_) => false);
@@ -211,8 +211,9 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       negativeCallBack: () {
         _navigationService.back();
       },
-      positiveCallBack: () async {
+      positiveCallBack: (isBusy) async {
         try {
+          isBusy?.value = !isBusy.value;
           await DeleteUserAccount().call(NoParams());
           _navigationService.offAllNamed(Routes.welcomeViewRoute, (_) => false);
           _dialogAndSheetService.showAppDialog(const StatusDialog(

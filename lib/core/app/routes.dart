@@ -117,6 +117,7 @@ class Routes {
         return _registerBlocView(
           view: const SplashView(),
           bloc: SplashBloc(),
+          settings: settings,
         );
       case versionUpdateRoute:
         return MaterialPageRoute(builder: (_) => const VersionUpdateView());
@@ -124,17 +125,20 @@ class Routes {
         return _registerBlocView(
           view: const OnboardingView(),
           bloc: OnboardingBloc(),
+          settings: settings,
         );
       case welcomeViewRoute:
         return _registerBlocView(
           view: const WelcomeView(),
           bloc: WelcomeBloc(),
+          settings: settings,
         );
       case verifyEmailRoute:
         final res = settings.arguments as RequestOtpResponse;
         return _registerBlocView(
           view: VerifyEmailView(response: res),
           bloc: VerifyEmailBloc(),
+          settings: settings,
         );
       case emailVerifiedRoute:
         final res = settings.arguments as UserModel;
@@ -145,11 +149,13 @@ class Routes {
         return _registerBlocView(
           view: ProfileSetUpView(user: settings.arguments as UserModel),
           bloc: ProfileSetupBloc(),
+          settings: settings,
         );
       case interestViewRoute:
         return _registerBlocView(
           view: const InterestView(),
           bloc: InterestsBloc(),
+          settings: settings,
         );
 
       // Places
@@ -158,6 +164,7 @@ class Routes {
         return _registerBlocView(
           view: PlaceDetailView(place: place),
           bloc: PlaceDetailBloc(),
+          settings: settings,
         );
 
       case categoryDetailRoute:
@@ -165,12 +172,14 @@ class Routes {
         return _registerBlocView(
           view: CategoryDetailView(category: category),
           bloc: CategoryDetailBloc(),
+          settings: settings,
         );
 
       case searchResultRoute:
         return _registerBlocView(
           view: const SearchResultView(),
           bloc: SearchResultBloc(),
+          settings: settings,
         );
 
       // Dashboard
@@ -178,12 +187,14 @@ class Routes {
         return _registerBlocView(
           bloc: DashboardBloc(),
           view: const DashboardView(),
+          settings: settings,
         );
 
       case notificationsViewRoute:
         return _registerBlocView(
           view: const NotificationsView(),
           bloc: NotificationBloc(),
+          settings: settings,
         );
 
       // Events
@@ -205,6 +216,7 @@ class Routes {
         return _registerBlocView(
           bloc: SavedBloc(),
           view: const SavedView(),
+          settings: settings,
         );
 
       case createCollectionViewRoute:
@@ -238,12 +250,14 @@ class Routes {
         return _registerBlocView(
           view: const EditProfileView(),
           bloc: EditProfileBloc(profile),
+          settings: settings,
         );
       case manageLoginOptionsRoute:
         final profile = settings.arguments as UserModel;
         return _registerBlocView(
           view: const ManageLogInOptionsView(),
           bloc: ManageLoginOptionsBloc(profile),
+          settings: settings,
         );
       case rateYourExperienceRoute:
         return MaterialPageRoute(
@@ -258,10 +272,10 @@ class Routes {
       case webViewRoute:
         String link = settings.arguments as String;
         return _registerBlocView(
-            view: WebViewScreen(
-              link: link,
-            ),
-            bloc: WebviewBloc());
+          view: WebViewScreen(link: link),
+          settings: settings,
+          bloc: WebviewBloc(),
+        );
 
       default:
         return MaterialPageRoute(
@@ -277,8 +291,10 @@ class Routes {
   static MaterialPageRoute _registerBlocView<T extends Bloc>({
     required Widget view,
     required T bloc,
+    required RouteSettings settings,
   }) {
     return MaterialPageRoute(
+      settings: settings,
       builder: (_) => BlocProvider<T>(
         create: (context) => bloc,
         child: view,

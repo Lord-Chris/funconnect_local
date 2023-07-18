@@ -28,7 +28,6 @@ class ProfileSetUpView extends HookWidget {
     final usernameController = useTextEditingController();
     final gender = useState<String?>(null);
     return Scaffold(
-      backgroundColor: AppColors.primary,
       body: SafeArea(
         top: false,
         child: BlocBuilder<ProfileSetupBloc, ProfileSetupState>(
@@ -190,17 +189,23 @@ class ProfileSetUpView extends HookWidget {
                     ],
                   ),
                 ),
-                AppOrangeBtn(
-                  label: "Continue",
-                  isBusy: state is ProfileSetupLoadingState,
-                  onTap: () {
-                    if (!formKey.currentState!.validate()) return;
-                    context.read<ProfileSetupBloc>().add(SetupProfileEvent(
-                          fullName: nameController.text,
-                          username: usernameController.text,
-                          gender: gender.value!,
-                        ));
-                  },
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: AppButton(
+                    label: "Continue",
+                    isBusy: state is ProfileSetupLoadingState,
+                    borderRadius: 8,
+                    height: 65,
+                    labelSize: 20,
+                    onTap: () {
+                      if (!formKey.currentState!.validate()) return;
+                      context.read<ProfileSetupBloc>().add(SetupProfileEvent(
+                            fullName: nameController.text,
+                            username: usernameController.text,
+                            gender: gender.value!,
+                          ));
+                    },
+                  ),
                 ),
               ],
             ),

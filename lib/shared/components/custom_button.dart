@@ -46,7 +46,7 @@ class AppButton extends StatelessWidget {
       width: width ?? (isCollapsed ? null : double.maxFinite),
       height: height ?? (isCollapsed ? null : 50.h),
       child: MaterialButton(
-        onPressed: isDisabled ? null : onTap,
+        onPressed: isDisabled ? null : () => isBusy ? null : onTap?.call(),
         disabledColor: disabledColor ?? buttonColor?.withOpacity(0.3),
         color: buttonColor,
         elevation: hasShadow ? 5 : 0,

@@ -7,8 +7,8 @@ import 'package:funconnect/services/_services.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
 
 import '../../../../core/models/_models.dart';
+import '../../../../shared/components/_components.dart';
 import '../../../../shared/components/app_black_modal.dart';
-import '../../../../shared/components/app_orange_button.dart';
 
 class EmailVerifiedScreen extends StatelessWidget {
   final UserModel user;
@@ -20,7 +20,6 @@ class EmailVerifiedScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.primary,
       body: SafeArea(
         top: false,
         child: AppBlackModalWidget(
@@ -57,21 +56,27 @@ class EmailVerifiedScreen extends StatelessWidget {
                   style: AppTextStyles.regular14,
                 ),
                 const SizedBox(height: 62),
-                AppOrangeBtn(
-                  label: AppText.aTAuthContinueText,
-                  onTap: () {
-                    if (user.status == UserStatus.newUser) {
-                      locator<INavigationService>().offNamed(
-                        Routes.profileSetupViewRoute,
-                        arguments: user,
-                      );
-                    } else {
-                      locator<INavigationService>().offAllNamed(
-                        Routes.dashboardViewRoute,
-                        (_) => false,
-                      );
-                    }
-                  },
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: AppButton(
+                    label: AppText.aTAuthContinueText,
+                    borderRadius: 8,
+                    height: 65,
+                    labelSize: 20,
+                    onTap: () {
+                      if (user.status == UserStatus.newUser) {
+                        locator<INavigationService>().offNamed(
+                          Routes.profileSetupViewRoute,
+                          arguments: user,
+                        );
+                      } else {
+                        locator<INavigationService>().offAllNamed(
+                          Routes.dashboardViewRoute,
+                          (_) => false,
+                        );
+                      }
+                    },
+                  ),
                 ),
               ],
             ),

@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:funconnect/features/startup/presentation/onboarding/bloc/onboarding_bloc.dart';
 import 'package:funconnect/features/startup/presentation/onboarding/bloc/onboarding_event.dart';
 import 'package:funconnect/features/startup/presentation/onboarding/bloc/onboarding_state.dart';
-import 'package:funconnect/features/startup/presentation/onboarding/widgets/onboarding_item_widget.dart';
 import 'package:funconnect/features/startup/presentation/onboarding/widgets/onboarding_item_model.dart';
+import 'package:funconnect/features/startup/presentation/onboarding/widgets/onboarding_item_widget.dart';
 import 'package:funconnect/shared/components/_components.dart';
 import 'package:funconnect/shared/constants/colors.dart';
 import 'package:story_view/story_view.dart';
@@ -34,10 +34,16 @@ class OnboardingView extends StatelessWidget {
           const SizedBox(height: 32),
           BlocBuilder<OnboardingBloc, OnboardingState>(
             builder: (context, state) {
-              return AppOrangeBtn(
-                onTap: () =>
-                    context.read<OnboardingBloc>().add(GetStartedEvent()),
-                label: "Get Started",
+              return Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: AppButton(
+                  label: "Get Started",
+                  borderRadius: 8,
+                  height: 65,
+                  labelSize: 20,
+                  onTap: () =>
+                      context.read<OnboardingBloc>().add(GetStartedEvent()),
+                ),
               );
             },
           )

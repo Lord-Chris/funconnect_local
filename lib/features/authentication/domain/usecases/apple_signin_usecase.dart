@@ -43,6 +43,9 @@ class AppleSignInUsecase with UseCases<UserModel?, NoParams> {
       }
       return user;
     } on SignInWithAppleException catch (e) {
+      if (e is SignInWithAppleAuthorizationException) {
+        if (e.code == AuthorizationErrorCode.canceled) return null;
+      }
       throw Failure("Apple Sign in failed", extraData: e.toString());
     }
   }

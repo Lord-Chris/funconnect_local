@@ -9,7 +9,7 @@ import 'package:funconnect/features/startup/presentation/onboarding/bloc/onboard
 import 'package:funconnect/features/startup/presentation/onboarding/bloc/onboarding_state.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
 
-import '../../../../../shared/components/app_orange_button.dart';
+import '../../../../../shared/components/_components.dart';
 
 class OnboardingViewBk extends StatefulHookWidget {
   const OnboardingViewBk({Key? key}) : super(key: key);
@@ -278,10 +278,17 @@ class _OnboardingViewState extends State<OnboardingViewBk> {
                     ),
                     Spacing.vertRegular(),
                     Spacing.vertRegular(),
-                    AppOrangeBtn(
-                      label: "Get Started",
-                      onTap: () =>
-                          context.read<OnboardingBloc>().add(GetStartedEvent()),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: AppButton(
+                        label: "Get Started",
+                        borderRadius: 8,
+                        height: 65,
+                        labelSize: 20,
+                        onTap: () => context
+                            .read<OnboardingBloc>()
+                            .add(GetStartedEvent()),
+                      ),
                     ),
                   ],
                 ),

@@ -117,13 +117,21 @@ class SocialNetworkInformationView extends StatelessWidget {
                 ),
               ),
             ),
-            AppOrangeBtn(
-              label: AppText.aTUpdateProfile,
-              isBusy: state.isUpdatingProfile,
-              onTap: () {
-                context.read<EditProfileBloc>().add(UpdateProfileEvent());
-              },
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: AppButton(
+                label: AppText.aTUpdateProfile,
+                borderRadius: 8,
+                height: 65,
+                labelSize: 20,
+                isBusy: state.isUpdatingProfile,
+                onTap: () {
+                  context.read<EditProfileBloc>().add(UpdateProfileEvent());
+                },
+              ),
             ),
+            Spacing.vertMedium(),
+            Spacing.vertMedium(),
           ],
         );
       },

@@ -12,6 +12,7 @@ import 'package:funconnect/shared/dialogs/_dialogs.dart';
 import 'package:logger/logger.dart';
 
 import '../../../../../core/app/_app.dart';
+import '../../../../../core/utils/failure_handler.dart';
 import '../../../domain/usecases/fetch_login_options.dart';
 import '../../../domain/usecases/update_login_options.dart';
 
@@ -72,7 +73,7 @@ class ManageLoginOptionsBloc
       negativeCallBack: () {
         _navigationService.back();
       },
-      positiveCallBack: () async {
+      positiveCallBack: (_) async {
         try {
           await LogoutUser().call(NoParams());
           _navigationService.offAllNamed(Routes.welcomeViewRoute, (_) => false);
@@ -106,16 +107,24 @@ class ManageLoginOptionsBloc
       negativeCallBack: () {
         _navigationService.back();
       },
-      positiveCallBack: () async {
+      positiveCallBack: (isBusy) async {
         try {
+          isBusy?.value = !isBusy.value;
           await DeleteUserAccount().call(NoParams());
           _navigationService.offAllNamed(Routes.welcomeViewRoute, (_) => false);
           _dialogAndSheetService.showAppDialog(const StatusDialog(
-              isError: false, title: "Alert", body: "User Account Deleted"));
-        } on Failure catch (e) {
+            isError: false,
+            title: "Alert",
+            body: "User Account Deleted",
+          ));
+        } on Failure catch (e, s) {
           _navigationService.back();
+          FailureHandler.instance.catchError(e, stackTrace: s);
           _dialogAndSheetService.showAppDialog(StatusDialog(
-              isError: true, title: "Error Deleting Account", body: e.message));
+            isError: true,
+            title: "Error Deleting Account",
+            body: e.message,
+          ));
         }
       },
     ));

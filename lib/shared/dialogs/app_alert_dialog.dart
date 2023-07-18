@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:funconnect/shared/components/_components.dart';
 import 'package:funconnect/shared/constants/app_spacer.dart';
 import 'package:funconnect/shared/constants/colors.dart';
 import 'package:funconnect/shared/constants/textstyles.dart';
 
-class AppAlertDialog extends StatelessWidget {
+class AppAlertDialog extends HookWidget {
   final bool isHighPriority;
   final String title;
   final String body;
   final String positiveLabel;
   final String negativeLabel;
-  final VoidCallback positiveCallBack;
+  final void Function(ValueNotifier<bool>?) positiveCallBack;
   final VoidCallback negativeCallBack;
 
   const AppAlertDialog({
@@ -27,6 +28,7 @@ class AppAlertDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isBusy = useState(false);
     return Dialog(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(36),
@@ -65,10 +67,9 @@ class AppAlertDialog extends StatelessWidget {
                 Spacing.horizRegular(),
                 Expanded(
                   child: AppButton(
-                    onTap: positiveCallBack,
+                    onTap: () => positiveCallBack(isBusy),
                     label: positiveLabel,
-                    // isCollapsed: true,
-
+                    isBusy: isBusy.value,
                     buttonColor: isHighPriority
                         ? AppColors.deleteTextRed
                         : AppColors.primary,

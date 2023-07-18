@@ -12,8 +12,8 @@ import 'package:funconnect/features/authentication/presentation/verify_email/blo
 import 'package:funconnect/shared/constants/_constants.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
+import '../../../../shared/components/_components.dart';
 import '../../../../shared/components/app_black_modal.dart';
-import '../../../../shared/components/app_orange_button.dart';
 import '../../data/dto/request_otp_response.dart';
 
 class VerifyEmailView extends StatefulHookWidget {
@@ -54,7 +54,6 @@ class _VerifyEmailViewState extends State<VerifyEmailView> {
             }
           },
           child: Scaffold(
-            backgroundColor: AppColors.primary,
             body: SafeArea(
               top: false,
               child: AppBlackModalWidget(
@@ -262,18 +261,24 @@ class _VerifyEmailViewState extends State<VerifyEmailView> {
                             ],
                           ),
                         ),
-                        AppOrangeBtn(
-                          label: AppText.aTAuthVerifyEmailText,
-                          isBusy: state is VerifyEmailLoadingState,
-                          onTap: () {
-                            if (!formKey.currentState!.validate()) return;
-                            context
-                                .read<VerifyEmailBloc>()
-                                .add(VerifyEmailTapEvent(
-                                  response: widget.response,
-                                  otp: pinController.text,
-                                ));
-                          },
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          child: AppButton(
+                            label: AppText.aTAuthVerifyEmailText,
+                            borderRadius: 8,
+                            height: 65,
+                            labelSize: 20,
+                            isBusy: state is VerifyEmailLoadingState,
+                            onTap: () {
+                              if (!formKey.currentState!.validate()) return;
+                              context
+                                  .read<VerifyEmailBloc>()
+                                  .add(VerifyEmailTapEvent(
+                                    response: widget.response,
+                                    otp: pinController.text,
+                                  ));
+                            },
+                          ),
                         ),
                       ],
                     ),
