@@ -7,4 +7,6 @@ abstract class PlanListEvent extends Equatable {
   List<Object> get props => [];
 }
 
+class FetchMiniPlansEvent extends PlanListEvent {}
+
 class CreatePlanClickedEvent extends PlanListEvent {}

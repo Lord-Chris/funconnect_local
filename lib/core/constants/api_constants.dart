@@ -72,6 +72,9 @@ class ApiConstants {
   static String togglePlaceBookmark(String placeId) =>
       '$places/saved-places/$placeId';
 
+  // PLANS
+  static String get miniPlans => "$_baseUrl/events/mini-plans";
+
   // EVENTS
   static String get events => "$_baseUrl/events";
 
