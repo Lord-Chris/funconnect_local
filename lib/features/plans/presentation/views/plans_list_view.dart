@@ -90,6 +90,7 @@ class PlansListView extends StatelessWidget {
                                     ),
                                     const Icon(
                                       Icons.upload,
+                                      color: Color(0xffcccccc),
                                       size: 20,
                                     )
                                   ],
