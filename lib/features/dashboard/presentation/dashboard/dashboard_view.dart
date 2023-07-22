@@ -40,7 +40,7 @@ class DashboardView extends StatelessWidget {
         BlocProvider(create: (context) => SavedBloc()),
         BlocProvider(create: (context) => NotificationBloc()),
         BlocProvider(
-          create: (context) => PlanListBloc(),
+          create: (context) => PlanListBloc()..add(FetchMiniPlansEvent()),
         )
       ],
       child: BlocBuilder<DashboardBloc, DashboardState>(

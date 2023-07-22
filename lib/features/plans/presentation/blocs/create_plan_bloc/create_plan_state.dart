@@ -8,21 +8,3 @@ abstract class CreatePlanState extends Equatable {
 }
 
 class CreatePlanInitial extends CreatePlanState {}
-
-class DateChangedState extends CreatePlanState {
-  final DateTime selectedDate;
-
-  const DateChangedState({required this.selectedDate});
-}
-
-class TimeChangedState extends CreatePlanState {
-  final TimeOfDay selectedTime;
-
-  const TimeChangedState({required this.selectedTime});
-}
-
-class PlaceChangedState extends CreatePlanState {
-  final FullPlaceModel selectedPlace;
-
-  const PlaceChangedState({required this.selectedPlace});
-}

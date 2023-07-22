@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:funconnect/features/plans/presentation/blocs/plan_list_bloc/plan_list_bloc.dart';
+import 'package:funconnect/features/plans/presentation/components/empty_plans_view.dart';
 
 class PlansListView extends StatelessWidget {
   const PlansListView({super.key});
@@ -9,75 +10,104 @@ class PlansListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Padding(
-          padding: const EdgeInsets.only(left: 16.0),
-          child: Text("Create plan",
-              style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w400)),
-        ),
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: const Padding(
-              padding: EdgeInsets.only(right: 16.0),
-              child: Icon(
-                Icons.add,
-                size: 24,
-              ),
-            ),
-          )
-        ],
-      ),
-      body: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            InkWell(
-              onTap: () {
+        appBar: AppBar(
+          title: Padding(
+            padding: const EdgeInsets.only(left: 16.0),
+            child: Text("My Plans",
+                style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w400)),
+          ),
+          actions: [
+            IconButton(
+              onPressed: () {
                 context.read<PlanListBloc>().add(CreatePlanClickedEvent());
               },
-              child: Container(
-                decoration: const BoxDecoration(
-                  color: Color(0xff0E0E0E),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 24.0, vertical: 16),
-                  child: Row(mainAxisSize: MainAxisSize.min, children: [
-                    const Icon(
-                      Icons.add,
-                      size: 16,
-                    ),
-                    const SizedBox(width: 8),
-                    Text(
-                      "Create new plan",
-                      style: TextStyle(
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.w400,
-                          color: const Color(0xff979797)),
-                    )
-                  ]),
+              icon: const Padding(
+                padding: EdgeInsets.only(right: 16.0),
+                child: Icon(
+                  Icons.add,
+                  size: 24,
                 ),
               ),
-            ),
+            )
           ],
         ),
-        const SizedBox(height: 24),
-        Text(
-          "You have no plans yet",
-          style: TextStyle(
-              fontSize: 14.sp,
-              fontWeight: FontWeight.w400,
-              color: const Color(0xff979797)),
-        ),
-        Text(
-          "Start your journey by creating a new plan",
-          style: TextStyle(
-              fontSize: 14.sp,
-              fontWeight: FontWeight.w400,
-              color: const Color(0xff979797)),
-        )
-      ]),
-    );
+        body: BlocBuilder<PlanListBloc, PlanListState>(
+          builder: (context, state) {
+            if (state is PlanListEmptyState) {
+              return const EmptyPLansView(
+                isListEmpty: true,
+              );
+            }
+            if (state is PlanListLoadingState) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+            if (state is PlanListFetchedState) {
+              return Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: Column(
+                  children: [
+                    ListView.separated(
+                        shrinkWrap: true,
+                        separatorBuilder: (context, index) => SizedBox(
+                              height: 16.h,
+                            ),
+                        itemCount: state.data.data.length,
+                        itemBuilder: (context, index) {
+                          return Container(
+                              decoration: BoxDecoration(
+                                  color: const Color(0xff161616),
+                                  borderRadius: BorderRadius.circular(8)),
+                              width: double.infinity,
+                              child: Padding(
+                                padding: const EdgeInsets.all(16.0),
+                                child: Row(
+                                  children: [
+                                    Expanded(
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(state.data.data[index].name,
+                                              style: TextStyle(
+                                                  color:
+                                                      const Color(0xffcccccc),
+                                                  fontSize: 16.sp,
+                                                  fontWeight: FontWeight.w500)),
+                                          SizedBox(
+                                            height: 8.h,
+                                          ),
+                                          Text(
+                                            state.data.data[index].description,
+                                            style: TextStyle(
+                                                color: const Color(0xff999999),
+                                                fontSize: 12.sp,
+                                                fontWeight: FontWeight.w400),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    const Icon(Icons.upload)
+                                  ],
+                                ),
+                              ));
+                        }),
+                    SizedBox(
+                      height: 96.h,
+                    ),
+                    const EmptyPLansView(
+                      isListEmpty: false,
+                    ),
+                  ],
+                ),
+              );
+            }
+
+            return const Center(
+              child: Text("Error"),
+            );
+          },
+        ));
   }
 }

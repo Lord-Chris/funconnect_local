@@ -47,11 +47,11 @@ class MiniPlanModel extends Equatable {
 
   factory MiniPlanModel.fromMap(Map<String, dynamic> map) {
     return MiniPlanModel(
-      id: map['id'],
-      name: map['name'],
-      description: map['description'],
-      reminderType: map['reminderType'],
-      reminderMedium: map['reminderMedium'],
+      id: map['id'] ?? '',
+      name: map['name'] ?? '',
+      description: map['description'] ?? '',
+      reminderType: map['reminderType'] ?? '',
+      reminderMedium: map['reminderMedium'] ?? '',
     );
   }
 
