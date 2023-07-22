@@ -88,7 +88,10 @@ class PlansListView extends StatelessWidget {
                                         ],
                                       ),
                                     ),
-                                    const Icon(Icons.upload)
+                                    const Icon(
+                                      Icons.upload,
+                                      size: 20,
+                                    )
                                   ],
                                 ),
                               ));
