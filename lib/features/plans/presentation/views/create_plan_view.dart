@@ -159,17 +159,6 @@ class _CreatePlanViewState extends State<CreatePlanView> {
               SizedBox(
                 height: 16.h,
               ),
-              SizedBox(
-                height: 60,
-                width: double.infinity,
-                child: ListView.builder(
-                  itemBuilder: (context, index) {
-                    return Container(
-                      child: const Column(children: []),
-                    );
-                  },
-                ),
-              )
             ]),
           ),
         ),
