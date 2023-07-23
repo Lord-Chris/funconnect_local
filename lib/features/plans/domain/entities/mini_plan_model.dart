@@ -6,9 +6,8 @@ class MiniPlanModel extends Equatable {
   final String id;
   final String name;
   final String description;
-  final String reminderType;
+  final ReminderType reminderType;
   final String reminderMedium;
-
   const MiniPlanModel({
     required this.id,
     required this.name,
@@ -21,7 +20,7 @@ class MiniPlanModel extends Equatable {
     String? id,
     String? name,
     String? description,
-    String? reminderType,
+    ReminderType? reminderType,
     String? reminderMedium,
   }) {
     return MiniPlanModel(
@@ -39,7 +38,7 @@ class MiniPlanModel extends Equatable {
     result.addAll({'id': id});
     result.addAll({'name': name});
     result.addAll({'description': description});
-    result.addAll({'reminderType': reminderType});
+    result.addAll({'reminderType': reminderType.value});
     result.addAll({'reminderMedium': reminderMedium});
 
     return result;
@@ -50,8 +49,8 @@ class MiniPlanModel extends Equatable {
       id: map['id'] ?? '',
       name: map['name'] ?? '',
       description: map['description'] ?? '',
-      reminderType: map['reminderType'] ?? '',
-      reminderMedium: map['reminderMedium'] ?? '',
+      reminderType: ReminderType.fromValue(map['reminderType']),
+      reminderMedium: map['reminderMedium'],
     );
   }
 
@@ -74,5 +73,27 @@ class MiniPlanModel extends Equatable {
       reminderType,
       reminderMedium,
     ];
+  }
+}
+
+enum ReminderType {
+  oneHourBefore("one_hour_before"),
+  thirtyMinutesBefore("thirty_minutes_before"),
+  fifteenMinutesBefore("fifteen_minutes_before");
+
+  const ReminderType(this.value);
+  final String value;
+
+  factory ReminderType.fromValue(String value) {
+    switch (value) {
+      case 'one_hour_before':
+        return ReminderType.oneHourBefore;
+      case 'thirty_minutes_before':
+        return ReminderType.thirtyMinutesBefore;
+      case 'fifteen_minutes_before':
+        return ReminderType.fifteenMinutesBefore;
+      default:
+        return ReminderType.oneHourBefore;
+    }
   }
 }
