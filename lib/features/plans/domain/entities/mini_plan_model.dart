@@ -39,8 +39,8 @@ class MiniPlanModel extends Equatable {
     result.addAll({'id': id});
     result.addAll({'name': name});
     result.addAll({'description': description});
-    result.addAll({'reminderType': reminderType.value});
-    result.addAll({'reminderMedium': reminderMedium});
+    result.addAll({'reminder_type': reminderType.value});
+    result.addAll({'reminder_medium': reminderMedium});
     result.addAll({'scope': scope.value});
 
     return result;
@@ -51,8 +51,8 @@ class MiniPlanModel extends Equatable {
         id: map['id'] ?? '',
         name: map['name'] ?? '',
         description: map['description'] ?? '',
-        reminderType: ReminderType.fromValue(map['reminderType']),
-        reminderMedium: map['reminderMedium'],
+        reminderType: ReminderType.fromValue(map['reminder_type']),
+        reminderMedium: map['reminder_medium'],
         scope: Scope.fromValue(map['scope']));
   }
 
