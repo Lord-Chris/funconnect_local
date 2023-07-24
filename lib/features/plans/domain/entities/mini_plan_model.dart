@@ -8,28 +8,29 @@ class MiniPlanModel extends Equatable {
   final String description;
   final ReminderType reminderType;
   final String reminderMedium;
-  const MiniPlanModel({
-    required this.id,
-    required this.name,
-    required this.description,
-    required this.reminderType,
-    required this.reminderMedium,
-  });
+  final Scope scope;
+  const MiniPlanModel(
+      {required this.id,
+      required this.name,
+      required this.description,
+      required this.reminderType,
+      required this.reminderMedium,
+      required this.scope});
 
-  MiniPlanModel copyWith({
-    String? id,
-    String? name,
-    String? description,
-    ReminderType? reminderType,
-    String? reminderMedium,
-  }) {
+  MiniPlanModel copyWith(
+      {String? id,
+      String? name,
+      String? description,
+      ReminderType? reminderType,
+      String? reminderMedium,
+      Scope? scope}) {
     return MiniPlanModel(
-      id: id ?? this.id,
-      name: name ?? this.name,
-      description: description ?? this.description,
-      reminderType: reminderType ?? this.reminderType,
-      reminderMedium: reminderMedium ?? this.reminderMedium,
-    );
+        id: id ?? this.id,
+        name: name ?? this.name,
+        description: description ?? this.description,
+        reminderType: reminderType ?? this.reminderType,
+        reminderMedium: reminderMedium ?? this.reminderMedium,
+        scope: scope ?? this.scope);
   }
 
   Map<String, dynamic> toMap() {
@@ -40,18 +41,19 @@ class MiniPlanModel extends Equatable {
     result.addAll({'description': description});
     result.addAll({'reminderType': reminderType.value});
     result.addAll({'reminderMedium': reminderMedium});
+    result.addAll({'scope': scope.value});
 
     return result;
   }
 
   factory MiniPlanModel.fromMap(Map<String, dynamic> map) {
     return MiniPlanModel(
-      id: map['id'] ?? '',
-      name: map['name'] ?? '',
-      description: map['description'] ?? '',
-      reminderType: ReminderType.fromValue(map['reminderType']),
-      reminderMedium: map['reminderMedium'],
-    );
+        id: map['id'] ?? '',
+        name: map['name'] ?? '',
+        description: map['description'] ?? '',
+        reminderType: ReminderType.fromValue(map['reminderType']),
+        reminderMedium: map['reminderMedium'],
+        scope: Scope.fromValue(map['scope']));
   }
 
   String toJson() => json.encode(toMap());
@@ -94,6 +96,25 @@ enum ReminderType {
         return ReminderType.fifteenMinutesBefore;
       default:
         return ReminderType.oneHourBefore;
+    }
+  }
+}
+
+enum Scope {
+  owner("owner"),
+  shared("shared");
+
+  const Scope(this.value);
+  final String value;
+
+  factory Scope.fromValue(String value) {
+    switch (value) {
+      case 'owner':
+        return Scope.owner;
+      case 'shared':
+        return Scope.shared;
+      default:
+        return Scope.owner;
     }
   }
 }
