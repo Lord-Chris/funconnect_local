@@ -8,3 +8,15 @@ abstract class CreatePlanState extends Equatable {
 }
 
 class CreatePlanInitial extends CreatePlanState {}
+
+class FriendAddedState extends CreatePlanState {
+  final List<String> friendsEmails;
+  const FriendAddedState(this.friendsEmails);
+
+  @override
+  bool operator ==(Object other) => false;
+
+  @override
+  // ignore: unnecessary_overrides
+  int get hashCode => super.hashCode;
+}

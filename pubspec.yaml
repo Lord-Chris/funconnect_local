@@ -30,6 +30,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   dio: ^5.1.1
   dotted_border: ^2.0.0+3
+  email_validator: ^2.1.17
   equatable: ^2.0.5
   extended_image: ^8.0.2
   firebase_analytics: ^10.1.4
@@ -39,7 +40,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.1
-  flutter_hooks: ^0.19.0
+  flutter_hooks: ^0.20.0
   flutter_html: ^3.0.0-alpha.6
   flutter_native_splash: ^2.2.19
   flutter_rating_bar: ^4.0.1
@@ -73,7 +74,7 @@ dependencies:
   skeletons: ^0.0.3
   smooth_page_indicator: ^1.1.0
   store_redirect: ^2.0.1
-  story_view: ^0.14.0
+  story_view: ^0.15.0
   url_launcher: ^6.1.9
   webview_flutter: ^4.2.2
 

@@ -1,8 +1,7 @@
-import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'dart:async';
 
-import 'package:funconnect/features/places/domain/entities/full_place_model.dart';
+import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'create_plan_event.dart';
 part 'create_plan_state.dart';
@@ -10,8 +9,12 @@ part 'create_plan_state.dart';
 class CreatePlanBloc extends Bloc<CreatePlanEvent, CreatePlanState> {
   CreatePlanBloc() : super(CreatePlanInitial()) {
     on<CreatePlanEvent>((event, emit) {});
+    on<AddFriendEvent>(_addFriendEvent);
   }
-  DateTime selectedDate = DateTime.now();
-  TimeOfDay selectedTime = TimeOfDay.now();
-  FullPlaceModel? selectedPlace;
+  List<String> friends = [];
+
+  FutureOr<void> _addFriendEvent(
+      AddFriendEvent event, Emitter<CreatePlanState> emit) {
+    emit(FriendAddedState(friends..add(event.friendEmail)));
+  }
 }

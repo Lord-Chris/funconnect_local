@@ -6,3 +6,11 @@ abstract class CreatePlanEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
+
+class AddFriendEvent extends CreatePlanEvent {
+  final String friendEmail;
+  const AddFriendEvent(this.friendEmail);
+
+  @override
+  List<Object> get props => [friendEmail];
+}
