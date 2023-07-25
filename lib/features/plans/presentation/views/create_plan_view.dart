@@ -159,6 +159,19 @@ class _CreatePlanViewState extends State<CreatePlanView> {
               SizedBox(
                 height: 16.h,
               ),
+              SizedBox(
+                  height: 60.h,
+                  child: ListView.separated(
+                      itemBuilder: (context, index) {
+                        return Container(
+                          height: 40,
+                          decoration: const BoxDecoration(color: Colors.amber),
+                        );
+                      },
+                      separatorBuilder: (context, index) => const SizedBox(
+                            width: 16,
+                          ),
+                      itemCount: 2)),
             ]),
           ),
         ),
