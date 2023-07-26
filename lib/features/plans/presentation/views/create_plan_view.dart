@@ -191,12 +191,6 @@ class _CreatePlanViewState extends State<CreatePlanView> {
                 height: 16.h,
               ),
               BlocBuilder<CreatePlanBloc, CreatePlanState>(
-                buildWhen: (previous, current) {
-                  if (current is FriendAddedState) {
-                    return true;
-                  }
-                  return false;
-                },
                 builder: (context, state) {
                   if (state is FriendAddedState) {
                     return SizedBox(
@@ -217,6 +211,48 @@ class _CreatePlanViewState extends State<CreatePlanView> {
                   return const SizedBox();
                 },
               ),
+              SizedBox(
+                height: 24.h,
+              ),
+              Row(
+                children: [
+                  Expanded(
+                    child: Column(
+                      children: [
+                        const Text("Reminder"),
+                        SizedBox(
+                          height: 8.h,
+                        ),
+                        DropdownButton(
+                            items: const [
+                              DropdownMenuItem(
+                                  child: Text("1 hour before event")),
+                            ],
+                            onChanged: (value) {},
+                            style: TextStyle(
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w400,
+                              color: const Color(0xff999999),
+                            ))
+                      ],
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 8,
+                  ),
+                  Column(
+                    children: [
+                      const Text("Notification"),
+                      SizedBox(
+                        height: 8.h,
+                      ),
+                      DropdownButton(items: const [
+                        DropdownMenuItem(child: Text("1 day")),
+                      ], onChanged: (value) {})
+                    ],
+                  ),
+                ],
+              )
             ]),
           ),
         ),
