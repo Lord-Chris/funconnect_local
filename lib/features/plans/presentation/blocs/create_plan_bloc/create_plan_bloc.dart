@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:funconnect/features/plans/domain/entities/mini_plan_model.dart';
+import 'package:uuid/uuid.dart';
 
 part 'create_plan_event.dart';
 part 'create_plan_state.dart';
@@ -29,5 +30,8 @@ class CreatePlanBloc extends Bloc<CreatePlanEvent, CreatePlanState> {
   FutureOr<void> _createPlanClickedEvent(
       CreatePlanClickedEvent event, Emitter<CreatePlanState> emit) {
     emit(CreatedPlanLoadingState());
+    try {
+      final id = const Uuid().v4();
+    } catch (e) {}
   }
 }
