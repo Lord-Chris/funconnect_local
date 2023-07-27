@@ -1,3 +1,4 @@
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -85,7 +86,7 @@ class _CreatePlanViewState extends State<CreatePlanView> {
                 height: 8.h,
               ),
               TextFormField(
-                controller: _planNameController,
+                controller: _planDescriptionController,
                 maxLines: 5,
                 decoration: InputDecoration(
                   filled: true,
@@ -218,12 +219,30 @@ class _CreatePlanViewState extends State<CreatePlanView> {
                 children: [
                   Expanded(
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const Text("Reminder"),
                         SizedBox(
                           height: 8.h,
                         ),
-                        DropdownButton(
+                        DropdownButtonFormField2<String>(
+                            alignment: Alignment.centerLeft,
+                            decoration: InputDecoration(
+                              filled: true,
+                              contentPadding: const EdgeInsets.all(16),
+                              fillColor: const Color(0xff202020),
+                              hintText: "Describe the plan...",
+                              hintStyle: TextStyle(
+                                fontSize: 14.sp,
+                                color: const Color(0xff999999),
+                              ),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8.r),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8.r),
+                              ),
+                            ),
                             items: const [
                               DropdownMenuItem(
                                   child: Text("1 hour before event")),
