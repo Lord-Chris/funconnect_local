@@ -20,3 +20,5 @@ class FriendAddedState extends CreatePlanState {
   // ignore: unnecessary_overrides
   int get hashCode => super.hashCode;
 }
+
+class CreatedPlanLoadingState extends CreatePlanState {}
