@@ -75,6 +75,14 @@ class ApiConstants {
   // PLANS
   static String get miniPlans => "$_baseUrl/events/mini-plans";
 
+  static String addFriends(String id) {
+    return "$_baseUrl/events/mini-plans/$id/friends";
+  }
+
+  static String getFriends(String plaId) {
+    return "$_baseUrl/events/mini-plans/$plaId/friends";
+  }
+
   // EVENTS
   static String get events => "$_baseUrl/events";
 
