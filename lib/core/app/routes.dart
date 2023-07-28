@@ -21,9 +21,11 @@ import 'package:funconnect/features/places/presentation/category_detail/category
 import 'package:funconnect/features/places/presentation/place_detail/bloc/place_detail_bloc.dart';
 import 'package:funconnect/features/places/presentation/place_detail/place_detail_view.dart';
 import 'package:funconnect/features/places/presentation/search_result/search_result_view.dart';
+import 'package:funconnect/features/plans/domain/entities/mini_plan_model.dart';
 import 'package:funconnect/features/plans/presentation/blocs/choose_plan_type_bloc/choose_plan_type_bloc.dart';
 import 'package:funconnect/features/plans/presentation/blocs/create_plan_bloc/create_plan_bloc.dart';
 import 'package:funconnect/features/plans/presentation/blocs/map_bloc/map_bloc.dart';
+import 'package:funconnect/features/plans/presentation/blocs/plan_details-bloc/plan_details_bloc.dart';
 import 'package:funconnect/features/plans/presentation/blocs/plan_list_bloc/plan_list_bloc.dart';
 
 import 'package:funconnect/features/plans/presentation/views/choose_plan_type_view.dart';
@@ -31,6 +33,7 @@ import 'package:funconnect/features/plans/presentation/views/choose_plan_type_vi
 import 'package:funconnect/features/plans/presentation/views/create_plan_view.dart';
 
 import 'package:funconnect/features/plans/presentation/views/map_view.dart';
+import 'package:funconnect/features/plans/presentation/views/plan_details_view.dart';
 
 import 'package:funconnect/features/plans/presentation/views/plans_list_view.dart';
 import 'package:funconnect/features/profile/presentation/edit_profile/edit_profile_view.dart';
@@ -98,6 +101,7 @@ class Routes {
   static const choosePlanTypeViewRoute = '/choose-plan-type-view';
   static const createPlanViewRoute = '/create-plan-view';
   static const plannerMapRoute = '/planner-map';
+  static const planDetailViewRoute = '/plan-detail-view';
 
   // Profile
   static const editProfileViewRoute = '/edit-profile';
@@ -248,6 +252,13 @@ class Routes {
         return _registerBlocView(
           view: const PlannerMapView(),
           bloc: MapBloc(),
+          settings: settings,
+        );
+      case planDetailViewRoute:
+        final plan = settings.arguments as MiniPlanModel;
+        return _registerBlocView(
+          view: PlanDetailsView(plan: plan),
+          bloc: PlanDetailsBloc(),
           settings: settings,
         );
 

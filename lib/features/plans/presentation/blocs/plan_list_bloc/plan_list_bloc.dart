@@ -18,13 +18,18 @@ class PlanListBloc extends Bloc<PlanListEvent, PlanListState> {
     on<PlanListEvent>((event, emit) {});
     on<CreatePlanClickedEvent>(_createPlanClickedEvent);
     on<FetchMiniPlansEvent>(_fetchMiniPlansEvent);
+    on<OpenPlanEvent>(_openPlanEvent);
   }
 
   final _navigation = locator<INavigationService>();
 
   FutureOr<void> _createPlanClickedEvent(
-      CreatePlanClickedEvent event, Emitter<PlanListState> emit) {
-    _navigation.toNamed(Routes.choosePlanTypeViewRoute);
+      CreatePlanClickedEvent event, Emitter<PlanListState> emit) async {
+    await _navigation.toNamed(Routes.choosePlanTypeViewRoute);
+    emit(PlanListLoadingState());
+    PaginatedData<MiniPlanModel> data =
+        await FetchMiniPlansUseCase().call(NoParams());
+    emit(PlanListFetchedState(data));
   }
 
   FutureOr<void> _fetchMiniPlansEvent(
@@ -42,5 +47,10 @@ class PlanListBloc extends Bloc<PlanListEvent, PlanListState> {
       Logger().e(e.toString());
       emit(PlanListErrorState(e.toString()));
     }
+  }
+
+  FutureOr<void> _openPlanEvent(
+      OpenPlanEvent event, Emitter<PlanListState> emit) {
+    _navigation.toNamed(Routes.planDetailViewRoute, arguments: event.plan);
   }
 }

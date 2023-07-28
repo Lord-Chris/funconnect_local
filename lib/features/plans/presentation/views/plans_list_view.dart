@@ -48,55 +48,68 @@ class PlansListView extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: Column(
                   children: [
-                    ListView.separated(
-                        shrinkWrap: true,
-                        separatorBuilder: (context, index) => SizedBox(
-                              height: 16.h,
-                            ),
-                        itemCount: state.data.data.length,
-                        itemBuilder: (context, index) {
-                          return Container(
-                              decoration: BoxDecoration(
-                                  color: const Color(0xff161616),
-                                  borderRadius: BorderRadius.circular(8)),
-                              width: double.infinity,
-                              child: Padding(
-                                padding: const EdgeInsets.all(16.0),
-                                child: Row(
-                                  children: [
-                                    Expanded(
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(state.data.data[index].name,
-                                              style: TextStyle(
-                                                  color:
-                                                      const Color(0xffcccccc),
-                                                  fontSize: 16.sp,
-                                                  fontWeight: FontWeight.w500)),
-                                          SizedBox(
-                                            height: 8.h,
+                    Expanded(
+                      child: ListView.separated(
+                          shrinkWrap: true,
+                          separatorBuilder: (context, index) => SizedBox(
+                                height: 16.h,
+                              ),
+                          itemCount: state.data.data.length,
+                          itemBuilder: (context, index) {
+                            return InkWell(
+                              onTap: () {
+                                context
+                                    .read<PlanListBloc>()
+                                    .add(OpenPlanEvent(state.data.data[index]));
+                              },
+                              child: Container(
+                                  decoration: BoxDecoration(
+                                      color: const Color(0xff161616),
+                                      borderRadius: BorderRadius.circular(8)),
+                                  width: double.infinity,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(16.0),
+                                    child: Row(
+                                      children: [
+                                        Expanded(
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(state.data.data[index].name,
+                                                  style: TextStyle(
+                                                      color: const Color(
+                                                          0xffcccccc),
+                                                      fontSize: 16.sp,
+                                                      fontWeight:
+                                                          FontWeight.w500)),
+                                              SizedBox(
+                                                height: 8.h,
+                                              ),
+                                              Text(
+                                                state.data.data[index]
+                                                    .description,
+                                                style: TextStyle(
+                                                    color:
+                                                        const Color(0xff999999),
+                                                    fontSize: 12.sp,
+                                                    fontWeight:
+                                                        FontWeight.w400),
+                                              ),
+                                            ],
                                           ),
-                                          Text(
-                                            state.data.data[index].description,
-                                            style: TextStyle(
-                                                color: const Color(0xff999999),
-                                                fontSize: 12.sp,
-                                                fontWeight: FontWeight.w400),
-                                          ),
-                                        ],
-                                      ),
+                                        ),
+                                        const Icon(
+                                          Icons.upload,
+                                          color: Color(0xffcccccc),
+                                          size: 20,
+                                        )
+                                      ],
                                     ),
-                                    const Icon(
-                                      Icons.upload,
-                                      color: Color(0xffcccccc),
-                                      size: 20,
-                                    )
-                                  ],
-                                ),
-                              ));
-                        }),
+                                  )),
+                            );
+                          }),
+                    ),
                     SizedBox(
                       height: 96.h,
                     ),

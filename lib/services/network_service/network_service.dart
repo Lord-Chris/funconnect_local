@@ -84,7 +84,7 @@ class NetworkService extends INetworkService {
       if (res.statusCode == 200 || res.statusCode == 201) {
         return ApiResponse(data: res.data);
       }
-      throw Failure(res.statusMessage!);
+      throw Failure(res.statusMessage!, extraData: res.toString());
     } on DioException catch (e) {
       throw convertException(e);
     } catch (e) {

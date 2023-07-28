@@ -1,5 +1,0 @@
-class CreatePlanUsecase with UseCases{
-    Future<void> call(){
-        return repository.createPlan();
-    }
-} 

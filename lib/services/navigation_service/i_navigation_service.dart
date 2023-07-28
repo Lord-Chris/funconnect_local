@@ -12,6 +12,11 @@ abstract class INavigationService {
     Object? arguments,
   });
 
+  Future<T?>? popAndPushNamed<T extends Object?>(
+    String routeName, {
+    Object? arguments,
+  });
+
   Future<T?>? offAllNamed<T extends Object?>(
     String routeName,
     bool Function(Route<dynamic>) predicate, {

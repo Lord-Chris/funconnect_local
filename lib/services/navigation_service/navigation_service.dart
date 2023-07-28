@@ -43,7 +43,18 @@ class NavigationService implements INavigationService {
   }
 
   @override
-  void back<T extends Object?>([T? result]) {
+  Future<T?>? popAndPushNamed<T extends Object?>(
+    String routeName, {
+    Object? arguments,
+  }) {
+    return navigatorKey.currentState?.popAndPushNamed(
+      routeName,
+      arguments: arguments,
+    );
+  }
+
+  @override
+  Future back<T extends Object?>([T? result]) async {
     return navigatorKey.currentState?.pop(result);
   }
 }

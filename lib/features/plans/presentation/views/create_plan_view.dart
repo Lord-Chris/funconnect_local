@@ -9,7 +9,6 @@ import 'package:funconnect/features/plans/presentation/components/friend_icon_wi
 import 'package:funconnect/shared/components/custom_button.dart';
 
 import 'package:funconnect/shared/constants/colors.dart';
-import 'package:logger/logger.dart';
 
 class CreatePlanView extends StatefulWidget {
   const CreatePlanView({super.key});
@@ -283,7 +282,11 @@ class _CreatePlanViewState extends State<CreatePlanView> {
                                         child: Text(e.value),
                                       ))
                                   .toList(),
-                              onChanged: (value) {},
+                              onChanged: (value) {
+                                context
+                                    .read<CreatePlanBloc>()
+                                    .add(ChangeReminderTypeEvent(value!));
+                              },
                               value: ReminderType.values[0],
                               style: TextStyle(
                                 fontSize: 14.sp,
@@ -328,7 +331,11 @@ class _CreatePlanViewState extends State<CreatePlanView> {
                               items: const [
                                 DropdownMenuItem(child: Text("Google")),
                               ],
-                              onChanged: (value) {},
+                              onChanged: (value) {
+                                context.read<CreatePlanBloc>().add(
+                                    const ChangeReminderMediumEvent(
+                                        ReminderMedium.google));
+                              },
                               style: TextStyle(
                                 fontSize: 14.sp,
                                 fontWeight: FontWeight.w400,
@@ -347,8 +354,13 @@ class _CreatePlanViewState extends State<CreatePlanView> {
                     borderRadius: 8,
                     onTap: () {
                       if (_formKey.currentState!.validate()) {
-                        Logger()
-                            .d("Plan name: ${_planNameController.text.trim()}");
+                        context
+                            .read<CreatePlanBloc>()
+                            .add(CreatePlanClickedEvent(
+                              planName: _planNameController.text.trim(),
+                              planDescription:
+                                  _planDescriptionController.text.trim(),
+                            ));
                       }
                     }),
               ],

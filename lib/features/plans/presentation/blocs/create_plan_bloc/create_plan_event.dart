@@ -26,13 +26,26 @@ class RemoveFriendEvent extends CreatePlanEvent {
 class CreatePlanClickedEvent extends CreatePlanEvent {
   final String planName;
   final String planDescription;
-  final ReminderType reminderType;
-  final ReminderMedium reminderMedium;
 
-  const CreatePlanClickedEvent(this.planName, this.planDescription,
-      this.reminderType, this.reminderMedium);
+  const CreatePlanClickedEvent(
+      {required this.planName, required this.planDescription});
 
   @override
-  List<Object> get props =>
-      [planName, planDescription, reminderType, reminderMedium];
+  List<Object> get props => [planName, planDescription];
+}
+
+class ChangeReminderTypeEvent extends CreatePlanEvent {
+  final ReminderType reminderType;
+  const ChangeReminderTypeEvent(this.reminderType);
+
+  @override
+  List<Object> get props => [reminderType];
+}
+
+class ChangeReminderMediumEvent extends CreatePlanEvent {
+  final ReminderMedium reminderMedium;
+  const ChangeReminderMediumEvent(this.reminderMedium);
+
+  @override
+  List<Object> get props => [reminderMedium];
 }

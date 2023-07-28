@@ -9,4 +9,9 @@ class PlansRepository extends IPlansRepository {
   Future<PaginatedData<MiniPlanModel>> fetchUserMiniPlans() {
     return _remoteDS.fetchUserMiniPlans();
   }
+
+  @override
+  Future<MiniPlanModel> createMiniPlan(MiniPlanModel miniPlan) {
+    return _remoteDS.createMiniPlan(miniPlan);
+  }
 }
