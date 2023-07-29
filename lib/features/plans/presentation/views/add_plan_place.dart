@@ -4,7 +4,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:funconnect/core/blocs/main_app_bloc.dart';
 import 'package:funconnect/features/places/domain/entities/place_model.dart';
 import 'package:funconnect/features/plans/presentation/blocs/plan_add_place_bloc/plan_add_place_bloc.dart';
+import 'package:funconnect/shared/components/custom_button.dart';
 import 'package:funconnect/shared/constants/colors.dart';
+import 'package:intl/intl.dart';
+import 'package:logger/logger.dart';
 
 class AddPlanPlaceView extends StatefulWidget {
   const AddPlanPlaceView({super.key});
@@ -128,6 +131,119 @@ class _AddPlanPlaceViewState extends State<AddPlanPlaceView> {
               return const SizedBox();
             },
           ),
+          SizedBox(height: 24.h),
+          Row(
+            children: [
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Date",
+                      style: TextStyle(
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.w400,
+                          color: Colors.white),
+                    ),
+                    SizedBox(height: 8.h),
+                    InkWell(
+                      onTap: () async {
+                        Logger().i("Date clicked");
+                        var date = await showDatePicker(
+                          context: context,
+                          initialDate: DateTime.now(),
+                          firstDate: DateTime.now(),
+                          lastDate: DateTime(2024),
+                        );
+                        context
+                            .read<PlanAddPlaceBloc>()
+                            .add(DateSelectedEvent(date));
+                      },
+                      child: Container(
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                            color: const Color(0xff202020),
+                            borderRadius: BorderRadius.circular(8.r)),
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                              vertical: 16.h, horizontal: 16.w),
+                          child:
+                              BlocBuilder<PlanAddPlaceBloc, PlanAddPlaceState>(
+                            builder: (context, state) {
+                              if (state is PlanDateSelected) {
+                                return Text(
+                                  state.date == null
+                                      ? "Select Date"
+                                      : DateFormat("yMMMMd")
+                                          .format(state.date!),
+                                  style: TextStyle(
+                                      fontSize: 14.sp,
+                                      color: const Color(0xff999999)),
+                                );
+                              }
+                              return Text(
+                                "Select Date",
+                                style: TextStyle(
+                                    fontSize: 14.sp,
+                                    color: const Color(0xff999999)),
+                              );
+                            },
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              SizedBox(width: 8.w),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Time",
+                    style: TextStyle(
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.w400,
+                        color: Colors.white),
+                  ),
+                  SizedBox(height: 8.h),
+                  InkWell(
+                    onTap: () async {
+                      Logger().i("Date clicked");
+                      var time = await showTimePicker(
+                        context: context,
+                        initialTime: TimeOfDay.now(),
+                      );
+                      context
+                          .read<PlanAddPlaceBloc>()
+                          .add(TimeSelectedEvent(time));
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                          color: const Color(0xff202020),
+                          borderRadius: BorderRadius.circular(8.r)),
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(
+                            vertical: 16.h, horizontal: 16.w),
+                        child: Text("Select Time",
+                            style: TextStyle(
+                                fontSize: 14.sp,
+                                color: const Color(0xff999999))),
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ],
+          ),
+          const Expanded(
+            child: SizedBox(),
+          ),
+          const AppButton(
+            label: "Add Place",
+            borderRadius: 8,
+          ),
+          SizedBox(height: 16.h),
         ]),
       ),
     );

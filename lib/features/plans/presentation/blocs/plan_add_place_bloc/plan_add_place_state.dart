@@ -16,3 +16,19 @@ class PlanPlaceSelected extends PlanAddPlaceState {
   @override
   List<Object> get props => [place];
 }
+
+class PlanDateSelected extends PlanAddPlaceState {
+  final DateTime? date;
+  const PlanDateSelected(this.date);
+
+  @override
+  List<Object> get props => [];
+}
+
+class PlanTimeSelected extends PlanAddPlaceState {
+  final TimeOfDay? time;
+  const PlanTimeSelected(this.time);
+
+  @override
+  List<Object> get props => [];
+}
