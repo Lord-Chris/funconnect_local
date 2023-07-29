@@ -1,9 +1,10 @@
 import 'dart:async';
 
-import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:funconnect/core/app/locator.dart';
 import 'package:funconnect/core/app/routes.dart';
+import 'package:funconnect/features/places/domain/entities/place_model.dart';
 import 'package:funconnect/services/navigation_service/i_navigation_service.dart';
 
 part 'plan_add_place_event.dart';
@@ -16,15 +17,19 @@ class PlanAddPlaceBloc extends Bloc<PlanAddPlaceEvent, PlanAddPlaceState> {
     on<MapClickedEvent>(_mapClickedEvent);
   }
   final _navigation = locator<INavigationService>();
-  String selectedPlaceId = "";
+  PlaceModel? selectedPlaceId;
 
   FutureOr<void> _planAddPlaceEventClicked(
       PlanAddPlaceEventClicked event, Emitter<PlanAddPlaceState> emit) {
-    selectedPlaceId = event.placeId;
+    selectedPlaceId = event.place;
+    emit(PlanPlaceSelected(event.place));
   }
 
   FutureOr<void> _mapClickedEvent(
-      MapClickedEvent event, Emitter<PlanAddPlaceState> emit) {
-    _navigation.toNamed(Routes.plannerMapRoute);
+      MapClickedEvent event, Emitter<PlanAddPlaceState> emit) async {
+    PlaceModel selectPlace =
+        await _navigation.toNamed(Routes.plannerMapRoute) as PlaceModel;
+    selectedPlaceId = selectPlace;
+    emit(PlanPlaceSelected(selectPlace));
   }
 }

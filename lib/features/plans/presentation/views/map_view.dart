@@ -62,13 +62,17 @@ class PlannerMapView extends StatelessWidget {
                     const EdgeInsets.only(top: 50.0, left: 16.0, right: 16.0),
                 child: Row(
                   children: [
-                    CircleAvatar(
-                      radius: 32.r,
-                      backgroundColor: Colors.white,
-                      child: const Icon(
-                        Icons.arrow_back_ios,
-                        color: Colors.black,
-                        size: 24,
+                    Container(
+                      height: 48.h,
+                      width: 48.w,
+                      decoration: const BoxDecoration(
+                          color: Colors.white, shape: BoxShape.circle),
+                      child: const Center(
+                        child: Icon(
+                          Icons.arrow_back_sharp,
+                          color: Colors.black,
+                          size: 24,
+                        ),
                       ),
                     ),
                     SizedBox(width: 8.w),
@@ -79,14 +83,15 @@ class PlannerMapView extends StatelessWidget {
                               borderRadius: BorderRadius.circular(40.r),
                             ),
                             child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 16.0, horizontal: 16.0),
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 16.w,
+                              ),
                               child: Row(
                                 children: [
                                   const Icon(
                                     Icons.search,
                                     color: Colors.black,
-                                    size: 24,
+                                    size: 15,
                                   ),
                                   SizedBox(width: 9.w),
                                   const Expanded(
@@ -100,7 +105,7 @@ class PlannerMapView extends StatelessWidget {
                                   const Icon(
                                     Icons.cancel,
                                     color: Colors.black,
-                                    size: 24,
+                                    size: 13,
                                   ),
                                 ],
                               ),

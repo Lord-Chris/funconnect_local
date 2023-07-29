@@ -75,7 +75,7 @@ class MapBloc extends Bloc<MapEvent, MapState> {
                                 InkWell(
                                   onTap: () {
                                     Navigator.pop(context);
-                                    Navigator.pop(context, fullPlace);
+                                    Navigator.pop(context, place);
                                   },
                                   child: Container(
                                     decoration: const BoxDecoration(

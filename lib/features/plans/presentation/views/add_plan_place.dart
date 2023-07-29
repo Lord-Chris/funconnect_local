@@ -15,6 +15,7 @@ class AddPlanPlaceView extends StatefulWidget {
 
 class _AddPlanPlaceViewState extends State<AddPlanPlaceView> {
   final _placeFormInputController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,8 +34,8 @@ class _AddPlanPlaceViewState extends State<AddPlanPlaceView> {
           ),
           SizedBox(height: 8.h),
           BlocBuilder<MainAppBloc, MainAppState>(
-            builder: (context, state) {
-              if (state is HomeTrendsLoadedState) {
+            builder: (context, state1) {
+              if (state1 is HomeTrendsLoadedState) {
                 return Container(
                   width: double.infinity,
                   decoration: BoxDecoration(
@@ -54,6 +55,14 @@ class _AddPlanPlaceViewState extends State<AddPlanPlaceView> {
                             color: Color(0xff999999),
                           ),
                           Expanded(
+                              child: BlocListener<PlanAddPlaceBloc,
+                                  PlanAddPlaceState>(
+                            listener: (context, state) {
+                              if (state is PlanPlaceSelected) {
+                                _placeFormInputController.text =
+                                    state.place.name;
+                              }
+                            },
                             child: TextFormField(
                               controller: _placeFormInputController,
                               readOnly: true,
@@ -63,11 +72,13 @@ class _AddPlanPlaceViewState extends State<AddPlanPlaceView> {
                                 color: const Color(0xff999999),
                               ),
                               onTap: () async {
-                                _placeFormInputController.text =
-                                    await showSearch(
-                                        context: context,
-                                        delegate: MySearchDelegate(
-                                            state.homeTrends.places[0].data));
+                                PlaceModel place = await showSearch(
+                                    context: context,
+                                    delegate: MySearchDelegate(
+                                        state1.homeTrends.places[0].data));
+                                context
+                                    .read<PlanAddPlaceBloc>()
+                                    .add(PlanAddPlaceEventClicked(place));
                               },
                               textAlignVertical: TextAlignVertical.top,
                               textAlign: TextAlign.start,
@@ -82,7 +93,7 @@ class _AddPlanPlaceViewState extends State<AddPlanPlaceView> {
                                 border: InputBorder.none,
                               ),
                             ),
-                          ),
+                          )),
                           InkWell(
                             onTap: () {
                               context
@@ -213,49 +224,44 @@ class MySearchDelegate extends SearchDelegate {
         ),
         itemCount: suggestions.length,
         itemBuilder: (context, index) {
-          return Container(
-            child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              const Icon(Icons.location_on_outlined),
-              SizedBox(width: 8.w),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      suggestions[index].name,
-                      style: TextStyle(
-                          fontSize: 14.sp,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w400),
-                    ),
-                    SizedBox(height: 8.h),
-                    Text(
-                      suggestions[index].headline,
-                      style: TextStyle(
-                          fontSize: 10.sp,
-                          color: AppColors.secondary500,
-                          fontWeight: FontWeight.w400),
-                    )
-                  ],
-                ),
+          return Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            const Icon(Icons.location_on_outlined),
+            SizedBox(width: 8.w),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    suggestions[index].name,
+                    style: TextStyle(
+                        fontSize: 14.sp,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w400),
+                  ),
+                  SizedBox(height: 8.h),
+                  Text(
+                    suggestions[index].headline,
+                    style: TextStyle(
+                        fontSize: 10.sp,
+                        color: AppColors.secondary500,
+                        fontWeight: FontWeight.w400),
+                  )
+                ],
               ),
-              InkWell(
-                onTap: () {
-                  context
-                      .read<PlanAddPlaceBloc>()
-                      .add(PlanAddPlaceEventClicked(suggestions[index].id));
-                  close(context, suggestions[index].name);
-                },
-                child: Text(
-                  "Add",
-                  style: TextStyle(
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.w400,
-                      color: AppColors.primary),
-                ),
+            ),
+            InkWell(
+              onTap: () {
+                close(context, suggestions[index]);
+              },
+              child: Text(
+                "Add",
+                style: TextStyle(
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.w400,
+                    color: AppColors.primary),
               ),
-            ]),
-          );
+            ),
+          ]);
         },
       ),
     );

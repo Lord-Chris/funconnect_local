@@ -8,11 +8,8 @@ abstract class PlanAddPlaceEvent extends Equatable {
 }
 
 class PlanAddPlaceEventClicked extends PlanAddPlaceEvent {
-  final String placeId;
-  const PlanAddPlaceEventClicked(this.placeId);
-
-  @override
-  List<Object> get props => [placeId];
+  final PlaceModel place;
+  const PlanAddPlaceEventClicked(this.place);
 }
 
 class MapClickedEvent extends PlanAddPlaceEvent {

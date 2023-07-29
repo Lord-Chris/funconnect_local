@@ -139,6 +139,6 @@ class MyApp extends StatelessWidget {
 }
 
 // Button on the dialog
-// Internet occured icon
+// Internet occurred icon
 // Filter flow
 // iOS tags

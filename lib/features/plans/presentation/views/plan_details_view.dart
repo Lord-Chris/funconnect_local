@@ -4,11 +4,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:funconnect/features/plans/domain/entities/mini_plan_model.dart';
 import 'package:funconnect/features/plans/presentation/blocs/plan_details-bloc/plan_details_bloc.dart';
-import 'package:funconnect/features/plans/presentation/components/empty_plans_view%20copy.dart';
+import 'package:funconnect/features/plans/presentation/components/empty_plans_places_view.dart';
 import 'package:funconnect/features/plans/presentation/components/friend_icon_empty_widget.dart';
 import 'package:funconnect/features/plans/presentation/components/friend_icon_widget.dart';
 import 'package:funconnect/shared/components/custom_button.dart';
-import 'package:logger/logger.dart';
 
 class PlanDetailsView extends StatelessWidget {
   final MiniPlanModel plan;
