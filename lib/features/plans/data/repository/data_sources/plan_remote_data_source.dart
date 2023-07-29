@@ -4,6 +4,7 @@ import 'package:funconnect/core/mixins/api_mixin.dart';
 import 'package:funconnect/core/models/paginated_data.dart';
 import 'package:funconnect/features/plans/domain/entities/mini_plan_friend_model.dart';
 import 'package:funconnect/features/plans/domain/entities/mini_plan_model.dart';
+import 'package:funconnect/features/plans/domain/entities/mini_plan_place_model.dart';
 import 'package:funconnect/features/plans/domain/params/add_friends.dart';
 import 'package:funconnect/services/network_service/i_network_service.dart';
 import 'package:logger/logger.dart';
@@ -53,5 +54,15 @@ class PlansRemoteDataSource with ApiMixin {
     );
     return PaginatedData.fromMap(
         res.data['data'], (x) => MiniPlanFriend.fromMap(x));
+  }
+
+  Future<PaginatedData<MiniPlanPlaceModel>> fetchMiniPlanPlaces(
+      String miniPlanId) async {
+    final res = await _networkService.get(
+      ApiConstants.getMiniPlanPlaces(miniPlanId),
+      headers: headers,
+    );
+    return PaginatedData.fromMap(
+        res.data['data'], (x) => MiniPlanPlaceModel.fromMap(x));
   }
 }

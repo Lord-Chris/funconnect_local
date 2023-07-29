@@ -8,6 +8,7 @@ import 'package:funconnect/features/plans/presentation/components/empty_plans_vi
 import 'package:funconnect/features/plans/presentation/components/friend_icon_empty_widget.dart';
 import 'package:funconnect/features/plans/presentation/components/friend_icon_widget.dart';
 import 'package:funconnect/shared/components/custom_button.dart';
+import 'package:logger/logger.dart';
 
 class PlanDetailsView extends StatelessWidget {
   final MiniPlanModel plan;
@@ -45,7 +46,25 @@ class PlanDetailsView extends StatelessWidget {
             SizedBox(
               height: 24.h,
             ),
-            const EmptyPLansPlacesView(),
+            BlocBuilder(
+              bloc: PlanDetailsBloc()..add(PlanPlacesLoad(plan)),
+              builder: (context, state) {
+                if (state is PlanPlacesLoading) {
+                  return const CircularProgressIndicator();
+                }
+                if (state is PlanPlacesLoaded) {
+                  return Text("loaded ${state.places.data.length}");
+                }
+                return const SizedBox();
+              },
+            ),
+            EmptyPLansPlacesView(
+              onClick: () {
+                context
+                    .read<PlanDetailsBloc>()
+                    .add(const AddAPlaceClickedEvent());
+              },
+            ),
             SizedBox(
               height: 32.h,
             ),
@@ -59,33 +78,43 @@ class PlanDetailsView extends StatelessWidget {
             SizedBox(
               height: 17.h,
             ),
-            BlocBuilder<PlanDetailsBloc, PlanDetailsState>(
+            BlocBuilder(
+              bloc: PlanDetailsBloc()..add(PlanFriendsLoad(plan)),
               builder: (context, state) {
-                return SizedBox(
-                    height: 65.h,
-                    width: double.infinity,
-                    child: ListView.separated(
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (context, index) {
-                          if (index == 1) {
-                            return const FriendIconEmptyWidget();
-                          } else {
-                            return const FriendIconWidget(
-                              email: "nich.otieno@gmail.com",
-                            );
-                          }
-                        },
-                        separatorBuilder: (context, index) => SizedBox(
-                              width: 8.w,
-                            ),
-                        itemCount: 2));
+                if (state is PlanFriendsLoading) {
+                  return const CircularProgressIndicator();
+                }
+                if (state is PlanFriendsLoaded) {
+                  return SizedBox(
+                      height: 65.h,
+                      width: double.infinity,
+                      child: ListView.separated(
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (context, index) {
+                            if (index == state.friends.data.length) {
+                              return const FriendIconEmptyWidget();
+                            } else {
+                              return FriendIconWidget(
+                                email: state.friends.data[index].email,
+                              );
+                            }
+                          },
+                          separatorBuilder: (context, index) => SizedBox(
+                                width: 8.w,
+                              ),
+                          itemCount: state.friends.data.length + 1));
+                }
+                return const SizedBox();
               },
             ),
             const Expanded(child: SizedBox()),
             const AppButton(
               label: "Save Plan",
               borderRadius: 8,
-            )
+            ),
+            SizedBox(
+              height: 16.h,
+            ),
           ],
         ),
       ),

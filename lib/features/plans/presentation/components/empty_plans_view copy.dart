@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:funconnect/features/plans/presentation/blocs/plan_list_bloc/plan_list_bloc.dart';
 
 class EmptyPLansPlacesView extends StatelessWidget {
+  final VoidCallback onClick;
   const EmptyPLansPlacesView({
     super.key,
+    required this.onClick,
   });
 
   @override
@@ -15,9 +16,7 @@ class EmptyPLansPlacesView extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           InkWell(
-            onTap: () {
-              context.read<PlanListBloc>().add(CreatePlanClickedEvent());
-            },
+            onTap: onClick,
             child: Container(
               decoration: const BoxDecoration(
                 color: Color(0xff0E0E0E),

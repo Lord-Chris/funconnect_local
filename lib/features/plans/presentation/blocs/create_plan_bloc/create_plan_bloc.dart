@@ -10,7 +10,6 @@ import 'package:funconnect/services/dialog_and_sheet_service/i_dialog_and_sheet_
 import 'package:funconnect/services/navigation_service/i_navigation_service.dart';
 import 'package:funconnect/shared/dialogs/_dialogs.dart';
 import 'package:logger/logger.dart';
-import 'package:uuid/uuid.dart';
 
 import 'package:funconnect/features/plans/domain/entities/mini_plan_model.dart';
 
@@ -51,7 +50,7 @@ class CreatePlanBloc extends Bloc<CreatePlanEvent, CreatePlanState> {
     emit(CreatedPlanLoadingState());
     try {
       final newPlan = MiniPlanModel(
-        id: const Uuid().v4(),
+        id: "",
         name: event.planName,
         description: event.planDescription,
         reminderMedium: reminderMedium,
