@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:funconnect/features/plans/domain/entities/mini_plan_model.dart';
+import 'package:funconnect/features/plans/presentation/blocs/plan_details-bloc/plan_details_bloc.dart';
 import 'package:funconnect/features/plans/presentation/components/empty_plans_view%20copy.dart';
 import 'package:funconnect/features/plans/presentation/components/friend_icon_empty_widget.dart';
 import 'package:funconnect/features/plans/presentation/components/friend_icon_widget.dart';
@@ -57,24 +59,28 @@ class PlanDetailsView extends StatelessWidget {
             SizedBox(
               height: 17.h,
             ),
-            SizedBox(
-                height: 65.h,
-                width: double.infinity,
-                child: ListView.separated(
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (context, index) {
-                      if (index == 1) {
-                        return const FriendIconEmptyWidget();
-                      } else {
-                        return const FriendIconWidget(
-                          email: "nich.otieno@gmail.com",
-                        );
-                      }
-                    },
-                    separatorBuilder: (context, index) => SizedBox(
-                          width: 8.w,
-                        ),
-                    itemCount: 2)),
+            BlocBuilder<PlanDetailsBloc, PlanDetailsState>(
+              builder: (context, state) {
+                return SizedBox(
+                    height: 65.h,
+                    width: double.infinity,
+                    child: ListView.separated(
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index) {
+                          if (index == 1) {
+                            return const FriendIconEmptyWidget();
+                          } else {
+                            return const FriendIconWidget(
+                              email: "nich.otieno@gmail.com",
+                            );
+                          }
+                        },
+                        separatorBuilder: (context, index) => SizedBox(
+                              width: 8.w,
+                            ),
+                        itemCount: 2));
+              },
+            ),
             const Expanded(child: SizedBox()),
             const AppButton(
               label: "Save Plan",
