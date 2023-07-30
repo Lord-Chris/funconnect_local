@@ -18,6 +18,13 @@ class AddPlanPlaceView extends StatefulWidget {
 
 class _AddPlanPlaceViewState extends State<AddPlanPlaceView> {
   final _placeFormInputController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+
+  @override
+  void dispose() {
+    _placeFormInputController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,6 +56,7 @@ class _AddPlanPlaceViewState extends State<AddPlanPlaceView> {
                     padding: EdgeInsets.only(
                         left: 16.w, right: 8.w, top: 9.h, bottom: 9.h),
                     child: Form(
+                      key: _formKey,
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
@@ -67,6 +75,12 @@ class _AddPlanPlaceViewState extends State<AddPlanPlaceView> {
                               }
                             },
                             child: TextFormField(
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return "Please select a place";
+                                }
+                                return null;
+                              },
                               controller: _placeFormInputController,
                               readOnly: true,
                               style: TextStyle(
@@ -169,13 +183,16 @@ class _AddPlanPlaceViewState extends State<AddPlanPlaceView> {
                               vertical: 16.h, horizontal: 16.w),
                           child:
                               BlocBuilder<PlanAddPlaceBloc, PlanAddPlaceState>(
+                            buildWhen: (previous, current) {
+                              if (current is PlanDateSelected) {
+                                return true;
+                              }
+                              return false;
+                            },
                             builder: (context, state) {
                               if (state is PlanDateSelected) {
                                 return Text(
-                                  state.date == null
-                                      ? "Select Date"
-                                      : DateFormat("yMMMMd")
-                                          .format(state.date!),
+                                  DateFormat("yMMMMd").format(state.date),
                                   style: TextStyle(
                                       fontSize: 14.sp,
                                       color: const Color(0xff999999)),
@@ -223,13 +240,31 @@ class _AddPlanPlaceViewState extends State<AddPlanPlaceView> {
                           color: const Color(0xff202020),
                           borderRadius: BorderRadius.circular(8.r)),
                       child: Padding(
-                        padding: EdgeInsets.symmetric(
-                            vertical: 16.h, horizontal: 16.w),
-                        child: Text("Select Time",
-                            style: TextStyle(
-                                fontSize: 14.sp,
-                                color: const Color(0xff999999))),
-                      ),
+                          padding: EdgeInsets.symmetric(
+                              vertical: 16.h, horizontal: 16.w),
+                          child:
+                              BlocBuilder<PlanAddPlaceBloc, PlanAddPlaceState>(
+                            buildWhen: (previous, current) {
+                              if (current is PlanTimeSelected) {
+                                return true;
+                              }
+                              return false;
+                            },
+                            builder: (context, state) {
+                              if (state is PlanTimeSelected) {
+                                return Text(
+                                  DateFormat("hh:mm a").format(state.time),
+                                  style: TextStyle(
+                                      fontSize: 14.sp,
+                                      color: const Color(0xff999999)),
+                                );
+                              }
+                              return Text("Select Time",
+                                  style: TextStyle(
+                                      fontSize: 14.sp,
+                                      color: const Color(0xff999999)));
+                            },
+                          )),
                     ),
                   )
                 ],
@@ -239,7 +274,10 @@ class _AddPlanPlaceViewState extends State<AddPlanPlaceView> {
           const Expanded(
             child: SizedBox(),
           ),
-          const AppButton(
+          AppButton(
+            onTap: () {
+              if (_formKey.currentState!.validate()) {}
+            },
             label: "Add Place",
             borderRadius: 8,
           ),

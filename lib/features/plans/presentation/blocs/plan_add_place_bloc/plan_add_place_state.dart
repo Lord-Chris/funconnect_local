@@ -18,17 +18,17 @@ class PlanPlaceSelected extends PlanAddPlaceState {
 }
 
 class PlanDateSelected extends PlanAddPlaceState {
-  final DateTime? date;
+  final DateTime date;
   const PlanDateSelected(this.date);
 
   @override
-  List<Object> get props => [];
+  List<Object> get props => [date];
 }
 
 class PlanTimeSelected extends PlanAddPlaceState {
-  final TimeOfDay? time;
+  final DateTime time;
   const PlanTimeSelected(this.time);
 
   @override
-  List<Object> get props => [];
+  List<Object> get props => [time];
 }

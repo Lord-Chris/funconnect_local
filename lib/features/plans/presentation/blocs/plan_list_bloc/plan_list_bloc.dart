@@ -19,6 +19,7 @@ class PlanListBloc extends Bloc<PlanListEvent, PlanListState> {
     on<CreatePlanClickedEvent>(_createPlanClickedEvent);
     on<FetchMiniPlansEvent>(_fetchMiniPlansEvent);
     on<OpenPlanEvent>(_openPlanEvent);
+    on<LoadMoreEvent>(_loadMoreEvent);
   }
 
   final _navigation = locator<INavigationService>();
@@ -53,4 +54,7 @@ class PlanListBloc extends Bloc<PlanListEvent, PlanListState> {
       OpenPlanEvent event, Emitter<PlanListState> emit) {
     _navigation.toNamed(Routes.planDetailViewRoute, arguments: event.plan);
   }
+
+  FutureOr<void> _loadMoreEvent(
+      LoadMoreEvent event, Emitter<PlanListState> emit) {}
 }

@@ -18,6 +18,7 @@ class PlanAddPlaceBloc extends Bloc<PlanAddPlaceEvent, PlanAddPlaceState> {
     on<MapClickedEvent>(_mapClickedEvent);
     on<DateSelectedEvent>(_dateSelectedEvent);
     on<TimeSelectedEvent>(_timeSelectedEvent);
+    on<AddPlaceEvent>(_addPlaceEvent);
   }
   final _navigation = locator<INavigationService>();
   PlaceModel? selectedPlaceId;
@@ -40,9 +41,22 @@ class PlanAddPlaceBloc extends Bloc<PlanAddPlaceEvent, PlanAddPlaceState> {
   FutureOr<void> _dateSelectedEvent(
       DateSelectedEvent event, Emitter<PlanAddPlaceState> emit) {
     selectedDate = event.date;
-    emit(PlanDateSelected(event.date));
+    emit(PlanDateSelected(selectedDate ?? DateTime.now()));
   }
 
   FutureOr<void> _timeSelectedEvent(
-      TimeSelectedEvent event, Emitter<PlanAddPlaceState> emit) {}
+      TimeSelectedEvent event, Emitter<PlanAddPlaceState> emit) {
+    DateTime? date;
+    if (selectedDate == null) {
+      date = DateTime.now();
+    } else {
+      date = selectedDate;
+    }
+    selectedDate = DateTime(date!.year, date.month, date.day,
+        event.time?.hour ?? date.hour, event.time?.minute ?? date.minute);
+    emit(PlanTimeSelected(selectedDate ?? DateTime.now()));
+  }
+
+  FutureOr<void> _addPlaceEvent(
+      AddPlaceEvent event, Emitter<PlanAddPlaceState> emit) {}
 }

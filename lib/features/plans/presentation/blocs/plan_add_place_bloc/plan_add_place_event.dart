@@ -34,3 +34,5 @@ class TimeSelectedEvent extends PlanAddPlaceEvent {
   @override
   List<Object> get props => [];
 }
+
+class AddPlaceEvent extends PlanAddPlaceEvent {}

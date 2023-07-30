@@ -9,6 +9,8 @@ class PlansListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ScrollController scrollController = ScrollController();
+    scrollController.addListener(() {});
     return Scaffold(
         appBar: AppBar(
           title: Padding(
@@ -50,6 +52,7 @@ class PlansListView extends StatelessWidget {
                   children: [
                     Expanded(
                       child: ListView.separated(
+                          controller: scrollController,
                           shrinkWrap: true,
                           separatorBuilder: (context, index) => SizedBox(
                                 height: 16.h,

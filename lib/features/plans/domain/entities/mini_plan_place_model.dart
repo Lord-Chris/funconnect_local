@@ -31,8 +31,8 @@ class MiniPlanPlaceModel extends Equatable {
     final result = <String, dynamic>{};
 
     result.addAll({'id': id});
-    result.addAll({'placeId': placeId});
-    result.addAll({'miniPlanId': miniPlanId});
+    result.addAll({'place_id': placeId});
+    result.addAll({'mini_plan_id': miniPlanId});
 
     return result;
   }
@@ -40,8 +40,8 @@ class MiniPlanPlaceModel extends Equatable {
   factory MiniPlanPlaceModel.fromMap(Map<String, dynamic> map) {
     return MiniPlanPlaceModel(
       id: map['id'] ?? '',
-      placeId: map['placeId'] ?? '',
-      miniPlanId: map['miniPlanId'] ?? '',
+      placeId: map['place_id'] ?? '',
+      miniPlanId: map['mini_plan_id'] ?? '',
     );
   }
 

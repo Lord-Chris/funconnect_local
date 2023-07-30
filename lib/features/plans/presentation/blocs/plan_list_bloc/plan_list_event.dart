@@ -18,3 +18,11 @@ class OpenPlanEvent extends PlanListEvent {
   @override
   List<Object> get props => [plan];
 }
+
+class LoadMoreEvent extends PlanListEvent {
+  final int page;
+  const LoadMoreEvent(this.page);
+
+  @override
+  List<Object> get props => [page];
+}
