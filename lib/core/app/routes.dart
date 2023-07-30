@@ -16,28 +16,32 @@ import 'package:funconnect/features/events/domain/entities/event_model.dart';
 import 'package:funconnect/features/events/presentation/views/booking_view.dart';
 import 'package:funconnect/features/events/presentation/views/checkout_view.dart';
 import 'package:funconnect/features/places/domain/entities/place_model.dart';
+import 'package:funconnect/features/places/presentation/add_place_to_plan/add_place_to_plan._view.dart';
+import 'package:funconnect/features/places/presentation/add_place_to_plan/bloc/add_place_to_plan_bloc.dart';
 import 'package:funconnect/features/places/presentation/category_detail/bloc/category_detail_bloc.dart';
 import 'package:funconnect/features/places/presentation/category_detail/category_detail_view.dart';
 import 'package:funconnect/features/places/presentation/place_detail/bloc/place_detail_bloc.dart';
 import 'package:funconnect/features/places/presentation/place_detail/place_detail_view.dart';
 import 'package:funconnect/features/places/presentation/search_result/search_result_view.dart';
 import 'package:funconnect/features/plans/domain/entities/mini_plan_model.dart';
-import 'package:funconnect/features/plans/presentation/blocs/choose_plan_type_bloc/choose_plan_type_bloc.dart';
-import 'package:funconnect/features/plans/presentation/blocs/create_plan_bloc/create_plan_bloc.dart';
-import 'package:funconnect/features/plans/presentation/blocs/map_bloc/map_bloc.dart';
-import 'package:funconnect/features/plans/presentation/blocs/plan_add_place_bloc/plan_add_place_bloc.dart';
-import 'package:funconnect/features/plans/presentation/blocs/plan_details-bloc/plan_details_bloc.dart';
-import 'package:funconnect/features/plans/presentation/blocs/plan_list_bloc/plan_list_bloc.dart';
-import 'package:funconnect/features/plans/presentation/views/add_plan_place.dart';
+import 'package:funconnect/features/plans/presentation/blocs/choose_plan_type/bloc/choose_plan_type_bloc.dart';
 
-import 'package:funconnect/features/plans/presentation/views/choose_plan_type_view.dart';
+import 'package:funconnect/features/plans/presentation/blocs/create_plan/bloc/create_plan_bloc.dart';
+import 'package:funconnect/features/plans/presentation/blocs/map/bloc/map_bloc.dart';
+import 'package:funconnect/features/plans/presentation/blocs/plan_add_place/bloc/plan_add_place_bloc.dart';
 
-import 'package:funconnect/features/plans/presentation/views/create_plan_view.dart';
+import 'package:funconnect/features/plans/presentation/blocs/plan_add_place/add_plan_place.dart';
 
-import 'package:funconnect/features/plans/presentation/views/map_view.dart';
-import 'package:funconnect/features/plans/presentation/views/plan_details_view.dart';
+import 'package:funconnect/features/plans/presentation/blocs/choose_plan_type/choose_plan_type_view.dart';
 
-import 'package:funconnect/features/plans/presentation/views/plans_list_view.dart';
+import 'package:funconnect/features/plans/presentation/blocs/create_plan/create_plan_view.dart';
+
+import 'package:funconnect/features/plans/presentation/blocs/map/map_view.dart';
+import 'package:funconnect/features/plans/presentation/blocs/plan_details/bloc/plan_details_bloc.dart';
+import 'package:funconnect/features/plans/presentation/blocs/plan_details/plan_details_view.dart';
+import 'package:funconnect/features/plans/presentation/blocs/plan_list/bloc/plan_list_bloc.dart';
+
+import 'package:funconnect/features/plans/presentation/blocs/plan_list/plans_list_view.dart';
 import 'package:funconnect/features/profile/presentation/edit_profile/edit_profile_view.dart';
 import 'package:funconnect/features/profile/presentation/manage_login_options/manage_login_options_view.dart';
 import 'package:funconnect/features/profile/presentation/views/my_events_view.dart';
@@ -86,6 +90,7 @@ class Routes {
   static const placeDetailRoute = '/place-detail';
   static const categoryDetailRoute = '/category-detail';
   static const searchResultRoute = '/search-result';
+  static const addPlaceToPlanRoute = '/add-place-to-plan';
 
   // Events
   static const createEventRoute = '/create-event-route';
@@ -189,6 +194,14 @@ class Routes {
           settings: settings,
         );
 
+      case addPlaceToPlanRoute:
+        final place = settings.arguments as PlaceModel;
+        return _registerBlocView(
+          view: AddPlaceToPlan(place: place),
+          bloc: AddPlaceToPlanBloc(),
+          settings: settings,
+        );
+
       // Dashboard
       case dashboardViewRoute:
         return _registerBlocView(
@@ -266,8 +279,11 @@ class Routes {
         );
 
       case planAddPlaceViewRoute:
+        final plan = settings.arguments as MiniPlanModel;
         return _registerBlocView(
-          view: const AddPlanPlaceView(),
+          view: AddPlanPlaceView(
+            plan: plan,
+          ),
           bloc: PlanAddPlaceBloc(),
           settings: settings,
         );

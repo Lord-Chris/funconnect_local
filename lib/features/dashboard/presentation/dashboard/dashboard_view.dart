@@ -9,8 +9,9 @@ import 'package:funconnect/features/dashboard/presentation/dashboard/bloc/dashbo
 import 'package:funconnect/features/dashboard/presentation/notifications/bloc/notification_bloc.dart';
 import 'package:funconnect/features/events/presentation/blocs/events_bloc/events_bloc.dart';
 import 'package:funconnect/features/places/presentation/explore/bloc/explore_bloc.dart';
-import 'package:funconnect/features/plans/presentation/blocs/plan_list_bloc/plan_list_bloc.dart';
-import 'package:funconnect/features/plans/presentation/views/plans_list_view.dart';
+import 'package:funconnect/features/plans/presentation/blocs/plan_list/bloc/plan_list_bloc.dart';
+
+import 'package:funconnect/features/plans/presentation/blocs/plan_list/plans_list_view.dart';
 import 'package:funconnect/features/profile/presentation/profile/profile_view.dart';
 import 'package:funconnect/features/saved/presentation/saved/bloc/saved_bloc.dart';
 import 'package:funconnect/features/saved/presentation/saved/saved_view.dart';
