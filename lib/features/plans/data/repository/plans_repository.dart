@@ -3,6 +3,7 @@ import 'package:funconnect/features/plans/data/data_sources/plan_remote_data_sou
 import 'package:funconnect/features/plans/data/repository/i_plans_repository.dart';
 import 'package:funconnect/features/plans/domain/entities/mini_plan_friend_model.dart';
 import 'package:funconnect/features/plans/domain/entities/mini_plan_model.dart';
+import 'package:funconnect/features/plans/domain/entities/mini_plan_place_model.dart';
 import 'package:funconnect/features/plans/domain/params/add_friends.dart';
 
 class PlansRepository extends IPlansRepository {
@@ -25,5 +26,10 @@ class PlansRepository extends IPlansRepository {
   @override
   Future<PaginatedData<MiniPlanFriend>> fetchMiniPlanFriends(String planId) {
     return _remoteDS.fetchMiniPlanFriends(planId);
+  }
+
+  @override
+  Future<PaginatedData<MiniPlanPlaceModel>> fetchMiniPlanPlaces(String planId) {
+    return _remoteDS.fetchMiniPlanPlaces(planId);
   }
 }
