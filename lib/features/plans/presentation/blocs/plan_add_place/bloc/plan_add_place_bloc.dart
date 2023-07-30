@@ -6,7 +6,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:funconnect/core/app/locator.dart';
 import 'package:funconnect/core/app/routes.dart';
 import 'package:funconnect/features/places/domain/entities/place_model.dart';
+import 'package:funconnect/features/plans/domain/params/add_place.dart';
+import 'package:funconnect/features/plans/domain/usecases/add_plan_place_usecase.dart';
 import 'package:funconnect/services/navigation_service/i_navigation_service.dart';
+import 'package:logger/logger.dart';
 
 part 'plan_add_place_event.dart';
 part 'plan_add_place_state.dart';
@@ -58,5 +61,15 @@ class PlanAddPlaceBloc extends Bloc<PlanAddPlaceEvent, PlanAddPlaceState> {
   }
 
   FutureOr<void> _addPlaceEvent(
-      AddPlaceEvent event, Emitter<PlanAddPlaceState> emit) {}
+      AddPlaceEvent event, Emitter<PlanAddPlaceState> emit) async {
+    try {
+      final data = await AddPlanPlaceUsecase().call(AddPlaceParams(
+        placeId: selectedPlaceId?.id ?? "",
+        miniPlanId: event.placeId,
+        date: int.parse(selectedDate!.toIso8601String()),
+      ));
+    } catch (e) {
+      Logger().e(e.toString());
+    }
+  }
 }

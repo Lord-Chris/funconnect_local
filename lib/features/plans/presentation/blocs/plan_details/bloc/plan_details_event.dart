@@ -26,7 +26,8 @@ class PlanFriendsLoad extends PlanDetailsEvent {
 }
 
 class AddAPlaceClickedEvent extends PlanDetailsEvent {
-  const AddAPlaceClickedEvent();
+  final MiniPlanModel plan;
+  const AddAPlaceClickedEvent(this.plan);
 
   @override
   List<Object> get props => [];

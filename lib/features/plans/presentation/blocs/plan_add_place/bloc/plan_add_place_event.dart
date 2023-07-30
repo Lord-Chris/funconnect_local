@@ -35,4 +35,8 @@ class TimeSelectedEvent extends PlanAddPlaceEvent {
   List<Object> get props => [];
 }
 
-class AddPlaceEvent extends PlanAddPlaceEvent {}
+class AddPlaceEvent extends PlanAddPlaceEvent {
+  final String placeId;
+
+  const AddPlaceEvent(this.placeId);
+}

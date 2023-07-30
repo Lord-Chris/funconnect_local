@@ -86,3 +86,11 @@ class ShareTapEvent extends PlaceDetailEvent {
 class BookRideEvent extends PlaceDetailEvent {}
 
 class BookmarkTapEvent extends PlaceDetailEvent {}
+
+class AddPlaceToPlanEvent extends PlaceDetailEvent {
+  final PlaceModel place;
+  AddPlaceToPlanEvent(this.place);
+
+  @override
+  List<Object> get props => [place];
+}

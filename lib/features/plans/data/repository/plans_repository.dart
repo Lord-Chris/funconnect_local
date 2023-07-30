@@ -5,6 +5,7 @@ import 'package:funconnect/features/plans/domain/entities/mini_plan_friend_model
 import 'package:funconnect/features/plans/domain/entities/mini_plan_model.dart';
 import 'package:funconnect/features/plans/domain/entities/mini_plan_place_model.dart';
 import 'package:funconnect/features/plans/domain/params/add_friends.dart';
+import 'package:funconnect/features/plans/domain/params/add_place.dart';
 
 class PlansRepository extends IPlansRepository {
   final _remoteDS = PlansRemoteDataSource();
@@ -31,5 +32,10 @@ class PlansRepository extends IPlansRepository {
   @override
   Future<PaginatedData<MiniPlanPlaceModel>> fetchMiniPlanPlaces(String planId) {
     return _remoteDS.fetchMiniPlanPlaces(planId);
+  }
+
+  @override
+  Future<MiniPlanPlaceModel> addPlace(AddPlaceParams param) {
+    return _remoteDS.addPlace(param);
   }
 }

@@ -1,7 +1,8 @@
 class AddPlaceParams {
   final String placeId;
   final String miniPlanId;
-  final DateTime date;
+  final int date;
 
-  AddPlaceParams(this.placeId, this.miniPlanId, this.date);
+  AddPlaceParams(
+      {required this.placeId, required this.miniPlanId, required this.date});
 }

@@ -67,11 +67,11 @@ class PlansRemoteDataSource with ApiMixin {
         res.data['data'], (x) => MiniPlanPlaceModel.fromMap(x));
   }
 
-  Future<MiniPlanPlaceModel> addPlace(
-      String miniPlanId, AddPlaceParams param) async {
+  Future<MiniPlanPlaceModel> addPlace(AddPlaceParams param) async {
     final res = await _networkService.post(
       ApiConstants.addMiniPlanPlace(param.miniPlanId),
-      body: {"date_time": param.date},
+      body: {"place_id": param.placeId, "datetime": param.date},
+      headers: headers,
     );
 
     return MiniPlanPlaceModel.fromMap(res.data['data']);

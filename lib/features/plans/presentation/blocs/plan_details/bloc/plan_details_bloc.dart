@@ -50,6 +50,6 @@ class PlanDetailsBloc extends Bloc<PlanDetailsEvent, PlanDetailsState> {
 
   FutureOr<void> _addAPlaceClicked(
       AddAPlaceClickedEvent event, Emitter<PlanDetailsState> emit) {
-    _navigation.toNamed(Routes.planAddPlaceViewRoute);
+    _navigation.toNamed(Routes.planAddPlaceViewRoute, arguments: event.plan);
   }
 }

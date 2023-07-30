@@ -3,14 +3,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:funconnect/core/blocs/main_app_bloc.dart';
 import 'package:funconnect/features/places/domain/entities/place_model.dart';
-import 'package:funconnect/features/plans/presentation/blocs/plan_add_place_bloc/plan_add_place_bloc.dart';
+import 'package:funconnect/features/plans/domain/entities/mini_plan_model.dart';
+import 'package:funconnect/features/plans/presentation/blocs/plan_add_place/bloc/plan_add_place_bloc.dart';
 import 'package:funconnect/shared/components/custom_button.dart';
 import 'package:funconnect/shared/constants/colors.dart';
 import 'package:intl/intl.dart';
 import 'package:logger/logger.dart';
 
 class AddPlanPlaceView extends StatefulWidget {
-  const AddPlanPlaceView({super.key});
+  final MiniPlanModel plan;
+  const AddPlanPlaceView({super.key, required this.plan});
 
   @override
   State<AddPlanPlaceView> createState() => _AddPlanPlaceViewState();
@@ -276,7 +278,11 @@ class _AddPlanPlaceViewState extends State<AddPlanPlaceView> {
           ),
           AppButton(
             onTap: () {
-              if (_formKey.currentState!.validate()) {}
+              if (_formKey.currentState!.validate()) {
+                context
+                    .read<PlanAddPlaceBloc>()
+                    .add(AddPlaceEvent(widget.plan.id));
+              }
             },
             label: "Add Place",
             borderRadius: 8,

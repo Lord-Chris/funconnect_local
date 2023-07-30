@@ -3,6 +3,7 @@ import 'package:funconnect/features/plans/domain/entities/mini_plan_friend_model
 import 'package:funconnect/features/plans/domain/entities/mini_plan_model.dart';
 import 'package:funconnect/features/plans/domain/entities/mini_plan_place_model.dart';
 import 'package:funconnect/features/plans/domain/params/add_friends.dart';
+import 'package:funconnect/features/plans/domain/params/add_place.dart';
 
 abstract class IPlansRepository {
   Future<PaginatedData<MiniPlanModel>> fetchUserMiniPlans();
@@ -10,4 +11,5 @@ abstract class IPlansRepository {
   Future<MiniPlanFriend> addFriend(AddFriendsParams param);
   Future<PaginatedData<MiniPlanFriend>> fetchMiniPlanFriends(String planId);
   Future<PaginatedData<MiniPlanPlaceModel>> fetchMiniPlanPlaces(String planId);
+  Future<MiniPlanPlaceModel> addPlace(AddPlaceParams param);
 }
