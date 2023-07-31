@@ -12,7 +12,7 @@ class PlanListInitial extends PlanListState {}
 class PlanListEmptyState extends PlanListState {}
 
 class PlanListFetchedState extends PlanListState {
-  final PaginatedData<MiniPlanModel> data;
+  final List<MiniPlanModel> data;
   const PlanListFetchedState(this.data);
 
   @override

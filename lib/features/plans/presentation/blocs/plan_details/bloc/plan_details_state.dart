@@ -21,7 +21,7 @@ class PlanDetailsLoaded extends PlanDetailsState {
 }
 
 class PlanPlacesLoaded extends PlanDetailsState {
-  final PaginatedData<MiniPlanPlaceModel> places;
+  final List<MiniPlanPlaceModel> places;
   const PlanPlacesLoaded(this.places);
 
   @override

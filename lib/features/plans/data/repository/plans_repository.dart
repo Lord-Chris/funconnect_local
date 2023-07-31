@@ -10,7 +10,7 @@ import 'package:funconnect/features/plans/domain/params/add_place.dart';
 class PlansRepository extends IPlansRepository {
   final _remoteDS = PlansRemoteDataSource();
   @override
-  Future<PaginatedData<MiniPlanModel>> fetchUserMiniPlans() {
+  Future<List<MiniPlanModel>> fetchUserMiniPlans() {
     return _remoteDS.fetchUserMiniPlans();
   }
 
@@ -30,7 +30,7 @@ class PlansRepository extends IPlansRepository {
   }
 
   @override
-  Future<PaginatedData<MiniPlanPlaceModel>> fetchMiniPlanPlaces(String planId) {
+  Future<List<MiniPlanPlaceModel>> fetchMiniPlanPlaces(String planId) {
     return _remoteDS.fetchMiniPlanPlaces(planId);
   }
 

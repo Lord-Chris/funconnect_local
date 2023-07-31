@@ -53,7 +53,7 @@ class PlanDetailsView extends StatelessWidget {
                   return const CircularProgressIndicator();
                 }
                 if (state is PlanPlacesLoaded) {
-                  return Text("loaded ${state.places.data.length}");
+                  return Text("loaded ${state.places.length}");
                 }
                 return const SizedBox();
               },

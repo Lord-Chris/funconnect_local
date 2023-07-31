@@ -12,13 +12,14 @@ import 'package:logger/logger.dart';
 
 class PlansRemoteDataSource with ApiMixin {
   final _networkService = locator<INetworkService>();
-  Future<PaginatedData<MiniPlanModel>> fetchUserMiniPlans() async {
+  Future<List<MiniPlanModel>> fetchUserMiniPlans() async {
     final res = await _networkService.get(
       ApiConstants.miniPlans,
       headers: headers,
     );
-    return PaginatedData.fromMap(
-        res.data['data'], (x) => MiniPlanModel.fromMap(x));
+    return res.data['data']
+        .map<MiniPlanModel>((x) => MiniPlanModel.fromMap(x))
+        .toList();
   }
 
   Future<MiniPlanModel> createMiniPlan(MiniPlanModel miniPlan) async {
@@ -57,14 +58,15 @@ class PlansRemoteDataSource with ApiMixin {
         res.data['data'], (x) => MiniPlanFriend.fromMap(x));
   }
 
-  Future<PaginatedData<MiniPlanPlaceModel>> fetchMiniPlanPlaces(
+  Future<List<MiniPlanPlaceModel>> fetchMiniPlanPlaces(
       String miniPlanId) async {
     final res = await _networkService.get(
       ApiConstants.getMiniPlanPlaces(miniPlanId),
       headers: headers,
     );
-    return PaginatedData.fromMap(
-        res.data['data'], (x) => MiniPlanPlaceModel.fromMap(x));
+    return res.data['data']
+        .map<MiniPlanPlaceModel>((x) => MiniPlanPlaceModel.fromMap(x))
+        .toList();
   }
 
   Future<MiniPlanPlaceModel> addPlace(AddPlaceParams param) async {

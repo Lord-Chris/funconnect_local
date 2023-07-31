@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:funconnect/core/app/_app.dart';
-import 'package:funconnect/core/models/paginated_data.dart';
 import 'package:funconnect/core/usecases/usecase.dart';
 import 'package:funconnect/features/plans/domain/entities/mini_plan_model.dart';
 import 'package:funconnect/features/plans/domain/usecases/fetch_mini_plans.dart';
@@ -28,8 +27,7 @@ class PlanListBloc extends Bloc<PlanListEvent, PlanListState> {
       CreatePlanClickedEvent event, Emitter<PlanListState> emit) async {
     await _navigation.toNamed(Routes.choosePlanTypeViewRoute);
     emit(PlanListLoadingState());
-    PaginatedData<MiniPlanModel> data =
-        await FetchMiniPlansUseCase().call(NoParams());
+    List<MiniPlanModel> data = await FetchMiniPlansUseCase().call(NoParams());
     emit(PlanListFetchedState(data));
   }
 
@@ -37,9 +35,8 @@ class PlanListBloc extends Bloc<PlanListEvent, PlanListState> {
       FetchMiniPlansEvent event, Emitter<PlanListState> emit) async {
     emit(PlanListLoadingState());
     try {
-      PaginatedData<MiniPlanModel> data =
-          await FetchMiniPlansUseCase().call(NoParams());
-      if (data.data.isEmpty) {
+      List<MiniPlanModel> data = await FetchMiniPlansUseCase().call(NoParams());
+      if (data.isEmpty) {
         emit(PlanListEmptyState());
       } else {
         emit(PlanListFetchedState(data));

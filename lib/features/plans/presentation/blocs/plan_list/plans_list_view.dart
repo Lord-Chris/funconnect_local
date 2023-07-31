@@ -58,13 +58,13 @@ class PlansListView extends StatelessWidget {
                           separatorBuilder: (context, index) => SizedBox(
                                 height: 16.h,
                               ),
-                          itemCount: state.data.data.length,
+                          itemCount: state.data.length,
                           itemBuilder: (context, index) {
                             return InkWell(
                               onTap: () {
                                 context
                                     .read<PlanListBloc>()
-                                    .add(OpenPlanEvent(state.data.data[index]));
+                                    .add(OpenPlanEvent(state.data[index]));
                               },
                               child: Container(
                                   decoration: BoxDecoration(
@@ -80,7 +80,7 @@ class PlansListView extends StatelessWidget {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
-                                              Text(state.data.data[index].name,
+                                              Text(state.data[index].name,
                                                   style: TextStyle(
                                                       color: const Color(
                                                           0xffcccccc),
@@ -91,8 +91,7 @@ class PlansListView extends StatelessWidget {
                                                 height: 8.h,
                                               ),
                                               Text(
-                                                state.data.data[index]
-                                                    .description,
+                                                state.data[index].description,
                                                 style: TextStyle(
                                                     color:
                                                         const Color(0xff999999),
