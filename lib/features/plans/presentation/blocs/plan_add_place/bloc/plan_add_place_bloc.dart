@@ -66,7 +66,8 @@ class PlanAddPlaceBloc extends Bloc<PlanAddPlaceEvent, PlanAddPlaceState> {
       final data = await AddPlanPlaceUsecase().call(AddPlaceParams(
         placeId: selectedPlaceId?.id ?? "",
         miniPlanId: event.placeId,
-        date: int.parse(selectedDate!.toIso8601String()),
+        date: selectedDate?.toUtc().millisecondsSinceEpoch ??
+            DateTime.now().toUtc().millisecondsSinceEpoch,
       ));
     } catch (e) {
       Logger().e(e.toString());
