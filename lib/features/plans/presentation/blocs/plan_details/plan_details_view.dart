@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:funconnect/features/places/domain/entities/full_place_model.dart';
 
 import 'package:funconnect/features/plans/domain/entities/mini_plan_model.dart';
 import 'package:funconnect/features/plans/presentation/blocs/plan_details/bloc/plan_details_bloc.dart';
@@ -54,8 +55,18 @@ class PlanDetailsView extends StatelessWidget {
                 }
                 if (state is PlanPlacesLoaded) {
                   return ListView.separated(
+                      shrinkWrap: true,
                       itemBuilder: (context, index) {
-                        return const SizedBox();
+                        return FutureBuilder<FullPlaceModel>(
+                            future: PlanDetailsBloc()
+                                .getPlaceDetails(state.places[index].placeId),
+                            builder: (context, snapshot) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                return const CircularProgressIndicator();
+                              }
+                              return (Text(snapshot.data?.name ?? ""));
+                            });
                       },
                       separatorBuilder: (context, index) => SizedBox(
                             height: 24.h,

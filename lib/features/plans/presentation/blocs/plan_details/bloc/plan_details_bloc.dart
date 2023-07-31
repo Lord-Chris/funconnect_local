@@ -5,6 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:funconnect/core/app/locator.dart';
 import 'package:funconnect/core/app/routes.dart';
 import 'package:funconnect/core/models/paginated_data.dart';
+import 'package:funconnect/features/places/domain/entities/full_place_model.dart';
+import 'package:funconnect/features/places/domain/usecases/fetch_place_detail.dart';
 import 'package:funconnect/features/plans/domain/entities/mini_plan_friend_model.dart';
 import 'package:funconnect/features/plans/domain/entities/mini_plan_model.dart';
 import 'package:funconnect/features/plans/domain/entities/mini_plan_place_model.dart';
@@ -51,5 +53,11 @@ class PlanDetailsBloc extends Bloc<PlanDetailsEvent, PlanDetailsState> {
   FutureOr<void> _addAPlaceClicked(
       AddAPlaceClickedEvent event, Emitter<PlanDetailsState> emit) {
     _navigation.toNamed(Routes.planAddPlaceViewRoute, arguments: event.plan);
+  }
+
+  Future<FullPlaceModel> getPlaceDetails(String placeId) async {
+    Logger().i("place details for $placeId");
+    List data = await FetchPlaceDetail().call(placeId);
+    return data[0];
   }
 }
