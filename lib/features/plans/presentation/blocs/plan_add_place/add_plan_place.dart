@@ -276,16 +276,30 @@ class _AddPlanPlaceViewState extends State<AddPlanPlaceView> {
           const Expanded(
             child: SizedBox(),
           ),
-          AppButton(
-            onTap: () {
-              if (_formKey.currentState!.validate()) {
-                context
-                    .read<PlanAddPlaceBloc>()
-                    .add(AddPlaceEvent(widget.plan.id));
+          BlocBuilder<PlanAddPlaceBloc, PlanAddPlaceState>(
+            buildWhen: (previous, current) {
+              if (current is PlanAddPlaceLoading) {
+                return true;
               }
+              return false;
             },
-            label: "Add Place",
-            borderRadius: 8,
+            builder: (context, state) {
+              Logger().i(state);
+              if (state is PlanAddPlaceLoading) {
+                const CircularProgressIndicator();
+              }
+              return AppButton(
+                onTap: () {
+                  if (_formKey.currentState!.validate()) {
+                    context
+                        .read<PlanAddPlaceBloc>()
+                        .add(AddPlaceEvent(widget.plan.id));
+                  }
+                },
+                label: "Add Place",
+                borderRadius: 8,
+              );
+            },
           ),
           SizedBox(height: 16.h),
         ]),

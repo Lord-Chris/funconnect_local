@@ -23,9 +23,6 @@ class PlanDetailsLoaded extends PlanDetailsState {
 class PlanPlacesLoaded extends PlanDetailsState {
   final List<MiniPlanPlaceModel> places;
   const PlanPlacesLoaded(this.places);
-
-  @override
-  List<Object> get props => [places];
 }
 
 class PlanFriendsLoading extends PlanDetailsState {}

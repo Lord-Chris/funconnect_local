@@ -72,6 +72,7 @@ dependencies:
   share_plus: ^7.0.2
   shimmer: ^3.0.0
   sign_in_with_apple: ^5.0.0
+  skeletonizer: ^0.4.0
   skeletons: ^0.0.3
   smooth_page_indicator: ^1.1.0
   store_redirect: ^2.0.1

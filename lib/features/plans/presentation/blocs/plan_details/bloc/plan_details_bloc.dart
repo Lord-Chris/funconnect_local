@@ -51,8 +51,17 @@ class PlanDetailsBloc extends Bloc<PlanDetailsEvent, PlanDetailsState> {
   }
 
   FutureOr<void> _addAPlaceClicked(
-      AddAPlaceClickedEvent event, Emitter<PlanDetailsState> emit) {
-    _navigation.toNamed(Routes.planAddPlaceViewRoute, arguments: event.plan);
+      AddAPlaceClickedEvent event, Emitter<PlanDetailsState> emit) async {
+    await _navigation.toNamed(Routes.planAddPlaceViewRoute,
+        arguments: event.plan) as bool;
+
+    emit(PlanFriendsLoading());
+    try {
+      final data = await FetchPlanFriendsUsecase().call(event.plan.id);
+      emit(PlanFriendsLoaded(data));
+    } catch (e) {
+      Logger().e(e);
+    }
   }
 
   Future<FullPlaceModel> getPlaceDetails(String placeId) async {

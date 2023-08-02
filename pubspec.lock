@@ -1176,6 +1176,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.1"
+  skeletonizer:
+    dependency: "direct main"
+    description:
+      name: skeletonizer
+      sha256: e4129ce8fc9559bbfa35d55f4b213cf19291409316cec31bb348d6b04b239441
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.4.0"
   skeletons:
     dependency: "direct main"
     description:

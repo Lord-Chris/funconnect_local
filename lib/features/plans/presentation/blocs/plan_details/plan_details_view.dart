@@ -5,12 +5,13 @@ import 'package:funconnect/features/places/domain/entities/full_place_model.dart
 
 import 'package:funconnect/features/plans/domain/entities/mini_plan_model.dart';
 import 'package:funconnect/features/plans/presentation/blocs/plan_details/bloc/plan_details_bloc.dart';
+import 'package:funconnect/features/plans/presentation/blocs/plan_details/components/plan_place_item.dart';
 
 import 'package:funconnect/features/plans/presentation/components/empty_plans_places_view.dart';
 import 'package:funconnect/features/plans/presentation/components/friend_icon_empty_widget.dart';
 import 'package:funconnect/features/plans/presentation/components/friend_icon_widget.dart';
-import 'package:funconnect/shared/components/app_network_image.dart';
 import 'package:funconnect/shared/components/custom_button.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 class PlanDetailsView extends StatelessWidget {
   final MiniPlanModel plan;
@@ -50,6 +51,9 @@ class PlanDetailsView extends StatelessWidget {
             ),
             Flexible(
               child: BlocBuilder(
+                buildWhen: (previous, current) {
+                  return current is PlanPlacesLoaded;
+                },
                 bloc: PlanDetailsBloc()..add(PlanPlacesLoad(plan)),
                 builder: (context, state) {
                   if (state is PlanPlacesLoading) {
@@ -65,99 +69,12 @@ class PlanDetailsView extends StatelessWidget {
                               builder: (context, snapshot) {
                                 if (snapshot.connectionState ==
                                     ConnectionState.waiting) {
-                                  return const CircularProgressIndicator();
+                                  return Skeletonizer(
+                                      child:
+                                          PlanPlaceItem(place: snapshot.data));
                                 }
-                                return (Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    AppNetworkImage(
-                                      url: snapshot.data?.coverImagePath ?? "",
-                                      size: Size(60.w, 60.h),
-                                      borderRadius: 8,
-                                      fit: BoxFit.cover,
-                                    ),
-                                    SizedBox(
-                                      width: 8.w,
-                                    ),
-                                    Expanded(
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            snapshot.data?.name ?? "",
-                                            style: TextStyle(
-                                                fontSize: 16.sp,
-                                                fontWeight: FontWeight.w500,
-                                                color: const Color(0xffcccccc)),
-                                          ),
-                                          SizedBox(
-                                            height: 8.h,
-                                          ),
-                                          Text(
-                                            snapshot.data?.location?.address ??
-                                                "",
-                                            style: TextStyle(
-                                                color: const Color(0xff999999),
-                                                fontSize: 14.sp,
-                                                fontWeight: FontWeight.w400),
-                                          ),
-                                          SizedBox(
-                                            height: 8.h,
-                                          ),
-                                          Text(
-                                              "${snapshot.data!.opensAtParsed.format(context)} - ${snapshot.data!.closesAtParsed.format(context)}",
-                                              style: TextStyle(
-                                                  color:
-                                                      const Color(0xff999999),
-                                                  fontSize: 12.sp,
-                                                  fontWeight: FontWeight.w400)),
-                                          SizedBox(
-                                            height: 16.h,
-                                          ),
-                                          Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Icon(
-                                                Icons.access_time,
-                                                size: 30.r,
-                                                color: const Color(0xff999999),
-                                              ),
-                                              SizedBox(
-                                                width: 8.w,
-                                              ),
-                                              Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    "03:30 PM",
-                                                    style: TextStyle(
-                                                        color: Colors.white,
-                                                        fontSize: 14.sp,
-                                                        fontWeight:
-                                                            FontWeight.w400),
-                                                  ),
-                                                  SizedBox(
-                                                    height: 4.h,
-                                                  ),
-                                                  const Text(
-                                                    "Saturday, 12 June, 2023",
-                                                    style: TextStyle(
-                                                        color:
-                                                            Color(0xff999999),
-                                                        fontWeight:
-                                                            FontWeight.w400),
-                                                  )
-                                                ],
-                                              )
-                                            ],
-                                          )
-                                        ],
-                                      ),
-                                    )
-                                  ],
+                                return (PlanPlaceItem(
+                                  place: snapshot.data!,
                                 ));
                               });
                         },

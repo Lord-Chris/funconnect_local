@@ -63,13 +63,15 @@ class PlanAddPlaceBloc extends Bloc<PlanAddPlaceEvent, PlanAddPlaceState> {
 
   FutureOr<void> _addPlaceEvent(
       AddPlaceEvent event, Emitter<PlanAddPlaceState> emit) async {
+    emit(PlanAddPlaceLoading());
     try {
-      final data = await AddPlanPlaceUsecase().call(AddPlaceParams(
+      await AddPlanPlaceUsecase().call(AddPlaceParams(
         placeId: selectedPlaceId?.id ?? "",
         miniPlanId: event.placeId,
         date: selectedDate?.toUtc().millisecondsSinceEpoch ??
             DateTime.now().toUtc().millisecondsSinceEpoch,
       ));
+      _navigation.back(true);
     } catch (e) {
       Logger().e(e.toString());
     }
