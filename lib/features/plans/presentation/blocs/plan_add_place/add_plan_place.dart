@@ -12,6 +12,7 @@ import 'package:logger/logger.dart';
 
 class AddPlanPlaceView extends StatefulWidget {
   final MiniPlanModel plan;
+
   const AddPlanPlaceView({super.key, required this.plan});
 
   @override

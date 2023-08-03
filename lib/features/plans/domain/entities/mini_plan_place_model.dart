@@ -6,10 +6,12 @@ class MiniPlanPlaceModel extends Equatable {
   final String id;
   final String placeId;
   final String miniPlanId;
+  final String createdAt;
   const MiniPlanPlaceModel({
     required this.id,
     required this.placeId,
     required this.miniPlanId,
+    required this.createdAt,
   });
 
   @override
@@ -19,11 +21,13 @@ class MiniPlanPlaceModel extends Equatable {
     String? id,
     String? placeId,
     String? miniPlanId,
+    String? createdAt,
   }) {
     return MiniPlanPlaceModel(
       id: id ?? this.id,
       placeId: placeId ?? this.placeId,
       miniPlanId: miniPlanId ?? this.miniPlanId,
+      createdAt: createdAt ?? this.createdAt,
     );
   }
 
@@ -33,6 +37,7 @@ class MiniPlanPlaceModel extends Equatable {
     result.addAll({'id': id});
     result.addAll({'place_id': placeId});
     result.addAll({'mini_plan_id': miniPlanId});
+    result.addAll({'created_at': createdAt});
 
     return result;
   }
@@ -42,6 +47,7 @@ class MiniPlanPlaceModel extends Equatable {
       id: map['id'] ?? '',
       placeId: map['place_id'] ?? '',
       miniPlanId: map['mini_plan_id'] ?? '',
+      createdAt: map['created_at'] ?? '',
     );
   }
 

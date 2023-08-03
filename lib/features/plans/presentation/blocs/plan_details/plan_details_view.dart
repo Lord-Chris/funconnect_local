@@ -51,13 +51,10 @@ class PlanDetailsView extends StatelessWidget {
             ),
             Flexible(
               child: BlocBuilder(
-                buildWhen: (previous, current) {
-                  return current is PlanPlacesLoaded;
-                },
                 bloc: PlanDetailsBloc()..add(PlanPlacesLoad(plan)),
                 builder: (context, state) {
                   if (state is PlanPlacesLoading) {
-                    return const CircularProgressIndicator();
+                    return const Center(child: CircularProgressIndicator());
                   }
                   if (state is PlanPlacesLoaded) {
                     return ListView.separated(
@@ -70,12 +67,14 @@ class PlanDetailsView extends StatelessWidget {
                                 if (snapshot.connectionState ==
                                     ConnectionState.waiting) {
                                   return Skeletonizer(
-                                      child:
-                                          PlanPlaceItem(place: snapshot.data));
+                                      child: PlanPlaceItem(
+                                    place: snapshot.data,
+                                    miniPlanPlace: state.places[index],
+                                  ));
                                 }
                                 return (PlanPlaceItem(
-                                  place: snapshot.data!,
-                                ));
+                                    place: snapshot.data!,
+                                    miniPlanPlace: state.places[index]));
                               });
                         },
                         separatorBuilder: (context, index) => Padding(

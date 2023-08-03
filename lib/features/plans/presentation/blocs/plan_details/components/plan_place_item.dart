@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:funconnect/features/places/domain/entities/full_place_model.dart';
+import 'package:funconnect/features/plans/domain/entities/mini_plan_place_model.dart';
 import 'package:funconnect/shared/components/app_network_image.dart';
 import 'package:funconnect/shared/constants/app_assets.dart';
+import 'package:funconnect/shared/constants/colors.dart';
+import 'package:intl/intl.dart';
 
 class PlanPlaceItem extends StatelessWidget {
   final FullPlaceModel? place;
-  const PlanPlaceItem({super.key, required this.place});
+  final MiniPlanPlaceModel miniPlanPlace;
+  const PlanPlaceItem(
+      {super.key, required this.place, required this.miniPlanPlace});
 
   @override
   Widget build(BuildContext context) {
@@ -27,12 +32,19 @@ class PlanPlaceItem extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                place?.name ?? "",
-                style: TextStyle(
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.w500,
-                    color: const Color(0xffcccccc)),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    place?.name ?? "",
+                    style: TextStyle(
+                        fontSize: 16.sp,
+                        fontWeight: FontWeight.w500,
+                        color: const Color(0xffcccccc)),
+                  ),
+                  const Text("Edit",
+                      style: TextStyle(fontSize: 14, color: AppColors.primary))
+                ],
               ),
               SizedBox(
                 height: 8.h,
@@ -71,7 +83,8 @@ class PlanPlaceItem extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "03:30 PM",
+                        DateFormat.jm()
+                            .format(DateTime.parse(miniPlanPlace.createdAt)),
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 14.sp,
@@ -80,9 +93,10 @@ class PlanPlaceItem extends StatelessWidget {
                       SizedBox(
                         height: 4.h,
                       ),
-                      const Text(
-                        "Saturday, 12 June, 2023",
-                        style: TextStyle(
+                      Text(
+                        DateFormat("EEEE dd MMMM, yyyy")
+                            .format(DateTime.parse(miniPlanPlace.createdAt)),
+                        style: const TextStyle(
                             color: Color(0xff999999),
                             fontWeight: FontWeight.w400),
                       )
