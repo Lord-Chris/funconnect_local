@@ -172,9 +172,11 @@ class _AddPlanPlaceViewState extends State<AddPlanPlaceView> {
                           firstDate: DateTime.now(),
                           lastDate: DateTime(2024),
                         );
-                        context
-                            .read<PlanAddPlaceBloc>()
-                            .add(DateSelectedEvent(date));
+                        if (date != null) {
+                          context
+                              .read<PlanAddPlaceBloc>()
+                              .add(DateSelectedEvent(date));
+                        }
                       },
                       child: Container(
                         width: double.infinity,

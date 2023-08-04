@@ -7,27 +7,31 @@ class MiniPlanPlaceModel extends Equatable {
   final String placeId;
   final String miniPlanId;
   final String createdAt;
+  final String dateTime;
   const MiniPlanPlaceModel({
     required this.id,
     required this.placeId,
     required this.miniPlanId,
     required this.createdAt,
+    required this.dateTime,
   });
 
   @override
-  List<Object> get props => [id, placeId, miniPlanId];
+  List<Object> get props => [id, placeId, miniPlanId, createdAt, dateTime];
 
   MiniPlanPlaceModel copyWith({
     String? id,
     String? placeId,
     String? miniPlanId,
     String? createdAt,
+    String? dateTime,
   }) {
     return MiniPlanPlaceModel(
       id: id ?? this.id,
       placeId: placeId ?? this.placeId,
       miniPlanId: miniPlanId ?? this.miniPlanId,
       createdAt: createdAt ?? this.createdAt,
+      dateTime: dateTime ?? this.dateTime,
     );
   }
 
@@ -38,6 +42,7 @@ class MiniPlanPlaceModel extends Equatable {
     result.addAll({'place_id': placeId});
     result.addAll({'mini_plan_id': miniPlanId});
     result.addAll({'created_at': createdAt});
+    result.addAll({'date_time': dateTime});
 
     return result;
   }
@@ -48,6 +53,7 @@ class MiniPlanPlaceModel extends Equatable {
       placeId: map['place_id'] ?? '',
       miniPlanId: map['mini_plan_id'] ?? '',
       createdAt: map['created_at'] ?? '',
+      dateTime: map['date_time'] ?? '',
     );
   }
 

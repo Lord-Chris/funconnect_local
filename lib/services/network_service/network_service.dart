@@ -100,6 +100,7 @@ class NetworkService extends INetworkService {
       if (headers != null) {
         _headers.addAll(headers);
       }
+      Logger().i("Set date: $body");
       final res = await _dio.post(
         url,
         data: body,

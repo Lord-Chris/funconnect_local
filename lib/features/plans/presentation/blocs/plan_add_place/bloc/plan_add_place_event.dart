@@ -20,7 +20,7 @@ class MapClickedEvent extends PlanAddPlaceEvent {
 }
 
 class DateSelectedEvent extends PlanAddPlaceEvent {
-  final DateTime? date;
+  final DateTime date;
   const DateSelectedEvent(this.date);
 
   @override

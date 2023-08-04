@@ -15,6 +15,9 @@ class PlanPlaceItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var dateTime =
+        DateFormat("yyyy-MM-dd HH:mm:ss").parse(miniPlanPlace.dateTime, true);
+
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -83,8 +86,7 @@ class PlanPlaceItem extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        DateFormat.jm()
-                            .format(DateTime.parse(miniPlanPlace.createdAt)),
+                        DateFormat.jm().format(dateTime.toLocal()),
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 14.sp,
@@ -95,7 +97,7 @@ class PlanPlaceItem extends StatelessWidget {
                       ),
                       Text(
                         DateFormat("EEEE dd MMMM, yyyy")
-                            .format(DateTime.parse(miniPlanPlace.createdAt)),
+                            .format(dateTime.toLocal()),
                         style: const TextStyle(
                             color: Color(0xff999999),
                             fontWeight: FontWeight.w400),
