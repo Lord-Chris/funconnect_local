@@ -5,6 +5,7 @@ import 'package:funconnect/features/places/domain/entities/place_model.dart';
 import 'package:funconnect/features/places/presentation/add_place_to_plan/bloc/add_place_to_plan_bloc.dart';
 import 'package:funconnect/features/places/presentation/add_place_to_plan/components/plans_list_items.dart';
 import 'package:funconnect/features/plans/presentation/components/empty_plans_view.dart';
+import 'package:funconnect/shared/components/custom_button.dart';
 import 'package:funconnect/shared/constants/colors.dart';
 
 class AddPlaceToPlan extends StatelessWidget {
@@ -81,9 +82,23 @@ class AddPlaceToPlan extends StatelessWidget {
           }, builder: (context, state) {
             return context.watch<AddPlaceToPlanBloc>().selectedPlans.isEmpty
                 ? const SizedBox()
-                : Text(
-                    "selected plans: ${context.watch<AddPlaceToPlanBloc>().selectedPlans.length} and state is ${state.toString()}");
-          })
+                : AppButton(
+                    onTap: () {
+                      context.read<AddPlaceToPlanBloc>().add(
+                          AddPlaceToPlaButtonClickedEvent(
+                              place: place,
+                              selectedPlans: context
+                                  .watch<AddPlaceToPlanBloc>()
+                                  .selectedPlans));
+                    },
+                    borderRadius: 8,
+                    label:
+                        "Add ${place.name} to plan (${context.watch<AddPlaceToPlanBloc>().selectedPlans.length})",
+                  );
+          }),
+          SizedBox(
+            height: 16.h,
+          )
         ]),
       ),
     );

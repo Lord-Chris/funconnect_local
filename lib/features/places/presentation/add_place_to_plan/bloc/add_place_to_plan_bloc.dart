@@ -7,6 +7,8 @@ import 'package:funconnect/features/plans/domain/entities/mini_plan_model.dart';
 import 'package:funconnect/features/plans/domain/usecases/fetch_mini_plans.dart';
 import 'package:logger/logger.dart';
 
+import '../../../domain/entities/place_model.dart';
+
 part 'add_place_to_plan_event.dart';
 part 'add_place_to_plan_state.dart';
 
@@ -17,6 +19,7 @@ class AddPlaceToPlanBloc
     on<LoadPlansListEvent>(_loadPlansList);
     on<AddSelectionEvent>(_addSelection);
     on<RemoveSelectionEvent>(_removeSelection);
+    on<AddPlaceToPlaButtonClickedEvent>(_addPlaceToPlaButtonClicked);
   }
 
   List<MiniPlanModel> selectedPlans = [];
@@ -47,5 +50,11 @@ class AddPlaceToPlanBloc
     emit(SelectionLoadingState());
     selectedPlans.remove(event.plan);
     emit(SelectionMadeState(selectedPlans));
+  }
+
+  FutureOr<void> _addPlaceToPlaButtonClicked(
+      AddPlaceToPlaButtonClickedEvent event,
+      Emitter<AddPlaceToPlanState> emit) {
+    emit(AddPlaceToPlanLoading());
   }
 }
