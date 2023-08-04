@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:funconnect/shared/components/custom_button.dart';
+import 'package:intl/intl.dart';
 
-class DateAndTimeDialog extends StatelessWidget {
+class DateAndTimeDialog extends StatefulWidget {
   const DateAndTimeDialog({super.key});
 
+  @override
+  State<DateAndTimeDialog> createState() => _DateAndTimeDialogState();
+}
+
+class _DateAndTimeDialogState extends State<DateAndTimeDialog> {
+  DateTime? selectedDate;
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -44,7 +51,11 @@ class DateAndTimeDialog extends StatelessWidget {
                             firstDate: DateTime.now(),
                             lastDate: DateTime(2024),
                           );
-                          if (date != null) {}
+                          if (date != null) {
+                            setState(() {
+                              selectedDate = date;
+                            });
+                          }
                         },
                         child: Container(
                           width: double.infinity,
@@ -69,6 +80,17 @@ class DateAndTimeDialog extends StatelessWidget {
                           context: context,
                           initialTime: TimeOfDay.now(),
                         );
+
+                        if (time != null) {
+                          setState(() {
+                            selectedDate = DateTime(
+                                selectedDate?.year ?? DateTime.now().year,
+                                selectedDate?.month ?? DateTime.now().month,
+                                selectedDate?.day ?? DateTime.now().day,
+                                time.hour,
+                                time.minute);
+                          });
+                        }
                       },
                       child: Container(
                           decoration: BoxDecoration(
@@ -77,7 +99,11 @@ class DateAndTimeDialog extends StatelessWidget {
                           child: Padding(
                               padding: EdgeInsets.symmetric(
                                   vertical: 16.h, horizontal: 16.w),
-                              child: Text("Time",
+                              child: Text(
+                                  selectedDate == null
+                                      ? "Time"
+                                      : DateFormat("hh:mm a")
+                                          .format(selectedDate!),
                                   style: TextStyle(
                                       fontSize: 14.sp, color: Colors.white)))),
                     ),

@@ -34,3 +34,19 @@ class AddPlaceToPlaButtonClickedEvent extends AddPlaceToPlanEvent {
   const AddPlaceToPlaButtonClickedEvent(
       {required this.place, required this.selectedPlans});
 }
+
+class DateSelectedEvent extends AddPlaceToPlanEvent {
+  final DateTime date;
+  const DateSelectedEvent(this.date);
+
+  @override
+  List<Object> get props => [];
+}
+
+class TimeSelectedEvent extends AddPlaceToPlanEvent {
+  final TimeOfDay? time;
+  const TimeSelectedEvent(this.time);
+
+  @override
+  List<Object> get props => [];
+}

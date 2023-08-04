@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:funconnect/core/app/_app.dart';
 import 'package:funconnect/core/usecases/usecase.dart';
@@ -23,11 +24,15 @@ class AddPlaceToPlanBloc
     on<AddSelectionEvent>(_addSelection);
     on<RemoveSelectionEvent>(_removeSelection);
     on<AddPlaceToPlaButtonClickedEvent>(_addPlaceToPlaButtonClicked);
+    on<DateSelectedEvent>(_dateSelected);
+    on<TimeSelectedEvent>(_timeSelected);
   }
 
   List<MiniPlanModel> selectedPlans = [];
 
   final _dialogAndSheetService = locator<IDialogAndSheetService>();
+
+  DateTime? selectedDate;
 
   FutureOr<void> _loadPlansList(
       LoadPlansListEvent event, Emitter<AddPlaceToPlanState> emit) async {
@@ -60,5 +65,24 @@ class AddPlaceToPlanBloc
       Emitter<AddPlaceToPlanState> emit) {
     emit(AddPlaceToPlanLoading());
     _dialogAndSheetService.showAppDialog(const DateAndTimeDialog());
+  }
+
+  FutureOr<void> _dateSelected(
+      DateSelectedEvent event, Emitter<AddPlaceToPlanState> emit) {
+    selectedDate = event.date;
+    emit(DateSelectedState(selectedDate ?? DateTime.now()));
+  }
+
+  FutureOr<void> _timeSelected(
+      TimeSelectedEvent event, Emitter<AddPlaceToPlanState> emit) {
+    DateTime? date;
+    if (selectedDate == null) {
+      date = DateTime.now();
+    } else {
+      date = selectedDate;
+    }
+    selectedDate = DateTime(date!.year, date.month, date.day,
+        event.time?.hour ?? date.hour, event.time?.minute ?? date.minute);
+    emit(TimeSelectedState(selectedDate ?? DateTime.now()));
   }
 }

@@ -34,3 +34,19 @@ class SelectionMadeState extends AddPlaceToPlanState {
 }
 
 class SelectionLoadingState extends AddPlaceToPlanState {}
+
+class DateSelectedState extends AddPlaceToPlanState {
+  final DateTime date;
+  const DateSelectedState(this.date);
+
+  @override
+  List<Object> get props => [date];
+}
+
+class TimeSelectedState extends AddPlaceToPlanState {
+  final DateTime time;
+  const TimeSelectedState(this.time);
+
+  @override
+  List<Object> get props => [time];
+}
