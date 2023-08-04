@@ -28,7 +28,7 @@ class RemoveSelectionEvent extends AddPlaceToPlanEvent {
 }
 
 class AddPlaceToPlaButtonClickedEvent extends AddPlaceToPlanEvent {
-  final PlaceModel place;
+  final FullPlaceModel place;
   final List<MiniPlanModel> selectedPlans;
 
   const AddPlaceToPlaButtonClickedEvent(

@@ -53,7 +53,13 @@ class _DateAndTimeDialogState extends State<DateAndTimeDialog> {
                           );
                           if (date != null) {
                             setState(() {
-                              selectedDate = date;
+                              selectedDate = DateTime(
+                                  date.year,
+                                  date.month,
+                                  date.day,
+                                  selectedDate?.hour ?? DateTime.now().hour,
+                                  selectedDate?.minute ??
+                                      DateTime.now().minute);
                             });
                           }
                         },
@@ -66,7 +72,10 @@ class _DateAndTimeDialogState extends State<DateAndTimeDialog> {
                               padding: EdgeInsets.symmetric(
                                   vertical: 16.h, horizontal: 16.w),
                               child: Text(
-                                "Date",
+                                selectedDate == null
+                                    ? "Date"
+                                    : DateFormat("dd-MM-yyyy")
+                                        .format(selectedDate!),
                                 style: TextStyle(
                                     fontSize: 14.sp, color: Colors.white),
                               )),
@@ -115,7 +124,9 @@ class _DateAndTimeDialogState extends State<DateAndTimeDialog> {
                 AppButton(
                   borderRadius: 8.r,
                   label: "Continue",
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pop(context, selectedDate);
+                  },
                 )
               ]),
         ),

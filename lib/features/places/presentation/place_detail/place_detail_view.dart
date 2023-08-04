@@ -46,15 +46,23 @@ class PlaceDetailView extends HookWidget {
                   children: [
                     _ImageSection(place: place),
                     Spacing.vertRegular(),
-                    AppButton(
-                      label: "Add to plan",
-                      borderRadius: 8,
-                      onTap: () {
-                        context
-                            .read<PlaceDetailBloc>()
-                            .add(AddPlaceToPlanEvent(place));
-                      },
-                    ),
+                    Builder(builder: (context) {
+                      final state = context.watch<PlaceDetailBloc>().state;
+
+                      if (state is PlaceDetailIdleState) {
+                        return AppButton(
+                          label: "Add to plan",
+                          borderRadius: 8,
+                          onTap: () {
+                            context
+                                .read<PlaceDetailBloc>()
+                                .add(AddPlaceToPlanEvent(state.place));
+                          },
+                        );
+                      }
+
+                      return const SizedBox();
+                    }),
                     Spacing.vertRegular(),
                     InfoSection(place: place),
                     const ReviewSection(),

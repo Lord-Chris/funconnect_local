@@ -16,6 +16,7 @@ import 'package:funconnect/features/dashboard/presentation/notifications/notific
 import 'package:funconnect/features/events/domain/entities/event_model.dart';
 import 'package:funconnect/features/events/presentation/views/booking_view.dart';
 import 'package:funconnect/features/events/presentation/views/checkout_view.dart';
+import 'package:funconnect/features/places/domain/entities/full_place_model.dart';
 import 'package:funconnect/features/places/domain/entities/place_model.dart';
 
 import 'package:funconnect/features/places/presentation/category_detail/bloc/category_detail_bloc.dart';
@@ -193,7 +194,7 @@ class Routes {
         );
 
       case addPlaceToPlanRoute:
-        final place = settings.arguments as PlaceModel;
+        final place = settings.arguments as FullPlaceModel;
         return _registerBlocView(
           view: AddPlaceToPlan(place: place),
           bloc: AddPlaceToPlanBloc(),

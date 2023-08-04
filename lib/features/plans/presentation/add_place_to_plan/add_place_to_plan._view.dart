@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:funconnect/features/places/domain/entities/place_model.dart';
+import 'package:funconnect/features/places/domain/entities/full_place_model.dart';
 import 'package:funconnect/features/plans/presentation/add_place_to_plan/bloc/add_place_to_plan_bloc.dart';
 import 'package:funconnect/features/plans/presentation/add_place_to_plan/components/plans_list_items.dart';
 
@@ -10,7 +10,7 @@ import 'package:funconnect/shared/components/custom_button.dart';
 import 'package:funconnect/shared/constants/colors.dart';
 
 class AddPlaceToPlan extends StatelessWidget {
-  final PlaceModel place;
+  final FullPlaceModel place;
   const AddPlaceToPlan({super.key, required this.place});
 
   @override

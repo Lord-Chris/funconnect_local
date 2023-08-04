@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:funconnect/core/models/_models.dart';
+import 'package:funconnect/features/places/domain/entities/full_place_model.dart';
 import 'package:funconnect/features/places/domain/entities/place_location_model.dart';
 import 'package:funconnect/features/places/domain/entities/place_model.dart';
 import 'package:funconnect/features/places/domain/entities/review_model.dart';
@@ -88,7 +89,7 @@ class BookRideEvent extends PlaceDetailEvent {}
 class BookmarkTapEvent extends PlaceDetailEvent {}
 
 class AddPlaceToPlanEvent extends PlaceDetailEvent {
-  final PlaceModel place;
+  final FullPlaceModel place;
   AddPlaceToPlanEvent(this.place);
 
   @override

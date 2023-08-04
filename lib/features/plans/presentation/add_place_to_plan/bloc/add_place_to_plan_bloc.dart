@@ -5,13 +5,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:funconnect/core/app/_app.dart';
 import 'package:funconnect/core/usecases/usecase.dart';
-import 'package:funconnect/features/places/domain/entities/place_model.dart';
 import 'package:funconnect/features/plans/domain/entities/mini_plan_model.dart';
+import 'package:funconnect/features/plans/domain/params/add_place.dart';
+import 'package:funconnect/features/plans/domain/usecases/add_plan_place_usecase.dart';
 import 'package:funconnect/features/plans/domain/usecases/fetch_mini_plans.dart';
 import 'package:funconnect/services/dialog_and_sheet_service/i_dialog_and_sheet_service.dart';
+import 'package:funconnect/shared/dialogs/add_plaace_to_plan_confirmation_dialog.dart';
 
 import 'package:funconnect/shared/dialogs/date_and_time_dialog.dart';
 import 'package:logger/logger.dart';
+
+import '../../../../places/domain/entities/full_place_model.dart';
 
 part 'add_place_to_plan_event.dart';
 part 'add_place_to_plan_state.dart';
@@ -62,9 +66,24 @@ class AddPlaceToPlanBloc
 
   FutureOr<void> _addPlaceToPlaButtonClicked(
       AddPlaceToPlaButtonClickedEvent event,
-      Emitter<AddPlaceToPlanState> emit) {
+      Emitter<AddPlaceToPlanState> emit) async {
     emit(AddPlaceToPlanLoading());
-    _dialogAndSheetService.showAppDialog(const DateAndTimeDialog());
+    var dateReceived =
+        await _dialogAndSheetService.showAppDialog(const DateAndTimeDialog());
+    Logger().i("Date Received $dateReceived");
+    if (dateReceived != null) {
+      Future.forEach(event.selectedPlans, (element) async {
+        await AddPlanPlaceUsecase().call(AddPlaceParams(
+            placeId: event.place.id,
+            miniPlanId: element.id,
+            date: dateReceived ?? DateTime.now()));
+      });
+    }
+    _dialogAndSheetService.showAppDialog(AddPlaceToPlanConfirmation(
+      place: event.place,
+      plans: event.selectedPlans,
+      selectedDate: dateReceived,
+    ));
   }
 
   FutureOr<void> _dateSelected(
