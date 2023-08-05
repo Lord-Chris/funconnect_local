@@ -50,3 +50,5 @@ class TimeSelectedState extends AddPlaceToPlanState {
   @override
   List<Object> get props => [time];
 }
+
+class SelectDateTimeState extends AddPlaceToPlanState {}
