@@ -96,7 +96,7 @@ class AddPlaceToPlan extends StatelessWidget {
                   : AppButton(
                       onTap: () {
                         context.read<AddPlaceToPlanBloc>().add(
-                            AddPlaceToPlaButtonClickedEvent(context,
+                            AddPlaceToPlaButtonClickedEvent(
                                 place: place,
                                 selectedPlans: context
                                     .read<AddPlaceToPlanBloc>()
