@@ -40,7 +40,9 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
   FutureOr<void> _onTabTapEvent(
     TabTapEvent event,
     Emitter<DashboardState> emit,
-  ) {
+  ) async {
+    Logger().i("dashboard tab tap event with index ${event.index}");
+
     emit(DashboardIdleState(event.index));
   }
 

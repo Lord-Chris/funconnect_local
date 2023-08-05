@@ -5,8 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:funconnect/core/app/_app.dart';
 import 'package:funconnect/core/usecases/usecase.dart';
-import 'package:funconnect/features/dashboard/presentation/dashboard/bloc/dashboard_bloc.dart';
-import 'package:funconnect/features/dashboard/presentation/dashboard/bloc/dashboard_event.dart';
 import 'package:funconnect/features/plans/domain/entities/mini_plan_model.dart';
 import 'package:funconnect/features/plans/domain/params/add_place.dart';
 import 'package:funconnect/features/plans/domain/usecases/add_plan_place_usecase.dart';
@@ -84,24 +82,23 @@ class AddPlaceToPlanBloc
             date: dateReceived.millisecondsSinceEpoch ??
                 DateTime.now().millisecondsSinceEpoch));
         Logger().i("Added ${event.place.name} to plan ${element.name}");
-      }).then((value) async {
-        await _dialogAndSheetService.showAppDialog(AddPlaceToPlanConfirmation(
-          place: event.place,
-          plans: event.selectedPlans,
-          selectedDate: dateReceived,
-        ));
-        final String returnValue =
-            await _dialogAndSheetService.showAppDialog(AddPlamToPlaceDoneDialog(
-          selectedPlace: event.place,
-        ));
-
-        if (returnValue == "view") {
-          DashboardBloc().add(TabTapEvent(4));
-        }
-        if (returnValue == "description") {
-          _naviagtionService.back();
-        }
       });
+      await _dialogAndSheetService.showAppDialog(AddPlaceToPlanConfirmation(
+        place: event.place,
+        plans: event.selectedPlans,
+        selectedDate: dateReceived,
+      ));
+      final String returnValue =
+          await _dialogAndSheetService.showAppDialog(AddPlamToPlaceDoneDialog(
+        selectedPlace: event.place,
+      ));
+
+      if (returnValue == "view") {
+        emit(AddPlaceToPlanSuccessState());
+      }
+      if (returnValue == "description") {
+        _naviagtionService.back();
+      }
     }
   }
 

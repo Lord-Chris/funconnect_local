@@ -51,4 +51,4 @@ class TimeSelectedState extends AddPlaceToPlanState {
   List<Object> get props => [time];
 }
 
-class SelectDateTimeState extends AddPlaceToPlanState {}
+class AddPlaceToPlanSuccessState extends AddPlaceToPlanState {}

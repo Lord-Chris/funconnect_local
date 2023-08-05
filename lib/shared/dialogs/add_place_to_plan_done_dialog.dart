@@ -1,10 +1,5 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:funconnect/features/dashboard/presentation/dashboard/bloc/dashboard_bloc.dart';
-import 'package:funconnect/features/dashboard/presentation/dashboard/bloc/dashboard_event.dart';
 import 'package:funconnect/features/places/domain/entities/full_place_model.dart';
 import 'package:funconnect/shared/components/custom_button.dart';
 import 'package:funconnect/shared/constants/colors.dart';
@@ -61,9 +56,7 @@ class AddPlamToPlaceDoneDialog extends StatelessWidget {
                 label: "View Plans",
                 labelColor: Colors.white,
                 onTap: () {
-                  context
-                      .read<DashboardBloc>()
-                      .add(TabTapEvent(!Platform.isIOS ? 4 : 3));
+                  Navigator.pop(context, "view");
                 },
                 borderRadius: 8,
                 buttonColor: const Color(0xff202020),
