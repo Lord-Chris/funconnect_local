@@ -50,8 +50,9 @@ class WelcomeView extends HookWidget {
                             Text(
                               state.isFirstTime ? "Welcome!" : "Hello again!",
                               style: AppTextStyles.medium24.copyWith(
-                                color: Colors.white,
-                              ),
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onBackground),
                             ),
                             Spacing.vertSmall(),
                             Text(

@@ -9,6 +9,8 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:funconnect/core/app/_app.dart';
+import 'package:funconnect/core/themes/dark_theme.dart';
+import 'package:funconnect/core/themes/light_theme.dart';
 import 'package:funconnect/core/utils/failure_handler.dart';
 import 'package:funconnect/features/authentication/presentation/welcome/bloc/welcome_bloc.dart';
 import 'package:funconnect/features/authentication/presentation/welcome/welcome_view.dart';
@@ -74,7 +76,9 @@ class MyApp extends StatelessWidget {
         builder: (context, _) {
           context.read<SplashBloc>().add(InitializeSplashEvent());
           return MaterialApp(
-            theme: AppTheme.theme,
+            themeMode: ThemeMode.system,
+            theme: LightTheme.theme,
+            darkTheme: DarkTheme.theme,
             title: AppConstants.appName,
             debugShowCheckedModeBanner: false,
             navigatorKey: NavigationService.navigatorKey,
