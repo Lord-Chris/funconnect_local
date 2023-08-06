@@ -104,9 +104,8 @@ class AppTextField extends StatelessWidget {
             width: 1,
           ),
         ),
-        labelStyle: AppTextStyles.regular14.copyWith(
-          color: AppColors.white,
-        ),
+        labelStyle: AppTextStyles.regular14
+            .copyWith(color: Theme.of(context).colorScheme.onBackground),
         hintStyle: AppTextStyles.regular14.copyWith(
           color: AppColors.gray333,
           fontWeight: FontWeight.w300,

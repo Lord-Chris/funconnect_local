@@ -21,6 +21,8 @@ class WelcomeView extends HookWidget {
   Widget build(BuildContext context) {
     final controller = useTextEditingController();
     final formKey = GlobalKey<FormState>();
+    final bool isDarkMode =
+        MediaQuery.of(context).platformBrightness == Brightness.dark;
 
     return BlocBuilder<WelcomeBloc, WelcomeState>(
       builder: (context, state) {
@@ -61,7 +63,8 @@ class WelcomeView extends HookWidget {
                                   : "Please enter email ID associated with your account",
                               style: AppTextStyles.dynamic(
                                 14,
-                                color: Colors.white,
+                                color:
+                                    Theme.of(context).colorScheme.onBackground,
                                 weight: FontWeight.w300,
                               ),
                             ),
@@ -74,7 +77,9 @@ class WelcomeView extends HookWidget {
                                       .read<WelcomeBloc>()
                                       .add(GoogleSignInEvent()),
                                   child: CircleAvatar(
-                                    backgroundColor: Colors.white,
+                                    backgroundColor: isDarkMode
+                                        ? AppColors.white
+                                        : AppColors.wGreyF1,
                                     radius: 30,
                                     child: SvgPicture.asset(
                                         AppAssets.googleIconSvg),
@@ -88,7 +93,9 @@ class WelcomeView extends HookWidget {
                                         .add(AppleSignInEvent()),
                                     child: CircleAvatar(
                                       radius: 30,
-                                      backgroundColor: Colors.white,
+                                      backgroundColor: isDarkMode
+                                          ? AppColors.white
+                                          : AppColors.wGreyF1,
                                       child: SvgPicture.asset(
                                           AppAssets.appleIconSvg),
                                     ),
@@ -104,9 +111,10 @@ class WelcomeView extends HookWidget {
                                 children: [
                                   Expanded(
                                     child: Container(
-                                      height: 0.5,
-                                      color: Colors.white,
-                                    ),
+                                        height: 0.5,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .onBackground),
                                   ),
                                   const SizedBox(width: 11),
                                   Padding(
@@ -117,7 +125,9 @@ class WelcomeView extends HookWidget {
                                           ? "Or with email ID"
                                           : "Or signin with e-mail",
                                       style: AppTextStyles.regular14.copyWith(
-                                        color: Colors.white,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .onBackground,
                                       ),
                                     ),
                                   ),
@@ -125,13 +135,10 @@ class WelcomeView extends HookWidget {
                                   Expanded(
                                     child: Container(
                                       height: 0.5,
-                                      color: Colors.white,
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onBackground,
                                     ),
-                                  ),
-                                  const Divider(
-                                    height: 5.0,
-                                    thickness: 5.0,
-                                    color: Colors.white,
                                   ),
                                 ],
                               ),
@@ -155,20 +162,30 @@ class WelcomeView extends HookWidget {
                               Text.rich(
                                 TextSpan(
                                   children: [
-                                    const TextSpan(
+                                    TextSpan(
                                         text:
-                                            "By registering, you agree to our "),
+                                            "By registering, you agree to our ",
+                                        style: TextStyle(
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .onBackground)),
                                     TextSpan(
                                       text: "Terms & Conditions",
                                       style: AppTextStyles.regular14.copyWith(
                                         color: AppColors.primary,
                                       ),
                                       recognizer: TapGestureRecognizer()
-                                        ..onTap = () => context
-                                            .read<WelcomeBloc>()
-                                            .add(TandCTapEvent()),
+                                        ..onTap = () =>
+                                            context.read<WelcomeBloc>().add(
+                                                  TandCTapEvent(),
+                                                ),
                                     ),
-                                    const TextSpan(text: " and "),
+                                    TextSpan(
+                                        text: " and ",
+                                        style: TextStyle(
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .onBackground)),
                                     TextSpan(
                                       text: "Privacy policy",
                                       style: AppTextStyles.regular14.copyWith(
