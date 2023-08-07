@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import 'package:funconnect/features/plans/presentation/components/empty_plans_view.dart';
 import 'package:funconnect/features/plans/presentation/plan_list/bloc/plan_list_bloc.dart';
+import 'package:funconnect/shared/components/app_loader.dart';
 
 class PlansListView extends StatelessWidget {
   const PlansListView({super.key});
@@ -43,7 +43,7 @@ class PlansListView extends StatelessWidget {
             }
             if (state is PlanListLoadingState) {
               return const Center(
-                child: CircularProgressIndicator(),
+                child: AppLoader(),
               );
             }
             if (state is PlanListFetchedState) {
