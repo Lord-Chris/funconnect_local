@@ -76,7 +76,7 @@ class AppTextField extends StatelessWidget {
       onEditingComplete:
           onEditingComplete ?? () => FocusScope.of(context).nextFocus(),
       style: AppTextStyles.regular14.copyWith(
-        color: AppColors.white,
+        color: Theme.of(context).colorScheme.onBackground,
       ),
       decoration: InputDecoration(
         hintText: hint,

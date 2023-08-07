@@ -60,8 +60,9 @@ class _VerifyEmailViewState extends State<VerifyEmailView> {
                 showBackButton: true,
                 topIcon: SvgPicture.asset(
                   AppAssets.emailIconSvg,
-                  colorFilter:
-                      const ColorFilter.mode(AppColors.white, BlendMode.srcIn),
+                  colorFilter: ColorFilter.mode(
+                      Theme.of(context).colorScheme.onBackground,
+                      BlendMode.srcIn),
                 ),
                 children: [
                   Form(
@@ -81,7 +82,9 @@ class _VerifyEmailViewState extends State<VerifyEmailView> {
                                     ? AppText.aTAuthVerifyEmailIdText
                                     : "Enter OTP",
                                 style: AppTextStyles.medium24.copyWith(
-                                  color: AppColors.white,
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onBackground,
                                 ),
                               ),
                               const SizedBox(height: 10),
@@ -95,7 +98,9 @@ class _VerifyEmailViewState extends State<VerifyEmailView> {
                                       TextSpan(
                                         text: "We’ve sent a code to ",
                                         style: AppTextStyles.light14.copyWith(
-                                          color: AppColors.white,
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .onBackground,
                                         ),
                                       ),
                                     if (!context
@@ -104,7 +109,9 @@ class _VerifyEmailViewState extends State<VerifyEmailView> {
                                       TextSpan(
                                         text: "We’ve sent an OTP to ",
                                         style: AppTextStyles.light14.copyWith(
-                                          color: AppColors.white,
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .onBackground,
                                         ),
                                       ),
                                     TextSpan(
@@ -115,7 +122,9 @@ class _VerifyEmailViewState extends State<VerifyEmailView> {
                                                 .read<VerifyEmailBloc>()
                                                 .isFirstTime
                                             ? AppColors.primary
-                                            : AppColors.white,
+                                            : Theme.of(context)
+                                                .colorScheme
+                                                .onBackground,
                                       ),
                                     ),
                                     if (context
@@ -125,7 +134,9 @@ class _VerifyEmailViewState extends State<VerifyEmailView> {
                                         text:
                                             "\nCheck your spam folder, refresh or try again with\nanother email",
                                         style: AppTextStyles.light14.copyWith(
-                                          color: AppColors.white,
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .onBackground,
                                         ),
                                       ),
                                   ],
@@ -145,7 +156,11 @@ class _VerifyEmailViewState extends State<VerifyEmailView> {
                                   validator: context.validateOtp,
                                   cursorColor: AppColors.ash,
                                   obscureText: !true,
-                                  textStyle: AppTextStyles.bold20,
+                                  textStyle: AppTextStyles.bold20.copyWith(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .onBackground,
+                                  ),
                                   obscuringCharacter: "*",
                                   backgroundColor: AppColors.transparent,
                                   enableActiveFill: true,
@@ -213,7 +228,9 @@ class _VerifyEmailViewState extends State<VerifyEmailView> {
                                                 AppText.aTAuthDNReceiveCodeText,
                                             style:
                                                 AppTextStyles.light12.copyWith(
-                                              color: AppColors.white,
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .onBackground,
                                             ),
                                           ),
                                           TextSpan(
