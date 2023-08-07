@@ -42,7 +42,7 @@ class NotificationService extends INotificationService {
           ),
         );
       }
-      _logger.d("Notification Entered", event.notification.body);
+
       event.complete(event.notification);
     });
 

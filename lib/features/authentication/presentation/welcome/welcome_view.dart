@@ -15,15 +15,21 @@ import 'package:funconnect/shared/constants/_constants.dart';
 
 import '../../../../shared/components/app_black_modal.dart';
 
-class WelcomeView extends HookWidget {
+class WelcomeView extends StatefulHookWidget {
   const WelcomeView({Key? key}) : super(key: key);
+
+  @override
+  State<WelcomeView> createState() => _WelcomeViewState();
+}
+
+class _WelcomeViewState extends State<WelcomeView> {
+  final formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     final controller = useTextEditingController();
-    final formKey = GlobalKey<FormState>();
     final bool isDarkMode =
         MediaQuery.of(context).platformBrightness == Brightness.dark;
-
     return BlocBuilder<WelcomeBloc, WelcomeState>(
       builder: (context, state) {
         return Scaffold(
