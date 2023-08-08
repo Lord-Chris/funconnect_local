@@ -39,6 +39,8 @@ class _HomeViewState extends State<HomeView> {
 
   @override
   Widget build(BuildContext context) {
+    final bool isDarkMode =
+        MediaQuery.of(context).platformBrightness == Brightness.dark;
     return Scaffold(
       appBar: AppBar(
         titleSpacing: 10,
@@ -112,9 +114,9 @@ class _HomeViewState extends State<HomeView> {
         child: Column(
           children: [
             Spacing.vertSmall(),
-            const Divider(
-              color: AppColors.secondary800,
-              height: 1,
+            Divider(
+              color: isDarkMode ? AppColors.secondary800 : AppColors.wGreyF8,
+              height: 1.h,
             ),
             Expanded(
               child: BlocBuilder<HomeBloc, HomeState>(
@@ -153,9 +155,11 @@ class _HomeViewState extends State<HomeView> {
                           );
                         },
                       ),
-                      const Divider(
-                        color: AppColors.secondary800,
-                        height: 1,
+                      Divider(
+                        color: isDarkMode
+                            ? AppColors.secondary800
+                            : AppColors.wGreyF8,
+                        height: 1.h,
                       ),
                       Spacing.vertSmall(),
                       Expanded(

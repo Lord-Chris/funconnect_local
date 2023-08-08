@@ -56,6 +56,8 @@ class AppTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bool isDarkMode =
+        MediaQuery.of(context).platformBrightness == Brightness.dark;
     return TextFormField(
       controller: controller,
       initialValue: initialValue,
@@ -88,32 +90,32 @@ class AppTextField extends StatelessWidget {
         floatingLabelBehavior:
             floatingLabelBehavior ?? FloatingLabelBehavior.always,
         floatingLabelStyle: AppTextStyles.regular14.copyWith(
-          color: AppColors.white,
+          color: Theme.of(context).colorScheme.onBackground,
         ),
         border: OutlineInputBorder(
           borderRadius: borderRadius ?? BorderRadius.circular(14),
-          borderSide: const BorderSide(
-            color: AppColors.gray333,
+          borderSide: BorderSide(
+            color: !isDarkMode ? AppColors.wGrey84 : AppColors.gray333,
             width: 1,
           ),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(14),
-          borderSide: const BorderSide(
-            color: AppColors.gray333,
+          borderSide: BorderSide(
+            color: !isDarkMode ? AppColors.wGrey84 : AppColors.gray333,
             width: 1,
           ),
         ),
         labelStyle: AppTextStyles.regular14
             .copyWith(color: Theme.of(context).colorScheme.onBackground),
         hintStyle: AppTextStyles.regular14.copyWith(
-          color: AppColors.gray333,
+          color: !isDarkMode ? AppColors.wGrey84 : AppColors.gray333,
           fontWeight: FontWeight.w300,
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(14),
-          borderSide: const BorderSide(
-            color: AppColors.gray333,
+          borderSide: BorderSide(
+            color: !isDarkMode ? AppColors.wGrey84 : AppColors.gray333,
             width: 1,
           ),
         ),
