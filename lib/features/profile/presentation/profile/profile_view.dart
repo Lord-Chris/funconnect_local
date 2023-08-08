@@ -27,9 +27,7 @@ class _ProfileViewState extends State<ProfileView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.black,
       appBar: AppBar(
-        backgroundColor: AppColors.black,
         centerTitle: true,
         automaticallyImplyLeading: false,
         elevation: 0,

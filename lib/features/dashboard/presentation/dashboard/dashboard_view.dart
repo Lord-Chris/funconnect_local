@@ -69,7 +69,7 @@ class DashboardView extends StatelessWidget {
               ],
             ),
             bottomNavigationBar: BottomNavigationBar(
-              backgroundColor: AppColors.black,
+              backgroundColor: Theme.of(context).colorScheme.background,
               currentIndex: state.navBarIndex,
               onTap: (index) {
                 if (index == (Platform.isIOS ? 2 : 3)) {

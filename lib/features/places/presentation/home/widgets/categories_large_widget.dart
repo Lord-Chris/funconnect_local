@@ -102,6 +102,9 @@ class HomeCategoriesLargeWidget extends HookWidget {
                                     rating.toString(),
                                     style: AppTextStyles.dynamic(
                                       10,
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onBackground,
                                       weight: FontWeight.w300,
                                     ),
                                   ),

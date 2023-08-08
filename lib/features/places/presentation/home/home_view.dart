@@ -40,7 +40,6 @@ class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.black,
       appBar: AppBar(
         titleSpacing: 10,
         leading: Center(
@@ -63,7 +62,8 @@ class _HomeViewState extends State<HomeView> {
           children: [
             Text(
               "Hi ${context.watch<HomeBloc>().user.username}",
-              style: AppTextStyles.medium20,
+              style: AppTextStyles.medium20
+                  .copyWith(color: Theme.of(context).colorScheme.onBackground),
             ),
             if ((context.watch<HomeBloc>().location?.parsedAddress ?? "")
                 .isNotEmpty) ...[
@@ -100,9 +100,9 @@ class _HomeViewState extends State<HomeView> {
                   context.watch<NotificationBloc>().state.showNotificationBadge,
               smallSize: 10,
               textColor: AppColors.white,
-              child: const Icon(
+              child: Icon(
                 CupertinoIcons.bell_fill,
-                color: AppColors.white,
+                color: Theme.of(context).colorScheme.onBackground,
               ),
             ),
           ),
