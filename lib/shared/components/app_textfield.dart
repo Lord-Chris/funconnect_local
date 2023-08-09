@@ -161,6 +161,8 @@ class AppDropdownField<T extends Object> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bool isDarkMode =
+        MediaQuery.of(context).platformBrightness == Brightness.dark;
     return DropdownButtonFormField<T>(
       items: items.map(
         (T item) {
@@ -182,7 +184,7 @@ class AppDropdownField<T extends Object> extends StatelessWidget {
       ).toList(),
       isExpanded: true,
       onChanged: onChanged,
-      dropdownColor: AppColors.gray333,
+      dropdownColor: isDarkMode ? AppColors.gray333 : AppColors.white,
       value: value,
       focusNode: focusNode,
       validator: validator,
@@ -192,9 +194,7 @@ class AppDropdownField<T extends Object> extends StatelessWidget {
         size: 0,
       ),
       style: AppTextStyles.medium14.copyWith(
-        height: 1.2,
-        color: AppColors.white,
-      ),
+          height: 1.2, color: Theme.of(context).colorScheme.onBackground),
       decoration: InputDecoration(
         hintText: hint,
         labelText: label,
@@ -209,9 +209,8 @@ class AppDropdownField<T extends Object> extends StatelessWidget {
         contentPadding: const EdgeInsets.fromLTRB(16, 15, 16, 15),
         floatingLabelAlignment: FloatingLabelAlignment.start,
         // floatingLabelBehavior: FloatingLabelBehavior.always,
-        floatingLabelStyle: AppTextStyles.regular14.copyWith(
-          color: AppColors.white,
-        ),
+        floatingLabelStyle: AppTextStyles.regular14
+            .copyWith(color: Theme.of(context).colorScheme.onBackground),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(14),
           borderSide: const BorderSide(
@@ -227,16 +226,16 @@ class AppDropdownField<T extends Object> extends StatelessWidget {
           ),
         ),
         labelStyle: AppTextStyles.regular14.copyWith(
-          color: AppColors.white,
+          color: Theme.of(context).colorScheme.onBackground,
         ),
         hintStyle: AppTextStyles.regular14.copyWith(
-          color: AppColors.gray333,
+          color: Theme.of(context).colorScheme.onBackground,
           fontWeight: FontWeight.w300,
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(14),
-          borderSide: const BorderSide(
-            color: AppColors.gray333,
+          borderSide: BorderSide(
+            color: isDarkMode ? AppColors.gray333 : AppColors.black,
             width: 1,
           ),
         ),
