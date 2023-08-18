@@ -11,6 +11,7 @@ import 'package:funconnect/features/plans/presentation/components/friend_icon_wi
 import 'package:funconnect/features/plans/presentation/plan_details/bloc/plan_details_bloc.dart';
 import 'package:funconnect/features/plans/presentation/plan_details/components/plan_place_item.dart';
 import 'package:funconnect/shared/components/custom_button.dart';
+import 'package:funconnect/shared/constants/colors.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 class PlanDetailsView extends StatelessWidget {
@@ -23,7 +24,39 @@ class PlanDetailsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        actions: [
+          Padding(
+            padding: EdgeInsets.only(right: 18.w),
+            child: Container(
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8.r),
+                  color: const Color(0xff202020)),
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
+                child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      const Icon(
+                        Icons.delete_outline_rounded,
+                        color: Color(0xffff224c),
+                      ),
+                      SizedBox(
+                        width: 8.w,
+                      ),
+                      Text(
+                        "Delete Plan",
+                        style: TextStyle(
+                            color: const Color(0xffff224c),
+                            fontSize: 12.sp,
+                            fontWeight: FontWeight.w400),
+                      )
+                    ]),
+              ),
+            ),
+          )
+        ],
+      ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: Column(
