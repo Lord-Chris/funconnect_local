@@ -398,6 +398,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.8.4"
+  flutter_staggered_grid_view:
+    dependency: transitive
+    description:
+      name: flutter_staggered_grid_view
+      sha256: "19e7abb550c96fbfeb546b23f3ff356ee7c59a019a651f8f102a4ba9b7349395"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.7.0"
   flutter_svg:
     dependency: "direct main"
     description:
@@ -452,10 +460,10 @@ packages:
     dependency: "direct main"
     description:
       name: geolocator
-      sha256: "5c23f3613f50586c0bbb2b8f970240ae66b3bd992088cf60dd5ee2e6f7dde3a8"
+      sha256: "9d6eff112971b9f195271834b390fc0e1899a9a6c96225ead72efd5d4aaa80c7"
       url: "https://pub.dev"
     source: hosted
-    version: "9.0.2"
+    version: "10.0.0"
   geolocator_android:
     dependency: transitive
     description:
@@ -492,10 +500,10 @@ packages:
     dependency: transitive
     description:
       name: geolocator_windows
-      sha256: "4f4218f122a6978d0ad655fa3541eea74c67417440b09f0657238810d5af6bdc"
+      sha256: "463045515b08bd83f73e014359c4ad063b902eb3899952cfb784497ae6c6583b"
       url: "https://pub.dev"
     source: hosted
-    version: "0.1.3"
+    version: "0.2.0"
   get_it:
     dependency: "direct main"
     description:
@@ -756,10 +764,10 @@ packages:
     dependency: "direct main"
     description:
       name: infinite_scroll_pagination
-      sha256: "9517328f4e373f08f57dbb11c5aac5b05554142024d6b60c903f3b73476d52db"
+      sha256: b68bce20752fcf36c7739e60de4175494f74e99e9a69b4dd2fe3a1dd07a7f16a
       url: "https://pub.dev"
     source: hosted
-    version: "3.2.0"
+    version: "4.0.0"
   intl:
     dependency: "direct main"
     description:
@@ -940,10 +948,10 @@ packages:
     dependency: "direct main"
     description:
       name: onesignal_flutter
-      sha256: f4e54ad09bbfc2401b5d3e9cda6b31577facf0dd119d282d008df5710f5665d0
+      sha256: "6be8ce195ac167466e202c8370ccdfe36e94375d3d4c3a0bb8fed7f121a3629f"
       url: "https://pub.dev"
     source: hosted
-    version: "3.5.1"
+    version: "5.0.0"
   package_info_plus:
     dependency: transitive
     description:
@@ -1180,10 +1188,10 @@ packages:
     dependency: "direct main"
     description:
       name: skeletonizer
-      sha256: e4129ce8fc9559bbfa35d55f4b213cf19291409316cec31bb348d6b04b239441
+      sha256: "73a4a2a1aa5474550942868f7c4130e9b0170b53daf4a493de9314ee964607fd"
       url: "https://pub.dev"
     source: hosted
-    version: "0.4.0"
+    version: "0.7.0"
   skeletons:
     dependency: "direct main"
     description:
@@ -1502,13 +1510,13 @@ packages:
     source: hosted
     version: "2.5.0"
   webview_flutter_wkwebview:
-    dependency: "direct overridden"
+    dependency: "direct main"
     description:
       name: webview_flutter_wkwebview
-      sha256: ecc9e9ea15216afc5ba3b1f14aa19414ceba526e57b19cebd970bfa91a0f4058
+      sha256: ed749f94ac9e814d04a258a9255cf69cfa4cc6006ff59542aea7fb4590144972
       url: "https://pub.dev"
     source: hosted
-    version: "3.5.0"
+    version: "3.7.3"
   win32:
     dependency: transitive
     description:

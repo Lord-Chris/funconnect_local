@@ -78,4 +78,6 @@ class PlansRemoteDataSource with ApiMixin {
 
     return MiniPlanPlaceModel.fromMap(res.data['data']);
   }
+
+  Future deletePlan() async {}
 }

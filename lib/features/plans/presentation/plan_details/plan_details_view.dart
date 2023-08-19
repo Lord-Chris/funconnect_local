@@ -28,30 +28,33 @@ class PlanDetailsView extends StatelessWidget {
         actions: [
           Padding(
             padding: EdgeInsets.only(right: 18.w),
-            child: Container(
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8.r),
-                  color: const Color(0xff202020)),
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
-                child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      const Icon(
-                        Icons.delete_outline_rounded,
-                        color: Color(0xffff224c),
-                      ),
-                      SizedBox(
-                        width: 8.w,
-                      ),
-                      Text(
-                        "Delete Plan",
-                        style: TextStyle(
-                            color: const Color(0xffff224c),
-                            fontSize: 12.sp,
-                            fontWeight: FontWeight.w400),
-                      )
-                    ]),
+            child: InkWell(
+              child: Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8.r),
+                    color: const Color(0xff202020)),
+                child: Padding(
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
+                  child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        const Icon(
+                          Icons.delete_outline_rounded,
+                          color: Color(0xffff224c),
+                        ),
+                        SizedBox(
+                          width: 8.w,
+                        ),
+                        Text(
+                          "Delete Plan",
+                          style: TextStyle(
+                              color: const Color(0xffff224c),
+                              fontSize: 12.sp,
+                              fontWeight: FontWeight.w400),
+                        )
+                      ]),
+                ),
               ),
             ),
           )

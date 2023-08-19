@@ -34,3 +34,5 @@ class PlanFriendsLoaded extends PlanDetailsState {
   @override
   List<Object> get props => [friends];
 }
+
+class PlanDetailsLoading extends PlanDetailsState {}

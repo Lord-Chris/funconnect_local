@@ -32,3 +32,9 @@ class AddAPlaceClickedEvent extends PlanDetailsEvent {
   @override
   List<Object> get props => [];
 }
+
+class DeletePlanClickedEvent extends PlanDetailsEvent {
+  final MiniPlanModel plan;
+
+  const DeletePlanClickedEvent({required this.plan});
+}

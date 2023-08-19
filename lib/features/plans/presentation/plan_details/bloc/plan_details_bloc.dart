@@ -25,6 +25,7 @@ class PlanDetailsBloc extends Bloc<PlanDetailsEvent, PlanDetailsState> {
     on<PlanPlacesLoad>(_planPlacesLoad);
     on<PlanFriendsLoad>(_planFriendsLoad);
     on<AddAPlaceClickedEvent>(_addAPlaceClicked);
+    on<DeletePlanClickedEvent>(_deletePlanClicked);
   }
   final _navigation = locator<INavigationService>();
 
@@ -68,5 +69,10 @@ class PlanDetailsBloc extends Bloc<PlanDetailsEvent, PlanDetailsState> {
     Logger().i("place details for $placeId");
     List data = await FetchPlaceDetail().call(placeId);
     return data[0];
+  }
+
+  FutureOr<void> _deletePlanClicked(
+      DeletePlanClickedEvent event, Emitter<PlanDetailsState> emit) {
+    emit(PlanDetailsLoading());
   }
 }
