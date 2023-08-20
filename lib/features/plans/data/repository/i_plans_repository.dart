@@ -12,4 +12,5 @@ abstract class IPlansRepository {
   Future<PaginatedData<MiniPlanFriend>> fetchMiniPlanFriends(String planId);
   Future<List<MiniPlanPlaceModel>> fetchMiniPlanPlaces(String planId);
   Future<MiniPlanPlaceModel> addPlace(AddPlaceParams param);
+  Future deletePlan(String id);
 }

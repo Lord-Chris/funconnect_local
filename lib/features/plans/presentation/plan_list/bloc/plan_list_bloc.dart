@@ -48,8 +48,10 @@ class PlanListBloc extends Bloc<PlanListEvent, PlanListState> {
   }
 
   FutureOr<void> _openPlanEvent(
-      OpenPlanEvent event, Emitter<PlanListState> emit) {
-    _navigation.toNamed(Routes.planDetailViewRoute, arguments: event.plan);
+      OpenPlanEvent event, Emitter<PlanListState> emit) async {
+    await _navigation.toNamed(Routes.planDetailViewRoute,
+        arguments: event.plan);
+    add(FetchMiniPlansEvent());
   }
 
   FutureOr<void> _loadMoreEvent(

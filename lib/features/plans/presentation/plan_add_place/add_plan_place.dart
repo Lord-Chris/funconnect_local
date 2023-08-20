@@ -97,9 +97,11 @@ class _AddPlanPlaceViewState extends State<AddPlanPlaceView> {
                                     context: context,
                                     delegate: MySearchDelegate(
                                         state1.homeTrends.places[0].data));
-                                context
-                                    .read<PlanAddPlaceBloc>()
-                                    .add(PlanAddPlaceEventClicked(place));
+                                if (mounted) {
+                                  context
+                                      .read<PlanAddPlaceBloc>()
+                                      .add(PlanAddPlaceEventClicked(place));
+                                }
                               },
                               textAlignVertical: TextAlignVertical.top,
                               textAlign: TextAlign.start,
@@ -174,9 +176,11 @@ class _AddPlanPlaceViewState extends State<AddPlanPlaceView> {
                           lastDate: DateTime(2024),
                         );
                         if (date != null) {
-                          context
-                              .read<PlanAddPlaceBloc>()
-                              .add(DateSelectedEvent(date));
+                          if (mounted) {
+                            context
+                                .read<PlanAddPlaceBloc>()
+                                .add(DateSelectedEvent(date));
+                          }
                         }
                       },
                       child: Container(
@@ -237,9 +241,11 @@ class _AddPlanPlaceViewState extends State<AddPlanPlaceView> {
                         context: context,
                         initialTime: TimeOfDay.now(),
                       );
-                      context
-                          .read<PlanAddPlaceBloc>()
-                          .add(TimeSelectedEvent(time));
+                      if (mounted) {
+                        context
+                            .read<PlanAddPlaceBloc>()
+                            .add(TimeSelectedEvent(time));
+                      }
                     },
                     child: Container(
                       decoration: BoxDecoration(

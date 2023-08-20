@@ -1,6 +1,7 @@
 import 'package:funconnect/core/models/paginated_data.dart';
 import 'package:funconnect/features/plans/data/data_sources/plan_remote_data_source.dart';
 import 'package:funconnect/features/plans/data/repository/i_plans_repository.dart';
+import 'package:funconnect/features/plans/domain/entities/delete_mini_plan_response.dart';
 import 'package:funconnect/features/plans/domain/entities/mini_plan_friend_model.dart';
 import 'package:funconnect/features/plans/domain/entities/mini_plan_model.dart';
 import 'package:funconnect/features/plans/domain/entities/mini_plan_place_model.dart';
@@ -37,5 +38,10 @@ class PlansRepository extends IPlansRepository {
   @override
   Future<MiniPlanPlaceModel> addPlace(AddPlaceParams param) {
     return _remoteDS.addPlace(param);
+  }
+
+  @override
+  Future<DeleteMiniPlanResponse> deletePlan(String id) async {
+    return await _remoteDS.deletePlan(id);
   }
 }

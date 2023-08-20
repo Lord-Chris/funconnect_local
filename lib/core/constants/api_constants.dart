@@ -91,6 +91,10 @@ class ApiConstants {
     return "$_baseUrl/events/mini-plans/$id/places";
   }
 
+  static String deleteMiniPlan(String id) {
+    return "$_baseUrl/events/mini-plans/$id";
+  }
+
   // EVENTS
   static String get events => "$_baseUrl/events";
 

@@ -10,6 +10,7 @@ import 'package:funconnect/features/places/domain/usecases/fetch_place_detail.da
 import 'package:funconnect/features/plans/domain/entities/mini_plan_friend_model.dart';
 import 'package:funconnect/features/plans/domain/entities/mini_plan_model.dart';
 import 'package:funconnect/features/plans/domain/entities/mini_plan_place_model.dart';
+import 'package:funconnect/features/plans/domain/usecases/delete_plan_usecase.dart';
 import 'package:funconnect/features/plans/domain/usecases/fetch_plan_friends_usecase.dart';
 import 'package:funconnect/features/plans/domain/usecases/fetch_plan_places_usecase.dart';
 import 'package:funconnect/services/navigation_service/i_navigation_service.dart';
@@ -66,13 +67,15 @@ class PlanDetailsBloc extends Bloc<PlanDetailsEvent, PlanDetailsState> {
   }
 
   Future<FullPlaceModel> getPlaceDetails(String placeId) async {
-    Logger().i("place details for $placeId");
     List data = await FetchPlaceDetail().call(placeId);
     return data[0];
   }
 
   FutureOr<void> _deletePlanClicked(
-      DeletePlanClickedEvent event, Emitter<PlanDetailsState> emit) {
+      DeletePlanClickedEvent event, Emitter<PlanDetailsState> emit) async {
     emit(PlanDetailsLoading());
+    var response = await DeletePlanUseCase().call(event.plan.id);
+    Logger().i(response);
+    _navigation.back();
   }
 }
