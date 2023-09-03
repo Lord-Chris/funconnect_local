@@ -11,7 +11,6 @@ import 'package:funconnect/features/plans/presentation/components/friend_icon_wi
 import 'package:funconnect/features/plans/presentation/plan_details/bloc/plan_details_bloc.dart';
 import 'package:funconnect/features/plans/presentation/plan_details/components/plan_place_item.dart';
 import 'package:funconnect/shared/components/_components.dart';
-import 'package:funconnect/shared/components/custom_button.dart';
 
 import 'package:skeletonizer/skeletonizer.dart';
 
