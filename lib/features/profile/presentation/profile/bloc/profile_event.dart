@@ -46,3 +46,10 @@ class InstagramTapEvent extends ProfileEvent {}
 class TwitterTapEvent extends ProfileEvent {}
 
 class HelpDeskTapEvent extends ProfileEvent {}
+
+class DarkModeTapEvent extends ProfileEvent {
+  final UserModel userProfile;
+  final bool isDarkModeEnabled;
+
+  DarkModeTapEvent(this.isDarkModeEnabled, {required this.userProfile});
+}
