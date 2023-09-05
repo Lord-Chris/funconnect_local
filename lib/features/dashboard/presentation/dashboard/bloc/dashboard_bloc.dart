@@ -57,7 +57,7 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
   }
 
   Future<void> _handleDeepLink(DeepLinkDataModel? data) async {
-    _logger.wtf(data);
+    _logger.w(data);
     if (data == null) return;
     if (data.type != "place") return;
     final place = await FetchPlaceDetail().call(data.value);

@@ -10,8 +10,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:funconnect/core/app/_app.dart';
 import 'package:funconnect/core/blocs/bloc/theme_switcher_bloc.dart';
-import 'package:funconnect/core/themes/light_theme.dart';
-import 'package:funconnect/core/themes/dark_theme.dart';
 import 'package:funconnect/core/utils/failure_handler.dart';
 import 'package:funconnect/features/authentication/presentation/welcome/bloc/welcome_bloc.dart';
 import 'package:funconnect/features/authentication/presentation/welcome/welcome_view.dart';
@@ -82,7 +80,6 @@ class MyApp extends StatelessWidget {
               builder: (context, state) {
                 return MaterialApp(
                   theme: state,
-                  darkTheme: DarkTheme.theme,
                   title: AppConstants.appName,
                   debugShowCheckedModeBanner: false,
                   navigatorKey: NavigationService.navigatorKey,
@@ -146,6 +143,6 @@ class MyApp extends StatelessWidget {
 }
 
 // Button on the dialog
-// Internet occured icon
+// Internet occurred icon
 // Filter flow
 // iOS tags
