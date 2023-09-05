@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:funconnect/core/blocs/bloc/theme_switcher_bloc.dart';
 import 'package:funconnect/shared/components/_components.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
 
@@ -283,6 +284,8 @@ class _ProfileViewState extends State<ProfileView> {
                                   context.read<ProfileBloc>().add(
                                       DarkModeTapEvent(state.isDarkModeEnabled,
                                           userProfile: state.userProfile));
+                                  BlocProvider.of<ThemeSwitcherBloc>(context)
+                                      .add(ThemeSwitcherEventToggle());
                                 },
                               ))
                         ],
