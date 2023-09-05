@@ -9,6 +9,7 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:funconnect/core/app/_app.dart';
+import 'package:funconnect/core/blocs/bloc/theme_switcher_bloc.dart';
 import 'package:funconnect/core/themes/light_theme.dart';
 import 'package:funconnect/core/themes/dark_theme.dart';
 import 'package:funconnect/core/utils/failure_handler.dart';
@@ -75,57 +76,64 @@ class MyApp extends StatelessWidget {
         splitScreenMode: true,
         builder: (context, _) {
           context.read<SplashBloc>().add(InitializeSplashEvent());
-          return MaterialApp(
-            themeMode: ThemeMode.system,
-            theme: LightTheme.theme,
-            darkTheme: DarkTheme.theme,
-            title: AppConstants.appName,
-            debugShowCheckedModeBanner: false,
-            navigatorKey: NavigationService.navigatorKey,
-            onGenerateRoute: Routes.generateRoute,
-            home: BlocBuilder<SplashBloc, SplashState>(
-              buildWhen: (previous, current) => previous is SplashInitialState,
+          return BlocProvider(
+            create: (context) => ThemeSwitcherBloc(),
+            child: BlocBuilder<ThemeSwitcherBloc, ThemeData>(
               builder: (context, state) {
-                if (state is SplashFinishedState) {
-                  FlutterNativeSplash.remove();
-                  if (state.needsUpdate == true) {
-                    return const VersionUpdateView();
-                  }
-                  if (state.isAuthenticated) {
-                    return BlocProvider(
-                      create: (context) => DashboardBloc(),
-                      child: const DashboardView(),
-                    );
-                  } else {
-                    if (state.showOnboarding) {
-                      return BlocProvider(
-                        create: (context) => OnboardingBloc(),
-                        child: const OnboardingView(),
-                      );
-                    } else {
-                      return BlocProvider(
-                        create: (context) => WelcomeBloc(),
-                        child: const WelcomeView(),
-                      );
-                    }
-                  }
-                }
-                return Scaffold(
-                  body: Container(
-                    width: double.maxFinite,
-                    color: AppColors.mediumBlack,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SizedBox(
-                          height: 250.r,
-                          width: 250.r,
-                          child: SvgPicture.asset(
-                            AppAssets.funconnectFullSvg,
+                return MaterialApp(
+                  theme: state,
+                  darkTheme: DarkTheme.theme,
+                  title: AppConstants.appName,
+                  debugShowCheckedModeBanner: false,
+                  navigatorKey: NavigationService.navigatorKey,
+                  onGenerateRoute: Routes.generateRoute,
+                  home: BlocBuilder<SplashBloc, SplashState>(
+                    buildWhen: (previous, current) =>
+                        previous is SplashInitialState,
+                    builder: (context, state) {
+                      if (state is SplashFinishedState) {
+                        FlutterNativeSplash.remove();
+                        if (state.needsUpdate == true) {
+                          return const VersionUpdateView();
+                        }
+                        if (state.isAuthenticated) {
+                          return BlocProvider(
+                            create: (context) => DashboardBloc(),
+                            child: const DashboardView(),
+                          );
+                        } else {
+                          if (state.showOnboarding) {
+                            return BlocProvider(
+                              create: (context) => OnboardingBloc(),
+                              child: const OnboardingView(),
+                            );
+                          } else {
+                            return BlocProvider(
+                              create: (context) => WelcomeBloc(),
+                              child: const WelcomeView(),
+                            );
+                          }
+                        }
+                      }
+                      return Scaffold(
+                        body: Container(
+                          width: double.maxFinite,
+                          color: AppColors.mediumBlack,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SizedBox(
+                                height: 250.r,
+                                width: 250.r,
+                                child: SvgPicture.asset(
+                                  AppAssets.funconnectFullSvg,
+                                ),
+                              ),
+                            ],
                           ),
                         ),
-                      ],
-                    ),
+                      );
+                    },
                   ),
                 );
               },
