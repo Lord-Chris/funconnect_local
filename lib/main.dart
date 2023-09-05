@@ -71,7 +71,7 @@ class MyApp extends StatelessWidget {
     return BlocProvider<SplashBloc>(
       create: (context) => SplashBloc(),
       child: ScreenUtilInit(
-        designSize: const Size(428, 926),
+        designSize: const Size(414, 856),
         minTextAdapt: true,
         splitScreenMode: true,
         builder: (context, _) {
