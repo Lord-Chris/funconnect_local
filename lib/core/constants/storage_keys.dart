@@ -4,6 +4,7 @@ class StorageKeys {
   // General
   static const isFirstTime = "is-first-time";
   static const showOnboarding = "show-onboarding";
+  static const isDarkMode = "is-dark-mode";
 
   // User
   static const token = "token";
