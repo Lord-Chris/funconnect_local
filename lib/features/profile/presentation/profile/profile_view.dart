@@ -276,13 +276,15 @@ class _ProfileViewState extends State<ProfileView> {
                           //     onChanged: (val) {},
                           //   ),
                           // ),
-                          // _buildProfileItems(
-                          //   "Dark mode",
-                          //   icon: AppSwitcher(
-                          //     value: true,
-                          //     onChanged: (val) {},
-                          //   ),
-                          // ),
+                          _buildProfileItems("Dark mode",
+                              icon: AppSwitcher(
+                                value: state.isDarkModeEnabled,
+                                onChanged: (val) {
+                                  context.read<ProfileBloc>().add(
+                                      DarkModeTapEvent(state.isDarkModeEnabled,
+                                          userProfile: state.userProfile));
+                                },
+                              ))
                         ],
                       ),
                     ),
