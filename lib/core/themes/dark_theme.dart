@@ -17,7 +17,7 @@ class DarkTheme {
     ),
     colorScheme: const ColorScheme.light(
       onBackground: AppColors.white,
-      brightness: Brightness.light,
+      brightness: Brightness.dark,
       primary: Colors.orange,
       background: AppColors.black,
     ),

@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:funconnect/core/blocs/bloc/theme_switcher_bloc.dart';
 import 'package:funconnect/features/dashboard/presentation/dashboard/bloc/dashboard_bloc.dart';
 import 'package:funconnect/features/dashboard/presentation/dashboard/bloc/dashboard_event.dart';
 import 'package:funconnect/features/dashboard/presentation/notifications/bloc/notification_bloc.dart';
@@ -14,6 +15,7 @@ import 'package:funconnect/features/places/presentation/home/bloc/home_bloc.dart
 import 'package:funconnect/features/places/presentation/home/bloc/home_event.dart';
 import 'package:funconnect/features/places/presentation/home/bloc/home_state.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
+import 'package:logger/logger.dart';
 
 import '../../../../shared/components/_components.dart';
 import 'widgets/categories_large_widget.dart';
@@ -39,8 +41,6 @@ class _HomeViewState extends State<HomeView> {
 
   @override
   Widget build(BuildContext context) {
-    final bool isDarkMode =
-        MediaQuery.of(context).platformBrightness == Brightness.dark;
     return Scaffold(
       appBar: AppBar(
         titleSpacing: 10,
@@ -114,9 +114,16 @@ class _HomeViewState extends State<HomeView> {
         child: Column(
           children: [
             Spacing.vertSmall(),
-            Divider(
-              color: isDarkMode ? AppColors.secondary800 : AppColors.wGreyF8,
-              height: 1.h,
+            BlocBuilder<ThemeSwitcherBloc, ThemeData>(
+              builder: (context, state) {
+                Logger().i("Theme: ${state.brightness}");
+                return Divider(
+                  color: state.brightness == Brightness.dark
+                      ? AppColors.secondary800
+                      : AppColors.wGreyF8,
+                  height: 1.h,
+                );
+              },
             ),
             Expanded(
               child: BlocBuilder<HomeBloc, HomeState>(
@@ -155,11 +162,15 @@ class _HomeViewState extends State<HomeView> {
                           );
                         },
                       ),
-                      Divider(
-                        color: isDarkMode
-                            ? AppColors.secondary800
-                            : AppColors.wGreyF8,
-                        height: 1.h,
+                      BlocBuilder<ThemeSwitcherBloc, ThemeData>(
+                        builder: (context, state) {
+                          return Divider(
+                            color: state.brightness == Brightness.dark
+                                ? AppColors.secondary800
+                                : AppColors.wGreyF8,
+                            height: 1.h,
+                          );
+                        },
                       ),
                       Spacing.vertSmall(),
                       Expanded(

@@ -10,6 +10,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:funconnect/core/app/_app.dart';
 import 'package:funconnect/core/blocs/bloc/theme_switcher_bloc.dart';
+import 'package:funconnect/core/themes/dark_theme.dart';
 import 'package:funconnect/core/utils/failure_handler.dart';
 import 'package:funconnect/features/authentication/presentation/welcome/bloc/welcome_bloc.dart';
 import 'package:funconnect/features/authentication/presentation/welcome/welcome_view.dart';
@@ -21,6 +22,7 @@ import 'package:funconnect/features/startup/presentation/onboarding/onboarding_v
 import 'package:funconnect/features/startup/presentation/version_update/version_update_view.dart';
 import 'package:funconnect/services/_services.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
+import 'package:logger/logger.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
 import 'features/startup/presentation/splash/bloc/splash_event.dart';
@@ -78,6 +80,7 @@ class MyApp extends StatelessWidget {
             create: (context) => ThemeSwitcherBloc(),
             child: BlocBuilder<ThemeSwitcherBloc, ThemeData>(
               builder: (context, state) {
+                Logger().i("main screen theme ${state.brightness}");
                 return MaterialApp(
                   theme: state,
                   title: AppConstants.appName,
