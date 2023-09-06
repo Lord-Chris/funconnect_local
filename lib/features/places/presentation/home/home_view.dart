@@ -15,7 +15,6 @@ import 'package:funconnect/features/places/presentation/home/bloc/home_bloc.dart
 import 'package:funconnect/features/places/presentation/home/bloc/home_event.dart';
 import 'package:funconnect/features/places/presentation/home/bloc/home_state.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
-import 'package:logger/logger.dart';
 
 import '../../../../shared/components/_components.dart';
 import 'widgets/categories_large_widget.dart';
@@ -116,7 +115,6 @@ class _HomeViewState extends State<HomeView> {
             Spacing.vertSmall(),
             BlocBuilder<ThemeSwitcherBloc, ThemeData>(
               builder: (context, state) {
-                Logger().i("Theme: ${state.brightness}");
                 return Divider(
                   color: state.brightness == Brightness.dark
                       ? AppColors.secondary800
