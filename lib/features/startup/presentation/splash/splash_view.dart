@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:funconnect/core/blocs/main_app_bloc.dart';
 import 'package:funconnect/features/startup/presentation/splash/bloc/splash_bloc.dart';
 import 'package:funconnect/features/startup/presentation/splash/bloc/splash_event.dart';
 import 'package:funconnect/features/startup/presentation/splash/bloc/splash_state.dart';
@@ -12,6 +13,7 @@ class SplashView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    context.read<MainAppBloc>().add(InitializeMainApp());
     context.read<SplashBloc>().add(InitializeSplashEvent());
     return BlocListener<SplashBloc, SplashState>(
       listener: (context, state) {

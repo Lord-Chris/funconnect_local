@@ -29,6 +29,7 @@ class PlaceDetailBloc extends Bloc<PlaceDetailEvent, PlaceDetailState> {
     on<ShareTapEvent>(_onShareTapEvent);
     on<BookRideEvent>(_onBookRideEvent);
     on<BookmarkTapEvent>(_onBookmarkTapEvent);
+    on<AddPlaceToPlanEvent>(_onAddPlaceToPlanEvent);
   }
   final _logger = Logger();
   final _navigationService = locator<INavigationService>();
@@ -145,5 +146,11 @@ class PlaceDetailBloc extends Bloc<PlaceDetailEvent, PlaceDetailState> {
       FailureHandler.instance.catchError(e, stackTrace: s);
       emit(prevState);
     }
+  }
+
+  FutureOr<void> _onAddPlaceToPlanEvent(
+      AddPlaceToPlanEvent event, Emitter<PlaceDetailState> emit) {
+    _navigationService.toNamed(Routes.addPlaceToPlanRoute,
+        arguments: event.place);
   }
 }

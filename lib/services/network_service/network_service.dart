@@ -16,7 +16,7 @@ class NetworkService extends INetworkService {
 
   NetworkService() {
     _dio = Dio();
-    _dio.options.connectTimeout = const Duration(seconds: 10);
+    _dio.options.connectTimeout = const Duration(seconds: 60);
     _dio.options.receiveTimeout = const Duration(seconds: 30);
     _dio.options.sendTimeout = const Duration(seconds: 30);
     _dio.interceptors.addAll([AuthInterceptor(), NetworkLoggerInterceptor()]);
@@ -49,13 +49,14 @@ class NetworkService extends INetworkService {
   @override
   Future<ApiResponse<Map<String, dynamic>>> get(String url,
       {Map<String, String>? headers}) async {
+    _logger.i("received url is $url");
     try {
       if (headers != null) {
         _headers.addAll(headers);
       }
       final res = await _dio.get(
         url,
-        options: Options(headers: _headers),
+        options: Options(headers: _headers, method: 'GET'),
       );
       if (res.statusCode == 200 || res.statusCode == 201) {
         return ApiResponse(data: res.data);
@@ -84,7 +85,7 @@ class NetworkService extends INetworkService {
       if (res.statusCode == 200 || res.statusCode == 201) {
         return ApiResponse(data: res.data);
       }
-      throw Failure(res.statusMessage!);
+      throw Failure(res.statusMessage!, extraData: res.toString());
     } on DioException catch (e) {
       throw convertException(e);
     } catch (e) {
@@ -100,6 +101,7 @@ class NetworkService extends INetworkService {
       if (headers != null) {
         _headers.addAll(headers);
       }
+      Logger().i("Set date: $body");
       final res = await _dio.post(
         url,
         data: body,
