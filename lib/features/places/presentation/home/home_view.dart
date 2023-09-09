@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:funconnect/core/blocs/bloc/theme_switcher_bloc.dart';
+import 'package:funconnect/core/blocs/main_app_bloc.dart';
 import 'package:funconnect/features/dashboard/presentation/dashboard/bloc/dashboard_bloc.dart';
 import 'package:funconnect/features/dashboard/presentation/dashboard/bloc/dashboard_event.dart';
 import 'package:funconnect/features/dashboard/presentation/notifications/bloc/notification_bloc.dart';
@@ -62,7 +63,7 @@ class _HomeViewState extends State<HomeView> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Text(
-              "Hi ${context.watch<HomeBloc>().user.username}",
+              "Hi ${context.watch<MainAppBloc>().user.username}",
               style: AppTextStyles.medium20
                   .copyWith(color: Theme.of(context).colorScheme.onBackground),
             ),
