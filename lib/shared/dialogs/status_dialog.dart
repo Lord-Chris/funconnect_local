@@ -61,16 +61,6 @@ class StatusDialog extends StatelessWidget {
                 style: AppTextStyles.light14,
               ),
             ),
-            hasButton == null || hasButton == false
-                ? const SizedBox()
-                : SizedBox(height: 32.h),
-            hasButton == null || hasButton == false
-                ? const SizedBox()
-                : AppButton(
-                    label: buttonLabel!,
-                    onTap: buttonAction,
-                    borderRadius: 8,
-                  )
           ],
         ),
       ),

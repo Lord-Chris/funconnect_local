@@ -43,10 +43,13 @@ class NotificationService extends INotificationService {
           ),
         );
       }
-      _logger.d("Notification Entered", error: event.notification.body);
 
-      /// notification.display() to display after preventing default
-      event.notification.display();
+      event.complete(event.notification);
+    });
+
+    OneSignal.shared
+        .setNotificationOpenedHandler((OSNotificationOpenedResult result) {
+      // Will be called whenever a notification is opened/button pressed.
     });
 
     OneSignal.User.pushSubscription.addObserver((state) {

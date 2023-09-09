@@ -81,147 +81,145 @@ class _WelcomeViewState extends State<WelcomeView> {
                                   GestureDetector(
                                     onTap: () => context
                                         .read<WelcomeBloc>()
-                                        .add(GoogleSignInEvent()),
+                                        .add(AppleSignInEvent()),
                                     child: CircleAvatar(
-                                      backgroundColor: Colors.white,
                                       radius: 30,
+                                      backgroundColor: isDarkMode
+                                          ? AppColors.white
+                                          : AppColors.wGreyF1,
                                       child: SvgPicture.asset(
-                                          AppAssets.googleIconSvg),
+                                          AppAssets.appleIconSvg),
                                     ),
                                   ),
-                                  if (Platform.isIOS) ...[
-                                    const SizedBox(width: 16.0),
-                                    GestureDetector(
-                                      onTap: () => context
-                                          .read<WelcomeBloc>()
-                                          .add(AppleSignInEvent()),
-                                      child: CircleAvatar(
-                                        radius: 30,
-                                        backgroundColor: Colors.white,
-                                        child: SvgPicture.asset(
-                                            AppAssets.appleIconSvg),
+                                ]
+                              ],
+                            ),
+                            Spacing.vertExtraMedium(),
+                            Padding(
+                              padding: REdgeInsets.symmetric(horizontal: 30),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Expanded(
+                                    child: Container(
+                                        height: 0.5,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .onBackground),
+                                  ),
+                                  const SizedBox(width: 11),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 8.0),
+                                    child: Text(
+                                      state.isFirstTime
+                                          ? "Or with email ID"
+                                          : "Or signin with e-mail",
+                                      style: AppTextStyles.regular14.copyWith(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .onBackground,
                                       ),
                                     ),
-                                  ]
+                                  ),
+                                  const SizedBox(width: 11),
+                                  Expanded(
+                                    child: Container(
+                                      height: 0.5,
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onBackground,
+                                    ),
+                                  ),
                                 ],
                               ),
-                              Spacing.vertExtraMedium(),
-                              Padding(
-                                padding: REdgeInsets.symmetric(horizontal: 30),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
+                            ),
+                            Spacing.vertExtraMedium(),
+                            AppTextField(
+                              label: AppText.aTAuthEmailText,
+                              hint: 'johndoe@gmail.com',
+                              controller: controller,
+                              validator: context.validateEmail,
+                              keyboardType: TextInputType.emailAddress,
+                              textCapitalization: TextCapitalization.none,
+                              prefix: Align(
+                                widthFactor: 1.0,
+                                heightFactor: 1.0,
+                                child: SvgPicture.asset(AppAssets.emailIconSvg),
+                              ),
+                            ),
+                            if (state.isFirstTime) const SizedBox(height: 32),
+                            if (state.isFirstTime)
+                              Text.rich(
+                                TextSpan(
                                   children: [
-                                    Expanded(
-                                      child: Container(
-                                        height: 0.5,
-                                        color: Colors.white,
+                                    TextSpan(
+                                        text:
+                                            "By registering, you agree to our ",
+                                        style: TextStyle(
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .onBackground)),
+                                    TextSpan(
+                                      text: "Terms & Conditions",
+                                      style: AppTextStyles.regular14.copyWith(
+                                        color: AppColors.primary,
                                       ),
+                                      recognizer: TapGestureRecognizer()
+                                        ..onTap = () =>
+                                            context.read<WelcomeBloc>().add(
+                                                  TandCTapEvent(),
+                                                ),
                                     ),
-                                    const SizedBox(width: 11),
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 8.0),
-                                      child: Text(
-                                        state.isFirstTime
-                                            ? "Or with email ID"
-                                            : "Or signin with e-mail",
-                                        style: AppTextStyles.regular14.copyWith(
-                                          color: Colors.white,
-                                        ),
+                                    TextSpan(
+                                        text: " and ",
+                                        style: TextStyle(
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .onBackground)),
+                                    TextSpan(
+                                      text: "Privacy policy",
+                                      style: AppTextStyles.regular14.copyWith(
+                                        color: AppColors.primary,
                                       ),
-                                    ),
-                                    const SizedBox(width: 11),
-                                    Expanded(
-                                      child: Container(
-                                        height: 0.5,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                    const Divider(
-                                      height: 5.0,
-                                      thickness: 5.0,
-                                      color: Colors.white,
+                                      recognizer: TapGestureRecognizer()
+                                        ..onTap = () => context
+                                            .read<WelcomeBloc>()
+                                            .add(PrivacyPolicyTapEvent()),
                                     ),
                                   ],
                                 ),
-                              ),
-                              Spacing.vertExtraMedium(),
-                              AppTextField(
-                                label: AppText.aTAuthEmailText,
-                                hint: 'johndoe@gmail.com',
-                                controller: controller,
-                                validator: context.validateEmail,
-                                keyboardType: TextInputType.emailAddress,
-                                textCapitalization: TextCapitalization.none,
-                                prefix: Align(
-                                  widthFactor: 1.0,
-                                  heightFactor: 1.0,
-                                  child:
-                                      SvgPicture.asset(AppAssets.emailIconSvg),
+                                // textAlign: TextAlign.center,
+                                style: AppTextStyles.regular14.copyWith(
+                                  color: AppColors.white,
                                 ),
                               ),
-                              if (state.isFirstTime) const SizedBox(height: 32),
-                              if (state.isFirstTime)
-                                Text.rich(
-                                  TextSpan(
-                                    children: [
-                                      const TextSpan(
-                                          text:
-                                              "By registering, you agree to our "),
-                                      TextSpan(
-                                        text: "Terms & Conditions",
-                                        style: AppTextStyles.regular14.copyWith(
-                                          color: AppColors.primary,
-                                        ),
-                                        recognizer: TapGestureRecognizer()
-                                          ..onTap = () => context
-                                              .read<WelcomeBloc>()
-                                              .add(TandCTapEvent()),
-                                      ),
-                                      const TextSpan(text: " and "),
-                                      TextSpan(
-                                        text: "Privacy policy",
-                                        style: AppTextStyles.regular14.copyWith(
-                                          color: AppColors.primary,
-                                        ),
-                                        recognizer: TapGestureRecognizer()
-                                          ..onTap = () => context
-                                              .read<WelcomeBloc>()
-                                              .add(PrivacyPolicyTapEvent()),
-                                      ),
-                                    ],
-                                  ),
-                                  // textAlign: TextAlign.center,
-                                  style: AppTextStyles.regular14.copyWith(
-                                    color: AppColors.white,
-                                  ),
-                                ),
-                            ],
-                          ),
+                          ],
                         ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16),
-                          child: AppButton(
-                            label: "Proceed",
-                            isBusy: state is WelcomeLoadingState,
-                            borderRadius: 8,
-                            height: 65,
-                            labelSize: 20,
-                            onTap: () {
-                              if (!formKey.currentState!.validate()) return;
-                              context.read<WelcomeBloc>().add(
-                                  EmailSignInEvent(email: controller.text));
-                            },
-                          ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        child: AppButton(
+                          label: "Proceed",
+                          isBusy: state is WelcomeLoadingState,
+                          borderRadius: 8,
+                          height: 65,
+                          labelSize: 20,
+                          onTap: () {
+                            if (!formKey.currentState!.validate()) return;
+                            context
+                                .read<WelcomeBloc>()
+                                .add(EmailSignInEvent(email: controller.text));
+                          },
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
-        );
+        )
       },
     );
   }

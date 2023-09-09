@@ -62,8 +62,9 @@ class _HomeViewState extends State<HomeView> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Text(
-              "Hi ${context.watch<MainAppBloc>().user.username}",
-              style: AppTextStyles.medium20,
+              "Hi ${context.watch<HomeBloc>().user.username}",
+              style: AppTextStyles.medium20
+                  .copyWith(color: Theme.of(context).colorScheme.onBackground),
             ),
             if ((context.watch<MainAppBloc>().location?.parsedAddress ?? "")
                 .isNotEmpty) ...[
