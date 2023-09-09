@@ -44,6 +44,7 @@ class LocalStorageService extends ILocalStorageService {
       assert(key.isNotEmpty, "Box key must not be empty");
       final box = Hive.box(boxId);
       final data = box.get(key, defaultValue: def);
+
       return jsonDecode(jsonEncode(data)) as T;
     } on Exception catch (e) {
       _log.e(e.toString());

@@ -16,7 +16,6 @@ class OnboardingView extends StatelessWidget {
   Widget build(BuildContext context) {
     final storyViewController = StoryController();
     return Scaffold(
-      backgroundColor: AppColors.black,
       body: Column(
         children: [
           Expanded(

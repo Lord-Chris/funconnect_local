@@ -14,14 +14,12 @@ class NotificationService extends INotificationService {
   @override
   void init() {
     //Remove this method to stop OneSignal Debugging
-    OneSignal.shared.setLogLevel(OSLogLevel.verbose, OSLogLevel.none);
+    OneSignal.Debug.setLogLevel(OSLogLevel.verbose);
 
-    OneSignal.shared.setAppId(AppKeys.oneSignalAppId);
+    OneSignal.initialize(AppKeys.oneSignalAppId);
 
     // The promptForPushNotificationsWithUserResponse function will show the iOS or Android push notification prompt. We recommend removing the following code and instead using an In-App Message to prompt for notification permission
-    OneSignal.shared
-        .promptUserForPushNotificationPermission(fallbackToSettings: true)
-        .then((accepted) {
+    OneSignal.Notifications.requestPermission(true).then((accepted) {
       _logger.i("Notification permission accepted: $accepted");
     });
 
@@ -29,10 +27,13 @@ class NotificationService extends INotificationService {
   }
 
   void _setObservers() {
-    OneSignal.shared.setNotificationWillShowInForegroundHandler(
-        (OSNotificationReceivedEvent event) {
+    OneSignal.Notifications.addForegroundWillDisplayListener((event) {
       // Will be called whenever a notification is received in foreground
       // Display Notification, pass null param for not displaying the notification
+
+      /// preventDefault to not display the notification
+      event.preventDefault();
+
       if (event.notification.body != null) {
         _controller.add(
           NotificationData(
@@ -51,29 +52,24 @@ class NotificationService extends INotificationService {
       // Will be called whenever a notification is opened/button pressed.
     });
 
-    OneSignal.shared.setPermissionObserver((OSPermissionStateChanges changes) {
-      // Will be called whenever the permission changes
-      // (ie. user taps Allow on the permission prompt in iOS)
+    OneSignal.User.pushSubscription.addObserver((state) {
+      _logger.i(state.current.jsonRepresentation());
     });
 
-    OneSignal.shared
-        .setSubscriptionObserver((OSSubscriptionStateChanges changes) {
-      // Will be called whenever the subscription changes
-      // (ie. user gets registered with OneSignal and gets a user ID)
+    OneSignal.Notifications.addPermissionObserver((state) {
+      _logger.i("Has permission $state");
     });
 
-    OneSignal.shared.setEmailSubscriptionObserver(
-        (OSEmailSubscriptionStateChanges emailChanges) {
-      // Will be called whenever then user's email subscription changes
-      // (ie. OneSignal.setEmail(email) is called and the user gets registered
+    OneSignal.Notifications.addClickListener((event) {
+      _logger.i('NOTIFICATION CLICK LISTENER CALLED WITH EVENT: $event');
     });
   }
 
   @override
   Future<void> setUser(UserModel user) async {
     try {
-      await OneSignal.shared.setExternalUserId(user.id);
-      await OneSignal.shared.setEmail(email: user.email);
+      OneSignal.login(user.id);
+      OneSignal.User.addEmail(user.email);
     } catch (e) {
       _logger.e(e);
     }
@@ -82,8 +78,7 @@ class NotificationService extends INotificationService {
   @override
   Future<void> clearUser() async {
     try {
-      await OneSignal.shared.removeExternalUserId();
-      await OneSignal.shared.logoutEmail();
+      OneSignal.logout();
     } catch (e) {
       _logger.e(e);
     }

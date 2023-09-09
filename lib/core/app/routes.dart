@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:funconnect/core/models/_models.dart';
 import 'package:funconnect/features/authentication/data/dto/request_otp_response.dart';
 import 'package:funconnect/features/authentication/presentation/interest/bloc/interest_bloc.dart';
@@ -15,12 +16,31 @@ import 'package:funconnect/features/dashboard/presentation/notifications/notific
 import 'package:funconnect/features/events/domain/entities/event_model.dart';
 import 'package:funconnect/features/events/presentation/views/booking_view.dart';
 import 'package:funconnect/features/events/presentation/views/checkout_view.dart';
+import 'package:funconnect/features/places/domain/entities/full_place_model.dart';
 import 'package:funconnect/features/places/domain/entities/place_model.dart';
+
 import 'package:funconnect/features/places/presentation/category_detail/bloc/category_detail_bloc.dart';
 import 'package:funconnect/features/places/presentation/category_detail/category_detail_view.dart';
 import 'package:funconnect/features/places/presentation/place_detail/bloc/place_detail_bloc.dart';
 import 'package:funconnect/features/places/presentation/place_detail/place_detail_view.dart';
 import 'package:funconnect/features/places/presentation/search_result/search_result_view.dart';
+import 'package:funconnect/features/plans/domain/entities/mini_plan_model.dart';
+import 'package:funconnect/features/plans/presentation/add_place_to_plan/add_place_to_plan._view.dart';
+import 'package:funconnect/features/plans/presentation/add_place_to_plan/bloc/add_place_to_plan_bloc.dart';
+
+import 'package:funconnect/features/plans/presentation/choose_plan_type/bloc/choose_plan_type_bloc.dart';
+import 'package:funconnect/features/plans/presentation/choose_plan_type/choose_plan_type_view.dart';
+import 'package:funconnect/features/plans/presentation/create_plan/bloc/create_plan_bloc.dart';
+import 'package:funconnect/features/plans/presentation/create_plan/create_plan_view.dart';
+import 'package:funconnect/features/plans/presentation/map/bloc/map_bloc.dart';
+import 'package:funconnect/features/plans/presentation/map/map_view.dart';
+import 'package:funconnect/features/plans/presentation/plan_add_place/add_plan_place.dart';
+import 'package:funconnect/features/plans/presentation/plan_add_place/bloc/plan_add_place_bloc.dart';
+import 'package:funconnect/features/plans/presentation/plan_details/bloc/plan_details_bloc.dart';
+import 'package:funconnect/features/plans/presentation/plan_details/plan_details_view.dart';
+import 'package:funconnect/features/plans/presentation/plan_list/bloc/plan_list_bloc.dart';
+import 'package:funconnect/features/plans/presentation/plan_list/plans_list_view.dart';
+
 import 'package:funconnect/features/profile/presentation/edit_profile/edit_profile_view.dart';
 import 'package:funconnect/features/profile/presentation/manage_login_options/manage_login_options_view.dart';
 import 'package:funconnect/features/profile/presentation/views/my_events_view.dart';
@@ -69,6 +89,7 @@ class Routes {
   static const placeDetailRoute = '/place-detail';
   static const categoryDetailRoute = '/category-detail';
   static const searchResultRoute = '/search-result';
+  static const addPlaceToPlanRoute = '/add-place-to-plan';
 
   // Events
   static const createEventRoute = '/create-event-route';
@@ -79,6 +100,15 @@ class Routes {
   // Saved
   static const savedViewRoute = '/saved-view';
   static const createCollectionViewRoute = '/create-collection-view';
+
+  //Planner
+
+  static const plannerListViewRoute = '/planner-list-view';
+  static const choosePlanTypeViewRoute = '/choose-plan-type-view';
+  static const createPlanViewRoute = '/create-plan-view';
+  static const plannerMapRoute = '/planner-map';
+  static const planDetailViewRoute = '/plan-detail-view';
+  static const planAddPlaceViewRoute = '/plan-add-place-view';
 
   // Profile
   static const editProfileViewRoute = '/edit-profile';
@@ -163,6 +193,14 @@ class Routes {
           settings: settings,
         );
 
+      case addPlaceToPlanRoute:
+        final place = settings.arguments as FullPlaceModel;
+        return _registerBlocView(
+          view: AddPlaceToPlan(place: place),
+          bloc: AddPlaceToPlanBloc(),
+          settings: settings,
+        );
+
       // Dashboard
       case dashboardViewRoute:
         return _registerBlocView(
@@ -202,6 +240,52 @@ class Routes {
 
       case createCollectionViewRoute:
         return MaterialPageRoute(builder: (_) => const CreateCollectionView());
+
+      // Planner
+      case plannerListViewRoute:
+        return _registerBlocView(
+          bloc: PlanListBloc(),
+          view: const PlansListView(),
+          settings: settings,
+        );
+
+      case createPlanViewRoute:
+        return _registerBlocView(
+          bloc: CreatePlanBloc(),
+          view: const CreatePlanView(),
+          settings: settings,
+        );
+
+      case choosePlanTypeViewRoute:
+        return _registerBlocView(
+          bloc: ChoosePlanTypeBloc(),
+          view: const ChoosePlanTypeView(),
+          settings: settings,
+        );
+
+      case plannerMapRoute:
+        return _registerBlocView(
+          view: const PlannerMapView(),
+          bloc: MapBloc(),
+          settings: settings,
+        );
+      case planDetailViewRoute:
+        final plan = settings.arguments as MiniPlanModel;
+        return _registerBlocView(
+          view: PlanDetailsView(plan: plan),
+          bloc: PlanDetailsBloc(),
+          settings: settings,
+        );
+
+      case planAddPlaceViewRoute:
+        final plan = settings.arguments as MiniPlanModel;
+        return _registerBlocView(
+          view: AddPlanPlaceView(
+            plan: plan,
+          ),
+          bloc: PlanAddPlaceBloc(),
+          settings: settings,
+        );
 
       // Profile
       case editProfileViewRoute:
