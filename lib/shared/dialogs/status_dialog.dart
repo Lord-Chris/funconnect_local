@@ -26,7 +26,9 @@ class StatusDialog extends StatelessWidget {
         padding: REdgeInsets.symmetric(horizontal: 40, vertical: 60),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(36),
-          color: AppColors.interestWidgetAsh,
+          color: Theme.of(context).brightness == Brightness.light
+              ? AppColors.white
+              : AppColors.interestWidgetAsh,
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -37,17 +39,19 @@ class StatusDialog extends StatelessWidget {
               size: 100.sp,
             ),
             SizedBox(height: 31.h),
-            Text(
-              title,
-              textAlign: TextAlign.center,
-              style: AppTextStyles.medium20,
-            ),
+            Text(title,
+                textAlign: TextAlign.center,
+                style: AppTextStyles.medium20.copyWith(
+                  color: Theme.of(context).colorScheme.onBackground,
+                )),
             SizedBox(height: 16.h),
             Flexible(
               child: Text(
                 body,
                 textAlign: TextAlign.center,
-                style: AppTextStyles.light14,
+                style: AppTextStyles.light14.copyWith(
+                  color: Theme.of(context).colorScheme.onBackground,
+                ),
               ),
             ),
           ],
