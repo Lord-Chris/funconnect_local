@@ -47,17 +47,19 @@ class StatusDialog extends StatelessWidget {
             SizedBox(height: 31.h),
             title == null
                 ? const SizedBox()
-                : Text(
-                    title!,
+                : Text(title!,
                     textAlign: TextAlign.center,
-                    style: AppTextStyles.medium20,
-                  ),
+                    style: AppTextStyles.medium20.copyWith(
+                      color: Theme.of(context).colorScheme.onBackground,
+                    )),
             SizedBox(height: 16.h),
             Flexible(
               child: Text(
                 body,
                 textAlign: TextAlign.center,
-                style: AppTextStyles.light14,
+                style: AppTextStyles.light14.copyWith(
+                  color: Theme.of(context).colorScheme.onBackground,
+                ),
               ),
             ),
           ],

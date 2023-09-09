@@ -23,8 +23,6 @@ class AppBlackModalWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool isDarkMode =
-        MediaQuery.of(context).platformBrightness == Brightness.dark;
     return Stack(
       fit: StackFit.expand,
       children: [
@@ -68,9 +66,10 @@ class AppBlackModalWidget extends StatelessWidget {
                   right: 0,
                   child: CircleAvatar(
                     radius: 32.r,
-                    backgroundColor: isDarkMode
-                        ? AppColors.interestWidgetAsh
-                        : AppColors.wGreyF8,
+                    backgroundColor:
+                        Theme.of(context).brightness == Brightness.dark
+                            ? AppColors.interestWidgetAsh
+                            : AppColors.wGreyF8,
                     child: topIcon,
                   ),
                 ),

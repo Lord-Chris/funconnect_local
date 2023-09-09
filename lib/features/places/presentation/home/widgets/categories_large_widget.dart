@@ -75,7 +75,9 @@ class HomeCategoriesLargeWidget extends HookWidget {
                             Flexible(
                               child: Text(
                                 name,
-                                style: AppTextStyles.regular14,
+                                style: AppTextStyles.regular14.copyWith(
+                                  color: AppColors.white,
+                                ),
                                 overflow: TextOverflow.ellipsis,
                               ),
                             ),
