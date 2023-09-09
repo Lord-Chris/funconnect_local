@@ -53,4 +53,10 @@ class AppAssets {
   static const appleSvg = "assets/svgs/apple.svg";
   static const googleSvg = "assets/svgs/google.svg";
   static const ratingStarSvg = "assets/svgs/rating_star.svg";
+
+  //Planner
+  static const plannerSvg = "assets/svgs/planner_icon.svg";
+  static const plannerActiveSvg = "assets/svgs/planner_active_icon.svg";
+  static const addFriendSvg = "assets/svgs/add_friend.svg";
+  static const planFriendSvg = "assets/svgs/plan_friend.svg";
 }

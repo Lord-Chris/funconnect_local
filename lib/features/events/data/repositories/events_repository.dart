@@ -10,13 +10,11 @@ class EventsRepository extends IEventsRepository {
 
   @override
   Future<EventModel> createEvent() {
-    // TODO: implement createEvent
     throw UnimplementedError();
   }
 
   @override
   Future<EventModel> getEventDescription(String eventId) {
-    // TODO: implement getEventDescription
     throw UnimplementedError();
   }
 

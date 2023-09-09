@@ -72,6 +72,29 @@ class ApiConstants {
   static String togglePlaceBookmark(String placeId) =>
       '$places/saved-places/$placeId';
 
+  // PLANS
+  static String get miniPlans => "$_baseUrl/events/mini-plans";
+
+  static String addFriends(String id) {
+    return "$_baseUrl/events/mini-plans/$id/friends";
+  }
+
+  static String getFriends(String plaId) {
+    return "$_baseUrl/events/mini-plans/$plaId/friends";
+  }
+
+  static String getMiniPlanPlaces(String id) {
+    return "$_baseUrl/events/mini-plans/$id/places";
+  }
+
+  static String addMiniPlanPlace(String id) {
+    return "$_baseUrl/events/mini-plans/$id/places";
+  }
+
+  static String deleteMiniPlan(String id) {
+    return "$_baseUrl/events/mini-plans/$id";
+  }
+
   // EVENTS
   static String get events => "$_baseUrl/events";
 

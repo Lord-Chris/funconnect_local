@@ -7,6 +7,8 @@ import 'package:funconnect/features/events/data/data_sources/http_events_data_so
 import 'package:funconnect/features/events/data/data_sources/i_events_data_source.dart';
 import 'package:funconnect/features/events/data/repositories/events_repository.dart';
 import 'package:funconnect/features/events/data/repositories/i_events_repository.dart';
+import 'package:funconnect/features/plans/data/repository/i_plans_repository.dart';
+import 'package:funconnect/features/plans/data/repository/plans_repository.dart';
 import 'package:funconnect/features/profile/data/repository/i_profile_repository.dart';
 import 'package:funconnect/features/profile/data/repository/profile_repository.dart';
 import 'package:funconnect/features/saved/data/repository/i_saved_repository.dart';
@@ -60,6 +62,7 @@ Future<void> setUpLocator() async {
   locator.registerLazySingleton<IProfileRepository>(
     () => ProfileRepository(),
   );
+  locator.registerLazySingleton<IPlansRepository>(() => PlansRepository());
 
   // DataSources
   locator.registerLazySingleton<IAuthenticationDataSource>(
