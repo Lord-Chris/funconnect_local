@@ -13,121 +13,131 @@ class PlansListView extends StatelessWidget {
     ScrollController scrollController = ScrollController();
     scrollController.addListener(() {});
     return Scaffold(
-        appBar: AppBar(
-          title: Padding(
-            padding: const EdgeInsets.only(left: 16.0),
-            child: Text("My Plans",
-                style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w400)),
-          ),
-          actions: [
-            IconButton(
-              onPressed: () {
-                context.read<PlanListBloc>().add(CreatePlanClickedEvent());
-              },
-              icon: const Padding(
-                padding: EdgeInsets.only(right: 16.0),
-                child: Icon(
-                  Icons.add,
-                  size: 24,
+        body: Column(
+      children: [
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16.w),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text("My Plans",
+                  style: TextStyle(
+                      fontSize: 20.sp,
+                      fontWeight: FontWeight.w400,
+                      color: Theme.of(context).colorScheme.onBackground)),
+              IconButton(
+                onPressed: () {
+                  context.read<PlanListBloc>().add(CreatePlanClickedEvent());
+                },
+                icon: const Padding(
+                  padding: EdgeInsets.only(right: 16.0),
+                  child: Icon(
+                    Icons.add,
+                    size: 24,
+                  ),
                 ),
-              ),
-            )
-          ],
+              )
+            ],
+          ),
         ),
-        body: BlocBuilder<PlanListBloc, PlanListState>(
-          builder: (context, state) {
-            if (state is PlanListEmptyState) {
-              return const EmptyPLansView(
-                isListEmpty: true,
-              );
-            }
-            if (state is PlanListLoadingState) {
-              return const Center(
-                child: AppLoader(),
-              );
-            }
-            if (state is PlanListFetchedState) {
-              return Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: Column(
-                  children: [
-                    Expanded(
-                      child: ListView.separated(
-                          controller: scrollController,
-                          shrinkWrap: true,
-                          separatorBuilder: (context, index) => SizedBox(
-                                height: 16.h,
-                              ),
-                          itemCount: state.data.length,
-                          itemBuilder: (context, index) {
-                            return InkWell(
-                              onTap: () {
-                                context
-                                    .read<PlanListBloc>()
-                                    .add(OpenPlanEvent(state.data[index]));
-                              },
-                              child: Container(
-                                  decoration: BoxDecoration(
-                                      color: const Color(0xff161616),
-                                      borderRadius: BorderRadius.circular(8)),
-                                  width: double.infinity,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(16.0),
-                                    child: Row(
-                                      children: [
-                                        Expanded(
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(state.data[index].name,
+        Expanded(
+          child: BlocBuilder<PlanListBloc, PlanListState>(
+            builder: (context, state) {
+              if (state is PlanListEmptyState) {
+                return const EmptyPLansView(
+                  isListEmpty: true,
+                );
+              }
+              if (state is PlanListLoadingState) {
+                return const Center(
+                  child: AppLoader(),
+                );
+              }
+              if (state is PlanListFetchedState) {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Column(
+                    children: [
+                      Expanded(
+                        child: ListView.separated(
+                            controller: scrollController,
+                            shrinkWrap: true,
+                            separatorBuilder: (context, index) => SizedBox(
+                                  height: 16.h,
+                                ),
+                            itemCount: state.data.length,
+                            itemBuilder: (context, index) {
+                              return InkWell(
+                                onTap: () {
+                                  context
+                                      .read<PlanListBloc>()
+                                      .add(OpenPlanEvent(state.data[index]));
+                                },
+                                child: Container(
+                                    decoration: BoxDecoration(
+                                        color: const Color(0xff161616),
+                                        borderRadius: BorderRadius.circular(8)),
+                                    width: double.infinity,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(16.0),
+                                      child: Row(
+                                        children: [
+                                          Expanded(
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(state.data[index].name,
+                                                    style: TextStyle(
+                                                        color: const Color(
+                                                            0xffcccccc),
+                                                        fontSize: 16.sp,
+                                                        fontWeight:
+                                                            FontWeight.w500)),
+                                                SizedBox(
+                                                  height: 8.h,
+                                                ),
+                                                Text(
+                                                  state.data[index].description,
                                                   style: TextStyle(
                                                       color: const Color(
-                                                          0xffcccccc),
-                                                      fontSize: 16.sp,
+                                                          0xff999999),
+                                                      fontSize: 12.sp,
                                                       fontWeight:
-                                                          FontWeight.w500)),
-                                              SizedBox(
-                                                height: 8.h,
-                                              ),
-                                              Text(
-                                                state.data[index].description,
-                                                style: TextStyle(
-                                                    color:
-                                                        const Color(0xff999999),
-                                                    fontSize: 12.sp,
-                                                    fontWeight:
-                                                        FontWeight.w400),
-                                              ),
-                                            ],
+                                                          FontWeight.w400),
+                                                ),
+                                              ],
+                                            ),
                                           ),
-                                        ),
-                                        const Icon(
-                                          Icons.upload,
-                                          color: Color(0xffcccccc),
-                                          size: 20,
-                                        )
-                                      ],
-                                    ),
-                                  )),
-                            );
-                          }),
-                    ),
-                    SizedBox(
-                      height: 96.h,
-                    ),
-                    const EmptyPLansView(
-                      isListEmpty: false,
-                    ),
-                  ],
-                ),
-              );
-            }
+                                          const Icon(
+                                            Icons.upload,
+                                            color: Color(0xffcccccc),
+                                            size: 20,
+                                          )
+                                        ],
+                                      ),
+                                    )),
+                              );
+                            }),
+                      ),
+                      SizedBox(
+                        height: 96.h,
+                      ),
+                      const EmptyPLansView(
+                        isListEmpty: false,
+                      ),
+                    ],
+                  ),
+                );
+              }
 
-            return const Center(
-              child: Text("Error"),
-            );
-          },
-        ));
+              return const Center(
+                child: Text("Error"),
+              );
+            },
+          ),
+        ),
+      ],
+    ));
   }
 }
