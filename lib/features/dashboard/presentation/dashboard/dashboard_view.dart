@@ -50,6 +50,7 @@ class DashboardView extends StatelessWidget {
         builder: (context, state) {
           if (state is! DashboardIdleState) return const SizedBox();
           return Scaffold(
+            appBar: AppBar(),
             body: Stack(
               children: [
                 LazyLoadIndexedStack(

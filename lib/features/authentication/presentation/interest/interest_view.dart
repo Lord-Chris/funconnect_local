@@ -133,7 +133,7 @@ class _InterestViewState extends State<InterestView> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: AppButton(
-                    label: AppText.aTAuthVerifyEmailText,
+                    label: "Continue",
                     borderRadius: 8,
                     height: 65,
                     labelSize: 20,

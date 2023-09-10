@@ -25,7 +25,11 @@ class HomeInterestWidget extends StatelessWidget {
         padding: const EdgeInsets.all(5),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(50.0),
-          color: isSelected ? AppColors.primary : AppColors.interestWidgetAsh,
+          color: isSelected
+              ? AppColors.primary
+              : Theme.of(context).brightness == Brightness.light
+                  ? AppColors.wGreyF8
+                  : AppColors.interestWidgetAsh,
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,

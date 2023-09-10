@@ -4,7 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:funconnect/core/blocs/bloc/theme_switcher_bloc.dart';
 import 'package:funconnect/core/blocs/main_app_bloc.dart';
 import 'package:funconnect/features/dashboard/presentation/dashboard/bloc/dashboard_bloc.dart';
 import 'package:funconnect/features/dashboard/presentation/dashboard/bloc/dashboard_event.dart';
@@ -161,20 +160,23 @@ class _HomeViewState extends State<HomeView> {
                           return SizedBox(
                             height: 50.h,
                             width: MediaQuery.of(context).size.width,
-                            child: ListView.builder(
-                              scrollDirection: Axis.horizontal,
-                              padding: EdgeInsets.symmetric(vertical: 8.h),
-                              itemCount: state.interests.length,
-                              itemBuilder: (context, index) {
-                                final interest = state.interests[index];
-                                return Padding(
-                                  padding: EdgeInsets.only(left: 5.r),
-                                  child: HomeInterestWidget(
-                                    interest: interest,
-                                    isSelected: state.interest == interest,
-                                  ),
-                                );
-                              },
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 16.w),
+                              child: ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                padding: EdgeInsets.symmetric(vertical: 8.h),
+                                itemCount: state.interests.length,
+                                itemBuilder: (context, index) {
+                                  final interest = state.interests[index];
+                                  return Padding(
+                                    padding: EdgeInsets.only(left: 5.r),
+                                    child: HomeInterestWidget(
+                                      interest: interest,
+                                      isSelected: state.interest == interest,
+                                    ),
+                                  );
+                                },
+                              ),
                             ),
                           );
                         },
