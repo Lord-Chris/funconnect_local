@@ -34,6 +34,7 @@ class _AddPlanPlaceViewState extends State<AddPlanPlaceView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: 56.h,
         title: Text(
           "Add place",
           style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w400),
@@ -53,7 +54,9 @@ class _AddPlanPlaceViewState extends State<AddPlanPlaceView> {
                 return Container(
                   width: double.infinity,
                   decoration: BoxDecoration(
-                    color: const Color(0xff202020),
+                    color: Theme.of(context).brightness == Brightness.dark
+                        ? const Color(0xff202020)
+                        : const Color(0xfff1f1f1),
                     borderRadius: BorderRadius.circular(8.r),
                   ),
                   child: Padding(
@@ -107,11 +110,17 @@ class _AddPlanPlaceViewState extends State<AddPlanPlaceView> {
                               textAlign: TextAlign.start,
                               decoration: InputDecoration(
                                 filled: true,
-                                fillColor: const Color(0xff202020),
+                                fillColor: Theme.of(context).brightness ==
+                                        Brightness.dark
+                                    ? const Color(0xff202020)
+                                    : const Color(0xfff1f1f1),
                                 hintText: "Find a place",
                                 hintStyle: TextStyle(
                                   fontSize: 14.sp,
-                                  color: const Color(0xff999999),
+                                  color: Theme.of(context).brightness ==
+                                          Brightness.dark
+                                      ? const Color(0xff999999)
+                                      : AppColors.secondary600,
                                 ),
                                 border: InputBorder.none,
                               ),
@@ -125,17 +134,22 @@ class _AddPlanPlaceViewState extends State<AddPlanPlaceView> {
                             },
                             child: Container(
                               decoration: BoxDecoration(
-                                color: AppColors.gray333,
+                                color: Theme.of(context).brightness ==
+                                        Brightness.dark
+                                    ? AppColors.gray333
+                                    : AppColors.secondary200,
                                 borderRadius: BorderRadius.circular(4.r),
                               ),
-                              child: const Padding(
-                                padding: EdgeInsets.symmetric(
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
                                     vertical: 8.0, horizontal: 12),
                                 child: Text(
                                   "Search Map",
                                   style: TextStyle(
                                     fontSize: 12,
-                                    color: Colors.white,
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .onBackground,
                                     fontWeight: FontWeight.w400,
                                   ),
                                 ),
@@ -163,7 +177,7 @@ class _AddPlanPlaceViewState extends State<AddPlanPlaceView> {
                       style: TextStyle(
                           fontSize: 14.sp,
                           fontWeight: FontWeight.w400,
-                          color: Colors.white),
+                          color: Theme.of(context).colorScheme.onBackground),
                     ),
                     SizedBox(height: 8.h),
                     InkWell(
@@ -186,7 +200,10 @@ class _AddPlanPlaceViewState extends State<AddPlanPlaceView> {
                       child: Container(
                         width: double.infinity,
                         decoration: BoxDecoration(
-                            color: const Color(0xff202020),
+                            color:
+                                Theme.of(context).brightness == Brightness.dark
+                                    ? const Color(0xff202020)
+                                    : const Color(0xfff1f1f1),
                             borderRadius: BorderRadius.circular(8.r)),
                         child: Padding(
                           padding: EdgeInsets.symmetric(
@@ -211,8 +228,12 @@ class _AddPlanPlaceViewState extends State<AddPlanPlaceView> {
                               return Text(
                                 "Select Date",
                                 style: TextStyle(
-                                    fontSize: 14.sp,
-                                    color: const Color(0xff999999)),
+                                  fontSize: 14.sp,
+                                  color: Theme.of(context).brightness ==
+                                          Brightness.dark
+                                      ? const Color(0xff999999)
+                                      : AppColors.secondary600,
+                                ),
                               );
                             },
                           ),
@@ -231,7 +252,7 @@ class _AddPlanPlaceViewState extends State<AddPlanPlaceView> {
                     style: TextStyle(
                         fontSize: 14.sp,
                         fontWeight: FontWeight.w400,
-                        color: Colors.white),
+                        color: Theme.of(context).colorScheme.onBackground),
                   ),
                   SizedBox(height: 8.h),
                   InkWell(
@@ -249,7 +270,9 @@ class _AddPlanPlaceViewState extends State<AddPlanPlaceView> {
                     },
                     child: Container(
                       decoration: BoxDecoration(
-                          color: const Color(0xff202020),
+                          color: Theme.of(context).brightness == Brightness.dark
+                              ? const Color(0xff202020)
+                              : const Color(0xfff1f1f1),
                           borderRadius: BorderRadius.circular(8.r)),
                       child: Padding(
                           padding: EdgeInsets.symmetric(
@@ -273,8 +296,12 @@ class _AddPlanPlaceViewState extends State<AddPlanPlaceView> {
                               }
                               return Text("Select Time",
                                   style: TextStyle(
-                                      fontSize: 14.sp,
-                                      color: const Color(0xff999999)));
+                                    fontSize: 14.sp,
+                                    color: Theme.of(context).brightness ==
+                                            Brightness.dark
+                                        ? const Color(0xff999999)
+                                        : AppColors.secondary600,
+                                  ));
                             },
                           )),
                     ),

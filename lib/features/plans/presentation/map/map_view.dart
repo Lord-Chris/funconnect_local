@@ -51,9 +51,7 @@ class PlannerMapView extends StatelessWidget {
                     mapToolbarEnabled: true,
                     trafficEnabled: true,
                     markers: snapshot.data!,
-                    onMapCreated: (GoogleMapController controller) {
-                      // _controller.complete(controller);
-                    },
+                    onMapCreated: (GoogleMapController controller) {},
                   );
                 },
               ),
