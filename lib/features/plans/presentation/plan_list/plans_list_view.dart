@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:funconnect/features/plans/presentation/components/empty_plans_view.dart';
 import 'package:funconnect/features/plans/presentation/plan_list/bloc/plan_list_bloc.dart';
 import 'package:funconnect/shared/components/app_loader.dart';
+import 'package:funconnect/shared/constants/colors.dart';
 
 class PlansListView extends StatelessWidget {
   const PlansListView({super.key});
@@ -75,7 +76,10 @@ class PlansListView extends StatelessWidget {
                                 },
                                 child: Container(
                                     decoration: BoxDecoration(
-                                        color: const Color(0xff161616),
+                                        color: Theme.of(context).brightness ==
+                                                Brightness.dark
+                                            ? const Color(0xff161616)
+                                            : const Color(0xffF1F1F1),
                                         borderRadius: BorderRadius.circular(8)),
                                     width: double.infinity,
                                     child: Padding(
@@ -89,8 +93,13 @@ class PlansListView extends StatelessWidget {
                                               children: [
                                                 Text(state.data[index].name,
                                                     style: TextStyle(
-                                                        color: const Color(
-                                                            0xffcccccc),
+                                                        color: Theme.of(context)
+                                                                    .brightness ==
+                                                                Brightness.dark
+                                                            ? const Color(
+                                                                0xffcccccc)
+                                                            : const Color(
+                                                                0xff333333),
                                                         fontSize: 16.sp,
                                                         fontWeight:
                                                             FontWeight.w500)),
@@ -100,8 +109,13 @@ class PlansListView extends StatelessWidget {
                                                 Text(
                                                   state.data[index].description,
                                                   style: TextStyle(
-                                                      color: const Color(
-                                                          0xff999999),
+                                                      color: Theme.of(context)
+                                                                  .brightness ==
+                                                              Brightness.dark
+                                                          ? const Color(
+                                                              0xff999999)
+                                                          : const Color(
+                                                              0xff666666),
                                                       fontSize: 12.sp,
                                                       fontWeight:
                                                           FontWeight.w400),
@@ -109,9 +123,13 @@ class PlansListView extends StatelessWidget {
                                               ],
                                             ),
                                           ),
-                                          const Icon(
+                                          Icon(
                                             Icons.upload,
-                                            color: Color(0xffcccccc),
+                                            color:
+                                                Theme.of(context).brightness ==
+                                                        Brightness.dark
+                                                    ? const Color(0xffcccccc)
+                                                    : const Color(0xff333333),
                                             size: 20,
                                           )
                                         ],
