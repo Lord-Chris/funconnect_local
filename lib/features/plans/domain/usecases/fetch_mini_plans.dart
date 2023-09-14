@@ -5,10 +5,26 @@ import 'package:funconnect/features/plans/data/repository/i_plans_repository.dar
 
 import 'package:funconnect/features/plans/domain/entities/mini_plan_model.dart';
 
-class FetchMiniPlansUseCase with UseCases<List<MiniPlanModel>, NoParams> {
+class FetchMiniPlansUseCase
+    with UseCases<(List<MiniPlanModel>, List<MiniPlanModel>), NoParams> {
   final _planRepository = locator<IPlansRepository>();
   @override
-  Future<List<MiniPlanModel>> call(params) async {
-    return await _planRepository.fetchUserMiniPlans();
+  Future<(List<MiniPlanModel>, List<MiniPlanModel>)> call(params) async {
+    List<MiniPlanModel> allMiniPlans =
+        await _planRepository.fetchUserMiniPlans();
+
+    List<MiniPlanModel> ownerPlans = [];
+
+    List<MiniPlanModel> sharedPlans = [];
+
+    for (var miniPlan in allMiniPlans) {
+      if (miniPlan.scope == Scope.owner) {
+        ownerPlans.add(miniPlan);
+      } else {
+        sharedPlans.add(miniPlan);
+      }
+    }
+
+    return (ownerPlans, sharedPlans);
   }
 }

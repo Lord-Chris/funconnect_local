@@ -58,13 +58,13 @@ class PlansListView extends StatelessWidget {
                           separatorBuilder: (context, index) => SizedBox(
                                 height: 16.h,
                               ),
-                          itemCount: state.data.length,
+                          itemCount: state.data.$1.length,
                           itemBuilder: (context, index) {
                             return InkWell(
                               onTap: () {
                                 context
                                     .read<PlanListBloc>()
-                                    .add(OpenPlanEvent(state.data[index]));
+                                    .add(OpenPlanEvent(state.data.$1[index]));
                               },
                               child: Container(
                                   decoration: BoxDecoration(
@@ -80,7 +80,7 @@ class PlansListView extends StatelessWidget {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
-                                              Text(state.data[index].name,
+                                              Text(state.data.$1[index].name,
                                                   style: TextStyle(
                                                       color: const Color(
                                                           0xffcccccc),
@@ -91,7 +91,83 @@ class PlansListView extends StatelessWidget {
                                                 height: 8.h,
                                               ),
                                               Text(
-                                                state.data[index].description,
+                                                state
+                                                    .data.$1[index].description,
+                                                style: TextStyle(
+                                                    color:
+                                                        const Color(0xff999999),
+                                                    fontSize: 12.sp,
+                                                    fontWeight:
+                                                        FontWeight.w400),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        const Icon(
+                                          Icons.upload,
+                                          color: Color(0xffcccccc),
+                                          size: 20,
+                                        )
+                                      ],
+                                    ),
+                                  )),
+                            );
+                          }),
+                    ),
+                    state.data.$2.isNotEmpty
+                        ? Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text("Shared Plans",
+                                style: TextStyle(
+                                    fontSize: 16.sp,
+                                    fontWeight: FontWeight.w500)),
+                          )
+                        : const SizedBox(),
+                    SizedBox(
+                      height: 24.h,
+                    ),
+                    Expanded(
+                      child: ListView.separated(
+                          controller: scrollController,
+                          shrinkWrap: true,
+                          separatorBuilder: (context, index) => SizedBox(
+                                height: 16.h,
+                              ),
+                          itemCount: state.data.$2.length,
+                          itemBuilder: (context, index) {
+                            return InkWell(
+                              onTap: () {
+                                context
+                                    .read<PlanListBloc>()
+                                    .add(OpenPlanEvent(state.data.$2[index]));
+                              },
+                              child: Container(
+                                  decoration: BoxDecoration(
+                                      color: const Color(0xff161616),
+                                      borderRadius: BorderRadius.circular(8)),
+                                  width: double.infinity,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(16.0),
+                                    child: Row(
+                                      children: [
+                                        Expanded(
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(state.data.$2[index].name,
+                                                  style: TextStyle(
+                                                      color: const Color(
+                                                          0xffcccccc),
+                                                      fontSize: 16.sp,
+                                                      fontWeight:
+                                                          FontWeight.w500)),
+                                              SizedBox(
+                                                height: 8.h,
+                                              ),
+                                              Text(
+                                                state
+                                                    .data.$2[index].description,
                                                 style: TextStyle(
                                                     color:
                                                         const Color(0xff999999),

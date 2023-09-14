@@ -27,7 +27,8 @@ class PlanListBloc extends Bloc<PlanListEvent, PlanListState> {
       CreatePlanClickedEvent event, Emitter<PlanListState> emit) async {
     await _navigation.toNamed(Routes.choosePlanTypeViewRoute);
     emit(PlanListLoadingState());
-    List<MiniPlanModel> data = await FetchMiniPlansUseCase().call(NoParams());
+    (List<MiniPlanModel>, List<MiniPlanModel>) data =
+        await FetchMiniPlansUseCase().call(NoParams());
     emit(PlanListFetchedState(data));
   }
 
@@ -35,8 +36,9 @@ class PlanListBloc extends Bloc<PlanListEvent, PlanListState> {
       FetchMiniPlansEvent event, Emitter<PlanListState> emit) async {
     emit(PlanListLoadingState());
     try {
-      List<MiniPlanModel> data = await FetchMiniPlansUseCase().call(NoParams());
-      if (data.isEmpty) {
+      (List<MiniPlanModel>, List<MiniPlanModel>) data =
+          await FetchMiniPlansUseCase().call(NoParams());
+      if (data.$1.isEmpty) {
         emit(PlanListEmptyState());
       } else {
         emit(PlanListFetchedState(data));

@@ -45,7 +45,8 @@ class AddPlaceToPlanBloc
       LoadPlansListEvent event, Emitter<AddPlaceToPlanState> emit) async {
     emit(AddPlaceToPlanLoading());
     try {
-      List<MiniPlanModel> data = await FetchMiniPlansUseCase().call(NoParams());
+      (List<MiniPlanModel>, List<MiniPlanModel>) data =
+          await FetchMiniPlansUseCase().call(NoParams());
 
       emit(PlansListLoaded(data));
     } catch (e) {

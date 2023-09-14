@@ -18,7 +18,7 @@ publish_to: "none" # Remove this line if you wish to publish to pub.dev
 version: 2.0.3+46
 
 environment:
-  sdk: ">=2.19.2 <3.0.0"
+  sdk: ">=3.0.0"
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -80,14 +80,13 @@ dependencies:
   url_launcher: ^6.1.12
   webview_flutter: ^4.2.2
 
-  webview_flutter_wkwebview: '3.7.3'
+  webview_flutter_wkwebview: "3.7.3"
 
 dev_dependencies:
   flutter_lints: ^2.0.0
   flutter_test:
     sdk: flutter
-dependency_overrides:
- 
+
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 # The following section is specific to Flutter packages.
