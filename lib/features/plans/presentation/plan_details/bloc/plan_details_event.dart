@@ -38,3 +38,5 @@ class DeletePlanClickedEvent extends PlanDetailsEvent {
 
   const DeletePlanClickedEvent({required this.plan});
 }
+
+class PlanPlaceEditEvent extends Plan

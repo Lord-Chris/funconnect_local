@@ -45,8 +45,11 @@ class PlanPlaceItem extends StatelessWidget {
                         fontWeight: FontWeight.w500,
                         color: const Color(0xffcccccc)),
                   ),
-                  const Text("Edit",
-                      style: TextStyle(fontSize: 14, color: AppColors.primary))
+                  const InkWell(
+                    child: Text("Edit",
+                        style:
+                            TextStyle(fontSize: 14, color: AppColors.primary)),
+                  )
                 ],
               ),
               SizedBox(
