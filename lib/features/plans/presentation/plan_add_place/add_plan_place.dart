@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:funconnect/core/blocs/main_app_bloc.dart';
 import 'package:funconnect/features/places/domain/entities/place_model.dart';
-import 'package:funconnect/features/plans/domain/entities/mini_plan_model.dart';
+import 'package:funconnect/features/plans/domain/entities/plan_add_place_arguments.dart';
 
 import 'package:funconnect/features/plans/presentation/plan_add_place/bloc/plan_add_place_bloc.dart';
 import 'package:funconnect/shared/components/custom_button.dart';
@@ -12,9 +12,12 @@ import 'package:intl/intl.dart';
 import 'package:logger/logger.dart';
 
 class AddPlanPlaceView extends StatefulWidget {
-  final MiniPlanModel plan;
+  final PLanAddPLaceArguments arguments;
 
-  const AddPlanPlaceView({super.key, required this.plan});
+  const AddPlanPlaceView({
+    super.key,
+    required this.arguments,
+  });
 
   @override
   State<AddPlanPlaceView> createState() => _AddPlanPlaceViewState();
@@ -23,6 +26,11 @@ class AddPlanPlaceView extends StatefulWidget {
 class _AddPlanPlaceViewState extends State<AddPlanPlaceView> {
   final _placeFormInputController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   void dispose() {
@@ -70,53 +78,52 @@ class _AddPlanPlaceViewState extends State<AddPlanPlaceView> {
                             color: Color(0xff999999),
                           ),
                           Expanded(
-                              child: BlocListener<PlanAddPlaceBloc,
-                                  PlanAddPlaceState>(
-                            listener: (context, state) {
-                              if (state is PlanPlaceSelected) {
+                            child: BlocBuilder<PlanAddPlaceBloc,
+                                PlanAddPlaceState>(
+                              builder: (context, state) {
                                 _placeFormInputController.text =
-                                    state.place.name;
-                              }
-                            },
-                            child: TextFormField(
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return "Please select a place";
-                                }
-                                return null;
+                                    state.place?.name ?? "";
+                                return TextFormField(
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return "Please select a place";
+                                    }
+                                    return null;
+                                  },
+                                  controller: _placeFormInputController,
+                                  readOnly: true,
+                                  style: TextStyle(
+                                    fontSize: 14.sp,
+                                    fontWeight: FontWeight.w400,
+                                    color: const Color(0xff999999),
+                                  ),
+                                  onTap: () async {
+                                    PlaceModel place = await showSearch(
+                                        context: context,
+                                        delegate: MySearchDelegate(
+                                            state1.homeTrends.places[0].data));
+                                    if (mounted) {
+                                      context
+                                          .read<PlanAddPlaceBloc>()
+                                          .add(PlanAddPlaceEventClicked(place));
+                                    }
+                                  },
+                                  textAlignVertical: TextAlignVertical.top,
+                                  textAlign: TextAlign.start,
+                                  decoration: InputDecoration(
+                                    filled: true,
+                                    fillColor: const Color(0xff202020),
+                                    hintText: "Find a place",
+                                    hintStyle: TextStyle(
+                                      fontSize: 14.sp,
+                                      color: const Color(0xff999999),
+                                    ),
+                                    border: InputBorder.none,
+                                  ),
+                                );
                               },
-                              controller: _placeFormInputController,
-                              readOnly: true,
-                              style: TextStyle(
-                                fontSize: 14.sp,
-                                fontWeight: FontWeight.w400,
-                                color: const Color(0xff999999),
-                              ),
-                              onTap: () async {
-                                PlaceModel place = await showSearch(
-                                    context: context,
-                                    delegate: MySearchDelegate(
-                                        state1.homeTrends.places[0].data));
-                                if (mounted) {
-                                  context
-                                      .read<PlanAddPlaceBloc>()
-                                      .add(PlanAddPlaceEventClicked(place));
-                                }
-                              },
-                              textAlignVertical: TextAlignVertical.top,
-                              textAlign: TextAlign.start,
-                              decoration: InputDecoration(
-                                filled: true,
-                                fillColor: const Color(0xff202020),
-                                hintText: "Find a place",
-                                hintStyle: TextStyle(
-                                  fontSize: 14.sp,
-                                  color: const Color(0xff999999),
-                                ),
-                                border: InputBorder.none,
-                              ),
                             ),
-                          )),
+                          ),
                           InkWell(
                             onTap: () {
                               context
@@ -193,16 +200,10 @@ class _AddPlanPlaceViewState extends State<AddPlanPlaceView> {
                               vertical: 16.h, horizontal: 16.w),
                           child:
                               BlocBuilder<PlanAddPlaceBloc, PlanAddPlaceState>(
-                            buildWhen: (previous, current) {
-                              if (current is PlanDateSelected) {
-                                return true;
-                              }
-                              return false;
-                            },
                             builder: (context, state) {
-                              if (state is PlanDateSelected) {
+                              if (state.date != null) {
                                 return Text(
-                                  DateFormat("yMMMMd").format(state.date),
+                                  DateFormat("yMMMMd").format(state.date!),
                                   style: TextStyle(
                                       fontSize: 14.sp,
                                       color: const Color(0xff999999)),
@@ -256,16 +257,10 @@ class _AddPlanPlaceViewState extends State<AddPlanPlaceView> {
                               vertical: 16.h, horizontal: 16.w),
                           child:
                               BlocBuilder<PlanAddPlaceBloc, PlanAddPlaceState>(
-                            buildWhen: (previous, current) {
-                              if (current is PlanTimeSelected) {
-                                return true;
-                              }
-                              return false;
-                            },
                             builder: (context, state) {
-                              if (state is PlanTimeSelected) {
+                              if (state.date != null) {
                                 return Text(
-                                  DateFormat("hh:mm a").format(state.time),
+                                  DateFormat("hh:mm a").format(state.date!),
                                   style: TextStyle(
                                       fontSize: 14.sp,
                                       color: const Color(0xff999999)),
@@ -303,7 +298,7 @@ class _AddPlanPlaceViewState extends State<AddPlanPlaceView> {
                   if (_formKey.currentState!.validate()) {
                     context
                         .read<PlanAddPlaceBloc>()
-                        .add(AddPlaceEvent(widget.plan.id));
+                        .add(AddPlaceEvent(widget.arguments.plan.id));
                   }
                 },
                 label: "Add Place",

@@ -116,11 +116,13 @@ class PlanDetailsView extends StatelessWidget {
                                         ConnectionState.waiting) {
                                       return Skeletonizer(
                                           child: PlanPlaceItem(
+                                        plan: plan,
                                         place: snapshot.data,
                                         miniPlanPlace: state.places[index],
                                       ));
                                     }
                                     return (PlanPlaceItem(
+                                        plan: plan,
                                         place: snapshot.data!,
                                         miniPlanPlace: state.places[index]));
                                   });
