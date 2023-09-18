@@ -31,6 +31,7 @@ class _ProfileViewState extends State<ProfileView> {
         MediaQuery.of(context).platformBrightness == Brightness.dark;
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: 56,
         centerTitle: true,
         automaticallyImplyLeading: false,
         elevation: 0,
@@ -164,7 +165,8 @@ class _ProfileViewState extends State<ProfileView> {
                               Text(
                                 '@${userProfile.username}',
                                 style: AppTextStyles.regular14.copyWith(
-                                  color: isDarkMode
+                                  color: Theme.of(context).brightness ==
+                                          Brightness.dark
                                       ? AppColors.secondary500
                                       : AppColors.gray333,
                                 ),
@@ -173,7 +175,8 @@ class _ProfileViewState extends State<ProfileView> {
                               Text(
                                 userProfile.email,
                                 style: AppTextStyles.regular14.copyWith(
-                                  color: isDarkMode
+                                  color: Theme.of(context).brightness ==
+                                          Brightness.dark
                                       ? AppColors.secondary500
                                       : AppColors.gray333,
                                 ),
@@ -221,9 +224,10 @@ class _ProfileViewState extends State<ProfileView> {
                     // Spacing.vertRegular(),
                     if (!Platform.isIOS) ...[
                       _ProfileSubButton(
-                        buttonColor: isDarkMode
-                            ? AppColors.primary.withOpacity(.2)
-                            : const Color(0xffffc16f),
+                        buttonColor:
+                            Theme.of(context).brightness == Brightness.dark
+                                ? AppColors.primary.withOpacity(.2)
+                                : const Color(0xffffc16f),
                         borderColor: AppColors.primary,
                         label: "My Events",
                         onTap: () =>
@@ -234,7 +238,7 @@ class _ProfileViewState extends State<ProfileView> {
                     Container(
                       padding: REdgeInsets.fromLTRB(18, 22, 18, 20),
                       decoration: BoxDecoration(
-                        color: isDarkMode
+                        color: Theme.of(context).brightness == Brightness.dark
                             ? AppColors.secondary800
                             : AppColors.wGreyF1,
                         borderRadius: BorderRadius.circular(24),
@@ -297,7 +301,7 @@ class _ProfileViewState extends State<ProfileView> {
                     Container(
                       padding: REdgeInsets.fromLTRB(18, 22, 18, 20),
                       decoration: BoxDecoration(
-                        color: isDarkMode
+                        color: Theme.of(context).brightness == Brightness.dark
                             ? AppColors.secondary800
                             : AppColors.wGreyF1,
                         borderRadius: BorderRadius.circular(24),
@@ -332,7 +336,7 @@ class _ProfileViewState extends State<ProfileView> {
                     Container(
                       padding: REdgeInsets.fromLTRB(18, 22, 18, 20),
                       decoration: BoxDecoration(
-                        color: isDarkMode
+                        color: Theme.of(context).brightness == Brightness.dark
                             ? AppColors.secondary800
                             : AppColors.wGreyF1,
                         borderRadius: BorderRadius.circular(24),
