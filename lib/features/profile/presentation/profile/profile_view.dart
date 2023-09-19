@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:funconnect/core/blocs/bloc/theme_switcher_bloc.dart';
 import 'package:funconnect/shared/components/_components.dart';
 import 'package:funconnect/shared/constants/_constants.dart';
 
@@ -26,16 +27,18 @@ class _ProfileViewState extends State<ProfileView> {
 
   @override
   Widget build(BuildContext context) {
+    final bool isDarkMode =
+        MediaQuery.of(context).platformBrightness == Brightness.dark;
     return Scaffold(
-      backgroundColor: AppColors.black,
       appBar: AppBar(
-        backgroundColor: AppColors.black,
+        toolbarHeight: 56,
         centerTitle: true,
         automaticallyImplyLeading: false,
         elevation: 0,
         title: Text(
           "Profile",
-          style: AppTextStyles.medium28,
+          style: AppTextStyles.medium28
+              .copyWith(color: Theme.of(context).colorScheme.onBackground),
         ),
       ),
       body: BlocBuilder<ProfileBloc, ProfileState>(
@@ -55,7 +58,8 @@ class _ProfileViewState extends State<ProfileView> {
                   children: [
                     Text(
                       state.failure.message,
-                      style: AppTextStyles.medium14,
+                      style: AppTextStyles.medium14.copyWith(
+                          color: Theme.of(context).colorScheme.onBackground),
                     ),
                     Spacing.vertRegular(),
                     AppButton(
@@ -108,7 +112,11 @@ class _ProfileViewState extends State<ProfileView> {
                                   Expanded(
                                     child: Text(
                                       userProfile.name,
-                                      style: AppTextStyles.medium20,
+                                      style: AppTextStyles.medium20.copyWith(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .onBackground,
+                                      ),
                                     ),
                                   ),
                                   Visibility(
@@ -157,14 +165,20 @@ class _ProfileViewState extends State<ProfileView> {
                               Text(
                                 '@${userProfile.username}',
                                 style: AppTextStyles.regular14.copyWith(
-                                  color: AppColors.secondary500,
+                                  color: Theme.of(context).brightness ==
+                                          Brightness.dark
+                                      ? AppColors.secondary500
+                                      : AppColors.gray333,
                                 ),
                               ),
                               Spacing.vertTiny(),
                               Text(
                                 userProfile.email,
                                 style: AppTextStyles.regular14.copyWith(
-                                  color: AppColors.secondary500,
+                                  color: Theme.of(context).brightness ==
+                                          Brightness.dark
+                                      ? AppColors.secondary500
+                                      : AppColors.gray333,
                                 ),
                               ),
                               if (userProfile.bio.isNotEmpty) ...[
@@ -185,7 +199,8 @@ class _ProfileViewState extends State<ProfileView> {
                                 hasBorder: true,
                                 borderRadius: 8,
                                 padding: REdgeInsets.fromLTRB(32, 5, 32, 5),
-                                labelColor: AppColors.white,
+                                labelColor:
+                                    Theme.of(context).colorScheme.onBackground,
                                 borderColor: AppColors.info700,
                                 buttonColor: AppColors.transparent,
                                 onTap: () => context.read<ProfileBloc>().add(
@@ -209,7 +224,10 @@ class _ProfileViewState extends State<ProfileView> {
                     // Spacing.vertRegular(),
                     if (!Platform.isIOS) ...[
                       _ProfileSubButton(
-                        buttonColor: AppColors.primary.withOpacity(.2),
+                        buttonColor:
+                            Theme.of(context).brightness == Brightness.dark
+                                ? AppColors.primary.withOpacity(.2)
+                                : const Color(0xffffc16f),
                         borderColor: AppColors.primary,
                         label: "My Events",
                         onTap: () =>
@@ -220,7 +238,9 @@ class _ProfileViewState extends State<ProfileView> {
                     Container(
                       padding: REdgeInsets.fromLTRB(18, 22, 18, 20),
                       decoration: BoxDecoration(
-                        color: AppColors.secondary800,
+                        color: Theme.of(context).brightness == Brightness.dark
+                            ? AppColors.secondary800
+                            : AppColors.wGreyF1,
                         borderRadius: BorderRadius.circular(24),
                       ),
                       child: Column(
@@ -228,7 +248,9 @@ class _ProfileViewState extends State<ProfileView> {
                         children: [
                           Text(
                             "Settings",
-                            style: AppTextStyles.semiBold20,
+                            style: AppTextStyles.semiBold20.copyWith(
+                              color: Theme.of(context).colorScheme.onBackground,
+                            ),
                           ),
                           // _buildProfileItems(
                           //   "Manage log-in options",
@@ -259,13 +281,19 @@ class _ProfileViewState extends State<ProfileView> {
                           //     onChanged: (val) {},
                           //   ),
                           // ),
-                          // _buildProfileItems(
-                          //   "Dark mode",
-                          //   icon: AppSwitcher(
-                          //     value: true,
-                          //     onChanged: (val) {},
-                          //   ),
-                          // ),
+                          BlocBuilder<ThemeSwitcherBloc, ThemeData>(
+                            builder: (context, state) {
+                              return _buildProfileItems("Dark mode",
+                                  icon: AppSwitcher(
+                                    value: state.brightness == Brightness.dark,
+                                    onChanged: (val) {
+                                      BlocProvider.of<ThemeSwitcherBloc>(
+                                              context)
+                                          .add(ThemeSwitcherEventToggle());
+                                    },
+                                  ));
+                            },
+                          )
                         ],
                       ),
                     ),
@@ -273,7 +301,9 @@ class _ProfileViewState extends State<ProfileView> {
                     Container(
                       padding: REdgeInsets.fromLTRB(18, 22, 18, 20),
                       decoration: BoxDecoration(
-                        color: AppColors.secondary800,
+                        color: Theme.of(context).brightness == Brightness.dark
+                            ? AppColors.secondary800
+                            : AppColors.wGreyF1,
                         borderRadius: BorderRadius.circular(24),
                       ),
                       child: Column(
@@ -281,7 +311,9 @@ class _ProfileViewState extends State<ProfileView> {
                         children: [
                           Text(
                             "Support",
-                            style: AppTextStyles.semiBold20,
+                            style: AppTextStyles.semiBold20.copyWith(
+                                color:
+                                    Theme.of(context).colorScheme.onBackground),
                           ),
                           _buildProfileItems(
                             "Help desk",
@@ -304,7 +336,9 @@ class _ProfileViewState extends State<ProfileView> {
                     Container(
                       padding: REdgeInsets.fromLTRB(18, 22, 18, 20),
                       decoration: BoxDecoration(
-                        color: AppColors.secondary800,
+                        color: Theme.of(context).brightness == Brightness.dark
+                            ? AppColors.secondary800
+                            : AppColors.wGreyF1,
                         borderRadius: BorderRadius.circular(24),
                       ),
                       child: Column(
@@ -312,7 +346,9 @@ class _ProfileViewState extends State<ProfileView> {
                         children: [
                           Text(
                             "About",
-                            style: AppTextStyles.semiBold20,
+                            style: AppTextStyles.semiBold20.copyWith(
+                              color: Theme.of(context).colorScheme.onBackground,
+                            ),
                           ),
                           _buildProfileItems(
                             "Version",
@@ -341,10 +377,10 @@ class _ProfileViewState extends State<ProfileView> {
                       ),
                     ),
                     Spacing.vertLarge(),
-                    Text(
-                      "Connect with us",
-                      style: AppTextStyles.medium20,
-                    ),
+                    Text("Connect with us",
+                        style: AppTextStyles.medium20.copyWith(
+                          color: Theme.of(context).colorScheme.onBackground,
+                        )),
                     Spacing.vertMedium(),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -422,7 +458,9 @@ class _ProfileViewState extends State<ProfileView> {
           children: [
             Text(
               title,
-              style: AppTextStyles.regular16,
+              style: AppTextStyles.regular16.copyWith(
+                color: Theme.of(context).colorScheme.onBackground,
+              ),
             ),
             icon ?? const SizedBox(),
           ],
@@ -467,7 +505,8 @@ class _ProfileSubButton extends StatelessWidget {
           children: [
             Text(
               label,
-              style: AppTextStyles.regular16,
+              style: AppTextStyles.regular16
+                  .copyWith(color: Theme.of(context).colorScheme.onBackground),
             ),
             const Icon(
               Icons.arrow_forward_ios,

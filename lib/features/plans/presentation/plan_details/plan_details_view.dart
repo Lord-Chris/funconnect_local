@@ -25,6 +25,7 @@ class PlanDetailsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: 56.h,
         actions: [
           Padding(
             padding: EdgeInsets.only(right: 18.w),
@@ -37,7 +38,9 @@ class PlanDetailsView extends StatelessWidget {
               child: Container(
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8.r),
-                    color: const Color(0xff202020)),
+                    color: Theme.of(context).brightness == Brightness.dark
+                        ? const Color(0xff202020)
+                        : const Color(0xfff1f1f1)),
                 child: Padding(
                   padding:
                       EdgeInsets.symmetric(horizontal: 24.w, vertical: 16.h),
@@ -79,10 +82,10 @@ class PlanDetailsView extends StatelessWidget {
               children: [
                 Text(
                   plan.name,
-                  style: const TextStyle(
+                  style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.w500,
-                      color: Colors.white),
+                      color: Theme.of(context).colorScheme.onBackground),
                 ),
                 SizedBox(
                   height: 8.h,
@@ -153,7 +156,7 @@ class PlanDetailsView extends StatelessWidget {
                 Text(
                   "Attendees",
                   style: TextStyle(
-                      color: Colors.white,
+                      color: Theme.of(context).colorScheme.onBackground,
                       fontSize: 14.sp,
                       fontWeight: FontWeight.w400),
                 ),

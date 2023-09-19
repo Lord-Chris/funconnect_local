@@ -36,9 +36,10 @@ class _CreatePlanViewState extends State<CreatePlanView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
+        toolbarHeight: 56.h,
+        title: Text(
           "Create a  plan",
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400),
+          style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w400),
         ),
         leading: const Icon(Icons.arrow_back_ios),
       ),
@@ -53,7 +54,7 @@ class _CreatePlanViewState extends State<CreatePlanView> {
                 Text(
                   "Title",
                   style: TextStyle(
-                      color: Colors.white,
+                      color: Theme.of(context).colorScheme.onBackground,
                       fontSize: 14.sp,
                       fontWeight: FontWeight.w400),
                 ),
@@ -74,16 +75,22 @@ class _CreatePlanViewState extends State<CreatePlanView> {
                   decoration: InputDecoration(
                     filled: true,
                     contentPadding: const EdgeInsets.all(16),
-                    fillColor: const Color(0xff202020),
+                    fillColor: Theme.of(context).brightness == Brightness.dark
+                        ? const Color(0xff202020)
+                        : const Color(0xFFF1F1F1),
                     hintText: "What's the title of the plan...",
                     hintStyle: TextStyle(
                       fontSize: 14.sp,
-                      color: const Color(0xff999999),
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? const Color(0xff999999)
+                          : AppColors.secondary600,
                     ),
                     border: OutlineInputBorder(
+                      borderSide: BorderSide.none,
                       borderRadius: BorderRadius.circular(8.r),
                     ),
                     enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide.none,
                       borderRadius: BorderRadius.circular(8.r),
                     ),
                   ),
@@ -93,7 +100,7 @@ class _CreatePlanViewState extends State<CreatePlanView> {
                 ),
                 Text("Description",
                     style: TextStyle(
-                        color: Colors.white,
+                        color: Theme.of(context).colorScheme.onBackground,
                         fontSize: 14.sp,
                         fontWeight: FontWeight.w400)),
                 SizedBox(
@@ -114,16 +121,22 @@ class _CreatePlanViewState extends State<CreatePlanView> {
                   decoration: InputDecoration(
                     filled: true,
                     contentPadding: const EdgeInsets.all(16),
-                    fillColor: const Color(0xff202020),
+                    fillColor: Theme.of(context).brightness == Brightness.dark
+                        ? const Color(0xff202020)
+                        : const Color(0xFFF1F1F1),
                     hintText: "Describe the plan...",
                     hintStyle: TextStyle(
                       fontSize: 14.sp,
-                      color: const Color(0xff999999),
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? const Color(0xff999999)
+                          : AppColors.secondary600,
                     ),
                     border: OutlineInputBorder(
+                      borderSide: BorderSide.none,
                       borderRadius: BorderRadius.circular(8.r),
                     ),
                     enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide.none,
                       borderRadius: BorderRadius.circular(8.r),
                     ),
                   ),
@@ -134,7 +147,7 @@ class _CreatePlanViewState extends State<CreatePlanView> {
                 Text(
                   "Add friends",
                   style: TextStyle(
-                      color: Colors.white,
+                      color: Theme.of(context).colorScheme.onBackground,
                       fontSize: 14.sp,
                       fontWeight: FontWeight.w400),
                 ),
@@ -144,7 +157,9 @@ class _CreatePlanViewState extends State<CreatePlanView> {
                 Container(
                   width: double.infinity,
                   decoration: BoxDecoration(
-                    color: const Color(0xff202020),
+                    color: Theme.of(context).brightness == Brightness.dark
+                        ? const Color(0xff202020)
+                        : const Color(0xFFF1F1F1),
                     borderRadius: BorderRadius.circular(8.r),
                   ),
                   child: Padding(
@@ -172,11 +187,17 @@ class _CreatePlanViewState extends State<CreatePlanView> {
                                 filled: true,
                                 contentPadding: const EdgeInsets.only(
                                     left: 8, top: 16, bottom: 16),
-                                fillColor: const Color(0xff202020),
+                                fillColor: Theme.of(context).brightness ==
+                                        Brightness.dark
+                                    ? const Color(0xff202020)
+                                    : const Color(0xFFF1F1F1),
                                 hintText: "Add a Friend's email",
                                 hintStyle: TextStyle(
                                   fontSize: 14.sp,
-                                  color: const Color(0xff999999),
+                                  color: Theme.of(context).brightness ==
+                                          Brightness.dark
+                                      ? const Color(0xff999999)
+                                      : AppColors.secondary600,
                                 ),
                                 border: InputBorder.none,
                               ),
@@ -194,17 +215,22 @@ class _CreatePlanViewState extends State<CreatePlanView> {
                             },
                             child: Container(
                               decoration: BoxDecoration(
-                                color: AppColors.gray333,
+                                color: Theme.of(context).brightness ==
+                                        Brightness.dark
+                                    ? AppColors.gray333
+                                    : AppColors.secondary200,
                                 borderRadius: BorderRadius.circular(4.r),
                               ),
-                              child: const Padding(
-                                padding: EdgeInsets.symmetric(
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
                                     vertical: 8.0, horizontal: 12),
                                 child: Text(
                                   "Add",
                                   style: TextStyle(
                                     fontSize: 12,
-                                    color: Colors.white,
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .onBackground,
                                     fontWeight: FontWeight.w400,
                                   ),
                                 ),
@@ -253,7 +279,8 @@ class _CreatePlanViewState extends State<CreatePlanView> {
                           Text(
                             "Reminder",
                             style: TextStyle(
-                                color: Colors.white,
+                                color:
+                                    Theme.of(context).colorScheme.onBackground,
                                 fontSize: 14.sp,
                                 fontWeight: FontWeight.w400),
                           ),
@@ -269,11 +296,16 @@ class _CreatePlanViewState extends State<CreatePlanView> {
                               decoration: InputDecoration(
                                 contentPadding: const EdgeInsets.all(8),
                                 filled: true,
-                                fillColor: const Color(0xff202020),
+                                fillColor: Theme.of(context).brightness ==
+                                        Brightness.dark
+                                    ? const Color(0xff202020)
+                                    : const Color(0xFFF1F1F1),
                                 border: OutlineInputBorder(
+                                  borderSide: BorderSide.none,
                                   borderRadius: BorderRadius.circular(8.r),
                                 ),
                                 enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide.none,
                                   borderRadius: BorderRadius.circular(8.r),
                                 ),
                               ),
@@ -292,7 +324,10 @@ class _CreatePlanViewState extends State<CreatePlanView> {
                               style: TextStyle(
                                 fontSize: 14.sp,
                                 fontWeight: FontWeight.w400,
-                                color: const Color(0xff999999),
+                                color: Theme.of(context).brightness ==
+                                        Brightness.dark
+                                    ? const Color(0xff999999)
+                                    : AppColors.secondary600,
                               ))
                         ],
                       ),
@@ -308,7 +343,8 @@ class _CreatePlanViewState extends State<CreatePlanView> {
                           Text(
                             "Notification",
                             style: TextStyle(
-                                color: Colors.white,
+                                color:
+                                    Theme.of(context).colorScheme.onBackground,
                                 fontSize: 14.sp,
                                 fontWeight: FontWeight.w400),
                           ),
@@ -321,11 +357,16 @@ class _CreatePlanViewState extends State<CreatePlanView> {
                               decoration: InputDecoration(
                                 contentPadding: const EdgeInsets.all(8),
                                 filled: true,
-                                fillColor: const Color(0xff202020),
+                                fillColor: Theme.of(context).brightness ==
+                                        Brightness.dark
+                                    ? const Color(0xff202020)
+                                    : const Color(0xFFF1F1F1),
                                 border: OutlineInputBorder(
+                                  borderSide: BorderSide.none,
                                   borderRadius: BorderRadius.circular(8.r),
                                 ),
                                 enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide.none,
                                   borderRadius: BorderRadius.circular(8.r),
                                 ),
                               ),
@@ -340,7 +381,10 @@ class _CreatePlanViewState extends State<CreatePlanView> {
                               style: TextStyle(
                                 fontSize: 14.sp,
                                 fontWeight: FontWeight.w400,
-                                color: const Color(0xff999999),
+                                color: Theme.of(context).brightness ==
+                                        Brightness.dark
+                                    ? const Color(0xff999999)
+                                    : AppColors.secondary600,
                               ))
                         ],
                       ),

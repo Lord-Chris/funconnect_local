@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:funconnect/shared/components/custom_button.dart';
 import 'package:funconnect/shared/constants/colors.dart';
 import 'package:funconnect/shared/constants/textstyles.dart';
 
@@ -33,7 +32,9 @@ class StatusDialog extends StatelessWidget {
         padding: REdgeInsets.symmetric(horizontal: 40, vertical: 60),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(36),
-          color: AppColors.interestWidgetAsh,
+          color: Theme.of(context).brightness == Brightness.light
+              ? AppColors.white
+              : AppColors.interestWidgetAsh,
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -46,29 +47,21 @@ class StatusDialog extends StatelessWidget {
             SizedBox(height: 31.h),
             title == null
                 ? const SizedBox()
-                : Text(
-                    title!,
+                : Text(title!,
                     textAlign: TextAlign.center,
-                    style: AppTextStyles.medium20,
-                  ),
+                    style: AppTextStyles.medium20.copyWith(
+                      color: Theme.of(context).colorScheme.onBackground,
+                    )),
             SizedBox(height: 16.h),
             Flexible(
               child: Text(
                 body,
                 textAlign: TextAlign.center,
-                style: AppTextStyles.light14,
+                style: AppTextStyles.light14.copyWith(
+                  color: Theme.of(context).colorScheme.onBackground,
+                ),
               ),
             ),
-            hasButton == null || hasButton == false
-                ? const SizedBox()
-                : SizedBox(height: 32.h),
-            hasButton == null || hasButton == false
-                ? const SizedBox()
-                : AppButton(
-                    label: buttonLabel!,
-                    onTap: buttonAction,
-                    borderRadius: 8,
-                  )
           ],
         ),
       ),

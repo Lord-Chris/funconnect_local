@@ -43,7 +43,7 @@ class PlanPlaceItem extends StatelessWidget {
                     style: TextStyle(
                         fontSize: 16.sp,
                         fontWeight: FontWeight.w500,
-                        color: const Color(0xffcccccc)),
+                        color: Theme.of(context).colorScheme.onBackground),
                   ),
                   const Text("Edit",
                       style: TextStyle(fontSize: 14, color: AppColors.primary))
@@ -55,7 +55,9 @@ class PlanPlaceItem extends StatelessWidget {
               Text(
                 place?.location?.address ?? "",
                 style: TextStyle(
-                    color: const Color(0xff999999),
+                    color: Theme.of(context).brightness == Brightness.dark
+                        ? const Color(0xff999999)
+                        : AppColors.secondary500,
                     fontSize: 14.sp,
                     fontWeight: FontWeight.w400),
               ),
@@ -88,7 +90,7 @@ class PlanPlaceItem extends StatelessWidget {
                       Text(
                         DateFormat.jm().format(dateTime.toLocal()),
                         style: TextStyle(
-                            color: Colors.white,
+                            color: Theme.of(context).colorScheme.onBackground,
                             fontSize: 14.sp,
                             fontWeight: FontWeight.w400),
                       ),

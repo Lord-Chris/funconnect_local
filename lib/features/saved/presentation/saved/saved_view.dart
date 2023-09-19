@@ -42,7 +42,6 @@ class _SavedViewState extends State<SavedView>
     return BlocBuilder<SavedBloc, SavedState>(
       builder: (context, state) {
         return Scaffold(
-          backgroundColor: AppColors.black,
           body: SafeArea(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -51,7 +50,8 @@ class _SavedViewState extends State<SavedView>
                   contentPadding: REdgeInsets.fromLTRB(16, 30, 16, 0),
                   title: Text(
                     AppText.aTSaved,
-                    style: AppTextStyles.medium28,
+                    style: AppTextStyles.medium28.copyWith(
+                        color: Theme.of(context).colorScheme.onBackground),
                   ),
                   subtitle: Text(
                     AppText.aTSavedSubtext,
@@ -75,7 +75,8 @@ class _SavedViewState extends State<SavedView>
                   indicatorWeight: 3,
                   labelColor: AppColors.primary,
                   labelStyle: AppTextStyles.medium16,
-                  unselectedLabelColor: Colors.white,
+                  unselectedLabelColor:
+                      Theme.of(context).colorScheme.onBackground,
                   unselectedLabelStyle: AppTextStyles.medium16,
                   tabs: [
                     Tab(

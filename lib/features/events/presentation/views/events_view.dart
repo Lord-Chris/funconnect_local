@@ -33,7 +33,7 @@ class _EventsViewState extends State<EventsView> {
       //     child: Icon(Icons.add),
       //   ),
       // ),
-      backgroundColor: AppColors.black,
+
       body: SafeArea(
         child: Column(
           mainAxisSize: MainAxisSize.max,
@@ -48,14 +48,16 @@ class _EventsViewState extends State<EventsView> {
             Text(
               "Events!",
               textAlign: TextAlign.center,
-              style: AppTextStyles.regular24,
+              style: AppTextStyles.regular24
+                  .copyWith(color: Theme.of(context).colorScheme.onBackground),
             ),
             Spacing.vertLarge(),
             Spacing.vertRegular(),
             Text(
               "Coming Soon!",
               textAlign: TextAlign.center,
-              style: AppTextStyles.medium32,
+              style: AppTextStyles.medium32
+                  .copyWith(color: Theme.of(context).colorScheme.onBackground),
             ),
             Spacing.vertRegular(),
             Flexible(

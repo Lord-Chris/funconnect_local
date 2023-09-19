@@ -47,13 +47,15 @@ class EmailVerifiedScreen extends StatelessWidget {
                 Spacing.vertRegular(),
                 Text(
                   AppText.aTAuthEmailIDVerificationText,
-                  style: AppTextStyles.medium24,
+                  style: AppTextStyles.medium24.copyWith(
+                      color: Theme.of(context).colorScheme.onBackground),
                 ),
                 Spacing.vertSmall(),
                 Text(
                   AppText.aTAuthEmailIDVerificationSuccessText,
                   textAlign: TextAlign.center,
-                  style: AppTextStyles.regular14,
+                  style: AppTextStyles.regular14.copyWith(
+                      color: Theme.of(context).colorScheme.onBackground),
                 ),
                 const SizedBox(height: 62),
                 Padding(

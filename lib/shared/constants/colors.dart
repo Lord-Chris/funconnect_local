@@ -56,9 +56,11 @@ class AppColors {
   static const stroke = Color(0xffb2e8e8e8);
 
   static const secondary200 = Color(0XFFB3B3B3);
+  static const secondary300 = Color(0xFF999999);
   static const secondary400 = Color(0XFF808080);
   static const secondary500 = Color(0XFF666666);
   static const secondary700 = Color(0XFF333333);
+  static const secondary600 = Color(0XFF4D4D4D);
   static const secondary800 = Color(0XFF0E0E0E);
   static const info700 = Color(0xFF665200);
 }

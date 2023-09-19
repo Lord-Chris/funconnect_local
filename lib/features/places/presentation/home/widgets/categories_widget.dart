@@ -39,7 +39,8 @@ class HomeSection<T> extends HookWidget {
                   padding: REdgeInsets.only(left: 12),
                   child: Text(
                     label,
-                    style: AppTextStyles.medium20,
+                    style: AppTextStyles.medium20.copyWith(
+                        color: Theme.of(context).colorScheme.onBackground),
                   ),
                 ),
                 if (showSeeAll)

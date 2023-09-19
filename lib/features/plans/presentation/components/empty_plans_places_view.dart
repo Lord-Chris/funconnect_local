@@ -18,8 +18,11 @@ class EmptyPLansPlacesView extends StatelessWidget {
           InkWell(
             onTap: onClick,
             child: Container(
-              decoration: const BoxDecoration(
-                color: Color(0xff0E0E0E),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8.r),
+                color: Theme.of(context).brightness == Brightness.dark
+                    ? const Color(0xff0E0E0E)
+                    : const Color(0xfff1f1f1),
               ),
               child: Padding(
                 padding:
@@ -35,7 +38,7 @@ class EmptyPLansPlacesView extends StatelessWidget {
                     style: TextStyle(
                         fontSize: 14.sp,
                         fontWeight: FontWeight.w400,
-                        color: const Color(0xff979797)),
+                        color: Theme.of(context).colorScheme.onBackground),
                   )
                 ]),
               ),

@@ -40,10 +40,10 @@ dependencies:
   firebase_remote_config: ^4.2.5
   flutter:
     sdk: flutter
-  flutter_bloc: ^8.1.3
+  flutter_bloc: ^8.1.1
   flutter_hooks: ^0.20.0
-  flutter_html: ^3.0.0-beta.2
-  flutter_native_splash: ^2.3.2
+  flutter_html: ^3.0.0-alpha.6
+  flutter_native_splash: ^2.2.19
   flutter_rating_bar: ^4.0.1
   flutter_rating_stars: ^1.0.3+4
   flutter_screenutil: ^5.8.4
@@ -61,10 +61,10 @@ dependencies:
   intl: ^0.18.1
   intl_phone_number_input: ^0.7.3+1
   launch_review: ^3.0.1
-  lazy_load_indexed_stack: ^1.0.1
-  location: ^5.0.3
+  lazy_load_indexed_stack: ^1.0.0
+  location: ^5.0.2+1
   logger: ^2.0.1
-  mailer: ^6.0.1
+  mailer: ^6.0.0
   onesignal_flutter: ^5.0.0
   pin_code_fields: ^8.0.1
   readmore: ^2.2.0
@@ -77,17 +77,16 @@ dependencies:
   smooth_page_indicator: ^1.1.0
   store_redirect: ^2.0.1
   story_view: ^0.15.0
-  url_launcher: ^6.1.12
+  url_launcher: ^6.1.9
   webview_flutter: ^4.2.2
 
-  webview_flutter_wkwebview: '3.7.3'
+  webview_flutter_wkwebview: ^3.7.4
 
 dev_dependencies:
   flutter_lints: ^2.0.0
   flutter_test:
     sdk: flutter
-dependency_overrides:
- 
+
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 # The following section is specific to Flutter packages.
@@ -101,6 +100,7 @@ flutter:
   assets:
     - assets/images/
     - assets/svgs/
+    - assets/jsons/
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
   # For details regarding adding assets from package dependencies, see

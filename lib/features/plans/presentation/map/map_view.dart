@@ -1,19 +1,42 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:funconnect/core/blocs/main_app_bloc.dart';
 import 'package:funconnect/core/models/app_location.dart';
 import 'package:funconnect/features/plans/presentation/map/bloc/map_bloc.dart';
+import 'package:funconnect/shared/constants/app_assets.dart';
 
 import 'package:funconnect/shared/constants/colors.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:logger/logger.dart';
 
-class PlannerMapView extends StatelessWidget {
+class PlannerMapView extends StatefulWidget {
   const PlannerMapView({super.key});
+
+  @override
+  State<PlannerMapView> createState() => _PlannerMapViewState();
+}
+
+class _PlannerMapViewState extends State<PlannerMapView> {
+  String? _mapStyleDark;
+  String? _mapStyleLight;
+
+  @override
+  void initState() {
+    rootBundle.loadString(AppAssets.darkModeMap).then((string) {
+      _mapStyleDark = string;
+    });
+    rootBundle.loadString(AppAssets.lightModeMap).then((string) {
+      _mapStyleLight = string;
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     AppLocation? currentLocation = context.watch<MainAppBloc>().location;
+    late GoogleMapController mapController;
     return BlocBuilder<MainAppBloc, MainAppState>(
       builder: (context, state) {
         if (state is HomeTrendsLoadedState) {
@@ -51,8 +74,12 @@ class PlannerMapView extends StatelessWidget {
                     mapToolbarEnabled: true,
                     trafficEnabled: true,
                     markers: snapshot.data!,
-                    onMapCreated: (GoogleMapController controller) {
-                      // _controller.complete(controller);
+                    onMapCreated: (GoogleMapController controller) async {
+                      Logger().i("Map Created : dark style is $_mapStyleDark");
+                      mapController = controller;
+                      Theme.of(context).brightness == Brightness.dark
+                          ? await mapController.setMapStyle(_mapStyleDark)
+                          : await mapController.setMapStyle(_mapStyleLight);
                     },
                   );
                 },

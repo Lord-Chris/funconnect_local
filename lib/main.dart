@@ -9,6 +9,7 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:funconnect/core/app/_app.dart';
+import 'package:funconnect/core/blocs/bloc/theme_switcher_bloc.dart';
 import 'package:funconnect/core/blocs/main_app_bloc.dart';
 import 'package:funconnect/core/utils/failure_handler.dart';
 import 'package:funconnect/features/authentication/presentation/welcome/bloc/welcome_bloc.dart';
@@ -66,71 +67,87 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<SplashBloc>(
-      create: (context) => SplashBloc(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<SplashBloc>(
+          create: (context) => SplashBloc()..add(InitializeSplashEvent()),
+          lazy: true,
+        ),
+        BlocProvider(
+          create: (context) =>
+              ThemeSwitcherBloc()..add(InitialThemeSwitcherEvent()),
+          lazy: true,
+        ),
+        BlocProvider(
+          create: (context) => MainAppBloc(),
+        ),
+      ],
       child: ScreenUtilInit(
-        designSize: const Size(428, 926),
+        designSize: const Size(414, 856),
         minTextAdapt: true,
         splitScreenMode: true,
         builder: (context, _) {
-          context.read<SplashBloc>().add(InitializeSplashEvent());
-          return BlocProvider(
-            create: (context) => MainAppBloc(),
-            child: MaterialApp(
-              theme: AppTheme.theme,
-              title: AppConstants.appName,
-              debugShowCheckedModeBanner: false,
-              navigatorKey: NavigationService.navigatorKey,
-              onGenerateRoute: Routes.generateRoute,
-              home: BlocBuilder<SplashBloc, SplashState>(
-                buildWhen: (previous, current) =>
-                    previous is SplashInitialState,
-                builder: (context, state) {
-                  if (state is SplashFinishedState) {
-                    FlutterNativeSplash.remove();
-                    if (state.needsUpdate == true) {
-                      return const VersionUpdateView();
-                    }
-                    if (state.isAuthenticated) {
-                      return BlocProvider(
-                        create: (context) => DashboardBloc(),
-                        child: const DashboardView(),
-                      );
-                    } else {
-                      if (state.showOnboarding) {
-                        return BlocProvider(
-                          create: (context) => OnboardingBloc(),
-                          child: const OnboardingView(),
-                        );
-                      } else {
-                        return BlocProvider(
-                          create: (context) => WelcomeBloc(),
-                          child: const WelcomeView(),
-                        );
+          return BlocBuilder<ThemeSwitcherBloc, ThemeData>(
+            builder: (context, state) {
+              return BlocProvider(
+                create: (context) => MainAppBloc(),
+                child: MaterialApp(
+                  theme: state,
+                  title: AppConstants.appName,
+                  debugShowCheckedModeBanner: false,
+                  navigatorKey: NavigationService.navigatorKey,
+                  onGenerateRoute: Routes.generateRoute,
+                  home: BlocBuilder<SplashBloc, SplashState>(
+                    buildWhen: (previous, current) =>
+                        previous is SplashInitialState,
+                    builder: (context, state) {
+                      if (state is SplashFinishedState) {
+                        FlutterNativeSplash.remove();
+                        if (state.needsUpdate == true) {
+                          return const VersionUpdateView();
+                        }
+                        if (state.isAuthenticated) {
+                          return BlocProvider(
+                            create: (context) => DashboardBloc(),
+                            child: const DashboardView(),
+                          );
+                        } else {
+                          if (state.showOnboarding) {
+                            return BlocProvider(
+                              create: (context) => OnboardingBloc(),
+                              child: const OnboardingView(),
+                            );
+                          } else {
+                            return BlocProvider(
+                              create: (context) => WelcomeBloc(),
+                              child: const WelcomeView(),
+                            );
+                          }
+                        }
                       }
-                    }
-                  }
-                  return Scaffold(
-                    body: Container(
-                      width: double.maxFinite,
-                      color: AppColors.mediumBlack,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SizedBox(
-                            height: 250.r,
-                            width: 250.r,
-                            child: SvgPicture.asset(
-                              AppAssets.funconnectFullSvg,
-                            ),
+                      return Scaffold(
+                        body: Container(
+                          width: double.maxFinite,
+                          color: AppColors.mediumBlack,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SizedBox(
+                                height: 250.r,
+                                width: 250.r,
+                                child: SvgPicture.asset(
+                                  AppAssets.funconnectFullSvg,
+                                ),
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
-                    ),
-                  );
-                },
-              ),
-            ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              );
+            },
           );
         },
       ),

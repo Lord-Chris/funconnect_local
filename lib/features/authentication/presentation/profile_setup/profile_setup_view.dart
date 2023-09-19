@@ -27,6 +27,8 @@ class ProfileSetUpView extends HookWidget {
     final nameController = useTextEditingController();
     final usernameController = useTextEditingController();
     final gender = useState<String?>(null);
+    final bool isDarkMode =
+        MediaQuery.of(context).platformBrightness == Brightness.dark;
     return Scaffold(
       body: SafeArea(
         top: false,
@@ -39,8 +41,9 @@ class ProfileSetUpView extends HookWidget {
               modalHeight: MediaQuery.of(context).size.height,
               topIcon: SvgPicture.asset(
                 AppAssets.profIconSvg,
-                colorFilter:
-                    const ColorFilter.mode(AppColors.white, BlendMode.srcIn),
+                colorFilter: ColorFilter.mode(
+                    Theme.of(context).colorScheme.onBackground,
+                    BlendMode.srcIn),
               ),
               children: [
                 Padding(
@@ -52,22 +55,22 @@ class ProfileSetUpView extends HookWidget {
                       Text(
                         "Profile setup",
                         style: AppTextStyles.medium24.copyWith(
-                          color: AppColors.white,
-                        ),
+                            color: Theme.of(context).colorScheme.onBackground),
                       ),
                       const SizedBox(height: 8),
                       Text(
                         "We would like to know about you Please kindly\nset up your profile.",
                         textAlign: TextAlign.center,
                         style: AppTextStyles.light14.copyWith(
-                          color: AppColors.white,
+                          color: Theme.of(context).colorScheme.onBackground,
                         ),
                       ),
                       const SizedBox(height: 29),
                       DottedBorder(
                         borderType: BorderType.Circle,
                         padding: const EdgeInsets.all(8),
-                        color: AppColors.lightAsh,
+                        color:
+                            isDarkMode ? AppColors.lightAsh : AppColors.wGreyF8,
                         dashPattern: const [8, 6],
                         strokeWidth: 1.6,
                         strokeCap: StrokeCap.round,
@@ -82,20 +85,27 @@ class ProfileSetUpView extends HookWidget {
                             builder: (context, state) {
                               if (state is! ProfileSetupIdleState ||
                                   state.image == null) {
-                                return const CircleAvatar(
+                                return CircleAvatar(
                                   radius: 55,
-                                  backgroundColor: AppColors.lightAsh,
+                                  backgroundColor: isDarkMode
+                                      ? AppColors.lightAsh
+                                      : AppColors.wGreyF8,
                                   child: Center(
                                     child: Icon(
                                       Icons.camera_alt,
                                       size: 50,
+                                      color: isDarkMode
+                                          ? AppColors.black
+                                          : AppColors.gray1,
                                     ),
                                   ),
                                 );
                               }
                               return CircleAvatar(
                                 radius: 55,
-                                backgroundColor: AppColors.lightAsh,
+                                backgroundColor: isDarkMode
+                                    ? AppColors.lightAsh
+                                    : AppColors.wGreyF8,
                                 backgroundImage: FileImage(state.image!),
                               );
                             },
@@ -107,8 +117,7 @@ class ProfileSetUpView extends HookWidget {
                         "Add image",
                         textAlign: TextAlign.center,
                         style: AppTextStyles.light14.copyWith(
-                          color: AppColors.white,
-                        ),
+                            color: Theme.of(context).colorScheme.onBackground),
                       ),
                       const SizedBox(height: 29),
                       Column(
@@ -179,8 +188,9 @@ class ProfileSetUpView extends HookWidget {
                               "Share my location",
                               textAlign: TextAlign.center,
                               style: AppTextStyles.regular14.copyWith(
-                                color: AppColors.white,
-                              ),
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onBackground),
                             ),
                           ),
                         ],
