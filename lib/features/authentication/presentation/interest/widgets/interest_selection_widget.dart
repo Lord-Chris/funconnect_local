@@ -21,7 +21,9 @@ class InterestSelectionWidget extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(5),
       decoration: BoxDecoration(
-        color: AppColors.interestWidgetAsh,
+        color: Theme.of(context).brightness == Brightness.light
+            ? AppColors.wGreyF1
+            : AppColors.interestWidgetAsh,
         borderRadius: BorderRadius.circular(32),
       ),
       child: Row(

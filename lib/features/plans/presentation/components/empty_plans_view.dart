@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:funconnect/features/plans/presentation/plan_list/bloc/plan_list_bloc.dart';
+import 'package:funconnect/shared/constants/colors.dart';
 
 class EmptyPLansView extends StatelessWidget {
   final bool isListEmpty;
@@ -22,8 +23,10 @@ class EmptyPLansView extends StatelessWidget {
               context.read<PlanListBloc>().add(CreatePlanClickedEvent());
             },
             child: Container(
-              decoration: const BoxDecoration(
-                color: Color(0xff0E0E0E),
+              decoration: BoxDecoration(
+                color: Theme.of(context).brightness == Brightness.dark
+                    ? const Color(0xff0E0E0E)
+                    : const Color(0XFFF1F1F1),
               ),
               child: Padding(
                 padding:
@@ -39,7 +42,9 @@ class EmptyPLansView extends StatelessWidget {
                     style: TextStyle(
                         fontSize: 14.sp,
                         fontWeight: FontWeight.w400,
-                        color: const Color(0xff979797)),
+                        color: Theme.of(context).brightness == Brightness.dark
+                            ? const Color(0xff979797)
+                            : AppColors.secondary600),
                   )
                 ]),
               ),
@@ -55,7 +60,7 @@ class EmptyPLansView extends StatelessWidget {
         style: TextStyle(
             fontSize: 14.sp,
             fontWeight: FontWeight.w400,
-            color: const Color(0xff979797)),
+            color: Theme.of(context).colorScheme.onBackground),
       ),
       Text(
         isListEmpty
@@ -64,7 +69,7 @@ class EmptyPLansView extends StatelessWidget {
         style: TextStyle(
             fontSize: 14.sp,
             fontWeight: FontWeight.w400,
-            color: const Color(0xff979797)),
+            color: Theme.of(context).colorScheme.onBackground),
       )
     ]);
   }

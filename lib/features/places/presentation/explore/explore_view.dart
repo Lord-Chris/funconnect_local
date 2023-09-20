@@ -30,6 +30,8 @@ class _ExploreViewState extends State<ExploreView> {
 
   @override
   Widget build(BuildContext context) {
+    final bool isDarkMode =
+        MediaQuery.of(context).platformBrightness == Brightness.dark;
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -52,12 +54,25 @@ class _ExploreViewState extends State<ExploreView> {
                         hintText: "Search places, people",
                         filled: true,
                         enabled: false,
-                        fillColor: AppColors.exploreIconAsh,
+                        hintStyle: TextStyle(
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.w400,
+                          color: AppColors.secondary300,
+                        ),
+                        fillColor: isDarkMode
+                            ? AppColors.exploreIconAsh
+                            : AppColors.wGreyF8,
                         prefixIcon: const Icon(
                           Icons.search,
                           size: 20,
+                          color: AppColors.secondary300,
                         ),
                         disabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: isDarkMode
+                                ? AppColors.transparent
+                                : AppColors.wGreyE1,
+                          ),
                           borderRadius: BorderRadius.circular(39),
                         ),
                         focusedBorder: OutlineInputBorder(
@@ -101,7 +116,8 @@ class _ExploreViewState extends State<ExploreView> {
                           AppButton(
                             label: "Retry",
                             isCollapsed: true,
-                            labelColor: AppColors.black,
+                            labelColor:
+                                Theme.of(context).colorScheme.onBackground,
                             onTap: () => context
                                 .read<ExploreBloc>()
                                 .add(const ExploreInitEvent()),
@@ -247,12 +263,14 @@ class FeaturedSection extends StatelessWidget {
         Spacing.vertMedium(),
         Text(
           "Explore",
-          style: AppTextStyles.medium28,
+          style: AppTextStyles.medium28
+              .copyWith(color: Theme.of(context).colorScheme.onBackground),
         ),
         Spacing.vertTiny(),
         Text(
           "Explore places near you",
-          style: AppTextStyles.regular16,
+          style: AppTextStyles.regular16
+              .copyWith(color: Theme.of(context).colorScheme.onBackground),
         ),
         Spacing.vertMedium(),
         SizedBox(

@@ -40,83 +40,101 @@ class _HomeViewState extends State<HomeView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.black,
-      appBar: AppBar(
-        titleSpacing: 10,
-        leading: Center(
-          child: InkWell(
-            onTap: () => context
-                .read<DashboardBloc>()
-                .add(TabTapEvent(!Platform.isIOS ? 4 : 3)),
-            child: AppNetworkImage(
-              size: Size.fromRadius(25.r),
-              isCircular: true,
-              url: context.watch<MainAppBloc>().user.photoUrl,
-              cacheImage: false,
-              fit: BoxFit.cover,
-              placeholderAssetImage: AppAssets.fallbackUserProfileSvg,
-            ),
-          ),
-        ),
-        title: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(),
+        body: Column(
           children: [
-            Text(
-              "Hi ${context.watch<MainAppBloc>().user.username}",
-              style: AppTextStyles.medium20,
-            ),
-            if ((context.watch<MainAppBloc>().location?.parsedAddress ?? "")
-                .isNotEmpty) ...[
-              Spacing.vertTiny(),
-              Visibility(
-                visible: context.watch<MainAppBloc>().location != null,
-                child: Row(
-                  children: [
-                    const Icon(
-                      Icons.location_on,
-                      color: AppColors.locationIconAsh,
-                      size: 13,
-                    ),
-                    Flexible(
-                      child: Text(
-                        context.watch<MainAppBloc>().location?.parsedAddress ??
-                            "",
-                        style: AppTextStyles.regular14.copyWith(
-                          color: AppColors.secondary400,
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
+              child: Row(
+                children: [
+                  InkWell(
+                      onTap: () => context
+                          .read<DashboardBloc>()
+                          .add(TabTapEvent(!Platform.isIOS ? 4 : 3)),
+                      child: AppNetworkImage(
+                        size: Size.fromRadius(25.r),
+                        isCircular: true,
+                        url: context.watch<MainAppBloc>().user.photoUrl,
+                        cacheImage: false,
+                        fit: BoxFit.cover,
+                        placeholderAssetImage: AppAssets.fallbackUserProfileSvg,
+                      )),
+                  SizedBox(
+                    width: 14.w,
+                  ),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Text(
+                          "Hi ${context.watch<MainAppBloc>().user.username}",
+                          style: AppTextStyles.medium20.copyWith(
+                              color:
+                                  Theme.of(context).colorScheme.onBackground),
                         ),
+                        if ((context
+                                    .watch<MainAppBloc>()
+                                    .location
+                                    ?.parsedAddress ??
+                                "")
+                            .isNotEmpty) ...[
+                          Spacing.vertTiny(),
+                          Visibility(
+                            visible:
+                                context.watch<MainAppBloc>().location != null,
+                            child: Row(
+                              children: [
+                                const Icon(
+                                  Icons.location_on,
+                                  color: AppColors.locationIconAsh,
+                                  size: 13,
+                                ),
+                                Flexible(
+                                  child: Text(
+                                    context
+                                            .watch<MainAppBloc>()
+                                            .location
+                                            ?.parsedAddress ??
+                                        "",
+                                    style: AppTextStyles.regular14.copyWith(
+                                      color: AppColors.secondary400,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ]
+                      ],
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: () =>
+                        context.read<HomeBloc>().add(NotificationTapEvent()),
+                    icon: Badge(
+                      isLabelVisible: context
+                          .watch<NotificationBloc>()
+                          .state
+                          .showNotificationBadge,
+                      smallSize: 10,
+                      textColor: AppColors.white,
+                      child: Icon(
+                        CupertinoIcons.bell_fill,
+                        color: Theme.of(context).colorScheme.onBackground,
                       ),
                     ),
-                  ],
-                ),
-              ),
-            ]
-          ],
-        ),
-        actions: [
-          IconButton(
-            onPressed: () =>
-                context.read<HomeBloc>().add(NotificationTapEvent()),
-            icon: Badge(
-              isLabelVisible:
-                  context.watch<NotificationBloc>().state.showNotificationBadge,
-              smallSize: 10,
-              textColor: AppColors.white,
-              child: const Icon(
-                CupertinoIcons.bell_fill,
-                color: AppColors.white,
+                  ),
+                ],
               ),
             ),
-          ),
-        ],
-      ),
-      body: SafeArea(
-        child: Column(
-          children: [
             Spacing.vertSmall(),
-            const Divider(
-              color: AppColors.secondary800,
-              height: 1,
+            Divider(
+              color: Theme.of(context).brightness == Brightness.dark
+                  ? AppColors.secondary800
+                  : AppColors.wGreyF8,
+              height: 1.h,
             ),
             Expanded(
               child: BlocBuilder<HomeBloc, HomeState>(
@@ -136,31 +154,38 @@ class _HomeViewState extends State<HomeView> {
                           if (state is! HomeIdleState) {
                             return const SizedBox();
                           }
-                          if (state.interests.isEmpty) return const SizedBox();
+                          if (state.interests.isEmpty) {
+                            return const SizedBox();
+                          }
                           return SizedBox(
                             height: 50.h,
                             width: MediaQuery.of(context).size.width,
-                            child: ListView.builder(
-                              scrollDirection: Axis.horizontal,
-                              padding: EdgeInsets.symmetric(vertical: 8.h),
-                              itemCount: state.interests.length,
-                              itemBuilder: (context, index) {
-                                final interest = state.interests[index];
-                                return Padding(
-                                  padding: EdgeInsets.only(left: 5.r),
-                                  child: HomeInterestWidget(
-                                    interest: interest,
-                                    isSelected: state.interest == interest,
-                                  ),
-                                );
-                              },
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 16.w),
+                              child: ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                padding: EdgeInsets.symmetric(vertical: 8.h),
+                                itemCount: state.interests.length,
+                                itemBuilder: (context, index) {
+                                  final interest = state.interests[index];
+                                  return Padding(
+                                    padding: EdgeInsets.only(left: 5.r),
+                                    child: HomeInterestWidget(
+                                      interest: interest,
+                                      isSelected: state.interest == interest,
+                                    ),
+                                  );
+                                },
+                              ),
                             ),
                           );
                         },
                       ),
-                      const Divider(
-                        color: AppColors.secondary800,
-                        height: 1,
+                      Divider(
+                        color: Theme.of(context).brightness == Brightness.dark
+                            ? AppColors.secondary800
+                            : AppColors.wGreyF8,
+                        height: 1.h,
                       ),
                       Spacing.vertSmall(),
                       Expanded(

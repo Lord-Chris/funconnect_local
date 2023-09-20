@@ -50,6 +50,7 @@ class DashboardView extends StatelessWidget {
         builder: (context, state) {
           if (state is! DashboardIdleState) return const SizedBox();
           return Scaffold(
+            appBar: AppBar(),
             body: Stack(
               children: [
                 LazyLoadIndexedStack(
@@ -77,7 +78,7 @@ class DashboardView extends StatelessWidget {
               ],
             ),
             bottomNavigationBar: BottomNavigationBar(
-              backgroundColor: AppColors.black,
+              backgroundColor: Theme.of(context).colorScheme.background,
               currentIndex: state.navBarIndex,
               onTap: (index) {
                 if (index == (Platform.isIOS ? 2 : 3)) {

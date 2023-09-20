@@ -39,6 +39,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     on<InstagramTapEvent>(_onInstagramTapEvent);
     on<TwitterTapEvent>(_onTwitterTapEvent);
     on<HelpDeskTapEvent>(_onHelpDeskTapEvent);
+    on<DarkModeTapEvent>(_onDarkModeTapEvent);
   }
 
   final _navigationService = locator<INavigationService>();
@@ -318,4 +319,13 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   }
 
   AppLocation? get location => _locationService.userLocation;
+
+  FutureOr<void> _onDarkModeTapEvent(
+      DarkModeTapEvent event, Emitter<ProfileState> emit) {
+    if (state is ProfileIdleState) {
+      emit(ProfileIdleState(
+          userProfile: event.userProfile,
+          isDarkModeEnabled: !event.isDarkModeEnabled));
+    }
+  }
 }

@@ -18,6 +18,7 @@ class OnboardingView extends StatelessWidget {
     return SafeArea(
       minimum: const EdgeInsets.only(bottom: 16),
       child: Scaffold(
+        backgroundColor: AppColors.black,
         body: Column(
           children: [
             Expanded(
@@ -33,7 +34,6 @@ class OnboardingView extends StatelessWidget {
                     .toList(),
               ),
             ),
-            const SizedBox(height: 32),
             BlocBuilder<OnboardingBloc, OnboardingState>(
               builder: (context, state) {
                 return Padding(

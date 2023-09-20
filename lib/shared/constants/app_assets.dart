@@ -59,4 +59,8 @@ class AppAssets {
   static const plannerActiveSvg = "assets/svgs/planner_active_icon.svg";
   static const addFriendSvg = "assets/svgs/add_friend.svg";
   static const planFriendSvg = "assets/svgs/plan_friend.svg";
+
+  //JSONS
+  static const darkModeMap = "assets/jsons/dark_mode_map.json";
+  static const lightModeMap = "assets/jsons/light_mode_map.json";
 }

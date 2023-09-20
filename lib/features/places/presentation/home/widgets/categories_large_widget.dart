@@ -75,7 +75,9 @@ class HomeCategoriesLargeWidget extends HookWidget {
                             Flexible(
                               child: Text(
                                 name,
-                                style: AppTextStyles.regular14,
+                                style: AppTextStyles.regular14.copyWith(
+                                  color: AppColors.white,
+                                ),
                                 overflow: TextOverflow.ellipsis,
                               ),
                             ),
@@ -102,6 +104,9 @@ class HomeCategoriesLargeWidget extends HookWidget {
                                     rating.toString(),
                                     style: AppTextStyles.dynamic(
                                       10,
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onBackground,
                                       weight: FontWeight.w300,
                                     ),
                                   ),

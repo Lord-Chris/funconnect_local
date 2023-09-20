@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:funconnect/features/startup/presentation/onboarding/widgets/onboarding_item_model.dart';
 import 'package:funconnect/shared/constants/colors.dart';
 
@@ -53,6 +54,10 @@ class OnboardingItemWidget extends StatelessWidget {
               Text(
                 onboardingItem.subtitle,
                 textAlign: TextAlign.center,
+                style: TextStyle(
+                    color: AppColors.white,
+                    fontSize: 16.sp,
+                    fontWeight: FontWeight.w400),
               ),
             ],
           ),

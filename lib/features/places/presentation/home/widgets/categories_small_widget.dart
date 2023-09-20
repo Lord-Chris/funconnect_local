@@ -59,7 +59,8 @@ class HomeViewCategoriesSmallSubWidget extends HookWidget {
                             REdgeInsets.symmetric(vertical: 4, horizontal: 12),
                         child: Text(
                           name,
-                          style: AppTextStyles.regular12,
+                          style: AppTextStyles.regular12
+                              .copyWith(color: AppColors.white),
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
