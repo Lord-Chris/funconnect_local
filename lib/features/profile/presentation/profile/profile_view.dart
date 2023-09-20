@@ -27,8 +27,6 @@ class _ProfileViewState extends State<ProfileView> {
 
   @override
   Widget build(BuildContext context) {
-    final bool isDarkMode =
-        MediaQuery.of(context).platformBrightness == Brightness.dark;
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 56,
@@ -42,7 +40,6 @@ class _ProfileViewState extends State<ProfileView> {
         ),
       ),
       body: BlocBuilder<ProfileBloc, ProfileState>(
-        // buildWhen: (previous, _) => previous is ProfileLoadingState,
         builder: (context, state) {
           if (state is ProfileLoadingState) {
             return const AppLoader(
