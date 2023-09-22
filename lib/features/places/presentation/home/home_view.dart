@@ -52,7 +52,7 @@ class _HomeViewState extends State<HomeView> {
                   InkWell(
                       onTap: () => context
                           .read<DashboardBloc>()
-                          .add(TabTapEvent(!Platform.isIOS ? 4 : 3)),
+                          .add(TabTapEvent(!Platform.isIOS ? 5 : 4)),
                       child: AppNetworkImage(
                         size: Size.fromRadius(25.r),
                         isCircular: true,
