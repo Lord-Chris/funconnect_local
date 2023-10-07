@@ -114,7 +114,8 @@ class _NotificationsViewState extends State<NotificationsView> {
                 itemBuilder: (context, index) {
                   final notification = state.notifications[index];
                   return Container(
-                    padding: const EdgeInsets.all(10),
+                    padding: EdgeInsets.only(
+                        left: 10.w, top: 20.h, bottom: 10.h, right: 30.w),
                     decoration: BoxDecoration(
                       color: Theme.of(context).brightness == Brightness.light
                           ? AppColors.wGreyF8
