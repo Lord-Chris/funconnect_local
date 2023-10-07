@@ -44,7 +44,7 @@ class _AddPlanPlaceViewState extends State<AddPlanPlaceView> {
       appBar: AppBar(
         toolbarHeight: 56.h,
         title: Text(
-          "Add place",
+          widget.arguments.place == null ? "Add place" : "Edit place",
           style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w400),
         ),
       ),
@@ -98,7 +98,10 @@ class _AddPlanPlaceViewState extends State<AddPlanPlaceView> {
                                   style: TextStyle(
                                     fontSize: 14.sp,
                                     fontWeight: FontWeight.w400,
-                                    color: const Color(0xff999999),
+                                    color: Theme.of(context).brightness ==
+                                            Brightness.dark
+                                        ? const Color(0xff999999)
+                                        : AppColors.secondary600,
                                   ),
                                   onTap: () async {
                                     PlaceModel place = await showSearch(
@@ -115,7 +118,10 @@ class _AddPlanPlaceViewState extends State<AddPlanPlaceView> {
                                   textAlign: TextAlign.start,
                                   decoration: InputDecoration(
                                     filled: true,
-                                    fillColor: const Color(0xff202020),
+                                    fillColor: Theme.of(context).brightness ==
+                                            Brightness.dark
+                                        ? const Color(0xff202020)
+                                        : const Color(0xfff1f1f1),
                                     hintText: "Find a place",
                                     hintStyle: TextStyle(
                                       fontSize: 14.sp,
@@ -183,7 +189,6 @@ class _AddPlanPlaceViewState extends State<AddPlanPlaceView> {
                     SizedBox(height: 8.h),
                     InkWell(
                       onTap: () async {
-                        Logger().i("Date clicked");
                         var date = await showDatePicker(
                           context: context,
                           initialDate: DateTime.now(),
@@ -216,8 +221,12 @@ class _AddPlanPlaceViewState extends State<AddPlanPlaceView> {
                                 return Text(
                                   DateFormat("yMMMMd").format(state.date!),
                                   style: TextStyle(
-                                      fontSize: 14.sp,
-                                      color: const Color(0xff999999)),
+                                    fontSize: 14.sp,
+                                    color: Theme.of(context).brightness ==
+                                            Brightness.dark
+                                        ? const Color(0xff999999)
+                                        : AppColors.secondary600,
+                                  ),
                                 );
                               }
                               return Text(
@@ -279,8 +288,12 @@ class _AddPlanPlaceViewState extends State<AddPlanPlaceView> {
                                 return Text(
                                   DateFormat("hh:mm a").format(state.date!),
                                   style: TextStyle(
-                                      fontSize: 14.sp,
-                                      color: const Color(0xff999999)),
+                                    fontSize: 14.sp,
+                                    color: Theme.of(context).brightness ==
+                                            Brightness.dark
+                                        ? const Color(0xff999999)
+                                        : AppColors.secondary600,
+                                  ),
                                 );
                               }
                               return Text("Select Time",
@@ -322,7 +335,9 @@ class _AddPlanPlaceViewState extends State<AddPlanPlaceView> {
                         .add(AddPlaceEvent(widget.arguments.plan.id));
                   }
                 },
-                label: "Add Place",
+                label: widget.arguments.place == null
+                    ? "Add Place"
+                    : "Save Changes",
                 borderRadius: 8,
               );
             },

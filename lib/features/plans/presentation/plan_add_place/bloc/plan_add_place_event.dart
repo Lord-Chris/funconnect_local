@@ -52,3 +52,9 @@ class PlanAddPlaceInitialEvent extends PlanAddPlaceEvent {
 
   const PlanAddPlaceInitialEvent({required this.arguments});
 }
+
+class PlanEditPlaceSaveChangesEvent extends PlanAddPlaceEvent {
+  final String placeId;
+
+  const PlanEditPlaceSaveChangesEvent(this.placeId);
+}

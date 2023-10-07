@@ -44,4 +44,9 @@ class PlansRepository extends IPlansRepository {
   Future<DeleteMiniPlanResponse> deletePlan(String id) async {
     return await _remoteDS.deletePlan(id);
   }
+
+  @override
+  Future updatePlan(AddPlaceParams param) async {
+    return await _remoteDS.updateMiniPlan(param);
+  }
 }

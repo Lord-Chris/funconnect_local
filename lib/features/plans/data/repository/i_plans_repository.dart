@@ -13,4 +13,5 @@ abstract class IPlansRepository {
   Future<List<MiniPlanPlaceModel>> fetchMiniPlanPlaces(String planId);
   Future<MiniPlanPlaceModel> addPlace(AddPlaceParams param);
   Future deletePlan(String id);
+  Future updatePlan(AddPlaceParams param);
 }

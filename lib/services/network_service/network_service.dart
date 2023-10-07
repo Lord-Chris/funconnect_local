@@ -97,6 +97,7 @@ class NetworkService extends INetworkService {
   @override
   Future<ApiResponse<Map<String, dynamic>>> post(String url,
       {dynamic body, Map<String, String>? headers}) async {
+    _logger.i("received url is $url");
     try {
       if (headers != null) {
         _headers.addAll(headers);

@@ -10,6 +10,7 @@ import 'package:funconnect/features/places/domain/entities/place_model.dart';
 import 'package:funconnect/features/plans/domain/entities/plan_add_place_arguments.dart';
 import 'package:funconnect/features/plans/domain/params/add_place.dart';
 import 'package:funconnect/features/plans/domain/usecases/add_plan_place_usecase.dart';
+import 'package:funconnect/features/plans/domain/usecases/update_mini_plan_usecase.dart';
 import 'package:funconnect/services/navigation_service/i_navigation_service.dart';
 import 'package:intl/intl.dart';
 import 'package:logger/logger.dart';
@@ -26,6 +27,7 @@ class PlanAddPlaceBloc extends Bloc<PlanAddPlaceEvent, PlanAddPlaceState> {
     on<TimeSelectedEvent>(_timeSelectedEvent);
     on<AddPlaceEvent>(_addPlaceEvent);
     on<PlanAddPlaceInitialEvent>(_addPlaceInitial);
+    on<PlanEditPlaceSaveChangesEvent>(_saveChangesEvent);
   }
   final _navigation = locator<INavigationService>();
   PlaceModel? selectedPlaceId;
@@ -89,5 +91,20 @@ class PlanAddPlaceBloc extends Bloc<PlanAddPlaceEvent, PlanAddPlaceState> {
                 .toLocal()
             : null,
         place: event.arguments.place?.toPlaceModel()));
+  }
+
+  FutureOr<void> _saveChangesEvent(PlanEditPlaceSaveChangesEvent event,
+      Emitter<PlanAddPlaceState> emit) async {
+    emit(PlanAddPlaceLoading());
+    try {
+      await UpdateMiniPlan().call(AddPlaceParams(
+        placeId: selectedPlaceId?.id ?? "",
+        miniPlanId: event.placeId,
+        date: selectedDate?.millisecondsSinceEpoch ??
+            DateTime.now().millisecondsSinceEpoch,
+      ));
+    } catch (e) {
+      Logger().e(e.toString());
+    }
   }
 }

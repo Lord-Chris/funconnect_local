@@ -71,13 +71,18 @@ class PlansRemoteDataSource with ApiMixin {
   }
 
   Future<MiniPlanPlaceModel> addPlace(AddPlaceParams param) async {
-    final res = await _networkService.post(
-      ApiConstants.addMiniPlanPlace(param.miniPlanId),
-      body: {"place_id": param.placeId, "datetime": param.date},
-      headers: headers,
-    );
+    try {
+      final res = await _networkService.post(
+        ApiConstants.addMiniPlanPlace(param.miniPlanId),
+        body: {"place_id": param.placeId, "datetime": param.date},
+        headers: headers,
+      );
 
-    return MiniPlanPlaceModel.fromMap(res.data['data']);
+      return MiniPlanPlaceModel.fromMap(res.data['data']);
+    } catch (e) {
+      Logger().e(e.toString());
+      rethrow;
+    }
   }
 
   Future<DeleteMiniPlanResponse> deletePlan(String id) async {
@@ -85,5 +90,14 @@ class PlansRemoteDataSource with ApiMixin {
         headers: headers);
 
     return DeleteMiniPlanResponse.fromMap(res.data);
+  }
+
+  Future updateMiniPlan(AddPlaceParams params) async {
+    final res = await _networkService.put(
+      ApiConstants.updateMiniPlan(params.miniPlanId, params.placeId),
+      body: {"place_id": params.placeId, "datetime": params.date},
+      headers: headers,
+    );
+    return res.data['data'];
   }
 }
