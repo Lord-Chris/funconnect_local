@@ -330,9 +330,15 @@ class _AddPlanPlaceViewState extends State<AddPlanPlaceView> {
               return AppButton(
                 onTap: () {
                   if (_formKey.currentState!.validate()) {
-                    context
-                        .read<PlanAddPlaceBloc>()
-                        .add(AddPlaceEvent(widget.arguments.plan.id));
+                    if (widget.arguments.place == null) {
+                      context
+                          .read<PlanAddPlaceBloc>()
+                          .add(AddPlaceEvent(widget.arguments.plan.id));
+                    } else {
+                      context.read<PlanAddPlaceBloc>().add(
+                          PlanEditPlaceSaveChangesEvent(
+                              widget.arguments.plan.id));
+                    }
                   }
                 },
                 label: widget.arguments.place == null
