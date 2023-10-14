@@ -366,18 +366,22 @@ class MySearchDelegate extends SearchDelegate {
   @override
   ThemeData appBarTheme(BuildContext context) {
     return Theme.of(context).copyWith(
-      appBarTheme: const AppBarTheme(
-        backgroundColor: Color(0xff202020),
+      appBarTheme: AppBarTheme(
+        backgroundColor: Theme.of(context).colorScheme.background,
         elevation: 0,
       ),
       textTheme: TextTheme(
-          titleMedium: TextStyle(
+          titleLarge: TextStyle(
         fontSize: 14.sp,
-        color: const Color(0xff999999),
+        color: Theme.of(context).brightness == Brightness.light
+            ? AppColors.secondary600
+            : const Color(0xff999999),
       )),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
-        fillColor: const Color(0xff202020),
+        fillColor: Theme.of(context).brightness == Brightness.light
+            ? const Color(0xfff1f1f1)
+            : const Color(0xff202020),
         hintStyle: TextStyle(
           fontSize: 14.sp,
           color: const Color(0xff999999),
@@ -414,10 +418,12 @@ class MySearchDelegate extends SearchDelegate {
       onPressed: () {
         close(context, null);
       },
-      icon: const Icon(
+      icon: Icon(
         Icons.arrow_back_ios_new,
         size: 15,
-        color: Color(0xff999999),
+        color: Theme.of(context).brightness == Brightness.light
+            ? const Color(0xff999999)
+            : const Color(0xff999999),
       ),
     );
   }
@@ -427,7 +433,7 @@ class MySearchDelegate extends SearchDelegate {
     return Text(
       query,
       style: const TextStyle(
-          fontSize: 14, fontWeight: FontWeight.w400, color: Color(0xff999999)),
+          fontSize: 14, fontWeight: FontWeight.w400, color: Colors.red),
     );
   }
 
@@ -459,7 +465,9 @@ class MySearchDelegate extends SearchDelegate {
                     suggestions[index].name,
                     style: TextStyle(
                         fontSize: 14.sp,
-                        color: Colors.white,
+                        color: Theme.of(context).brightness == Brightness.light
+                            ? Colors.black
+                            : Colors.white,
                         fontWeight: FontWeight.w400),
                   ),
                   SizedBox(height: 8.h),
