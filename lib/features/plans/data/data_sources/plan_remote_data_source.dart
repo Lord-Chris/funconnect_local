@@ -8,6 +8,7 @@ import 'package:funconnect/features/plans/domain/entities/mini_plan_model.dart';
 import 'package:funconnect/features/plans/domain/entities/mini_plan_place_model.dart';
 import 'package:funconnect/features/plans/domain/params/add_friends.dart';
 import 'package:funconnect/features/plans/domain/params/add_place.dart';
+import 'package:funconnect/features/plans/domain/params/update_mini_plan_params.dart';
 import 'package:funconnect/services/network_service/i_network_service.dart';
 import 'package:logger/logger.dart';
 
@@ -92,10 +93,11 @@ class PlansRemoteDataSource with ApiMixin {
     return DeleteMiniPlanResponse.fromMap(res.data);
   }
 
-  Future updateMiniPlan(AddPlaceParams params) async {
+  Future updateMiniPlan(UpdateMiniPlanParams params) async {
     final res = await _networkService.put(
-      ApiConstants.updateMiniPlan(params.miniPlanId, params.placeId),
-      body: {"place_id": params.placeId, "datetime": params.date},
+      ApiConstants.updateMiniPlan(
+          params.miniPlanId, params.planPlaceIdentifier),
+      body: {"place_id": params.selectedPLaceId, "datetime": params.date},
       headers: headers,
     );
     return res.data['data'];

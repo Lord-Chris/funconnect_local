@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:funconnect/features/plans/presentation/components/empty_plans_view.dart';
 import 'package:funconnect/features/plans/presentation/plan_list/bloc/plan_list_bloc.dart';
 import 'package:funconnect/shared/components/app_loader.dart';
+import 'package:funconnect/shared/constants/colors.dart';
 
 class PlansListView extends StatelessWidget {
   const PlansListView({super.key});
@@ -69,7 +70,10 @@ class PlansListView extends StatelessWidget {
                               },
                               child: Container(
                                   decoration: BoxDecoration(
-                                      color: const Color(0xff161616),
+                                      color: Theme.of(context).brightness ==
+                                              Brightness.light
+                                          ? const Color(0xffF1F1F1)
+                                          : const Color(0xff161616),
                                       borderRadius: BorderRadius.circular(8)),
                                   width: double.infinity,
                                   child: Padding(
@@ -83,8 +87,13 @@ class PlansListView extends StatelessWidget {
                                             children: [
                                               Text(state.data.$1[index].name,
                                                   style: TextStyle(
-                                                      color: const Color(
-                                                          0xffcccccc),
+                                                      color: Theme.of(context)
+                                                                  .brightness ==
+                                                              Brightness.light
+                                                          ? AppColors
+                                                              .secondary700
+                                                          : const Color(
+                                                              0xffcccccc),
                                                       fontSize: 16.sp,
                                                       fontWeight:
                                                           FontWeight.w500)),
@@ -95,8 +104,12 @@ class PlansListView extends StatelessWidget {
                                                 state
                                                     .data.$1[index].description,
                                                 style: TextStyle(
-                                                    color:
-                                                        const Color(0xff999999),
+                                                    color: Theme.of(context)
+                                                                .brightness ==
+                                                            Brightness.light
+                                                        ? AppColors.secondary500
+                                                        : const Color(
+                                                            0xff999999),
                                                     fontSize: 12.sp,
                                                     fontWeight:
                                                         FontWeight.w400),
@@ -104,9 +117,12 @@ class PlansListView extends StatelessWidget {
                                             ],
                                           ),
                                         ),
-                                        const Icon(
+                                        Icon(
                                           Icons.upload,
-                                          color: Color(0xffcccccc),
+                                          color: Theme.of(context).brightness ==
+                                                  Brightness.light
+                                              ? AppColors.secondary700
+                                              : const Color(0xffcccccc),
                                           size: 20,
                                         )
                                       ],
@@ -137,14 +153,13 @@ class PlansListView extends StatelessWidget {
                           itemCount: state.data.$2.length,
                           itemBuilder: (context, index) {
                             return InkWell(
-                              onTap: () {
-                                context
-                                    .read<PlanListBloc>()
-                                    .add(OpenPlanEvent(state.data.$2[index]));
-                              },
+                              onTap: () {},
                               child: Container(
                                   decoration: BoxDecoration(
-                                      color: const Color(0xff161616),
+                                      color: Theme.of(context).brightness ==
+                                              Brightness.light
+                                          ? const Color(0xffF1F1F1)
+                                          : const Color(0xff161616),
                                       borderRadius: BorderRadius.circular(8)),
                                   width: double.infinity,
                                   child: Padding(
@@ -158,8 +173,13 @@ class PlansListView extends StatelessWidget {
                                             children: [
                                               Text(state.data.$2[index].name,
                                                   style: TextStyle(
-                                                      color: const Color(
-                                                          0xffcccccc),
+                                                      color: Theme.of(context)
+                                                                  .brightness ==
+                                                              Brightness.light
+                                                          ? AppColors
+                                                              .secondary700
+                                                          : const Color(
+                                                              0xffcccccc),
                                                       fontSize: 16.sp,
                                                       fontWeight:
                                                           FontWeight.w500)),
@@ -170,8 +190,12 @@ class PlansListView extends StatelessWidget {
                                                 state
                                                     .data.$2[index].description,
                                                 style: TextStyle(
-                                                    color:
-                                                        const Color(0xff999999),
+                                                    color: Theme.of(context)
+                                                                .brightness ==
+                                                            Brightness.light
+                                                        ? AppColors.secondary500
+                                                        : const Color(
+                                                            0xff999999),
                                                     fontSize: 12.sp,
                                                     fontWeight:
                                                         FontWeight.w400),
@@ -179,9 +203,12 @@ class PlansListView extends StatelessWidget {
                                             ],
                                           ),
                                         ),
-                                        const Icon(
+                                        Icon(
                                           Icons.upload,
-                                          color: Color(0xffcccccc),
+                                          color: Theme.of(context).brightness ==
+                                                  Brightness.light
+                                              ? AppColors.secondary700
+                                              : const Color(0xffcccccc),
                                           size: 20,
                                         )
                                       ],

@@ -7,6 +7,7 @@ import 'package:funconnect/features/plans/domain/entities/mini_plan_model.dart';
 import 'package:funconnect/features/plans/domain/entities/mini_plan_place_model.dart';
 import 'package:funconnect/features/plans/domain/params/add_friends.dart';
 import 'package:funconnect/features/plans/domain/params/add_place.dart';
+import 'package:funconnect/features/plans/domain/params/update_mini_plan_params.dart';
 
 class PlansRepository extends IPlansRepository {
   final _remoteDS = PlansRemoteDataSource();
@@ -46,7 +47,7 @@ class PlansRepository extends IPlansRepository {
   }
 
   @override
-  Future updatePlan(AddPlaceParams param) async {
+  Future updatePlan(UpdateMiniPlanParams param) async {
     return await _remoteDS.updateMiniPlan(param);
   }
 }

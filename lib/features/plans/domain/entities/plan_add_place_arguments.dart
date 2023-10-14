@@ -6,6 +6,11 @@ class PLanAddPLaceArguments {
   final MiniPlanModel plan;
   final MiniPlanPlaceModel? selectedPlace;
   final FullPlaceModel? place;
+  final String? placeIdentifierId;
 
-  PLanAddPLaceArguments({this.place, required this.plan, this.selectedPlace});
+  PLanAddPLaceArguments(
+      {this.placeIdentifierId,
+      this.place,
+      required this.plan,
+      this.selectedPlace});
 }

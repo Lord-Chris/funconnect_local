@@ -84,6 +84,7 @@ class PlanDetailsBloc extends Bloc<PlanDetailsEvent, PlanDetailsState> {
       PlanPlaceEditEvent event, Emitter<PlanDetailsState> emit) {
     _navigation.toNamed(Routes.planAddPlaceViewRoute,
         arguments: PLanAddPLaceArguments(
+            placeIdentifierId: event.place.id,
             plan: event.plan,
             selectedPlace: event.place,
             place: event.fullPlace));

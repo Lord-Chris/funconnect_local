@@ -96,7 +96,7 @@ class ApiConstants {
   }
 
   static String updateMiniPlan(String miniPlanId, String placeId) {
-    return "$_baseUrl/events/mini-plans/$miniPlanId/friends/$placeId";
+    return "$_baseUrl/events/mini-plans/$miniPlanId/places/$placeId";
   }
 
   // EVENTS

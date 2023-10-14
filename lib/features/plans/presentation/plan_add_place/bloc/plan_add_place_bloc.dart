@@ -9,6 +9,7 @@ import 'package:funconnect/core/app/routes.dart';
 import 'package:funconnect/features/places/domain/entities/place_model.dart';
 import 'package:funconnect/features/plans/domain/entities/plan_add_place_arguments.dart';
 import 'package:funconnect/features/plans/domain/params/add_place.dart';
+import 'package:funconnect/features/plans/domain/params/update_mini_plan_params.dart';
 import 'package:funconnect/features/plans/domain/usecases/add_plan_place_usecase.dart';
 import 'package:funconnect/features/plans/domain/usecases/update_mini_plan_usecase.dart';
 import 'package:funconnect/services/navigation_service/i_navigation_service.dart';
@@ -97,9 +98,10 @@ class PlanAddPlaceBloc extends Bloc<PlanAddPlaceEvent, PlanAddPlaceState> {
       Emitter<PlanAddPlaceState> emit) async {
     emit(PlanAddPlaceLoading());
     try {
-      await UpdateMiniPlan().call(AddPlaceParams(
-        placeId: selectedPlaceId?.id ?? "",
-        miniPlanId: event.placeId,
+      await UpdateMiniPlan().call(UpdateMiniPlanParams(
+        planPlaceIdentifier: event.planPlaceIdentifier,
+        selectedPLaceId: selectedPlaceId?.id ?? "",
+        miniPlanId: event.planId,
         date: selectedDate?.millisecondsSinceEpoch ??
             DateTime.now().millisecondsSinceEpoch,
       ));
