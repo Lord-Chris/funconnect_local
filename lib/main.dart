@@ -89,62 +89,59 @@ class MyApp extends StatelessWidget {
         builder: (context, _) {
           return BlocBuilder<ThemeSwitcherBloc, ThemeData>(
             builder: (context, state) {
-              return BlocProvider(
-                create: (context) => MainAppBloc(),
-                child: MaterialApp(
-                  theme: state,
-                  title: AppConstants.appName,
-                  debugShowCheckedModeBanner: false,
-                  navigatorKey: NavigationService.navigatorKey,
-                  onGenerateRoute: Routes.generateRoute,
-                  home: BlocBuilder<SplashBloc, SplashState>(
-                    buildWhen: (previous, current) =>
-                        previous is SplashInitialState,
-                    builder: (context, state) {
-                      if (state is SplashFinishedState) {
-                        FlutterNativeSplash.remove();
-                        if (state.needsUpdate == true) {
-                          return const VersionUpdateView();
-                        }
-                        if (state.isAuthenticated) {
+              return MaterialApp(
+                theme: state,
+                title: AppConstants.appName,
+                debugShowCheckedModeBanner: false,
+                navigatorKey: NavigationService.navigatorKey,
+                onGenerateRoute: Routes.generateRoute,
+                home: BlocBuilder<SplashBloc, SplashState>(
+                  buildWhen: (previous, current) =>
+                      previous is SplashInitialState,
+                  builder: (context, state) {
+                    if (state is SplashFinishedState) {
+                      FlutterNativeSplash.remove();
+                      if (state.needsUpdate == true) {
+                        return const VersionUpdateView();
+                      }
+                      if (state.isAuthenticated) {
+                        return BlocProvider(
+                          create: (context) => DashboardBloc(),
+                          child: const DashboardView(),
+                        );
+                      } else {
+                        if (state.showOnboarding) {
                           return BlocProvider(
-                            create: (context) => DashboardBloc(),
-                            child: const DashboardView(),
+                            create: (context) => OnboardingBloc(),
+                            child: const OnboardingView(),
                           );
                         } else {
-                          if (state.showOnboarding) {
-                            return BlocProvider(
-                              create: (context) => OnboardingBloc(),
-                              child: const OnboardingView(),
-                            );
-                          } else {
-                            return BlocProvider(
-                              create: (context) => WelcomeBloc(),
-                              child: const WelcomeView(),
-                            );
-                          }
+                          return BlocProvider(
+                            create: (context) => WelcomeBloc(),
+                            child: const WelcomeView(),
+                          );
                         }
                       }
-                      return Scaffold(
-                        body: Container(
-                          width: double.maxFinite,
-                          color: AppColors.mediumBlack,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SizedBox(
-                                height: 250.r,
-                                width: 250.r,
-                                child: SvgPicture.asset(
-                                  AppAssets.funconnectFullSvg,
-                                ),
+                    }
+                    return Scaffold(
+                      body: Container(
+                        width: double.maxFinite,
+                        color: AppColors.mediumBlack,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              height: 250.r,
+                              width: 250.r,
+                              child: SvgPicture.asset(
+                                AppAssets.funconnectFullSvg,
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
-                      );
-                    },
-                  ),
+                      ),
+                    );
+                  },
                 ),
               );
             },

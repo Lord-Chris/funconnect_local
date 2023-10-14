@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:funconnect/features/places/domain/entities/full_place_model.dart';
+import 'package:funconnect/features/plans/domain/entities/mini_plan_model.dart';
 import 'package:funconnect/features/plans/domain/entities/mini_plan_place_model.dart';
+import 'package:funconnect/features/plans/presentation/plan_details/bloc/plan_details_bloc.dart';
 import 'package:funconnect/shared/components/app_network_image.dart';
 import 'package:funconnect/shared/constants/app_assets.dart';
 import 'package:funconnect/shared/constants/colors.dart';
@@ -10,8 +13,12 @@ import 'package:intl/intl.dart';
 class PlanPlaceItem extends StatelessWidget {
   final FullPlaceModel? place;
   final MiniPlanPlaceModel miniPlanPlace;
+  final MiniPlanModel plan;
   const PlanPlaceItem(
-      {super.key, required this.place, required this.miniPlanPlace});
+      {super.key,
+      required this.place,
+      required this.miniPlanPlace,
+      required this.plan});
 
   @override
   Widget build(BuildContext context) {
@@ -45,8 +52,15 @@ class PlanPlaceItem extends StatelessWidget {
                         fontWeight: FontWeight.w500,
                         color: Theme.of(context).colorScheme.onBackground),
                   ),
-                  const Text("Edit",
-                      style: TextStyle(fontSize: 14, color: AppColors.primary))
+                  InkWell(
+                    onTap: () {
+                      context.read<PlanDetailsBloc>().add(PlanPlaceEditEvent(
+                          plan: plan, place: miniPlanPlace, fullPlace: place));
+                    },
+                    child: const Text("Edit",
+                        style:
+                            TextStyle(fontSize: 14, color: AppColors.primary)),
+                  )
                 ],
               ),
               SizedBox(
@@ -107,7 +121,8 @@ class PlanPlaceItem extends StatelessWidget {
                     ],
                   )
                 ],
-              )
+              ),
+              Text("The Id ${miniPlanPlace.id}")
             ],
           ),
         )

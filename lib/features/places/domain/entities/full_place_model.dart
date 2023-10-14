@@ -209,6 +209,51 @@ class FullPlaceModel extends Equatable {
       websiteUrl: websiteUrl ?? this.websiteUrl,
     );
   }
+
+  PlaceModel toPlaceModel({
+    String? id,
+    String? name,
+    String? headline,
+    String? coverImagePath,
+    String? description,
+    String? addedBy,
+    String? opensAt,
+    String? closesAt,
+    String? phoneE164,
+    String? address,
+    double? avgRating,
+    double? avgReviewCount,
+    double? reviewsAvgRating,
+    double? reviewsCount,
+    List<CategoryModel>? categories,
+    List<FeatureModel>? features,
+    PlaceLocationModel? location,
+    List<ImageModel>? images,
+    List<PlaceModel>? similarPlaces,
+    bool? savedPlace,
+    String? emailAddress,
+    int? showRatings,
+    String? websiteUrl,
+  }) {
+    return PlaceModel(
+      addedBy: addedBy ?? this.addedBy,
+      id: id ?? this.id,
+      name: name ?? this.name,
+      headline: headline ?? this.headline,
+      coverImagePath: coverImagePath ?? this.coverImagePath,
+      description: description ?? this.description,
+      opensAt: opensAt ?? this.opensAt,
+      closesAt: closesAt ?? this.closesAt,
+      phoneE164: phoneE164 ?? this.phoneE164,
+      avgRating: avgRating ?? this.avgRating,
+      avgReviewCount: avgReviewCount ?? this.avgReviewCount,
+      distance: 0,
+      savedPlace: false,
+      emailAddress: emailAddress ?? this.emailAddress,
+      showRatings: showRatings ?? this.showRatings,
+      websiteUrl: websiteUrl ?? this.websiteUrl,
+    );
+  }
 }
 
 final mockFullPlace = {

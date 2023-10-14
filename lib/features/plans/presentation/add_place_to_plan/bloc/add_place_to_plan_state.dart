@@ -12,7 +12,7 @@ class AddPlaceToPlanInitial extends AddPlaceToPlanState {}
 class AddPlaceToPlanLoading extends AddPlaceToPlanState {}
 
 class PlansListLoaded extends AddPlaceToPlanState {
-  final List<MiniPlanModel> plans;
+  final (List<MiniPlanModel>, List<MiniPlanModel>) plans;
   const PlansListLoaded(this.plans);
 
   @override

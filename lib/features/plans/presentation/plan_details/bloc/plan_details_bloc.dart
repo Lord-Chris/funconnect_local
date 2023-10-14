@@ -10,6 +10,7 @@ import 'package:funconnect/features/places/domain/usecases/fetch_place_detail.da
 import 'package:funconnect/features/plans/domain/entities/mini_plan_friend_model.dart';
 import 'package:funconnect/features/plans/domain/entities/mini_plan_model.dart';
 import 'package:funconnect/features/plans/domain/entities/mini_plan_place_model.dart';
+import 'package:funconnect/features/plans/domain/entities/plan_add_place_arguments.dart';
 import 'package:funconnect/features/plans/domain/usecases/delete_plan_usecase.dart';
 import 'package:funconnect/features/plans/domain/usecases/fetch_plan_friends_usecase.dart';
 import 'package:funconnect/features/plans/domain/usecases/fetch_plan_places_usecase.dart';
@@ -27,6 +28,7 @@ class PlanDetailsBloc extends Bloc<PlanDetailsEvent, PlanDetailsState> {
     on<PlanFriendsLoad>(_planFriendsLoad);
     on<AddAPlaceClickedEvent>(_addAPlaceClicked);
     on<DeletePlanClickedEvent>(_deletePlanClicked);
+    on<PlanPlaceEditEvent>(_planPlaceEdit);
   }
   final _navigation = locator<INavigationService>();
 
@@ -55,8 +57,7 @@ class PlanDetailsBloc extends Bloc<PlanDetailsEvent, PlanDetailsState> {
   FutureOr<void> _addAPlaceClicked(
       AddAPlaceClickedEvent event, Emitter<PlanDetailsState> emit) async {
     await _navigation.toNamed(Routes.planAddPlaceViewRoute,
-        arguments: event.plan) as bool;
-
+        arguments: PLanAddPLaceArguments(plan: event.plan)) as bool;
     emit(PlanFriendsLoading());
     try {
       final data = await FetchPlanFriendsUsecase().call(event.plan.id);
@@ -77,5 +78,15 @@ class PlanDetailsBloc extends Bloc<PlanDetailsEvent, PlanDetailsState> {
     var response = await DeletePlanUseCase().call(event.plan.id);
     Logger().i(response);
     _navigation.back();
+  }
+
+  FutureOr<void> _planPlaceEdit(
+      PlanPlaceEditEvent event, Emitter<PlanDetailsState> emit) {
+    _navigation.toNamed(Routes.planAddPlaceViewRoute,
+        arguments: PLanAddPLaceArguments(
+            placeIdentifierId: event.place.id,
+            plan: event.plan,
+            selectedPlace: event.place,
+            place: event.fullPlace));
   }
 }

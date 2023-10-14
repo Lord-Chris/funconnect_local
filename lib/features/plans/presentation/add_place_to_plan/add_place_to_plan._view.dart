@@ -76,10 +76,10 @@ class AddPlaceToPlan extends StatelessWidget {
                         separatorBuilder: (context, index) => SizedBox(
                           height: 24.h,
                         ),
-                        itemCount: state.plans.length,
+                        itemCount: state.plans.$1.length,
                         itemBuilder: (context, index) {
                           return PlansListItem(
-                            plan: state.plans[index],
+                            plan: state.plans.$1[index],
                           );
                         },
                       ),

@@ -2,16 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:funconnect/features/places/domain/entities/full_place_model.dart';
-
 import 'package:funconnect/features/plans/domain/entities/mini_plan_model.dart';
-
 import 'package:funconnect/features/plans/presentation/components/empty_plans_places_view.dart';
 import 'package:funconnect/features/plans/presentation/components/friend_icon_empty_widget.dart';
 import 'package:funconnect/features/plans/presentation/components/friend_icon_widget.dart';
 import 'package:funconnect/features/plans/presentation/plan_details/bloc/plan_details_bloc.dart';
 import 'package:funconnect/features/plans/presentation/plan_details/components/plan_place_item.dart';
 import 'package:funconnect/shared/components/_components.dart';
-
 import 'package:skeletonizer/skeletonizer.dart';
 
 class PlanDetailsView extends StatelessWidget {
@@ -119,11 +116,13 @@ class PlanDetailsView extends StatelessWidget {
                                         ConnectionState.waiting) {
                                       return Skeletonizer(
                                           child: PlanPlaceItem(
+                                        plan: plan,
                                         place: snapshot.data,
                                         miniPlanPlace: state.places[index],
                                       ));
                                     }
                                     return (PlanPlaceItem(
+                                        plan: plan,
                                         place: snapshot.data!,
                                         miniPlanPlace: state.places[index]));
                                   });

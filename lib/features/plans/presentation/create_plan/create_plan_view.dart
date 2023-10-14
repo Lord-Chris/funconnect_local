@@ -1,5 +1,6 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:email_validator/email_validator.dart';
+import 'package:enum_to_string/enum_to_string.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -312,7 +313,9 @@ class _CreatePlanViewState extends State<CreatePlanView> {
                               items: ReminderType.values
                                   .map((e) => DropdownMenuItem(
                                         value: e,
-                                        child: Text(e.value),
+                                        child: Text(
+                                            EnumToString.convertToString(e,
+                                                camelCase: true)),
                                       ))
                                   .toList(),
                               onChanged: (value) {

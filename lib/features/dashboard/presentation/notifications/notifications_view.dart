@@ -28,7 +28,7 @@ class _NotificationsViewState extends State<NotificationsView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: AppColors.black,
+        toolbarHeight: 56,
         centerTitle: true,
         automaticallyImplyLeading: false,
         elevation: 0,
@@ -114,9 +114,12 @@ class _NotificationsViewState extends State<NotificationsView> {
                 itemBuilder: (context, index) {
                   final notification = state.notifications[index];
                   return Container(
-                    padding: const EdgeInsets.all(10),
+                    padding: EdgeInsets.only(
+                        left: 10.w, top: 20.h, bottom: 10.h, right: 30.w),
                     decoration: BoxDecoration(
-                      color: AppColors.notificationWidgetBlack,
+                      color: Theme.of(context).brightness == Brightness.light
+                          ? AppColors.wGreyF8
+                          : AppColors.notificationWidgetBlack,
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Row(

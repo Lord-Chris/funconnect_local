@@ -25,6 +25,7 @@ import 'package:funconnect/features/places/presentation/place_detail/bloc/place_
 import 'package:funconnect/features/places/presentation/place_detail/place_detail_view.dart';
 import 'package:funconnect/features/places/presentation/search_result/search_result_view.dart';
 import 'package:funconnect/features/plans/domain/entities/mini_plan_model.dart';
+import 'package:funconnect/features/plans/domain/entities/plan_add_place_arguments.dart';
 import 'package:funconnect/features/plans/presentation/add_place_to_plan/add_place_to_plan._view.dart';
 import 'package:funconnect/features/plans/presentation/add_place_to_plan/bloc/add_place_to_plan_bloc.dart';
 
@@ -278,12 +279,13 @@ class Routes {
         );
 
       case planAddPlaceViewRoute:
-        final plan = settings.arguments as MiniPlanModel;
+        final arguments = settings.arguments as PLanAddPLaceArguments;
         return _registerBlocView(
           view: AddPlanPlaceView(
-            plan: plan,
+            arguments: arguments,
           ),
-          bloc: PlanAddPlaceBloc(),
+          bloc: PlanAddPlaceBloc()
+            ..add(PlanAddPlaceInitialEvent(arguments: arguments)),
           settings: settings,
         );
 

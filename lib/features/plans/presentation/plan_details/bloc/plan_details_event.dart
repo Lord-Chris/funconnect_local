@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 part of 'plan_details_bloc.dart';
 
 abstract class PlanDetailsEvent extends Equatable {
@@ -37,4 +38,15 @@ class DeletePlanClickedEvent extends PlanDetailsEvent {
   final MiniPlanModel plan;
 
   const DeletePlanClickedEvent({required this.plan});
+}
+
+class PlanPlaceEditEvent extends PlanDetailsEvent {
+  final MiniPlanModel plan;
+  final MiniPlanPlaceModel place;
+  final FullPlaceModel? fullPlace;
+  const PlanPlaceEditEvent({
+    this.fullPlace,
+    required this.plan,
+    required this.place,
+  });
 }
