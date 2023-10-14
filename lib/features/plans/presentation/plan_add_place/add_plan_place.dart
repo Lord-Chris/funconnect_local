@@ -48,311 +48,323 @@ class _AddPlanPlaceViewState extends State<AddPlanPlaceView> {
           style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w400),
         ),
       ),
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16.w),
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Text(
-            "Add place",
-            style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w400),
-          ),
-          SizedBox(height: 8.h),
-          BlocBuilder<MainAppBloc, MainAppState>(
-            builder: (context, state1) {
-              if (state1 is HomeTrendsLoadedState) {
-                return Container(
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).brightness == Brightness.dark
-                        ? const Color(0xff202020)
-                        : const Color(0xfff1f1f1),
-                    borderRadius: BorderRadius.circular(8.r),
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.only(
-                        left: 16.w, right: 8.w, top: 9.h, bottom: 9.h),
-                    child: Form(
-                      key: _formKey,
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          const Icon(
-                            Icons.search,
-                            size: 15,
-                            color: Color(0xff999999),
-                          ),
-                          Expanded(
-                            child: BlocBuilder<PlanAddPlaceBloc,
-                                PlanAddPlaceState>(
-                              builder: (context, state) {
-                                _placeFormInputController.text =
-                                    state.place?.name ?? "";
-                                return TextFormField(
-                                  validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return "Please select a place";
-                                    }
-                                    return null;
-                                  },
-                                  controller: _placeFormInputController,
-                                  readOnly: true,
-                                  style: TextStyle(
-                                    fontSize: 14.sp,
-                                    fontWeight: FontWeight.w400,
-                                    color: Theme.of(context).brightness ==
-                                            Brightness.dark
-                                        ? const Color(0xff999999)
-                                        : AppColors.secondary600,
-                                  ),
-                                  onTap: () async {
-                                    PlaceModel place = await showSearch(
-                                        context: context,
-                                        delegate: MySearchDelegate(
-                                            state1.homeTrends.places[0].data));
-                                    if (mounted) {
-                                      context
-                                          .read<PlanAddPlaceBloc>()
-                                          .add(PlanAddPlaceEventClicked(place));
-                                    }
-                                  },
-                                  textAlignVertical: TextAlignVertical.top,
-                                  textAlign: TextAlign.start,
-                                  decoration: InputDecoration(
-                                    filled: true,
-                                    fillColor: Theme.of(context).brightness ==
-                                            Brightness.dark
-                                        ? const Color(0xff202020)
-                                        : const Color(0xfff1f1f1),
-                                    hintText: "Find a place",
-                                    hintStyle: TextStyle(
-                                      fontSize: 14.sp,
-                                      color: const Color(0xff999999),
-                                    ),
-                                    border: InputBorder.none,
-                                  ),
-                                );
-                              },
-                            ),
-                          ),
-                          InkWell(
-                            onTap: () {
-                              context
-                                  .read<PlanAddPlaceBloc>()
-                                  .add(const MapClickedEvent());
-                            },
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: Theme.of(context).brightness ==
-                                        Brightness.dark
-                                    ? AppColors.gray333
-                                    : AppColors.secondary200,
-                                borderRadius: BorderRadius.circular(4.r),
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    vertical: 8.0, horizontal: 12),
-                                child: Text(
-                                  "Search Map",
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .onBackground,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          )
-                        ],
+      body: BlocBuilder<PlanAddPlaceBloc, PlanAddPlaceState>(
+        builder: (context, state) {
+          if (state is PlanAddPlaceLoading) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+          return Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16.w),
+            child:
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              Text(
+                "Add place",
+                style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w400),
+              ),
+              SizedBox(height: 8.h),
+              BlocBuilder<MainAppBloc, MainAppState>(
+                builder: (context, state1) {
+                  if (state1 is HomeTrendsLoadedState) {
+                    return Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).brightness == Brightness.dark
+                            ? const Color(0xff202020)
+                            : const Color(0xfff1f1f1),
+                        borderRadius: BorderRadius.circular(8.r),
                       ),
-                    ),
-                  ),
-                );
-              }
-              return const SizedBox();
-            },
-          ),
-          SizedBox(height: 24.h),
-          Row(
-            children: [
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Date",
-                      style: TextStyle(
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.w400,
-                          color: Theme.of(context).colorScheme.onBackground),
-                    ),
-                    SizedBox(height: 8.h),
-                    InkWell(
-                      onTap: () async {
-                        var date = await showDatePicker(
-                          context: context,
-                          initialDate: DateTime.now(),
-                          firstDate: DateTime.now(),
-                          lastDate: DateTime(2024),
-                        );
-                        if (date != null) {
-                          if (mounted) {
-                            context
-                                .read<PlanAddPlaceBloc>()
-                                .add(DateSelectedEvent(date));
-                          }
-                        }
-                      },
-                      child: Container(
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                            color:
-                                Theme.of(context).brightness == Brightness.dark
-                                    ? const Color(0xff202020)
-                                    : const Color(0xfff1f1f1),
-                            borderRadius: BorderRadius.circular(8.r)),
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(
-                              vertical: 16.h, horizontal: 16.w),
-                          child:
-                              BlocBuilder<PlanAddPlaceBloc, PlanAddPlaceState>(
-                            builder: (context, state) {
-                              if (state.date != null) {
-                                return Text(
-                                  DateFormat("yMMMMd").format(state.date!),
-                                  style: TextStyle(
-                                    fontSize: 14.sp,
+                      child: Padding(
+                        padding: EdgeInsets.only(
+                            left: 16.w, right: 8.w, top: 9.h, bottom: 9.h),
+                        child: Form(
+                          key: _formKey,
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              const Icon(
+                                Icons.search,
+                                size: 15,
+                                color: Color(0xff999999),
+                              ),
+                              Expanded(
+                                child: BlocBuilder<PlanAddPlaceBloc,
+                                    PlanAddPlaceState>(
+                                  builder: (context, state) {
+                                    _placeFormInputController.text =
+                                        state.place?.name ?? "";
+                                    return TextFormField(
+                                      validator: (value) {
+                                        if (value == null || value.isEmpty) {
+                                          return "Please select a place";
+                                        }
+                                        return null;
+                                      },
+                                      controller: _placeFormInputController,
+                                      readOnly: true,
+                                      style: TextStyle(
+                                        fontSize: 14.sp,
+                                        fontWeight: FontWeight.w400,
+                                        color: Theme.of(context).brightness ==
+                                                Brightness.dark
+                                            ? const Color(0xff999999)
+                                            : AppColors.secondary600,
+                                      ),
+                                      onTap: () async {
+                                        PlaceModel place = await showSearch(
+                                            context: context,
+                                            delegate: MySearchDelegate(state1
+                                                .homeTrends.places[0].data));
+                                        if (mounted) {
+                                          context.read<PlanAddPlaceBloc>().add(
+                                              PlanAddPlaceEventClicked(place));
+                                        }
+                                      },
+                                      textAlignVertical: TextAlignVertical.top,
+                                      textAlign: TextAlign.start,
+                                      decoration: InputDecoration(
+                                        filled: true,
+                                        fillColor:
+                                            Theme.of(context).brightness ==
+                                                    Brightness.dark
+                                                ? const Color(0xff202020)
+                                                : const Color(0xfff1f1f1),
+                                        hintText: "Find a place",
+                                        hintStyle: TextStyle(
+                                          fontSize: 14.sp,
+                                          color: const Color(0xff999999),
+                                        ),
+                                        border: InputBorder.none,
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  context
+                                      .read<PlanAddPlaceBloc>()
+                                      .add(const MapClickedEvent());
+                                },
+                                child: Container(
+                                  decoration: BoxDecoration(
                                     color: Theme.of(context).brightness ==
                                             Brightness.dark
-                                        ? const Color(0xff999999)
-                                        : AppColors.secondary600,
+                                        ? AppColors.gray333
+                                        : AppColors.secondary200,
+                                    borderRadius: BorderRadius.circular(4.r),
                                   ),
-                                );
-                              }
-                              return Text(
-                                "Select Date",
-                                style: TextStyle(
-                                  fontSize: 14.sp,
-                                  color: Theme.of(context).brightness ==
-                                          Brightness.dark
-                                      ? const Color(0xff999999)
-                                      : AppColors.secondary600,
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 8.0, horizontal: 12),
+                                    child: Text(
+                                      "Search Map",
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .onBackground,
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    ),
+                                  ),
                                 ),
-                              );
-                            },
+                              )
+                            ],
                           ),
                         ),
                       ),
-                    )
-                  ],
-                ),
+                    );
+                  }
+                  return const SizedBox();
+                },
               ),
-              SizedBox(width: 8.w),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              SizedBox(height: 24.h),
+              Row(
                 children: [
-                  Text(
-                    "Time",
-                    style: TextStyle(
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.w400,
-                        color: Theme.of(context).colorScheme.onBackground),
-                  ),
-                  SizedBox(height: 8.h),
-                  InkWell(
-                    onTap: () async {
-                      Logger().i("Date clicked");
-                      var time = await showTimePicker(
-                        context: context,
-                        initialTime: TimeOfDay.now(),
-                      );
-                      if (mounted) {
-                        context
-                            .read<PlanAddPlaceBloc>()
-                            .add(TimeSelectedEvent(time));
-                      }
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                          color: Theme.of(context).brightness == Brightness.dark
-                              ? const Color(0xff202020)
-                              : const Color(0xfff1f1f1),
-                          borderRadius: BorderRadius.circular(8.r)),
-                      child: Padding(
-                          padding: EdgeInsets.symmetric(
-                              vertical: 16.h, horizontal: 16.w),
-                          child:
-                              BlocBuilder<PlanAddPlaceBloc, PlanAddPlaceState>(
-                            builder: (context, state) {
-                              if (state.date != null) {
-                                return Text(
-                                  DateFormat("hh:mm a").format(state.date!),
-                                  style: TextStyle(
-                                    fontSize: 14.sp,
-                                    color: Theme.of(context).brightness ==
-                                            Brightness.dark
-                                        ? const Color(0xff999999)
-                                        : AppColors.secondary600,
-                                  ),
-                                );
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Date",
+                          style: TextStyle(
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w400,
+                              color:
+                                  Theme.of(context).colorScheme.onBackground),
+                        ),
+                        SizedBox(height: 8.h),
+                        InkWell(
+                          onTap: () async {
+                            var date = await showDatePicker(
+                              context: context,
+                              initialDate: DateTime.now(),
+                              firstDate: DateTime.now(),
+                              lastDate: DateTime(2024),
+                            );
+                            if (date != null) {
+                              if (mounted) {
+                                context
+                                    .read<PlanAddPlaceBloc>()
+                                    .add(DateSelectedEvent(date));
                               }
-                              return Text("Select Time",
-                                  style: TextStyle(
-                                    fontSize: 14.sp,
-                                    color: Theme.of(context).brightness ==
-                                            Brightness.dark
-                                        ? const Color(0xff999999)
-                                        : AppColors.secondary600,
-                                  ));
-                            },
-                          )),
+                            }
+                          },
+                          child: Container(
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                                color: Theme.of(context).brightness ==
+                                        Brightness.dark
+                                    ? const Color(0xff202020)
+                                    : const Color(0xfff1f1f1),
+                                borderRadius: BorderRadius.circular(8.r)),
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(
+                                  vertical: 16.h, horizontal: 16.w),
+                              child: BlocBuilder<PlanAddPlaceBloc,
+                                  PlanAddPlaceState>(
+                                builder: (context, state) {
+                                  if (state.date != null) {
+                                    return Text(
+                                      DateFormat("yMMMMd").format(state.date!),
+                                      style: TextStyle(
+                                        fontSize: 14.sp,
+                                        color: Theme.of(context).brightness ==
+                                                Brightness.dark
+                                            ? const Color(0xff999999)
+                                            : AppColors.secondary600,
+                                      ),
+                                    );
+                                  }
+                                  return Text(
+                                    "Select Date",
+                                    style: TextStyle(
+                                      fontSize: 14.sp,
+                                      color: Theme.of(context).brightness ==
+                                              Brightness.dark
+                                          ? const Color(0xff999999)
+                                          : AppColors.secondary600,
+                                    ),
+                                  );
+                                },
+                              ),
+                            ),
+                          ),
+                        )
+                      ],
                     ),
-                  )
+                  ),
+                  SizedBox(width: 8.w),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Time",
+                        style: TextStyle(
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w400,
+                            color: Theme.of(context).colorScheme.onBackground),
+                      ),
+                      SizedBox(height: 8.h),
+                      InkWell(
+                        onTap: () async {
+                          Logger().i("Date clicked");
+                          var time = await showTimePicker(
+                            context: context,
+                            initialTime: TimeOfDay.now(),
+                          );
+                          if (mounted) {
+                            context
+                                .read<PlanAddPlaceBloc>()
+                                .add(TimeSelectedEvent(time));
+                          }
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                              color: Theme.of(context).brightness ==
+                                      Brightness.dark
+                                  ? const Color(0xff202020)
+                                  : const Color(0xfff1f1f1),
+                              borderRadius: BorderRadius.circular(8.r)),
+                          child: Padding(
+                              padding: EdgeInsets.symmetric(
+                                  vertical: 16.h, horizontal: 16.w),
+                              child: BlocBuilder<PlanAddPlaceBloc,
+                                  PlanAddPlaceState>(
+                                builder: (context, state) {
+                                  if (state.date != null) {
+                                    return Text(
+                                      DateFormat("hh:mm a").format(state.date!),
+                                      style: TextStyle(
+                                        fontSize: 14.sp,
+                                        color: Theme.of(context).brightness ==
+                                                Brightness.dark
+                                            ? const Color(0xff999999)
+                                            : AppColors.secondary600,
+                                      ),
+                                    );
+                                  }
+                                  return Text("Select Time",
+                                      style: TextStyle(
+                                        fontSize: 14.sp,
+                                        color: Theme.of(context).brightness ==
+                                                Brightness.dark
+                                            ? const Color(0xff999999)
+                                            : AppColors.secondary600,
+                                      ));
+                                },
+                              )),
+                        ),
+                      )
+                    ],
+                  ),
                 ],
               ),
-            ],
-          ),
-          const Expanded(
-            child: SizedBox(),
-          ),
-          BlocBuilder<PlanAddPlaceBloc, PlanAddPlaceState>(
-            buildWhen: (previous, current) {
-              if (current is PlanAddPlaceLoading) {
-                return true;
-              }
-              return false;
-            },
-            builder: (context, state) {
-              Logger().i(state);
-              if (state is PlanAddPlaceLoading) {
-                const CircularProgressIndicator();
-              }
-              return AppButton(
-                onTap: () {
-                  if (_formKey.currentState!.validate()) {
-                    if (widget.arguments.place == null) {
-                      context
-                          .read<PlanAddPlaceBloc>()
-                          .add(AddPlaceEvent(widget.arguments.plan.id));
-                    } else {
-                      Logger().d(
-                          "we are editing place with ${widget.arguments.placeIdentifierId} as id ");
-                      context.read<PlanAddPlaceBloc>().add(
-                          PlanEditPlaceSaveChangesEvent(
-                              widget.arguments.plan.id,
-                              widget.arguments.placeIdentifierId!));
-                    }
+              const Expanded(
+                child: SizedBox(),
+              ),
+              BlocBuilder<PlanAddPlaceBloc, PlanAddPlaceState>(
+                buildWhen: (previous, current) {
+                  if (current is PlanAddPlaceLoading) {
+                    return true;
                   }
+                  return false;
                 },
-                label: widget.arguments.place == null
-                    ? "Add Place"
-                    : "Save Changes",
-                borderRadius: 8,
-              );
-            },
-          ),
-          SizedBox(height: 16.h),
-        ]),
+                builder: (context, state) {
+                  Logger().i(state);
+                  if (state is PlanAddPlaceLoading) {
+                    const CircularProgressIndicator();
+                  }
+                  return AppButton(
+                    onTap: () {
+                      if (_formKey.currentState!.validate()) {
+                        if (widget.arguments.place == null) {
+                          context
+                              .read<PlanAddPlaceBloc>()
+                              .add(AddPlaceEvent(widget.arguments.plan.id));
+                        } else {
+                          Logger().d(
+                              "we are editing place with ${widget.arguments.placeIdentifierId} as id ");
+                          context.read<PlanAddPlaceBloc>().add(
+                              PlanEditPlaceSaveChangesEvent(
+                                  widget.arguments.plan.id,
+                                  widget.arguments.placeIdentifierId!));
+                        }
+                      }
+                    },
+                    label: widget.arguments.place == null
+                        ? "Add Place"
+                        : "Save Changes",
+                    borderRadius: 8,
+                  );
+                },
+              ),
+              SizedBox(height: 16.h),
+            ]),
+          );
+        },
       ),
     );
   }

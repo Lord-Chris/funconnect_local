@@ -98,13 +98,17 @@ class PlanAddPlaceBloc extends Bloc<PlanAddPlaceEvent, PlanAddPlaceState> {
       Emitter<PlanAddPlaceState> emit) async {
     emit(PlanAddPlaceLoading());
     try {
-      await UpdateMiniPlan().call(UpdateMiniPlanParams(
+      await UpdateMiniPlan()
+          .call(UpdateMiniPlanParams(
         planPlaceIdentifier: event.planPlaceIdentifier,
         selectedPLaceId: selectedPlaceId?.id ?? "",
         miniPlanId: event.planId,
         date: selectedDate?.millisecondsSinceEpoch ??
             DateTime.now().millisecondsSinceEpoch,
-      ));
+      ))
+          .then((value) {
+        _navigation.back(true);
+      });
     } catch (e) {
       Logger().e(e.toString());
     }
