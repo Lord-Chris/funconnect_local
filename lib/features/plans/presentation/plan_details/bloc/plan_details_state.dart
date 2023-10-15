@@ -1,10 +1,18 @@
 part of 'plan_details_bloc.dart';
 
-abstract class PlanDetailsState extends Equatable {
-  const PlanDetailsState();
+class PlanDetailsState extends Equatable {
+  final List<MiniPlanFriend>? invitedFriends;
+  const PlanDetailsState({List<MiniPlanFriend>? invitedFriends})
+      : invitedFriends = invitedFriends ?? const [];
 
   @override
-  List<Object> get props => [];
+  List<Object?> get props => [invitedFriends];
+
+  PlanDetailsState copyWith({List<MiniPlanFriend>? invitedFriends}) {
+    return PlanDetailsState(
+      invitedFriends: invitedFriends ?? this.invitedFriends,
+    );
+  }
 }
 
 class PlanDetailsInitial extends PlanDetailsState {}

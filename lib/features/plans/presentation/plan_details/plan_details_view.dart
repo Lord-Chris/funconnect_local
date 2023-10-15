@@ -162,33 +162,34 @@ class PlanDetailsView extends StatelessWidget {
                 SizedBox(
                   height: 17.h,
                 ),
-                BlocBuilder(
+                BlocBuilder<PlanDetailsBloc, PlanDetailsState>(
                   bloc: PlanDetailsBloc()..add(PlanFriendsLoad(plan)),
                   builder: (context, state) {
                     if (state is PlanFriendsLoading) {
                       return const CircularProgressIndicator();
                     }
-                    if (state is PlanFriendsLoaded) {
-                      return SizedBox(
-                          height: 65.h,
-                          width: double.infinity,
-                          child: ListView.separated(
-                              scrollDirection: Axis.horizontal,
-                              itemBuilder: (context, index) {
-                                if (index == state.friends.data.length) {
-                                  return const FriendIconEmptyWidget();
-                                } else {
-                                  return FriendIconWidget(
-                                    email: state.friends.data[index].email,
-                                  );
-                                }
-                              },
-                              separatorBuilder: (context, index) => SizedBox(
-                                    width: 8.w,
-                                  ),
-                              itemCount: state.friends.data.length + 1));
-                    }
-                    return const SizedBox();
+
+                    return SizedBox(
+                        height: 65.h,
+                        width: double.infinity,
+                        child: ListView.separated(
+                            scrollDirection: Axis.horizontal,
+                            itemBuilder: (context, index) {
+                              if (state.invitedFriends?.length == null ||
+                                  index == state.invitedFriends?.length) {
+                                return const FriendIconEmptyWidget();
+                              } else {
+                                return FriendIconWidget(
+                                  email:
+                                      state.invitedFriends?[index].email ?? "",
+                                );
+                              }
+                            },
+                            separatorBuilder: (context, index) => SizedBox(
+                                  width: 8.w,
+                                ),
+                            itemCount:
+                                (state.invitedFriends?.length ?? 0) + 1));
                   },
                 ),
                 SizedBox(

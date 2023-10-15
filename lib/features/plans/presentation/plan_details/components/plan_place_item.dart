@@ -122,7 +122,6 @@ class PlanPlaceItem extends StatelessWidget {
                   )
                 ],
               ),
-              Text("The Id ${miniPlanPlace.id}")
             ],
           ),
         )

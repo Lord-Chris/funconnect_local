@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:funconnect/shared/components/custom_button.dart';
 import 'package:funconnect/shared/constants/colors.dart';
 import 'package:funconnect/shared/constants/textstyles.dart';
 
@@ -62,6 +63,16 @@ class StatusDialog extends StatelessWidget {
                 ),
               ),
             ),
+            hasButton == null || hasButton == false
+                ? const SizedBox()
+                : SizedBox(height: 32.h),
+            hasButton == null || hasButton == false
+                ? const SizedBox()
+                : AppButton(
+                    label: buttonLabel!,
+                    onTap: buttonAction,
+                    borderRadius: 8,
+                  )
           ],
         ),
       ),
