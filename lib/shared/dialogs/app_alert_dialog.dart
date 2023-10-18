@@ -37,7 +37,9 @@ class AppAlertDialog extends HookWidget {
         padding: EdgeInsets.all(40.r),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(36),
-          color: AppColors.interestWidgetAsh,
+          color: Theme.of(context).brightness == Brightness.dark
+              ? AppColors.interestWidgetAsh
+              : AppColors.white,
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
