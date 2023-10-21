@@ -14,9 +14,6 @@ class PlanListEmptyState extends PlanListState {}
 class PlanListFetchedState extends PlanListState {
   final (List<MiniPlanModel>, List<MiniPlanModel>) data;
   const PlanListFetchedState(this.data);
-
-  @override
-  List<Object> get props => [data];
 }
 
 class PlanListErrorState extends PlanListState {

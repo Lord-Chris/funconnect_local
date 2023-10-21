@@ -30,6 +30,7 @@ class PlanDetailsBloc extends Bloc<PlanDetailsEvent, PlanDetailsState> {
     on<DeletePlanClickedEvent>(_deletePlanClicked);
     on<PlanPlaceEditEvent>(_planPlaceEdit);
   }
+  List<String> friends = [];
   final _navigation = locator<INavigationService>();
 
   FutureOr<void> _planPlacesLoad(
@@ -48,7 +49,9 @@ class PlanDetailsBloc extends Bloc<PlanDetailsEvent, PlanDetailsState> {
     emit(PlanFriendsLoading());
     try {
       final data = await FetchPlanFriendsUsecase().call(event.plan.id);
-      emit(PlanFriendsLoaded(data));
+      List<MiniPlanFriend> friends = data.data.map((e) => e).toList();
+      emit(PlanFriendsLoaded(data)
+          .copyWith(invitedFriends: [...?state.invitedFriends, ...friends]));
     } catch (e) {
       Logger().e(e);
     }
