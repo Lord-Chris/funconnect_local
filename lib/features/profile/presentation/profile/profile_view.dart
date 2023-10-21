@@ -133,9 +133,13 @@ class _ProfileViewState extends State<ProfileView> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         children: [
-                                          const Icon(
+                                          Icon(
                                             Icons.location_on,
-                                            color: AppColors.white,
+                                            color:
+                                                Theme.of(context).brightness ==
+                                                        Brightness.dark
+                                                    ? AppColors.white
+                                                    : AppColors.black,
                                             size: 13,
                                           ),
                                           Spacing.horizExtraTiny(),

@@ -11,7 +11,7 @@ import '../../themes/light_theme.dart';
 part 'theme_switcher_event.dart';
 
 class ThemeSwitcherBloc extends Bloc<ThemeSwitcherEvent, ThemeData> {
-  ThemeSwitcherBloc() : super(LightTheme.theme) {
+  ThemeSwitcherBloc() : super(DarkTheme.theme) {
     on<ThemeSwitcherEvent>((event, emit) {
       if (isDark) {
         emit(DarkTheme.theme);

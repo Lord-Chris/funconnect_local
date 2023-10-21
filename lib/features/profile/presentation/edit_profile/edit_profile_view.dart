@@ -24,12 +24,10 @@ class EditProfileView extends StatelessWidget {
         return false;
       },
       child: Scaffold(
-        backgroundColor: AppColors.black,
         appBar: AppBar(
-          backgroundColor: AppColors.black,
+          toolbarHeight: 56,
           centerTitle: true,
           automaticallyImplyLeading: false,
-          elevation: 0,
           leading: IconButton(
             onPressed: () =>
                 context.read<EditProfileBloc>().add(BackTapEvent()),
