@@ -14,7 +14,9 @@ import 'package:funconnect/features/plans/domain/entities/plan_add_place_argumen
 import 'package:funconnect/features/plans/domain/usecases/delete_plan_usecase.dart';
 import 'package:funconnect/features/plans/domain/usecases/fetch_plan_friends_usecase.dart';
 import 'package:funconnect/features/plans/domain/usecases/fetch_plan_places_usecase.dart';
+import 'package:funconnect/services/dialog_and_sheet_service/i_dialog_and_sheet_service.dart';
 import 'package:funconnect/services/navigation_service/i_navigation_service.dart';
+import 'package:funconnect/shared/dialogs/add_plan_friend_dialog.dart';
 
 import 'package:logger/logger.dart';
 
@@ -29,9 +31,12 @@ class PlanDetailsBloc extends Bloc<PlanDetailsEvent, PlanDetailsState> {
     on<AddAPlaceClickedEvent>(_addAPlaceClicked);
     on<DeletePlanClickedEvent>(_deletePlanClicked);
     on<PlanPlaceEditEvent>(_planPlaceEdit);
+    on<AddAFriendClickedEvent>(_addAFriendClicked);
   }
   List<String> friends = [];
   final _navigation = locator<INavigationService>();
+  final _logger = Logger();
+  final _dialogAndSheetService = locator<IDialogAndSheetService>();
 
   FutureOr<void> _planPlacesLoad(
       PlanPlacesLoad event, Emitter<PlanDetailsState> emit) async {
@@ -60,7 +65,7 @@ class PlanDetailsBloc extends Bloc<PlanDetailsEvent, PlanDetailsState> {
   FutureOr<void> _addAPlaceClicked(
       AddAPlaceClickedEvent event, Emitter<PlanDetailsState> emit) async {
     await _navigation.toNamed(Routes.planAddPlaceViewRoute,
-        arguments: PLanAddPLaceArguments(plan: event.plan)) as bool;
+        arguments: PLanAddPLaceArguments(plan: event.plan)) as bool?;
     emit(PlanFriendsLoading());
     try {
       final data = await FetchPlanFriendsUsecase().call(event.plan.id);
@@ -91,5 +96,24 @@ class PlanDetailsBloc extends Bloc<PlanDetailsEvent, PlanDetailsState> {
             plan: event.plan,
             selectedPlace: event.place,
             place: event.fullPlace));
+  }
+
+  FutureOr<void> _addAFriendClicked(
+      AddAFriendClickedEvent event, Emitter<PlanDetailsState> emit) async {
+    bool? reload =
+        await _dialogAndSheetService.showAppDialog(AddPlanFriendDialog(
+      plan: event.plan,
+    ));
+    if (reload ?? false) {
+      emit(PlanFriendsLoading());
+      try {
+        final data = await FetchPlanFriendsUsecase().call(event.plan.id);
+        List<MiniPlanFriend> friends = data.data.map((e) => e).toList();
+        emit(PlanFriendsLoaded(data)
+            .copyWith(invitedFriends: [...?state.invitedFriends, ...friends]));
+      } catch (e) {
+        Logger().e(e);
+      }
+    }
   }
 }
