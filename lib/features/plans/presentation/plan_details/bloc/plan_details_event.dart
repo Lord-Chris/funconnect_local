@@ -50,3 +50,11 @@ class PlanPlaceEditEvent extends PlanDetailsEvent {
     required this.place,
   });
 }
+
+class AddAFriendClickedEvent extends PlanDetailsEvent {
+  final MiniPlanModel plan;
+  const AddAFriendClickedEvent(this.plan);
+
+  @override
+  List<Object> get props => [];
+}

@@ -177,7 +177,13 @@ class PlanDetailsView extends StatelessWidget {
                             itemBuilder: (context, index) {
                               if (state.invitedFriends?.length == null ||
                                   index == state.invitedFriends?.length) {
-                                return const FriendIconEmptyWidget();
+                                return InkWell(
+                                    onTap: () {
+                                      context
+                                          .read<PlanDetailsBloc>()
+                                          .add(AddAFriendClickedEvent(plan));
+                                    },
+                                    child: const FriendIconEmptyWidget());
                               } else {
                                 return FriendIconWidget(
                                   email:
